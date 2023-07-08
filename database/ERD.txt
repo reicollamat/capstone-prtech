@@ -1,0 +1,56 @@
+User:
+    id
+    first_name
+    last_name
+    email
+    phone
+    password
+    address
+    city
+    zip_code
+    country
+    permissions
+
+Product:
+    id
+    title
+    slug
+    image
+    description
+    price
+    status
+
+Cart Item:
+    id
+    user_id*
+    product_id*
+    quantity
+    total_price
+
+Purchase:
+    id
+    user_id*
+    purchase_date
+    total_amount
+    purchase_status
+
+Purchase Item:
+    id
+    purchase_id*
+    product_id*
+    quantity
+    unit_price
+
+Payment:
+    id
+    user_id*
+    purchase_id*
+    date_of_payment
+    payment_status
+    payment_type
+
+Voucher:
+    id
+    title
+    value
+    description
