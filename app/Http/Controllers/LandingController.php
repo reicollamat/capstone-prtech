@@ -13,9 +13,10 @@ class LandingController extends Controller
     }
 
 
+    // redirect to admin panel if the account has permission
     public function redirect()
     {
-        $permissions = Auth::user()->permissions;
+        $permissions = Auth::user()->permissions ?? '';
 
         if($permissions == null)
         {
@@ -25,6 +26,5 @@ class LandingController extends Controller
         {
             return redirect('/admin');
         }
-
     }
 }
