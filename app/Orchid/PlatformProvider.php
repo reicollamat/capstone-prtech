@@ -38,7 +38,7 @@ class PlatformProvider extends OrchidServiceProvider
             // productscreen
             Menu::make('Products')
                 ->icon('bs.bag')
-                ->route('platform.product'),
+                ->route('platform.products'),
 
             Menu::make('Get Started')
                 ->icon('bs.book')

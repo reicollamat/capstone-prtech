@@ -49,9 +49,9 @@ class ProductScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make(__('Add Product (sample)'))
+            Link::make(__('Add Product'))
                 ->icon('bs.plus-circle')
-                ->route('platform.systems.users.create'),
+                ->route('platform.products.create'),
         ];
     }
 
@@ -64,8 +64,6 @@ class ProductScreen extends Screen
     {
         return [
             ProductListLayout::class,
-
-
         ];
     }
 }
