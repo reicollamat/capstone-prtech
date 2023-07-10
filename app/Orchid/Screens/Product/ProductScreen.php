@@ -4,8 +4,10 @@ namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
 use App\Orchid\Layouts\Product\ProductListLayout;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Toast;
 
 class ProductScreen extends Screen
 {
@@ -65,5 +67,12 @@ class ProductScreen extends Screen
         return [
             ProductListLayout::class,
         ];
+    }
+
+    public function remove(Request $request): void
+    {
+        Product::findOrFail($request->get('id'))->delete();
+
+        Toast::info(__('Product was removed'));
     }
 }
