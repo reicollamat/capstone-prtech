@@ -35,6 +35,19 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
 
+            // Access Controls
+            Menu::make(__('Users'))
+                ->icon('bs.people')
+                ->route('platform.systems.users')
+                ->permission('platform.systems.users')
+                ->title(__('Access Controls')),
+
+            Menu::make(__('Roles'))
+                ->icon('bs.lock')
+                ->route('platform.systems.roles')
+                ->permission('platform.systems.roles')
+                ->divider(),
+
             // productscreen
             Menu::make('Products')
                 ->icon('bs.bag')
@@ -69,29 +82,18 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.example.cards')
                 ->divider(),
 
-            Menu::make(__('Users'))
-                ->icon('bs.people')
-                ->route('platform.systems.users')
-                ->permission('platform.systems.users')
-                ->title(__('Access Controls')),
 
-            Menu::make(__('Roles'))
-                ->icon('bs.lock')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles')
-                ->divider(),
+            // Menu::make('Documentation')
+            //     ->title('Docs')
+            //     ->icon('bs.box-arrow-up-right')
+            //     ->url('https://orchid.software/en/docs')
+            //     ->target('_blank'),
 
-            Menu::make('Documentation')
-                ->title('Docs')
-                ->icon('bs.box-arrow-up-right')
-                ->url('https://orchid.software/en/docs')
-                ->target('_blank'),
-
-            Menu::make('Changelog')
-                ->icon('bs.box-arrow-up-right')
-                ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
-                ->target('_blank')
-                ->badge(fn () => Dashboard::version(), Color::DARK),
+            // Menu::make('Changelog')
+            //     ->icon('bs.box-arrow-up-right')
+            //     ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
+            //     ->target('_blank')
+            //     ->badge(fn () => Dashboard::version(), Color::DARK),
         ];
     }
 

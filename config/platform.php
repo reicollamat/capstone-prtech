@@ -160,8 +160,8 @@ return [
      */
 
     'template' => [
-        'header' => '',
-        'footer' => '',
+        'header' => 'admin.brand.header',
+        'footer' => 'admin.brand.footer',
     ],
 
     /*
