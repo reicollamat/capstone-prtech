@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
-            <div class="d-inline-flex align-items-center d-block d-lg-none">
+            <div class="d-inline-flex align-items-center d-block d-lg-block">
                 <a href="" class="btn px-0 ml-2">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge text-light border border-light rounded-circle" style="padding-bottom: 2px;">0</span>

@@ -1,13 +1,25 @@
 @extends('layouts.master_layout')
 @section('content')
 
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-dark mb-30">
+                <span class="breadcrumb-item active">Shop List</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
 <!-- Shop Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <!-- Price Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-primary pr-3">Filter by price</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -45,7 +57,7 @@
             <!-- Price End -->
             
             <!-- Color Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-primary pr-3">Filter by color</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -83,7 +95,7 @@
             <!-- Color End -->
 
             <!-- Size Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by size</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-primary pr-3">Filter by size</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">

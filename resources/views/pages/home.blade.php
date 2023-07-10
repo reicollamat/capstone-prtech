@@ -69,29 +69,29 @@
 
 
 <!-- Featured Start -->
-<div class="container-fluid pt-5 bg-light">
-    <div class="row px-xl-5 pb-3">
+<div class="container-fluid mt-5 bg-primary">
+    <div class="row px-xl-5" style="height: 100px">
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+            <div class="d-flex align-items-center bg-primary mb-4" style="padding: 30px;">
+                <h1 class="fa fa-check text-light m-0 mr-3"></h1>
                 <h5 class="font-weight-semi-bold m-0 text-dark">Quality Product</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+            <div class="d-flex align-items-center bg-primary mb-4" style="padding: 30px;">
+                <h1 class="fa fa-shipping-fast text-light m-0 mr-2"></h1>
                 <h5 class="font-weight-semi-bold m-0 text-dark">Free Shipping</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+            <div class="d-flex align-items-center bg-primary mb-4" style="padding: 30px;">
+                <h1 class="fas fa-exchange-alt text-light m-0 mr-3"></h1>
                 <h5 class="font-weight-semi-bold m-0 text-dark">14-Day Return</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
-                <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+            <div class="d-flex align-items-center bg-primary mb-4" style="padding: 30px;">
+                <h1 class="fa fa-phone-volume text-light m-0 mr-3"></h1>
                 <h5 class="font-weight-semi-bold m-0 text-dark">24/7 Support</h5>
             </div>
         </div>
@@ -111,8 +111,8 @@
                         <img class="img-fluid" src="multishop/img/cat-1.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6 class="text-primary">Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6 class="text-primary">Storage</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -124,8 +124,8 @@
                         <img class="img-fluid" src="multishop/img/cat-2.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Processor</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -137,8 +137,8 @@
                         <img class="img-fluid" src="multishop/img/cat-3.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Graphic Cards</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -150,8 +150,8 @@
                         <img class="img-fluid" src="multishop/img/cat-4.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Motherboards</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -163,8 +163,8 @@
                         <img class="img-fluid" src="multishop/img/cat-4.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>RAM (Memory)</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -176,8 +176,8 @@
                         <img class="img-fluid" src="multishop/img/cat-3.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Power Supply Unit (PSU)</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -189,8 +189,8 @@
                         <img class="img-fluid" src="multishop/img/cat-2.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Computer Case</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -202,8 +202,8 @@
                         <img class="img-fluid" src="multishop/img/cat-1.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Cooling Solutions</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -215,8 +215,8 @@
                         <img class="img-fluid" src="multishop/img/cat-2.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Monitor</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -228,8 +228,8 @@
                         <img class="img-fluid" src="multishop/img/cat-1.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Keyboard</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -241,8 +241,8 @@
                         <img class="img-fluid" src="multishop/img/cat-4.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Mouse</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>
@@ -254,8 +254,8 @@
                         <img class="img-fluid" src="multishop/img/cat-3.jpg" alt="">
                     </div>
                     <div class="flex-fill pl-3">
-                        <h6>Category Name</h6>
-                        <small class="text-body">100 Products</small>
+                        <h6>Others</h6>
+                        <small class="text-body">0 Products</small>
                     </div>
                 </div>
             </a>

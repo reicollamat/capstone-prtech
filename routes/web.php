@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,13 +20,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// displays the new landing page
-Route::get('/', [LandingController::class, 'index'])->name('index_landing');
-// shop page
-Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
 
 // get if user is_admin then redirect to designated view
 Route::get('/redirect', [LandingController::class, 'redirect']);
+
+// landing page / home page
+Route::get('/', [LandingController::class, 'index'])->name('index_landing');
+// shop page
+Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
+// product detail page
 
 
 
