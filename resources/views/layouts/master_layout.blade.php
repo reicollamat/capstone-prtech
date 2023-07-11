@@ -11,7 +11,7 @@
 
 
     <!-- Favicon -->
-    <link href="retechicon.ico" rel="icon">
+    <link href="{{ asset('img/icon/retechicon.ico') }}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -21,11 +21,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="multishop/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="multishop/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{{ asset('multishop/lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('multishop/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="multishop/css/style.css" rel="stylesheet">
+    <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
@@ -49,15 +49,15 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="multishop/lib/easing/easing.min.js"></script>
-    <script src="multishop/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{ asset('multishop/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('multishop/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
     <!-- Contact Javascript File -->
-    <script src="multishop/mail/jqBootstrapValidation.min.js"></script>
-    <script src="multishop/mail/contact.js"></script>
+    <script src="{{ asset('multishop/mail/jqBootstrapValidation.min.js') }}"></script>
+    <script src="{{ asset('multishop/mail/contact.js') }}"></script>
 
     <!-- Template Javascript -->
-    <script src="multishop/js/main.js"></script>
+    <script src="{{ asset('multishop/js/main.js') }}"></script>
 </body>
 
 </html>

@@ -54,11 +54,11 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between bg-primary" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="{{route('index_landing')}}" class="nav-item nav-link {{ (request()->routeIs('index_landing')) ? 'active' : '' }}">Home</a>
-                        <a href="{{route('index_shop')}}" class="nav-item nav-link {{ (request()->routeIs('index_shop')) ? 'active' : '' }}">Shop</a>
+                        <a href="{{ route('index_landing') }}" class="nav-item nav-link {{ (request()->routeIs('index_landing')) ? 'active' : '' }}">Home</a>
+                        <a href="{{ route('index_shop') }}" class="nav-item nav-link {{ (request()->routeIs('index_shop')) ? 'active' : '' }}">Shop</a>
                         <a href="#" class="nav-item nav-link">Purchases</a>
                         <a href="#" class="nav-item nav-link">Bookmark</a>
-                        <a href="#" class="nav-item nav-link">Cart</a>
+                        <a href="{{ route('index_cart', [ 'name' => Auth::user()->name ]) }}" class="nav-item nav-link">Cart</a>
                         {{-- <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">

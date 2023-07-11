@@ -26,7 +26,7 @@
             <a href="" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary bg-dark">
                     RE
-                    <img class="h1" src="img/icon/retechicon.ico" alt="icon">
+                    <img class="h1" src="{{ asset('img/icon/retechicon.ico') }}" alt="icon">
                 </span>
                 <span class="h1 text-uppercase text-primary bg-dark px-2 ml-n1">TECH</span>
             </a>
