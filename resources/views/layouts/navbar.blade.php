@@ -58,7 +58,11 @@
                         <a href="{{ route('index_shop') }}" class="nav-item nav-link {{ (request()->routeIs('index_shop')) ? 'active' : '' }}">Shop</a>
                         <a href="#" class="nav-item nav-link">Purchases</a>
                         <a href="#" class="nav-item nav-link">Bookmark</a>
-                        <a href="{{ route('index_cart', [ 'name' => Auth::user()->name ]) }}" class="nav-item nav-link">Cart</a>
+                        @auth
+                            <a href="{{ route('index_cart', [ 'name' => Auth::user()->name ]) }}" class="nav-item nav-link">Cart</a>
+                        @else
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Cart</a>
+                        @endauth
                         {{-- <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
