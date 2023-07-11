@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
+use App\Orchid\Layouts\Product\ProductFiltersLayout;
 use App\Orchid\Layouts\Product\ProductListLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
@@ -19,7 +20,9 @@ class ProductScreen extends Screen
     public function query(): iterable
     {
         return [
-            'products' => Product::paginate(),
+            'products' => Product::filters(ProductFiltersLayout::class)
+                ->defaultSort('id', 'desc')
+                ->paginate(),
         ];
     }
 
@@ -65,6 +68,7 @@ class ProductScreen extends Screen
     public function layout(): iterable
     {
         return [
+            ProductFiltersLayout::class,
             ProductListLayout::class,
         ];
     }
