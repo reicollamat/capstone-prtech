@@ -44,15 +44,15 @@ Purchase Item:
     purchase_id*
     product_id*
     quantity
-    unit_price
+    total_price
 
 Payment:
     id
     user_id*
     purchase_id*
     date_of_payment
+	payment_type
     payment_status
-    payment_type
 
 Voucher:
     id

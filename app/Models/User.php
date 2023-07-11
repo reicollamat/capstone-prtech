@@ -12,11 +12,24 @@ class User extends Authenticatable
 {
     use HasFactory;
 
+    // relationship to Bookmark
+    public function bookmark()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
     // relationship to CartItem
     public function cart_item()
     {
         return $this->hasMany(CartItem::class);
     }
+    
+    // relationship to Purchase
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.
