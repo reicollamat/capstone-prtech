@@ -20,6 +20,11 @@ Product:
     price
     status
 
+Bookmark:
+	id
+	user_id*
+	product_id*
+
 Cart Item:
     id
     user_id*
