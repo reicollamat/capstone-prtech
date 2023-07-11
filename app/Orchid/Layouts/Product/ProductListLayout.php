@@ -31,11 +31,17 @@ class ProductListLayout extends Table
     {
         return [
             TD::make('title', __('Product Name'))
+                ->width('150')
+                ->sort()
+                ->cantHide(),
+
+            TD::make('category', __('Category'))
+                ->width('100')
                 ->sort()
                 ->cantHide(),
 
             TD::make('description', __('Description'))
-                ->width('450')
+                ->width('300')
                 ->render(fn (Product $product) => Str::limit($product->description, 200))
                 ->sort()
                 ->cantHide(),
@@ -46,6 +52,7 @@ class ProductListLayout extends Table
                 ->cantHide(),
 
             TD::make('status', __('Status'))
+                ->width('100')
                 ->sort()
                 ->cantHide(),
 

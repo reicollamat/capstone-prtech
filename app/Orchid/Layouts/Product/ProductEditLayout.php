@@ -35,6 +35,25 @@ class ProductEditLayout extends Rows
 
             // input product image
 
+            Select::make('product.category')
+                ->required()
+                ->options([
+                    '' => '',
+                    'processor' => 'Processor(CPUs)',
+                    'graphics_card' => 'Graphics Cards',
+                    'motherboard' => 'Motherboards',
+                    'ram' => 'RAM (Memory)',
+                    'psu' => 'Power Supply Unit (PSU)',
+                    'case' => 'Computer Case',
+                    'cooling' => 'Cooling Solution',
+                    'monitor' => 'Monitor',
+                    'keyboard' => 'Keyboard',
+                    'mouse' => 'Mouse',
+                    'others' => 'Others',
+                ])
+                ->title(__('Category'))
+                ->help('Choose product category'),
+
             TextArea::make('product.description')
                 ->required()
                 ->title(__('Description'))

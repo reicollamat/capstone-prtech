@@ -17,9 +17,22 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->word(),
+            'title' => fake()->words(3, true),
             'description' => fake()->paragraph(),
             'price' => fake()->randomFloat(2),
+            'category' => fake()->randomElement([
+                'processor',
+                'graphics_card',
+                'motherboard' ,
+                'ram',
+                'psu',
+                'case',
+                'cooling',
+                'monitor',
+                'keyboard',
+                'mouse',
+                'others',
+            ])
         ];
     }
 }

@@ -15,6 +15,7 @@ Product:
     id
     title
     slug
+	category
     image
     description
     price
