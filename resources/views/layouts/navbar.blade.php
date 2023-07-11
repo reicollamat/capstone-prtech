@@ -56,11 +56,14 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="{{ route('index_landing') }}" class="nav-item nav-link {{ (request()->routeIs('index_landing')) ? 'active' : '' }}">Home</a>
                         <a href="{{ route('index_shop') }}" class="nav-item nav-link {{ (request()->routeIs('index_shop')) ? 'active' : '' }}">Shop</a>
-                        <a href="#" class="nav-item nav-link">Purchases</a>
-                        <a href="#" class="nav-item nav-link">Bookmark</a>
+                        
                         @auth
-                            <a href="{{ route('index_cart', [ 'name' => Auth::user()->name ]) }}" class="nav-item nav-link">Cart</a>
+                            <a href="#" class="nav-item nav-link">Purchases</a>
+                            <a href="#" class="nav-item nav-link">Bookmark</a>
+                            <a href="{{ route('index_cart', [ 'name' => Auth::user()->name ]) }}" class="nav-item nav-link {{ (request()->routeIs('index_cart')) ? 'active' : '' }}">Cart</a>
                         @else
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Purchases</a>
+                            <a href="{{ route('login') }}" class="nav-item nav-link">Bookmark</a>
                             <a href="{{ route('login') }}" class="nav-item nav-link">Cart</a>
                         @endauth
                         {{-- <div class="nav-item dropdown">
