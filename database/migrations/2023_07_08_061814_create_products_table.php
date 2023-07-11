@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->longText('description');
             $table->decimal('price', 20, 2);
-            $table->string('status');
+            $table->string('status')->default('unavailable');
             $table->softDeletes();
             $table->timestamps();
         });
