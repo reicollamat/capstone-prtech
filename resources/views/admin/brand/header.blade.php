@@ -1,6 +1,6 @@
 @push('head')
     <link
-        href="/favicon.ico"
+        href="{{ asset('img/icon/retechicon3.ico') }}"
         id="favicon"
         rel="icon"
     >
