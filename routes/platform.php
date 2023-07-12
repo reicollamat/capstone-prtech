@@ -18,6 +18,7 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\Product\ProductScreen;
+use App\Orchid\Screens\UserData\UserDataScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -99,14 +100,22 @@ Route::screen('products/create', ProductEditScreen::class)
         ->parent('platform.products')
         ->push(__('Create Product'), route('platform.products.create')));
 
+
+// __________ SHOP __________
+        
 // Platform > System > Product
 Route::screen('products', ProductScreen::class)
     ->name('platform.products')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
-        ->push('Product Screen'));
+        ->push('Products'));
 
-
+// Platform > System > Product
+Route::screen('userdata', UserDataScreen::class)
+    ->name('platform.userdata')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push('User Data'));
 
 // Example...
 Route::screen('example', ExampleScreen::class)

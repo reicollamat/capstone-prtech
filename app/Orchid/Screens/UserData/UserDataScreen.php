@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Orchid\Screens\Product;
+namespace App\Orchid\Screens\UserData;
 
-use App\Models\Product;
-use App\Orchid\Layouts\Product\ProductFiltersLayout;
-use App\Orchid\Layouts\Product\ProductListLayout;
-use Illuminate\Http\Request;
-use Orchid\Screen\Actions\Link;
+use App\Models\User;
+use App\Orchid\Layouts\User\UserFiltersLayout;
+use App\Orchid\Layouts\UserData\UserDataListLayout;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Toast;
 
-class ProductScreen extends Screen
+class UserDataScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -20,7 +17,8 @@ class ProductScreen extends Screen
     public function query(): iterable
     {
         return [
-            'products' => Product::filters(ProductFiltersLayout::class)
+            'users' => User::where('permissions', 'like', '{"platform.index": "0", "platform.systems.roles": "0", "platform.systems.users": "0", "platform.systems.attachment": "0"}')
+                ->filters(UserFiltersLayout::class)
                 ->defaultSort('id', 'desc')
                 ->paginate(),
         ];
@@ -33,17 +31,15 @@ class ProductScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Product List';
+        return 'User Data';
     }
 
     /**
      * Display header description.
-     *
-     * @return string|null
      */
     public function description(): ?string
     {
-        return 'Display products here :D';
+        return 'A comprehensive list of all registered users, including their bookmark, shopping cart & purchases data';
     }
 
     public function permission(): ?iterable
@@ -60,11 +56,7 @@ class ProductScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [
-            Link::make(__('Add Product'))
-                ->icon('bs.plus-circle')
-                ->route('platform.products.create'),
-        ];
+        return [];
     }
 
     /**
@@ -75,15 +67,7 @@ class ProductScreen extends Screen
     public function layout(): iterable
     {
         return [
-            ProductFiltersLayout::class,
-            ProductListLayout::class,
+            UserDataListLayout::class,
         ];
-    }
-
-    public function remove(Request $request): void
-    {
-        Product::findOrFail($request->get('id'))->delete();
-
-        Toast::info(__('Product was removed'));
     }
 }

@@ -9,6 +9,7 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 use Illuminate\Support\Str;
+use Orchid\Screen\Fields\Input;
 
 class ProductListLayout extends Table
 {
@@ -33,18 +34,21 @@ class ProductListLayout extends Table
             TD::make('title', __('Product Name'))
                 ->width('150')
                 ->sort()
-                ->cantHide(),
+                ->cantHide()
+                ->filter(Input::make()),
 
             TD::make('category', __('Category'))
                 ->width('100')
                 ->sort()
-                ->cantHide(),
+                ->cantHide()
+                ->filter(Input::make()),
 
             TD::make('description', __('Description'))
                 ->width('300')
                 ->render(fn (Product $product) => Str::limit($product->description, 200))
                 ->sort()
-                ->cantHide(),
+                ->cantHide()
+                ->filter(Input::make()),
 
             TD::make('price', __('Price'))
                 ->render(fn (Product $product) => '₱'.number_format($product->price, 2))
@@ -62,7 +66,7 @@ class ProductListLayout extends Table
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
-                ->width('100px')
+                ->width('50')
                 ->render(fn (Product $product) => DropDown::make()
                     ->icon('bs.three-dots-vertical')
                     ->list([
