@@ -18,6 +18,7 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\Product\ProductScreen;
+use App\Orchid\Screens\UserData\UserBookmarkScreen;
 use App\Orchid\Screens\UserData\UserDataScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -86,6 +87,9 @@ Route::screen('roles', RoleListScreen::class)
         ->parent('platform.index')
         ->push(__('Roles'), route('platform.systems.roles')));
 
+
+// __________ SHOP __________
+
 // Platform > System > Product > Edit
 Route::screen('products/{product}/edit', ProductEditScreen::class)
     ->name('platform.products.edit')
@@ -99,9 +103,6 @@ Route::screen('products/create', ProductEditScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.products')
         ->push(__('Create Product'), route('platform.products.create')));
-
-
-// __________ SHOP __________
         
 // Platform > System > Product
 Route::screen('products', ProductScreen::class)
@@ -110,13 +111,23 @@ Route::screen('products', ProductScreen::class)
         ->parent('platform.index')
         ->push('Products'));
 
-// Platform > System > Product
+// Platform > System > UserData > Bookmark
+Route::screen('userdata/{user}/bookmark', UserBookmarkScreen::class)
+    ->name('platform.userdata.bookmark')
+    ->breadcrumbs(fn (Trail $trail, $user) => $trail
+        ->parent('platform.userdata')
+        ->push($user->name, route('platform.userdata.bookmark', $user)));
+
+// Platform > System > UserData
 Route::screen('userdata', UserDataScreen::class)
     ->name('platform.userdata')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.index')
         ->push('User Data'));
 
+
+
+        
 // Example...
 Route::screen('example', ExampleScreen::class)
     ->name('platform.example')

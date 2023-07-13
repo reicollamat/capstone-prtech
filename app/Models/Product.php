@@ -20,6 +20,14 @@ class Product extends Model
      */
     protected $table = 'products';
 
+
+    // relationship to Bookmark
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *

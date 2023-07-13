@@ -39,7 +39,7 @@ class UserDataScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'A comprehensive list of all registered users, including their bookmark, shopping cart & purchases data';
+        return 'A comprehensive list of all registered users, including their bookmark, shopping cart and purchases data';
     }
 
     public function permission(): ?iterable

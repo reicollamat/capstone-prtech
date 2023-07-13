@@ -45,7 +45,7 @@ class UserDataListLayout extends Table
                 // ->width('100px')
                 ->render(fn (User $user) => 
                     Link::make(__('View'))
-                        ->route('platform.systems.users.edit', $user->id)
+                        ->route('platform.userdata.bookmark', $user->id)
                         ->icon('bs.bookmark'),),
 
             TD::make(__('Shopping Cart'))
