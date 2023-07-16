@@ -2,21 +2,14 @@
 
 namespace App\Orchid\Screens\UserData;
 
-use App\Models\Bookmark;
-use App\Models\Product;
+use App\Models\CartItem;
 use App\Models\User;
-use App\Orchid\Layouts\UserData\BookmarkListLayout;
-use Illuminate\Support\Facades\DB;
+use App\Orchid\Layouts\UserData\CartListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class UserBookmarkScreen extends Screen
+class UserCartScreen extends Screen
 {
-    /**
-     * @var User
-     */
-    public $user;
-
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -26,14 +19,14 @@ class UserBookmarkScreen extends Screen
     {
         // load current user
         $user->load(['roles']);
-            
-        // get bookmarks.product_id inner join products.id
-        $bookmark = Bookmark::where('user_id', $user->id)
-            ->join('products', 'products.id', '=', 'bookmarks.product_id')
+
+        // get cart_items.product_id inner join products.id
+        $cart = CartItem::where('user_id', $user->id)
+            ->join('products', 'products.id', '=', 'cart_items.product_id')
             ->get();
 
         return [
-            'bookmarks' => $bookmark,
+            'cart_items' => $cart,
         ];
     }
 
@@ -44,7 +37,7 @@ class UserBookmarkScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Bookmarks';
+        return 'Shopping Cart Items';
     }
 
     public function permission(): ?iterable
@@ -76,7 +69,7 @@ class UserBookmarkScreen extends Screen
     public function layout(): iterable
     {
         return [
-            BookmarkListLayout::class,
+            CartListLayout::class,
         ];
     }
 }

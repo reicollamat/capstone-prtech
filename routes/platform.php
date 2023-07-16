@@ -18,8 +18,11 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\Product\ProductScreen;
+use App\Orchid\Screens\UserData\PurchaseItemsListScreen;
 use App\Orchid\Screens\UserData\UserBookmarkScreen;
+use App\Orchid\Screens\UserData\UserCartScreen;
 use App\Orchid\Screens\UserData\UserDataScreen;
+use App\Orchid\Screens\UserData\UserPurchaseScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -115,8 +118,39 @@ Route::screen('products', ProductScreen::class)
 Route::screen('userdata/{user}/bookmark', UserBookmarkScreen::class)
     ->name('platform.userdata.bookmark')
     ->breadcrumbs(fn (Trail $trail, $user) => $trail
-        ->parent('platform.userdata')
-        ->push($user->name, route('platform.userdata.bookmark', $user)));
+        ->parent('platform.index')
+        ->push('User Data', route('platform.userdata'))
+        ->push('Bookmarks', route('platform.userdata.bookmark', $user))
+        ->push($user->name)
+        );
+
+// Platform > System > UserData > Cart
+Route::screen('userdata/{user}/cart', UserCartScreen::class)
+    ->name('platform.userdata.cart')
+    ->breadcrumbs(fn (Trail $trail, $user) => $trail
+        ->parent('platform.index')
+        ->push('User Data', route('platform.userdata'))
+        ->push('Shopping Cart', route('platform.userdata.cart', $user))
+        ->push($user->name)
+        );
+
+// Platform > System > UserData > Purchase > PurchaseItem
+Route::screen('userdata/purchase/items', PurchaseItemsListScreen::class)
+    ->name('platform.userdata.purchase.items');
+    // ->breadcrumbs(fn (Trail $trail, $purchase) => $trail
+    //     ->parent('platform.userdata.purchase')
+    //     ->push($purchase->id, route('platform.userdata.purchase.items', $purchase)));
+
+// Platform > System > UserData > Purchase
+Route::screen('userdata/{user}/purchase', UserPurchaseScreen::class)
+    ->name('platform.userdata.purchase')
+    ->breadcrumbs(fn (Trail $trail, $user) => $trail
+        ->parent('platform.index')
+        ->push('User Data', route('platform.userdata'))
+        ->push('Purchases', route('platform.userdata.purchase', $user))
+        ->push($user->name)
+        );
+
 
 // Platform > System > UserData
 Route::screen('userdata', UserDataScreen::class)

@@ -53,7 +53,7 @@ class UserDataListLayout extends Table
                 // ->width('100px')
                 ->render(fn (User $user) => 
                     Link::make(__('View'))
-                        ->route('platform.systems.users.edit', $user->id)
+                        ->route('platform.userdata.cart', $user->id)
                         ->icon('bs.cart'),),
 
             TD::make(__('Purchases'))
@@ -61,7 +61,7 @@ class UserDataListLayout extends Table
                 // ->width('100px')
                 ->render(fn (User $user) => 
                     Link::make(__('View'))
-                        ->route('platform.systems.users.edit', $user->id)
+                        ->route('platform.userdata.purchase', $user->id)
                         ->icon('bs.bag'),),
         ];
     }

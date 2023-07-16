@@ -2,21 +2,16 @@
 
 namespace App\Orchid\Screens\UserData;
 
-use App\Models\Bookmark;
 use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\PurchaseItem;
 use App\Models\User;
-use App\Orchid\Layouts\UserData\BookmarkListLayout;
-use Illuminate\Support\Facades\DB;
+use App\Orchid\Layouts\UserData\PurchaseListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class UserBookmarkScreen extends Screen
+class UserPurchaseScreen extends Screen
 {
-    /**
-     * @var User
-     */
-    public $user;
-
     /**
      * Fetch data to be displayed on the screen.
      *
@@ -28,12 +23,13 @@ class UserBookmarkScreen extends Screen
         $user->load(['roles']);
             
         // get bookmarks.product_id inner join products.id
-        $bookmark = Bookmark::where('user_id', $user->id)
-            ->join('products', 'products.id', '=', 'bookmarks.product_id')
+        $purchase = Purchase::where('user_id', $user->id)
             ->get();
 
+        // dd($purchase);
+
         return [
-            'bookmarks' => $bookmark,
+            'purchases' => $purchase,
         ];
     }
 
@@ -44,7 +40,7 @@ class UserBookmarkScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Bookmarks';
+        return 'Purchases';
     }
 
     public function permission(): ?iterable
@@ -76,7 +72,7 @@ class UserBookmarkScreen extends Screen
     public function layout(): iterable
     {
         return [
-            BookmarkListLayout::class,
+            PurchaseListLayout::class,
         ];
     }
 }

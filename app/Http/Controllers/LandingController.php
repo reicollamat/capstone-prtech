@@ -18,9 +18,10 @@ class LandingController extends Controller
     {
         $permissions = Auth::user()->permissions ?? '';
 
-        if($permissions == null)
+        // check permissions column
+        if($permissions['platform.index'] == 0)
         {
-            return view('pages.home');
+            return redirect('/');
         }
         else
         {
