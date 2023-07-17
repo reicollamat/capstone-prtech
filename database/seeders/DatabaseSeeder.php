@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
 
-        // seed an 'admin' role
+        // seed an 'regular user' role
         DB::table('roles')->insert([
             'slug' => 'regular_user',
             'name' => 'Regular User',
@@ -63,9 +63,31 @@ class DatabaseSeeder extends Seeder
             ->count(3)
             ->create();
 
-        Product::factory()
-            ->count(5)
-            ->create();
+        // seed dataset
+        $this->call([
+            ComputerCaseSeeder::class,
+            CaseFanSeeder::class,
+            CpuSeeder::class,
+            CpuCoolerSeeder::class,
+            ExtStorageSeeder::class,
+            IntStorageSeeder::class,
+            FanControllerSeeder::class,
+            HeadphoneSeeder::class,
+            KeyboardSeeder::class,
+            MemorySeeder::class,
+            MonitorSeeder::class,
+            MotherboardSeeder::class,
+            MouseSeeder::class,
+            PsuSeeder::class,
+            SoundCardSeeder::class,
+            SpeakerSeeder::class,
+            VideoCardSeeder::class,
+            WebcamSeeder::class,
+        ]);
+
+        // Product::factory()
+        //     ->count(5)
+        //     ->create();
 
         // \App\Models\User::factory(10)->create();
 
