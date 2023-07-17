@@ -28,6 +28,98 @@ class Product extends Model
     }
 
 
+
+    public function computercase()
+    {
+        return $this->hasOne(ComputerCase::class);
+    }
+
+    public function casefan()
+    {
+        return $this->hasOne(CaseFan::class);
+    }
+
+    public function cpu()
+    {
+        return $this->hasOne(Cpu::class);
+    }
+
+    public function cpucooler()
+    {
+        return $this->hasOne(CpuCooler::class);
+    }
+
+    public function extstorage()
+    {
+        return $this->hasOne(ExtStorage::class);
+    }
+
+    public function intstorage()
+    {
+        return $this->hasOne(IntStorage::class);
+    }
+
+    public function fancontroller()
+    {
+        return $this->hasOne(FanController::class);
+    }
+
+    public function headphone()
+    {
+        return $this->hasOne(Headphone::class);
+    }
+    
+    public function keyboard()
+    {
+        return $this->hasOne(Keyboard::class);
+    }
+
+    public function memory()
+    {
+        return $this->hasOne(Memory::class);
+    }
+
+    public function monitor()
+    {
+        return $this->hasOne(Monitor::class);
+    }
+
+    public function motherboard()
+    {
+        return $this->hasOne(Motherboard::class);
+    }
+
+    public function mouse()
+    {
+        return $this->hasOne(Mouse::class);
+    }
+
+    public function psu()
+    {
+        return $this->hasOne(Psu::class);
+    }
+
+    public function soundcard()
+    {
+        return $this->hasOne(SoundCard::class);
+    }
+
+    public function speaker()
+    {
+        return $this->hasOne(Speaker::class);
+    }
+
+    public function videocard()
+    {
+        return $this->hasOne(VideoCard::class);
+    }
+
+    public function webcam()
+    {
+        return $this->hasOne(Webcam::class);
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,10 +128,10 @@ class Product extends Model
     protected $fillable = [
         'title',
         'slug',
-        'category',
-        'description',
-        'price',
-        'status',
+        // 'category',
+        // 'description',
+        // 'price',
+        // 'status',
     ];
 
     /**
@@ -77,7 +169,7 @@ class Product extends Model
     protected $allowedSorts = [
         'id',
         'title',
-        'category',
+        // 'category',
         'updated_at',
         'created_at',
     ];

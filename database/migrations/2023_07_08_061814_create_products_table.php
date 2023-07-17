@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique()->nullable();
-            $table->string('category');
-            $table->string('image')->nullable();
-            $table->longText('description');
-            $table->decimal('price', 20, 2);
-            $table->string('status')->default('unavailable');
+            // $table->string('category');
+            // $table->string('image')->nullable();
+            // $table->longText('description');
+            // $table->decimal('price', 20, 2);
+            // $table->string('status')->default('unavailable');
             $table->softDeletes();
             $table->timestamps();
         });

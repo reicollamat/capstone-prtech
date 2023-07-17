@@ -13,13 +13,25 @@ User:
 
 Product:
     id
-    title
+    title -> product_name
     slug
-	category
-    image
-    description
-    price
-    status
+	
+CPU:
+	id
+	product_id *
+	
+	name
+	price
+	core_count
+	core_clock
+	boost_clock
+	tdp
+	graphics ->nullable
+	smt
+	
+	image
+	description
+	status
 
 Bookmark:
 	id
@@ -60,3 +72,182 @@ Voucher:
     title
     value
     description
+
+-------------------------------------------------------------------------------
+
+CATEGORIES
+	- computercase
+		product_id *
+		
+		name
+		price
+		type
+		color ->nullable
+		psu ->nullable
+		side_panel ->nullable
+		external_525_bays ->int
+		internal_35_bays ->int
+		
+		image
+		description
+		status
+		
+	- case_fan
+		name
+		price
+		size
+		color ->nullable
+		rpm ->array->nullable
+		airflow ->array->nullable
+		noise_level ->array->nullable
+		pwm ->bool
+		
+	- cpu
+		name
+		price
+		core_count ->int
+		core_clock ->decimal
+		boost_clock ->decimal->nullable
+		tdp ->int
+		graphics ->nullable
+		smt ->bool
+	
+	- cpu_cooler
+		name
+		price
+		rpm ->array->nullable
+		noise_level ->array->nullable
+		color ->nullable
+		size ->int->nullable
+	
+	- ext_storage
+		name
+		price
+		type
+		interface ->nullable
+		capacity ->int
+		price_per_gb ->decimal->nullable
+		color ->nullable
+	
+	- int_storage
+		name
+		price
+		capacity ->int
+		price_per_gb ->decimal->nullable
+		type ->nullable
+		cache ->int->nullable
+		form_factor
+		interface
+	
+	- fan_controller
+		name
+		price
+		channels ->int
+		channel_wattage ->decimal->nullable
+		pwm ->bool
+		form_factor ->decimal
+		color ->nullable
+		
+	- headphone
+		name
+		price
+		type
+		frequency_response ->array->nullable
+		microphone ->bool
+		wireless ->bool
+		enclosure_type
+		color ->nullable
+	
+	- keyboard !!!
+		name
+		price
+		style
+		swithces ->nullable
+		backlit ->nullable
+		tenkeyless ->bool
+		connection_type
+		color ->nullable
+	
+	- memory
+		name
+		price
+		speed ->array
+		modules ->array
+		price_per_gb ->decimal->nullable
+		color ->nullable
+		first_word_latency ->int
+		cas_latency ->int
+	
+	- monitor
+		name
+		price
+		screen_size ->decimal
+		resolution ->array
+		refresh_rate ->int->nullable
+		response_time ->decimal->nullable
+		panel_type ->nullable
+		aspect_ratio
+	
+	- motherboard
+		name
+		price
+		socket
+		form_factor
+		max_memory ->int
+		memory_slots ->int
+		color ->nullable
+	
+	- mouse
+		name
+		price
+		tracking_method
+		connection_type ->nullable
+		max_dpi ->int->nullable
+		hand_orientation ->nullable
+		color ->nullable
+	
+	- psu
+		name
+		price
+		type
+		efficiency ->nullable
+		wattage ->int
+		modular
+		color ->nullable
+		
+	- sound_card
+		name
+		price
+		channels ->decimal
+		digital_audio ->int->nullable
+		snr ->int->nullable
+		sample_rate ->int->nullable
+		chipset ->nullable
+		interface
+	
+	- speaker
+		name
+		price
+		configuration ->decimal
+		wattage ->int->nullable
+		frequency_response ->array->nullable
+		color ->nullable
+	
+	- video_card
+		name
+		price
+		chipset
+		memory ->int
+		core_clock ->int->nullable
+		boost_clock ->int->nullable
+		length ->int->nullable
+		color ->nullable
+	
+	- webcam ****
+		name
+		price
+		resolutions->array
+		connection
+		focus_type ->nullable
+		os ->array
+		fov ->int->nullable
