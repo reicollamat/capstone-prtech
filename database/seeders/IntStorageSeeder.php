@@ -35,7 +35,7 @@ class IntStorageSeeder extends Seeder
                     "cache" => $value->cache,
                     "form_factor" => $value->form_factor,
                     "interface" => $value->interface,
-                    "image" => 'img/components/intstorage/'.fake()->randomElement(['hdd', 'ssd-m2','ssd-sata']).' ('.fake()->numberBetween(1, 260).').png',
+                    "image" => 'img/components/intstorage/'.fake()->randomElement(['ssd-m2','ssd-sata']).' ('.fake()->numberBetween(1, 260).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }
