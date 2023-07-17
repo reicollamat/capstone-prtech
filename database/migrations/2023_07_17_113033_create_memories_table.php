@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->integer('first_word_latency');
             $table->integer('cas_latency');
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->softDeletes();

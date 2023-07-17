@@ -35,6 +35,7 @@ class MemorySeeder extends Seeder
                     "color" => $value->color,
                     "first_word_latency" => $value->first_word_latency,
                     "cas_latency" => $value->cas_latency,
+                    "image" => 'img/components/ram/ram ('.fake()->numberBetween(1, 260).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

@@ -34,6 +34,7 @@ class MouseSeeder extends Seeder
                     "max_dpi" => $value->max_dpi,
                     "hand_orientation" => $value->hand_orientation,
                     "color" => $value->color,
+                    "image" => 'img/components/mouse/mouse ('.fake()->numberBetween(1, 10).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

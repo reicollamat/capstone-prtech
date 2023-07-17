@@ -35,6 +35,7 @@ class VideoCardSeeder extends Seeder
                     "boost_clock" => $value->boost_clock,
                     "length" => $value->length,
                     "color" => $value->color,
+                    "image" => 'img/components/gpu/gpu ('.fake()->numberBetween(1, 260).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('boost_clock')->nullable();
             $table->integer('length')->nullable();
             $table->string('color')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->softDeletes();

@@ -34,6 +34,7 @@ class ExtStorageSeeder extends Seeder
                     "capacity" => $value->capacity,
                     "price_per_gb" => $value->price_per_gb,
                     "color" => $value->color,
+                    "image" => 'img/components/extstorage/extstorage ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

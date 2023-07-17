@@ -35,6 +35,7 @@ class MonitorSeeder extends Seeder
                     "response_time" => $value->response_time,
                     "panel_type" => $value->panel_type,
                     "aspect_ratio" => $value->aspect_ratio,
+                    "image" => 'img/components/monitor/monitor ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

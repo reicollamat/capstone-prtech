@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('sidepanel')->nullable();
             $table->integer('external_525_bays');
             $table->integer('internal_35_bays');
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->softDeletes();

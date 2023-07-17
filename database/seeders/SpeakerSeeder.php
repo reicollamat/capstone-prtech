@@ -33,6 +33,7 @@ class SpeakerSeeder extends Seeder
                     "wattage" => $value->wattage,
                     "frequency_response" => $value->frequency_response,
                     "color" => $value->color,
+                    "image" => 'img/components/speaker/speaker ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

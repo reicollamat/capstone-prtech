@@ -35,6 +35,7 @@ class CpuSeeder extends Seeder
                     "tdp" => $value->tdp,
                     "graphics" => $value->graphics,
                     "smt" => $value->smt,
+                    "image" => 'img/components/cpu/cpu ('.fake()->numberBetween(1, 260).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

@@ -35,6 +35,7 @@ class ComputerCaseSeeder extends Seeder
                     "sidepanel" => $value->side_panel,
                     "external_525_bays" => $value->external_525_bays,
                     "internal_35_bays" => $value->internal_35_bays,
+                    "image" => 'img/components/case/case ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

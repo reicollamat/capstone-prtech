@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('focus_type')->nullable();
             $table->json('os');
             $table->integer('fov')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->softDeletes();

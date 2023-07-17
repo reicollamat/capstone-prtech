@@ -34,6 +34,7 @@ class WebcamSeeder extends Seeder
                     "focus_type" => $value->focus_type,
                     "os" => $value->os,
                     "fov" => $value->fov,
+                    "image" => 'img/components/webcam/webcam ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

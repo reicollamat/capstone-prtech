@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique()->nullable();
             // $table->string('category');
-            // $table->string('image')->nullable();
+            // $table->string('image')->default('img/showcase1.jpg');
             // $table->longText('description');
             // $table->decimal('price', 20, 2);
             // $table->string('status')->default('unavailable');

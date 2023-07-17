@@ -59,11 +59,6 @@ class Product extends Model
         return $this->hasOne(IntStorage::class);
     }
 
-    public function fancontroller()
-    {
-        return $this->hasOne(FanController::class);
-    }
-
     public function headphone()
     {
         return $this->hasOne(Headphone::class);
@@ -97,11 +92,6 @@ class Product extends Model
     public function psu()
     {
         return $this->hasOne(Psu::class);
-    }
-
-    public function soundcard()
-    {
-        return $this->hasOne(SoundCard::class);
     }
 
     public function speaker()

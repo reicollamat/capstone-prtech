@@ -34,6 +34,7 @@ class PsuSeeder extends Seeder
                     "wattage" => $value->wattage,
                     "modular" => $value->modular,
                     "color" => $value->color,
+                    "image" => 'img/components/psu/psu ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

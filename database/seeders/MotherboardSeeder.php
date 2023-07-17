@@ -34,6 +34,7 @@ class MotherboardSeeder extends Seeder
                     "max_memory" => $value->max_memory,
                     "memory_slots" => $value->memory_slots,
                     "color" => $value->color,
+                    "image" => 'img/components/mobo/mobo ('.fake()->numberBetween(1, 260).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

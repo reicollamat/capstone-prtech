@@ -35,6 +35,7 @@ class KeyboardSeeder extends Seeder
                     "tenkeyless" => $value->tenkeyless,
                     "connection_type" => $value->connection_type,
                     "color" => $value->color,
+                    "image" => 'img/components/keyboard/keyboard ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

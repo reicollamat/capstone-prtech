@@ -35,6 +35,7 @@ class HeadphoneSeeder extends Seeder
                     "wireless" => $value->wireless,
                     "enclosure_type" => $value->enclosure_type,
                     "color" => $value->color,
+                    "image" => 'img/components/headphone/headphone ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

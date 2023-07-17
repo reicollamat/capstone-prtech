@@ -138,15 +138,6 @@ CATEGORIES
 		cache ->int->nullable
 		form_factor
 		interface
-	
-	- fan_controller
-		name
-		price
-		channels ->int
-		channel_wattage ->decimal->nullable
-		pwm ->bool
-		form_factor ->decimal
-		color ->nullable
 		
 	- headphone
 		name
@@ -158,7 +149,7 @@ CATEGORIES
 		enclosure_type
 		color ->nullable
 	
-	- keyboard !!!
+	- keyboard
 		name
 		price
 		style
@@ -214,16 +205,6 @@ CATEGORIES
 		wattage ->int
 		modular
 		color ->nullable
-		
-	- sound_card
-		name
-		price
-		channels ->decimal
-		digital_audio ->int->nullable
-		snr ->int->nullable
-		sample_rate ->int->nullable
-		chipset ->nullable
-		interface
 	
 	- speaker
 		name

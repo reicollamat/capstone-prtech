@@ -35,6 +35,7 @@ class CaseFanSeeder extends Seeder
                     "airflow" => $value->airflow,
                     "noise_level" => $value->noise_level,
                     "pwm" => $value->pwm,
+                    "image" => 'img/components/casefan/casefan ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

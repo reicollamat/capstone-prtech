@@ -33,6 +33,7 @@ class CpuCoolerSeeder extends Seeder
                     "noise_level" => $value->noise_level,
                     "color" => $value->color,
                     "size" => $value->size,
+                    "image" => 'img/components/cpucooler/cpucooler ('.fake()->numberBetween(1, 5).').png',
                     "description" => fake()->paragraph(),
                 ]);
             }

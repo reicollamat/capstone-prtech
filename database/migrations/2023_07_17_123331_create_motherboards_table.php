@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('max_memory');
             $table->integer('memory_slots');
             $table->string('color')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->softDeletes();

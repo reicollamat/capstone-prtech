@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('response_time', 8, 2)->nullable();
             $table->string('panel_type')->nullable();
             $table->string('aspect_ratio');
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->softDeletes();

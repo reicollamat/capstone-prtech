@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('tdp');
             $table->string('graphics')->nullable();
             $table->boolean('smt');
-            $table->string('image')->nullable();
+            $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->softDeletes();
