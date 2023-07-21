@@ -16,17 +16,24 @@ class IntStorageSeeder extends Seeder
     public function run(): void
     {
         IntStorage::truncate();
-  
+
         $json = File::get("database/product_dataset/internal-hard-drive.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/intstorage/' . fake()->randomElement(['ssd-m2', 'ssd-sata']) . ' (' . fake()->numberBetween(1, 260) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "int_storage",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 IntStorage::create([
                     "product_id" => $product->id,
+                    "category" => "int_storage",
                     "name" => $value->name,
                     "price" => $value->price,
                     "capacity" => $value->capacity,
@@ -35,8 +42,9 @@ class IntStorageSeeder extends Seeder
                     "cache" => $value->cache,
                     "form_factor" => $value->form_factor,
                     "interface" => $value->interface,
-                    "image" => 'img/components/intstorage/'.fake()->randomElement(['ssd-m2','ssd-sata']).' ('.fake()->numberBetween(1, 260).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

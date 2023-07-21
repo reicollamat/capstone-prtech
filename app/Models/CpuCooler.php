@@ -23,6 +23,7 @@ class CpuCooler extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'rpm',
@@ -32,6 +33,8 @@ class CpuCooler extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**

@@ -23,6 +23,7 @@ class ComputerCase extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'type',
@@ -34,5 +35,7 @@ class ComputerCase extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

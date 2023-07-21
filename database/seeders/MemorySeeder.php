@@ -16,17 +16,24 @@ class MemorySeeder extends Seeder
     public function run(): void
     {
         Memory::truncate();
-  
+
         $json = File::get("database/product_dataset/memory.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/ram/ram (' . fake()->numberBetween(1, 260) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "memory",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Memory::create([
                     "product_id" => $product->id,
+                    "category" => "memory",
                     "name" => $value->name,
                     "price" => $value->price,
                     "speed" => $value->speed,
@@ -35,8 +42,9 @@ class MemorySeeder extends Seeder
                     "color" => $value->color,
                     "first_word_latency" => $value->first_word_latency,
                     "cas_latency" => $value->cas_latency,
-                    "image" => 'img/components/ram/ram ('.fake()->numberBetween(1, 260).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

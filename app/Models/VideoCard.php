@@ -23,6 +23,7 @@ class VideoCard extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'chipset',
@@ -34,5 +35,7 @@ class VideoCard extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

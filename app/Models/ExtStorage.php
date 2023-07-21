@@ -23,6 +23,7 @@ class ExtStorage extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'type',
@@ -33,5 +34,7 @@ class ExtStorage extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

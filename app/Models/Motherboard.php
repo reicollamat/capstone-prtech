@@ -23,6 +23,7 @@ class Motherboard extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'socket',
@@ -33,5 +34,7 @@ class Motherboard extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

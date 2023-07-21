@@ -23,6 +23,7 @@ class Memory extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'speed',
@@ -34,6 +35,8 @@ class Memory extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**

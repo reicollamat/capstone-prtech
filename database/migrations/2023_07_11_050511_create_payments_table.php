@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
-            $table->date('date_of_payment');
+            $table->timestamp('date_of_payment');
             $table->string('payment_type');
             $table->string('payment_status');
             $table->softDeletes();

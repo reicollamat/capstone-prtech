@@ -16,17 +16,24 @@ class MonitorSeeder extends Seeder
     public function run(): void
     {
         Monitor::truncate();
-  
+
         $json = File::get("database/product_dataset/monitor.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/monitor/monitor (' . fake()->numberBetween(1, 5) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "monitor",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Monitor::create([
                     "product_id" => $product->id,
+                    "category" => "monitor",
                     "name" => $value->name,
                     "price" => $value->price,
                     "screen_size" => $value->screen_size,
@@ -35,8 +42,9 @@ class MonitorSeeder extends Seeder
                     "response_time" => $value->response_time,
                     "panel_type" => $value->panel_type,
                     "aspect_ratio" => $value->aspect_ratio,
-                    "image" => 'img/components/monitor/monitor ('.fake()->numberBetween(1, 5).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

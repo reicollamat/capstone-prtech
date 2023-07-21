@@ -23,6 +23,7 @@ class Webcam extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'resolutions',
@@ -33,6 +34,8 @@ class Webcam extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**

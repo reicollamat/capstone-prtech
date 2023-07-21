@@ -43,6 +43,8 @@
 }
 
 html {
+  height: 100%;
+
   font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -71,6 +73,10 @@ body {
   color: #6C757D;
   text-align: left;
   background-color: #1B1B1B;
+
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -573,6 +579,12 @@ mark,
 .img-fluid {
   max-width: 100%;
   height: auto;
+}
+
+.img-fluid-fixheight {
+  max-width: 100%;
+  width: fit-content;
+  height: 150px;
 }
 
 .img-thumbnail {
@@ -1849,6 +1861,10 @@ pre code {
   border-top: 1px solid #dee2e6;
 }
 
+.details td.header{
+  text-align: right;
+}
+
 .table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
@@ -2050,14 +2066,14 @@ pre code {
 .table-dark,
 .table-dark>th,
 .table-dark>td {
-  background-color: #c9cbcd;
+  background-color: #1B1B1B;
 }
 
 .table-dark th,
 .table-dark td,
 .table-dark thead th,
 .table-dark tbody+tbody {
-  border-color: #9a9fa2;
+  border-color: #1B1B1B;
 }
 
 .table-hover .table-dark:hover {
@@ -2086,8 +2102,8 @@ pre code {
 
 .table .thead-dark th {
   color: #fff;
-  background-color: #343a40;
-  border-color: #454d55;
+  background-color: #2B7EA1;
+  border-color: #2B7EA1;
 }
 
 .table .thead-light th {
@@ -2098,13 +2114,13 @@ pre code {
 
 .table-dark {
   color: #fff;
-  background-color: #343a40;
+  background-color: #1B1B1B;
 }
 
 .table-dark th,
 .table-dark td,
 .table-dark thead th {
-  border-color: #454d55;
+  border-color: #1B1B1B;
 }
 
 .table-dark.table-bordered {
@@ -2723,7 +2739,7 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
   color: #212529;
-  background-color: #2B7EA1;
+  background-color: #2d6177;
   border-color: #2B7EA1;
 }
 
@@ -3867,7 +3883,6 @@ input[type="button"].btn-block {
   text-align: center;
   white-space: nowrap;
   background-color: #e9ecef;
-  border: 1px solid #ced4da;
 }
 
 .input-group-text input[type="radio"],
@@ -4394,7 +4409,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link:focus {
-  border-color: #e9ecef #e9ecef #dee2e6;
+  border-color: #2B7EA1 #2B7EA1 #2B7EA1;
 }
 
 .nav-tabs .nav-link.disabled {
@@ -4406,8 +4421,8 @@ input[type="button"].btn-block {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #F5F5F5;
-  border-color: #dee2e6 #dee2e6 #F5F5F5;
+  background-color: #2B7EA1;
+  border-color: #2B7EA1 #2B7EA1 #2B7EA1;
 }
 
 .nav-tabs .dropdown-menu {
@@ -5065,11 +5080,11 @@ input[type="button"].btn-block {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e9ecef;
 }
 
 .breadcrumb-item {
   display: flex;
+  color: #2B7EA1;
 }
 
 .breadcrumb-item+.breadcrumb-item {
@@ -5079,7 +5094,7 @@ input[type="button"].btn-block {
 .breadcrumb-item+.breadcrumb-item::before {
   display: inline-block;
   padding-right: 0.5rem;
-  color: #1B1B1B;
+  color: #2B7EA1;
   content: "/";
 }
 
@@ -5093,6 +5108,10 @@ input[type="button"].btn-block {
 
 .breadcrumb-item.active {
   color: #FFFFFF;
+}
+
+.breadcrumb-item.hide {
+  display: none;
 }
 
 .pagination {
@@ -5349,9 +5368,12 @@ a.badge-dark.focus {
 }
 
 .alert {
-  position: relative;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
   padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
   border: 1px solid transparent;
 }
 
@@ -10309,10 +10331,20 @@ button.bg-dark:focus {
   white-space: nowrap !important;
 }
 
-.text-truncate {
+/* .text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+} */
+
+.text-truncate {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
 }
 
 .text-left {
@@ -10811,6 +10843,8 @@ h6 {
 
 .product-item {
   transition: .5s;
+  height: 350px;
+
 }
 
 .product-action {
@@ -10876,10 +10910,10 @@ h6 {
   color: #2B7EA1 !important;
 }
 
-.table.table-borderless thead tr,
+/* .table.table-borderless thead tr,
 .table.table-borderless tbody tr:not(:last-child) {
   border-bottom: 15px solid #F5F5F5;
-}
+} */
 
 .contact-form .help-block ul {
   margin: 0;
@@ -10905,3 +10939,19 @@ h6 {
     transform: translateY(-15px);
   }
 }
+
+footer {
+  /* position: fixed; */
+  /* bottom: 0; */
+  bottom: 0;
+  left: 0;
+  font-size: small;
+  width: 100%;
+  background: #2B7EA1;
+
+  margin-top: auto;
+}
+
+/* .searchbar {
+  
+} */

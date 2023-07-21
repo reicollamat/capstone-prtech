@@ -16,17 +16,24 @@ class CpuSeeder extends Seeder
     public function run(): void
     {
         Cpu::truncate();
-  
+
         $json = File::get("database/product_dataset/cpu.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/cpu/cpu (' . fake()->numberBetween(1, 260) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "cpu",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Cpu::create([
                     "product_id" => $product->id,
+                    "category" => "cpu",
                     "name" => $value->name,
                     "price" => $value->price,
                     "core_count" => $value->core_count,
@@ -35,8 +42,9 @@ class CpuSeeder extends Seeder
                     "tdp" => $value->tdp,
                     "graphics" => $value->graphics,
                     "smt" => $value->smt,
-                    "image" => 'img/components/cpu/cpu ('.fake()->numberBetween(1, 260).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

@@ -23,6 +23,7 @@ class Mouse extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'tracking_method',
@@ -33,5 +34,7 @@ class Mouse extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

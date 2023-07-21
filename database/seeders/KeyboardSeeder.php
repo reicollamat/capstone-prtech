@@ -16,17 +16,24 @@ class KeyboardSeeder extends Seeder
     public function run(): void
     {
         Keyboard::truncate();
-  
+
         $json = File::get("database/product_dataset/keyboard.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/keyboard/keyboard (' . fake()->numberBetween(1, 5) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "keyboard",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Keyboard::create([
                     "product_id" => $product->id,
+                    "category" => "keyboard",
                     "name" => $value->name,
                     "price" => $value->price,
                     "style" => $value->style,
@@ -35,8 +42,9 @@ class KeyboardSeeder extends Seeder
                     "tenkeyless" => $value->tenkeyless,
                     "connection_type" => $value->connection_type,
                     "color" => $value->color,
-                    "image" => 'img/components/keyboard/keyboard ('.fake()->numberBetween(1, 5).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

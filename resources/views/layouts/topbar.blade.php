@@ -24,22 +24,28 @@
     <div class="row align-items-center bg-dark py-3 px-xl-5">
         <div class="col-lg-4 d-none d-lg-flex">
             <a href="" class="text-decoration-none">
-                <span class="h1 text-uppercase text-primary bg-dark">
+                <span class="h1 text-uppercase text-primary">
                     RE
                     <img class="h1" src="{{ asset('img/icon/retechicon.ico') }}" alt="icon">
                 </span>
-                <span class="h1 text-uppercase text-primary bg-dark px-2 ml-n1">TECH</span>
+                <span class="h1 text-uppercase text-primary px-2 ml-n1">TECH</span>
             </a>
         </div>
-        <div class="col-lg-4 col-6 text-left">
-            <form action="">
+        <div class="searchbar col-lg-4 col-6 text-left">
+            <form action="{{route('search_result')}}" method="GET">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products">
-                    <div class="input-group-append">
-                        <span class="input-group-text bg-transparent text-primary">
-                            <i class="fa fa-search"></i>
-                        </span>
-                    </div>
+                    @if (session('to_search'))
+                        <input type="text" class="form-control" name="to_search" placeholder="Search for products" value="{{ session('to_search') }}">
+                    @else
+                        <input type="text" class="form-control" name="to_search" placeholder="Search for products">
+                    @endif
+                    <button type="submit" class="bg-dark">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </button>
                 </div>
             </form>
         </div>

@@ -23,6 +23,7 @@ class Headphone extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'type',
@@ -34,6 +35,8 @@ class Headphone extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**

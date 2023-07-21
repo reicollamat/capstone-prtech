@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('webcams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->string('category');
             $table->string('name');
             $table->decimal('price');
             $table->json('resolutions');
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
+            $table->string('condition');
+            $table->integer('purchase_count')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

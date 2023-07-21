@@ -23,6 +23,7 @@ class Cpu extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'core_count',
@@ -34,5 +35,7 @@ class Cpu extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

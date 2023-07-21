@@ -16,17 +16,24 @@ class VideoCardSeeder extends Seeder
     public function run(): void
     {
         VideoCard::truncate();
-  
+
         $json = File::get("database/product_dataset/video-card.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/gpu/gpu (' . fake()->numberBetween(1, 260) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "video_card",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 VideoCard::create([
                     "product_id" => $product->id,
+                    "category" => "video_card",
                     "name" => $value->name,
                     "price" => $value->price,
                     "chipset" => $value->chipset,
@@ -35,8 +42,9 @@ class VideoCardSeeder extends Seeder
                     "boost_clock" => $value->boost_clock,
                     "length" => $value->length,
                     "color" => $value->color,
-                    "image" => 'img/components/gpu/gpu ('.fake()->numberBetween(1, 260).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

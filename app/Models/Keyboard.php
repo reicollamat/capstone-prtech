@@ -23,6 +23,7 @@ class Keyboard extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'style',
@@ -34,5 +35,7 @@ class Keyboard extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

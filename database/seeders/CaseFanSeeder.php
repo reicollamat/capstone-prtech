@@ -16,17 +16,24 @@ class CaseFanSeeder extends Seeder
     public function run(): void
     {
         CaseFan::truncate();
-  
+
         $json = File::get("database/product_dataset/case-fan.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/casefan/casefan (' . fake()->numberBetween(1, 5) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "case_fan",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 CaseFan::create([
                     "product_id" => $product->id,
+                    "category" => "case_fan",
                     "name" => $value->name,
                     "price" => $value->price,
                     "size" => $value->size,
@@ -35,8 +42,9 @@ class CaseFanSeeder extends Seeder
                     "airflow" => $value->airflow,
                     "noise_level" => $value->noise_level,
                     "pwm" => $value->pwm,
-                    "image" => 'img/components/casefan/casefan ('.fake()->numberBetween(1, 5).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

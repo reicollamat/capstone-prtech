@@ -16,17 +16,24 @@ class WebcamSeeder extends Seeder
     public function run(): void
     {
         Webcam::truncate();
-  
+
         $json = File::get("database/product_dataset/webcam.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/webcam/webcam (' . fake()->numberBetween(1, 5) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "webcam",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Webcam::create([
                     "product_id" => $product->id,
+                    "category" => "webcam",
                     "name" => $value->name,
                     "price" => $value->price,
                     "resolutions" => $value->resolutions,
@@ -34,8 +41,9 @@ class WebcamSeeder extends Seeder
                     "focus_type" => $value->focus_type,
                     "os" => $value->os,
                     "fov" => $value->fov,
-                    "image" => 'img/components/webcam/webcam ('.fake()->numberBetween(1, 5).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

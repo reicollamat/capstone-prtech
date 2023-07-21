@@ -15,6 +15,13 @@ Product:
     id
     title -> product_name
     slug
+	category
+	
+	price
+	image
+	status
+	condition
+	purchase_count
 	
 CPU:
 	id
@@ -81,10 +88,11 @@ CATEGORIES
 		
 		name
 		price
+
 		type
 		color ->nullable
 		psu ->nullable
-		side_panel ->nullable
+		sidepanel ->nullable
 		external_525_bays ->int
 		internal_35_bays ->int
 		
@@ -95,6 +103,7 @@ CATEGORIES
 	- case_fan
 		name
 		price
+
 		size
 		color ->nullable
 		rpm ->array->nullable
@@ -105,6 +114,7 @@ CATEGORIES
 	- cpu
 		name
 		price
+
 		core_count ->int
 		core_clock ->decimal
 		boost_clock ->decimal->nullable
@@ -115,6 +125,7 @@ CATEGORIES
 	- cpu_cooler
 		name
 		price
+
 		rpm ->array->nullable
 		noise_level ->array->nullable
 		color ->nullable
@@ -123,6 +134,7 @@ CATEGORIES
 	- ext_storage
 		name
 		price
+
 		type
 		interface ->nullable
 		capacity ->int
@@ -132,6 +144,7 @@ CATEGORIES
 	- int_storage
 		name
 		price
+
 		capacity ->int
 		price_per_gb ->decimal->nullable
 		type ->nullable
@@ -142,6 +155,7 @@ CATEGORIES
 	- headphone
 		name
 		price
+
 		type
 		frequency_response ->array->nullable
 		microphone ->bool
@@ -152,6 +166,7 @@ CATEGORIES
 	- keyboard
 		name
 		price
+
 		style
 		swithces ->nullable
 		backlit ->nullable
@@ -162,6 +177,7 @@ CATEGORIES
 	- memory
 		name
 		price
+
 		speed ->array
 		modules ->array
 		price_per_gb ->decimal->nullable
@@ -172,6 +188,7 @@ CATEGORIES
 	- monitor
 		name
 		price
+
 		screen_size ->decimal
 		resolution ->array
 		refresh_rate ->int->nullable
@@ -182,6 +199,7 @@ CATEGORIES
 	- motherboard
 		name
 		price
+
 		socket
 		form_factor
 		max_memory ->int
@@ -191,6 +209,7 @@ CATEGORIES
 	- mouse
 		name
 		price
+
 		tracking_method
 		connection_type ->nullable
 		max_dpi ->int->nullable
@@ -200,6 +219,7 @@ CATEGORIES
 	- psu
 		name
 		price
+
 		type
 		efficiency ->nullable
 		wattage ->int
@@ -209,6 +229,7 @@ CATEGORIES
 	- speaker
 		name
 		price
+
 		configuration ->decimal
 		wattage ->int->nullable
 		frequency_response ->array->nullable
@@ -217,6 +238,7 @@ CATEGORIES
 	- video_card
 		name
 		price
+		
 		chipset
 		memory ->int
 		core_clock ->int->nullable
@@ -227,8 +249,41 @@ CATEGORIES
 	- webcam ****
 		name
 		price
+
 		resolutions->array
 		connection
 		focus_type ->nullable
 		os ->array
 		fov ->int->nullable
+		
+computer_case
+case_fan
+cpu
+cpu_cooler
+ext_storage
+int_storage
+headphone
+keyboard
+memory
+monitor
+motherboard
+mouse
+psu
+speaker
+video_card
+webcam
+
+
+
+purchase_count (sold)
+status
+condition
+
+purchase_status
+	Processing
+	Shipped
+	Delivered
+	Completed
+
+
+				

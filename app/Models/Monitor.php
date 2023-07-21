@@ -23,6 +23,7 @@ class Monitor extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'screen_size',
@@ -34,6 +35,8 @@ class Monitor extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**

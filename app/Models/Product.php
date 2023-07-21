@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Kyslik\ColumnSortable\Sortable;
 use Orchid\Filters\Filterable;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
@@ -13,7 +14,7 @@ use Orchid\Filters\Types\WhereDateStartEnd;
 
 class Product extends Model
 {
-    use HasFactory, AsSource, Sluggable, Filterable;
+    use HasFactory, AsSource, Sluggable, Filterable, Sortable;
 
     /**
      * @var string
@@ -28,13 +29,80 @@ class Product extends Model
     }
 
 
+    public function category($category)
+    {
+        if ($category == 'computer_case') 
+        {
+            return $this->hasOne(ComputerCase::class);
+        }
+        elseif ($category == 'case_fan')
+        {
+            return $this->hasOne(CaseFan::class);
+        }
+        elseif ($category == 'cpu')
+        {
+            return $this->hasOne(Cpu::class);
+        }
+        elseif ($category == 'cpu_cooler')
+        {
+            return $this->hasOne(CpuCooler::class);
+        }
+        elseif ($category == 'ext_storage')
+        {
+            return $this->hasOne(ExtStorage::class);
+        }
+        elseif ($category == 'int_storage')
+        {
+            return $this->hasOne(IntStorage::class);
+        }
+        elseif ($category == 'headphone')
+        {
+            return $this->hasOne(Headphone::class);
+        }
+        elseif ($category == 'keyboard')
+        {
+            return $this->hasOne(Keyboard::class);
+        }
+        elseif ($category == 'memory')
+        {
+            return $this->hasOne(Memory::class);
+        }
+        elseif ($category == 'monitor')
+        {
+            return $this->hasOne(Monitor::class);
+        }
+        elseif ($category == 'motherboard')
+        {
+            return $this->hasOne(Motherboard::class);
+        }
+        elseif ($category == 'mouse')
+        {
+            return $this->hasOne(Mouse::class);
+        }
+        elseif ($category == 'psu')
+        {
+            return $this->hasOne(Psu::class);
+        }
+        elseif ($category == 'speaker')
+        {
+            return $this->hasOne(Speaker::class);
+        }
+        elseif ($category == 'video_card')
+        {
+            return $this->hasOne(VideoCard::class);
+        }
+        elseif ($category == 'webcam')
+        {
+            return $this->hasOne(Webcam::class);
+        }
+    }
 
-    public function computercase()
+    public function computer_case()
     {
         return $this->hasOne(ComputerCase::class);
     }
 
-    public function casefan()
+    public function case_fan()
     {
         return $this->hasOne(CaseFan::class);
     }
@@ -44,17 +112,17 @@ class Product extends Model
         return $this->hasOne(Cpu::class);
     }
 
-    public function cpucooler()
+    public function cpu_cooler()
     {
         return $this->hasOne(CpuCooler::class);
     }
 
-    public function extstorage()
+    public function ext_storage()
     {
         return $this->hasOne(ExtStorage::class);
     }
 
-    public function intstorage()
+    public function int_storage()
     {
         return $this->hasOne(IntStorage::class);
     }
@@ -99,7 +167,7 @@ class Product extends Model
         return $this->hasOne(Speaker::class);
     }
 
-    public function videocard()
+    public function video_card()
     {
         return $this->hasOne(VideoCard::class);
     }
@@ -118,10 +186,12 @@ class Product extends Model
     protected $fillable = [
         'title',
         'slug',
-        // 'category',
-        // 'description',
-        // 'price',
-        // 'status',
+        'category',
+        'price',
+        'image',
+        'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**
@@ -159,8 +229,14 @@ class Product extends Model
     protected $allowedSorts = [
         'id',
         'title',
-        // 'category',
+        'category',
         'updated_at',
         'created_at',
+    ];
+
+    public $sortable =[
+        'title',
+        'price',
+        'purchase_count',
     ];
 }

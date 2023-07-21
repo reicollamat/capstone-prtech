@@ -23,6 +23,7 @@ class IntStorage extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'capacity',
@@ -34,5 +35,7 @@ class IntStorage extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 }

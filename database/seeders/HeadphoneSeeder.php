@@ -16,17 +16,24 @@ class HeadphoneSeeder extends Seeder
     public function run(): void
     {
         Headphone::truncate();
-  
+
         $json = File::get("database/product_dataset/headphones.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/headphone/headphone (' . fake()->numberBetween(1, 5) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "headphone",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Headphone::create([
                     "product_id" => $product->id,
+                    "category" => "headphone",
                     "name" => $value->name,
                     "price" => $value->price,
                     "type" => $value->type,
@@ -35,8 +42,9 @@ class HeadphoneSeeder extends Seeder
                     "wireless" => $value->wireless,
                     "enclosure_type" => $value->enclosure_type,
                     "color" => $value->color,
-                    "image" => 'img/components/headphone/headphone ('.fake()->numberBetween(1, 5).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

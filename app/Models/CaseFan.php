@@ -23,6 +23,7 @@ class CaseFan extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'size',
@@ -34,6 +35,8 @@ class CaseFan extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**

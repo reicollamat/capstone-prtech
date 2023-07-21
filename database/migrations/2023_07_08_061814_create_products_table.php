@@ -15,11 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique()->nullable();
-            // $table->string('category');
-            // $table->string('image')->default('img/showcase1.jpg');
-            // $table->longText('description');
-            // $table->decimal('price', 20, 2);
-            // $table->string('status')->default('unavailable');
+            $table->string('category');
+
+            $table->decimal('price', 20, 2);
+            $table->string('image');
+            $table->string('status')->default('available');
+            $table->string('condition');
+            $table->integer('purchase_count')->default(0);
+
             $table->softDeletes();
             $table->timestamps();
         });

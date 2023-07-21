@@ -18,6 +18,43 @@
         $(window).resize(toggleNavbarMethod);
     });
     
+    // Wait for the DOM to be ready
+    $(document).ready(function() {
+        // Add an event listener to all checkboxes with the class 'custom-control-input'
+        $('input.custom-control-input').on('change', function() {
+            // Automatically submit the form when a checkbox is checked or unchecked
+            $('.category').submit();
+        });
+        
+
+
+        // if auth submits form when clicked Add To Cart
+        $('#addToCartBtn').click(function() {
+            $('#cartFormAuth').submit();
+        });
+
+        // if auth submits form when clicked Purchase Now
+        $('#purchaseBtn').click(function() {
+            // Update the value of #purchaseQuantityInput with the current value of #cartQuantityInput
+            $('#purchaseQuantityInput').val($('#cartQuantityInput').val());
+            // Submit the #purchaseFormAuth with the updated quantity value
+            $('#purchaseFormAuth').submit();
+        });
+
+        // If not authenticated, submit the #formLogin
+        $('#addToCartBtn, #purchaseBtn').click(function() {
+            $('#formLogin').submit();
+        });
+
+
+
+        // Fade out the notification after 3 seconds
+        setTimeout(function () {
+            $('#notification').fadeOut('slow', function () {
+                $(this).remove();
+            });
+        }, 3000); // 3000 milliseconds = 3 seconds
+    });
     
     // Back to top button
     $(window).scroll(function () {
@@ -85,19 +122,15 @@
 
 
     // Product Quantity
-    $('.quantity button').on('click', function () {
-        var button = $(this);
-        var oldValue = button.parent().parent().find('input').val();
-        if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
-            } else {
-                newVal = 0;
-            }
-        }
-        button.parent().parent().find('input').val(newVal);
+    $('.btn-plus, .btn-minus').click(function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+    
+        // Increment or decrement the quantity value based on the clicked button
+        var inputField = $(this).parent().siblings('input[name="quantity"]');
+        var oldValue = parseInt(inputField.val());
+        var newValue = $(this).hasClass('btn-plus') ? oldValue + 1 : (oldValue > 1 ? oldValue - 1 : 1);
+        inputField.val(newValue);
     });
     
 })(jQuery);

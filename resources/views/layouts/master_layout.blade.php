@@ -34,14 +34,16 @@
 <body>
 
     @include('layouts.topbar')
-    @include('layouts.navbar')  
+    @include('layouts.navbar') 
 
     <main>
         @yield('content')
     </main>
 
     {{-- Footer --}}
-    @include('layouts.footer')
+    <footer>
+        @include('layouts.footer')
+    </footer>
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>

@@ -16,25 +16,33 @@ class SpeakerSeeder extends Seeder
     public function run(): void
     {
         Speaker::truncate();
-  
+
         $json = File::get("database/product_dataset/speakers.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/speaker/speaker (' . fake()->numberBetween(1, 5) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "speaker",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Speaker::create([
                     "product_id" => $product->id,
+                    "category" => "speaker",
                     "name" => $value->name,
                     "price" => $value->price,
                     "configuration" => $value->configuration,
                     "wattage" => $value->wattage,
                     "frequency_response" => $value->frequency_response,
                     "color" => $value->color,
-                    "image" => 'img/components/speaker/speaker ('.fake()->numberBetween(1, 5).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

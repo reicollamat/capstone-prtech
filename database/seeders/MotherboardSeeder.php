@@ -16,17 +16,24 @@ class MotherboardSeeder extends Seeder
     public function run(): void
     {
         Motherboard::truncate();
-  
+
         $json = File::get("database/product_dataset/motherboard.json");
-        $computercases = json_decode($json);
-  
-        foreach ($computercases as $key => $value) {
-            if(!empty($value->price)){
+        $dataset = json_decode($json);
+
+        foreach (array_slice($dataset, 0, 100) as $key => $value) {
+            $image = 'img/components/mobo/mobo (' . fake()->numberBetween(1, 260) . ').png';
+            $condition = fake()->randomElement(['brand_new', 'used']);
+            if (!empty($value->price)) {
                 $product = Product::create([
                     "title" => $value->name,
+                    "category" => "motherboard",
+                    "price" => $value->price,
+                    "image" => $image,
+                    "condition" => $condition,
                 ]);
                 Motherboard::create([
                     "product_id" => $product->id,
+                    "category" => "motherboard",
                     "name" => $value->name,
                     "price" => $value->price,
                     "socket" => $value->socket,
@@ -34,8 +41,9 @@ class MotherboardSeeder extends Seeder
                     "max_memory" => $value->max_memory,
                     "memory_slots" => $value->memory_slots,
                     "color" => $value->color,
-                    "image" => 'img/components/mobo/mobo ('.fake()->numberBetween(1, 260).').png',
+                    "image" => $image,
                     "description" => fake()->paragraph(),
+                    "condition" => $condition,
                 ]);
             }
         }

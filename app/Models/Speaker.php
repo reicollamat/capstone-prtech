@@ -23,6 +23,7 @@ class Speaker extends Model
      */
     protected $fillable = [
         'product_id',
+        'category',
         'name',
         'price',
         'configuration',
@@ -32,6 +33,8 @@ class Speaker extends Model
         'image',
         'description',
         'status',
+        'condition',
+        'purchase_count',
     ];
 
     /**
