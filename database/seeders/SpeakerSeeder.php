@@ -21,7 +21,7 @@ class SpeakerSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/speaker/speaker (' . fake()->numberBetween(1, 5) . ').png';
+            $image = 'img/components/speaker/speaker (' . fake()->numberBetween(1, 3) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([

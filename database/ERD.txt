@@ -286,4 +286,11 @@ purchase_status
 	Completed
 
 
+3
+cpu 10
+memory
+intstorage 5 5
+motherboard
+gpu
+
 				

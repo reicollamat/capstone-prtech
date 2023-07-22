@@ -21,7 +21,7 @@ class CpuSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/cpu/cpu (' . fake()->numberBetween(1, 260) . ').png';
+            $image = 'img/components/cpu/cpu (' . fake()->numberBetween(1, 10) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([
