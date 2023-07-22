@@ -2,9 +2,11 @@
 
 namespace App\Orchid\Screens\UserData;
 
+use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\User;
+use App\Orchid\Layouts\PaymentLayout;
 use App\Orchid\Layouts\UserData\PurchaseItemsListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -21,9 +23,13 @@ class PurchaseItemsListScreen extends Screen
     {
         $purchase_items = PurchaseItem::where('purchase_id', $purchase->id)
             ->get();
+        $payment = Payment::where('purchase_id', $purchase->id)
+            ->get()->first();
+        
 
         return [
-            'purchase_items' => $purchase_items
+            'purchase_items' => $purchase_items,
+            'payment' => $payment,
         ];
     }
 
@@ -53,7 +59,7 @@ class PurchaseItemsListScreen extends Screen
         // string passed via URL
         parse_str($url_components['query'], $params);
 
-        $title_name = 'Purchase ID #'.$params['purchase'].': Purchase Items';
+        $title_name = 'Purchase No. '.$params['purchase'].': Details';
         
         return $title_name;
     }
@@ -108,7 +114,10 @@ class PurchaseItemsListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            PurchaseItemsListLayout::class,
+            Layout::split([
+                PurchaseItemsListLayout::class,
+                Layout::view('admin.payment'),
+            ]),
         ];
     }
 }

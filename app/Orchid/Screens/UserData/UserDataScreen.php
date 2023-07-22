@@ -17,8 +17,7 @@ class UserDataScreen extends Screen
     public function query(): iterable
     {
         return [
-            'users' => User::where('permissions', 'like', '{"platform.index": "0", "platform.systems.roles": "0", "platform.systems.users": "0", "platform.systems.attachment": "0"}')
-                ->filters(UserFiltersLayout::class)
+            'users' => User::filters(UserFiltersLayout::class)
                 ->defaultSort('id', 'desc')
                 ->paginate(),
         ];

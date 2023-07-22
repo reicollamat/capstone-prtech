@@ -21,7 +21,7 @@ class ProductScreen extends Screen
     {
         return [
             'products' => Product::filters(ProductFiltersLayout::class)
-                ->defaultSort('id', 'desc')
+                ->defaultSort('title', 'asc')
                 ->paginate(),
         ];
     }

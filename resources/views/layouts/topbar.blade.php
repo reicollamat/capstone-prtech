@@ -1,3 +1,9 @@
+<div hidden>
+    {{ $user = Auth::user() }}
+    {{ $cart_count = App\Models\CartItem::where('user_id', $user->id)->count() }}
+    {{ $bookmark_count = App\Models\Bookmark::where('user_id', $user->id)->count() }}
+</div>
+
 <div class="container-fluid">
     <div class="row bg-dark py-1 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-6 d-none d-lg-block">
@@ -10,14 +16,34 @@
         </div>
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center d-block d-lg-block">
-                <a href="" class="btn px-0 ml-2">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span class="badge text-light border border-light rounded-circle" style="padding-bottom: 2px;">0</span>
-                </a>
-                <a href="" class="btn px-0 ml-2">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge text-light border border-light rounded-circle" style="padding-bottom: 2px;">0</span>
-                </a>
+                @auth
+                    <a href="{{ route('index_bookmark') }}" class="btn px-0 ml-2">
+                        <i class="fas fa-heart text-primary"></i>
+                        <span class="badge text-light border border-light rounded-circle" style="padding-bottom: 2px;">
+                            {{$bookmark_count}}
+                        </span>
+                    </a>
+                    <a href="{{ route('index_cart') }}" class="btn px-0 ml-2">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        <span class="badge text-light border border-light rounded-circle" style="padding-bottom: 2px;">
+                            {{$cart_count}}
+                        </span>
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="btn px-0 ml-2">
+                        <i class="fas fa-heart text-primary"></i>
+                        <span class="badge text-light border border-light rounded-circle" style="padding-bottom: 2px;">
+                            0
+                        </span>
+                    </a>
+                    <a href="{{ route('login') }}" class="btn px-0 ml-2">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        <span class="badge text-light border border-light rounded-circle" style="padding-bottom: 2px;">
+                            0
+                        </span>
+                    </a>
+                @endauth
+                
             </div>
         </div>
     </div>

@@ -43,19 +43,22 @@ class ProductListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make()),
 
-            TD::make('description', __('Description'))
-                ->width('300')
-                ->render(fn (Product $product) => Str::limit($product->description, 200))
-                ->sort()
-                ->cantHide()
-                ->filter(Input::make()),
-
             TD::make('price', __('Price'))
                 ->render(fn (Product $product) => '₱'.number_format($product->price, 2))
                 ->sort()
                 ->cantHide(),
 
             TD::make('status', __('Status'))
+                ->width('100')
+                ->sort()
+                ->cantHide(),
+
+            TD::make('condition', __('Condition'))
+                ->width('100')
+                ->sort()
+                ->cantHide(),
+
+            TD::make('purchase_count', __('Purchase Count'))
                 ->width('100')
                 ->sort()
                 ->cantHide(),

@@ -31,9 +31,9 @@ class PurchaseItemsListLayout extends Table
                 ->sort()
                 ->cantHide(),
 
-            TD::make('product_id', __('Product ID'))
+            TD::make('product_id', __('Product'))
                 ->sort()
-                ->render(fn (PurchaseItem $purchase_item) => $purchase_item->product_id),
+                ->render(fn (PurchaseItem $purchase_item) => Product::find($purchase_item->product_id)->title),
 
             TD::make('quantity', __('Quantity'))
                 ->sort()
