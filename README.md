@@ -1,13 +1,12 @@
-# ![RE Tech](public/img/icon/retechicon.ico)
-# ReTech Computer Parts E-commerce Website
+# ![Techno](public/img/icon/retechicon.ico) RE Tech Computer Parts E-commerce Website
 
-> ### [ReTech](http://112.204.9.82/) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
+> ### [RE Tech](http://112.204.9.82/) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
 
-## Laravel Framework [About Laravel]
+## Laravel Framework [About Laravel](#about-laravel)
 - Laravel Breeze 
     - Account Authentication
 
-## Laravel Orchid
+## Laravel [Orchid](https://orchid.software/)
 - Admin Management Panel
     - CRUD Functions
 
@@ -23,39 +22,73 @@ Please check the official laravel installation guide for server requirements bef
 
 Clone the repository
 
+<span style="color: blue;">
+
     git clone git@github.com:reicollamat/techno-retech.git
+    
+</span>
 
 Switch to the repo folder
 
+<span style="color: blue;">
+
     cd techno-retech
+    
+</span>
 
 Install all the dependencies using composer
 
+<span style="color: blue;">
+
     composer install
+    
+</span>
 
 Copy the example env file and make the required configuration changes in the .env file
 
+<span style="color: blue;">
+
     cp .env.example .env
+    
+</span>
 
 Generate a new application key
 
+<span style="color: blue;">
+
     php artisan key:generate
+    
+</span>
 
 Generate a new JWT authentication secret key
 
+<span style="color: blue;">
+
     php artisan jwt:generate
+    
+</span>
 
 Run the database migrations (**Set the database connection in .env before migrating**)
 
+<span style="color: blue;">
+
     php artisan migrate
+    
+</span>
 
 Start the local development server
 
+<span style="color: blue;">
+
     php artisan serve
+    
+</span>
 
 You can now access the server at http://localhost:8000
 
 **TL;DR command list**
+
+<span style="color: blue;">
 
     git clone git@github.com:reicollamat/techno-retech.git
     cd techno-retech
@@ -63,26 +96,44 @@ You can now access the server at http://localhost:8000
     cp .env.example .env
     php artisan key:generate
     php artisan jwt:generate 
-    
+        
+</span>
+
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
+
+<span style="color: blue;">
 
     php artisan migrate
     php artisan serve
+        
+</span>
 
 ## Database seeding
 
 **Populate the database with seed data with relationships which includes users, categories, roles, products, and follows.**
 
+<span style="color: blue;">
+
     database/seeds/DatabaseSeeder.php
+        
+</span>
 
 Run the database seeder and you're done
 
+<span style="color: blue;">
+
     php artisan db:seed
+        
+</span>
 
 ***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
 
+<span style="color: blue;">
+
     php artisan migrate:refresh
-    
+            
+</span>
+
 
 ----------
 
@@ -115,6 +166,8 @@ Run the database seeder and you're done
 - `.env` - Environment variables can be set in this file
 
 ***Note*** : You can quickly set the database information and other variables in this file and have the application fully working.
+
+----------
 
 ## About Laravel
 
