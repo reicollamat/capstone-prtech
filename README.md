@@ -2,7 +2,7 @@
 
 > ### [RE Tech](http://112.204.9.82/) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
 
-## Laravel Framework [About Laravel](#about-laravel)
+## [Laravel](#about-laravel) Framework 
 - Laravel Breeze 
     - Account Authentication
 
@@ -10,7 +10,8 @@
 - Admin Management Panel
     - CRUD Functions
 
-## SQL Database
+## Database Management System
+- [MySQL]
 
 ----------
 
