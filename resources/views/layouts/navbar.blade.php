@@ -1,9 +1,9 @@
 <div class="container-fluid bg-dark mb-30">
     <div class="row px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 46px; padding: 0 30px;">
+            <a class="btn d-flex align-items-center bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 46px; padding: 0 30px;">
                 <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
-                <i class="fa fa-angle-down text-dark"></i>
+                <i class="fa fa-angle-down text-dark ml-2"></i>
             </a>
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-primary" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">
@@ -39,7 +39,7 @@
         
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
-                <a href="" class="text-decoration-none d-block d-lg-none">
+                <a href="{{route('index_landing')}}" class="text-decoration-none d-block d-lg-none">
                     <span class="h1 text-uppercase text-primary bg-dark">
                         RE
                         <img class="h1" src="img/icon/retechicon.ico" alt="icon">

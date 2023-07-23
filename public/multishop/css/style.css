@@ -3471,7 +3471,7 @@ input[type="button"].btn-block {
   color: #6C757D;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: #2B7EA1;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
@@ -3641,7 +3641,7 @@ input[type="button"].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: #1B1B1B;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -4387,6 +4387,7 @@ input[type="button"].btn-block {
 .nav-link:hover,
 .nav-link:focus {
   text-decoration: none;
+  background-color: #FFFFFF;
 }
 
 .nav-link.disabled {
@@ -4420,7 +4421,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
+  color: #1B1B1B;
   background-color: #2B7EA1;
   border-color: #2B7EA1 #2B7EA1 #2B7EA1;
 }
@@ -4796,7 +4797,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-brand {
-  color: rgba(0, 0, 0, 0.9);
+  color: #1B1B1B;
 }
 
 .navbar-light .navbar-brand:hover,
@@ -4805,7 +4806,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: #1B1B1B;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -10697,7 +10698,7 @@ h6 {
 }
 
 .btn.btn-primary {
-  color: #3D464D !important;
+  color: #FFFFFF !important;
 }
 
 .btn-square {
@@ -10727,13 +10728,17 @@ h6 {
 .navbar-dark .navbar-nav .nav-link {
   padding: 11px 10px;
   margin-left: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
   color: #1B1B1B;
-  outline: none;
+  outline: none;  
 }
 
-.navbar-dark .navbar-nav .nav-link:hover,
-.navbar-dark .navbar-nav .nav-link.active {
-  color: #FFFFFF;
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #1B1B1B;
+}
+.navbar-dark .navbar-nav .nav-link:hover.active {
+  color: #1B1B1B;
 }
 
 @media (max-width: 991.98px) {

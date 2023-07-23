@@ -40,7 +40,7 @@
                         <div class="">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sort</button>
-                                <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-menu dropdown-menu-right bg-light">
                                     <div class="dropdown-item">@sortablelink('title')</div>
                                     <div class="dropdown-item">@sortablelink('price')</div>
                                     <div class="dropdown-item">@sortablelink('purchase_count', 'Purchase Count')</div>

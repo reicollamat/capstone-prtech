@@ -45,17 +45,39 @@ class ShopController extends Controller
         // $webcam = Webcam::all();
 
         // get checked categories
-        $category_checked = array_keys($request->query());
-        // get products with check categories
-        $products = Product::sortable();
-        $products = $products->whereIn('category', $category_checked)->paginate(30);
+        if($request->sort)
+        {
+            if(!empty(array_diff(array_keys($request->query()), ['sort','direction'])))
+            {
+                // get products with check categories
+                $products = Product::sortable();
+
+                $category_checked = array_keys($request->query());
+                $products = $products->whereIn('category', $category_checked)->paginate(30);
+            }
+            
+            $products = Product::sortable()->paginate();
+        }
+        else
+        {
+            // get products with check categories
+            $products = Product::sortable();
+
+            $category_checked = array_keys($request->query());
+            $products = $products->whereIn('category', $category_checked)->paginate(30);
+        }
+        
 
         Session::forget('to_search');
-        $to_search = null;
         
         // get all products if all categories not checked
         if (empty($request->query())) {
             $products = Product::sortable()->paginate(30);
+
+            return view('pages.shop', [
+                'products' => $products,
+                'all_products' => $all_products,
+            ]);
         }
         else
         {
@@ -64,15 +86,21 @@ class ShopController extends Controller
                 $to_search = $request->to_search;
                 $products = Product::where('title', 'LIKE', '%'.$to_search.'%')->sortable()->paginate(30);
                 Session::put('to_search', $to_search);
+
+                return view('pages.shop', [
+                    'products' => $products,
+                    'all_products' => $all_products,
+                ])->with('to_search', $to_search);
+            }
+            else
+            {
+                return view('pages.shop', [
+                    'products' => $products,
+                    'all_products' => $all_products,
+                ]);
             }
             // $products = Product::sortable()->paginate(30);
-        }
-
-
-        return view('pages.shop', [
-            'products' => $products,
-            'all_products' => $all_products,
-        ])->with('to_search', $to_search);
+        }        
     }
 
     public function product_detail($product_id, $category)

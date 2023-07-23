@@ -22,11 +22,13 @@ use App\Models\Webcam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class LandingController extends Controller
 {
     public function index()
     {
+        Session::forget('to_search');
         $products = Product::all();
         $case_fan = CaseFan::all();
         $computer_case = ComputerCase::all();

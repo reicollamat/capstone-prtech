@@ -15,9 +15,9 @@
                     <x-home.carousel_item>
                         active
                         <x-slot:img_path>img/showcase1.jpg</x-slot:img_path>
-                        <x-slot:title>PC Components</x-slot:title>
+                        <x-slot:title>Your Trusted PC Components Shop</x-slot:title>
                         <x-slot:description>
-                            Lorem rebum magna amet lorem magna erat diam stet. Sadips duo stet amet amet ndiam elitr ipsum diam.
+                            Embrace the power of customization with our unmatched collection of PC parts, perfect for building your dream gaming rig or upgrading your existing setup.
                         </x-slot:description>
                         <x-slot:href>{{ route('index_shop') }}</x-slot:href>
                         <x-slot:btn_title>Shop Now</x-slot:btn_title>
@@ -26,7 +26,7 @@
                         <x-slot:img_path>img/showcase3.jpg</x-slot:img_path>
                         <x-slot:title>Gaming Peripherals</x-slot:title>
                         <x-slot:description>
-                            In quis urna sed lectus tristique ultrices. Nullam feugiat aliquet massa, malesuada auctor neque auctor ut. Morbi tempor mi nunc, sed suscipit elit suscipit quis. Maecenas suscipit nunc nec nisl viverra, id porttitor augue placerat.
+                            Dependable and secure online shopping experience for customers seeking high-quality computer parts and peripherals.
                         </x-slot:description>
                         <x-slot:href>{{ route('index_shop') }}</x-slot:href>
                         <x-slot:btn_title>Shop Now</x-slot:btn_title>
@@ -35,7 +35,7 @@
                         <x-slot:img_path>img/showcase2.jpg</x-slot:img_path>
                         <x-slot:title>Quality Assurance</x-slot:title>
                         <x-slot:description>
-                            Integer metus tortor, imperdiet non pellentesque vitae, tempus eget massa. Morbi gravida eleifend purus sed sodales. Phasellus vel laoreet tortor. Pellentesque sed quam at orci ornare molestie.
+                            Experience a seamless blend of premium quality and unbeatable value with our curated range of PC parts and gaming peripherals. Why compromise when you can have it all?
                         </x-slot:description>
                         <x-slot:href>{{ route('index_shop') }}</x-slot:href>
                         <x-slot:btn_title>Shop Now</x-slot:btn_title>
@@ -48,7 +48,7 @@
                 <img class="img-fluid" src="img/showcase4.jpg" alt="">
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 10%</h6>
-                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <h3 class="text-white mb-3">Voucher Offer</h3>
                     <a href="" class="btn btn-primary">Shop Now</a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 <img class="img-fluid" src="img/showcase5.jpg" alt="">
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 25%</h6>
-                    <h3 class="text-white mb-3">Special Offer</h3>
+                    <h3 class="text-white mb-3">Voucher Offer</h3>
                     <a href="" class="btn btn-primary">Shop Now</a>
                 </div>
             </div>
@@ -100,7 +100,7 @@
 
 <!-- Categories Start -->
 <div class="container-fluid pt-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-dark text-light pr-3">Categories</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="text-light pr-3">Categories</span></h2>
     <div class="row px-xl-5 pb-3">
         <x-home.category>
             <x-slot:cat_value>href="{{route('index_shop', ['computer_case' => 'on'])}}"</x-slot:cat_value>
@@ -118,7 +118,7 @@
 
         <x-home.category>
             <x-slot:cat_value>href="{{route('index_shop', ['cpu' => 'on'])}}"</x-slot:cat_value>
-            img/components/cpu/cpu (49).png
+            img/components/cpu/cpu (2).png
             <x-slot:category>CPU</x-slot:category>
             <x-slot:count>{{ $cpu->count() }}</x-slot:count>
         </x-home.category>
@@ -153,7 +153,7 @@
 
         <x-home.category>
             <x-slot:cat_value>href="{{route('index_shop', ['int_storage' => 'on'])}}"</x-slot:cat_value>
-            img/components/intstorage/intstorage (1).png
+            img/components/intstorage/ssd-sata (1).png
             <x-slot:category>Internal storage</x-slot:category>
             <x-slot:count>{{ $int_storage->count() }}</x-slot:count>
         </x-home.category>
@@ -174,7 +174,7 @@
 
         <x-home.category>
             <x-slot:cat_value>href="{{route('index_shop', ['monitor' => 'on'])}}"</x-slot:cat_value>
-            img/components/monitor/monitor (1).png
+        img/components/monitor/monitor (1).png
             <x-slot:category>Monitor</x-slot:category>
             <x-slot:count>{{ $monitor->count() }}</x-slot:count>
         </x-home.category>

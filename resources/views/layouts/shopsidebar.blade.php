@@ -93,7 +93,7 @@
     </div>
     <!-- By Category End -->
 
-    <!-- By Color Start -->
+    <!-- By Condition Start -->
     <div class="p-4 mt-3" style="border: 1px solid #FFFFFF">
         <h5 class="section-title position-relative text-uppercase mb-3">
             <span class="pr-3">Filter by condition</span>

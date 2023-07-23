@@ -1,7 +1,9 @@
 <div hidden>
+    @auth
     {{ $user = Auth::user() }}
     {{ $cart_count = App\Models\CartItem::where('user_id', $user->id)->count() }}
     {{ $bookmark_count = App\Models\Bookmark::where('user_id', $user->id)->count() }}
+    @endauth
 </div>
 
 <div class="container-fluid">
@@ -49,7 +51,7 @@
     </div>
     <div class="row align-items-center bg-dark py-3 px-xl-5">
         <div class="col-lg-4 d-none d-lg-flex">
-            <a href="" class="text-decoration-none">
+            <a href="{{route('index_landing')}}" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary">
                     RE
                     <img class="h1" src="{{ asset('img/icon/retechicon.ico') }}" alt="icon">
@@ -77,10 +79,10 @@
         </div>
         <div class="col-lg-4 col-6 text-right">
             <div class="btn-group mx-2">
-                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
+                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">PHP</button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <button class="dropdown-item" type="button">EUR</button>
-                    <button class="dropdown-item" type="button">GBP</button>
+                    <button class="dropdown-item" type="button">USD</button>
                     <button class="dropdown-item" type="button">CAD</button>
                 </div>
             </div>
