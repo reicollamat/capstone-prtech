@@ -1,6 +1,6 @@
 # ![Techno](public/img/icon/retechicon.ico) RE Tech Computer Parts E-commerce Website
 
-> ### [RE Tech](http://112.204.9.82/) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
+> ### [RE Tech](https://github.com/reicollamat/techno-retech) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
 
 ## [Laravel](#about-laravel) Framework 
 - Laravel Breeze 
@@ -12,6 +12,9 @@
 
 ## Database Management System
 - [MySQL](https://www.mysql.com/)
+
+## Dataset
+- [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
 
 ----------
 
@@ -105,6 +108,7 @@ Run the database seeder and you're done
 - `database/factories` - Contains the model factory for all the models
 - `database/migrations` - Contains all the database migrations
 - `database/seeds` - Contains the database seeder
+- `database/product_dataset` - Contains the pc parts dataset
 - `public/img` - Contains all image assets
 - `public/multishop` - Contains other assets for blade files
 - `resources/views/` - Contains all the blade template files
