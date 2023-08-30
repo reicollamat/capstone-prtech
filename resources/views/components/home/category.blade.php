@@ -6,7 +6,7 @@
             </div>
             <div class="flex-fill pl-3">
                 <h6 class="text-primary">{{ $category }}</h6>
-                <small class="text-body">{{ $count }}</small>
+                <small class="text-body">{{ $count }} ITEMS</small>
             </div>
         </div>
     </a>

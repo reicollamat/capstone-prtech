@@ -100,7 +100,7 @@
 
 <!-- Categories Start -->
 <div class="container-fluid pt-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="text-light pr-3">Categories</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="text-dark pr-3">Categories</span></h2>
     <div class="row px-xl-5 pb-3">
         <x-home.category>
             <x-slot:cat_value>href="{{route('index_shop', ['computer_case' => 'on'])}}"</x-slot:cat_value>
@@ -221,7 +221,7 @@
 
 <!-- Featured Products Start -->
 <div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-dark text-light pr-3">Featured Products</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="text-dark pr-3">Featured Products</span></h2>
 
     {{-- owl-carousel --}}
     <div class="container-fluid">
@@ -277,7 +277,7 @@
 
 <!-- Recent Products Start -->
 <div class="container-fluid pt-5 pb-3">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-dark text-light pr-3">Recent Products</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="text-dark pr-3">Recent Products</span></h2>
     
     {{-- owl-carousel --}}
     <div class="container-fluid">

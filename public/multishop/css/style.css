@@ -72,7 +72,7 @@ body {
   line-height: 1.5;
   color: #6C757D;
   text-align: left;
-  background-color: #1B1B1B;
+  background-color: #FFFFFF;
 
   min-height: 100%;
   display: flex;
@@ -5108,7 +5108,7 @@ input[type="button"].btn-block {
 }
 
 .breadcrumb-item.active {
-  color: #FFFFFF;
+  color: #1B1B1B;
 }
 
 .breadcrumb-item.hide {
@@ -10829,13 +10829,13 @@ h6 {
 }
 
 .cat-item {
-  background: #1B1B1B;
+  background: #FFFFFF;
   transition: .5s;
   border: 1px solid #FFFFFF;
 }
 
 .cat-item:hover {
-  background: #FFFFFF;
+  background: #1B1B1B;
 }
 
 .cat-item img {
