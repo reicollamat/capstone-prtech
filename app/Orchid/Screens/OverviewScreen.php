@@ -63,7 +63,7 @@ class OverviewScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'PR Tech - Admin Management';
+        return 'PR Tech - Shop Management';
     }
 
     /**

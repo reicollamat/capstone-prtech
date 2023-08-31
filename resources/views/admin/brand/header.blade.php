@@ -18,6 +18,6 @@
 
     <p class="my-0 {{ auth()->check() ? 'd-none d-xl-block' : '' }}">
         {{ '_Tech' }}
-        <small class="align-top opacity">{{ 'ADMIN' }}</small>
+        <small class="align-top opacity">{{ 'SELLER' }}</small>
     </p>
 </div>

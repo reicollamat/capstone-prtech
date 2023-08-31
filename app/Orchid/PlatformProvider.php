@@ -40,29 +40,35 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route(config('platform.index')),
 
             // Access Controls
-            Menu::make(__('Users'))
-                ->icon('bs.people')
-                ->route('platform.systems.users')
-                ->permission('platform.systems.users')
-                ->title(__('Access Controls')),
+            // Menu::make(__('Users'))
+            //     ->icon('bs.people')
+            //     ->route('platform.systems.users')
+            //     ->permission('platform.systems.users')
+            //     ->title(__('Access Controls')),
 
-            Menu::make(__('Roles'))
-                ->icon('bs.lock')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles')
-                ->divider(),
+            // Menu::make(__('Roles'))
+            //     ->icon('bs.lock')
+            //     ->route('platform.systems.roles')
+            //     ->permission('platform.systems.roles')
+            //     ->divider(),
 
             // product screen
             Menu::make('Products')
                 ->icon('bs.bag')
                 ->route('platform.products')
                 ->title(__('Shop')),
+
+            // tentative
+            Menu::make('Product Recommender')
+                ->icon('bs.bag')
+                ->route('platform.products')
+                ->divider(),
                 
             // user data screen
-            Menu::make('User Data')
-                ->icon('bs.database')
-                ->route('platform.userdata')
-                ->divider(),
+            // Menu::make('User Data')
+            //     ->icon('bs.database')
+            //     ->route('platform.userdata')
+            //     ->divider(),
 
 
             // Menu::make('Example Screen')

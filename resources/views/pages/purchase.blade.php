@@ -13,10 +13,10 @@
 <!-- Checkout Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
-        <div class="col-lg-8">
+        <div class="col-lg-8 bg-dark">
             
             <div class="p-30 mb-5">
-                <h5 class="section-title position-relative text-uppercase mb-3 pb-3"><span class=" pr-3">Billing Address</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3 pb-3 text-light"><span class=" pr-3">Billing Address</span></h5>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label>First Name</label>
@@ -67,7 +67,7 @@
             <div class="collapse mb-5" id="shipping-address">
                 
                 <div class="p-30">
-                    <h5 class="section-title position-relative text-uppercase mb-3 pb-3"><span class="pr-3">Shipping Address</span></h5>
+                    <h5 class="section-title position-relative text-uppercase mb-3 pb-3 text-light"><span class="pr-3">Shipping Address</span></h5>
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>First Name</label>
@@ -111,9 +111,10 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-4">
             
-            <div class="text-light p-30 mb-5">
+            <div class="text-dark p-30 mb-5">
                 <h5 class="section-title position-relative text-uppercase mb-3 pb-3"><span class="pr-3">Purchase Total</span></h5>
                 <div class="border-bottom">
                     <h6 class="mb-3">Products</h6>
@@ -139,7 +140,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-light mb-5">
+            <div class="text-dark mb-5">
                 
                 <div class="p-30">
                     <h5 class="section-title position-relative text-uppercase mb-3 pb-3"><span class="pr-3">Payment</span></h5>
