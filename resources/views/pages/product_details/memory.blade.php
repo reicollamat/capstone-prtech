@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Speed:</strong>
+            <strong class="text-dark mr-3">Speed:</strong>
         </td>
         <td>
             @if ($product->speed === null)
@@ -51,7 +51,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Modules:</strong>
+            <strong class="text-dark mr-3">Modules:</strong>
         </td>
         <td>
             @if ($product->modules === null)
@@ -67,7 +67,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Price per GB:</strong>
+            <strong class="text-dark mr-3">Price per GB:</strong>
         </td>
         <td>
             @if ($product->price_per_gb === null)
@@ -79,7 +79,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Color:</strong>
+            <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
             @if ($product->color === null)
@@ -91,7 +91,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">First Word Latency:</strong>
+            <strong class="text-dark mr-3">First Word Latency:</strong>
         </td>
         <td>
             @if ($product->first_word_latency === null)
@@ -103,7 +103,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">CAS Latency:</strong>
+            <strong class="text-dark mr-3">CAS Latency:</strong>
         </td>
         <td>
             @if ($product->cas_latency === null)

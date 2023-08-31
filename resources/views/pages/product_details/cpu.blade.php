@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Core Count:</strong>
+            <strong class="text-dark mr-3">Core Count:</strong>
         </td>
         <td>
             @if ($product->core_count === null)
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Core Clock:</strong>
+            <strong class="text-dark mr-3">Core Clock:</strong>
         </td>
         <td>
             @if ($product->core_clock === null)
@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Boost Clock:</strong>
+            <strong class="text-dark mr-3">Boost Clock:</strong>
         </td>
         <td>
             @if ($product->boost_clock === null)
@@ -71,7 +71,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">TDP:</strong>
+            <strong class="text-dark mr-3">TDP:</strong>
         </td>
         <td>
             @if ($product->tdp === null)
@@ -83,7 +83,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Graphics:</strong>
+            <strong class="text-dark mr-3">Graphics:</strong>
         </td>
         <td>
             @if ($product->graphics === null)
@@ -95,7 +95,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">SMT:</strong>
+            <strong class="text-dark mr-3">SMT:</strong>
         </td>
         <td>
             @if ($product->smt === null)

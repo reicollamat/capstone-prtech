@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Socket:</strong>
+            <strong class="text-dark mr-3">Socket:</strong>
         </td>
         <td>
             @if ($product->socket === null)
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Form Factor:</strong>
+            <strong class="text-dark mr-3">Form Factor:</strong>
         </td>
         <td>
             @if ($product->form_factor === null)
@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Max memory:</strong>
+            <strong class="text-dark mr-3">Max memory:</strong>
         </td>
         <td>
             @if ($product->max_memory === null)
@@ -71,7 +71,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Memory Slots:</strong>
+            <strong class="text-dark mr-3">Memory Slots:</strong>
         </td>
         <td>
             @if ($product->memory_slots === null)
@@ -83,7 +83,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Color:</strong>
+            <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
             @if ($product->color === null)

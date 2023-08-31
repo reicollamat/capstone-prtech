@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Tracking method:</strong>
+            <strong class="text-dark mr-3">Tracking method:</strong>
         </td>
         <td>
             @if ($product->tracking_method === null)
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Connection type:</strong>
+            <strong class="text-dark mr-3">Connection type:</strong>
         </td>
         <td>
             @if ($product->connection_type === null)
@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Max DPI:</strong>
+            <strong class="text-dark mr-3">Max DPI:</strong>
         </td>
         <td>
             @if ($product->max_dpi === null)
@@ -71,7 +71,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Hand orientation:</strong>
+            <strong class="text-dark mr-3">Hand orientation:</strong>
         </td>
         <td>
             @if ($product->hand_orientation === null)
@@ -83,7 +83,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Color:</strong>
+            <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
             @if ($product->color === null)

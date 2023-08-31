@@ -47,7 +47,7 @@
         </div>
 
 
-        <div class="col-lg-7 h-auto mb-30 text-light">
+        <div class="col-lg-7 h-auto mb-30 text-dark">
             <div class="h-100">
                 <h3>{{ $product->name }}</h3>
                 <div class="d-flex mb-3">
@@ -185,16 +185,16 @@
                 <div class="nav nav-tabs mb-4">
                     <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
                     <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (3)</a>
                 </div>
-                <div class="tab-content">
+                <div class="tab-content text-dark">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3 text-dark">Product Description</h4>
+                        <h4 class="mb-3">Product Description</h4>
                         <p>Upgrade your computing experience with the High-Performance Computer Part - Model HPX500. This cutting-edge component is designed to enhance your system's capabilities, offering superior performance and reliability for all your computing needs.</p>
                         <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
-                        <h4 class="mb-3 text-dark">Additional Information</h4>
+                        <h4 class="mb-3">Additional Information</h4>
                         <p>Upgrade your computer's performance and unlock its full potential with the High-Performance Computer Part - Model HPX500. Whether you're a gamer, creative professional, or casual user, this computer part will elevate your computing experience to new heights.</p>
                         <div class="row">
                             <div class="col-md-6">
@@ -232,56 +232,50 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="tab-pane-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="mb-4 text-dark">1 review for "{{$product->name}}"</h4>
-                                <div class="media mb-4">
-                                    <img src="{{asset('img/user1.png')}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="mb-4">Leave a review</h4>
-                                <small>Your email address will not be published. Required fields are marked *</small>
-                                <div class="d-flex my-3">
-                                    <p class="mb-0 mr-2">Your Rating * :</p>
-                                    <div class="text-primary">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </div>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="message">Your Review *</label>
-                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name">Your Name *</label>
-                                        <input type="text" class="form-control" id="name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Your Email *</label>
-                                        <input type="email" class="form-control" id="email">
-                                    </div>
-                                    <div class="form-group mb-0">
-                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        <h4 class="mb-4">3 reviews for "{{$product->name}}"</h4>
+                        <!-- dummy customer reviews -->
+
+                        <x-shop.cus_review>
+                            <x-slot:img_path>img/user1.png</x-slot:img_path>
+                            <x-slot:cus_name>Leaz Goe Gauys</x-slot:cus_name>
+                            <x-slot:cus_date>09 Feb 2021</x-slot:cus_date>
+                            <x-slot:cus_star>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </x-slot:cus_star>
+                            <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver napakabait..  Diko pa na testing pero the best sa packaging Godbless.</p>
+                        </x-shop.cus_review>
+
+                        <x-shop.cus_review>
+                            <x-slot:img_path>img/user2.png</x-slot:img_path>
+                            <x-slot:cus_name>Eyho Waht</x-slot:cus_name>
+                            <x-slot:cus_date>24 May 2019</x-slot:cus_date>
+                            <x-slot:cus_star>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </x-slot:cus_star>
+                            <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor. Dismaya lang  ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box  knowing almost 20K ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>
+                        </x-shop.cus_review>
+
+                        <x-shop.cus_review>
+                            <x-slot:img_path>img/user3.png</x-slot:img_path>
+                            <x-slot:cus_name>Nhoe Caph Foereal</x-slot:cus_name>
+                            <x-slot:cus_date>14 Mar 2019</x-slot:cus_date>
+                            <x-slot:cus_star>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                            </x-slot:cus_star>
+                            <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible with the OS installed in computer but the connector foe headphone is functioning well.</p>
+                        </x-shop.cus_review>
                     </div>
                 </div>
             </div>

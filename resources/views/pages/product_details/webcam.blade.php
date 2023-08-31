@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Resolutions:</strong>
+            <strong class="text-dark mr-3">Resolutions:</strong>
         </td>
         <td>
             @if ($product->resolutions === null)
@@ -50,7 +50,7 @@
     <tr>
         <tr>
             <td class="header">
-                <strong class="text-light mr-3">Connection:</strong>
+                <strong class="text-dark mr-3">Connection:</strong>
             </td>
             <td>
                 @if ($product->connection === null)
@@ -61,7 +61,7 @@
             </td>
         </tr>
         <td class="header">
-            <strong class="text-light mr-3">Focus type:</strong>
+            <strong class="text-dark mr-3">Focus type:</strong>
         </td>
         <td>
             @if ($product->focus_type === null)
@@ -73,7 +73,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Operating System:</strong>
+            <strong class="text-dark mr-3">Operating System:</strong>
         </td>
         <td>
             @if ($product->os === null)
@@ -87,7 +87,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">FOV Angle:</strong>
+            <strong class="text-dark mr-3">FOV Angle:</strong>
         </td>
         <td>
             @if ($product->fov === null)

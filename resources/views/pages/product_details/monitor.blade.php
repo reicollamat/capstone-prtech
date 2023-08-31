@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Screen size:</strong>
+            <strong class="text-dark mr-3">Screen size:</strong>
         </td>
         <td>
             @if ($product->screen_size === null)
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Resolution:</strong>
+            <strong class="text-dark mr-3">Resolution:</strong>
         </td>
         <td>
             @if ($product->resolution === null)
@@ -63,7 +63,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Refresh rate:</strong>
+            <strong class="text-dark mr-3">Refresh rate:</strong>
         </td>
         <td>
             @if ($product->refresh_rate === null)
@@ -75,7 +75,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Response Time:</strong>
+            <strong class="text-dark mr-3">Response Time:</strong>
         </td>
         <td>
             @if ($product->response_time === null)
@@ -87,7 +87,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Panel type:</strong>
+            <strong class="text-dark mr-3">Panel type:</strong>
         </td>
         <td>
             @if ($product->panel_type === null)
@@ -99,7 +99,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Aspect ratio:</strong>
+            <strong class="text-dark mr-3">Aspect ratio:</strong>
         </td>
         <td>
             @if ($product->aspect_ratio === null)

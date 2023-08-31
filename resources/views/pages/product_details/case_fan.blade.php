@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             {{ $product->status }}
@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             {{ $product->condition }}
@@ -27,7 +27,7 @@
 
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Color:</strong>
+            <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
             @if ($product->color === null)
@@ -39,7 +39,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Size:</strong>
+            <strong class="text-dark mr-3">Size:</strong>
         </td>
         <td>
             @if ($product->size === null)
@@ -51,7 +51,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">RPM:</strong>
+            <strong class="text-dark mr-3">RPM:</strong>
         </td>
         <td>
             @if ($product->rpm === null)
@@ -67,7 +67,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Airflow:</strong>
+            <strong class="text-dark mr-3">Airflow:</strong>
         </td>
         <td>
             @if ($product->airflow === null)
@@ -83,7 +83,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Noise Level:</strong>
+            <strong class="text-dark mr-3">Noise Level:</strong>
         </td>
         <td>
             @if ($product->noise_level === null)
@@ -99,7 +99,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Pulse Width Modulation:</strong>
+            <strong class="text-dark mr-3">Pulse Width Modulation:</strong>
         </td>
         <td>
             @if ($product->pwm === null)

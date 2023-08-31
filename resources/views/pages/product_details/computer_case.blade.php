@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Type:</strong>
+            <strong class="text-dark mr-3">Type:</strong>
         </td>
         <td>
             @if ($product->type === null)
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Color:</strong>
+            <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
             @if ($product->color === null)
@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">PSU:</strong>
+            <strong class="text-dark mr-3">PSU:</strong>
         </td>
         <td>
             @if ($product->psu === null)
@@ -71,7 +71,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Side Panel:</strong>
+            <strong class="text-dark mr-3">Side Panel:</strong>
         </td>
         <td>
             @if ($product->sidepanel === null)
@@ -83,7 +83,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">External 5.25" Bays:</strong>
+            <strong class="text-dark mr-3">External 5.25" Bays:</strong>
         </td>
         <td>
             @if ($product->external_525_bays === null)
@@ -95,7 +95,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Internal 3.5" Bays:</strong>
+            <strong class="text-dark mr-3">Internal 3.5" Bays:</strong>
         </td>
         <td>
             @if ($product->internal_35_bays === null)

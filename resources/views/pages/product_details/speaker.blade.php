@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Configuration:</strong>
+            <strong class="text-dark mr-3">Configuration:</strong>
         </td>
         <td>
             @if ($product->configuration === null)
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Wattage:</strong>
+            <strong class="text-dark mr-3">Wattage:</strong>
         </td>
         <td>
             @if ($product->wattage === null)
@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Frequency response:</strong>
+            <strong class="text-dark mr-3">Frequency response:</strong>
         </td>
         <td>
             @if ($product->frequency_response === null)
@@ -75,7 +75,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Color:</strong>
+            <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
             @if ($product->color === null)

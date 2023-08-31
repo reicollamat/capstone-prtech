@@ -1,7 +1,7 @@
 <table class="details d-flex mb-4">
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Sold:</strong>
+            <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
             {{ $product->purchase_count }}
@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Status:</strong>
+            <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
             @if ($product->status === null)
@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Condition:</strong>
+            <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
             @if ($product->condition === null)
@@ -35,7 +35,7 @@
     
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Style:</strong>
+            <strong class="text-dark mr-3">Style:</strong>
         </td>
         <td>
             @if ($product->style === null)
@@ -47,7 +47,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Switches:</strong>
+            <strong class="text-dark mr-3">Switches:</strong>
         </td>
         <td>
             @if ($product->switches === null)
@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Backlit:</strong>
+            <strong class="text-dark mr-3">Backlit:</strong>
         </td>
         <td>
             @if ($product->backlit === null)
@@ -71,7 +71,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Tenkeyless:</strong>
+            <strong class="text-dark mr-3">Tenkeyless:</strong>
         </td>
         <td>
             @if ($product->tenkeyless === null)
@@ -87,7 +87,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Connection type:</strong>
+            <strong class="text-dark mr-3">Connection type:</strong>
         </td>
         <td>
             @if ($product->connection_type === null)
@@ -99,7 +99,7 @@
     </tr>
     <tr>
         <td class="header">
-            <strong class="text-light mr-3">Color:</strong>
+            <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
             @if ($product->color === null)

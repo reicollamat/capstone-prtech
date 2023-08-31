@@ -396,7 +396,7 @@ h6,
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
-  color: #FFFFFF;
+  color: #1B1B1B;
 }
 
 h6,
@@ -4421,7 +4421,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #1B1B1B;
+  color: #FFFFFF;
   background-color: #2B7EA1;
   border-color: #2B7EA1 #2B7EA1 #2B7EA1;
 }
