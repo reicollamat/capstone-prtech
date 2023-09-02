@@ -26,7 +26,7 @@
         {{-- Phone number --}}
         <div class="mt-4" style='display: inline-block;'>
             <x-input-label for="phone_number" :value="__('Phone Number')" />
-            <input id="phone_number" type="tel" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" name="phone_number" placeholder="09XX-XXX-XXXX" :value="old('phone_number')" required autocomplete="phone_number" />
+            <input id="phone_number" type="tel" pattern="[0-9]{11}" name="phone_number" placeholder="09XXXXXXXXX" :value="old('phone_number')" required autocomplete="phone_number" />
             <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
         </div>
 

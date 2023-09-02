@@ -31,7 +31,7 @@
         @include('layouts.shopsidebar')
         <!-- Shop Sidebar End -->
 
-        
+
         <!-- Shop Product Start -->
         <div class="col-lg-9 col-md-8">
             <div class="row pb-3">
@@ -61,7 +61,7 @@
                         <x-slot:purchasecount>{{ $value->purchase_count }}</x-slot:purchasecount>
                     </x-shop.display_product>
                 @endforeach
-                
+
                 {{-- pagination --}}
                 <div class="col-12">
                     <div class="d-flex justify-content-center">

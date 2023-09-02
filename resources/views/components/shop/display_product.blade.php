@@ -1,5 +1,5 @@
-<div class="col-lg-2 col-md-6 col-sm-6 pb-1">
-    <div class="product-item bg-light mb-4">
+<div class="col-lg-2 col-md-4 col-sm-6 pb-1">
+    <div class="product-item bg-light mb-4 p-3">
         <div class="product-img position-relative overflow-hidden">
             <img class="img-fluid-fixheight w-100" src="{{ asset($image) }}" alt="">
             <div class="product-action">

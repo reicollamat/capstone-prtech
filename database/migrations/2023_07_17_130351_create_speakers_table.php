@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price');
             $table->decimal('configuration', 8, 1);
-            $table->integer('wattage')->nullable();
+            $table->string('wattage')->nullable();
             $table->json('frequency_response')->nullable();
             $table->string('color')->nullable();
             $table->string('image')->default('img/showcase1.jpg');

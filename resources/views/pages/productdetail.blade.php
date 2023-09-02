@@ -79,7 +79,7 @@
                 @includeWhen($category === 'speaker', 'pages.product_details.speaker')
                 @includeWhen($category === 'video_card', 'pages.product_details.video_card')
                 @includeWhen($category === 'webcam', 'pages.product_details.webcam')
-                
+
                 <div class="d-flex align-items-center mb-4 pt-2">
                     @auth
                         <form id="cartFormAuth" action="{{route('add_to_cart')}}" method="POST">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
                     @endauth
-                    
+
                     <button class="btn btn-primary px-3" id="addToCartBtn">
                         <div class="text-light">
                             <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
@@ -211,7 +211,7 @@
                                     <li class="list-group-item px-0">
                                         Next-Gen Performance: The Model HPX500 is powered by state-of-the-art technology, delivering next-generation performance for seamless multitasking, gaming, and content creation.
                                     </li>
-                                  </ul> 
+                                  </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
@@ -227,7 +227,7 @@
                                     <li class="list-group-item px-0">
                                         Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
                                     </li>
-                                  </ul> 
+                                  </ul>
                             </div>
                         </div>
                     </div>

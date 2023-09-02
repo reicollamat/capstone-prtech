@@ -21,8 +21,8 @@ return new class extends Migration
             $table->json('modules');
             $table->decimal('price_per_gb', 8, 3)->nullable();
             $table->string('color')->nullable();
-            $table->integer('first_word_latency');
-            $table->integer('cas_latency');
+            $table->string('first_word_latency');
+            $table->string('cas_latency');
             $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
