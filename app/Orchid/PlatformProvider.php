@@ -61,14 +61,18 @@ class PlatformProvider extends OrchidServiceProvider
             // tentative
             Menu::make('Product Recommender')
                 ->icon('bs.bag')
-                ->route('platform.products')
-                ->divider(),
+                ->route('platform.products.recommender'),
+
+            // tentative
+            // Menu::make('Inventory')
+            //     ->icon('bs.collection')
+            //     ->route('platform.products.inventory'),
                 
             // user data screen
-            // Menu::make('User Data')
-            //     ->icon('bs.database')
-            //     ->route('platform.userdata')
-            //     ->divider(),
+            Menu::make('Purchases')
+                ->icon('bs.database')
+                ->route('platform.userdata')
+                ->divider(),
 
 
             // Menu::make('Example Screen')

@@ -19,6 +19,8 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\Product\ProductScreen;
+use App\Orchid\Screens\Product\RecommenderScreen;
+use App\Orchid\Screens\Product\ManageInventoryScreen;
 use App\Orchid\Screens\UserData\PurchaseItemsListScreen;
 use App\Orchid\Screens\UserData\UserBookmarkScreen;
 use App\Orchid\Screens\UserData\UserCartScreen;
@@ -107,6 +109,20 @@ Route::screen('products/create', ProductEditScreen::class)
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.products')
         ->push(__('Create Product'), route('platform.products.create')));
+
+// Platform > System > Product > Create
+Route::screen('products/inventory', ManageInventoryScreen::class)
+    ->name('platform.products.inventory')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.products')
+        ->push(__('Manage Inventory'), route('platform.products.inventory')));
+
+// Platform > System > Product > Recommender
+Route::screen('products/recommender', RecommenderScreen::class)
+    ->name('platform.products.recommender')
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.products')
+        ->push(__('Product Recommender'), route('platform.products.recommender')));
         
 // Platform > System > Product
 Route::screen('products', ProductScreen::class)
@@ -144,13 +160,13 @@ Route::screen('userdata/purchase/items', PurchaseItemsListScreen::class)
 
 // Platform > System > UserData > Purchase
 Route::screen('userdata/{user}/purchase', UserPurchaseScreen::class)
-    ->name('platform.userdata.purchase')
-    ->breadcrumbs(fn (Trail $trail, $user) => $trail
-        ->parent('platform.index')
-        ->push('User Data', route('platform.userdata'))
-        ->push('Purchases', route('platform.userdata.purchase', $user))
-        ->push($user->name)
-        );
+    ->name('platform.userdata.purchase');
+    // ->breadcrumbs(fn (Trail $trail, $user) => $trail
+    //     ->parent('platform.index')
+    //     ->push('User Data', route('platform.userdata'))
+    //     ->push('Purchases', route('platform.userdata.purchase', $user))
+    //     ->push($user->name)
+    //     );
 
 
 // Platform > System > UserData

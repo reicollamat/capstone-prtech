@@ -84,6 +84,11 @@ class ProductListLayout extends Table
                                 'id' => $product->id,
                             ]),
                     ])),
+            
+            TD::make('purchase_count', __('Stock'))
+                ->width('100')
+                ->sort()
+                ->cantHide(),
         ];
     }
 }
