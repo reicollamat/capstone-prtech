@@ -231,51 +231,89 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="tab-pane-3">
-                        <h4 class="mb-4">3 reviews for "{{$product->name}}"</h4>
-                        <!-- dummy customer reviews -->
+{{--                    <div class="tab-pane fade" id="tab-pane-3">--}}
+{{--                        <h4 class="mb-4">3 reviews for "{{$product->name}}"</h4>--}}
+{{--                        <!-- dummy customer reviews -->--}}
 
-                        <x-shop.cus_review>
-                            <x-slot:img_path>img/user1.png</x-slot:img_path>
-                            <x-slot:cus_name>Leaz Goe Gauys</x-slot:cus_name>
-                            <x-slot:cus_date>09 Feb 2021</x-slot:cus_date>
-                            <x-slot:cus_star>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </x-slot:cus_star>
-                            <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver napakabait..  Diko pa na testing pero the best sa packaging Godbless.</p>
-                        </x-shop.cus_review>
+{{--                        <x-shop.cus_review>--}}
+{{--                            <x-slot:img_path>img/user1.png</x-slot:img_path>--}}
+{{--                            <x-slot:cus_name>Leaz Goe Gauys</x-slot:cus_name>--}}
+{{--                            <x-slot:cus_date>09 Feb 2021</x-slot:cus_date>--}}
+{{--                            <x-slot:cus_star>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star-half-alt"></i>--}}
+{{--                            </x-slot:cus_star>--}}
+{{--                            <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver napakabait..  Diko pa na testing pero the best sa packaging Godbless.</p>--}}
+{{--                        </x-shop.cus_review>--}}
 
-                        <x-shop.cus_review>
-                            <x-slot:img_path>img/user2.png</x-slot:img_path>
-                            <x-slot:cus_name>Eyho Waht</x-slot:cus_name>
-                            <x-slot:cus_date>24 May 2019</x-slot:cus_date>
-                            <x-slot:cus_star>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </x-slot:cus_star>
-                            <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor. Dismaya lang  ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box  knowing almost 20K ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>
-                        </x-shop.cus_review>
+{{--                        <x-shop.cus_review>--}}
+{{--                            <x-slot:img_path>img/user2.png</x-slot:img_path>--}}
+{{--                            <x-slot:cus_name>Eyho Waht</x-slot:cus_name>--}}
+{{--                            <x-slot:cus_date>24 May 2019</x-slot:cus_date>--}}
+{{--                            <x-slot:cus_star>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star-half-alt"></i>--}}
+{{--                                <i class="far fa-star"></i>--}}
+{{--                                <i class="far fa-star"></i>--}}
+{{--                            </x-slot:cus_star>--}}
+{{--                            <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor. Dismaya lang  ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box  knowing almost 20K ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>--}}
+{{--                        </x-shop.cus_review>--}}
 
-                        <x-shop.cus_review>
-                            <x-slot:img_path>img/user3.png</x-slot:img_path>
-                            <x-slot:cus_name>Nhoe Caph Foereal</x-slot:cus_name>
-                            <x-slot:cus_date>14 Mar 2019</x-slot:cus_date>
-                            <x-slot:cus_star>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                            </x-slot:cus_star>
-                            <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible with the OS installed in computer but the connector foe headphone is functioning well.</p>
-                        </x-shop.cus_review>
+{{--                        <x-shop.cus_review>--}}
+{{--                            <x-slot:img_path>img/user3.png</x-slot:img_path>--}}
+{{--                            <x-slot:cus_name>Nhoe Caph Foereal</x-slot:cus_name>--}}
+{{--                            <x-slot:cus_date>14 Mar 2019</x-slot:cus_date>--}}
+{{--                            <x-slot:cus_star>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star"></i>--}}
+{{--                                <i class="fas fa-star-half-alt"></i>--}}
+{{--                                <i class="far fa-star"></i>--}}
+{{--                            </x-slot:cus_star>--}}
+{{--                            <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible with the OS installed in computer but the connector foe headphone is functioning well.</p>--}}
+{{--                        </x-shop.cus_review>--}}
+{{--                        --}}
+{{--                    </div>--}}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="mb-4 text-dark">1 review for "{{$product->name}}"</h4>
+
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-4">Leave a review</h4>
+                            <small>Your email address will not be published. Required fields are marked *</small>
+                            <div class="d-flex my-3">
+                                <p class="mb-0 mr-2">Your Rating * :</p>
+                                <div class="text-primary">
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="form-group">
+                                    <label for="message">Your Review *</label>
+                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Your Name *</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Your Email *</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="form-group mb-0">
+                                    <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
