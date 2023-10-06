@@ -35,7 +35,7 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             
-            Menu::make('Overview')
+            Menu::make('Dashboard')
                 ->icon('bs.book')
                 ->route(config('platform.index')),
 
@@ -53,15 +53,15 @@ class PlatformProvider extends OrchidServiceProvider
             //     ->divider(),
 
             // product screen
-            Menu::make('Products')
+            Menu::make('Product Inventory')
                 ->icon('bs.bag')
                 ->route('platform.products')
                 ->title(__('Shop')),
 
             // tentative
-            Menu::make('Product Recommender')
-                ->icon('bs.bag')
-                ->route('platform.products.recommender'),
+            // Menu::make('Product Recommender')
+            //     ->icon('bs.bag')
+            //     ->route('platform.products.recommender'),
 
             // tentative
             // Menu::make('Inventory')
