@@ -24,11 +24,13 @@
     <link href="{{ asset('multishop/lib/animate/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('multishop/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
-    @vite(['resources/js/app.js'])
+
 </head>
 
 <body>
