@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <title>PR Tech</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="PR-Tech, E-commerce" name="keywords">
+    <meta content="PR-Tech is an E-commerce website that provides products for all your needs." name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
