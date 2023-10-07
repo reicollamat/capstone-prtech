@@ -27,6 +27,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
 
@@ -35,33 +36,39 @@
 
 <body>
 
-    @include('layouts.topbar')
-    @include('layouts.navbar')
+@include('layouts.topbar')
+@include('layouts.navbar')
 
-    <main>
-        @yield('content')
-    </main>
+<main>
+    {{--  testing livewire, comment this out   --}}
+    @yield('test')
 
-    {{-- Footer --}}
-    <footer>
-        @include('layouts.footer')
-    </footer>
+    {{--  the main page content uncomment to load default   --}}
+{{--    @yield('content')--}}
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('multishop/lib/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('multishop/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+</main>
 
-    <!-- Contact Javascript File -->
-    <script src="{{ asset('multishop/mail/jqBootstrapValidation.min.js') }}"></script>
-    <script src="{{ asset('multishop/mail/contact.js') }}"></script>
+{{-- Footer --}}
+<footer>
+    @include('layouts.footer')
+</footer>
 
-    <!-- Template Javascript -->
-    <script src="{{ asset('multishop/js/main.js') }}"></script>
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="{{ asset('multishop/lib/easing/easing.min.js') }}"></script>
+<script src="{{ asset('multishop/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+<!-- Contact Javascript File -->
+<script src="{{ asset('multishop/mail/jqBootstrapValidation.min.js') }}"></script>
+<script src="{{ asset('multishop/mail/contact.js') }}"></script>
+
+<!-- Template Javascript -->
+<script src="{{ asset('multishop/js/main.js') }}"></script>
 </body>
 
 </html>

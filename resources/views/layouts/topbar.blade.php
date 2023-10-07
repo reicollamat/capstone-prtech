@@ -45,7 +45,7 @@
                         </span>
                     </a>
                 @endauth
-                
+
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
                     </form>
                 </div>
             </div>
-            
+
             @else
             <div class="btn-group mx-2">
                 <a class="btn btn-outline-light" href="{{ route('register') }}">Sign-up</a>
@@ -120,7 +120,7 @@
 
             @endauth
             @endif
-            
+
         </div>
     </div>
 </div>
