@@ -41,7 +41,7 @@
 
 <main>
     {{--  testing livewire, comment this out   --}}
-    @yield('test')
+    <livewire:landing lazy/>
 
     {{--  the main page content uncomment to load default   --}}
 {{--    @yield('content')--}}
