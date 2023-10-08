@@ -27,6 +27,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- This directive is used to include the Livewire styles --}}
+    @livewireStyles
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
@@ -41,10 +43,16 @@
 
 <main>
     {{--  testing livewire, comment this out   --}}
-    <livewire:landing lazy="on-load"/>
+    {{--    <livewire:landing lazy="on-load"/>--}}
 
     {{--  the main page content uncomment to load default   --}}
-{{--    @yield('content')--}}
+    {{--    @yield('content')--}}
+
+    <div x-data="{name:''}">
+        <label for="name">Name:</label>
+        <input id="name" type="text" x-model="name"/>
+        <p x-text="name">
+    </div>
 
 
 </main>
@@ -57,6 +65,8 @@
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
 
+{{-- This directive is used to include the Livewire scripts --}}
+@livewireScripts
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -69,6 +79,7 @@
 
 <!-- Template Javascript -->
 <script src="{{ asset('multishop/js/main.js') }}"></script>
+
 </body>
 
 </html>
