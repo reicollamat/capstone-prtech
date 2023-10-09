@@ -7,9 +7,9 @@ import '../scss/styles.scss'
 import * as bootstrap from 'bootstrap'
 
 // Disable alpine plugin for now for livewire
-// import Alpine from 'alpinejs';
+import Alpine from 'alpinejs';
 //
-// window.Alpine = Alpine;
+window.Alpine = Alpine;
 //
-// Alpine.start();
+Alpine.start();
 

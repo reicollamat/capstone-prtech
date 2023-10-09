@@ -36,7 +36,7 @@
                 </div>
             </nav>
         </div>
-        
+
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                 <a href="{{route('index_landing')}}" class="text-decoration-none d-block d-lg-none">
@@ -53,7 +53,7 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="{{ route('index_landing') }}" class="nav-item nav-link {{ (request()->routeIs('index_landing')) ? 'active' : '' }}">Home</a>
                         <a href="{{ route('index_shop') }}" class="nav-item nav-link {{ (request()->routeIs('index_shop')) ? 'active' : '' }}">Shop</a>
-                        
+
                         @auth
                             <a href="{{ route('purchase_list') }}" class="nav-item nav-link {{ (request()->routeIs('purchase_list')) ? 'active' : '' }}">Purchases</a>
 
