@@ -19,6 +19,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@types/node": "^20.8.2"
+        "@types/node": "^20.8.2",
+        "bootstrap-icons": "^1.11.1"
     }
 }
