@@ -14,20 +14,29 @@
                              class="d-inline-block align-text-top">
                     </a>
                 </div>
-                <div class="w-1/3">
+                <div class="w-1/2">
                     <div class="input-group rounded-none">
-                    <span class="input-group-text" id="basic-addon1">
-                         <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
-                              class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                        </svg>
-                    </span>
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">All Categories
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
                         <input type="text" class="form-control p-2 rounded-none" placeholder="Search PR-Tech"
                                aria-label="Recipient's username" aria-describedby="button-addon2">
                         <button class="btn btn-outline-secondary rounded-none d-flex items-center gap-2" type="button"
                                 id="button-addon2">
-
+                            <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
+                                 class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
                             Search
                         </button>
                     </div>
@@ -133,30 +142,45 @@
 
                 <div class="hidden md:block text-white">
                     <ul class="nav nav-underline">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="#">Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="#">Active</a>
+                        <div x-data="{ open: false }" class="nav-item ">
+                            <button @mouseover="open = ! open" class="nav-link text-white">Products</button>
 
-                        </li>
-                        <div x-data="{ open: false }" class="nav-item position-relative" >
-                            <button @mouseover="open = ! open" class="nav-link text-white">Support</button>
-
-                            <div x-show="open" @mouseover.away="open = false"  class="w-full position-absolute"
-                                 x-transition:enter.duration.500ms
-                                 x-transition:leave.duration.400ms>
+                            <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
+                                 x-transition:enter.duration.750ms
+                                 x-transition:leave.duration.750ms>
                                 <div class="w-full h-[200px] bg-dark">
                                     <a class="dropdown-item" href="#">Action</a>
                                 </div>
                             </div>
                         </div>
-                        <div x-data="{ open: false }" class="nav-item " >
+                        <div x-data="{ open: false }" class="nav-item ">
+                            <button @mouseover="open = ! open" class="nav-link text-white">New Release</button>
+
+                            <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
+                                 x-transition:enter.duration.750ms
+                                 x-transition:leave.duration.750ms>
+                                <div class="w-full h-[200px] bg-dark">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="nav-item ">
+                            <button @mouseover="open = ! open" class="nav-link text-white">Support</button>
+
+                            <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
+                                 x-transition:enter.duration.750ms
+                                 x-transition:leave.duration.750ms>
+                                <div class="w-full h-[200px] bg-dark">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div x-data="{ open: false }" class="nav-item ">
                             <button @mouseover="open = ! open" class="nav-link text-white">Explore</button>
 
-                            <div x-show="open" @mouseover.away="open = false"  class="w-[100vw] position-absolute"
-                                 x-transition:enter.duration.500ms
-                                 x-transition:leave.duration.500ms>
+                            <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
+                                 x-transition:enter.duration.750ms
+                                 x-transition:leave.duration.750ms>
                                 <div class="w-full h-[200px] bg-dark">
                                     <a class="dropdown-item" href="#">Action</a>
                                 </div>
@@ -166,6 +190,8 @@
                     </ul>
                 </div>
 
+
+                {{--responsive offcanvas on the side menu--}}
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                      aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
@@ -205,15 +231,15 @@
             </div>
         </nav>
     </div>
-    <div class="position-relative w-fit">
-        <h1>
-            hello
-            <span class="badge rounded-pill text-bg-light">Light</span>
-        </h1>
-    </div>
+{{--    <div class="position-relative w-fit">--}}
+{{--        <h1>--}}
+{{--            hello--}}
+{{--            <span class="badge rounded-pill text-bg-light">Light</span>--}}
+{{--        </h1>--}}
+{{--    </div>--}}
 
 
-    <h1>Example heading <span class="badge rounded-pill bg-secondary vh-100">New</span></h1>
+{{--    <h1>Example heading <span class="badge rounded-pill bg-secondary vh-100">New</span></h1>--}}
 
 
 </div>

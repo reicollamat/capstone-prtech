@@ -46,13 +46,13 @@
     <livewire:landing lazy="on-load"/>
 
     {{--  the main page content uncomment to load default   --}}
-    {{--        @yield('content')--}}
+            @yield('content')
 
-    <div x-data="{name:''}">
-        <label for="name">Name:</label>
-        <input id="name" type="text" x-model="name"/>
-        <p x-text="name">
-    </div>
+{{--    <div x-data="{name:''}">--}}
+{{--        <label for="name">Name:</label>--}}
+{{--        <input id="name" type="text" x-model="name"/>--}}
+{{--        <p x-text="name">--}}
+{{--    </div>--}}
 
 </main>
 
