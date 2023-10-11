@@ -43,10 +43,10 @@
 
 <main>
     {{--  testing livewire, comment this out   --}}
-        <livewire:landing lazy="on-load"/>
+    <livewire:landing lazy="on-load"/>
 
     {{--  the main page content uncomment to load default   --}}
-{{--        @yield('content')--}}
+    {{--        @yield('content')--}}
 
     <div x-data="{name:''}">
         <label for="name">Name:</label>

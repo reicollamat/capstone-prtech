@@ -283,6 +283,7 @@ footer {
   margin-top: auto;
 }
 
-/* .searchbar {
-
-} */
+.outline-remove{
+    border: none !important;
+    box-shadow: none !important;
+}
