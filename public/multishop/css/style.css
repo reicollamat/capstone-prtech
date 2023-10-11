@@ -283,7 +283,27 @@ footer {
   margin-top: auto;
 }
 
+/* this removes the outline of buttons on some cases where we dont need it*/
 .outline-remove{
     border: none !important;
     box-shadow: none !important;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    transition: .5s ease-in-out;
+}
+
+.show > .dropdown-menu {
+    max-height: 800px;
+    visibility: visible;
+}
+.padding-remove{
+    --bs-navbar-padding-y: 0px !important;
+}
+
+.content-center{
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
 }
