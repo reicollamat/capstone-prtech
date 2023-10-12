@@ -88,37 +88,37 @@
             </div>
 
             @if (Route::has('login'))
-            @auth
-            <div class="btn-group nav-item dropdown">
-                {{-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                        <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->first_name }}" />
-                    </button>
-                @else --}}
-                <a href="#" class="nav-link dropdown-toggle btn btn-outline-primary" data-toggle="dropdown">
-                    {{-- {{ Auth::user()->first_name }} --}}
-                    {{ Auth::user()->name }}
-                    {{-- <i class="fa fa-angle-down mt-1"></i> --}}
-                </a>
-                {{-- @endif --}}
-                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
-                    <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-                        <a href="{{ route('logout') }}" class="dropdown-item" @click.prevent="$root.submit();">Log Out</a>
-                    </form>
+                @auth
+                <div class="btn-group nav-item dropdown">
+                    {{-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                        <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                            <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->first_name }}" />
+                        </button>
+                    @else --}}
+                    <a href="#" class="nav-link dropdown-toggle btn btn-outline-primary" data-toggle="dropdown">
+                        {{-- {{ Auth::user()->first_name }} --}}
+                        {{ Auth::user()->name }}
+                        {{-- <i class="fa fa-angle-down mt-1"></i> --}}
+                    </a>
+                    {{-- @endif --}}
+                    <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item">Profile</a>
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+                            <a href="{{ route('logout') }}" class="dropdown-item" @click.prevent="$root.submit();">Log Out</a>
+                        </form>
+                    </div>
                 </div>
-            </div>
 
-            @else
-            <div class="btn-group mx-2">
-                <a class="btn btn-outline-light" href="{{ route('register') }}">Sign-up</a>
-            </div>
-            <div class="btn-group">
-                <a class="btn btn-outline-primary" href="{{ route('login') }}">Log In</a>
-            </div>
+                @else
+                <div class="btn-group mx-2">
+                    <a class="btn btn-outline-light" href="{{ route('register') }}">Sign-up</a>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary" href="{{ route('login') }}">Log In</a>
+                </div>
 
-            @endauth
+                @endauth
             @endif
 
         </div>

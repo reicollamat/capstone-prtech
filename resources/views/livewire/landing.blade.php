@@ -8,38 +8,8 @@
                              class="d-inline-block align-text-top">
                     </a>
                 </div>
-                <div class="w-1/2 position-relative" x-data="{ open: false }" @mouseover="open = true" @mouseleave="open = false">
-                    <div class="input-group rounded-none" >
-                        <select wire:model.live="selected_category" class="form-control form-select max-w-[200px]" aria-label="Default select example" >
-                            <option value="all_products" selected default>All Categories</option>
-                            @foreach ($categories as $key => $value)
-                                <p>Key: {{ $key }}, Value: {{ $value }}</p>/
-                                <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option>
-                            @endforeach
-
-
-                        </select>
-                        <input type="text" class="form-control p-2 rounded-none" placeholder="Search PR-Tech"
-                               aria-label="Recipient's username" aria-describedby="button-addon2" >
-                        <button class="btn btn-outline-secondary rounded-none d-flex items-center gap-2" type="button"
-                                id="button-addon2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
-                                 class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                            </svg>
-                            Search
-                        </button>
-                    </div>
-                    <div x-show="open" class="position-absolute h-80 w-[700px] bg-white shadow start-50 translate-middle-x "
-                         x-transition:enter.duration.750ms
-                         x-transition:leave.duration.300ms>
-                        <ul>
-                            <p>this where the products are listed by categories selected best product or most positive</p>
-                        </ul>
-                    </div>
-                </div>
-
+                {{--                search bar here--}}
+                <livewire:searchbar/>
 
 
                 <div class="flex gap-2">
@@ -59,62 +29,115 @@
                     <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1"
                          id="offcanvasWithBothOptions_account"
                          aria-labelledby="offcanvasWithBothOptionsLabel">
-                        <div>
-                            <div class="offcanvas-header">
-                                <h4 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Login</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                        aria-label="Close"></button>
 
-                            </div>
-                            <hr>
-                            <div class="offcanvas-body">
-                                <p class="text-center font-bold">Please enter your e-mail and password</p>
-                                <form method="POST" action="{{ route('login') }}">
-                                    @csrf
+                        @if (Route::has('login'))
+                            @auth
+                                <div>
+                                    <div class="offcanvas-header">
+                                        <h4 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+                                            Welcome, {{ Auth::user()->name }}</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                                aria-label="Close"></button>
 
-                                    <!-- Email Address -->
-                                    <div>
-                                        <x-input-label for="email" :value="__('Email')" />
-                                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                    </div>
+                                    <hr>
+                                    <div
+                                        class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300 w-full">
+                                        <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                        </svg>
+                                    </div>
+                                    <div
+                                        class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300 w-full">
+                                        <a class="dropdown-item" href="#">Dashboard</a>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                        </svg>
                                     </div>
 
-                                    <!-- Password -->
-                                    <div class="mt-4">
-                                        <x-input-label for="password" :value="__('Password')" />
+                                    <form method="POST" action="{{ route('logout') }}" x-data>
+                                        @csrf
+                                        <div
+                                            class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300 w-full">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               @click.prevent="$root.submit();">Logout</a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                            </svg>
+                                        </div>
+                                    </form>
 
-                                        <x-text-input id="password" class="block mt-1 w-full"
-                                                      type="password"
-                                                      name="password"
-                                                      required autocomplete="current-password" />
+                                </div>
+                            @else
+                                <div>
+                                    <div class="offcanvas-header">
+                                        <h4 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Login</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                                aria-label="Close"></button>
 
-                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
+                                    <hr>
+                                    <div class="offcanvas-body">
+                                        <p class="text-center font-bold">Please enter your e-mail and password</p>
+                                        <form method="POST" action="{{ route('login') }}">
+                                            @csrf
 
-                                    <div class="flex flex-col items-center justify-start mt-4 gap-3">
-                                        @if (Route::has('password.request'))
-                                            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                                                {{ __('Forgot your password?') }}
-                                            </a>
-                                        @endif
+                                            <!-- Email Address -->
+                                            <div>
+                                                <x-input-label for="email" :value="__('Email')"/>
+                                                <x-text-input id="email" class="block mt-1 w-full" type="email"
+                                                              name="email" :value="old('email')" required autofocus
+                                                              autocomplete="username"/>
+                                                <x-input-error :messages="$errors->get('email')" class="mt-2"/>
+                                            </div>
 
-                                        <x-primary-button class="ml-3 w-full text-center p-3">
-                                            {{ __('Log in') }}
-                                        </x-primary-button>
-{{--                                            <button href="#_" class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group ">--}}
-{{--                                                <span class="w-48 h-48 rounded rotate-[-40deg] bg-primary absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>--}}
-{{--                                                <span class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Log in</span>--}}
-{{--                                            </button>--}}
+                                            <!-- Password -->
+                                            <div class="mt-4">
+                                                <x-input-label for="password" :value="__('Password')"/>
+
+                                                <x-text-input id="password" class="block mt-1 w-full"
+                                                              type="password"
+                                                              name="password"
+                                                              required autocomplete="current-password"/>
+
+                                                <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+                                            </div>
+
+                                            <div class="flex flex-col items-center justify-start mt-4 gap-3">
+                                                @if (Route::has('password.request'))
+                                                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                                                       href="{{ route('password.request') }}">
+                                                        {{ __('Forgot your password?') }}
+                                                    </a>
+                                                @endif
+
+                                                <x-primary-button class="ml-3 w-full text-center p-3">
+                                                    {{ __('Log in') }}
+                                                </x-primary-button>
+                                                {{--                                            <button href="#_" class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group ">--}}
+                                                {{--                                                <span class="w-48 h-48 rounded rotate-[-40deg] bg-primary absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>--}}
+                                                {{--                                                <span class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Log in</span>--}}
+                                                {{--                                            </button>--}}
+                                            </div>
+
+                                            <div class="flex items-center justify-end mt-2">
+                                                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                                                   href="{{ route('register') }}">
+                                                    {{ __('Don\'t have an account?') }}
+                                                </a>
+                                            </div>
+                                        </form>
                                     </div>
-
-                                    <div class="flex items-center justify-end mt-2">
-                                        <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
-                                            {{ __('Don\'t have an account?') }}
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                                </div>
+                            @endauth
+                        @endif
 
                     </div>
 
@@ -213,41 +236,61 @@
                                 <div class="w-full h-[300px] bg-white text-black shadow">
                                     <div class="d-flex h-full ">
                                         <div class="">
-                                            <div class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300" style="width: 15rem!important;">
+                                            <div
+                                                class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
+                                                style="width: 15rem!important;">
                                                 <a class="dropdown-item" href="#">Components</a>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                                 </svg>
                                             </div>
-                                            <div class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300" style="width: 15rem!important;">
+                                            <div
+                                                class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
+                                                style="width: 15rem!important;">
                                                 <a class="dropdown-item" href="#">Peripherals</a>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                                 </svg>
                                             </div>
-                                            <div class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300" style="width: 15rem!important;">
+                                            <div
+                                                class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
+                                                style="width: 15rem!important;">
                                                 <a class="dropdown-item" href="#">Accessories</a>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                                 </svg>
                                             </div>
-                                            <div class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300" style="width: 15rem!important;">
+                                            <div
+                                                class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
+                                                style="width: 15rem!important;">
                                                 <a class="dropdown-item" href="#">Best Sellers</a>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                                 </svg>
                                             </div>
-                                            <div class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300" style="width: 15rem!important;">
+                                            <div
+                                                class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
+                                                style="width: 15rem!important;">
                                                 <a class="dropdown-item" href="#">All Products</a>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                     fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd"
+                                                          d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                                 </svg>
                                             </div>
 
-{{--                                            <a class="dropdown-item p-2" href="#">Peripherals</a>--}}
-{{--                                            <a class="dropdown-item p-2" href="#">Accessories</a>--}}
-{{--                                            <a class="dropdown-item p-2" href="#">Best Sellers</a>--}}
-{{--                                            <a class="dropdown-item p-2 hover:bg-gray-900" href="#">All Products</a>--}}
+                                            {{--                                            <a class="dropdown-item p-2" href="#">Peripherals</a>--}}
+                                            {{--                                            <a class="dropdown-item p-2" href="#">Accessories</a>--}}
+                                            {{--                                            <a class="dropdown-item p-2" href="#">Best Sellers</a>--}}
+                                            {{--                                            <a class="dropdown-item p-2 hover:bg-gray-900" href="#">All Products</a>--}}
                                         </div>
                                         <div class="vr" style="opacity: .10 !important"></div>
                                         <div class="p-2 flex-grow-1">Flex item</div>
@@ -338,9 +381,6 @@
                 </div>
             </div>
         </nav>
-    </div>
-    <div>
-        <p>@json($selected_category)</p>
     </div>
 </div>
 {{--    <div class="position-relative w-fit">--}}
