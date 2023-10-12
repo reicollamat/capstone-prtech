@@ -36,7 +36,7 @@
             @foreach($search_return as $product_search)
                 <div wire:loading.class.delay="opacity-50">
                     <a href="{{route('product_detail', ['product_id' => $product_search->id, 'category' => $product_search->category])}}" class="text-decoration-none text-black">
-                        <div class="d-flex h-full outline outline-1 outline-gray-200 p-0.5">
+                        <div class="d-flex h-full outline outline-1 outline-gray-200 p-0.5 hover:bg-gray-200 transition-all duration-300">
                             <div class="w-16 h-full">
                                 <img src="{{ asset($product_search->image) }}"  alt="image" class="w-full h-full"/>
                             </div>
@@ -57,11 +57,12 @@
                                 </div>
                                 <div>
                                     <h1 class="text-base font-bold">{{ $product_search->price }}</h1>
+
                                 </div>
                             </div>
                         </div>
-                </div>
                     </a>
+                </div>
 
             @endforeach
         </div>
