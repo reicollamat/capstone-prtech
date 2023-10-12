@@ -35,31 +35,34 @@
 {{--            <p> @json($search)</p>--}}
             @foreach($search_return as $product_search)
                 <div wire:loading.class.delay="opacity-50">
-                    <div class="d-flex h-full outline outline-1 outline-gray-200 p-0.5">
-                        <div class="w-16 h-full">
-                            <img src="{{ asset($product_search->image) }}"  alt="image" class="w-full h-full"/>
-                        </div>
-                        <div class="flex-grow-1 d-flex flex-col ml-3">
-                            <div>
-                                <h1 class="text-lg">{{ $product_search->title }}</h1>
+                    <a href="{{route('product_detail', ['product_id' => $product_search->id, 'category' => $product_search->category])}}" class="text-decoration-none text-black">
+                        <div class="d-flex h-full outline outline-1 outline-gray-200 p-0.5">
+                            <div class="w-16 h-full">
+                                <img src="{{ asset($product_search->image) }}"  alt="image" class="w-full h-full"/>
                             </div>
-                            <div class="row w-full">
-                                <div class="col">
-                                    <p class="mb-0">Status : {{ strtoupper($product_search->status)  }}</p>
+                            <div class="flex-grow-1 d-flex flex-col ml-3">
+                                <div>
+                                    <h1 class="text-lg">{{ $product_search->title }}</h1>
                                 </div>
-                                <div class="col">
-                                    <p class="mb-0">Condition : {{ strtoupper($product_search->condition)  }}</p>
+                                <div class="row w-full">
+                                    <div class="col">
+                                        <p class="mb-0">Status : {{ strtoupper($product_search->status)  }}</p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="mb-0">Condition : {{ strtoupper($product_search->condition)  }}</p>
+                                    </div>
+                                    {{--                                <div class="col">--}}
+                                    {{--                                    <p>Condition : {{ strtoupper($product_search->condition)  }}</p>--}}
+                                    {{--                                </div>--}}
                                 </div>
-{{--                                <div class="col">--}}
-{{--                                    <p>Condition : {{ strtoupper($product_search->condition)  }}</p>--}}
-{{--                                </div>--}}
-                            </div>
-                            <div>
-                                <h1 class="text-base font-bold">{{ $product_search->price }}</h1>
+                                <div>
+                                    <h1 class="text-base font-bold">{{ $product_search->price }}</h1>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
+                    </a>
+
             @endforeach
         </div>
     </div>
