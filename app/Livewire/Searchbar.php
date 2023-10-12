@@ -45,6 +45,13 @@ class Searchbar extends Component
         </div>
         HTML;
     }
+
+//    public function search($search){
+//        $search = '%' . $this->search . '%';
+//        $this->search_return = Product::where('title', 'ilike', $search)
+//            ->limit(5)
+//            ->get();
+//    }
     public function render()
 
     {
