@@ -13,7 +13,7 @@
 
         </select>
         <input type="text" class="form-control p-2 rounded-none shadow-none"
-               placeholder="Search PR-Tech" wire:model.debounce="search"
+               placeholder="Search PR-Tech" wire:model.live="search"
                aria-label="Recipient's username" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary rounded-none d-flex items-center gap-2" type="button"
                 id="button-addon2">
@@ -35,7 +35,7 @@
             <p> @json($selected_category)</p>
             <p> @json($search)</p>
             @foreach($search_return as $product_search)
-                <li wire:loading.class="opacity-50">{{ $product_search->title }}</li>
+                <li wire:loading.class.delay="opacity-50">{{ $product_search->title }}</li>
             @endforeach
         </ul>
     </div>
