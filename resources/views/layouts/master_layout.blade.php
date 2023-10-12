@@ -40,13 +40,14 @@
 
 {{--@include('layouts.topbar')--}}
 {{--@include('layouts.navbar')--}}
+<livewire:announcementbar/>
 
 <main>
     {{--  testing livewire, comment this out   --}}
-    <livewire:landing lazy="on-load"/>
+    <livewire:landing/>
 
     {{--  the main page content uncomment to load default   --}}
-            @yield('content')
+{{--            @yield('content')--}}
 
 {{--    <div x-data="{name:''}">--}}
 {{--        <label for="name">Name:</label>--}}
