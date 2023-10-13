@@ -13,8 +13,8 @@
 
         </select>
         <input type="text" class="form-control p-2 rounded-none shadow-none"
-               placeholder="Search PR-Tech" wire:model.live="search"
-               aria-label="Recipient's username" aria-describedby="button-addon2">
+               placeholder="Search PR-Tech" wire:model.live="search" @click.outside="$wire.resetSearchValue()"
+               aria-label="Search" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary rounded-none d-flex items-center gap-2" type="button"
                 id="button-addon2">
             <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
@@ -31,40 +31,55 @@
          x-transition:leave.duration.300ms>
         <div class="p-2 rounded-2 bg-white shadow">
             <p>Search Results</p>
+            <hr>
 {{--            <p> @json($selected_category)</p>--}}
+{{--            <p> @json(strlen($search_return))</p>--}}
 {{--            <p> @json($search)</p>--}}
-            @foreach($search_return as $product_search)
-                <div wire:loading.class.delay="opacity-50">
-                    <a href="{{route('product_detail', ['product_id' => $product_search->id, 'category' => $product_search->category])}}" class="text-decoration-none text-black">
-                        <div class="d-flex h-full outline outline-1 outline-gray-200 p-0.5 hover:bg-gray-200 transition-all duration-300">
-                            <div class="w-16 h-full">
-                                <img src="{{ asset($product_search->image) }}"  alt="image" class="w-full h-full"/>
-                            </div>
-                            <div class="flex-grow-1 d-flex flex-col ml-3">
-                                <div>
-                                    <h1 class="text-lg">{{ $product_search->title }}</h1>
-                                </div>
-                                <div class="row w-full">
-                                    <div class="col">
-                                        <p class="mb-0">Status : {{ strtoupper($product_search->status)  }}</p>
+            @if(strlen($search) > 2)
+                @if(strlen($search_return) > 0)
+                    @foreach($search_return as $product_search)
+                        <div wire:loading.class.delay="opacity-50" wire:key="{{ $product_search->id }}">
+                            <a href="{{route('product_detail', ['product_id' => $product_search->id, 'category' => $product_search->category])}}"
+                               class="text-decoration-none text-black">
+                                <div
+                                    class="d-flex h-full outline outline-1 outline-gray-200 p-0.5 hover:bg-gray-200 transition-all duration-300">
+                                    <div class="w-16 h-full">
+                                        <img src="{{ asset($product_search->image) }}" alt="image"
+                                             class="w-full h-full"/>
                                     </div>
-                                    <div class="col">
-                                        <p class="mb-0">Condition : {{ strtoupper($product_search->condition)  }}</p>
-                                    </div>
-                                    {{--                                <div class="col">--}}
-                                    {{--                                    <p>Condition : {{ strtoupper($product_search->condition)  }}</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div>
-                                    <h1 class="text-base font-bold">{{ $product_search->price }}</h1>
+                                    <div class="flex-grow-1 d-flex flex-col ml-3">
+                                        <div>
+                                            <h1 class="text-lg">{{ $product_search->title }}</h1>
+                                        </div>
+                                        <div class="row w-full">
+                                            <div class="col">
+                                                <p class="mb-0">Status : {{ strtoupper($product_search->status)  }}</p>
+                                            </div>
+                                            <div class="col">
+                                                <p class="mb-0">Condition
+                                                    : {{ strtoupper($product_search->condition)  }}</p>
+                                            </div>
+                                            {{--                                <div class="col">--}}
+                                            {{--                                    <p>Condition : {{ strtoupper($product_search->condition)  }}</p>--}}
+                                            {{--                                </div>--}}
+                                        </div>
+                                        <div>
+                                            <h1 class="text-base font-bold">{{ $product_search->price }}</h1>
 
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
+                    @endforeach
+                @else
+                    <p class="text-center" wire:key="no-results">No products found</p>
+{{--                    <p>@json($search)</p>--}}
+                @endif
+            @else
+                <p class="text-center" wire:key="no-results">Input string to Continue...</p>
+            @endif
 
-            @endforeach
         </div>
     </div>
 
