@@ -1,5 +1,5 @@
 <div class="w-1/2 position-relative" x-data="{ open: false }" @mouseover="open = true"
-     @mouseleave="open = false">
+     @mouseleave="open = false" >
     <div class="input-group rounded-none">
         <select wire:model.live="selected_category"
                 class="form-control form-select max-w-[200px] shadow-none"
@@ -13,7 +13,7 @@
 
         </select>
         <input type="text" class="form-control p-2 rounded-none shadow-none"
-               placeholder="Search PR-Tech" wire:model.live="search" @click.outside="$wire.resetSearchValue()"
+               placeholder="Search PR-Tech" wire:model.live="search"
                aria-label="Search" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary rounded-none d-flex items-center gap-2" type="button"
                 id="button-addon2">
@@ -26,19 +26,23 @@
         </button>
     </div>
     <div x-show="open"
-         class="position-absolute h-full w-[700px] bg-white shadow start-50 translate-middle-x shadow"
+         class="position-absolute h-full w-[700px] bg-white start-50 translate-middle-x shadow"
          x-transition:enter.duration.750ms
          x-transition:leave.duration.300ms>
         <div class="p-2 rounded-2 bg-white shadow">
             <p>Search Results</p>
+{{--            <p>{{ strlen($search_return) }}</p>--}}
+{{--            <p>{{ $search_return }}</p>--}}
             <hr>
 {{--            <p> @json($selected_category)</p>--}}
 {{--            <p> @json(strlen($search_return))</p>--}}
 {{--            <p> @json($search)</p>--}}
             @if(strlen($search) > 2)
-                @if(strlen($search_return) > 0)
+                @if(strlen($search_return) > 2)
+
                     @foreach($search_return as $product_search)
-                        <div wire:loading.class.delay="opacity-50" wire:key="{{ $product_search->id }}">
+                        <div wire:loading.class.delay="opacity-50" wire:key="{{ $product_search->id }}" >
+
                             <a href="{{route('product_detail', ['product_id' => $product_search->id, 'category' => $product_search->category])}}"
                                class="text-decoration-none text-black">
                                 <div
@@ -79,9 +83,6 @@
             @else
                 <p class="text-center" wire:key="no-results">Input string to Continue...</p>
             @endif
-
         </div>
     </div>
-
-
 </div>
