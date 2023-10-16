@@ -9,7 +9,6 @@
     <meta content="PR-Tech is an E-commerce website that provides products for all your needs." name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
     <!-- Favicon -->
     <link href="{{ asset('img/icon/retechicon.ico') }}" rel="icon">
 
@@ -38,16 +37,16 @@
 
 <body>
 
-{{--@include('layouts.topbar')--}}
-{{--@include('layouts.navbar')--}}
-<livewire:announcementbar/>
 
+<livewire:announcementbar/>
+@include('layouts.topbar')
+@include('layouts.navbar')
 <main>
     {{--  testing livewire, comment this out   --}}
-    <livewire:landing/>
+{{--    <livewire:landing/>--}}
 
     {{--  the main page content uncomment to load default   --}}
-            @yield('content')
+{{--        @yield('content')--}}
 
 {{--    <div x-data="{name:''}">--}}
 {{--        <label for="name">Name:</label>--}}

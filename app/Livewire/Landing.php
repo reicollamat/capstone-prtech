@@ -76,6 +76,6 @@ class Landing extends Component
 
     public function render()
     {
-        return view('livewire.landing')->extends('layouts.master_layout')->section('test');
+        return view('livewire.landing');
     }
 }
