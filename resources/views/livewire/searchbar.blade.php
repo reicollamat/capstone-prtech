@@ -31,18 +31,14 @@
          x-transition:leave.duration.300ms>
         <div class="p-2 rounded-2 bg-white shadow">
             <p>Search Results</p>
-            {{--            <p>{{ strlen($search_return) }}</p>--}}
-            {{--            <p>{{ $search_return }}</p>--}}
             <hr>
             {{--            <p> @json($selected_category)</p>--}}
             {{--            <p> @json(strlen($search_return))</p>--}}
             {{--            <p> @json($search)</p>--}}
             @if(strlen($search) > 2)
                 @if(strlen($search_return) > 2)
-
                     @foreach($search_return as $product_search)
                         <div wire:loading.class.delay="opacity-50" wire:key="{{ $product_search->id }}">
-
                             <a href="{{route('product_detail', ['product_id' => $product_search->id, 'category' => $product_search->category])}}"
                                class="text-decoration-none text-black">
                                 <div
