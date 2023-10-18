@@ -14,17 +14,16 @@ class BookmarkController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $products = Product::all();
 
-            $bookmarks = Bookmark::where('user_id', $user->id)->get();
+            $bookmarks = Product::join('bookmarks', 'products.id', '=', 'bookmarks.product_id')
+                ->get();
+
 
             return view('pages.profile.bookmark', [
                 'bookmarks' => $bookmarks,
-                'products' => $products,
+                'id' => $user,
             ]);
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
     }
@@ -58,7 +57,7 @@ class BookmarkController extends Controller
         // dd($bookmark_id);
 
         $bookmark = Bookmark::find($bookmark_id);
-        
+
         Bookmark::destroy($bookmark_id);
 
         return redirect(route('index_bookmark'));

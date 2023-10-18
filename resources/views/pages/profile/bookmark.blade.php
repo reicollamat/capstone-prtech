@@ -36,43 +36,43 @@
                     @foreach ($bookmarks as $value)
                     <tr>
                         <td>
-                            <img src="{{asset($products->where('id', $value->product_id)->first()->image)}}" alt="" style="width: 100px;">
+                            <img src="{{ $value->image }}" alt="" style="width: 100px;">
                         </td>
                         <td class="align-middle">
-                            {{$products->where('id', $value->product_id)->first()->title}}
+                            {{ $value->title}}
                         </td>
                         <td class="align-middle">
-                            ₱ {{$products->where('id', $value->product_id)->first()->price}}
+{{--                            ₱ {{$products->where('id', $value->product_id)->first()->price}}--}}
                         </td>
                         <td class="align-middle">
-                            @if ($products->where('id', $value->product_id)->first()->condition == 'used')
+                            @if ($value->condition == 'used')
                                 Used
                             @else
                                 Brand New
                             @endif
-                            
+
                         </td>
                         <td class="align-middle">
                             <form action="{{route('remove_bookmark')}}" method="POST">
                                 @csrf
                                 <input type="text" name="bookmark_id" value="{{$value->id}}" hidden>
-                                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
+                                <input type="text" name="user_id" value="{{$id->id}}" hidden>
                                 <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
                             </form>
                         </td>
                         <td class="align-middle">
-                            <form action="{{route('product_detail', ['product_id' => $value->product_id, 'category' => $products->where('id', $value->product_id)->first()->category])}}" method="GET">
+                            <form action="{{route('product_detail', ['product_id' => $value->product_id, 'category' => $value->category])}}" method="GET">
                                 @csrf
-                                <button class="btn btn-sm btn-info">View</i></button>
+                                <button class="btn btn-sm btn-info">View</button>
                             </form>
                         </td>
                     </tr>
                     @endforeach
-                    
+
                 </tbody>
             </table>
         </div>
-        
+
         @if ($bookmarks->isEmpty())
             <div class="col-lg-12 text-center">
                 No Cart Items Found
