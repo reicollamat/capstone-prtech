@@ -47,7 +47,7 @@ class Landing extends Component
     public function mount()
     {
 
-//            $this->products = Product::all();
+//        $this->products = Product::all();
 //        $this->cpu = Cpu::all();
 //        $this->cpu_cooler = CpuCooler::all();
 //        $this->ext_storage = ExtStorage::all();

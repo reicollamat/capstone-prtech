@@ -62,7 +62,7 @@ class LandingController extends Controller
         {
             $recent_products[] = Product::find($value->id)->category($value->category)->first();
         }
-        
+
         return view('pages.home', [
             'featured_products' => $featured_products,
             'recent_products' => $recent_products,

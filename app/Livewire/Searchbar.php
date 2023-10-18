@@ -26,7 +26,17 @@ class Searchbar extends Component
         'headphone' => '2.2 Headphone',
         'webcam' => '2.3 Webcam',
     ];
+
+    protected function queryString()
+    {
+        return [
+            'search' => [
+                'as' => 'q',
+            ],
+        ];
+    }
     public $selected_category;
+
 
     public $search = '';
     public $search_return;
