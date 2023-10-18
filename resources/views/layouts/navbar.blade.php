@@ -1,5 +1,5 @@
-<nav class="navbar padding-remove bg-body-tertiary " role="navigation">
-    <div class="container-fluid  bg-dark text-white content-center py-2">
+<nav class="navbar padding-remove bg-body-tertiary z-50 " role="navigation">
+    <div class="container-fluid  bg-dark text-white content-center py-2 z-50">
         <button class="navbar-toggler outline-none outline-remove py-2 md:hidden" type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
@@ -27,8 +27,8 @@
                     <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
-                        <div class="w-full h-[300px] bg-white text-black shadow">
-                            <div class="d-flex h-full ">
+                        <div class="w-full h-[300px] bg-white text-black shadow z-50">
+                            <div class="d-flex h-full z-50">
                                 <div class="">
                                     <div
                                         class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
@@ -95,7 +95,7 @@
                 <div x-data="{ open: false }" class="nav-item ">
                     <button @mouseover="open = ! open" class="nav-link text-white">New Release</button>
 
-                    <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
+                    <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0 z-50"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
                         <div class="w-full h-[200px] bg-dark">
@@ -106,7 +106,7 @@
                 <div x-data="{ open: false }" class="nav-item">
                     <a @mouseover="open = ! open" class="nav-link text-white" role="button">Support</a>
 
-                    <div x-show="open" @mouseover.away="open = false" class="position-absolute min-w-[200px]"
+                    <div x-show="open" @mouseover.away="open = false" class="position-absolute min-w-[200px] z-50"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
                         <div class="w-full h-full bg-dark p-3">
@@ -121,7 +121,7 @@
                 <div x-data="{ open: false }" class="nav-item ">
                     <a @mouseover="open = ! open" class="nav-link  text-white user-select-none " role="button">Explore</a>
 
-                    <div x-show="open" @mouseover.away="open = false" class="position-absolute min-w-[200px]"
+                    <div x-show="open" @mouseover.away="open = false" class="position-absolute min-w-[200px] z-50"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
                         <div class="w-full h-full bg-dark p-3">
