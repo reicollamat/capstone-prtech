@@ -56,7 +56,7 @@
                             <form action="{{route('remove_bookmark')}}" method="POST">
                                 @csrf
                                 <input type="text" name="bookmark_id" value="{{$value->id}}" hidden>
-                                <input type="text" name="user_id" value="{{$id->id}}" hidden>
+                                <input type="text" name="user_id" value="{{$id}}" hidden>
                                 <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
                             </form>
                         </td>
