@@ -27,14 +27,16 @@ class Searchbar extends Component
         'webcam' => '2.3 Webcam',
     ];
 
-    protected function queryString()
-    {
-        return [
-            'search' => [
-                'as' => 'q',
-            ],
-        ];
-    }
+    ##create a function upon cliuckg search send a get request to search
+
+//    protected function queryString()
+//    {
+//        return [
+//            'search' => [
+//                'as' => 'q',
+//            ],
+//        ];
+//    }
     public $selected_category;
 
 
@@ -56,6 +58,19 @@ class Searchbar extends Component
         </div>
         HTML;
     }
+
+    public function to_search()
+    {
+//        $url = '/shop?to_search=' . $this->search;
+
+        // Redirect the user to the search endpoint
+//        header('Location: ' . $url);
+        dd("im clicked");
+
+
+    }
+
+
 
 //    public function search($search){
 //        $search = '%' . $this->search . '%';

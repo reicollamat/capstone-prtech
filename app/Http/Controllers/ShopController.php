@@ -55,7 +55,7 @@ class ShopController extends Controller
                 $category_checked = array_keys($request->query());
                 $products = $products->whereIn('category', $category_checked)->paginate(30);
             }
-            
+
             $products = Product::sortable()->paginate();
         }
         else
@@ -66,10 +66,10 @@ class ShopController extends Controller
             $category_checked = array_keys($request->query());
             $products = $products->whereIn('category', $category_checked)->paginate(30);
         }
-        
+
 
         Session::forget('to_search');
-        
+
         // get all products if all categories not checked
         if (empty($request->query())) {
             $products = Product::sortable()->paginate(30);
@@ -84,7 +84,7 @@ class ShopController extends Controller
             if($request->to_search)
             {
                 $to_search = $request->to_search;
-                $products = Product::where('title', 'LIKE', '%'.$to_search.'%')->sortable()->paginate(30);
+                $products = Product::where('title', 'ilike', '%'.$to_search.'%')->sortable()->paginate(30);
                 Session::put('to_search', $to_search);
 
                 return view('pages.shop', [
@@ -100,7 +100,7 @@ class ShopController extends Controller
                 ]);
             }
             // $products = Product::sortable()->paginate(30);
-        }        
+        }
     }
 
     public function product_detail($product_id, $category)
@@ -137,7 +137,7 @@ class ShopController extends Controller
             abort(404);
         }
 
-        
+
         // generate 10 random models corresponds to category
         $count = 10;
 
@@ -177,7 +177,9 @@ class ShopController extends Controller
 
     public function search_result(Request $request)
     {
-        $to_search = $request->to_search;
+        if (!empty($request->to_search)) {
+            $to_search = $request->to_search;
+        }
         // dd($to_search);
 
         return redirect(route('index_shop', [

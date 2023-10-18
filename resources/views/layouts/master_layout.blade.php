@@ -46,13 +46,14 @@
 {{--    <livewire:landing/>--}}
 
     {{--  the main page content uncomment to load default   --}}
-{{--        @yield('content')--}}
+{{--
 
 {{--    <div x-data="{name:''}">--}}
 {{--        <label for="name">Name:</label>--}}
 {{--        <input id="name" type="text" x-model="name"/>--}}
 {{--        <p x-text="name">--}}
 {{--    </div>--}}
+    @yield('content')
 
 </main>
 
