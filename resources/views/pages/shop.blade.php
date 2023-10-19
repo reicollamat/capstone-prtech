@@ -80,6 +80,5 @@
     </div>
 </div>
 <!-- Shop End -->
-test
-test2
+
 @endsection
