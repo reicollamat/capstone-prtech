@@ -17,7 +17,7 @@
         <div class="hidden md:block text-white">
             <ul class="nav">
                 <li class="nav-link text-white">
-                    <a href="#" class="text-white no-underline">
+                    <a href="{{ route("index_landing") }}" class="text-white no-underline">
                         <span>HOME</span>
                     </a>
                 </li>
