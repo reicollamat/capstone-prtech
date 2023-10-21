@@ -15,7 +15,7 @@
                   </span>
     </button>
 
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1"
+    <div class="offcanvas offcanvas-end min-w-[450px]" data-bs-scroll="true" tabindex="-1"
          id="offcanvasWithBothOptions_wishlist"
          aria-labelledby="offcanvasWithBothOptionsLabel">
         <div class="offcanvas-header">
@@ -26,6 +26,36 @@
         <div class="offcanvas-body">
             @if($wishlist_count >0)
                 <p>you have {{ $wishlist_count }} items in your wishlist</p>
+                @foreach($bookmarks as $item)
+                    <div class="card mb-2" style="max-width: 540px;" wire:key="{{ $item->id }}">
+                        <div class="row g-0">
+                            <div class="col-md-3 d-flex p-2">
+                                <img src="/{{ $item->image }}" class="img-fluid img-thumbnail rounded-start border-0"
+                                     alt="item image">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body">
+                                    <div class="card-title d-flex justify-between">
+                                        <a class="text-lg decoration-0 text-decoration-none text-black"
+                                           href="{{route('product_detail', ['product_id' => $item->product_id, 'category' => $item->category])}}">{{ $item->title }}</a>
+                                        <h5 class="text-lg text-gray-600">
+                                            <small class="text-body-secondary">PHP</small>
+                                            {{ $item->price }}</h5>
+                                    </div>
+
+                                    <div class="card-text">
+                                        <p class="mb-0">{{$item->slug}}</p>
+                                        <p><small
+                                                class="text-body-secondary">{{ App\Helper\Helper::maptopropercatetory($item->category)  }}
+                                                | {{ App\Helper\Helper::maptopropercondition($item->condition) }}</small>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             @else
                 <p>You don't have any products in the wishlist yet.
                     You will find a lot of interesting products on our "Shop" page.</p>
