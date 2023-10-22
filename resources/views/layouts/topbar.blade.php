@@ -9,7 +9,7 @@
                     </a>
                 </div>
                 {{--search bar here--}}
-                <livewire:searchbar/>
+                <livewire:searchbar lazy/>
                 <div class="flex gap-2">
                     {{--profile account button--}}
                     <button class="btn  outline-remove position-relative" type="button" data-bs-toggle="offcanvas"
