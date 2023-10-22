@@ -13,7 +13,7 @@
             </select>
 
             <input type="text" class="form-control p-2 rounded-none shadow-none"
-                   placeholder="Search PR-Tech" wire:model.live="search" name="to_search"
+                   placeholder="Search PR-Tech" wire:model.live="search" name="to_search" autocomplete="off"
                    aria-label="Search" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary rounded-none d-flex items-center gap-2" type="submit"
                     id="button-addon2">
@@ -33,13 +33,18 @@
         <div class="p-2 rounded-2 bg-white shadow">
             <p>Search Results</p>
             <hr>
+{{--            <div wire:loading>--}}
+{{--                <div class="w-full d-flex justify-center">--}}
+{{--                    <p>Loading...</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             {{--            <p> @json($selected_category)</p>--}}
             {{--            <p> @json(strlen($search_return))</p>--}}
             {{--            <p> @json($search)</p>--}}
-            @if(strlen($search) > 2)
+            @if(strlen($search) > 1)
                 @if(strlen($search_return) > 2)
                     @foreach($search_return as $product_search)
-                        <div wire:loading.class.delay="opacity-50" wire:key="{{ $product_search->id }}">
+                        <div  wire:transition.scale.origin.top wire:key="{{ $product_search->id }}" >
                             <a href="{{route('product_detail', ['product_id' => $product_search->id, 'category' => $product_search->category])}}"
                                class="text-decoration-none text-black">
                                 <div
@@ -72,6 +77,8 @@
                             </a>
                         </div>
                     @endforeach
+
+
                 @else
                     <p class="text-center" wire:key="no-results">No products found</p>
                     {{--                    <p>@json($search)</p>--}}

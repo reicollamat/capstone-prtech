@@ -29,16 +29,7 @@ class Searchbar extends Component
 
     ##create a function upon cliuckg search send a get request to search
 
-//    protected function queryString()
-//    {
-//        return [
-//            'search' => [
-//                'as' => 'q',
-//            ],
-//        ];
-//    }
     public $selected_category;
-
 
     public $search = '';
     public $search_return;
@@ -50,29 +41,22 @@ class Searchbar extends Component
     public function clearsearch(){
         $this->search = '';
     }
-    public function placeholder()
+//    public function placeholder()
+//    {
+//        return <<<'HTML'
+//        <div>
+//            <p1>loading</p1>
+//        </div>
+//        HTML;
+//    }
+
+    public function placeholder(array $params = [])
     {
-        return <<<'HTML'
-        <div>
-            <p1>loading</p1>
-        </div>
-        HTML;
-    }
-
-    public function to_search()
-    {
-//        $url = '/shop?to_search=' . $this->search;
-
-        // Redirect the user to the search endpoint
-//        header('Location: ' . $url);
-        dd("im clicked");
-
-
+        return view('livewire.search.placeholder', $params);
     }
 
 
-
-//    public function search($search){
+    //    public function search($search){
 //        $search = '%' . $this->search . '%';
 //        $this->search_return = Product::where('title', 'ilike', $search)
 //            ->limit(5)
