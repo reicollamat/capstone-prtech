@@ -5,12 +5,14 @@ namespace App\Livewire;
 use App\Helper\Helper;
 use App\Models\CartItem;
 use App\Models\Product;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use LaravelIdea\Helper\App\Models\_IH_Product_C;
 use Livewire\Component;
 
 class CartSidebar extends Component
 {
+    use AuthorizesRequests;
 
     public string|int|null $user_id;
     /**
@@ -20,6 +22,8 @@ class CartSidebar extends Component
     public int $cartiems_count = 0;
 
     public float $total_price = 0;
+
+
 
     public function placeholder()
     {
@@ -47,6 +51,7 @@ class CartSidebar extends Component
 
     public function mount()
     {
+        $this->total_price = 0;
 
         if (Auth::check()) {
             $this->user_id = Auth::id();
@@ -75,5 +80,17 @@ class CartSidebar extends Component
         return view('livewire.cart-sidebar');
 
 
+    }
+
+    public function removeitem($product_id, $user_id){
+
+        $cartitem = CartItem::where('id', $product_id)->where('user_id', $user_id)->get();
+
+        if (\auth()->check()) {
+            CartItem::destroy($cartitem);
+        }
+
+        $this->mount();
+//        $this->render();
     }
 }

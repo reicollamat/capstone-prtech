@@ -138,9 +138,11 @@
                         @endif
                     </div>
                     {{--                    add the livewire of wishlist--}}
-                    <livewire:wishlist-sidebar lazy/>
+{{--                    <livewire:wishlist-sidebar lazy/>--}}
+                    @include('components.topbar.wishlist-sidebar')
                     {{--                    add the livewire of cart items--}}
-                    <livewire:cart-sidebar lazy />
+                    @include('components.topbar.cart-sidebar')
+{{--                    <livewire:cart-sidebar lazy />--}}
                 </div>
             </div>
         </nav>
