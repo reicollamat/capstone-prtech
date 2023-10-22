@@ -1,66 +1,107 @@
-    {{-- <div class="row px-xl-5 pt-5">
-        <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-            <h5 class="text-secondary text-uppercase mb-4">Get In Touch</h5>
-            <p class="mb-4">No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no</p>
-            <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-            <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-            <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-        </div>
-        <div class="col-lg-8 col-md-12">
-            <div class="row">
-                <div class="col-md-4 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Quick Shop</h5>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">My Account</h5>
-                    <div class="d-flex flex-column justify-content-start">
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Shop</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop Detail</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                        <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                        <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-5">
-                    <h5 class="text-secondary text-uppercase mb-4">Newsletter</h5>
-                    <p>Duo stet tempor ipsum sit amet magna ipsum tempor est</p>
-                    <form action="">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Your Email Address">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary">Sign Up</button>
-                            </div>
-                        </div>
-                    </form>
-                    <h6 class="text-secondary text-uppercase mt-4 mb-3">Follow Us</h6>
-                    <div class="d-flex">
-                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
+<!-- Remove the container if you want to extend the Footer to full width. -->
+
+
+<footer class="text-white text-center text-lg-start" style="background-color: #23242a;">
+    <!-- Grid container -->
+    <div class="container p-4">
+        <!--Grid row-->
+        <div class="row mt-4">
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4">About company</h5>
+
+                <p>
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                    voluptatum deleniti atque corrupti.
+                </p>
+
+                <p>
+                    Blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas
+                    molestias.
+                </p>
+
+                <div class="mt-4">
+                    <!-- Facebook -->
+                    <a type="button" class="btn btn-floating btn-ghost btn-lg text-white"><i class="fab fa-facebook-f"></i></a>
+                    <!-- Dribbble -->
+                    <a type="button" class="btn btn-floating btn-ghost btn-lg text-white"><i class="fab fa-dribbble"></i></a>
+                    <!-- Twitter -->
+                    <a type="button" class="btn btn-floating btn-ghost btn-lg text-white"><i class="fab fa-twitter"></i></a>
+                    <!-- Google + -->
+                    <a type="button" class="btn btn-floating btn-ghost btn-lg text-white"><i
+                            class="fab fa-google-plus-g"></i></a>
+                    <!-- Linkedin -->
                 </div>
             </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+{{--                <h5 class="text-uppercase mb-4 pb-1">Search something</h5>--}}
+
+{{--                <div class="form-outline form-white mb-4">--}}
+{{--                    <input type="text" id="formControlLg" class="form-control form-control-lg">--}}
+{{--                    <label class="form-label" for="formControlLg" style="margin-left: 0px;">Search</label>--}}
+{{--                    <div class="form-notch">--}}
+{{--                        <div class="form-notch-leading" style="width: 9px;"></div>--}}
+{{--                        <div class="form-notch-middle" style="width: 48.8px;"></div>--}}
+{{--                        <div class="form-notch-trailing"></div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+                <ul class="fa-ul" style="margin-left: 1.65em;">
+                    <li class="mb-3">
+                        <span class="fa-li"><i class="fas fa-home"></i></span><span
+                            class="ms-2">New York, NY 10012, US</span>
+                    </li>
+                    <li class="mb-3">
+                        <span class="fa-li"><i class="fas fa-envelope"></i></span><span
+                            class="ms-2">info@example.com</span>
+                    </li>
+                    <li class="mb-3">
+                        <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+ 01 234 567 88</span>
+                    </li>
+                    <li class="mb-3">
+                        <span class="fa-li"><i class="fas fa-print"></i></span><span class="ms-2">+ 01 234 567 89</span>
+                    </li>
+                </ul>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-4">Opening hours</h5>
+
+                <table class="table text-center text-white">
+                    <tbody class="font-weight-normal">
+                    <tr>
+                        <td>Mon - Thu:</td>
+                        <td>8am - 9pm</td>
+                    </tr>
+                    <tr>
+                        <td>Fri - Sat:</td>
+                        <td>8am - 1am</td>
+                    </tr>
+                    <tr>
+                        <td>Sunday:</td>
+                        <td>9am - 10pm</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--Grid column-->
         </div>
-    </div> --}}
-    <div class="row border-top mx-xl-5 py-2" style="border-color: rgba(256, 256, 256, .1) !important;">
-        <div class="col-md-6 px-xl-0">
-            <p class="mb-md-0 text-center text-md-left text-secondary">
-                &copy; <a class="text-dark" href="#">Domain</a>. All Rights Reserved. Designed
-                by
-                <a class="text-dark" href="https://htmlcodex.com">HTML Codex</a>
-            </p>
-        </div>
-        <div class="col-md-6 px-xl-0 text-center text-md-right">
-            <img class="img-fluid" src="multishop/img/payments.png" alt="">
-        </div>
+        <!--Grid row-->
     </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-white" href="#">website_name.com</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+
+<!-- End of .container -->
