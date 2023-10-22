@@ -47,7 +47,7 @@
                                         <p class="mb-0">{{$item->slug}}</p>
                                         <p><small
                                                 class="text-body-secondary">{{ App\Helper\Helper::maptopropercatetory($item->category)  }}
-                                                | {{ App\Helper\Helper::maptopropercondition($item->condition) }}</small>
+                                                | {{ App\Helper\Helper::maptopropercondition($item->condition) }} | {{ strtoupper($item->status) }}</small>
                                         </p>
                                     </div>
 
