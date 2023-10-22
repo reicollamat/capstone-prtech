@@ -19,6 +19,8 @@ class CartSidebar extends Component
     public $cartitems = [];
     public int $cartiems_count = 0;
 
+    public float $total_price = 0;
+
     public function placeholder()
     {
         return <<<'HTML'
@@ -40,9 +42,11 @@ class CartSidebar extends Component
         </div>
         HTML;
     }
+
+
+
     public function mount()
     {
-
 
         if (Auth::check()) {
             $this->user_id = Auth::id();
@@ -54,11 +58,17 @@ class CartSidebar extends Component
 
             $this->cartiems_count = count($this->cartitems);
 
-            //            dd(Helper::maptopropercatetory('external_storage'));
+            if (!empty($this->cartitems)) {
+                foreach ($this->cartitems as $item) {
+                    $this->total_price += $item->price * $item->quantity;
+                }
+            }
 
+            //            dd(Helper::maptopropercatetory('external_storage'));
 
         }
     }
+
 
     public function render()
     {

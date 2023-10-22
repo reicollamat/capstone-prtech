@@ -23,10 +23,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body relative">
             @if($cartiems_count >0)
                 <p>you have {{ $cartiems_count }} items in your cart</p>
-
                 @foreach($cartitems as $item)
                     <div class="card mb-2" style="max-width: 540px;" wire:key="{{ $item->id }}">
                         <div class="row g-0">
@@ -63,6 +62,14 @@
                 <p>You don't have any products in the Cart yet.
                     You will find a lot of interesting products on our "Shop" page.</p>
             @endif
+        </div>
+        <div class="w-full absolute bottom-0 py-4 px-3">
+            <hr>
+            <p class="text-gray-500 rounded-lg text-sm ">Shipping is calculated at Checkout</p>
+            <button class="btn btn-primary btn-lg text-center w-full py-2">
+                Checkout | PHP {{ $total_price }}
+            </button>
+
         </div>
     </div>
 </div>

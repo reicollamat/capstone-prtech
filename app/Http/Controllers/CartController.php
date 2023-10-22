@@ -34,7 +34,7 @@ class CartController extends Controller
         {
             return redirect('login');
         }
-        
+
     }
 
     public function add_to_cart(Request $request)
@@ -64,15 +64,15 @@ class CartController extends Controller
         ]))->with('message', 'Added to Cart!')->with('alert-class', 'alert-danger');
     }
 
-    public function remove_cart(Request $request)
+    public function remove_cartitem (Request $request)
     {
         $cart_id = $request->cart_id;
         $user_id = $request->user_id;
         // dd($cart_id);
 
-        $cart_item = CartItem::find($cart_id);
+        $cart_item = CartItem::find($cart_id)->get();
         // dd($cart_item);
-        CartItem::destroy($cart_id);
+        CartItem::destroy($cart_item);
 
         return redirect(route('index_cart', [
             'user_id' => $user_id,
