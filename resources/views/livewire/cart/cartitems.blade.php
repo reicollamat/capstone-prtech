@@ -15,10 +15,14 @@
             <div class="card-body mb-0" style="padding: 0.50rem!important;">
                 <div class="card-title d-flex justify-between mb-0">
                     <a class="text-lg decoration-0 text-decoration-none text-black"
-                       href="{{route('product_detail', ['product_id' => $cartitem->id, 'category' => $cartitem->category])}}">{{ $cartitem->title }}</a>
+                       {{--                       href="{{route('product_detail', ['product_id' => $cartitem->product_id, 'category' => $cartitem->category])}}">{{ $cartitem->product_id }}</a>--}}
+                       href="/shop/{{$cartitem->product_id}}/{{$cartitem->category}}/details">{{ $cartitem->title }}
+                    </a>
                     <h5 class="text-lg text-gray-600 mb-0">
                         <small class="text-body-secondary text-sm">PHP</small>
                         {{ $cartitem->price }}</h5>
+
+
                 </div>
                 <div class="card-text">
                     <p class="mb-0 mt-0">{{$cartitem->slug}}</p>
@@ -26,11 +30,34 @@
                             class="text-body-secondary">{{ App\Helper\Helper::maptopropercatetory($cartitem->category)  }}
                             | {{ App\Helper\Helper::maptopropercondition($cartitem->condition) }}</small>
                     </p>
-                    <a href="#" wire:click="remove"
-                       wire:click.prevent="$parent.removecartitem({{ $cartitem->id }}, {{ $user_id }})"
-                       class="small decoration-0 no-underline text-gray-700 rounded border-gray-400 border-1 p-1">Remove</a>
-                </div>
+                    <div class="d-flex items-center justify-start self-center gap-3">
+                        <div class="input-group input-group-sm w-auto border-1 border-gray-300 rounded">
+                            <button type="button" class="input-group-text font-black btn btn-ghost"
+                                    wire:click.prevent="addquantity({{$cartitem}})"
+                                    wire:click.stop="remove"
+                                    wire:key="addquantitybutton"
+                                    id="inputGroup-sizingadd-sm">+
+                            </button>
+                            <input type="text" class="form-control text-center border-0"
+                                   aria-label="Sizing example input"
+                                   value="{{ $cartitem->quantity }}"
+                                   style="max-width: 2.5rem!important;"
+                                   aria-describedby="inputGroup-sizing-sm">
+                            <button type="button" class="input-group-text font-black btn btn-ghost"
+                                    wire:click.prevent="minusquantity({{$cartitem}})"
+                                    wire:click.stop="remove"
+                                    wire:key="minusquantitybutton"
+                                    id="inputGroup-sizingminus-sm">-
+                            </button>
+                        </div>
+                        <a href="#" wire:click.stop="remove" wire:key="linktoremove"
+                           wire:click.prevent="$parent.removecartitem({{ $cartitem->id }}, {{ $user_id }})"
+                           class="small decoration-0 no-underline text-gray-700 rounded border-gray-400 border-1 p-1">
+                            Remove
+                        </a>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
