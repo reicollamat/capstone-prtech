@@ -1,6 +1,6 @@
 <div x-transition>
     @if($wishlist_count > 0)
-        <p>you have {{ $wishlist_count }} items in your wishlist</p>
+        {{--        <p>you have {{ $wishlist_count }} items in your wishlist</p>--}}
         @foreach($bookmarks as $bookmark)
             <livewire:wishlist.wishitems :bookmark="$bookmark" :key="$bookmark->id"/>
         @endforeach

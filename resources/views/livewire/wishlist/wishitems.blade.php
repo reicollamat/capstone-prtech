@@ -7,23 +7,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 d-flex p-2">
+        <div class="col-md-3 d-flex p-2 justify-center">
             <img src="/{{ $bookmark->image }}" class="img-fluid img-thumbnail rounded-start border-0 self-center"
                  alt="item image" style="height: 80%!important;">
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 self-center">
             <div class="card-body mb-0" style="padding: 0.75rem!important;">
                 <div class="card-title d-flex justify-between mb-0">
                     <a class="text-lg decoration-0 text-decoration-none text-black"
-                       {{--                       href="/shop/{{ $bookmark->product_id }}/{{ $bookmark->category }}/details"--}}
                        href="{{route('product_detail', ['product_id' => $bookmark->id, 'category' => $bookmark->category])}}">{{ $bookmark->title }}</a>
-                    <h5 class="text-lg text-gray-600">
-                        <small class="text-body-secondary">PHP</small>
+                    <h5 class="text-lg text-gray-600 mb-0">
+                        <small class="text-body-secondary text-sm">PHP</small>
                         {{ $bookmark->price }}</h5>
                 </div>
                 <div class="card-text">
                     <p class="mb-0 mt-0">{{$bookmark->slug}}</p>
-                    <p class="mb-1"><small
+                    <p class="mb-2"><small
                             class="text-body-secondary">{{ App\Helper\Helper::maptopropercatetory($bookmark->category)  }}
                             | {{ App\Helper\Helper::maptopropercondition($bookmark->condition) }}
                             | {{ strtoupper($bookmark->status) }}</small>

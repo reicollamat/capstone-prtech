@@ -1,3 +1,4 @@
-<div>
-    {{ $wishlist_count ?? 0}}
-</div>
+<span>
+      {{ $wishlist_count ?? 0}}
+</span>
+
