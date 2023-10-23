@@ -47,22 +47,22 @@ class Landing extends Component
     public function mount()
     {
 
-//        $this->products = Product::all();
-//        $this->cpu = Cpu::all();
-//        $this->cpu_cooler = CpuCooler::all();
-//        $this->ext_storage = ExtStorage::all();
-//        $this->headphone = Headphone::all();
-//        $this->int_storage = IntStorage::all();
-//        $this->keyboard = Keyboard::all();
-//        $this->memory = Memory::all();
-//        $this->monitor = Monitor::all();
-//        $this->motherboard = Motherboard::all();
-//        $this->mouse = Mouse::all();
-//        $this->psu = Psu::all();
-//        $this->speaker = Speaker::all();
-//        $this->video_card = VideoCard::all();
-//        $this->webcam = Webcam::all();
-//        $this->case_fan = CaseFan::all();
+        //        $this->products = Product::all();
+        //        $this->cpu = Cpu::all();
+        //        $this->cpu_cooler = CpuCooler::all();
+        //        $this->ext_storage = ExtStorage::all();
+        //        $this->headphone = Headphone::all();
+        //        $this->int_storage = IntStorage::all();
+        //        $this->keyboard = Keyboard::all();
+        //        $this->memory = Memory::all();
+        //        $this->monitor = Monitor::all();
+        //        $this->motherboard = Motherboard::all();
+        //        $this->mouse = Mouse::all();
+        //        $this->psu = Psu::all();
+        //        $this->speaker = Speaker::all();
+        //        $this->video_card = VideoCard::all();
+        //        $this->webcam = Webcam::all();
+        //        $this->case_fan = CaseFan::all();
     }
 
     public function placeholder()
@@ -77,5 +77,15 @@ class Landing extends Component
     public function render()
     {
         return view('livewire.landing');
+    }
+
+    // login-register test
+    public function login()
+    {
+        return view('layouts.login-register-layout');
+    }
+    public function register()
+    {
+        return view('layouts.login-register-layout');
     }
 }

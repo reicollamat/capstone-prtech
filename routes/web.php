@@ -5,8 +5,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseListController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Livewire\Landing;
 use App\Livewire\Seller\Dashboard;
 use App\Livewire\Seller\Inventory;
 use Illuminate\Support\Facades\Route;
@@ -44,8 +46,11 @@ Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'pro
 // seller
 Route::get('/seller', [Dashboard::class, 'render'])->name('seller_dashboard');
 Route::get('/inventory', [Inventory::class, 'render'])->name('seller_inventory');
+Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
-
+// login-register test
+Route::get('/logintest', [Landing::class, 'login'])->name('login');
+Route::get('/registertest', [Landing::class, 'register'])->name('register');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
