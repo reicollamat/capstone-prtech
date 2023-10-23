@@ -8,6 +8,7 @@ use App\Http\Controllers\PurchaseListController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Livewire\Seller\Dashboard;
+use App\Livewire\Seller\Inventory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,8 @@ Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'pro
 
 // seller
 Route::get('/seller', [Dashboard::class, 'render'])->name('seller_dashboard');
+Route::get('/inventory', [Inventory::class, 'render'])->name('seller_inventory');
+
 
 
 Route::get('/dashboard', function () {
