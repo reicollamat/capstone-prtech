@@ -27,7 +27,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- This directive is used to include the Livewire styles --}}
-    @livewireStyles
+    {{--    @livewireStyles--}}
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
@@ -66,7 +66,7 @@
 <a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
 
 {{-- This directive is used to include the Livewire scripts --}}
-@livewireScripts
+{{--@livewireScripts--}}
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
