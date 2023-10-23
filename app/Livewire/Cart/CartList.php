@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use LaravelIdea\Helper\App\Models\_IH_Product_C;
 use Livewire\Attributes\Lazy;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 #[lazy]
@@ -32,13 +33,20 @@ class CartList extends Component
             HTML;
     }
 
+    #[On('cartitem-item-change')]
+    public function tset()
+    {
+        sleep(0.5);
+        $this->mount();
+    }
+
+
     public function mount()
     {
         $this->total_price = 0;
 
         if (Auth::check()) {
             $this->user_id = Auth::id();
-
 
             $this->cartitems = Product::join('cart_items', 'products.id', '=', 'cart_items.product_id')
                 ->where('user_id', $this->user_id)
@@ -71,7 +79,7 @@ class CartList extends Component
 
             CartItem::destroy($cartitem);
 
-            sleep(1);
+            sleep(0.5);
             $this->mount();
 
         }
