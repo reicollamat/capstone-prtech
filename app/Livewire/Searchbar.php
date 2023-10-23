@@ -2,8 +2,11 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use App\Models\Product;
+
+
 class Searchbar extends Component
 {
     public array $categories = [
@@ -33,22 +36,26 @@ class Searchbar extends Component
 
     public $search = '';
     public $search_return;
-    public function mount(){
+
+    public function mount()
+    {
         $this->categories;
-        $this->selected_category ='all_products';
-//        $this->reset();
+        $this->selected_category = 'all_products';
+        //        $this->reset();
     }
-    public function clearsearch(){
+
+    public function clearsearch()
+    {
         $this->search = '';
     }
-//    public function placeholder()
-//    {
-//        return <<<'HTML'
-//        <div>
-//            <p1>loading</p1>
-//        </div>
-//        HTML;
-//    }
+    //    public function placeholder()
+    //    {
+    //        return <<<'HTML'
+    //        <div>
+    //            <p1>loading</p1>
+    //        </div>
+    //        HTML;
+    //    }
 
     public function placeholder(array $params = [])
     {
@@ -57,18 +64,18 @@ class Searchbar extends Component
 
 
     //    public function search($search){
-//        $search = '%' . $this->search . '%';
-//        $this->search_return = Product::where('title', 'ilike', $search)
-//            ->limit(5)
-//            ->get();
-//    }
+    //        $search = '%' . $this->search . '%';
+    //        $this->search_return = Product::where('title', 'ilike', $search)
+    //            ->limit(5)
+    //            ->get();
+    //    }
     public function render()
     {
         if (strlen($this->search) > 2) {
             $this->search_return = Product::where('title', 'ilike', "%{$this->search}%")
                 ->limit(5)
                 ->get();
-        }else{
+        } else {
             $this->search_return = '';
         }
         return view('livewire.searchbar');

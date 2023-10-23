@@ -10,7 +10,7 @@
         </svg>
         <span
             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light border border-info-subtle text-black text-xs">
-                    <livewire:cart.itemcount />
+                    <livewire:cart.itemcount/>
                     <span class="visually-hidden">Cart items count</span>
                   </span>
     </button>
@@ -24,53 +24,8 @@
                     aria-label="Close"></button>
         </div>
         <div class="offcanvas-body relative">
-            @if($cartiems_count ?? 0 > 0)
-                <p>you have {{ $cartiems_count }} items in your cart</p>
-                @foreach($cartitems as $item)
-                    <div class="card mb-2" style="max-width: 540px;" wire:key="{{ $item->id }}">
-                        <div class="row g-0">
-                            <div class="col-md-3 d-flex p-2">
-
-                                <img src="/{{ $item->image }}" class="img-fluid img-thumbnail rounded-start border-0"
-                                     alt="item image">
-
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body mb-0">
-                                    <div class="card-title d-flex justify-between mb-0">
-                                        <a class="text-lg decoration-0 text-decoration-none text-black"
-                                           href="{{route('product_detail', ['product_id' => $item->product_id, 'category' => $item->category])}}">{{ $item->title }}</a>
-                                        <h5 class="text-lg text-gray-600">
-                                            <small class="text-body-secondary">PHP</small>
-                                            {{ $item->price }}</h5>
-                                    </div>
-
-                                    <div class="card-text">
-                                        <p class="mb-0 mt-0">{{$item->slug}}</p>
-                                        <p class="mb-0"><small
-                                                class="text-body-secondary">{{ App\Helper\Helper::maptopropercatetory($item->category)  }}
-                                                | {{ App\Helper\Helper::maptopropercondition($item->condition) }}</small>
-                                        </p>
-                                        <a href="#" wire:click.prevent="removeitem({{ $item->id }}, {{ $item->user_id  }})" class="small decoration-0 no-underline text-gray-700">Remove</a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <p>You don't have any products in the Cart yet.
-                    You will find a lot of interesting products on our "Shop" page.</p>
-            @endif
+            <livewire:cart.cart-list/>
         </div>
-        <div class="w-full absolute bottom-0 py-4 px-3">
-            <hr>
-            <p class="text-gray-500 rounded-lg text-sm ">Shipping is calculated at Checkout</p>
-            <button class="btn btn-primary btn-lg text-center w-full py-2">
-                Checkout | PHP {{ $total_price ?? 0}}
-            </button>
-
-        </div>
+        
     </div>
 </div>

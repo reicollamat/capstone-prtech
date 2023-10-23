@@ -4,6 +4,7 @@ namespace App\Livewire\Wishlist;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Wishlistcount extends Component
@@ -19,6 +20,8 @@ class Wishlistcount extends Component
     {
 
     }
+
+    #[On('wishlist-item-remove')]
     public function mount()
     {
         if (Auth::check()) {
@@ -27,10 +30,10 @@ class Wishlistcount extends Component
             $this->wishlist_count = Product::join('bookmarks', 'products.id', '=', 'bookmarks.product_id')
                 ->where('user_id', $this->user_id)
                 ->count();
-//            $this->wishlist_count = count($this->bookmarks);
         }
 
     }
+
     public function render()
     {
         return view('livewire..wishlist.wishlistcount');

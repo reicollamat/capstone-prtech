@@ -4,6 +4,7 @@ namespace App\Livewire\Cart;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Itemcount extends Component
@@ -15,21 +16,23 @@ class Itemcount extends Component
     public $cartitems = 0;
     public int $cartiems_count = 0;
 
-    public function placeholder(){
+    public function placeholder()
+    {
 
     }
-    public function mount(){
-        if (Auth::check()) {
-            $this->user_id = Auth::id();
 
+    #[On('cartitem-item-remove')]
+    public function mount()
+    {
+        if (Auth::check()) {
+
+            $this->user_id = Auth::id();
 
             $this->cartiems_count = Product::join('cart_items', 'products.id', '=', 'cart_items.product_id')
                 ->where('user_id', $this->user_id)
                 ->count();
 
-//            $this->cartiems_count = count($this->cartitems);
-
-
+            //            $this->cartiems_count = count($this->cartitems);
             //            dd(Helper::maptopropercatetory('external_storage'));
 
         }
