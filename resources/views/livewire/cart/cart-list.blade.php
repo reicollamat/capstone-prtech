@@ -1,4 +1,4 @@
-<div class=" h-full">
+<div class="h-full ">
     @if($cartiems_count > 0)
         <p>you have {{ $cartiems_count }} items in your cart</p>
         @foreach($cartitems as $cartitem)
