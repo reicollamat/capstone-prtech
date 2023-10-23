@@ -62,19 +62,19 @@ class Searchbar extends Component
         return view('livewire.search.placeholder', $params);
     }
 
-
-    //    public function search($search){
-    //        $search = '%' . $this->search . '%';
-    //        $this->search_return = Product::where('title', 'ilike', $search)
-    //            ->limit(5)
-    //            ->get();
-    //    }
     public function render()
     {
         if (strlen($this->search) > 2) {
-            $this->search_return = Product::where('title', 'ilike', "%{$this->search}%")
-                ->limit(5)
-                ->get();
+            if ($this->selected_category == 'all_products') {
+                $this->search_return = Product::where('title', 'ilike', "%{$this->search}%")
+                    ->limit(5)
+                    ->get();
+            } else {
+                $this->search_return = Product::where('title', 'ilike', "%{$this->search}%")
+                    ->where('category', $this->selected_category)
+                    ->limit(5)
+                    ->get();
+            }
         } else {
             $this->search_return = '';
         }
