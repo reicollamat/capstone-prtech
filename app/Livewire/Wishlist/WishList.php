@@ -27,7 +27,6 @@ class WishList extends Component
 
     public function mount()
     {
-
         if (Auth::check()) {
             $this->user_id = Auth::id();
 
@@ -43,7 +42,7 @@ class WishList extends Component
 
     public function render()
     {
-        return view('livewire..wishlist.wish-list')->extends('layouts.master_layout');
+        return view('livewire..wishlist.wish-list');
     }
 
     public function removebookmark(Bookmark $bookmark, $user_id)
