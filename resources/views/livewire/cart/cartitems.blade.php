@@ -1,4 +1,5 @@
-<div class="card mb-2" style="max-width: 540px;" x-transition>
+<div class="card mb-2 " style="max-width: 540px;"
+     x-transition>
     <div class="row g-0 relative" x-transition>
         <div wire:loading wire:target="remove">
             <div class="absolute w-full h-full d-flex justify-center items-center bg-gray-300 opacity-50" x-transition>
@@ -34,7 +35,7 @@
                         <div class="input-group input-group-sm w-auto border-1 border-gray-300 rounded">
                             <button type="button" class="input-group-text font-black btn btn-ghost"
                                     wire:click.prevent="addquantity({{$cartitem}})"
-                                    wire:click.stop="remove"
+                                    wire:click="remove"
                                     wire:key="addquantitybutton"
                                     id="inputGroup-sizingadd-sm">+
                             </button>
@@ -45,16 +46,16 @@
                                    aria-describedby="inputGroup-sizing-sm">
                             <button type="button" class="input-group-text font-black btn btn-ghost"
                                     wire:click.prevent="minusquantity({{$cartitem}})"
-                                    wire:click.stop="remove"
+                                    wire:click="remove"
                                     wire:key="minusquantitybutton"
                                     id="inputGroup-sizingminus-sm">-
                             </button>
                         </div>
-                        <a href="#" wire:click.stop="remove" wire:key="linktoremove"
-                           wire:click.prevent="$parent.removecartitem({{ $cartitem->id }}, {{ $user_id }})"
-                           class="small decoration-0 no-underline text-gray-700 rounded border-gray-400 border-1 p-1">
+                        <button href="#" wire:click.prevent="remove" wire:key="linktoremove"
+                                wire:click="$parent.removecartitem({{ $cartitem->id }}, {{ $user_id }})"
+                                class="small decoration-0 no-underline text-gray-700 rounded border-gray-400 border-1 p-1">
                             Remove
-                        </a>
+                        </button>
                     </div>
 
                 </div>

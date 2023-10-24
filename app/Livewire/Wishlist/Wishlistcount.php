@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use App\Helper\Helper;
 
 class Wishlistcount extends Component
 {
@@ -33,6 +34,7 @@ class Wishlistcount extends Component
         }
 
     }
+    
 
     public function render()
     {

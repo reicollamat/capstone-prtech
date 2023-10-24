@@ -27,7 +27,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- This directive is used to include the Livewire styles --}}
-    {{--    @livewireStyles--}}
+    @livewireStyles
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
@@ -43,17 +43,19 @@
 @include('layouts.navbar')
 <main>
     {{--  testing livewire, comment this out   --}}
-    {{--    <livewire:landing/>--}}
 
     {{--  the main page content uncomment to load default   --}}
-    {{--
 
-    {{--    <div x-data="{name:''}">--}}
-    {{--        <label for="name">Name:</label>--}}
-    {{--        <input id="name" type="text" x-model="name"/>--}}
-    {{--        <p x-text="name">--}}
-    {{--    </div>--}}
-    @yield('content')
+
+    <div x-data="{name:''}">
+        <label for="name">Name:</label>
+        <button x-on:click="console.log('test')">Hello</button>
+        <input id="name" type="text" x-model="name"/>
+        <p x-text="name">
+    </div>
+
+
+    @yield('content', $slot ?? '')
 
 </main>
 
@@ -66,7 +68,7 @@
 <a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
 
 {{-- This directive is used to include the Livewire scripts --}}
-{{--@livewireScripts--}}
+@livewireScripts
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

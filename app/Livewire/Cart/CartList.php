@@ -33,13 +33,6 @@ class CartList extends Component
             HTML;
     }
 
-    #[On('cartitem-item-change')]
-    public function tset()
-    {
-        sleep(0.5);
-        $this->mount();
-    }
-
 
     public function mount()
     {
@@ -73,9 +66,10 @@ class CartList extends Component
     public function removecartitem(CartItem $cartitem, $user_id)
     {
         //        dd($cartitem, $user_id);
-        $cartitem = CartItem::where('id', $cartitem->id)->where('user_id', $user_id)->get();
 
         if (Auth::check()) {
+
+            $cartitem = CartItem::where('id', $cartitem->id)->where('user_id', $user_id)->get();
 
             CartItem::destroy($cartitem);
 
@@ -84,4 +78,11 @@ class CartList extends Component
 
         }
     }
+
+    #[On('cartitem-item-change')]
+    public function callfromchild()
+    {
+        $this->mount();
+    }
+
 }

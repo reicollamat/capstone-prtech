@@ -1,8 +1,7 @@
 <div class="h-full ">
     @if($cartiems_count > 0)
-        <p>you have {{ $cartiems_count }} items in your cart</p>
         @foreach($cartitems as $cartitem)
-            <livewire:cart.cartitems :cartitem="$cartitem" :key="$cartitem->id"/>
+            <livewire:cart.cartitems :key="$cartitem->id" :cartitem="$cartitem"/>
         @endforeach
     @else
         <p>You don't have any products in the Cart yet.

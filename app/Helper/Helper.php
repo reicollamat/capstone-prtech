@@ -4,7 +4,8 @@ namespace App\Helper;
 
 class Helper
 {
-    public static function maptopropercatetory($input) {
+    public static function maptopropercatetory($input)
+    {
         $mapping = [
             'storage' => 'Storage',
             'external_storage' => 'External Storage',
@@ -29,12 +30,24 @@ class Helper
         return $mapping[$input] ?? 'Unknown value';
     }
 
-    public static function maptopropercondition($input) {
+    public static function maptopropercondition($input)
+    {
         $mapping = [
             'used' => 'Used',
             'brand_new' => 'Brand New'
         ];
 
         return $mapping[$input] ?? 'Unknown value';
+    }
+
+    /**
+     * Logs data to the browser console for debugging purposes.
+     *
+     * @param mixed $data The data to be logged. It can be of any type.
+     * @return void
+     */
+    public static function debug_to_console($data)
+    {
+        echo "<script>console.log('Debug Objects: " . $data . "' );</script>";
     }
 }

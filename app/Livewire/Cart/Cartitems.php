@@ -5,14 +5,20 @@ namespace App\Livewire\Cart;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Reactive;
+use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
 class Cartitems extends Component
 {
     public string|int|null $user_id;
+
+    #[Reactive]
     public $cartitem = [];
 
     public int $testvalue = 0;
+
+    protected $listeners = ['rerenderSidebar' => '$refresh'];
 
     public function placeholder()
     {
@@ -38,7 +44,11 @@ class Cartitems extends Component
     {
         return view('livewire..cart.cartitems');
 
+    }
 
+    public function archive()
+    {
+        $this->reset();
     }
 
     public function remove()
@@ -46,24 +56,22 @@ class Cartitems extends Component
         $this->dispatch('cartitem-item-remove');
     }
 
+    #[Renderless]
     public function addquantity($cartitem)
     {
-        //        sleep(1);
-        //        dd($cartitem['id']);
 
         CartItem::where('id', $cartitem['id'])->increment('quantity');
+        sleep(0.750);
         $this->dispatch('cartitem-item-change');
-        $this->render();
-        //        $this->dispatch('cartitem-item-remove');
-        //        dd('add clicked');
+
+
     }
 
+    #[Renderless]
     public function minusquantity($cartitem)
     {
-        //        sleep(1);
-
         CartItem::where('id', $cartitem['id'])->decrement('quantity');
+        sleep(.750);
         $this->dispatch('cartitem-item-change');
-        //        dd('minus clicked');
     }
 }
