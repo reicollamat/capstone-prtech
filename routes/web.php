@@ -35,9 +35,7 @@ Route::get('/redirect', [LandingController::class, 'redirect']);
 // landing page / home page
 Route::get('/', [LandingController::class, 'index'])->name('index_landing');
 
-Route::get('/testing', function () {
-    return view('testing');
-});
+Route::get('/testing', Landing::class);
 
 // shop page
 Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
