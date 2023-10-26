@@ -4,8 +4,20 @@
             <livewire:cart.cartitems :key="$cartitem->id" :cartitem="$cartitem"/>
         @endforeach
     @else
-        <p>You don't have any products in the Cart yet.
-            You will find a lot of interesting products on our "Shop" page.</p>
+        <div class="flex flex-column justify-center items-center m-8 gap-2">
+            <div>
+                <p>Your cart is empty</p>
+            </div>
+            <div>
+                <a href="{{ route('index_shop') }}"
+                   class="btn btn-primary btn-lg text-center w-full ">
+                    Start Shopping
+                </a>
+            </div>
+
+
+        </div>
+
     @endif
     <div class="w-full absolute bottom-0 py-4 pr-8 bg-white ">
         <hr>

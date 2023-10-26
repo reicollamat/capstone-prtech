@@ -11,7 +11,7 @@ class Landing extends Component
 
     public function mount()
     {
-        $this->announcements = AnnouncementBanner::all();
+        //        $this->announcements = AnnouncementBanner::all();
 
     }
 
