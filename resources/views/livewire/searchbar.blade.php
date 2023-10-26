@@ -35,22 +35,13 @@
             </button>
         </div>
     </form>
-    <div x-show="open"
+    <div x-cloak x-show="open"
          class="position-absolute h-full w-[700px] bg-white start-50 translate-middle-x shadow"
          x-transition:enter.duration.750ms
          x-transition:leave.duration.300ms>
         <div class="p-2 rounded-2 bg-white shadow">
             <p>Search Results</p>
-            {{--            {{ $selected_category }}--}}
             <hr>
-            {{--            <div wire:loading>--}}
-            {{--                <div class="w-full d-flex justify-center">--}}
-            {{--                    <p>Loading...</p>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
-            {{--            <p> @json($selected_category)</p>--}}
-            {{--            <p> @json(strlen($search_return))</p>--}}
-            {{--            <p> @json($search)</p>--}}
             @if(strlen($search) > 1)
                 @if(strlen($search_return) > 2)
                     @foreach($search_return as $product_search)

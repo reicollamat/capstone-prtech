@@ -23,8 +23,7 @@
                 </li>
                 <div x-data="{ open: false }" class="nav-item ">
                     <button @mouseover="open = ! open" type="button" class="nav-link text-white">Products</button>
-
-                    <div x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
+                    <div x-cloak x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
                         <div class="w-full h-[300px] bg-white text-black shadow z-50">
@@ -95,7 +94,7 @@
                 <div x-data="{ open: false }" class="nav-item ">
                     <button @mouseover="open = ! open" class="nav-link text-white">New Release</button>
 
-                    <div x-show="open" @mouseover.away="open = false"
+                    <div x-cloak x-show="open" @mouseover.away="open = false"
                          class="w-full position-absolute left-0 z-50 shadow"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
@@ -107,16 +106,18 @@
                 <div x-data="{ open: false }" class="nav-item">
                     <a @mouseover="open = ! open" class="nav-link text-white" role="button">Support</a>
 
-                    <div x-show="open" @mouseover.away="open = false"
+                    <div x-cloak x-show="open" @mouseover.away="open = false"
                          class="position-absolute min-w-[200px] z-50 shadow"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
                         <div class="w-full h-full bg-white text-black p-3">
-                            <a class="dropdown-item m-2" href="{{ route('contact-us') }}">Contact Us</a>
-                            <a class="dropdown-item m-2" href="{{ route('support-center') }}">Support Center</a>
-                            <a class="dropdown-item m-2" href="{{ route('warranty-information') }}">Warranty</a>
-                            <a class="dropdown-item m-2" href="{{ route('track-order') }}">Track Order</a>
-                            <a class="dropdown-item m-2" href="{{ route('shipping-return-policy') }}">Shipping and
+                            <a class="dropdown-item m-2" href="{{ route('contact-us') }}" wire:navigate>Contact Us</a>
+                            <a class="dropdown-item m-2" href="{{ route('support-center') }} " wire:navigate>Support
+                                Center</a>
+                            <a class="dropdown-item m-2" href="{{ route('warranty-information') }}" wire:navigate>Warranty</a>
+                            <a class="dropdown-item m-2" href="{{ route('track-order') }}" wire:navigate>Track Order</a>
+                            <a class="dropdown-item m-2" href="{{ route('shipping-return-policy') }}" wire:navigate>Shipping
+                                and
                                 Return Policy</a>
                         </div>
                     </div>
@@ -125,15 +126,17 @@
                     <a @mouseover="open = ! open" class="nav-link  text-white user-select-none "
                        role="button">Explore</a>
 
-                    <div x-show="open" @mouseover.away="open = false"
+                    <div x-cloak x-show="open" @mouseover.away="open = false"
                          class="position-absolute min-w-[200px] z-50 shadow"
                          x-transition:enter.duration.500ms
                          x-transition:leave.duration.500ms>
                         <div class="w-full h-full bg-white text-black p-3">
-                            <a class="dropdown-item m-2" href="{{ route('about-us') }}">About Us</a>
-                            <a class="dropdown-item m-2" href="{{ route('help') }}">Help</a>
-                            <a class="dropdown-item m-2" href="{{ route('privacy-policy') }}">Privacy Policy</a>
-                            <a class="dropdown-item m-2" href="{{ route('terms-and-conditions') }}">Terms and
+                            <a class="dropdown-item m-2" href="{{ route('about-us') }}" wire:navigate>About Us</a>
+                            <a class="dropdown-item m-2" href="{{ route('help') }}" wire:navigate>Help</a>
+                            <a class="dropdown-item m-2" href="{{ route('privacy-policy') }}" wire:navigate>Privacy
+                                Policy</a>
+                            <a class="dropdown-item m-2" href="{{ route('terms-and-conditions') }}" wire:navigate>Terms
+                                and
                                 Conditions</a>
                         </div>
                     </div>
