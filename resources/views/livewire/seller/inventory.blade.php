@@ -9,6 +9,90 @@
     </x-seller.titlebar>
 
     <!-- Page content-->
-    <h1>Product List...</h1>
+
+    <div class="mx-4">
+        <label for="exampleDataList" class="form-label">Search Product</label>
+        <div class="d-flex">
+            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+            <datalist id="datalistOptions">
+                <option value="San Francisco">
+                <option value="New York">
+                <option value="Seattle">
+                <option value="Los Angeles">
+                <option value="Chicago">
+            </datalist>
+            <button type="button" class="btn btn-outline-primary btn-sm ml-2">Add Product</button>
+        </div>
+    </div>
+
+    <div class="card m-4">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Condition</th>
+                    <th scope="col">Purchase Count</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Last Modified</th>
+                    <th scope="col">Ations</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th>Product Name</th>
+                        <td>monitor</td>
+                        <td>₱109.99</td>
+                        <td>available</td>
+                        <td>used</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>date</td>
+                        <td>
+                            <div class="dropdown-center">
+                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Product Name</th>
+                        <td>monitor</td>
+                        <td>₱109.99</td>
+                        <td>available</td>
+                        <td>used</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>date</td>
+                        <td>
+                            <div class="dropdown-center">
+                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+
+
 </div>
 @endsection
