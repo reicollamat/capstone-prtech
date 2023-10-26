@@ -37,6 +37,49 @@ Route::get('/', [LandingController::class, 'index'])->name('index_landing');
 
 Route::get('/testing', Landing::class);
 
+// support page
+Route::prefix('support')->group(function () {
+    Route::get('/contact-us', function () {
+        return view('support.contactus');
+
+    })->name('contact-us');
+    Route::get('/shipping-return-policy', function () {
+        return view('support.shippingandreturn');
+
+    })->name('shipping-return-policy');
+    Route::get('/warranty-information', function () {
+        return view('support.warranty');
+
+    })->name('warranty-information');
+    Route::get('/track-order', function () {
+        return view('support.trackorder');
+
+    })->name('track-order');
+    Route::get('/support-center', function () {
+        return view('support.supportcenter');
+
+    })->name('support-center');
+});
+
+// explore page
+Route::prefix('explore')->group(function () {
+    Route::get('/about-us', function () {
+        return view('explore.aboutus');
+
+    })->name('about-us');
+    Route::get('/help', function () {
+        return view('explore.help');
+
+    })->name('help');
+    Route::get('/privacy-policy', function () {
+        return view('explore.privacypolicy');
+
+    })->name('privacy-policy');
+    Route::get('/terms-and-conditions', function () {
+        return view('explore.termsandcondition');
+    })->name('terms-and-conditions');
+});
+
 // shop page
 Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
 Route::get('/searchresult', [ShopController::class, 'search_result'])->name('search_result');
