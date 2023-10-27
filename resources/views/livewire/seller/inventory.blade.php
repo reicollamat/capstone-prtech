@@ -30,16 +30,16 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Condition</th>
-                    <th scope="col">Purchase Count</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Last Modified</th>
-                    {{-- <th scope="col">Ations</th> --}}
-                </tr>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Condition</th>
+                        <th scope="col">Purchase Count</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Last Modified</th>
+                        {{-- <th scope="col">Ations</th> --}}
+                    </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     @foreach ($products as $product)
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        {{ $products->links() }}
+        {{ $products->links(data: ['scrollTo' => false]) }}
     </div>
   
 
