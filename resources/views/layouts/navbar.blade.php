@@ -24,92 +24,32 @@
                 <div x-data="{ open: false }" class="nav-item ">
                     <button @mouseover="open = ! open" type="button" class="nav-link text-white">Products</button>
                     <div x-cloak x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
-                         x-transition:enter.duration.500ms
-                         x-transition:leave.duration.500ms>
-                        <div class="w-full h-[300px] bg-white text-black shadow z-50">
-                            <div class="d-flex h-full z-50">
-                                <div class="">
-                                    <div
-                                        class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
-                                        style="width: 15rem!important;">
-                                        <a class="dropdown-item" href="#">Components</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                        </svg>
-                                    </div>
-                                    <div
-                                        class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
-                                        style="width: 15rem!important;">
-                                        <a class="dropdown-item" href="#">Peripherals</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                        </svg>
-                                    </div>
-                                    <div
-                                        class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
-                                        style="width: 15rem!important;">
-                                        <a class="dropdown-item" href="#">Accessories</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                        </svg>
-                                    </div>
-                                    <div
-                                        class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
-                                        style="width: 15rem!important;">
-                                        <a class="dropdown-item" href="#">Best Sellers</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                        </svg>
-                                    </div>
-                                    <div
-                                        class="d-flex justify-evenly p-3 hover:bg-gray-100 transition duration-300"
-                                        style="width: 15rem!important;">
-                                        <a class="dropdown-item" href="#">All Products</a>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                        </svg>
-                                    </div>
-
-                                    {{--                                            <a class="dropdown-item p-2" href="#">Peripherals</a>--}}
-                                    {{--                                            <a class="dropdown-item p-2" href="#">Accessories</a>--}}
-                                    {{--                                            <a class="dropdown-item p-2" href="#">Best Sellers</a>--}}
-                                    {{--                                            <a class="dropdown-item p-2 hover:bg-gray-900" href="#">All Products</a>--}}
-                                </div>
-                                <div class="vr" style="opacity: .10 !important"></div>
-                                <div class="p-2 flex-grow-1">Flex item</div>
-                            </div>
+                         x-transition:enter.duration.250ms
+                         x-transition:leave.duration.250ms>
+                        <div class="w-full h-auto bg-white text-black shadow z-50">
+                            <livewire:topbar.products.menu/>
                         </div>
                     </div>
                 </div>
-                <div x-data="{ open: false }" class="nav-item ">
-                    <button @mouseover="open = ! open" class="nav-link text-white">New Release</button>
+                {{--                <div x-data="{ open: false }" class="nav-item ">--}}
+                {{--                    <button @mouseover="open = ! open" class="nav-link text-white">New Release</button>--}}
 
-                    <div x-cloak x-show="open" @mouseover.away="open = false"
-                         class="w-full position-absolute left-0 z-50 shadow"
-                         x-transition:enter.duration.500ms
-                         x-transition:leave.duration.500ms>
-                        <div class="w-full h-[200px] bg-white text-black ">
-                            <a class="dropdown-item" href="#">Action</a>
-                        </div>
-                    </div>
-                </div>
+                {{--                    <div x-cloak x-show="open" @mouseover.away="open = false"--}}
+                {{--                         class="w-full position-absolute left-0 z-50 shadow"--}}
+                {{--                         x-transition:enter.duration.500ms--}}
+                {{--                         x-transition:leave.duration.500ms>--}}
+                {{--                        <div class="w-full h-[200px] bg-white text-black ">--}}
+                {{--                            <a class="dropdown-item" href="#">Action</a>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
                 <div x-data="{ open: false }" class="nav-item">
                     <a @mouseover="open = ! open" class="nav-link text-white" role="button">Support</a>
 
                     <div x-cloak x-show="open" @mouseover.away="open = false"
                          class="position-absolute min-w-[200px] z-50 shadow"
-                         x-transition:enter.duration.500ms
-                         x-transition:leave.duration.500ms>
+                         x-transition:enter.duration.250ms
+                         x-transition:leave.duration.250ms>
                         <div class="w-full h-full bg-white text-black p-3">
                             <a class="dropdown-item m-2" href="{{ route('contact-us') }}" wire:navigate>Contact Us</a>
                             <a class="dropdown-item m-2" href="{{ route('support-center') }} " wire:navigate>Support
@@ -128,8 +68,8 @@
 
                     <div x-cloak x-show="open" @mouseover.away="open = false"
                          class="position-absolute min-w-[200px] z-50 shadow"
-                         x-transition:enter.duration.500ms
-                         x-transition:leave.duration.500ms>
+                         x-transition:enter.duration.250ms
+                         x-transition:leave.duration.250ms>
                         <div class="w-full h-full bg-white text-black p-3">
                             <a class="dropdown-item m-2" href="{{ route('about-us') }}" wire:navigate>About Us</a>
                             <a class="dropdown-item m-2" href="{{ route('help') }}" wire:navigate>Help</a>
