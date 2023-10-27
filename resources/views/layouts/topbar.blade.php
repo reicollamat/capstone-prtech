@@ -1,6 +1,6 @@
 <div>
     <div class="sticky-top">
-        <nav class="navbar padding-remove bg-body-tertiary bg-dark sticky-top py-2">
+        <nav class="navbar padding-remove bg-body-tertiary bg-dark sticky-top py-3">
             <div class="w-full container-fluid mx-4 justify-between align-items-center my-1">
                 <div class=" ">
                     <a class="navbar-brand" href="#">
@@ -14,14 +14,14 @@
                     {{--profile account button--}}
                     <button class="btn  outline-remove position-relative" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#offcanvasWithBothOptions_account" aria-controls="offcanvasWithBothOptions">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
                              class="bi bi-person  position-relative"
                              viewBox="0 0 16 16">
                             <path
                                 d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
 
                         </svg>
-                        <span class="visually-hidden">unread messages</span>
+                        <span class="visually-hidden">Account</span>
                     </button>
 
                     <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1"
@@ -125,16 +125,16 @@
                                                     </a>
                                                 @endif
 
-                                                <x-primary-button class="ml-3 w-full text-center p-3">
-                                                    {{ __('Log in') }}
-                                                </x-primary-button>
-                                                {{--                                            <button href="#_" class="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group ">--}}
-                                                {{--                                                <span class="w-48 h-48 rounded rotate-[-40deg] bg-primary absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>--}}
-                                                {{--                                                <span class="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">Log in</span>--}}
-                                                {{--                                            </button>--}}
+                                                {{--                                                <x-primary-button class="ml-3 w-full text-center p-3">--}}
+                                                {{--                                                    {{ __('Log in') }}--}}
+                                                {{--                                                </x-primary-button>--}}
+                                                <button type="submit"
+                                                        class="btn btn-primary text-center w-full ">
+                                                    Login
+                                                </button>
                                             </div>
 
-                                            <div class="flex items-center justify-end mt-2">
+                                            <div class="flex items-center justify-end mt-3">
                                                 <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                                                    href="{{ route('register') }}">
                                                     {{ __('Don\'t have an account?') }}
