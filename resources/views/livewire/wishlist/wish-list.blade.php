@@ -6,8 +6,17 @@
         @endforeach
     @else
         <div x-transition>
-            <p>You don't have any products in the wishlist yet.
-                You will find a lot of interesting products on our "Shop" page.</p>
+            <div class="flex flex-column justify-center items-center m-8 gap-2">
+                <div>
+                    <p>Wishlist is empty</p>
+                </div>
+                <div>
+                    <a href="{{ route('index_shop') }}"
+                       class="btn btn-primary btn-lg text-center w-full ">
+                        Start Shopping
+                    </a>
+                </div>
+            </div>
         </div>
 
     @endif
