@@ -336,3 +336,7 @@ footer {
     display: none !important;
 }
 
+/* change cursor pointer of clickable-row */
+tr.clickable-row {
+    cursor: pointer; 
+}

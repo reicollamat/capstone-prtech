@@ -38,57 +38,37 @@
                     <th scope="col">Purchase Count</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Last Modified</th>
-                    <th scope="col">Ations</th>
+                    {{-- <th scope="col">Ations</th> --}}
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr>
-                        <th>Product Name</th>
-                        <td>monitor</td>
-                        <td>₱109.99</td>
-                        <td>available</td>
-                        <td>used</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>date</td>
+                    @foreach ($products as $product)
+                    <tr class="clickable-row" data-bs-toggle="dropdown" aria-expanded="false">
+                        <th>{{ $product->title }}</th>
+                        <td>{{ $product->category }}</td>
+                        <td>${{ $product->price }}</td>
+                        <td>{{ $product->status }}</td>
+                        <td>{{ $product->condition }}</td>
+                        <td>{{ $product->purchase_count }}</td>
+                        <td>1</td>
+                        <td>{{ $product->updated_at }}</td>
                         <td>
                             <div class="dropdown-center">
-                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{-- <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu">
+                                </button> --}}
+                                <ul class="dropdown-menu bg-primary">
                                     <li><a class="dropdown-item" href="#">Action</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                                 </ul>
                             </div>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <th>Product Name</th>
-                        <td>monitor</td>
-                        <td>₱109.99</td>
-                        <td>available</td>
-                        <td>used</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>date</td>
-                        <td>
-                            <div class="dropdown-center">
-                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                    </tr>    
+                    @endforeach
                 </tbody>
             </table>
+            {{ $products->links() }}
         </div>
     </div>
   
