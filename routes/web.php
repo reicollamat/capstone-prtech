@@ -41,23 +41,18 @@ Route::get('/testing', Landing::class);
 Route::prefix('support')->group(function () {
     Route::get('/contact-us', function () {
         return view('support.contactus');
-
     })->name('contact-us');
     Route::get('/shipping-return-policy', function () {
         return view('support.shippingandreturn');
-
     })->name('shipping-return-policy');
     Route::get('/warranty-information', function () {
         return view('support.warranty');
-
     })->name('warranty-information');
     Route::get('/track-order', function () {
         return view('support.trackorder');
-
     })->name('track-order');
     Route::get('/support-center', function () {
         return view('support.supportcenter');
-
     })->name('support-center');
 });
 
@@ -65,15 +60,12 @@ Route::prefix('support')->group(function () {
 Route::prefix('explore')->group(function () {
     Route::get('/about-us', function () {
         return view('explore.aboutus');
-
     })->name('about-us');
     Route::get('/help', function () {
         return view('explore.help');
-
     })->name('help');
     Route::get('/privacy-policy', function () {
         return view('explore.privacypolicy');
-
     })->name('privacy-policy');
     Route::get('/terms-and-conditions', function () {
         return view('explore.termsandcondition');
@@ -87,8 +79,9 @@ Route::get('/searchresult', [ShopController::class, 'search_result'])->name('sea
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
 
 // seller
-Route::get('/seller', [Dashboard::class, 'render'])->name('seller_dashboard');
-Route::get('/inventory', [Inventory::class, 'render'])->name('seller_inventory');
+Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
+Route::get('/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
+
 Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
 // login-register test

@@ -8,7 +8,7 @@
   </div>
 
   <div class="list-group list-group-flush py-3">
-    <a wire:navigate class="active list-group-item list-group-item-action p-3 border-0" href="{{ route('seller_dashboard') }}">
+    <a wire:navigate class="list-group-item list-group-item-action p-3 border-0 {{ (request()->routeIs('seller_dashboard')) ? 'active' : '' }}" href="{{ route('seller_dashboard') }}">
       <div class="row">
         <div class="col-2">
           <i class="fa fa-home" aria-hidden="true"></i>
@@ -18,7 +18,7 @@
         </div>
       </div>
     </a>
-    <a wire:navigate class="list-group-item list-group-item-action p-3 border-0" href="{{ route('seller_inventory') }}">
+    <a wire:navigate class="list-group-item list-group-item-action p-3 border-0 {{ (request()->routeIs('seller_inventory')) ? 'active' : '' }}" href="{{ route('seller_inventory') }}">
       <div class="row">
         <div class="col-2">
           <i class="fa fa-archive" aria-hidden="true"></i>

@@ -9,6 +9,6 @@
     </x-seller.titlebar>
 
     <!-- Page content-->
-    <h1>Dashboard...</h1>
+    <h1>Dashboard test...</h1>
 </div>
 @endsection
