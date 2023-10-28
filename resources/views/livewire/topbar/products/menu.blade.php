@@ -71,75 +71,52 @@
     <div class="vr" style="opacity: .10 !important">
 
     </div>
-    <div class="p-2 flex-grow-1">
+    <div class="p-2 flex-grow-1 max-w-full scroll-x">
 
-        {{--        <p>test</p>--}}
+        <div class="d-flex flex-row gap-2 " x-transition>
+            @foreach($itemdisplay as $item)
+                <div wire:key="{{$item->id}}" x-transition wire:loading.remove>
+                    <a href="{{ route('product_detail',['product_id' => $item->id, 'category' => $item->category]) }}"
+                       class="no-underline decoration-0">
+                        <div class="card h-100 w-[230px] max-w-[230px] border-0">
+                            <div class="card-img-top w-full h-[100px] d-flex justify-center">
+                                <img src="{{ $item->image }}"
+                                     class="img-fluid w-[100px] "
+                                     alt="...">
+                            </div>
+                            <div class="card-body p-2">
+                                <div class="position-relative">
+                                    <div>
+                                        <p class="text-sm text-gray-600 mb-1 text-center">{{ \App\Helper\Helper::maptopropercatetory($item->category) }}</p>
+                                        <div class="card-title d-flex justify-center">
+                                            <h5 class="card-title text-base text-center">{{ $item->title }}</h5>
+                                        </div>
+                                        <div class="card-title d-flex justify-center">
+                                            <h6 class="card-title !text-red-600">PHP {{ $item->price }}</h6>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="card-text d-flex justify-between">
+                                            <p class="card-text mb-0">{{ $item->status }}</p>
+                                            <p class="card-text mb-0">stars??</p>
+                                        </div>
+                                    </div>
 
-        {{--        <p> {{ $value }}</p>--}}
-        <div class="d-flex flex-row gap-3 ">
-            <div class="card h-100 w-[230px] max-w-[230px]">
-                <div class="card-img-top w-full h-auto d-flex justify-center">
-                    <img src="/img/components/case/case%20(1).png"
-                         class="img-fluid w-[100px] "
-                         alt="...">
-                </div>
-                <div class="card-body p-2">
-                    <p class="text-sm text-gray-600 mb-1 text-center">category</p>
-                    <div class="card-title d-flex justify-center">
-                        <h5 class="card-title">product name</h5>
-                    </div>
-                    <div class="card-title d-flex justify-center">
-                        <h6 class="card-title">product price</h6>
-                    </div>
+                                </div>
 
-                    <div class="card-text d-flex justify-between">
-                        <p class="card-text">stock info</p>
-                        <p class="card-text">stars??</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card h-100 w-[230px] max-w-[230px]">
-                <div class="card-img-top w-full h-auto d-flex justify-center">
-                    <img src="/img/components/case/case%20(1).png"
-                         class="img-fluid w-[100px] "
-                         alt="...">
-                </div>
-                <div class="card-body p-2">
-                    <p class="text-sm text-gray-600 mb-1 text-center">category</p>
-                    <div class="card-title d-flex justify-center">
-                        <h5 class="card-title">product name</h5>
-                    </div>
-                    <div class="card-title d-flex justify-center">
-                        <h6 class="card-title">product price</h6>
-                    </div>
+                            </div>
+                        </div>
+                    </a>
 
-                    <div class="card-text d-flex justify-between">
-                        <p class="card-text">stock info</p>
-                        <p class="card-text">stars??</p>
-                    </div>
                 </div>
-            </div>
-            <div class="card h-100 w-[230px] max-w-[230px]">
-                <div class="card-img-top w-full h-auto d-flex justify-center">
-                    <img src="/img/components/case/case%20(1).png"
-                         class="img-fluid w-[100px] "
-                         alt="...">
-                </div>
-                <div class="card-body p-2">
-                    <p class="text-sm text-gray-600 mb-1 text-center">category</p>
-                    <div class="card-title d-flex justify-center">
-                        <h5 class="card-title">product name</h5>
-                    </div>
-                    <div class="card-title d-flex justify-center">
-                        <h6 class="card-title">product price</h6>
-                    </div>
-
-                    <div class="card-text d-flex justify-between">
-                        <p class="card-text">stock info</p>
-                        <p class="card-text">stars??</p>
-                    </div>
-                </div>
+            @endforeach
+        </div>
+        <div wire:loading>
+            <div class="spinner-border text-black" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
+
     </div>
 </div>
+

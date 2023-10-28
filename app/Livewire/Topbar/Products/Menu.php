@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Topbar\Products;
 
+use App\Models\Product;
 use Livewire\Component;
 
 class Menu extends Component
@@ -17,7 +18,7 @@ class Menu extends Component
 
     public function mount()
     {
-
+        $this->itemdisplay = Product::all()->random(4);
     }
 
     public function componentsbutton()
@@ -46,12 +47,17 @@ class Menu extends Component
     {
         $this->value = 'allproducts';
 
+        //        sleep(3);
+
+        //        $this->itemdisplay = Product::all()->random(4);
+
+        //        dd($this->itemdisplay);
+
     }
 
     public function allproductsbuttonclick()
     {
         return redirect()->route('index_shop');
-
     }
 
 

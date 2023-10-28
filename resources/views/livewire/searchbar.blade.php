@@ -38,7 +38,7 @@
     <div x-cloak x-show="open"
          class="position-absolute h-full w-full bg-white start-50 translate-middle-x rounded-lg shadow"
          x-transition:enter.duration.250ms
-         x-transition:leave.duration.250ms>
+         x-transition:leave.duration.100ms>
         <div class="p-2 rounded-2 bg-white shadow">
             <p>Search Results</p>
             <hr>

@@ -1,5 +1,5 @@
 <div class="relative nav justify-content-center  bg-gray-300">
-    <div class="my-2 mx-2">
+    <div class="my-1 mx-2">
         <li>Sale <strong>10%</strong> off Use code <strong>#sale10</strong></li>
         {{--        @foreach($announcements as $announcement)--}}
         {{--            <li class="hidden" id="">{{ $announcement }}</li>--}}
