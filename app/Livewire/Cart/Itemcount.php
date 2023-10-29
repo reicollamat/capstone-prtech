@@ -20,6 +20,7 @@ class Itemcount extends Component
     {
 
     }
+    }
 
     #[On('cartitem-item-remove')]
     public function mount()

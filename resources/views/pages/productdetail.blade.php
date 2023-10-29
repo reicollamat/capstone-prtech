@@ -129,14 +129,18 @@
                         </button>
                         @auth
                             <div class="px-3 ml-auto">
-                                <form action="{{route('add_bookmark')}}" method="POST">
-                                    @csrf
-                                    <input type="text" name="product_id" value="{{$product->product_id}}" hidden>
-                                    <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
-                                    <button type="submit" class="btn btn-outline-primary btn-square">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </form>
+                                {{--                                <form action="{{route('add_bookmark')}}" method="POST">--}}
+                                {{--                                    @csrf--}}
+                                {{--                                    <input type="text" name="product_id" value="{{$product->product_id}}" hidden>--}}
+                                {{--                                    <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>--}}
+                                {{--                                    <button type="submit" class="btn btn-outline-primary btn-square">--}}
+                                {{--                                        <i class="fas fa-heart"></i>--}}
+                                {{--                                    </button>--}}
+                                {{--                                </form>--}}
+
+                                <livewire:addtowishlist.add-to-wishlist-in-details
+                                    :product_id="$product->product_id"/>
+
                             </div>
                         @else
                             <div class="px-3 ml-auto">

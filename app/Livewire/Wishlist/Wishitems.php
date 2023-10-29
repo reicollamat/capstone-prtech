@@ -40,6 +40,6 @@ class Wishitems extends Component
 
     public function remove()
     {
-        $this->dispatch('wishlist-item-remove');
+        $this->dispatch('wishlist-item-change');
     }
 }

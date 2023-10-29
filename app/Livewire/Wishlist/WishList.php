@@ -6,6 +6,7 @@ use App\Models\Bookmark;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Lazy;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 #[lazy]
@@ -25,6 +26,7 @@ class WishList extends Component
             HTML;
     }
 
+    #[On('wishlist-item-change')]
     public function mount()
     {
         if (Auth::check()) {

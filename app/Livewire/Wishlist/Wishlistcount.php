@@ -22,7 +22,7 @@ class Wishlistcount extends Component
 
     }
 
-    #[On('wishlist-item-remove')]
+    #[On('wishlist-item-change')]
     public function mount()
     {
         if (Auth::check()) {
@@ -34,7 +34,7 @@ class Wishlistcount extends Component
         }
 
     }
-    
+
 
     public function render()
     {

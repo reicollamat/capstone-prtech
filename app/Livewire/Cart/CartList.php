@@ -43,6 +43,7 @@ class CartList extends Component
 
             $this->cartitems = Product::join('cart_items', 'products.id', '=', 'cart_items.product_id')
                 ->where('user_id', $this->user_id)
+                //                ->select('cart_items.id')
                 ->get();
 
             $this->cartiems_count = count($this->cartitems);
@@ -53,7 +54,7 @@ class CartList extends Component
                 }
             }
 
-            //            dd(Helper::maptopropercatetory('external_storage'));
+            //            dd($this->cartitems);
 
         }
     }
