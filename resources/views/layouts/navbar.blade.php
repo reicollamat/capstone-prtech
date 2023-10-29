@@ -11,9 +11,7 @@
                 <rect y="14" width="30" height="2"></rect>
             </svg>
         </button>
-
         <a class="navbar-brand text-white md:hidden" href="#">Offcanvas navbar</a>
-
         <div class="hidden md:block text-white">
             <ul class="nav">
                 <li class="nav-link text-white">

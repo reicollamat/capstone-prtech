@@ -1,4 +1,9 @@
 /********** Custom CSS ************/
+
+:root {
+    
+}
+
 .h1,
 h2,
 h3 {
@@ -338,5 +343,5 @@ footer {
 
 /* change cursor pointer of clickable-row */
 tr.clickable-row {
-    cursor: pointer; 
+    cursor: pointer;
 }

@@ -1,7 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="row px-xl-5">
         <div class="col-12">
-            <nav class="breadcrumb m-3">
+            <nav class="breadcrumb">
                 {{ $slot }}
             </nav>
         </div>

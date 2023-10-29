@@ -45,10 +45,8 @@ class ShopController extends Controller
         // $webcam = Webcam::all();
 
         // get checked categories
-        if($request->sort)
-        {
-            if(!empty(array_diff(array_keys($request->query()), ['sort','direction'])))
-            {
+        if ($request->sort) {
+            if (!empty(array_diff(array_keys($request->query()), ['sort', 'direction']))) {
                 // get products with check categories
                 $products = Product::sortable();
 
@@ -57,9 +55,7 @@ class ShopController extends Controller
             }
 
             $products = Product::sortable()->paginate();
-        }
-        else
-        {
+        } else {
             // get products with check categories
             $products = Product::sortable();
 
@@ -78,22 +74,17 @@ class ShopController extends Controller
                 'products' => $products,
                 'all_products' => $all_products,
             ]);
-        }
-        else
-        {
-            if($request->to_search)
-            {
+        } else {
+            if ($request->to_search) {
                 $to_search = $request->to_search;
-                $products = Product::where('title', 'ilike', '%'.$to_search.'%')->sortable()->paginate(30);
+                $products = Product::where('title', 'ilike', '%' . $to_search . '%')->sortable()->paginate(30);
                 Session::put('to_search', $to_search);
 
                 return view('pages.shop', [
                     'products' => $products,
                     'all_products' => $all_products,
                 ])->with('to_search', $to_search);
-            }
-            else
-            {
+            } else {
                 return view('pages.shop', [
                     'products' => $products,
                     'all_products' => $all_products,
