@@ -5,7 +5,10 @@ namespace App\Livewire\Addtowishlist;
 use App\Models\Bookmark;
 use Auth;
 use Livewire\Component;
-use function Sodium\increment;
+
+/*
+ * @todo add an effect to notify the user if tthe item is already in wishlist
+ * */
 
 class AddToWishlistInDetails extends Component
 {
@@ -23,15 +26,19 @@ class AddToWishlistInDetails extends Component
 
     public function addToWishlist()
     {
+        //        dd($this->quantity, $this->user_id, $this->product_id);
+
         if (Auth::check()) {
             $user = Auth::user()->id;
 
-            //            sleep(2);
+            //            dd($this->product_id);
 
             Bookmark::firstOrCreate(['user_id' => $user, 'product_id' => $this->product_id]);
 
             // create an event to update the count of wihshlist items
             $this->dispatch('wishlist-item-change');
+        } else {
+            $this->redirect(route('login'));
         }
     }
 }

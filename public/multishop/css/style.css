@@ -1,7 +1,7 @@
 /********** Custom CSS ************/
 
 :root {
-    
+
 }
 
 .h1,
@@ -344,4 +344,12 @@ footer {
 /* change cursor pointer of clickable-row */
 tr.clickable-row {
     cursor: pointer;
+}
+
+.notify {
+    z-index: 99999;
+}
+
+#laravel-notify {
+    z-index: 99999;
 }

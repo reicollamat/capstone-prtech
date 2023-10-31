@@ -17,8 +17,7 @@ class Cartitems extends Component
     public $cartitem = [];
 
     public int $testvalue = 0;
-
-    protected $listeners = ['rerenderSidebar' => '$refresh'];
+    
 
     public function placeholder()
     {
@@ -38,6 +37,8 @@ class Cartitems extends Component
         $this->cartitem = $cartitem;
 
         $this->testvalue = 0;
+
+        //        dd($this->cartitem);
     }
 
     public function render()
@@ -46,14 +47,10 @@ class Cartitems extends Component
 
     }
 
-    public function archive()
-    {
-        $this->reset();
-    }
 
     public function remove()
     {
-        $this->dispatch('cartitem-item-remove');
+        $this->dispatch('cartitem-item-change');
     }
 
     #[Renderless]
@@ -61,7 +58,7 @@ class Cartitems extends Component
     {
 
         CartItem::where('id', $cartitem['id'])->increment('quantity');
-        sleep(0.750);
+        sleep(0.500);
         $this->dispatch('cartitem-item-change');
 
 
@@ -70,8 +67,10 @@ class Cartitems extends Component
     #[Renderless]
     public function minusquantity($cartitem)
     {
-        CartItem::where('id', $cartitem['id'])->decrement('quantity');
-        sleep(.750);
+        if ($cartitem['quantity'] > 1) {
+            CartItem::where('id', $cartitem['id'])->decrement('quantity');
+        }
+        sleep(.500);
         $this->dispatch('cartitem-item-change');
     }
 }

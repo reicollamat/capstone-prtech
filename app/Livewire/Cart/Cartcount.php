@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class Itemcount extends Component
+class Cartcount extends Component
 {
     public string|int|null $user_id;
     /**
@@ -20,9 +20,8 @@ class Itemcount extends Component
     {
 
     }
-    }
 
-    #[On('cartitem-item-remove')]
+    #[On('cartitem-item-change')]
     public function mount()
     {
         if (Auth::check()) {

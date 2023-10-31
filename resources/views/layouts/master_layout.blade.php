@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    {{--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">--}}
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('multishop/lib/animate/animate.min.css') }}" rel="stylesheet">
@@ -28,6 +28,10 @@
 
     {{-- This directive is used to include the Livewire styles --}}
     @livewireStyles
+
+    {{--  laravel notify  --}}
+    {{--    @notifyCss--}}
+
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
@@ -53,9 +57,11 @@
     {{--        <input id="name" type="text" x-model="name"/>--}}
     {{--        <p x-text="name">--}}
     {{--    </div>--}}
+    {{--    <x-notify::notify/>--}}
 
 
     @yield('content', $slot ?? '')
+
 
 </main>
 
@@ -82,6 +88,9 @@
 <!-- Template Javascript -->
 <script src="{{ asset('multishop/js/main.js') }}"></script>
 
+
+{{--larvel notify js--}}
+{{--@notifyJs--}}
 </body>
 
 </html>

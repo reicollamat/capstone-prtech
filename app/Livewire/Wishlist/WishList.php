@@ -37,6 +37,8 @@ class WishList extends Component
                 ->get();
 
             $this->wishlist_count = count($this->bookmarks);
+
+            //            dd($this->bookmarks);
         }
 
     }
@@ -61,5 +63,10 @@ class WishList extends Component
             $this->mount();
 
         }
+    }
+
+    public function remove()
+    {
+        $this->dispatch('wishlist-item-change');
     }
 }

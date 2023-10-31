@@ -49,7 +49,12 @@
 
             <div class="col-lg-7 h-auto mb-30 text-dark">
                 <div class="h-100">
-                    <h3>{{ $product->name }}</h3>
+                    <div class="d-flex items-center align-middle text-center gap-2">
+                        <h3>{{ $product->name }}</h3>
+                        <livewire:addtowishlist.add-to-wishlist-in-details
+                                :product_id="$product->product_id"/>
+                    </div>
+
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
                             <small class="fas fa-star"></small>
@@ -81,77 +86,83 @@
                     @includeWhen($category === 'webcam', 'pages.product_details.webcam')
 
                     <div class="d-flex align-items-center mb-4 pt-2">
-                        @auth
-                            <form id="cartFormAuth" action="{{route('add_to_cart')}}" method="POST">
-                                @csrf
-                                <input type="text" name="product_id" value="{{$product->product_id}}" hidden>
-                                <input type="text" name="category" value="{{$product->category}}" hidden>
-                                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
-                                <div class="input-group quantity mr-3" style="width: 130px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-primary btn-minus">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control bg-light border-0 text-center"
-                                           name="quantity" value="1" id="cartQuantityInput">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        @else
-                            <form id="formLogin" action="{{route('login')}}">
-                                @csrf
-                            </form>
-                            <div class="input-group quantity mr-3" style="width: 130px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control bg-light border-0 text-center" name="quantity"
-                                       value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        @endauth
+                        <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>
+                        {{--                        @auth--}}
+                        {{--                            <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>--}}
+                        {{--                            --}}{{--                            <form id="cartFormAuth" action="{{route('add_to_cart')}}" method="POST">--}}
+                        {{--                            --}}{{--                                @csrf--}}
+                        {{--                            --}}{{--                                <input type="text" name="product_id" value="{{$product->product_id}}" hidden>--}}
+                        {{--                            --}}{{--                                <input type="text" name="category" value="{{$product->category}}" hidden>--}}
+                        {{--                            --}}{{--                                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>--}}
+                        {{--                            --}}{{--                                <div class="input-group quantity mr-3" style="width: 130px;">--}}
+                        {{--                            --}}{{--                                    <div class="input-group-btn">--}}
+                        {{--                            --}}{{--                                        <button class="btn btn-primary btn-minus">--}}
+                        {{--                            --}}{{--                                            <i class="fa fa-minus"></i>--}}
+                        {{--                            --}}{{--                                        </button>--}}
+                        {{--                            --}}{{--                                    </div>--}}
+                        {{--                            --}}{{--                                    <input type="text" class="form-control bg-light border-0 text-center"--}}
+                        {{--                            --}}{{--                                           name="quantity" value="1" id="cartQuantityInput">--}}
+                        {{--                            --}}{{--                                    <div class="input-group-btn">--}}
+                        {{--                            --}}{{--                                        <button class="btn btn-primary btn-plus">--}}
+                        {{--                            --}}{{--                                            <i class="fa fa-plus"></i>--}}
+                        {{--                            --}}{{--                                        </button>--}}
+                        {{--                            --}}{{--                                    </div>--}}
+                        {{--                            --}}{{--                                </div>--}}
+                        {{--                            --}}{{--                            </form>--}}
+                        {{--                        @else--}}
+                        {{--                            <form id="formLogin" action="{{route('login')}}">--}}
+                        {{--                                @csrf--}}
+                        {{--                                <button class="btn btn-primary px-3" id="addToCartBtn">--}}
+                        {{--                                    <div class="text-light">--}}
+                        {{--                                        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart--}}
+                        {{--                                    </div>--}}
+                        {{--                                </button>--}}
+                        {{--                            </form>--}}
+                        {{--                            <div class="input-group quantity mr-3" style="width: 130px;">--}}
+                        {{--                                <div class="input-group-btn">--}}
+                        {{--                                    <button class="btn btn-primary btn-minus">--}}
+                        {{--                                        <i class="fa fa-minus"></i>--}}
+                        {{--                                    </button>--}}
+                        {{--                                </div>--}}
+                        {{--                                <input type="text" class="form-control bg-light border-0 text-center" name="quantity"--}}
+                        {{--                                       value="1">--}}
+                        {{--                                <div class="input-group-btn">--}}
+                        {{--                                    <button class="btn btn-primary btn-plus">--}}
+                        {{--                                        <i class="fa fa-plus"></i>--}}
+                        {{--                                    </button>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        @endauth--}}
+                        <div class="px-3 ml-auto">
+                            {{--                            <livewire:addtowishlist.add-to-wishlist-in-details--}}
+                            {{--                                    :product_id="$product->product_id"/>--}}
+                        </div>
 
-                        <button class="btn btn-primary px-3" id="addToCartBtn">
-                            <div class="text-light">
-                                <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
-                            </div>
-                        </button>
-                        @auth
-                            <div class="px-3 ml-auto">
-                                {{--                                <form action="{{route('add_bookmark')}}" method="POST">--}}
-                                {{--                                    @csrf--}}
-                                {{--                                    <input type="text" name="product_id" value="{{$product->product_id}}" hidden>--}}
-                                {{--                                    <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>--}}
-                                {{--                                    <button type="submit" class="btn btn-outline-primary btn-square">--}}
-                                {{--                                        <i class="fas fa-heart"></i>--}}
-                                {{--                                    </button>--}}
-                                {{--                                </form>--}}
+                        {{--                        @auth--}}
+                        {{--                            <div class="px-3 ml-auto">--}}
+                        {{--                                --}}{{--                                <form action="{{route('add_bookmark')}}" method="POST">--}}
+                        {{--                                --}}{{--                                    @csrf--}}
+                        {{--                                --}}{{--                                    <input type="text" name="product_id" value="{{$product->product_id}}" hidden>--}}
+                        {{--                                --}}{{--                                    <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>--}}
+                        {{--                                --}}{{--                                    <button type="submit" class="btn btn-outline-primary btn-square">--}}
+                        {{--                                --}}{{--                                        <i class="fas fa-heart"></i>--}}
+                        {{--                                --}}{{--                                    </button>--}}
+                        {{--                                --}}{{--                                </form>--}}
 
-                                <livewire:addtowishlist.add-to-wishlist-in-details
-                                    :product_id="$product->product_id"/>
+                        {{--                                <livewire:addtowishlist.add-to-wishlist-in-details--}}
+                        {{--                                        :product_id="$product->product_id"/>--}}
 
-                            </div>
-                        @else
-                            <div class="px-3 ml-auto">
-                                <form action="{{route('login')}}">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-primary btn-square">
-                                        <i class="fas fa-heart"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        @endauth
+                        {{--                            </div>--}}
+                        {{--                        @else--}}
+                        {{--                            <div class="px-3 ml-auto">--}}
+                        {{--                                <form action="{{route('login')}}">--}}
+                        {{--                                    @csrf--}}
+                        {{--                                    <button type="submit" class="btn btn-outline-primary btn-square">--}}
+                        {{--                                        <i class="fas fa-heart"></i>--}}
+                        {{--                                    </button>--}}
+                        {{--                                </form>--}}
+                        {{--                            </div>--}}
+                        {{--                        @endauth--}}
                     </div>
 
                     @auth
@@ -349,7 +360,7 @@
     <!-- Products Start -->
     <div class="container-fluid py-5">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                class="pr-3">You May Also Like</span></h2>
+                    class="pr-3">You May Also Like</span></h2>
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">

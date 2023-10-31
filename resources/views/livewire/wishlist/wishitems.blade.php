@@ -1,4 +1,5 @@
 <div class="card mb-2" style="max-width: 540px;" x-transition>
+    {{ $bookmark->title }}
     <div class="row g-0 relative" x-transition>
         <div wire:loading wire:target="remove">
             <div class="absolute w-full h-full d-flex justify-center items-center bg-gray-300 opacity-50" x-transition>
@@ -23,7 +24,7 @@
                 <div class="card-text">
                     <p class="mb-0 mt-0">{{$bookmark->slug}}</p>
                     <p class="mb-2"><small
-                            class="text-body-secondary">{{ App\Helper\Helper::maptopropercatetory($bookmark->category)  }}
+                                class="text-body-secondary">{{ App\Helper\Helper::maptopropercatetory($bookmark->category)  }}
                             | {{ App\Helper\Helper::maptopropercondition($bookmark->condition) }}
                             | {{ strtoupper($bookmark->status) }}</small>
                     </p>

@@ -4,6 +4,7 @@ namespace App\Livewire\Wishlist;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 #[lazy]
@@ -11,7 +12,8 @@ class Wishitems extends Component
 {
     public string|int|null $user_id;
 
-    public $bookmark;
+    #[Reactive]
+    public $bookmark = [];
 
     public function placeholder()
     {
@@ -29,6 +31,8 @@ class Wishitems extends Component
         $this->user_id = Auth::id();
 
         $this->bookmark = $bookmark;
+
+        //        dd($this->bookmark);
     }
 
     public function render()
