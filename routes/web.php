@@ -35,6 +35,8 @@ Route::get('/redirect', [LandingController::class, 'redirect']);
 // landing page / home page
 Route::get('/', [LandingController::class, 'index'])->name('index_landing');
 
+Route::get('/collection', [\App\Livewire\Shop\Collections::class])->name('collection');
+
 Route::get('/testing', Landing::class);
 
 // support page

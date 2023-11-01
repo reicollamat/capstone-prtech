@@ -1,7 +1,7 @@
 <!-- Shop Sidebar Start -->
-<div class=" hidden md:block col-lg-3 col-md-4">
+<div class=" md:block col-lg-3 col-md-4">
     <!-- By Category Start -->
-    <div class="p-4" style="border: 1px solid #FFFFFF">
+    <div class="p-2" style="border: 1px solid #FFFFFF">
         <h5 class="section-title position-relative text-uppercase">
             <span class="pr-3">Filter by Category</span>
         </h5>

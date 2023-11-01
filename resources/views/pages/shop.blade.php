@@ -35,7 +35,6 @@
             <!-- Shop Sidebar Start -->
             @include('layouts.shopsidebar')
             <!-- Shop Sidebar End -->
-
             <!-- Shop Product Start -->
             <div class="col-lg-9 col-md-8">
                 <div class="row pb-3">
