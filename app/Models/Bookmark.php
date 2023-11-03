@@ -22,13 +22,7 @@ class Bookmark extends Model
         return $this->belongsTo(User::class);
     }
 
-    // relationship to Product
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
-
+    
     /**
      * The attributes that are mass assignable.
      *
