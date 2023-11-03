@@ -17,7 +17,7 @@ class Cartitems extends Component
     public $cartitem = [];
 
     public int $testvalue = 0;
-    
+
 
     public function placeholder()
     {
@@ -51,6 +51,8 @@ class Cartitems extends Component
     public function remove()
     {
         $this->dispatch('cartitem-item-change');
+
+
     }
 
     #[Renderless]

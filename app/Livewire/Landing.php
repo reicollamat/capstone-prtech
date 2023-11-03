@@ -3,11 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\AnnouncementBanner;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Landing extends Component
 {
-
+    public int $count = 0;
 
     public function mount()
     {
@@ -38,5 +39,11 @@ class Landing extends Component
     public function register()
     {
         return view('layouts.login-register-layout');
+    }
+
+    #[On('wishlist-item-remount')]
+    public function increment()
+    {
+        $this->count++;
     }
 }

@@ -20,8 +20,8 @@ class CollectionFilter extends Component
 
     public function mount()
     {
-        $this->all_products = DB::table('products')->get();
 
+        $this->all_products = DB::table('products')->get();
     }
 
     public function render()
