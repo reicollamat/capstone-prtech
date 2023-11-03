@@ -14,9 +14,13 @@ class AddToWishlistInDetails extends Component
 {
     public $product_id;
 
+    public string|int|null $user_id;
+
     public function mount($product_id)
     {
         $this->product_id = $product_id;
+
+        $this->user_id = Auth::user()->id;
     }
 
     public function render()
@@ -29,11 +33,10 @@ class AddToWishlistInDetails extends Component
         //        dd($this->quantity, $this->user_id, $this->product_id);
 
         if (Auth::check()) {
-            $user = Auth::user()->id;
-
+            
             //            dd($this->product_id);
 
-            Bookmark::firstOrCreate(['user_id' => $user, 'product_id' => $this->product_id]);
+            Bookmark::firstOrCreate(['user_id' => $this->user_id, 'product_id' => $this->product_id]);
 
             // create an event to update the count of wihshlist items
             $this->dispatch('wishlist-item-change');
