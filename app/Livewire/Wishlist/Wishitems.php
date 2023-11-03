@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Wishlist;
 
+use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
@@ -12,8 +14,7 @@ class Wishitems extends Component
 {
     public string|int|null $user_id;
 
-    #[Reactive]
-    public $bookmark = [];
+    public $bookmark;
 
     public function placeholder()
     {
@@ -26,13 +27,20 @@ class Wishitems extends Component
         HTML;
     }
 
-    public function mount($bookmark)
+    public function mount($bookmark_id)
     {
+
         $this->user_id = Auth::id();
 
-        $this->bookmark = $bookmark;
+        //        $this->bookmark = $bookmark_id->id;
 
-        //        dd($this->bookmark);
+        //        $this->bookmark = Bookmark::where('id', $bookmark_id->id)->get();
+        $this->bookmark = DB::table('products')->join('bookmarks', 'products.id', '=', 'bookmarks.product_id')
+            ->where('bookmarks.id', $bookmark_id->id)->first();
+
+        //
+        //        dd($this->bookmark->product_id);
+
     }
 
     public function render()
@@ -45,5 +53,7 @@ class Wishitems extends Component
     public function remove()
     {
         $this->dispatch('wishlist-item-change');
+
+        $this->dispatch('wishlist-item-remount', id: $this->bookmark->product_id);
     }
 }

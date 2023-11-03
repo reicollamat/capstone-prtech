@@ -32,8 +32,12 @@ class WishList extends Component
         if (Auth::check()) {
             $this->user_id = Auth::id();
 
-            $this->bookmarks = Product::join('bookmarks', 'products.id', '=', 'bookmarks.product_id')
-                ->where('user_id', $this->user_id)
+            //            $this->bookmarks = Product::join('bookmarks', 'products.id', '=', 'bookmarks.product_id')
+            //                ->where('user_id', $this->user_id)
+            //                ->get();
+
+            $this->bookmarks = Bookmark::where('user_id', $this->user_id)
+                ->select('id')
                 ->get();
 
             $this->wishlist_count = count($this->bookmarks);
