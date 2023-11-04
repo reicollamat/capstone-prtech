@@ -2,7 +2,7 @@
     {{--    The whole world belongs to you.--}}
     <div x-data="">
         <div class="container-fluid md:!px-16">
-            <p>test</p>
+            {{--            <p></p>--}}
 
             <div class="row">
                 <div class="hidden md:block col-auto col-0">
@@ -70,8 +70,9 @@
                                         </div>
                                         <div class="flex justify-content-center gap-2">
                                             <a href="#"
-                                               class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none focus:ring-blue-300 font-bold text-xl rounded-lg px-5 py-2 text-center ">Buy
-                                                Now</a>
+                                               class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none
+                                               focus:ring-blue-300 font-bold text-xl rounded-lg px-5 py-1.5 text-center ">
+                                                Buy Now</a>
                                             <div>
                                                 <livewire:addtocart.add-to-cart :product_id="$value->id"
                                                                                 :key="$value->id"
