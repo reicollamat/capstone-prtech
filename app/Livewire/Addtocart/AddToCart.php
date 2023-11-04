@@ -16,7 +16,7 @@ class AddToCart extends Component
     {
         $this->product_id = $product_id;
 
-        $this->user_id = Auth::user()->id;
+        $this->user_id = Auth::user()->id ?? null;
     }
 
     public function render()
@@ -28,7 +28,7 @@ class AddToCart extends Component
     {
 
         if (Auth::check()) {
-            
+
             CartItem::firstOrCreate([
                 'user_id' => $this->user_id,
                 'product_id' => $this->product_id,
