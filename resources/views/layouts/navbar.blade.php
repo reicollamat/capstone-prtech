@@ -41,11 +41,11 @@
                 {{--                        </div>--}}
                 {{--                    </div>--}}
                 {{--                </div>--}}
-                <div x-data="{ open: false }" class="nav-item">
+                <div x-data="{ open: false }" class="nav-item z-50">
                     <a @mouseover="open = ! open" class="nav-link text-white" role="button">Support</a>
 
                     <div x-cloak x-show="open" @mouseover.away="open = false"
-                         class="position-absolute min-w-[200px] z-50 shadow"
+                         class="position-absolute min-w-[200px] shadow z-[999]"
                          x-transition:enter.duration.250ms
                          x-transition:leave.duration.250ms>
                         <div class="w-full h-full bg-white text-black p-3">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div x-data="{ open: false }" class="nav-item ">
+                <div x-data="{ open: false }" class="nav-item z-50">
                     <a @mouseover="open = ! open" class="nav-link  text-white user-select-none "
                        role="button">Explore</a>
 
@@ -85,7 +85,7 @@
 
 
     {{--responsive offcanvas on the side menu--}}
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+    <div class="offcanvas offcanvas-start z-50" tabindex="-1" id="offcanvasNavbar"
          aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
