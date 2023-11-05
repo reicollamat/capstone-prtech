@@ -353,3 +353,9 @@ tr.clickable-row {
 #laravel-notify {
     z-index: 99999;
 }
+
+.rotated {
+    transform: rotate(180deg);
+    display: inline-block;
+    transition: all 0.250s;
+}
