@@ -20,7 +20,7 @@ class AddToWishlistInDetails extends Component
     {
         $this->product_id = $product_id;
 
-        $this->user_id = Auth::user()->id;
+        $this->user_id = Auth::user()->id ?? null;
     }
 
     public function render()
@@ -33,7 +33,7 @@ class AddToWishlistInDetails extends Component
         //        dd($this->quantity, $this->user_id, $this->product_id);
 
         if (Auth::check()) {
-            
+
             //            dd($this->product_id);
 
             Bookmark::firstOrCreate(['user_id' => $this->user_id, 'product_id' => $this->product_id]);
