@@ -5,23 +5,12 @@
     {{--    {{ var_dump($category_filter) }}--}}
 
     <div class="max-w-max">
-
-
         <div class="p-2" style="border: 1px solid #FFFFFF">
             <h5 class="section-title position-relative text-uppercase underline underline-offset-4">
                 <span class="pr-3">Filter by Category</span>
-
-
             </h5>
             <div class="">
                 <div class="category">
-                    {{--                <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">--}}
-                    {{--                    <input type="checkbox" class="custom-control-input" name="computer_case"--}}
-                    {{--                           id="computer_case" {{ request()->filled('computer_case') ? 'checked' : '' }}>--}}
-                    {{--                    <label class="custom-control-label" for="computer_case">Computer Case</label>--}}
-                    {{--                    <span--}}
-                    {{--                        class="font-weight-normal">{{ $all_products->where('category', 'computer_case')->count() }}</span>--}}
-                    {{--                </div>--}}
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" class="custom-control-input" name="computer_case"
                                value="computer_case"

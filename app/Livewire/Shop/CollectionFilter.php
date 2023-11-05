@@ -11,12 +11,10 @@ use RalphJSmit\Livewire\Urls\Facades\Url as UrlFacade;
 
 class CollectionFilter extends Component
 {
-
-
     public $all_products;
 
     #[Url(as: 'filter', history: true, keep: false)]
-    public $category_filter = ['cpu'];
+    public $category_filter = [];
 
     #[Url(as: 'condition', history: true, keep: false)]
     public $conditon_filter = [];
@@ -52,15 +50,15 @@ class CollectionFilter extends Component
     {
         $this->stringurl = parse_url($this->currentUrl, PHP_URL_QUERY);
 
-        parse_str($this->stringurl, $this->queryarray);
+        parse_str(parse_url(UrlFacade::current(), PHP_URL_QUERY), $this->queryarray);
 
-        foreach ($this->queryarray as $key => $value) {
+        //        foreach ($this->queryarray as $key => $value) {
 
-            //            dd($value);
-            //            $this->category_filter[] = $value;
+        //            dd($value);
+        //            $this->category_filter[] = $value;
 
-            //            array_push($this->category_filter, $value);
-        }
+        //            array_push($this->category_filter, $value);
+        //        }
 
         //        dd($this->queryarray);
     }
