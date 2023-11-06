@@ -44,7 +44,7 @@
         </li>
     </ul>
 </nav>
-<nav aria-label="Page navigation example">
+{{-- <nav aria-label="Page navigation example">
     <ul class="flex items-center -space-x-px h-10 text-base">
         <li>
             <a href="#"
@@ -89,4 +89,4 @@
             </a>
         </li>
     </ul>
-</nav>
+</nav> --}}
