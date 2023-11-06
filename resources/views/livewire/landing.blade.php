@@ -1,4 +1,5 @@
 <div>
     {{ $count }}
-    <livewire:shop.collections/>
+    {{--    <livewire:shop.collections/>--}}
+    {{--    {{ $collection->title }}--}}
 </div>
