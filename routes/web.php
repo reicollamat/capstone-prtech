@@ -39,7 +39,11 @@ Route::get('/collection', [\App\Livewire\Shop\Collections::class])->name('collec
 
 Route::get('/testing', Landing::class);
 
-// support page
+// there is where the seller route group and prefix with a seller name
+Route::prefix('seller')->group(function () {
+});
+
+// support page group
 Route::prefix('support')->group(function () {
     Route::get('/contact-us', function () {
         return view('support.contactus');
@@ -58,7 +62,7 @@ Route::prefix('support')->group(function () {
     })->name('support-center');
 });
 
-// explore page
+// explore page group
 Route::prefix('explore')->group(function () {
     Route::get('/about-us', function () {
         return view('explore.aboutus');

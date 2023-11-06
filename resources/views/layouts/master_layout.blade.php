@@ -43,6 +43,7 @@
 
 
 <livewire:announcementbar/>
+@include('headerbar')
 @include('layouts.topbar')
 @include('layouts.navbar')
 <main>

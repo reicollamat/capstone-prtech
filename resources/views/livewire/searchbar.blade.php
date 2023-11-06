@@ -17,7 +17,7 @@
                    aria-label="Search" aria-describedby="button-addon2">
             <button class="btn btn-outline-secondary rounded-none d-flex items-center gap-2" type="submit"
                     id="button-addon2">
-                <div wire:loading.remove>
+                <div wire:loading.remove wire:target="search">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
                              class="bi bi-search" viewBox="0 0 16 16">
@@ -26,7 +26,7 @@
                         </svg>
                     </div>
                 </div>
-                <div wire:loading>
+                <div wire:loading wire:target="search">
                     <div class="spinner-border spinner-border-sm" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
@@ -80,7 +80,7 @@
                     @endforeach
 
                 @else
-                    <p class="text-center" wire:key="no-results">No products found</p>
+                    <p class="text-center" wire:key="no-results">No Products Found. Click Search to find more.</p>
                     {{--                    <p>@json($search)</p>--}}
                 @endif
             @else
