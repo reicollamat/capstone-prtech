@@ -39,8 +39,10 @@ Route::get('/collection', [\App\Livewire\Shop\Collections::class])->name('collec
 
 Route::get('/testing', Landing::class);
 
-// there is where the seller route group and prefix with a seller name
+// there is where the seller route group and prefix with a seller name     // seller
 Route::prefix('seller')->group(function () {
+    Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
+    Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
 });
 
 // support page group
@@ -84,15 +86,12 @@ Route::get('/searchresult', [ShopController::class, 'search_result'])->name('sea
 // product detail page
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
 
-// seller
-Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
-Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
 
 Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
 // login-register test
-Route::get('/logintest', [Landing::class, 'login'])->name('login');
-Route::get('/registertest', [Landing::class, 'register'])->name('register');
+//Route::get('/logintest', [Landing::class, 'login'])->name('login');
+//Route::get('/registertest', [Landing::class, 'register'])->name('register');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
