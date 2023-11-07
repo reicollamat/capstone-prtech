@@ -13,6 +13,8 @@ use App\Livewire\Seller\Dashboard;
 use App\Livewire\Seller\Inventory;
 use Illuminate\Support\Facades\Route;
 
+use \App\Livewire\Seller\Auth\LoginPage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,44 +43,14 @@ Route::get('/testing', Landing::class);
 
 // there is where the seller route group and prefix with a seller name     // seller
 Route::prefix('seller')->group(function () {
+
+    Route::get('signup', LoginPage::class)->name('seller-signup');
+    Route::get('login', LoginPage::class)->name('seller-login');
+
     Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
     Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
 });
 
-// support page group
-Route::prefix('support')->group(function () {
-    Route::get('/contact-us', function () {
-        return view('support.contactus');
-    })->name('contact-us');
-    Route::get('/shipping-return-policy', function () {
-        return view('support.shippingandreturn');
-    })->name('shipping-return-policy');
-    Route::get('/warranty-information', function () {
-        return view('support.warranty');
-    })->name('warranty-information');
-    Route::get('/track-order', function () {
-        return view('support.trackorder');
-    })->name('track-order');
-    Route::get('/support-center', function () {
-        return view('support.supportcenter');
-    })->name('support-center');
-});
-
-// explore page group
-Route::prefix('explore')->group(function () {
-    Route::get('/about-us', function () {
-        return view('explore.aboutus');
-    })->name('about-us');
-    Route::get('/help', function () {
-        return view('explore.help');
-    })->name('help');
-    Route::get('/privacy-policy', function () {
-        return view('explore.privacypolicy');
-    })->name('privacy-policy');
-    Route::get('/terms-and-conditions', function () {
-        return view('explore.termsandcondition');
-    })->name('terms-and-conditions');
-});
 
 // shop page
 Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
@@ -87,7 +59,7 @@ Route::get('/searchresult', [ShopController::class, 'search_result'])->name('sea
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
 
 
-Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
+//Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
 // login-register test
 //Route::get('/logintest', [Landing::class, 'login'])->name('login');
@@ -125,6 +97,41 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/purchasecartpage', [UserController::class, 'purchasecart_page'])->name('purchasecart_page');
     Route::post('/purchasecart', [UserController::class, 'purchase_cart'])->name('purchase_cart');
+});
+
+// support page group
+Route::prefix('support')->group(function () {
+    Route::get('/contact-us', function () {
+        return view('support.contactus');
+    })->name('contact-us');
+    Route::get('/shipping-return-policy', function () {
+        return view('support.shippingandreturn');
+    })->name('shipping-return-policy');
+    Route::get('/warranty-information', function () {
+        return view('support.warranty');
+    })->name('warranty-information');
+    Route::get('/track-order', function () {
+        return view('support.trackorder');
+    })->name('track-order');
+    Route::get('/support-center', function () {
+        return view('support.supportcenter');
+    })->name('support-center');
+});
+
+// explore page group
+Route::prefix('explore')->group(function () {
+    Route::get('/about-us', function () {
+        return view('explore.aboutus');
+    })->name('about-us');
+    Route::get('/help', function () {
+        return view('explore.help');
+    })->name('help');
+    Route::get('/privacy-policy', function () {
+        return view('explore.privacypolicy');
+    })->name('privacy-policy');
+    Route::get('/terms-and-conditions', function () {
+        return view('explore.termsandcondition');
+    })->name('terms-and-conditions');
 });
 
 require __DIR__ . '/auth.php';
