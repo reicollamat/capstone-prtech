@@ -14,7 +14,11 @@ class SellerController extends Controller
 
     public function dashboard()
     {
-        return view('pages.seller.dashboard');
+        $all_products = Product::paginate(10);
+
+        return view('pages.seller.dashboard', [
+            'products' => $all_products,
+        ]);
     }
 
     public function inventory()

@@ -22,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // Paginator::defaultView('views.vendor.pagination.tailwind');
         //        Paginator::useTailwind();
+        Paginator::defaultView('pagination::bootstrap-5');
     }
 }

@@ -86,7 +86,7 @@ Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'pro
 
 // seller
 Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
-Route::get('/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
+Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
 
 Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
