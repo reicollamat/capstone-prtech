@@ -9,7 +9,8 @@
     </x-seller.titlebar>
 
     <!-- Page content-->
-    <h1>Dashboard test...</h1>
+    Popular Produts - Restock Analysis
+
     <div class="card m-4">
         <div class="card-body">
             <table class="table table-hover">
