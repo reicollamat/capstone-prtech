@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    {{--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">--}}
+    {{--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> --}}
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('multishop/lib/animate/animate.min.css') }}" rel="stylesheet">
@@ -30,68 +30,61 @@
     @livewireStyles
 
     {{--  laravel notify  --}}
-    {{--    @notifyCss--}}
-
+    {{--    @notifyCss --}}
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
-
 
 </head>
 
 <body>
 
+    <livewire:announcementbar />
+    @include('headerbar')
+    @include('layouts.topbar')
+    @include('layouts.navbar')
+    <main>
+        {{--  testing livewire, comment this out   --}}
 
-<livewire:announcementbar/>
-@include('headerbar')
-@include('layouts.topbar')
-@include('layouts.navbar')
-<main>
-    {{--  testing livewire, comment this out   --}}
+        {{--  the main page content uncomment to load default   --}}
 
-    {{--  the main page content uncomment to load default   --}}
+        {{--    <div x-data="{name:''}"> --}}
+        {{--        <label for="name">Name:</label> --}}
+        {{--        <button x-on:click="console.log('test')">Hello</button> --}}
+        {{--        <input id="name" type="text" x-model="name"/> --}}
+        {{--        <p x-text="name"> --}}
+        {{--    </div> --}}
+        {{--    <x-notify::notify/> --}}
 
+        @yield('content', $slot ?? '')
 
-    {{--    <div x-data="{name:''}">--}}
-    {{--        <label for="name">Name:</label>--}}
-    {{--        <button x-on:click="console.log('test')">Hello</button>--}}
-    {{--        <input id="name" type="text" x-model="name"/>--}}
-    {{--        <p x-text="name">--}}
-    {{--    </div>--}}
-    {{--    <x-notify::notify/>--}}
+    </main>
 
+    {{-- Footer --}}
+    <footer>
+        @include('layouts.footer')
+    </footer>
 
-    @yield('content', $slot ?? '')
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
 
+    {{-- This directive is used to include the Livewire scripts --}}
+    @livewireScripts
 
-</main>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ asset('multishop/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('multishop/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
-{{-- Footer --}}
-<footer>
-    @include('layouts.footer')
-</footer>
+    <!-- Contact Javascript File -->
+    <script src="{{ asset('multishop/mail/jqBootstrapValidation.min.js') }}"></script>
+    <script src="{{ asset('multishop/mail/contact.js') }}"></script>
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
+    <!-- Template Javascript -->
+    <script src="{{ asset('multishop/js/main.js') }}"></script>
 
-{{-- This directive is used to include the Livewire scripts --}}
-@livewireScripts
-
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="{{ asset('multishop/lib/easing/easing.min.js') }}"></script>
-<script src="{{ asset('multishop/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-
-<!-- Contact Javascript File -->
-<script src="{{ asset('multishop/mail/jqBootstrapValidation.min.js') }}"></script>
-<script src="{{ asset('multishop/mail/contact.js') }}"></script>
-
-<!-- Template Javascript -->
-<script src="{{ asset('multishop/js/main.js') }}"></script>
-
-
-{{--larvel notify js--}}
-{{--@notifyJs--}}
+    {{-- larvel notify js --}}
+    {{-- @notifyJs --}}
 </body>
 
 </html>
