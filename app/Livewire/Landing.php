@@ -42,10 +42,10 @@ class Landing extends Component
     }
 
     // login-register test
-    public function login()
-    {
-        return view('layouts.login-register-layout');
-    }
+    //    public function login()
+    //    {
+    //        return view('layouts.login-register-layout');
+    //    }
 
     //    public function register()
     //    {
