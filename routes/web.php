@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 use \App\Livewire\Seller\Auth\LoginPage;
 
+use \App\Livewire\Seller\Auth\RegisterPage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,7 +46,7 @@ Route::get('/testing', Landing::class);
 // there is where the seller route group and prefix with a seller name     // seller
 Route::prefix('seller')->group(function () {
 
-    Route::get('signup', LoginPage::class)->name('seller-signup');
+    Route::get('signup', RegisterPage::class)->name('seller-signup');
     Route::get('login', LoginPage::class)->name('seller-login');
 
     Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
