@@ -51,9 +51,7 @@ class RegisterPage extends Component
 
         // check if email is already exist
         if (User::where('email', $this->email)->exists()) {
-            session()->flash('accountregistration', 'Email already exists. Sign In instead.');
-        } else {
-
+            session()->flash('accountregistration', 'Email Already Exists. Please Sign In Instead.');
         }
 
 

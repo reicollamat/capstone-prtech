@@ -18,7 +18,7 @@
                 </div>
 
                 <!-- Right column container with form -->
-                <div class="md:w-8/12 lg:ml-6 lg:w-5/12 border border-red-500 border-solid p-8 shadow-xl">
+                <div class="md:w-8/12 lg:ml-6 lg:w-5/12 border border-solid p-8 shadow-xl">
                     <form wire:submit="save">
                         <div class="mb-4 text-2xl">
                             <h>Sign Up</h>
