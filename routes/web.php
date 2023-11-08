@@ -11,6 +11,9 @@ use App\Http\Controllers\UserController;
 use App\Livewire\Landing;
 use App\Livewire\Seller\Dashboard;
 use App\Livewire\Seller\Inventory;
+use App\Livewire\Seller\OnBoarding\Form\SellerRegistration;
+use App\Livewire\Seller\OnBoarding\Form\ShopInformation;
+use App\Livewire\Seller\OnBoarding\Form\ShopSuccess;
 use Illuminate\Support\Facades\Route;
 
 use \App\Livewire\Seller\Auth\LoginPage;
@@ -48,6 +51,10 @@ Route::prefix('seller')->group(function () {
 
     Route::get('signup', RegisterPage::class)->name('seller-signup');
     Route::get('login', LoginPage::class)->name('seller-login');
+
+    Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
+    Route::get('on-boarding/form', ShopInformation::class)->name('seller-shop-information');
+    Route::get('on-boarding/form/sucess', ShopSuccess::class)->name('seller-shop-information-success');
 
     Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
     Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
