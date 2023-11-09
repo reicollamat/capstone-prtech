@@ -2,9 +2,15 @@
 
 :root {
     box-sizing: border-box;
-    
+
 }
 
+/* alpine rule to remove flashes when page reload */
+[x-cloak] {
+    visibility: hidden !important;
+    overflow: hidden !important;
+    display: none !important;
+}
 
 .h1,
 h2,
@@ -338,10 +344,6 @@ footer {
     width: 100%;
 }
 
-/* alpine rule to remove flashes when page reload */
-[x-cloak] {
-    display: none !important;
-}
 
 /* change cursor pointer of clickable-row */
 tr.clickable-row {
