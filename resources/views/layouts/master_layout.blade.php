@@ -66,7 +66,7 @@
     </footer>
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-primary back-to-top mb-3"><i class="bi bi-caret-up-square"></i></a>
 
     {{-- This directive is used to include the Livewire scripts --}}
     @livewireScripts

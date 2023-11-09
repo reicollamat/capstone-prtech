@@ -11,7 +11,7 @@
     <a wire:navigate class="list-group-item list-group-item-action p-3 border-0 {{ (request()->routeIs('seller_dashboard')) ? 'active' : '' }}" href="{{ route('seller_dashboard') }}">
       <div class="row">
         <div class="col-2">
-          <i class="fa fa-home" aria-hidden="true"></i>
+          <i class="bi bi-house-fill" aria-hidden="true"></i>
         </div>
         <div class="col">
           Dashboard
@@ -21,7 +21,7 @@
     <a wire:navigate class="list-group-item list-group-item-action p-3 border-0 {{ (request()->routeIs('seller_inventory')) ? 'active' : '' }}" href="{{ route('seller_inventory') }}">
       <div class="row">
         <div class="col-2">
-          <i class="fa fa-archive" aria-hidden="true"></i>
+          <i class="bi bi-database-fill" aria-hidden="true"></i>
         </div>
         <div class="col">
           Product Inventory
@@ -31,7 +31,7 @@
     <a class="list-group-item list-group-item-action p-3 border-0" href="#!">
       <div class="row">
         <div class="col-2">
-          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <i class="bi bi-bar-chart-line-fill" aria-hidden="true"></i>
         </div>
         <div class="col">
           Statistics
@@ -41,7 +41,7 @@
     <a class="list-group-item list-group-item-action p-3 border-0" href="#!">
       <div class="row">
         <div class="col-2">
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <i class="bi bi-cart-fill" aria-hidden="true"></i>
         </div>
         <div class="col">
           Purchases
@@ -51,7 +51,7 @@
     <a class="list-group-item list-group-item-action p-3 border-0" href="#!">
       <div class="row">
         <div class="col-2">
-          <i class="fa fa-truck" aria-hidden="true"></i>
+          <i class="bi bi-truck" aria-hidden="true"></i>
         </div>
         <div class="col">
           Deliveries
@@ -61,7 +61,7 @@
     <a class="list-group-item list-group-item-action p-3 border-0" href="#!">
       <div class="row">
         <div class="col-2">
-          <i class="fa fa-user" aria-hidden="true"></i>
+          <i class="bi bi-person-circle" aria-hidden="true"></i>
         </div>
         <div class="col">
           Profile

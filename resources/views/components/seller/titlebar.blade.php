@@ -2,7 +2,7 @@
     {{-- sidebar toggler --}}
     <div class="card bg-body-tertiary" style="max-width: 50px">
         <div class="card-body fs-5">
-            <button class="fa fa-bars" aria-hidden="true" id="sidebarToggle"></button>
+            <button class="bi bi-layout-sidebar-inset" aria-hidden="true" id="sidebarToggle"></button>
             </button>
         </div>
     </div>

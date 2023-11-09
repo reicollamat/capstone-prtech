@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> --}}
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('multishop/lib/animate/animate.min.css') }}" rel="stylesheet">
@@ -62,7 +62,7 @@
     </footer>
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top mb-3"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-primary back-to-top mb-3"><i class="bi bi-caret-up-square"></i></a>
 
     {{-- This directive is used to include the Livewire scripts --}}
     @livewireScripts
