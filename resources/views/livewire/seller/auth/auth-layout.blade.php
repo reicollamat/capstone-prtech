@@ -9,6 +9,14 @@
     <meta content="PR-Tech is an E-commerce website that provides products for all your needs." name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        [x-cloak] {
+            visibility: hidden !important;
+            overflow: hidden !important;
+            display: none !important;
+        }
+    </style>
+    
     <!-- Favicon -->
     <link href="{{ asset('img/icon/retechicon.ico') }}" rel="icon">
 
