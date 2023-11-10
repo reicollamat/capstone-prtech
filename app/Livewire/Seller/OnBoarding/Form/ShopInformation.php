@@ -3,6 +3,7 @@
 namespace App\Livewire\Seller\OnBoarding\Form;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -28,9 +29,14 @@ class ShopInformation extends Component
     public $registered_zip_code;
 
 
-    public function mount()
+    #[Locked]
+    public $id;
+
+    public function mount($id = null)
     {
         $this->currentStep = 1;
+        $this->id = $id;
+
     }
 
     public function render()
@@ -63,6 +69,7 @@ class ShopInformation extends Component
 
         // change the form to 2nd step if validation is passed
         $this->currentStep = 2;
+
     }
 
     public function SecondStepSubmit()
@@ -79,6 +86,7 @@ class ShopInformation extends Component
         sleep(0.5);
         // add here the database query for creation of seller shop information
         $this->currentStep = 3;
+
 
     }
 
