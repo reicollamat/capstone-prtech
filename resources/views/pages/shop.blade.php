@@ -60,7 +60,7 @@
                         <div class="row ">
                             @foreach ($products as $value)
                                 <x-shop.display_product>
-                                    <a class="h6 text-decoration-none text-truncate"
+                                    <a class="h6 text-decoration-none"
                                        href="{{route('product_detail', ['product_id' => $value->id, 'category' => $value->category])}}">
                                         {{ $value->title }}
                                     </a>
