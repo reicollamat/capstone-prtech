@@ -10,6 +10,8 @@ class SellerAccount extends Model
 {
     use HasFactory;
 
+    public $table = 'seller_account';
+
     /**
      * Get the Seller Information associated with the seller account.
      */
