@@ -1,11 +1,13 @@
 <div>
-    <nav class="navbar bg-light shadow-xl">
+    <nav class="navbar bg-light shadow-lg">
         <div class="container-fluid !justify-start md:!px-36">
             <a class="navbar-brand" href="/">
-                <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="175" height="175"
-                    class="d-inline-block align-text-top">
+                <div class="w-[130px] sm:w-[175px] h-auto">
+                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%"
+                        class="d-inline-block align-text-top" />
+                </div>
             </a>
-            <h class="tracking-tight text-2xl">Sign Up</h>
+            <h class="tracking-tight text-xl md:text-2xl">Seller Sign Up</h>
         </div>
     </nav>
     <section class="h-full">
@@ -18,10 +20,23 @@
                 </div>
 
                 <!-- Right column container with form -->
-                <div class="md:w-8/12 lg:ml-6 lg:w-5/12 border border-solid p-8 shadow-xl">
+                <div class="md:w-8/12 lg:ml-6 lg:w-5/12 p-8 shadow-xl border-t-4 border-blue-500 rounded">
                     <form wire:submit="save">
                         <div class="mb-4 text-2xl">
                             <h>Sign Up</h>
+                        </div>
+                        <!-- Username input -->
+                        <div class="mb-3">
+                            <label for="username"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username
+
+                            </label>
+                            <input type="text" id="username" wire:model.blur="username"
+                                class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="" required>
+                            @error('username')
+                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                         <!-- Email input -->
                         <div class="mb-3">
@@ -108,19 +123,19 @@
                         </div>
 
                         <!-- Submit button -->
-                        <button type="submit" wire:loading.attr="disabled"
+                        <button type="submit"
                             class="mt-2 inline-block w-full rounded bg-primary px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                             data-te-ripple-init data-te-ripple-color="light">
-                            <div wire:loading.remove wire:target="save">
+                            <span wire:loading.remove wire:target="save">
                                 Sign Up
-                            </div>
-                            <div wire:loading wire:target="save">
+                            </span>
+                            <span wire:loading wire:target="save">
                                 <div class="text-center">
                                     <div class="spinner-border spinner-border-sm" role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
                                 </div>
-                            </div>
+                            </span>
                         </button>
 
                         {{-- Have an Account and Terms and condition --}}
