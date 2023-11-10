@@ -1,5 +1,6 @@
 <div>
     {{ $count }}
-    {{--    <livewire:shop.collections/>--}}
-    {{--    {{ $collection->title }}--}}
+    {{--    <livewire:shop.collections/> --}}
+    {{--    {{ $collection->title }} --}}
+    @dd(Auth::user())
 </div>
