@@ -1,11 +1,13 @@
 <div>
     <nav class="navbar bg-light shadow-xl">
-        <div class="container-fluid !justify-start md:!px-36 py-2">
+        <div class="container-fluid !justify-start md:!px-36 ">
             <a class="navbar-brand" href="/">
-                <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="175" height="175"
-                    class="d-inline-block align-text-top">
+                <div class="w-[130px] sm:w-[175px] h-auto">
+                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%"
+                        class="d-inline-block align-text-top" />
+                </div>
             </a>
-            <h class="tracking-tight text-2xl">Login</h>
+            <h class="tracking-tight text-xl md:text-2xl">Seller Sign In</h>
         </div>
     </nav>
     <section class="h-full">
@@ -18,7 +20,7 @@
                 </div>
 
                 <!-- Right column container with form -->
-                <div class="md:w-8/12 lg:ml-6 lg:w-5/12 border border-red-500 border-solid p-8 shadow-xl">
+                <div class="md:w-8/12 lg:ml-6 lg:w-5/12  p-8 shadow-xl border-t-4 border-blue-500 rounded">
                     <form wire:submit="submit">
                         <div class="mb-4 text-2xl">
                             <h>Login</h>
@@ -62,6 +64,13 @@
                             <a href="#!"
                                 class="text-primary transition duration-150 ease-in-out hover:text-primary-600 focus:text-primary-600 active:text-primary-700 dark:text-primary-400 dark:hover:text-primary-500 dark:focus:text-primary-500 dark:active:text-primary-600">Forgot
                                 password?</a>
+                        </div>
+
+                        <div class="text-center mb-6">
+                            @if (session()->has('accountlogin'))
+                                <span class="font-sm text-red-500 text-center">{{ session()->get('accountlogin') }}
+                                </span>
+                            @endif
                         </div>
 
                         <!-- Submit button -->
