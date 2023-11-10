@@ -13,7 +13,7 @@
     <div>
         <div class="container-fluid !bg-red md:!px-14 py-14 ">
             <div class="flex gap-6">
-                <div class="!bg-transparent p-2.5 py-24 pl-4">
+                <div class="!bg-transparent hidden md:block p-2.5 py-24 pl-4">
                     <ol class="relative text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">
                         <li class="mb-10 ml-3">
                             <span x-transition.duration.500ms
@@ -62,7 +62,12 @@
                         <div class="w-full text-gray-700 tracking-tight text-xl text-center">
                             Shop Information
                         </div>
-                        <hr>
+                        {{--                        <hr> --}}
+                        <div class="progress my-3" role="progressbar" aria-label="Example 3px high"
+                            aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100" style="height: 3px">
+                            <div class="progress-bar !bg-red-600" style="width: 33.33%"></div>
+                        </div>
+
                         step 1 of 3
                         <button wire:click="move">
                             click me
@@ -113,7 +118,8 @@
                                                         <label for="shop_city"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             <span class="text-red-600 text-xs">*</span> City </label>
-                                                        <input type="text" id="shop_city" wire:model.blur="shop_city"
+                                                        <input type="text" id="shop_city"
+                                                            wire:model.blur="shop_city"
                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                             required>
                                                     </div>
@@ -159,7 +165,10 @@
                         <div class="w-full text-gray-700 tracking-tight text-xl text-center">
                             Business Information
                         </div>
-                        <hr>
+                        <div class="progress my-3" role="progressbar" aria-label="Example 3px high"
+                            aria-valuenow="66.66" aria-valuemin="0" aria-valuemax="100" style="height: 3px">
+                            <div class="progress-bar !bg-red-600" style="width: 66.66%"></div>
+                        </div>
                         step 2 of 3
                         <button wire:click="move">
                             click me
@@ -232,7 +241,7 @@
                                     </div>
 
                                 </div>
-                                <hr>
+
                                 <div class="flex justify-end gap-3">
                                     <button type="button" class="btn btn-ghost"
                                         wire:click="$set('currentStep', 1)">Back
@@ -257,7 +266,10 @@
                         <div class="w-full text-gray-700 tracking-tight text-xl text-center">
                             Shop Registration
                         </div>
-                        <hr>
+                        <div class="progress my-3" role="progressbar" aria-label="Example 3px high"
+                            aria-valuenow="99.99" aria-valuemin="0" aria-valuemax="100" style="height: 3px">
+                            <div class="progress-bar !bg-red-600" style="width: 99.99%"></div>
+                        </div>
                         <div class="flex justify-center items-center pt-24">
                             <div class="flex flex-column items-center">
                                 <div>
