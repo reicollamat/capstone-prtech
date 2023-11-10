@@ -44,7 +44,7 @@ Route::get('/', [LandingController::class, 'index'])->name('index_landing');
 
 Route::get('/collection', [\App\Livewire\Shop\Collections::class])->name('collection');
 
-Route::get('/testing', Landing::class);
+Route::get('/testing', Landing::class)->name('testing_page');
 
 // there is where the seller route group and prefix with a seller name     // seller
 Route::prefix('seller')->group(function () {
@@ -54,6 +54,7 @@ Route::prefix('seller')->group(function () {
 
     Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
     Route::get('on-boarding/form', ShopInformation::class)->name('seller-shop-information');
+    Route::get('on-boarding/form/{id}', ShopInformation::class)->name('seller-shop-information-user');
     Route::get('on-boarding/form/sucess', ShopSuccess::class)->name('seller-shop-information-success');
 
     Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
