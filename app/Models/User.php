@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasFactory;
 
+    // TODO: Add address_line_2, sex/gender, birthdate, state/province
+
     // relationship to Bookmark
     public function bookmark()
     {
@@ -23,7 +25,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(CartItem::class);
     }
-    
+
     // relationship to Purchase
     public function purchase()
     {
@@ -48,6 +50,7 @@ class User extends Authenticatable
         'postal_code',
         'country',
         'permissions',
+        'is_seller'
     ];
 
     /**
@@ -67,8 +70,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'permissions'          => 'array',
-        'email_verified_at'    => 'datetime',
+        'permissions' => 'array',
+        'email_verified_at' => 'datetime',
+        'is_seller' => 'boolean'
     ];
 
     /**
@@ -77,11 +81,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $allowedFilters = [
-           'id'         => Where::class,
-           'name'       => Like::class,
-           'email'      => Like::class,
-           'updated_at' => WhereDateStartEnd::class,
-           'created_at' => WhereDateStartEnd::class,
+        'id' => Where::class,
+        'name' => Like::class,
+        'email' => Like::class,
+        'updated_at' => WhereDateStartEnd::class,
+        'created_at' => WhereDateStartEnd::class,
     ];
 
     /**
