@@ -4,6 +4,7 @@ namespace App\Livewire\Seller\Auth;
 
 use App\Models\SellerAccount;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -71,9 +72,9 @@ class RegisterPage extends Component
                     'password' => Hash::make($this->password),
                 ]);
                 if ($account) {
+                    event(new Registered($account));
                     $user = Auth::attempt($validation);
                     if ($user) {
-
                         // redirect to comlpete account details in seller
                         $this->redirect(route('seller-registration'));
                     } else {
