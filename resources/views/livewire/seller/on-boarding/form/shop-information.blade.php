@@ -1,15 +1,18 @@
 <div>
-    <nav class="navbar bg-light shadow-xl">
-        <div class="container-fluid !justify-start md:!px-36 py-2">
-            <a class="navbar-brand" href="/">
-                <div class="w-[120px] sm:w-[175px] h-auto">
-                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%"
-                        class="d-inline-block align-text-top" />
-                </div>
-            </a>
-            <h class="tracking-tight text-lg sm:text-2xl">Seller Registration</h>
-        </div>
-    </nav>
+    {{--    <nav class="navbar bg-light shadow-xl"> --}}
+    {{--        <div class="container-fluid !justify-start md:!px-36 py-2"> --}}
+    {{--            <a class="navbar-brand" href="/"> --}}
+    {{--                <div class="w-[120px] sm:w-[175px] h-auto"> --}}
+    {{--                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%" --}}
+    {{--                        class="d-inline-block align-text-top" /> --}}
+    {{--                </div> --}}
+    {{--            </a> --}}
+    {{--            <h class="tracking-tight text-lg sm:text-2xl">Seller Registration</h> --}}
+    {{--        </div> --}}
+    {{--    </nav> --}}
+    <x-slot:page_header>
+        Seller Registration
+    </x-slot:page_header>
     <div>
         <div class="container-fluid !bg-red md:!px-14 py-14 ">
             <div class="flex gap-6">
@@ -118,8 +121,7 @@
                                                         <label for="shop_city"
                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             <span class="text-red-600 text-xs">*</span> City </label>
-                                                        <input type="text" id="shop_city"
-                                                            wire:model.blur="shop_city"
+                                                        <input type="text" id="shop_city" wire:model.blur="shop_city"
                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                             required>
                                                     </div>
