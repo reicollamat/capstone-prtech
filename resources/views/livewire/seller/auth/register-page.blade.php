@@ -1,26 +1,29 @@
 <div>
-    <nav class="navbar bg-light shadow-lg">
-        <div class="container-fluid !justify-start md:!px-36">
-            <a class="navbar-brand" href="/">
-                <div class="w-[130px] sm:w-[175px] h-auto">
-                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%"
-                        class="d-inline-block align-text-top" />
-                </div>
-            </a>
-            <h class="tracking-tight text-xl md:text-2xl">Seller Sign Up</h>
-        </div>
-    </nav>
-    <section class="h-full">
-        <div class="container h-full px-6 py-24">
-            <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
+    {{--    <nav class="navbar bg-light shadow-lg z-50"> --}}
+    {{--        <div class="container-fluid !justify-start md:!px-36"> --}}
+    {{--            <a class="navbar-brand" href="/"> --}}
+    {{--                <div class="w-[130px] sm:w-[175px] h-auto"> --}}
+    {{--                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%" --}}
+    {{--                        class="d-inline-block align-text-top" /> --}}
+    {{--                </div> --}}
+    {{--            </a> --}}
+    {{--            <h class="tracking-tight text-xl md:text-2xl">Seller Sign Up</h> --}}
+    {{--        </div> --}}
+    {{--    </nav> --}}
+    <x-slot:page_header>
+        Seller Sign Up
+    </x-slot:page_header>
+    <section class="h-full relative z-50 ">
+        <div class="container h-full px-6 py-20 z-50">
+            <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between z-50">
                 <!-- Left column container with background-->
-                <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-                    <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-                        class="w-full" alt="Phone image" />
+                <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12 z-50">
+                    {{--                    <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" --}}
+                    <img src="/img/396555896_852107473310756_4771051241956245430_n.jpg" class="w-full" alt="Phone image" />
                 </div>
 
                 <!-- Right column container with form -->
-                <div class="md:w-8/12 lg:ml-6 lg:w-5/12 p-8 shadow-xl border-t-4 border-blue-500 rounded">
+                <div class="md:w-8/12 lg:ml-6 lg:w-5/12 p-8 shadow-xl border-t-4 border-blue-500 rounded bg-white">
                     <form wire:submit="save">
                         <div class="mb-4 text-2xl">
                             <h>Sign Up</h>
@@ -35,7 +38,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="" required>
                             @error('username')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                             @enderror
                         </div>
                         <!-- Email input -->
@@ -45,14 +48,14 @@
                                 address
                                 @if (session()->has('accountregistration'))
                                     <span
-                                        class="font-sm text-red-500 text-center">{{ session()->get('accountregistration') }}</span>
+                                        class="text-sm text-red-600 text-center">{{ session()->get('accountregistration') }}</span>
                                 @endif
                             </label>
                             <input type="email" id="email" wire:model.blur="email"
                                 class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="john.doe@company.com" required>
                             @error('email')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                             @enderror
                         </div>
                         <!-- Password input -->
@@ -84,7 +87,7 @@
 
                             </div>
                             @error('password')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                             @enderror
                         </div>
 
