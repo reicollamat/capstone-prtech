@@ -12,7 +12,7 @@ use Livewire\Component;
 #[Title('Seller Login')]
 class LoginPage extends Component
 {
-    #[Rule('required', message: 'Please provide a Email Address')]
+    #[Rule('required|email', message: 'Please provide a Email Address')]
     public $email;
 
     #[Rule('required', message: 'Please provide a Password ')]
@@ -26,9 +26,11 @@ class LoginPage extends Component
     public function submit()
     {
         $validation = $this->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required'],
+            [
+                'email.exists' => 'Email does not exist. Please try again.',
+            ]);
 
         if ($validation) {
             $user = Auth::attempt($validation);
