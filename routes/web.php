@@ -49,7 +49,7 @@ Route::get('/testing', Landing::class)->name('testing_page');
 // there is where the seller route group and prefix with a seller name     // seller
 Route::prefix('seller')->group(function () {
 
-    Route::get('signup', RegisterPage::class)->name('seller-signup');
+    Route::get('register', RegisterPage::class)->name('seller-signup');
     Route::get('login', LoginPage::class)->name('seller-login');
 
     Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
