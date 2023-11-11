@@ -16,7 +16,7 @@
             display: none !important;
         }
     </style>
-    
+
     <!-- Favicon -->
     <link href="{{ asset('img/icon/retechicon.ico') }}" rel="icon">
 
@@ -33,7 +33,29 @@
 
 <body>
 
-    <main>
+    <main class="relative">
+        {{--        <div class="absolute w-full h-full top-0 z-10"> --}}
+        {{--            <div class="  w-full h-full opacity-50 z-10" style=""> --}}
+
+        {{--            </div> --}}
+        {{--            --}}{{--            <div class=" w-full opacity-90 h-1/2 z-10" style="background-color:#051937 "> --}}
+        {{--            --}}{{--            </div> --}}
+        {{--            --}}{{--            <div class="bg-blue-100 opacity-75  w-full h-1/2 z-10"> --}}
+        {{--            --}}{{--            </div> --}}
+        {{--        </div> --}}
+        <nav class="navbar bg-light shadow-xl">
+            <div class="container-fluid !justify-start md:!px-36 ">
+                <a class="navbar-brand" href="/">
+                    <div class="w-[130px] sm:w-[175px] h-auto">
+                        <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%"
+                            class="d-inline-block align-text-top" />
+                    </div>
+                </a>
+                <h class="tracking-tight text-xl md:text-2xl">
+                    {{ $page_header ?? 'PR-TECH' }}
+                </h>
+            </div>
+        </nav>
         @yield('content', $slot ?? '')
     </main>
 
