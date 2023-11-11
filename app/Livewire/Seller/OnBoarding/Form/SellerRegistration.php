@@ -67,6 +67,11 @@ class SellerRegistration extends Component
         return view('livewire..seller.on-boarding.form.seller-registration');
     }
 
+    // public function sellercontinue()
+    // {
+    //     return redirect()->route('seller-shop-information')->with('success', 'Account details updated successfully!');
+    // }
+
     public function RegistrationForm()
     {
         $validator = $this->validate([
@@ -98,10 +103,16 @@ class SellerRegistration extends Component
             ]);
             if ($user) {
                 // TODO: add a modal or confirmaiton on ui that query is sucess before redirecting to shop information page
-                dd($user);
+                // dd($user);
+                if ($user) {
+                    // redirect to comlpete account details in seller
+                    // $this->redirect(route('seller-shop-information'));
+                    return redirect()->route('seller-shop-information')->with('success', 'Account details updated successfully!');
+                } else {
+                    // TODO: show error like no record found in database or laravel eloquest where email and password
+                    session()->flash('accountregistration', 'Something went wrong, Please try again.');
+                }
             }
         }
-
-
     }
 }

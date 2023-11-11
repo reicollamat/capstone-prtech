@@ -13,6 +13,17 @@
     <x-slot:page_header>
         Seller Registration
     </x-slot:page_header>
+
+    {{-- alert message if success --}}
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible d-flex align-items-center m-3" role="alert">
+            <div>
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
+
+
     <div>
         <div class="container-fluid !bg-red md:!px-14 py-14 ">
             <div class="flex gap-6">
