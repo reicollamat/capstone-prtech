@@ -12,6 +12,14 @@
                 {{-- search bar here --}}
                 <livewire:searchbar />
                 <div class="flex gap-2">
+                    {{--                    add the livewire of wishlist --}}
+                    {{--                    <livewire:wishlist-sidebar lazy/> --}}
+                    @include('components.topbar.wishlist-sidebar')
+                    {{--                    add the livewire of cart items --}}
+                    @include('components.topbar.cart-sidebar')
+                    {{--                    <livewire:cart-sidebar lazy /> --}}
+
+                    
                     {{-- profile account button --}}
                     <button class="btn  outline-remove position-relative" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasWithBothOptions_account" aria-controls="offcanvasWithBothOptions">
@@ -139,12 +147,6 @@
                             @endauth
                         @endif
                     </div>
-                    {{--                    add the livewire of wishlist --}}
-                    {{--                    <livewire:wishlist-sidebar lazy/> --}}
-                    @include('components.topbar.wishlist-sidebar')
-                    {{--                    add the livewire of cart items --}}
-                    @include('components.topbar.cart-sidebar')
-                    {{--                    <livewire:cart-sidebar lazy /> --}}
                 </div>
             </div>
         </nav>
