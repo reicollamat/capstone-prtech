@@ -1,15 +1,18 @@
 <div>
-    <nav class="navbar bg-light shadow-lg">
-        <div class="container-fluid !justify-start md:!px-36">
-            <a class="navbar-brand" href="/">
-                <div class="w-[130px] sm:w-[175px] h-auto">
-                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%"
-                        class="d-inline-block align-text-top" />
-                </div>
-            </a>
-            <h class="tracking-tight text-xl md:text-2xl">Seller Registration</h>
-        </div>
-    </nav>
+    {{--    <nav class="navbar bg-light shadow-lg"> --}}
+    {{--        <div class="container-fluid !justify-start md:!px-36"> --}}
+    {{--            <a class="navbar-brand" href="/"> --}}
+    {{--                <div class="w-[130px] sm:w-[175px] h-auto"> --}}
+    {{--                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%" --}}
+    {{--                        class="d-inline-block align-text-top" /> --}}
+    {{--                </div> --}}
+    {{--            </a> --}}
+    {{--            <h class="tracking-tight text-xl md:text-2xl">Seller Registration</h> --}}
+    {{--        </div> --}}
+    {{--    </nav> --}}
+    <x-slot:page_header>
+        Seller Registration
+    </x-slot:page_header>
     <div>
         <section class="w-full h-full flex justify-center items-center px-6 py-6 lg:px-20 lg:py-20 ">
             <div class="container md:!max-w-2xl h-full p-4 shadow bg-white border-t-4 border-blue-500 rounded">
