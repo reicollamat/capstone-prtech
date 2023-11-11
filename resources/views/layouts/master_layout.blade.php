@@ -56,13 +56,12 @@
 
         {{--  the main page content uncomment to load default   --}}
 
-        {{--    <div x-data="{name:''}"> --}}
-        {{--        <label for="name">Name:</label> --}}
-        {{--        <button x-on:click="console.log('test')">Hello</button> --}}
-        {{--        <input id="name" type="text" x-model="name"/> --}}
-        {{--        <p x-text="name"> --}}
-        {{--    </div> --}}
-        {{--    <x-notify::notify/> --}}
+        {{--        <div x-data="{ name: '' }"> --}}
+        {{--            <label for="name">Name:</label> --}}
+        {{--            <button x-on:click="name = 'John'">Hello</button> --}}
+        {{--            <input id="name" type="text" x-model="name" /> --}}
+        {{--            <p x-text="name"> --}}
+        {{--        </div> --}}
 
         @yield('content', $slot ?? '')
 
