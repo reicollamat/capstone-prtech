@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    // TODO: Add address_line_2, sex/gender, birthdate, state/province
+    // TODO: Add address_line_2, sex/gender, birthdate, state/province, address_line_2
 
     // relationship to Bookmark
     public function bookmark()
