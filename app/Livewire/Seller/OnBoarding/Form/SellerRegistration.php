@@ -53,7 +53,7 @@ class SellerRegistration extends Component
 
     public function mount()
     {
-        $this->userid = Auth::user()->id;
+        $this->userid = Auth::user()->id ?? null;
 
         $user = User::find($this->userid);
 
