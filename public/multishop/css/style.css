@@ -2,7 +2,7 @@
 
 :root {
     box-sizing: border-box;
-
+    /*--bs-white-rgb: 242, 242, 242 !important;*/
 }
 
 /* alpine rule to remove flashes when page reload */
@@ -10,6 +10,10 @@
     visibility: hidden !important;
     overflow: hidden !important;
     display: none !important;
+}
+
+.front {
+    z-index: 9999;
 }
 
 .h1,
@@ -350,16 +354,27 @@ tr.clickable-row {
     cursor: pointer;
 }
 
-.notify {
-    z-index: 99999;
-}
-
-#laravel-notify {
-    z-index: 99999;
-}
-
 .rotated {
     transform: rotate(180deg);
     display: inline-block;
     transition: all 0.250s;
+}
+
+
+.dropdown-arrow::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: 40px;
+    border: 10px solid transparent;
+    border-bottom-color: #ddd;
+}
+
+.dropdown-arrow::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: 40px;
+    border: 10px solid transparent;
+    border-bottom-color: #fff;
 }
