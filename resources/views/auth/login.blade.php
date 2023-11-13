@@ -1,8 +1,10 @@
 <x-guest-layout>
     <!-- Session Status -->
 
+    @section('title', 'Sign In - PR-TECH')
+
     <nav class="navbar bg-light shadow-xl">
-        <div class="container-fluid !justify-start md:!px-36 ">
+        <div class="container-fluid md:!justify-start !justify-center md:!px-36 ">
             <a class="navbar-brand" href="/">
                 <div class="w-[130px] sm:w-[175px] h-auto">
                     <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%"
@@ -97,11 +99,20 @@
                         </div>
 
                         <!-- Submit button -->
-                        <button type="submit"
-                            class=" inline-block w-full rounded bg-primary px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                            data-te-ripple-init data-te-ripple-color="light">
-                            Login
-                        </button>
+                        {{--                        <button type="submit" --}}
+                        {{--                            class=" inline-block w-full rounded bg-primary px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]" --}}
+                        {{--                            data-te-ripple-init data-te-ripple-color="light"> --}}
+                        {{--                            Login --}}
+                        {{--                        </button> --}}
+
+                        <div class="w-full">
+                            <button class="flex w-full no-underline decoration-0 text-black" type="submit">
+                                <span
+                                    class="lg:!h-12 w-full  h-10 flex items-center justify-center uppercase font-semibold px-4 lg:!px-6 border border-black hover:bg-gray-800 hover:text-white transition duration-500 ease-in-out">
+                                    Login
+                                </span>
+                            </button>
+                        </div>
 
                         {{-- Have an Account and Terms and condition --}}
                         <div
