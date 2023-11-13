@@ -16,7 +16,7 @@ class SellerInformation extends Model
      */
     public function useraccount(): BelongsTo
     {
-        return $this->belongsTo(SellerAccount::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -36,6 +36,7 @@ class SellerInformation extends Model
         'postal_code',
         'tin_number',
         'business_permit',
+        'user_id'
     ];
 
     /**
