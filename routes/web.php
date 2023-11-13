@@ -49,16 +49,19 @@ Route::get('/testing', Landing::class)->name('testing_page');
 // there is where the seller route group and prefix with a seller name     // seller
 Route::prefix('seller')->group(function () {
 
+    // seller registration
     Route::get('register', RegisterPage::class)->name('seller-signup');
     Route::get('login', LoginPage::class)->name('seller-login');
 
+    // seller registration
     Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
     Route::get('on-boarding/form', ShopInformation::class)->name('seller-shop-information');
     Route::get('on-boarding/form/{id}', ShopInformation::class)->name('seller-shop-information-user');
     Route::get('on-boarding/form/sucess', ShopSuccess::class)->name('seller-shop-information-success');
 
-    Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller_dashboard');
-    Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller_inventory');
+    // seller dashboard
+    Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller-dashboard');
+    Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller-inventory');
 });
 
 
