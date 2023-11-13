@@ -192,8 +192,7 @@ h6 {
 
 .product-item {
     transition: .5s;
-    height: 350px;
-
+    min-height: 350px;
 }
 
 .product-action {
@@ -312,7 +311,7 @@ footer {
     transition: .5s ease-in-out;
 }
 
-.show > .dropdown-menu {
+.show>.dropdown-menu {
     max-height: 800px;
     visibility: visible;
 }
