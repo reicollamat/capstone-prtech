@@ -59,9 +59,14 @@ Route::group(["prefix" => "buyer", "middleware" => "guest"], function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
 
+    // TODO: uncomment me when done editing ui and logic
+
     Route::get('on-boarding', BuyerRegistration::class);
+
+
 });
 
+//Route::get('buyer/on-boarding', BuyerRegistration::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
