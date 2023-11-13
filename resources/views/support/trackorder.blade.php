@@ -10,9 +10,8 @@
             <h1>Track Order</h1>
         </div>
         <div x-transition.duration.500ms>
-            <livewire:tracker.track-order lazy/>
+            <livewire:tracker.track-order />
         </div>
 
     </div>
-
 @endsection
