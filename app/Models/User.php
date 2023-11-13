@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
@@ -11,8 +12,6 @@ use Orchid\Platform\Models\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasFactory;
-
-    // TODO: Add address_line_2, sex/gender, birthdate, state/province, address_line_2
 
     // relationship to Bookmark
     public function bookmark()
@@ -32,6 +31,11 @@ class User extends Authenticatable
         return $this->hasMany(Purchase::class);
     }
 
+    public function seller(): HasOne
+    {
+        return $this->hasOne(SellerInformation::class,);
+    }
+
 
     /**
      * The attributes that are mass assignable.
@@ -44,10 +48,15 @@ class User extends Authenticatable
         'password',
         'first_name',
         'last_name',
+        'profile_picture',
+        'birthdate',
+        'sex',
         'phone_number',
-        'street_address',
+        'street_address_1',
+        'street_address_2',
         'city',
         'postal_code',
+        'state_province',
         'country',
         'permissions',
         'is_seller'
