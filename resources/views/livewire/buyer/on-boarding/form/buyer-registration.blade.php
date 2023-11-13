@@ -14,6 +14,7 @@
     <x-slot:page_header>
         Account Registration
     </x-slot:page_header>
+
     <div>
         <section class="w-full h-full flex justify-center items-center px-6 py-6 lg:px-20 lg:py-20 ">
             <div class="container md:!max-w-2xl h-full p-4 shadow bg-white border-t-4 border-blue-500 rounded">
@@ -163,20 +164,36 @@
                     </div>
                     <hr>
                     <div class="flex justify-end gap-3">
-                        <p>{{ $user_sex }} test</p>
-                        <p>{{ $userid }}</p>
-                        <button type="submit" class="btn btn-primary">
-                            <span wire:loading.remove wire:target="RegistrationForm">
-                                Proceed
-                            </span>
-                            <span wire:loading wire:target="RegistrationForm">
-                                <div class="text-center">
-                                    <div class="spinner-border spinner-border-sm" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                        {{--                        <p>{{ $user_sex }} test</p> --}}
+                        {{--                        <p>{{ $userid }}</p> --}}
+                        {{--                        <button type="submit" class="btn btn-primary"> --}}
+                        {{--                            <span wire:loading.remove wire:target="RegistrationForm"> --}}
+                        {{--                                Proceed --}}
+                        {{--                            </span> --}}
+                        {{--                            <span wire:loading wire:target="RegistrationForm"> --}}
+                        {{--                                <div class="text-center"> --}}
+                        {{--                                    <div class="spinner-border spinner-border-sm" role="status"> --}}
+                        {{--                                        <span class="visually-hidden">Loading...</span> --}}
+                        {{--                                    </div> --}}
+                        {{--                                </div> --}}
+                        {{--                            </span> --}}
+                        {{--                        </button> --}}
+                        <button class="flex no-underline decoration-0 text-black" type="submit">
+                            <span
+                                class="lg:!h-12 w-full  h-10 flex items-center text-primary justify-center uppercase font-semibold rounded-sm px-4 lg:!px-6 border border-primary hover:bg-blue-600 hover:!text-white transition duration-500 ease-in-out">
+                                <span wire:loading wire:target="RegistrationForm">
+                                    <div class="text-center mr-1">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </span>
+                                Proceed
+
                             </span>
+
                         </button>
+
                     </div>
                 </form>
             </div>

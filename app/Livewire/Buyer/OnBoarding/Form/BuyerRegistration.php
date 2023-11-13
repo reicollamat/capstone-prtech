@@ -51,13 +51,26 @@ class BuyerRegistration extends Component
 
     public function mount()
     {
-        $this->userid = Auth::user()->id ?? null;;
+        $this->userid = Auth::user()->id ?? null;
+        //        $this->userid = 1;
 
         $user = User::find($this->userid);
 
+
+        // get the email value of user and set it to user_email input and disables it
         if ($user != null) {
             $this->user_email = $user->email;
         }
+
+        // this will check if first_name and last_name in the database has been filled and will redirect to landing
+        // if not page will be displayed
+        
+        // redirect the user if the information here is already filled
+        if ($user->first_name != null | $user->last_name != null) {
+            return redirect()->route('index_landing');
+        }
+
+
     }
 
     public function render()
@@ -67,6 +80,8 @@ class BuyerRegistration extends Component
 
     public function RegistrationForm()
     {
+        //        dd('im clicked');
+        //        sleep(10);
         $validator = $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -81,27 +96,26 @@ class BuyerRegistration extends Component
             'user_zip_postal' => 'required',
         ]);
 
-        dd($validator);
-
         if ($validator) {
-            //            dd($validator['user_address_1'] . $this->user_address_2);
             $user = User::find($this->userid)->update([
                 'first_name' => $validator['first_name'],
                 'last_name' => $validator['last_name'],
                 'email' => $validator['user_email'],
                 'phone_number' => $validator['user_phone'],
-                //                'birthdate' => $validator['user_birthdate'],
-                //                'sex' => $validator['user_sex'],
+                'birthdate' => $validator['user_birthdate'],
+                'sex' => $validator['user_sex'],
                 'street_address' => $validator['user_address_1'],
-                //                'street_address_1' => $validator['user_address_1'],
-                //                'street_address_2' => $validator['user_address_2'],
+                'street_address_1' => $validator['user_address_1'],
+                'street_address_2' => $validator['user_address_2'],
                 'city' => $validator['user_city'],
                 'postal_code' => $validator['user_zip_postal'],
-                //                'country' => $validator['user_state_province'],
+                'state_province' => $validator['user_state_province'],
             ]);
             if ($user) {
                 // TODO: add a modal or confirmaiton on ui that query is sucess before redirecting to shop information page
-                dd($user);
+                $this->redirect(route('index_landing'));
+            } else {
+                $this->redirect(abort(505, 'Something went wrong!'));
             }
         }
     }
