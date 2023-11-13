@@ -20,18 +20,18 @@ class DatabaseSeeder extends Seeder
         // seed an 'admin' & 'regular_user' role
         DB::table('roles')->insert([
             [
-            'slug' => 'admin',
-            'name' => 'Admin',
-            'permissions' => '{"platform.index": "1", "platform.systems.roles": "1", "platform.systems.users": "1", "platform.systems.attachment": "1"}',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
-            ], 
+                'slug' => 'admin',
+                'name' => 'Admin',
+                'permissions' => '{"platform.index": "1", "platform.systems.roles": "1", "platform.systems.users": "1", "platform.systems.attachment": "1"}',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
+            ],
             [
-            'slug' => 'regular_user',
-            'name' => 'Regular User',
-            'permissions' => '{"platform.index": "0", "platform.systems.roles": "0", "platform.systems.users": "0", "platform.systems.attachment": "0"}',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
+                'slug' => 'regular_user',
+                'name' => 'Regular User',
+                'permissions' => '{"platform.index": "0", "platform.systems.roles": "0", "platform.systems.users": "0", "platform.systems.attachment": "0"}',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s"),
             ]
         ]);
 
@@ -45,12 +45,12 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('1'),
             'phone_number' => fake()->phoneNumber(),
-            'street_address' => fake()->streetAddress(),
+            'street_address_1' => fake()->streetAddress(),
             'city' => fake()->city(),
             'postal_code' => fake()->postcode(),
             'country' => fake()->country(),
             'permissions' => [
-                "platform.index" => true, 
+                "platform.index" => true,
                 "platform.systems.roles" => true,
                 "platform.systems.users" => true,
                 "platform.systems.attachment" => true,
@@ -66,12 +66,24 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('1'),
             'phone_number' => fake()->phoneNumber(),
-            'street_address' => fake()->streetAddress(),
+            'street_address_1' => fake()->streetAddress(),
             'city' => fake()->city(),
             'postal_code' => fake()->postcode(),
             'country' => fake()->country(),
             'permissions' => [
-                "platform.index" => false, 
+                "platform.index" => false,
+                "platform.systems.roles" => false,
+                "platform.systems.users" => false,
+                "platform.systems.attachment" => false,
+            ],
+        ]);
+
+        $user2 = User::factory()->create([
+            'name' => 'richmondjohnbillones',
+            'email' => 'mai@gmail.com',
+            'password' => Hash::make('1'),
+            'permissions' => [
+                "platform.index" => false,
                 "platform.systems.roles" => false,
                 "platform.systems.users" => false,
                 "platform.systems.attachment" => false,
@@ -85,12 +97,12 @@ class DatabaseSeeder extends Seeder
         // Insert the record into the role_users table
         DB::table('role_users')->insert([
             [
-            'user_id' => 1,
-            'role_id' => 1,
-            ], 
+                'user_id' => 1,
+                'role_id' => 1,
+            ],
             [
-            'user_id' => 2,
-            'role_id' => 2,
+                'user_id' => 2,
+                'role_id' => 2,
             ]
         ]);
 
