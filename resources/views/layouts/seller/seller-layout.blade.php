@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>PR Tech</title>
+    <title>{{ $title ?? 'PR-TECH' }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="PR-Tech, E-commerce" name="keywords">
     <meta content="PR-Tech is an E-commerce website that provides products for all your needs." name="description">
@@ -33,33 +33,32 @@
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('multishop/css/seller.css') }}" rel="stylesheet">
 
-
 </head>
 
 <body>
 
     <main>
-        {{-- <div class="sidebar-heading border-bottom bg-light py-2 d-flex">
-            <div class="">
-                <a class="navbar-brand" href="#">
-                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="150" height="150"
-                        class="d-inline-block align-text-top">
-                </a>
-            </div>
-            <div>
-                @yield('title')
-            </div>
-        </div> --}}
+        {{--        <div class="sidebar-heading border-bottom bg-light py-2 d-flex"> --}}
+        {{--            <div class=""> --}}
+        {{--                <a class="navbar-brand" href="#"> --}}
+        {{--                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="150" height="150" --}}
+        {{--                        class="d-inline-block align-text-top"> --}}
+        {{--                </a> --}}
+        {{--            </div> --}}
+        {{--            <div> --}}
+        {{--                @yield('title') --}}
+        {{--            </div> --}}
+        {{--        </div> --}}
         <div class="d-flex" id="wrapper">
             @include('layouts.seller.sidebar')
             @yield('content')
         </div>
     </main>
 
-    {{-- Footer --}}
-    <footer>
-        @include('layouts.footer')
-    </footer>
+    {{--    --}}{{-- Footer --}}
+    {{--    <footer> --}}
+    {{--        @include('layouts.footer') --}}
+    {{--    </footer> --}}
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top mb-3"><i class="bi bi-caret-up-square"></i></a>
