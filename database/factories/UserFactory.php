@@ -26,12 +26,12 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('1'),
             'phone_number' => fake()->phoneNumber(),
-            'street_address' => fake()->streetAddress(),
+            'street_address_1' => fake()->streetAddress(),
             'city' => fake()->city(),
             'postal_code' => fake()->postcode(),
-            'country' => fake()->country(),
+            'country' => 'Phillipines',
             'permissions' => [
-                "platform.index" => "0", 
+                "platform.index" => "0",
                 "platform.systems.roles" => "0",
                 "platform.systems.users" => "0",
                 "platform.systems.attachment" => "0",
@@ -44,7 +44,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
