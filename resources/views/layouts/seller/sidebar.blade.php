@@ -34,20 +34,20 @@
         <li class="py-3">
             <div>
                 <a wire:navigate
-                    class="list-group-item list-group-item-action bborder-0 {{ request()->routeIs('seller-dashboard') ? 'active' : '' }}"
+                    class="list-group-item list-group-item-action text-gray-600 border-0 {{ request()->routeIs('seller-dashboard') ? 'active' : '' }}"
                     href="{{ route('seller-dashboard') }}">
-                    <i class="bi bi-house-fill" aria-hidden="true"></i>
+                    <i class="bi bi-house-fill text-xl text-gray-600" aria-hidden="true"></i>
                     Dashboard
                 </a>
             </div>
         </li>
-        <li class="py-3">
+        <li class="py-2.5">
             <div x-data="{ open: false }" class="w-full">
                 <div class="flex justify-between items-center">
-                    <button @click="open=!open"
-                        class="w-full flex justify-between items-center text-base font-semibold text-gray-700  transition">
+                    <button @click="open=!open" :class="{ '!text-blue-600': open }"
+                        class="w-full flex justify-between items-center text-base font-semibold text-gray-600 mb-1.5  transition">
                         <div class="flex items-center gap-2">
-                            <i class="bi bi-box2-heart text-xl"></i>
+                            <i class="bi bi-box2-heart text-xl text-gray-600" :class="{ '!text-blue-600': open }"></i>
                             <p class="mb-0">Product</p>
                         </div>
                         <span class="transition duration-500 rotate-180"
@@ -58,23 +58,25 @@
                                     fill="currentColor"></path>
                             </svg>
                         </span>
-
                     </button>
                 </div>
-                <div x-show="open" x-cloak class="" x-transition>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Dicta repudiandae ut dolores totam nobis molestias!
+                <div x-show="open" x-cloak x-transition>
+                    <ul>
+                        <li class="p-1.5 text-sm">My Products</li>
+                        <li class="p-1.5 text-sm">Add New Product</li>
+
+                    </ul>
                 </div>
             </div>
 
         </li>
-        <li class="py-3">
+        <li class="py-2.5">
             <div x-data="{ open: false }" class="w-full">
                 <div class="flex justify-between items-center">
-                    <button @click="open=!open"
-                        class="w-full flex justify-between items-center text-base font-semibold text-gray-700  transition">
+                    <button @click="open=!open" :class="{ '!text-blue-600': open }"
+                        class="w-full flex justify-between items-center text-base font-semibold text-gray-600  mb-1.5  transition">
                         <div class="flex items-center gap-2">
-                            <i class="bi bi-box2-heart text-xl"></i>
+                            <i class="bi bi-truck text-xl text-gray-600" :class="{ '!text-blue-600': open }"></i>
                             <p class="mb-0">Shipments</p>
                         </div>
                         <span class="transition duration-500 rotate-180"
@@ -88,19 +90,23 @@
 
                     </button>
                 </div>
-                <div x-show="open" x-cloak class="" x-transition>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Dicta repudiandae ut dolores totam nobis molestias!
+                <div x-show="open" x-cloak x-transition>
+                    <ul>
+                        <li class="p-1.5 text-sm">My Shipments</li>
+                        <li class="p-1.5 text-sm" text-sm>Shipment Options</li>
+                        <li class="p-1.5 text-sm" text-sm>Shipment History</li>
+                    </ul>
                 </div>
             </div>
         </li>
-        <li class="py-3">
+        <li class="py-2.5">
             <div x-data="{ open: false }" class="w-full">
                 <div class="flex justify-between items-center">
-                    <button @click="open=!open"
-                        class="w-full flex justify-between items-center text-base font-semibold text-gray-700  transition">
+                    <button @click="open=!open" :class="{ '!text-blue-600': open }"
+                        class="w-full flex justify-between items-center text-base font-semibold text-gray-600  mb-1.5  transition">
                         <div class="flex items-center gap-2">
-                            <i class="bi bi-box2-heart text-xl"></i>
+                            <i class="bi bi-card-checklist text-xl text-gray-600"
+                                :class="{ '!text-blue-600': open }"></i>
                             <p class="mb-0">Orders</p>
                         </div>
                         <span class="transition duration-500 rotate-180"
@@ -115,18 +121,24 @@
                     </button>
                 </div>
                 <div x-show="open" x-cloak class="" x-transition>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Dicta repudiandae ut dolores totam nobis molestias!
+                    <ul>
+                        <li class="p-1.5 text-sm">My Orders</li>
+                        <li class="p-1.5 text-sm">Cancellations</li>
+                        <li class="p-1.5 text-sm">Refunds / Returns</li>
+                        <li class="p-1.5 text-sm">Order History</li>
+
+                    </ul>
                 </div>
             </div>
         </li>
-        <li class="py-3">
+        <li class="py-2.5">
             <div x-data="{ open: false }" class="w-full">
                 <div class="flex justify-between items-center">
-                    <button @click="open=!open"
-                        class="w-full flex justify-between items-center text-base font-semibold text-gray-700  transition">
+                    <button @click="open=!open" :class="{ '!text-blue-600': open }"
+                        class="w-full flex justify-between items-center text-base font-semibold text-gray-600  mb-1.5  transition">
                         <div class="flex items-center gap-2">
-                            <i class="bi bi-box2-heart text-xl"></i>
+                            <i class="bi bi-bar-chart-steps text-xl text-gray-600"
+                                :class="{ '!text-blue-600': open }"></i>
                             <p class="mb-0">Analytics</p>
                         </div>
                         <span class="transition duration-500 rotate-180"
@@ -141,18 +153,21 @@
                     </button>
                 </div>
                 <div x-show="open" x-cloak class="" x-transition>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Dicta repudiandae ut dolores totam nobis molestias!
+                    <ul>
+                        <li class="p-1.5 text-sm">My Orders</li>
+                        <li class="p-1.5 text-sm">Cancellations</li>
+                        <li class="p-1.5 text-sm">Refunds / Returns</li>
+                    </ul>
                 </div>
             </div>
         </li>
-        <li class="py-3">
+        <li class="py-2.5">
             <div x-data="{ open: false }" class="w-full">
                 <div class="flex justify-between items-center">
-                    <button @click="open=!open"
-                        class="w-full flex justify-between items-center text-base font-semibold text-gray-700  transition">
+                    <button @click="open=!open" :class="{ '!text-blue-600': open }"
+                        class="w-full flex justify-between items-center text-base font-semibold text-gray-600 mb-1.5 transition">
                         <div class="flex items-center gap-2">
-                            <i class="bi bi-box2-heart text-xl"></i>
+                            <i class="bi bi-shop-window text-xl text-gray-600" :class="{ '!text-blue-600': open }"></i>
                             <p class="mb-0">Shop</p>
                         </div>
                         <span class="transition duration-500 rotate-180"
@@ -166,9 +181,11 @@
 
                     </button>
                 </div>
-                <div x-show="open" x-cloak class="" x-transition>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Dicta repudiandae ut dolores totam nobis molestias!
+                <div x-show="open" x-cloak x-transition>
+                    <ul>
+                        <li class="p-1.5 text-sm">Shop Information</li>
+                        <li class="p-1.5 text-sm">Shop Categories</li>
+                    </ul>
                 </div>
             </div>
         </li>

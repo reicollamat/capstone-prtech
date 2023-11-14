@@ -58,18 +58,18 @@
                                 x-transition:leave="transition ease-in duration-100"
                                 x-transition:leave-start="opacity-100 scale-100"
                                 x-transition:leave-end="opacity-0 scale-90"
-                                class="absolute right-0 z-20 w-full py-3 overflow-hidden origin-top-right bg-transparent front rounded">
-                                <div class="dropdown-arrow bg-white  rounded shadow border-1  border-gray-300 ">
+                                class="absolute right-0 z-20 w-max py-3 overflow-hidden origin-top-right bg-transparent front rounded">
+                                <div class="dropdown-arrow bg-white  rounded shadow border-1 border-gray-300 ">
                                     <a href="#"
-                                        class="block w-full text-start pl-6 font-semibold py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <div class="flex gap-2 items-center">
+                                        class="block w-full text-start px-3  font-semibold py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <div class="flex gap-2 justify-start items-center text-start">
                                             <i class="bi bi-person-fill text-gray-800 text-lg"></i>
                                             <span>Profile</span>
                                         </div>
 
                                     </a>
                                     <a href="#"
-                                        class="block w-full text-start font-semibold pl-6 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
 
                                         <div class="flex gap-2 items-center">
                                             <i class="bi bi-bag-fill text-gray-800 text-lg"></i>
@@ -79,7 +79,7 @@
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit"
-                                            class="block w-full text-start font-semibold pl-6 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                                            class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
 
                                             <div class="flex gap-2 items-center">
                                                 <i class="bi bi-box-arrow-left text-gray-800 text-lg"></i>

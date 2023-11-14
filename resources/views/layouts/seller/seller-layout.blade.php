@@ -70,35 +70,44 @@
                             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-100"
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                            class="absolute right-0 z-20 w-56 py-2 mt-2.5 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 front">
-                            <div
-                                class="flex items-center p-1.5 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
-                                    src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200"
-                                    alt="jane avatar">
-                                <div class="mx-1">
-                                    <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">
-                                        {{ Auth::user()->name ?? 'John Doe' }}</h1>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                                        {{ Auth::user()->email ?? 'john.doe@gmail.com' }}</p>
+                            class="absolute right-0 z-20 w-56 py-3 overflow-hidden origin-top-right bg-transparent rounded-md shadow-xl dark:bg-gray-800 front">
+                            <div class="dropdown-arrow bg-white  rounded shadow border-1 border-gray-300">
+                                <div
+                                    class="flex items-center p-2.5 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
+                                        src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200"
+                                        alt="jane avatar">
+                                    <div class="flex items-center flex-column text-start justify-start mx-1">
+                                        <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                            {{ Auth::user()->name ?? 'John Doe' }}</h1>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 text-start mb-0">
+                                            {{ Auth::user()->email ?? 'john.doe@gmail.com' }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <a href="#"
-                                class="block px-2 py-2.5 text-sm text-gray-600 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                                Help
-                            </a>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
                                 <button type="submit"
-                                    class="block w-full text-start px-2 py-2 text-sm text-gray-600 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                                    Sign Out
+                                    class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <div class="flex gap-2 items-center">
+
+                                        <i class="bi bi-question-lg text-gray-800 text-lg"></i>
+                                        <span>Help</span>
+                                    </div>
                                 </button>
-                            </form>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+
+                                        <div class="flex gap-2 items-center">
+                                            <i class="bi bi-box-arrow-left text-gray-800 text-lg"></i>
+                                            <span>Sign Out</span>
+                                        </div>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endif
             </div>
-
         </nav>
 
         <div class="flex w-full h-full" id="wrapper">

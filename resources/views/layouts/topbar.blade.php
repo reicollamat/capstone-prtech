@@ -1,6 +1,6 @@
 <div class="sticky-top z-50">
     <div>
-        <nav class="navbar bg-white padding-remove sticky-top py-2 text-white shadow">
+        <nav class="navbar bg-white text-black padding-remove sticky-top py-2 shadow">
             <div class="w-full container-fluid mx-4 justify-between align-items-center my-1">
                 <div class=" ">
                     <a class="navbar-brand" href="#">
