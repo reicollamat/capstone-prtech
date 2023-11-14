@@ -35,7 +35,7 @@ class LoginPage extends Component
         if ($validation) {
             $user = Auth::attempt($validation);
             if ($user) {
-                $this->redirect(route('seller_dashboard'));
+                $this->redirect(route('seller-dashboard'));
             } else {
                 // TODO: show error like no record found in database or laravel eloquest where email and password
                 session()->flash('accountlogin', 'Something went wrong, Please try again.');
