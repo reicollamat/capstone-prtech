@@ -10,6 +10,19 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Livewire\Landing;
 use App\Livewire\Seller\Dashboard;
+use App\Livewire\Seller\Dashboard\AnalyticsLinks\AnalyticsModelReport;
+use App\Livewire\Seller\Dashboard\OrderLinks\OrderCancellations;
+use App\Livewire\Seller\Dashboard\OrderLinks\OrderHistory;
+use App\Livewire\Seller\Dashboard\OrderLinks\OrderList;
+use App\Livewire\Seller\Dashboard\OrderLinks\OrderReturnsRefunds;
+use App\Livewire\Seller\Dashboard\ProductLinks\ProductAdd;
+use App\Livewire\Seller\Dashboard\ProductLinks\ProductList;
+use App\Livewire\Seller\Dashboard\SellerLanding;
+use App\Livewire\Seller\Dashboard\ShipmentLinks\ShipmentHistory;
+use App\Livewire\Seller\Dashboard\ShipmentLinks\ShipmentList;
+use App\Livewire\Seller\Dashboard\ShipmentLinks\ShipmentOptions;
+use App\Livewire\Seller\Dashboard\ShopLinks\ShopManagement;
+use App\Livewire\Seller\Dashboard\ShopLinks\ShopManagementCategory;
 use App\Livewire\Seller\Inventory;
 use App\Livewire\Seller\OnBoarding\Form\SellerRegistration;
 use App\Livewire\Seller\OnBoarding\Form\ShopInformation;
@@ -60,8 +73,38 @@ Route::prefix('seller')->group(function () {
     Route::get('on-boarding/form/sucess', ShopSuccess::class)->name('seller-shop-information-success');
 
     // seller dashboard
-    Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller-dashboard');
-    Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller-inventory');
+    //    Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller-dashboard');
+    //    Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller-inventory');
+    Route::get('/', SellerLanding::class)->name('seller-landing');
+
+    Route::prefix('app')->group(function () {
+        // route groups of products tab with its child routes
+        Route::prefix('product')->group(function () {
+            Route::get('/list', ProductList::class)->name('product-list');
+            Route::get('/new', ProductAdd::class)->name('product-new');
+        });
+        // route groups of order tab with its child routes
+        Route::prefix('order')->group(function () {
+            Route::get('/list', Orderlist::class)->name('order-list');
+            Route::get('/history', OrderHistory::class)->name('order-history');
+            Route::get('/cancellations', OrderCancellations::class)->name('order-cancellations');
+            Route::get('/returns', OrderReturnsRefunds::class)->name('order-returns');
+        });
+        // route groups of shipment tab with its child routes
+        Route::prefix('shipment')->group(function () {
+            Route::get('/list', ShipmentList::class)->name('shipment-list');
+            Route::get('/history', ShipmentHistory::class)->name('shipment-history');
+            Route::get('/options', ShipmentOptions::class)->name('shipment-options');
+        });
+        // route groups of shop management tab with its child routes
+        Route::prefix('shop')->group(function () {
+            Route::get('/', Shopmanagement::class)->name('shop-management');
+            Route::get('/manage/category', ShopManagementCategory::class)->name('shop-management-category');
+        });
+        Route::prefix('analytics')->group(function () {
+            Route::get('/', AnalyticsModelReport::class)->name('analytics-model-report');
+        });
+    });
 });
 
 
