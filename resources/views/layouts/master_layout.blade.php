@@ -37,9 +37,6 @@
     {{-- This directive is used to include the Livewire styles --}}
     @livewireStyles
 
-    {{--  laravel notify  --}}
-    {{--    @notifyCss --}}
-
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
 

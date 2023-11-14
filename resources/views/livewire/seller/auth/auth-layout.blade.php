@@ -27,6 +27,9 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    {{-- This directive is used to include the Livewire styles --}}
+    @livewireStyles
+
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('multishop/css/style.css') }}" rel="stylesheet">
 </head>
@@ -68,7 +71,7 @@
                             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-100"
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                            class="absolute right-0 z-20 w-56 py-2 mt-2.5 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800">
+                            class="absolute right-0 z-20 w-56 py-2 mt-2.5 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800 front">
                             <div
                                 class="flex items-center p-1.5 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                 <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
@@ -113,7 +116,7 @@
     </footer>
 
     {{-- This directive is used to include the Livewire scripts --}}
-    {{-- @livewireScripts --}}
+    @livewireScripts
 
 </body>
 

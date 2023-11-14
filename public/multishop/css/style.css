@@ -16,6 +16,11 @@
     z-index: 9999;
 }
 
+ul {
+    list-style-type: none;
+    padding-left: 1rem !important;
+}
+
 .h1,
 h2,
 h3 {
@@ -356,7 +361,7 @@ tr.clickable-row {
 .rotated {
     transform: rotate(180deg);
     display: inline-block;
-    transition: all 0.250s;
+    transition: all 0.500s;
 }
 
 
