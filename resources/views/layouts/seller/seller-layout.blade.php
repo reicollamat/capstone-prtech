@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title> {{ $title ?? 'PR - TECH' }}</title>
+    <title> {{ $title ?? 'PR - TECH Seller Hub' }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="PR-Tech, E-commerce" name="keywords">
     <meta content="PR-Tech is an E-commerce website that provides products for all your needs." name="description">
@@ -35,11 +35,11 @@
 </head>
 
 <body>
-    <main class="relative w-full h-full">
-        <nav class="navbar bg-light shadow md:!px-6">
+    <main class="relative w-full h-screen" id="main">
+        <nav class="navbar sticky-top bg-white border-bottom md:!px-6" id="navigationbar">
             <div class="container-fluid lg:!justify-between">
                 <div class="flex items-center">
-                    <a class="navbar-brand" href="{{ route('seller-dashboard') }}">
+                    <a class="navbar-brand" href="{{ route('seller-landing') }}">
                         <div class="w-[100px] sm:w-[120px] h-auto">
                             <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%"
                                 height="100%" class="d-inline-block align-text-top" />
@@ -96,7 +96,6 @@
                                     @csrf
                                     <button type="submit"
                                         class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-
                                         <div class="flex gap-2 items-center">
                                             <i class="bi bi-box-arrow-left text-gray-800 text-lg"></i>
                                             <span>Sign Out</span>
@@ -111,18 +110,36 @@
         </nav>
 
         <div class="flex w-full h-full" id="wrapper">
-            <div class="h-screen flex-1 min-w-[220px]  max-w-[220px] border-end overflow-y-scroll">
-                @include('layouts.seller.sidebar')
+            <div class="h-full flex-1 min-w-[220px] max-w-[220px] !bg-white border-end overflow-y-scroll"
+                id="sidebar">
+                @include('layouts.seller.seller-sidebar')
             </div>
-            <div class="w-full h-full">
+            <div class=" w-full overflow-y-scroll bg-[#F2F2F2]">
                 @yield('content', $slot ?? '')
             </div>
         </div>
-
     </main>
 
     {{--    This directive is used to include the Livewire scripts --}}
     @livewireScripts
+    <script>
+        function setChildContainerHeight() {
+            // get the height if main wrapper
+            let parentHeight = document.getElementById('main').clientHeight;
+            // get the height of navigation bar
+            let otherElementHeight = document.getElementById('navigationbar').clientHeight;
+            // get the child container where we need to set the height
+            let childContainer = document.getElementById('wrapper');
+            // apply the height to the element
+            childContainer.style.height = (parentHeight - otherElementHeight) + 'px';
+
+            // console.log(parentHeight, otherElementHeight, childContainer);
+        }
+
+        // event listener to adjust the height of the child container
+        window.addEventListener('load', setChildContainerHeight);
+        window.addEventListener('resize', setChildContainerHeight);
+    </script>
 
 </body>
 
