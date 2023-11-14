@@ -19,71 +19,98 @@
     <div class="container-fluid pb-5">
         <div class="row px-xl-5">
             <div class="col-lg-5 mb-30">
-                <div id="product-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="w-100 h-100" src="{{asset($product->image)}}" alt="Image">
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="row border border-dark rounded">
+                        <div class="col-lg-10">
+                            <div class="carousel-inner p-5">
+                                <div class="carousel-item active">
+                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
                         </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="{{asset('img/showcase1.jpg')}}" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="{{asset('img/showcase2.jpg')}}" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="{{asset('img/showcase3.jpg')}}" alt="Image">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="w-100 h-100" src="{{asset('img/showcase4.jpg')}}" alt="Image">
+                        <div class="col-lg-2 d-flex align-items-center p-0">
+                            <div class="carousel-indicators position-relative d-block">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="width: 50px">
+                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
+                                </button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="width: 50px">
+                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
+                                </button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="width: 50px">
+                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
-                        <i class="fa fa-2x fa-angle-left text-primary"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
-                        <i class="fa fa-2x fa-angle-right text-primary"></i>
-                    </a>
                 </div>
             </div>
 
 
             <div class="col-lg-7 h-auto mb-30 text-dark">
                 <div class="h-100">
-                    <div class="d-flex items-center align-middle text-center gap-2">
+                    <div class="d-flex items-center align-middle text-center justify-content-between">
                         <h3>{{ $product->name }}</h3>
-                        <livewire:addtowishlist.add-to-wishlist-in-details
+                        <div class="bg-primary-subtle rounded">
+                            <livewire:addtowishlist.add-to-wishlist-in-details
                                 :product_id="$product->product_id"/>
-                    </div>
-
-                    <div class="d-flex mb-3">
-                        <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
                         </div>
-                        <small class="pt-1">(99 Reviews)</small>
                     </div>
-                    <h3 class="font-weight-semi-bold mb-4">₱{{ $product->price }}</h3>
-                    <p class="mb-4">{{ $product->description }}</p>
+                    <div class="d-flex pb-2">
+                        <div class="text-primary mr-2">
+                            <small class="bi bi-star-fill"></small>
+                            <small class="bi bi-star-fill"></small>
+                            <small class="bi bi-star-fill"></small>
+                            <small class="bi bi-star-half"></small>
+                            <small class="bi bi-star"></small>
+                        </div>
+                        <small class="pb-1">(0 Reviews)</small>
+                    </div>
 
-                    @includeWhen($category === 'computer_case', 'pages.product_details.computer_case')
-                    @includeWhen($category === 'case_fan', 'pages.product_details.case_fan')
-                    @includeWhen($category === 'cpu', 'pages.product_details.cpu')
-                    @includeWhen($category === 'cpu_cooler', 'pages.product_details.cpu_cooler')
-                    @includeWhen($category === 'ext_storage', 'pages.product_details.ext_storage')
-                    @includeWhen($category === 'int_storage', 'pages.product_details.int_storage')
-                    @includeWhen($category === 'headphone', 'pages.product_details.headphone')
-                    @includeWhen($category === 'keyboard', 'pages.product_details.keyboard')
-                    @includeWhen($category === 'memory', 'pages.product_details.memory')
-                    @includeWhen($category === 'monitor', 'pages.product_details.monitor')
-                    @includeWhen($category === 'motherboard', 'pages.product_details.motherboard')
-                    @includeWhen($category === 'mouse', 'pages.product_details.mouse')
-                    @includeWhen($category === 'psu', 'pages.product_details.psu')
-                    @includeWhen($category === 'speaker', 'pages.product_details.speaker')
-                    @includeWhen($category === 'video_card', 'pages.product_details.video_card')
-                    @includeWhen($category === 'webcam', 'pages.product_details.webcam')
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="nav nav-underline nav-fill">
+                                <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
+                                <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Specifications</a>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="tab-pane-1">
+                                <p class="mt-2">{{ $product->description }}</p>
+                                <p>Upgrade your computing experience with the High-Performance Computer Part - Model HPX500.
+                                This cutting-edge component is designed to enhance your system's capabilities, offering
+                                superior performance and reliability for all your computing needs.</p>
+                            </div>
+                            <div class="tab-pane fade" id="tab-pane-2">
+                                @includeWhen($category === 'computer_case', 'pages.product_details.computer_case')
+                                @includeWhen($category === 'case_fan', 'pages.product_details.case_fan')
+                                @includeWhen($category === 'cpu', 'pages.product_details.cpu')
+                                @includeWhen($category === 'cpu_cooler', 'pages.product_details.cpu_cooler')
+                                @includeWhen($category === 'ext_storage', 'pages.product_details.ext_storage')
+                                @includeWhen($category === 'int_storage', 'pages.product_details.int_storage')
+                                @includeWhen($category === 'headphone', 'pages.product_details.headphone')
+                                @includeWhen($category === 'keyboard', 'pages.product_details.keyboard')
+                                @includeWhen($category === 'memory', 'pages.product_details.memory')
+                                @includeWhen($category === 'monitor', 'pages.product_details.monitor')
+                                @includeWhen($category === 'motherboard', 'pages.product_details.motherboard')
+                                @includeWhen($category === 'mouse', 'pages.product_details.mouse')
+                                @includeWhen($category === 'psu', 'pages.product_details.psu')
+                                @includeWhen($category === 'speaker', 'pages.product_details.speaker')
+                                @includeWhen($category === 'video_card', 'pages.product_details.video_card')
+                                @includeWhen($category === 'webcam', 'pages.product_details.webcam')
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <h1 class="mb-4">₱ {{ $product->price }}</h1>
+
 
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>
@@ -195,8 +222,89 @@
             </div>
         </div>
 
+        <br class="mb-4">
 
         <div class="row px-xl-5">
+            <div class="col-md-8">
+                <h4 class="mb-4">3 reviews for "{{$product->name}}"</h4>
+                <!-- dummy customer reviews -->
+
+                <x-shop.cus_review>
+                    <x-slot:img_path>img/user1.png</x-slot:img_path>
+                    <x-slot:cus_name>Leaz Goe Gauys</x-slot:cus_name>
+                    <x-slot:cus_date>09 Feb 2021</x-slot:cus_date>
+                    <x-slot:cus_star>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </x-slot:cus_star>
+                    <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver napakabait..  Diko pa na testing pero the best sa packaging Godbless.</p>
+                </x-shop.cus_review>
+
+                <x-shop.cus_review>
+                    <x-slot:img_path>img/user2.png</x-slot:img_path>
+                    <x-slot:cus_name>Eyho Waht</x-slot:cus_name>
+                    <x-slot:cus_date>24 May 2019</x-slot:cus_date>
+                    <x-slot:cus_star>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </x-slot:cus_star>
+                    <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor. Dismaya lang  ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box  knowing almost 20K ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>
+                </x-shop.cus_review>
+
+                <x-shop.cus_review>
+                    <x-slot:img_path>img/user3.png</x-slot:img_path>
+                    <x-slot:cus_name>Nhoe Caph Foereal</x-slot:cus_name>
+                    <x-slot:cus_date>14 Mar 2019</x-slot:cus_date>
+                    <x-slot:cus_star>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="far fa-star"></i>
+                    </x-slot:cus_star>
+                    <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible with the OS installed in computer but the connector foe headphone is functioning well.</p>
+                </x-shop.cus_review>
+            </div>
+            <div class="col-md-4">
+                <h4 class="mb-4">Leave a review</h4>
+                <small>Your email address will not be published. Required fields are marked *</small>
+                <div class="d-flex my-3">
+                    <p class="mb-0 mr-2">Your Rating * :</p>
+                    <div class="text-primary">
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label for="message">Your Review *</label>
+                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email *</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group mb-0">
+                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{-- <div class="row px-xl-5">
             <div class="col">
                 <div class="bg-light p-30">
                     <div class="nav nav-tabs mb-4">
@@ -265,53 +373,53 @@
                                 </div>
                             </div>
                         </div>
-                        {{--                    <div class="tab-pane fade" id="tab-pane-3">--}}
-                        {{--                        <h4 class="mb-4">3 reviews for "{{$product->name}}"</h4>--}}
-                        {{--                        <!-- dummy customer reviews -->--}}
+                        <div class="tab-pane fade" id="tab-pane-3">
+                            <h4 class="mb-4">3 reviews for "{{$product->name}}"</h4>
+                            <!-- dummy customer reviews -->
 
-                        {{--                        <x-shop.cus_review>--}}
-                        {{--                            <x-slot:img_path>img/user1.png</x-slot:img_path>--}}
-                        {{--                            <x-slot:cus_name>Leaz Goe Gauys</x-slot:cus_name>--}}
-                        {{--                            <x-slot:cus_date>09 Feb 2021</x-slot:cus_date>--}}
-                        {{--                            <x-slot:cus_star>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star-half-alt"></i>--}}
-                        {{--                            </x-slot:cus_star>--}}
-                        {{--                            <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver napakabait..  Diko pa na testing pero the best sa packaging Godbless.</p>--}}
-                        {{--                        </x-shop.cus_review>--}}
+                            <x-shop.cus_review>
+                                <x-slot:img_path>img/user1.png</x-slot:img_path>
+                                <x-slot:cus_name>Leaz Goe Gauys</x-slot:cus_name>
+                                <x-slot:cus_date>09 Feb 2021</x-slot:cus_date>
+                                <x-slot:cus_star>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </x-slot:cus_star>
+                                <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver napakabait..  Diko pa na testing pero the best sa packaging Godbless.</p>
+                            </x-shop.cus_review>
 
-                        {{--                        <x-shop.cus_review>--}}
-                        {{--                            <x-slot:img_path>img/user2.png</x-slot:img_path>--}}
-                        {{--                            <x-slot:cus_name>Eyho Waht</x-slot:cus_name>--}}
-                        {{--                            <x-slot:cus_date>24 May 2019</x-slot:cus_date>--}}
-                        {{--                            <x-slot:cus_star>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star-half-alt"></i>--}}
-                        {{--                                <i class="far fa-star"></i>--}}
-                        {{--                                <i class="far fa-star"></i>--}}
-                        {{--                            </x-slot:cus_star>--}}
-                        {{--                            <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor. Dismaya lang  ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box  knowing almost 20K ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>--}}
-                        {{--                        </x-shop.cus_review>--}}
+                            <x-shop.cus_review>
+                                <x-slot:img_path>img/user2.png</x-slot:img_path>
+                                <x-slot:cus_name>Eyho Waht</x-slot:cus_name>
+                                <x-slot:cus_date>24 May 2019</x-slot:cus_date>
+                                <x-slot:cus_star>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </x-slot:cus_star>
+                                <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor. Dismaya lang  ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box  knowing almost 20K ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>
+                            </x-shop.cus_review>
 
-                        {{--                        <x-shop.cus_review>--}}
-                        {{--                            <x-slot:img_path>img/user3.png</x-slot:img_path>--}}
-                        {{--                            <x-slot:cus_name>Nhoe Caph Foereal</x-slot:cus_name>--}}
-                        {{--                            <x-slot:cus_date>14 Mar 2019</x-slot:cus_date>--}}
-                        {{--                            <x-slot:cus_star>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                                <i class="fas fa-star-half-alt"></i>--}}
-                        {{--                                <i class="far fa-star"></i>--}}
-                        {{--                            </x-slot:cus_star>--}}
-                        {{--                            <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible with the OS installed in computer but the connector foe headphone is functioning well.</p>--}}
-                        {{--                        </x-shop.cus_review>--}}
-                        {{--                        --}}
-                        {{--                    </div>--}}
+                            <x-shop.cus_review>
+                                <x-slot:img_path>img/user3.png</x-slot:img_path>
+                                <x-slot:cus_name>Nhoe Caph Foereal</x-slot:cus_name>
+                                <x-slot:cus_date>14 Mar 2019</x-slot:cus_date>
+                                <x-slot:cus_star>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </x-slot:cus_star>
+                                <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible with the OS installed in computer but the connector foe headphone is functioning well.</p>
+                            </x-shop.cus_review>
+                            
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <h4 class="mb-4 text-dark">1 review for "{{$product->name}}"</h4>
@@ -352,7 +460,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- Shop Detail End -->
 
@@ -366,7 +474,7 @@
                 <div class="owl-carousel vendor-carousel">
                     @foreach($random_models as $value)
                         <x-home.product_showcase>
-                            <a class="h6 text-decoration-none text-truncate" style="font-size: 0.9rem"
+                            <a class="h6 text-decoration-none" style="font-size: 0.9rem"
                                href="{{route('product_detail', ['product_id' => $value->product_id, 'category' => $value->category])}}">
                                 {{ $value->name }}
                             </a>
