@@ -112,7 +112,9 @@
         <div class="flex w-full h-full" id="wrapper">
             <div class="h-full flex-1 min-w-[220px] max-w-[220px] !bg-white border-end overflow-y-scroll"
                 id="sidebar">
+
                 @include('layouts.seller.seller-sidebar')
+
             </div>
             <div class=" w-full overflow-y-scroll bg-[#F2F2F2]">
                 @yield('content', $slot ?? '')
