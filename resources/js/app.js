@@ -1,10 +1,10 @@
-import './bootstrap';
+import "./bootstrap";
 
 // Import our custom CSS
-import '../scss/styles.scss'
+import "../scss/styles.scss";
 
 // Import all of Bootstrap's JS
-import * as bootstrap from 'bootstrap'
+import * as bootstrap from "bootstrap";
 
 // // Disable alpine plugin for now for livewire
 // import Alpine from 'alpinejs';
@@ -13,3 +13,8 @@ import * as bootstrap from 'bootstrap'
 // //
 // Alpine.start();
 
+document.addEventListener("livewire:navigated", () => {
+    console.log("navigated");
+    // Runs immediately after Livewire has finished initializing
+    // on the page...
+});
