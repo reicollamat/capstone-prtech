@@ -7,11 +7,14 @@ use App\Models\User;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('layouts.seller.seller-layout')]
 class ProductList extends Component
 {
-//    public $totalProductCount;
+    use WithPagination;
+
+    //    public $totalProductCount;
 
     public function mount()
     {
@@ -22,6 +25,12 @@ class ProductList extends Component
     public function getTotalProductCount()
     {
         return $totalProductCount = Product::count();
+    }
+
+    #[Computed]
+    public function getProductList()
+    {
+        return $products = Product::cursorPaginate(20);
     }
 
     public function render()

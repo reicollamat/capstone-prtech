@@ -123,7 +123,7 @@
                     <p class="mb-0  min-w-[60px] !text-gray-400 !font-light">
                         IMG
                     </p>
-                    <p class="mb-0 min-w-[40px] min-w-max !text-gray-400 !font-light">
+                    <p class="mb-0 min-w-[40px]  !text-gray-400 !font-light">
                         #
                     </p>
                     <p class="mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
@@ -142,101 +142,103 @@
                         Action
                     </p>
                 </div>
+                <div x-data="{ expanded: false }">
+                    <div class="flex flex-column flex-lg-row min-w-full  items-center text-center">
+                        <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light">
+                            <input class="form-check-input" type="checkbox">
+                        </span>
+                        <div class="mb-0  min-w-[60px] p-2 !text-gray-400 !font-light">
+                            IMG
+                        </div>
+                        <div class="mb-0 min-w-[40px] p-2 !text-gray-400 !font-light">
+                            #
+                        </div>
+                        <div class="mb-0 min-w-[100px] p-2 flex-1 !text-gray-400 !font-light">
+                            Name
+                        </div>
+                        <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-400 !font-light">
+                            Category
+                        </div>
+                        <div class=" mb-0  min-w-[100px] p-2 !text-gray-400 !font-light">
+                            Price
+                        </div>
+                        <div class=" mb-0 min-w-[100px] p-2 !text-gray-400 !font-light">
+                            Stock
+                        </div>
+                        <div class=" mb-0 min-w-[100px] p-2 !text-gray-600 !font-light">
+                            <button class="p-1 border border-gray-900 rounded " @click="expanded = ! expanded">
+                                <span class="transition duration-500" :class="{ 'rotate-180': expanded }">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </span>
 
-                <div class="flex flex-column flex-lg-row min-w-full  items-center text-center  overflow-x-auto">
-                    <p class="mb-0 p-2 !text-gray-400 !font-light">
-                        <input class="form-check-input" type="checkbox">
-                    </p>
-                    <div class="mb-0 !text-gray-800 !font-base">
-                        IMG
+                            </button>
+                        </div>
                     </div>
-                    <p class="mb-0 min-w-[100px] flex-1 min-w-max !text-gray-400 !font-light">
-                        #
-                    </p>
-                    <p class="mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
-                        Name
-                    </p>
-                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
-                        Category
-                    </p>
-                    <p class=" mb-0  min-w-[100px] flex-1 !text-gray-400 !font-light">
-                        Price
-                    </p>
-                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
-                        Stock
-                    </p>
-                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
-                        Action
-                    </p>
+                    {{--                     dropdown content --}}
+                    <div x-cloak class="!h-60" x-show="expanded" x-collapse>
+                        tesrtetetetetetetetetetasdds
+                    </div>
                 </div>
             </div>
-            {{--            <div> --}}
-            {{--                <div class="table-responsive"> --}}
-            {{--                    <table class="table rounded-lg align-middle items-center"> --}}
-            {{--                        <thead> --}}
-            {{--                            <tr> --}}
-            {{--                                <th scope="col" class="!w-3 !text-gray-400 !font-light"><input --}}
-            {{--                                        class="form-check-input" type="checkbox"> --}}
-            {{--                                </th> --}}
-            {{--                                <th scope="col" class="!text-gray-400 !font-light">#</th> --}}
-            {{--                                <th scope="col" class="!text-gray-400 !font-light">IMG</th> --}}
-            {{--                                <th scope="col" class="!text-gray-400 !font-light">Name</th> --}}
-            {{--                                <th scope="col" class="!text-gray-400 !font-light">Category</th> --}}
-            {{--                                <th scope="col" class="!text-gray-400 !font-light">Price</th> --}}
-            {{--                                <th scope="col" class="!text-gray-400 !font-light">Stock</th> --}}
-            {{--                                <th scope="col" class="!text-gray-400 !font-light">Action</th> --}}
-            {{--                            </tr> --}}
-            {{--                        </thead> --}}
-            {{--                        <tbody class="table-group-divider text-blue-300"> --}}
-            {{--                            <tr> --}}
-            {{--                                <th scope="row" class="w-fit"> --}}
-            {{--                                    <input class="form-check-input" type="checkbox"> --}}
-            {{--                                </th> --}}
-            {{--                                <td>1</td> --}}
-            {{--                                <td>IMG</td> --}}
-            {{--                                <td>PRODUCT NAME SLUG</td> --}}
-            {{--                                <td>PRODUCT CATEGORY SLUG</td> --}}
-            {{--                                <td>PRODUCT PRICE SLUG</td> --}}
-            {{--                                <td>PRUDUCT STOCK SLUG</td> --}}
-            {{--                                <td> --}}
-            {{--                                    <button type="button" class="btn border border-gray-200 rounded-full" --}}
-            {{--                                        data-bs-toggle="collapse" data-bs-target="#collapseExample" --}}
-            {{--                                        aria-expanded="false" aria-controls="collapseExample"> --}}
-            {{--                                        <i class="bi bi-caret-up-fill"></i> --}}
-            {{--                                    </button> --}}
-            {{--                                </td> --}}
-            {{--                            </tr> --}}
-            {{--                        </tbody> --}}
-            {{--                        <tbody> --}}
-            {{--                            <tr> --}}
-            {{--                                <th colspan="8"> --}}
-            {{--                                    <div class="collapse" id="collapseExample"> --}}
-            {{--                                        test --}}
-            {{--                                    </div> --}}
-            {{--                                </th> --}}
-            {{--                            </tr> --}}
-            {{--                        </tbody> --}}
-
-            {{--                        <tr> --}}
-            {{--                            <th scope="row" class="w-fit"> --}}
-            {{--                                <input class="form-check-input" type="checkbox"> --}}
-            {{--                            </th> --}}
-            {{--                            <td>1</td> --}}
-            {{--                            <td>IMG</td> --}}
-            {{--                            <td>PRODUCT NAME SLUG</td> --}}
-            {{--                            <td>PRODUCT CATEGORY SLUG</td> --}}
-            {{--                            <td>PRODUCT PRICE SLUG</td> --}}
-            {{--                            <td>PRUDUCT STOCK SLUG</td> --}}
-            {{--                            <td> --}}
-            {{--                                <button class="btn border border-gray-200 rounded-full"> --}}
-            {{--                                    <i class="bi bi-caret-up-fill"></i> --}}
-            {{--                                </button> --}}
-            {{--                            </td> --}}
-            {{--                        </tr> --}}
-            {{--                        </tbody> --}}
-            {{--                    </table> --}}
-            {{--                </div> --}}
-            {{--            </div> --}}
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                            aria-controls="flush-collapseOne">
+                            Accordion Item #1
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                            demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion
+                            body.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                            aria-controls="flush-collapseTwo">
+                            Accordion Item #2
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse h-60">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                            demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion
+                            body. Let's imagine this being filled with some actual content.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                            aria-controls="flush-collapseThree">
+                            Accordion Item #3
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                            demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion
+                            body. Nothing more exciting happening here in terms of content, but just filling up the
+                            space to make it look, at least at first glance, a bit more representative of how this would
+                            look in a real-world application.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{--            @foreach ($this->getProductList as $item) --}}
+            {{--                <p>{{ $item->title }}</p> --}}
+            {{--            @endforeach --}}
+            {{--            {{ $this->getProductList->links() }} --}}
         </div>
         <div class="flex-none py-12 pr-5 pl-3 justify-start bg-white">
             <p class="text-xs font-light uppercase text-gray-700">Overview</p>

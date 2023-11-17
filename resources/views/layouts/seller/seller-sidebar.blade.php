@@ -13,46 +13,46 @@
                 </a>
             </div>
         </li>
-        {{--        <li class="py-2.5"> --}}
-        {{--            <div x-data="{ open_1: $persist(false) }" class="w-full"> --}}
-        {{--                <div class="flex justify-between transition items-center"> --}}
-        {{--                    <button @click="open_1=!open_1" --}}
-        {{--                        class="w-full flex justify-between items-center text-base font-medium text-gray-600 mb-1.5 transition"> --}}
-        {{--                        <div class="flex items-center gap-2"> --}}
-        {{--                            <i class="bi bi-box2-heart text-xl text-gray-600" :class="{ '!text-blue-600': open_1 }"></i> --}}
-        {{--                            <p class="mb-0" :class="{ '!text-blue-600 text-base': open_1 }">Products</p> --}}
-        {{--                        </div> --}}
-        {{--                        <span class="transition  duration-500 rotate-180" :class="{ 'rotate-180': open_1 }"> --}}
-        {{--                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> --}}
-        {{--                                <path --}}
-        {{--                                    d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" --}}
-        {{--                                    fill="currentColor"></path> --}}
-        {{--                            </svg> --}}
-        {{--                        </span> --}}
-        {{--                    </button> --}}
-        {{--                </div> --}}
+        {{--         <li class="py-2.5"> --}}
+        {{--             <div x-data="{ open_1: $persist(false) }" class="w-full"> --}}
+        {{--                 <div class="flex justify-between transition items-center"> --}}
+        {{--                     <button @click="open_1=!open_1" --}}
+        {{--                         class="w-full flex justify-between items-center text-base font-medium text-gray-600 mb-1.5 transition"> --}}
+        {{--                         <div class="flex items-center gap-2"> --}}
+        {{--                             <i class="bi bi-box2-heart text-xl text-gray-600" :class="{ '!text-blue-600': open_1 }"></i> --}}
+        {{--                             <p class="mb-0" :class="{ '!text-blue-600 text-base': open_1 }">Products</p> --}}
+        {{--                         </div> --}}
+        {{--                         <span class="transition  duration-500 rotate-180" :class="{ 'rotate-180': open_1 }"> --}}
+        {{--                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> --}}
+        {{--                                 <path --}}
+        {{--                                     d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" --}}
+        {{--                                     fill="currentColor"></path> --}}
+        {{--                             </svg> --}}
+        {{--                         </span> --}}
+        {{--                     </button> --}}
+        {{--                 </div> --}}
 
-        {{--                <div x-cloak x-show="open_1" x-transition> --}}
-        {{--                    <ul> --}}
-        {{--                        <li class="p-1.5 text-sm"> --}}
-        {{--                            <a href="{{ route('product-list') }}" --}}
-        {{--                                class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
-        {{--                                wire:navigate wire:ignore> --}}
-        {{--                                My Products --}}
-        {{--                            </a> --}}
-        {{--                        </li> --}}
-        {{--                        <li class="p-1.5 text-sm"> --}}
-        {{--                            <a href="{{ route('product-new') }}" --}}
-        {{--                                class="no-underline decoration-0 {{ Route::is('product-new') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}" --}}
-        {{--                                wire:navigate wire:ignore> --}}
-        {{--                                Add New Product --}}
-        {{--                            </a> --}}
-        {{--                        </li> --}}
-        {{--                    </ul> --}}
-        {{--                </div> --}}
-        {{--            </div> --}}
+        {{--                 <div x-cloak x-show="open_1" x-transition> --}}
+        {{--                     <ul> --}}
+        {{--                         <li class="p-1.5 text-sm"> --}}
+        {{--                             <a href="{{ route('product-list') }}" --}}
+        {{--                                 class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
+        {{--                                 wire:navigate wire:ignore> --}}
+        {{--                                 My Products --}}
+        {{--                             </a> --}}
+        {{--                         </li> --}}
+        {{--                         <li class="p-1.5 text-sm"> --}}
+        {{--                             <a href="{{ route('product-new') }}" --}}
+        {{--                                 class="no-underline decoration-0 {{ Route::is('product-new') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}" --}}
+        {{--                                 wire:navigate wire:ignore> --}}
+        {{--                                 Add New Product --}}
+        {{--                             </a> --}}
+        {{--                         </li> --}}
+        {{--                     </ul> --}}
+        {{--                 </div> --}}
+        {{--             </div> --}}
 
-        {{--        </li> --}}
+        {{--         </li> --}}
 
         {{--        <li class="py-2.5"> --}}
         {{--            <div x-data="{ open_2: $persist(false), get isOpen_2() { return this.open_2 }, toggle_2() { this.open_2 = !this.open_2 } }" class="w-full"> --}}
