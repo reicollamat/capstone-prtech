@@ -112,37 +112,35 @@
         <div class="flex w-full h-full" id="wrapper">
             <div class="h-full flex-1 min-w-[220px] max-w-[220px] !bg-white border-end overflow-y-scroll"
                 id="sidebar">
-
                 @include('layouts.seller.seller-sidebar')
-
             </div>
-            <div class=" w-full overflow-y-scroll bg-[#F2F2F2]">
+            <div class="w-full h-full overflow-y-scroll bg-background">
                 @yield('content', $slot ?? '')
             </div>
         </div>
     </main>
 
     {{--    This directive is used to include the Livewire scripts --}}
-    @livewireScripts
-    <script>
-        function setChildContainerHeight() {
-            // get the height if main wrapper
-            let parentHeight = document.getElementById('main').clientHeight;
-            // get the height of navigation bar
-            let otherElementHeight = document.getElementById('navigationbar').clientHeight;
-            // get the child container where we need to set the height
-            let childContainer = document.getElementById('wrapper');
-            // apply the height to the element
-            childContainer.style.height = (parentHeight - otherElementHeight) + 'px';
+    @livewireScriptConfig
+    {{--    @livewireScripts --}}
+    {{--    <script> --}}
+    {{--        function setChildContainerHeight() { --}}
+    {{--            // get the height if main wrapper --}}
+    {{--            let parentHeight = document.getElementById('main').clientHeight; --}}
+    {{--            // get the height of navigation bar --}}
+    {{--            let otherElementHeight = document.getElementById('navigationbar').clientHeight; --}}
+    {{--            // get the child container where we need to set the height --}}
+    {{--            let childContainer = document.getElementById('wrapper'); --}}
+    {{--            // apply the height to the element --}}
+    {{--            childContainer.style.height = (parentHeight - otherElementHeight) + 'px'; --}}
 
-            // console.log(parentHeight, otherElementHeight, childContainer);
-        }
+    {{--            console.log(parentHeight, otherElementHeight, childContainer.style.height); --}}
+    {{--        } --}}
 
-        // event listener to adjust the height of the child container
-        window.addEventListener('load', setChildContainerHeight);
-        window.addEventListener('resize', setChildContainerHeight);
-    </script>
-
+    {{--        // event listener to adjust the height of the child container --}}
+    {{--        window.addEventListener('load', setChildContainerHeight); --}}
+    {{--        window.addEventListener('resize', setChildContainerHeight); --}}
+    {{--    </script> --}}
 </body>
 
 </html>

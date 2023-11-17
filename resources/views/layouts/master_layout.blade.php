@@ -73,7 +73,8 @@
     <a href="#" class="btn btn-primary back-to-top mb-3"><i class="bi bi-caret-up-square"></i></a>
 
     {{-- This directive is used to include the Livewire scripts --}}
-    @livewireScripts
+    @livewireScriptConfig
+    {{--    @livewireScripts --}}
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

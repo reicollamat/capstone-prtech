@@ -116,7 +116,8 @@
     </footer>
 
     {{-- This directive is used to include the Livewire scripts --}}
-    @livewireScripts
+    @livewireScriptConfig
+    {{--    @livewireScripts --}}
 
 </body>
 
