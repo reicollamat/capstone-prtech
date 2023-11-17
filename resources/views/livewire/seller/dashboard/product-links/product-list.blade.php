@@ -114,35 +114,60 @@
                     tesrtetetetetetetetetet
                 </p>
             </div>
-            <div class="bg-white">
-                <div class="flex  min-w-2xl items-center tablelike overflow-x-auto">
-                    <p class="!w-3 mb-0 !text-gray-400 !font-light">
+            <div class="bg-white overflow-x-auto">
+                <div
+                    class="flex flex-column flex-lg-row min-w-full  items-center text-center tablelike  border-b-2 border-blue-300">
+                    <p class="mb-0 min-w-[40px] !text-gray-400 !font-light">
                         <input class="form-check-input" type="checkbox">
                     </p>
-                    <p class="!w-3 mb-0  !text-gray-400 !font-light">
-                        #
-                    </p>
-                    <p class="!w-3 mb-0  !text-gray-400 !font-light">
+                    <p class="mb-0  min-w-[60px] !text-gray-400 !font-light">
                         IMG
                     </p>
-                    <p class="!w-3 mb-0  !text-gray-400 !font-light">
+                    <p class="mb-0 min-w-[40px] min-w-max !text-gray-400 !font-light">
+                        #
+                    </p>
+                    <p class="mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
                         Name
                     </p>
-                    <p class="!w-3 mb-0  !text-gray-400 !font-light">
+                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
                         Category
                     </p>
-                    <p class="!w-3 mb-0  !text-gray-400 !font-light">
+                    <p class=" mb-0  min-w-[100px]  !text-gray-400 !font-light">
                         Price
                     </p>
-                    <p class="!w-3 mb-0  !text-gray-400 !font-light">
+                    <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light">
                         Stock
                     </p>
-                    <p class="!w-3 mb-0  !text-gray-400 !font-light">
+                    <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light">
                         Action
                     </p>
                 </div>
-                <div class="table-group-divider text-blue-300">
 
+                <div class="flex flex-column flex-lg-row min-w-full  items-center text-center  overflow-x-auto">
+                    <p class="mb-0 p-2 !text-gray-400 !font-light">
+                        <input class="form-check-input" type="checkbox">
+                    </p>
+                    <div class="mb-0 !text-gray-800 !font-base">
+                        IMG
+                    </div>
+                    <p class="mb-0 min-w-[100px] flex-1 min-w-max !text-gray-400 !font-light">
+                        #
+                    </p>
+                    <p class="mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
+                        Name
+                    </p>
+                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
+                        Category
+                    </p>
+                    <p class=" mb-0  min-w-[100px] flex-1 !text-gray-400 !font-light">
+                        Price
+                    </p>
+                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
+                        Stock
+                    </p>
+                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
+                        Action
+                    </p>
                 </div>
             </div>
             {{--            <div> --}}
