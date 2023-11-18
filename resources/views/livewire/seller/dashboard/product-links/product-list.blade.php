@@ -27,8 +27,14 @@
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                         class="absolute left-0 z-20 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                         <div class="bg-white rounded border-1 border-gray-300">
-                            <p class="mb-0 uppercase text-sm p-2 tracking-tight">In Stock</p>
-                            <p class="mb-0 uppercase text-sm p-2 tracking-tight">test</p>
+                            <button
+                                class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
+                                @click="isOpen = false">In Stock
+                            </button>
+                            <button
+                                class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
+                                @click="isOpen = false">Out of Stock
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -89,13 +95,18 @@
                     </div>
                     {{--                    searchning filter --}}
                     <div>
-                        <form action="">
-                            <div class="relative text-gray-600">
-                                <label for="quick_search" class="sr-only">Search</label>
+                        <div class="relative text-gray-600">
+                            <label for="quick_search" class="sr-only">Search</label>
+                            <div class="flex gap-1.5 items-center">
                                 <input id="quick_search" type="search" name="serch" placeholder="Quick Search"
-                                    class="bg-white w-full h-full border-gray-200 rounded-lg text-sm focus:outline-none">
+                                    class="bg-white w-full h-full border-gray-200 rounded-lg text-sm focus:outline-none"
+                                    wire:model.blur="quick_search_filter">
+                                <button wire:click="test">
+                                    goto page1
+                                </button>
                             </div>
-                        </form>
+
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center text-blue-500 justify-center gap-1">
@@ -105,142 +116,114 @@
                         Product</a>
                 </div>
             </div>
-            {{--            there is the table for data --}}
+            {{ $quick_search_filter }}
             <hr>
-            <div x-data="{ expanded: false }">
-                <button @click="expanded = ! expanded">Toggle Content</button>
-
-                <p x-cloak x-show="expanded" x-collapse>
-                    tesrtetetetetetetetetet
-                </p>
-            </div>
-            <div class="bg-white overflow-x-auto">
-                <div
-                    class="flex flex-column flex-lg-row min-w-full  items-center text-center tablelike  border-b-2 border-blue-300">
-                    <p class="mb-0 min-w-[40px] !text-gray-400 !font-light">
-                        <input class="form-check-input" type="checkbox">
-                    </p>
-                    <p class="mb-0  min-w-[60px] !text-gray-400 !font-light">
-                        IMG
-                    </p>
-                    <p class="mb-0 min-w-[40px]  !text-gray-400 !font-light">
-                        #
-                    </p>
-                    <p class="mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
-                        Name
-                    </p>
-                    <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light">
-                        Category
-                    </p>
-                    <p class=" mb-0  min-w-[100px]  !text-gray-400 !font-light">
-                        Price
-                    </p>
-                    <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light">
-                        Stock
-                    </p>
-                    <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light">
-                        Action
-                    </p>
-                </div>
-                <div x-data="{ expanded: false }">
-                    <div class="flex flex-column flex-lg-row min-w-full  items-center text-center">
-                        <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light">
+            <div class="bg-white overflow-x-auto rounded-lg p-3">
+                <div id="table-headers">
+                    <div
+                        class="flex flex-column flex-lg-row flex-shrink-0 min-w-full  items-center text-center tablelike">
+                        <p class="mb-0 min-w-[40px] !text-gray-400 !font-light border-b-2 border-blue-300">
                             <input class="form-check-input" type="checkbox">
-                        </span>
-                        <div class="mb-0  min-w-[60px] p-2 !text-gray-400 !font-light">
+                        </p>
+                        <p class="mb-0  min-w-[60px] !text-gray-400 !font-light border-b-2 border-blue-300">
                             IMG
-                        </div>
-                        <div class="mb-0 min-w-[40px] p-2 !text-gray-400 !font-light">
+                        </p>
+                        <p class="mb-0 min-w-[40px]  !text-gray-400 !font-light border-b-2 border-blue-300">
                             #
-                        </div>
-                        <div class="mb-0 min-w-[100px] p-2 flex-1 !text-gray-400 !font-light">
+                        </p>
+                        <p class="mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light border-b-2 border-blue-300">
                             Name
-                        </div>
-                        <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-400 !font-light">
+                        </p>
+                        <p class=" mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light border-b-2 border-blue-300">
                             Category
-                        </div>
-                        <div class=" mb-0  min-w-[100px] p-2 !text-gray-400 !font-light">
+                        </p>
+                        <p class=" mb-0  min-w-[100px]  !text-gray-400 !font-light border-b-2 border-blue-300">
                             Price
-                        </div>
-                        <div class=" mb-0 min-w-[100px] p-2 !text-gray-400 !font-light">
+                        </p>
+                        <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light border-b-2 border-blue-300">
                             Stock
-                        </div>
-                        <div class=" mb-0 min-w-[100px] p-2 !text-gray-600 !font-light">
-                            <button class="p-1 border border-gray-900 rounded " @click="expanded = ! expanded">
-                                <span class="transition duration-500" :class="{ 'rotate-180': expanded }">
-                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                                            fill="currentColor"></path>
-                                    </svg>
-                                </span>
-
-                            </button>
-                        </div>
-                    </div>
-                    {{--                     dropdown content --}}
-                    <div x-cloak class="!h-60" x-show="expanded" x-collapse>
-                        tesrtetetetetetetetetetasdds
+                        </p>
+                        <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light border-b-2 border-blue-300">
+                            Action
+                        </p>
                     </div>
                 </div>
+                @foreach ($this->getProductList as $item)
+                    {{--                     <div wire:key="{{ $item->id }}" x-data="{ expanded: false }" class="py-2 bg-white"> --}}
+                    {{--                         <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center"> --}}
+                    {{--                             <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light"> --}}
+                    {{--                                 <input class="form-check-input" wire:model.live="select_products" --}}
+                    {{--                                     value="{{ $item->id }}" type="checkbox"> --}}
+                    {{--                             </span> --}}
+                    {{--                             <div class="relative items-center  mb-0 min-w-[60px] p-2 !text-gray-800 !font-light"> --}}
+                    {{--                                  --}}{{--                                 <img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" --}}
+                    {{--                                 <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-9 h-9" --}}
+                    {{--                                     alt="Product-Thumbnail"> --}}
+                    {{--                             </div> --}}
+                    {{--                             <div class="mb-0 min-w-[40px] p-2 !text-gray-800 !font-light"> --}}
+                    {{--                                 {{ $item->id }} --}}
+                    {{--                             </div> --}}
+                    {{--                             <div class="mb-0 min-w-[100px] text-start p-2 flex-1 !text-gray-800 !font-light"> --}}
+                    {{--                                 {{ $item->title }} --}}
+                    {{--                             </div> --}}
+                    {{--                             <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-800 !font-light"> --}}
+                    {{--                                 {{ \App\Helper\Helper::maptopropercatetory($item->category) }} --}}
+                    {{--                             </div> --}}
+                    {{--                             <div class=" mb-0  min-w-[100px] p-2 !text-gray-800 !font-light"> --}}
+                    {{--                                 {{ $item->price }} --}}
+                    {{--                             </div> --}}
+                    {{--                             <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light"> --}}
+                    {{--                                 Stock --}}
+                    {{--                             </div> --}}
+                    {{--                             <div --}}
+                    {{--                                 class="flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center"> --}}
+                    {{--                                 <button id="faqs-title-01" type="button" --}}
+                    {{--                                     class="flex items-center justify-center text-center font-semibold p-1 bg-white rounded-lg" --}}
+                    {{--                                     @click="expanded = !expanded" :aria-expanded="expanded" --}}
+                    {{--                                     aria-controls="faqs-text-01"> --}}
+                    {{--                                     <span class="transform origin-center transition duration-200 ease-out" --}}
+                    {{--                                         :class="{ '!rotate-180': expanded }"> --}}
+                    {{--                                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" --}}
+                    {{--                                             xmlns="http://www.w3.org/2000/svg"> --}}
+                    {{--                                             <path --}}
+                    {{--                                                 d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" --}}
+                    {{--                                                 fill="currentColor"></path> --}}
+                    {{--                                         </svg> --}}
+                    {{--                                     </span> --}}
+                    {{--                                 </button> --}}
+                    {{--                             </div> --}}
+                    {{--                         </div> --}}
+                    {{--                         <div id="faqs-text-01" role="region" aria-labelledby="faqs-title-01" --}}
+                    {{--                             class="grid text-sm text-slate-600 overflow-hidden transition-all duration-300 ease-in-out" --}}
+                    {{--                             :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"> --}}
+                    {{--                             <div class="overflow-hidden"> --}}
+                    {{--                                 <p class="pb-3"> --}}
+                    {{--                                     If you go over your organisations or user limit, a member of the team will reach out --}}
+                    {{--                                     about --}}
+                    {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
+                    {{--                                     accounts or --}}
+                    {{--                                     users that are over the 100-account or 1,000-user limit. --}}
+                    {{--                                     If you go over your organisations or user limit, a member of the team will reach out --}}
+                    {{--                                     about --}}
+                    {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
+                    {{--                                     accounts or --}}
+                    {{--                                     users that are over the 100-account or 1,000-user limit. If you go over your --}}
+                    {{--                                     organisations --}}
+                    {{--                                     or user limit, a member of the team will reach out about --}}
+                    {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
+                    {{--                                     accounts or --}}
+                    {{--                                     users that are over the 100-account or 1,000-user limit. --}}
+                    {{--                                 </p> --}}
+                    {{--                             </div> --}}
+                    {{--                         </div> --}}
+                    {{--                     </div> --}}
+                    <livewire:component.product-list-component :$item :key="$item->id" />
+                @endforeach
+                {{ $this->getProductList->links() }}
+                {{ $this->getProductList->count() }}
             </div>
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne">
-                            Accordion Item #1
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                            demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion
-                            body.
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                            aria-controls="flush-collapseTwo">
-                            Accordion Item #2
-                        </button>
-                    </h2>
-                    <div id="flush-collapseTwo" class="accordion-collapse collapse h-60">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                            demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion
-                            body. Let's imagine this being filled with some actual content.
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseThree" aria-expanded="false"
-                            aria-controls="flush-collapseThree">
-                            Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="flush-collapseThree" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                            demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion
-                            body. Nothing more exciting happening here in terms of content, but just filling up the
-                            space to make it look, at least at first glance, a bit more representative of how this would
-                            look in a real-world application.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{--            @foreach ($this->getProductList as $item) --}}
-            {{--                <p>{{ $item->title }}</p> --}}
-            {{--            @endforeach --}}
-            {{--            {{ $this->getProductList->links() }} --}}
         </div>
-        <div class="flex-none py-12 pr-5 pl-3 justify-start bg-white">
+        <div class="flex-none h-full py-12 pr-5 pl-3 justify-start bg-white">
             <p class="text-xs font-light uppercase text-gray-700">Overview</p>
             <div class="py-2">
                 <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
