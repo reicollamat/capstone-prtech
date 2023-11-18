@@ -31,68 +31,37 @@ class Product extends Model
 
     public function category($category)
     {
-        if ($category == 'computer_case') 
-        {
+        if ($category == 'computer_case') {
             return $this->hasOne(ComputerCase::class);
-        }
-        elseif ($category == 'case_fan')
-        {
+        } elseif ($category == 'case_fan') {
             return $this->hasOne(CaseFan::class);
-        }
-        elseif ($category == 'cpu')
-        {
+        } elseif ($category == 'cpu') {
             return $this->hasOne(Cpu::class);
-        }
-        elseif ($category == 'cpu_cooler')
-        {
+        } elseif ($category == 'cpu_cooler') {
             return $this->hasOne(CpuCooler::class);
-        }
-        elseif ($category == 'ext_storage')
-        {
+        } elseif ($category == 'ext_storage') {
             return $this->hasOne(ExtStorage::class);
-        }
-        elseif ($category == 'int_storage')
-        {
+        } elseif ($category == 'int_storage') {
             return $this->hasOne(IntStorage::class);
-        }
-        elseif ($category == 'headphone')
-        {
+        } elseif ($category == 'headphone') {
             return $this->hasOne(Headphone::class);
-        }
-        elseif ($category == 'keyboard')
-        {
+        } elseif ($category == 'keyboard') {
             return $this->hasOne(Keyboard::class);
-        }
-        elseif ($category == 'memory')
-        {
+        } elseif ($category == 'memory') {
             return $this->hasOne(Memory::class);
-        }
-        elseif ($category == 'monitor')
-        {
+        } elseif ($category == 'monitor') {
             return $this->hasOne(Monitor::class);
-        }
-        elseif ($category == 'motherboard')
-        {
+        } elseif ($category == 'motherboard') {
             return $this->hasOne(Motherboard::class);
-        }
-        elseif ($category == 'mouse')
-        {
+        } elseif ($category == 'mouse') {
             return $this->hasOne(Mouse::class);
-        }
-        elseif ($category == 'psu')
-        {
+        } elseif ($category == 'psu') {
             return $this->hasOne(Psu::class);
-        }
-        elseif ($category == 'speaker')
-        {
+        } elseif ($category == 'speaker') {
             return $this->hasOne(Speaker::class);
-        }
-        elseif ($category == 'video_card')
-        {
+        } elseif ($category == 'video_card') {
             return $this->hasOne(VideoCard::class);
-        }
-        elseif ($category == 'webcam')
-        {
+        } elseif ($category == 'webcam') {
             return $this->hasOne(Webcam::class);
         }
     }
@@ -131,7 +100,7 @@ class Product extends Model
     {
         return $this->hasOne(Headphone::class);
     }
-    
+
     public function keyboard()
     {
         return $this->hasOne(Keyboard::class);
@@ -214,11 +183,11 @@ class Product extends Model
      * @var array
      */
     protected $allowedFilters = [
-           'id'         => Where::class,
-           'title'       => Like::class,
-           'category'      => Like::class,
-           'updated_at' => WhereDateStartEnd::class,
-           'created_at' => WhereDateStartEnd::class,
+        'id' => Where::class,
+        'title' => Like::class,
+        'category' => Like::class,
+        'updated_at' => WhereDateStartEnd::class,
+        'created_at' => WhereDateStartEnd::class,
     ];
 
     /**
@@ -234,7 +203,7 @@ class Product extends Model
         'created_at',
     ];
 
-    public $sortable =[
+    public $sortable = [
         'title',
         'price',
         'purchase_count',

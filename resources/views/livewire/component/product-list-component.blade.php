@@ -13,7 +13,7 @@
                 {{ $item->id }}
             </div>
             <div class="mb-0 min-w-[100px] text-start p-2 flex-1 !text-gray-800 !font-light">
-                {{ $item->title }}
+                {{ $item->name }}
             </div>
             <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-800 !font-light">
                 {{ \App\Helper\Helper::maptopropercatetory($item->category) }}
