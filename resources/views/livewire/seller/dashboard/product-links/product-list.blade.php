@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-column flex-lg-row gap-2.5">
+                <div class="flex flex-column flex-lg-row lg:items-center gap-2.5">
                     {{--  Category Filter --}}
                     <div x-data="{ isOpen: false }" class="relative inline-block ">
                         <!-- Dropdown toggle button -->
@@ -99,11 +99,8 @@
                             <label for="quick_search" class="sr-only">Search</label>
                             <div class="flex gap-1.5 items-center">
                                 <input id="quick_search" type="search" name="serch" placeholder="Quick Search"
-                                    class="bg-white w-full h-full border-gray-200 rounded-lg text-sm focus:outline-none"
+                                    class="bg-white w-full p-1 h-full border-gray-200 !rounded-lg text-sm focus:outline-none"
                                     wire:model.blur="quick_search_filter">
-                                <button wire:click="test">
-                                    goto page1
-                                </button>
                             </div>
 
                         </div>
@@ -221,10 +218,16 @@
                 @endforeach
                 {{ $this->getProductList->links() }}
                 {{ $this->getProductList->count() }}
+                <button wire:click="$dispatch('openModal', { component: 'livewire.modals.sample-modal' })">Edit User
+                </button>
+                <button onclick="Livewire.dispatch('openModal', { component: 'livewire.modals.samplemodal' })">Edit
+                    User
+                </button>
+                <button wire:click="$dispatch('openModal', { component: 'edit-user' })">Edit User</button>
             </div>
         </div>
         <div class="flex-none h-full py-12 pr-5 pl-3 justify-start bg-white">
-            <p class="text-xs font-light uppercase text-gray-700">Overview</p>
+            <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
             <div class="py-2">
                 <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
                 <p class="font-semibold">{{ $this->getTotalProductCount }}</p>

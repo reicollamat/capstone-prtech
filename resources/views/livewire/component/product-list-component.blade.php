@@ -39,27 +39,41 @@
                 </button>
             </div>
         </div>
-        <div id="faqs-text-01" role="region" aria-labelledby="faqs-title-01"
-            class="grid text-sm text-slate-600 overflow-hidden transition-all duration-300 ease-in-out"
+        <div x-cloak id="faqs-text-01" role="region" aria-labelledby="faqs-title-01"
+            class="grid text-sm border-t-2 border-blue-100 text-slate-600 overflow-hidden transition-all duration-300 ease-in-out"
             :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
             <div class="overflow-hidden">
-                <p class="pb-3">
-                    If you go over your organisations or user limit, a member of the team will reach out
-                    about
-                    bespoke pricing. In the meantime, our collaborative features won't appear in
-                    accounts or
-                    users that are over the 100-account or 1,000-user limit.
-                    If you go over your organisations or user limit, a member of the team will reach out
-                    about
-                    bespoke pricing. In the meantime, our collaborative features won't appear in
-                    accounts or
-                    users that are over the 100-account or 1,000-user limit. If you go over your
-                    organisations
-                    or user limit, a member of the team will reach out about
-                    bespoke pricing. In the meantime, our collaborative features won't appear in
-                    accounts or
-                    users that are over the 100-account or 1,000-user limit.
-                </p>
+                <div class="p-3 flex">
+                    <div class="px-2.5">
+                        <div class="flex justify-center items-center p-2.5">
+                            <img src="{{ asset($item->image) }}"
+                                class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-28 h-28"
+                                alt="Product-Thumbnail">
+                        </div>
+                        <p class="text-center">+ Add Image</p>
+                    </div>
+                    <div class="flex-1">
+                        <div class="grid grid-cols-2">
+                            <div>
+                                <div class="mb-3">
+                                    <label for="username"
+                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Display
+                                        Name
+                                    </label>
+                                    <input type="text" id="username" value="{{ $item->name }}"
+                                        class="bg-white !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                        placeholder="" required>
+                                    @error('username')
+                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

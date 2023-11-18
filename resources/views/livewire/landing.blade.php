@@ -9,4 +9,8 @@
         <span x-text="count"></span>
         <button x-on:click="count++">+</button>
     </div>
+    @foreach ($this->getProducts as $value)
+        {{ $value->title }}
+    @endforeach
+    {{ $this->getProducts->links() }}
 </div>

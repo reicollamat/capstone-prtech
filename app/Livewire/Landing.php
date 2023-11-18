@@ -3,22 +3,22 @@
 namespace App\Livewire;
 
 use App\Models\AnnouncementBanner;
+use App\Models\Product;
 use Illuminate\Support\Facades\Http;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Landing extends Component
 {
+    use WithPagination;
+
     public int $count = 0;
 
     public function mount()
 
     {
-        //        $all_products = Http::get('http://127.0.0.1:8000/api/product') ?? null;
-        //        $all_products = Http::timeout(3)->get('http://127.0.0.1:8000/api/product') ?? null;
-
-
-        //        $this->announcements = AnnouncementBanner::all();
 
     }
 
@@ -31,26 +31,17 @@ class Landing extends Component
         HTML;
     }
 
-    public function render()
+    #[Computed]
+    public function getProducts()
     {
+        return Product::paginate(10);
 
-        //        $response = Http::timeout(3)->get('https://jsonplaceholder.typicode.com/todos/1');
-        //        $collection = json_decode($response);
-
-
-        return view('livewire.landing');
     }
 
-    // login-register test
-    //    public function login()
-    //    {
-    //        return view('layouts.login-register-layout');
-    //    }
-
-    //    public function register()
-    //    {
-    //        return view('layouts.login-register-layout');
-    //    }
+    public function render()
+    {
+        return view('livewire.landing');
+    }
 
     #[On('wishlist-item-remount')]
     public function increment()

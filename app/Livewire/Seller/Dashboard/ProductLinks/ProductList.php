@@ -65,15 +65,14 @@ class ProductList extends Component
 
         if ($this->quick_search_filter) {
 
-            return $products = Product::where('title', 'ilike', "%{$this->quick_search_filter}%")->cursorPaginate(10);
+            return Product::where('title', 'ilike', "%{$this->quick_search_filter}%")->paginate(10);
 
         } else {
 
-            return $products = Product::cursorPaginate(10);
+            return Product::paginate(10);
         }
 
     }
-
 
     public function render()
     {

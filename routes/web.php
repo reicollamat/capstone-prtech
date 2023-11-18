@@ -27,8 +27,9 @@ use App\Livewire\Seller\Inventory;
 use App\Livewire\Seller\OnBoarding\Form\SellerRegistration;
 use App\Livewire\Seller\OnBoarding\Form\ShopInformation;
 use App\Livewire\Seller\OnBoarding\Form\ShopSuccess;
+use App\Livewire\Shop\Collections;
 use Illuminate\Support\Facades\Route;
-
+use \App\Livewire\Shop;
 use \App\Livewire\Seller\Auth\LoginPage;
 
 use \App\Livewire\Seller\Auth\RegisterPage;
@@ -55,7 +56,7 @@ Route::get('/redirect', [LandingController::class, 'redirect']);
 // landing page / home page
 Route::get('/', [LandingController::class, 'index'])->name('index_landing');
 
-Route::get('/collection', [\App\Livewire\Shop\Collections::class])->name('collection');
+Route::get('/collection', Collections::class)->name('collection');
 
 Route::get('/testing', Landing::class)->name('testing_page');
 
