@@ -41,3 +41,7 @@ document.addEventListener("livewire:navigated", () => {
     // on the page...
     setChildContainerHeight();
 });
+Livewire.on("page-updated", () => {
+    console.log("next page");
+    setChildContainerHeight();
+});
