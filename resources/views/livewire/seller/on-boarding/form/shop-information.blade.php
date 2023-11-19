@@ -15,7 +15,7 @@
     </x-slot:page_header>
 
     {{-- alert message if success --}}
-    @if(session('success'))
+    @if (session('success'))
         <div class="alert alert-success alert-dismissible d-flex align-items-center m-3" role="alert">
             <div>
                 {{ session('success') }}
@@ -23,11 +23,10 @@
         </div>
     @endif
 
-
     <div>
         <div class="container-fluid !bg-red md:!px-14 py-14 ">
             <div class="flex gap-6">
-                <div class="!bg-transparent hidden md:block p-2.5 py-24 pl-4">
+                <div class="!bg-transparent self-center hidden md:block p-2.5 py-24 pl-4">
                     <ol class="relative text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">
                         <li class="mb-10 ml-3">
                             <span x-transition.duration.500ms
@@ -105,6 +104,7 @@
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     <span class="text-red-600 text-xs">*</span> Email</label>
                                                 <input type="email" id="shop_email" wire:model.blur="shop_email"
+                                                    @disabled($shop_email)
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     placeholder="example@gmail.com" required>
                                             </div>
@@ -248,11 +248,12 @@
                                     <div class="flex justify-center">
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" id="terms" name="terms" required />
-                                            <label for="terms" class="mb-0">I agree to the Terms and
-                                                Conditions</label>
+                                            <label for="terms" class="mb-0">
+                                                I agree to the <a class="no-underline"
+                                                    href="{{ route('terms-and-conditions') }}">Terms and
+                                                    Conditions</a> </label>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <div class="flex justify-end gap-3">

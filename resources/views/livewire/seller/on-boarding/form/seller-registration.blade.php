@@ -47,7 +47,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     <span class="text-red-600 text-xs">*</span> Email</label>
                                 <input type="email" id="user_email" wire:model.blur="user_email"
-                                    @disabled($user_email > 1)
+                                    @disabled($shop_email > 1)
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="example@gmail.com" required>
                                 @error('user_email')
@@ -165,31 +165,37 @@
                         <p>{{ $user_sex }} test</p>
                         <p>{{ $userid }}</p>
 
-                    {{-- modal test --}}
+                        {{-- modal test --}}
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
                             Proceed Modal
                         </button>
-                        
+
                         <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ...
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close
+                                        </button>
+                                        <button type="button" class="btn btn-primary">Understood</button>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                ...
-                                </div>
-                                <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Understood</button>
-                                </div>
-                            </div>
                             </div>
                         </div>
-                        
+
                         <button type="submit" class="btn btn-primary">
                             <span wire:loading.remove wire:target="RegistrationForm">
                                 Proceed

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Seller\OnBoarding\Form;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
@@ -30,12 +32,20 @@ class ShopInformation extends Component
 
 
     #[Locked]
-    public $id;
+    public $user_id;
 
-    public function mount($id = null)
+    public function mount()
     {
+        $this->user_id = Auth::user()->id ?? null;
+
         $this->currentStep = 1;
-        $this->id = $id;
+
+        $user = User::find($this->user_id)->select('email');
+
+        // get the email value of user and set it to user_email input and disables it
+        if ($user != null) {
+            $this->shop_email = $user->email;
+        }
 
     }
 

@@ -70,8 +70,8 @@ Route::prefix('seller')->group(function () {
     // seller registration
     Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
     Route::get('on-boarding/form', ShopInformation::class)->name('seller-shop-information');
-    Route::get('on-boarding/form/{id}', ShopInformation::class)->name('seller-shop-information-user');
-    Route::get('on-boarding/form/sucess', ShopSuccess::class)->name('seller-shop-information-success');
+    //    Route::get('on-boarding/form/{id}', ShopInformation::class)->name('seller-shop-information-user');
+    //    Route::get('on-boarding/form/sucess', ShopSuccess::class)->name('seller-shop-information-success');
 
     // seller dashboard
     //    Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller-dashboard');
