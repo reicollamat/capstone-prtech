@@ -26,6 +26,25 @@ return new class extends Migration {
         Schema::create('seller_information', function (Blueprint $table) {
             $table->id();
             $table->string('shop_name')->nullable();
+            $table->string('shop_email')->nullable();
+            $table->string('shop_phone_number')->nullable();
+            $table->string('shop_address')->nullable();
+            $table->string('shop_city')->nullable();
+            $table->string('shop_state_province')->nullable();
+            $table->string('shop_postal_code')->nullable();
+
+            $table->string('registered_business_name')->nullable();
+            $table->string('registered_address')->nullable();
+            $table->string('registered_city')->nullable();
+            $table->string('registered_state_province')->nullable();
+            $table->string('registered_postal_code')->nullable();
+
+
+            $table->string('seller_type')->nullable();
+            $table->string('business_permit')->nullable();
+
+
+            $table->unsignedBigInteger('user_id')->unique();
 
             $table->timestamps();
         });
