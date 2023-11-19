@@ -30,16 +30,6 @@ class AddToWishlist extends Component
      * @throws Some_Exception_Class If the product cannot be mounted.
      */
 
-    public function placeholder()
-    {
-        return <<<'HTML'
-        <div>
-            <!-- Loading spinner... -->
-            <svg>...</svg>
-        </div>
-        HTML;
-    }
-
     #[On('wishlist-item-remount')]
     public function mount($product_id)
     {
@@ -67,22 +57,13 @@ class AddToWishlist extends Component
 
     public function addtowishlist()
     {
-        //        $bookmark_entry = DB::table('bookmarks')->where('user_id', $this->user_id)->where('product_id', $this->product_id)->first();
-
-        //        dd($this->user_id, $this->added_to_wishlist);
-
         if (Auth::check()) {
 
             if (!$this->added_to_wishlist) {
                 Bookmark::firstOrCreate(['user_id' => $this->user_id, 'product_id' => $this->product_id]);
-
                 // create an event to update the count of wihshlist items
                 $this->dispatch('wishlist-item-change');
-
-
-                $this->mount($this->product_id);
             }
-
         } else {
             $this->redirect(route('login'));
         }
