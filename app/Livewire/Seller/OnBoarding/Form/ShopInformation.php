@@ -3,6 +3,7 @@
 namespace App\Livewire\Seller\OnBoarding\Form;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -36,14 +37,13 @@ class ShopInformation extends Component
 
     public function mount()
     {
-        $this->user_id = Auth::user()->id ?? null;
-
         $this->currentStep = 1;
 
-        $user = User::find($this->user_id)->select('email');
+        $user = Auth::user() ?? null;
 
-        // get the email value of user and set it to user_email input and disables it
-        if ($user != null) {
+        //         get the email value of user and set it to user_email input and disables it
+        if ($user) {
+            $this->user_id = $user->id;
             $this->shop_email = $user->email;
         }
 
@@ -94,7 +94,39 @@ class ShopInformation extends Component
             ]
         );
         sleep(0.5);
-        // add here the database query for creation of seller shop information
+
+        // add here the database query for creation of seller shop information.
+        //        dd($this->user_id);
+
+        $user = User::find($this->user_id);
+
+        try {
+            // create a seller information account using the $user model
+            $user->seller()->create(
+                [
+                    'shop_name' => 'required',
+                    'shop_email' => $user->email,
+                    'shop_phone_number' => 'required',
+                    'shop_address' => 'required',
+                    'shop_city' => 'required',
+                    'shop_state_province' => 'required',
+                    'shop_postal_code' => 'required',
+                    'registered_business_name' => 'required',
+                    'registered_address' => 'required',
+                    'registered_city' => 'required',
+                    'registered_state_province' => 'required',
+                    'registered_postal_code' => 'required',
+                ]
+            );
+
+            //         set the is_seller to true
+            $user->update(['is_seller' => true]);
+
+        } catch (Exception $e) {
+            abort(500, $e->getMessage());
+        }
+
+        // change the form to 3rd step if validation is passed
         $this->currentStep = 3;
 
 

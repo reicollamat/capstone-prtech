@@ -125,6 +125,10 @@
                                                 <input type="text" id="shop_address" wire:model.blur="shop_address"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     placeholder="Address" required>
+                                                <span
+                                                    class="block ml-2 mt-1 text-sm font-light text-gray-600 dark:text-white">This
+                                                    is where the Items are going to be Pick-up. Preferably the address
+                                                    that is on your Business Permit</span>
                                             </div>
                                             <div class="mt-6">
                                                 <div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -198,8 +202,14 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="" required>
                                         <span
-                                            class="block ml-2 mt-0.5 text-xs font-light text-gray-600 dark:text-white">Surname,
+                                            class="block ml-2 mt-1 text-sm font-light text-gray-600 dark:text-white">Surname,
                                             Firstname (e.g. Dela Cruz, Juan)</span>
+                                    </div>
+                                    <div class="mt-3 flex justify-center">
+                                        <p class="mb-0 text-base text-gray-700 w-1/2 text-center">
+                                            If Business Address is the same as the address provided at Shop Information.
+                                            You may just copy and paste the information.
+                                        </p>
                                     </div>
                                     <div class="mt-3">
                                         <label for="registered_address"
@@ -209,9 +219,7 @@
                                             wire:model.blur="registered_address"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="" required>
-                                        <span
-                                            class="block ml-2 mt-0.5 text-xs font-light text-gray-600 dark:text-white">Full
-                                            Address</span>
+
                                     </div>
                                     <div class="mt-3">
                                         <div class="grid gap-6 mb-6 md:grid-cols-3">
