@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('image');
             $table->string('status')->default('available');
             $table->string('condition');
-            $table->float('rating');
+            $table->float('rating')->default(0.0);
             $table->integer('purchase_count')->default(0);
 
             $table->softDeletes();
