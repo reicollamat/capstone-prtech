@@ -46,14 +46,7 @@ class Searchbar extends Component
     {
         $this->search = '';
     }
-    //    public function placeholder()
-    //    {
-    //        return <<<'HTML'
-    //        <div>
-    //            <p1>loading</p1>
-    //        </div>
-    //        HTML;
-    //    }
+
 
     public function placeholder(array $params = [])
     {
@@ -77,5 +70,10 @@ class Searchbar extends Component
             $this->search_return = '';
         }
         return view('livewire.searchbar');
+    }
+
+    public function submit()
+    {
+        $this->redirect(route('collections', ['search' => $this->search]));
     }
 }
