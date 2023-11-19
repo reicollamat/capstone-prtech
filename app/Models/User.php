@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
@@ -18,6 +19,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bookmark::class);
     }
+
+    // relationship to shipment
+    public function shipment(): HasMany
+    {
+        return $this->hasMany(Shipments::class);
+    }
+
 
     // relationship to CartItem
     public function cart_item()
