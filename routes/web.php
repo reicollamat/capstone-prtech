@@ -56,7 +56,7 @@ Route::get('/redirect', [LandingController::class, 'redirect']);
 // landing page / home page
 Route::get('/', [LandingController::class, 'index'])->name('index_landing');
 
-Route::get('/collection', Collections::class)->name('collection');
+Route::get('/collections', Collections::class)->name('collections');
 
 Route::get('/testing', Landing::class)->name('testing_page');
 
