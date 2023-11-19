@@ -28,6 +28,7 @@ class CaseFanSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "case_fan",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

@@ -28,6 +28,7 @@ class ExtStorageSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "ext_storage",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

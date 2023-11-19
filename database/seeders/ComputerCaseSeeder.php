@@ -28,6 +28,7 @@ class ComputerCaseSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "computer_case",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

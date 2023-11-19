@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
+use Nette\Utils\Random;
 
 class HeadphoneSeeder extends Seeder
 {
@@ -28,6 +29,7 @@ class HeadphoneSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "headphone",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

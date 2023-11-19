@@ -28,6 +28,7 @@ class CpuCoolerSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "cpu_cooler",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

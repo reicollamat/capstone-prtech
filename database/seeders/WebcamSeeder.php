@@ -28,6 +28,7 @@ class WebcamSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "webcam",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

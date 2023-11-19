@@ -213,6 +213,7 @@ class Product extends Model
     public $sortable = [
         'title',
         'price',
+        'rating',
         'purchase_count',
     ];
 }

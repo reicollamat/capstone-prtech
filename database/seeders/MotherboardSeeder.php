@@ -28,6 +28,7 @@ class MotherboardSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "motherboard",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

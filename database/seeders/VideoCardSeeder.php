@@ -28,6 +28,7 @@ class VideoCardSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "video_card",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

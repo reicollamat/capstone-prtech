@@ -28,6 +28,7 @@ class KeyboardSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "keyboard",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

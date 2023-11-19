@@ -14,7 +14,7 @@ class SellerInformation extends Model
     /**
      * Get the Seller Account that owns the seller information.
      */
-    public function useraccount(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -27,15 +27,19 @@ class SellerInformation extends Model
     protected $fillable = [
         'shop_name',
         'registered_business_name',
-        'pickup_address',
-        'email',
-        'phone_number',
-        'seller_type',
+        'shop_email',
+        'shop_phone_number',
+        'shop_address',
+        'shop_city',
+        'shop_state_province',
+        'shop_postal_code',
         'registered_address',
-        'city',
-        'postal_code',
-        'tin_number',
+        'registered_city',
+        'registered_state_province',
+        'registered_postal_code',
+        'seller_type',
         'business_permit',
+        //reference of user id
         'user_id'
     ];
 

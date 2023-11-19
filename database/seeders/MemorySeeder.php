@@ -28,6 +28,7 @@ class MemorySeeder extends Seeder
                     "title" => $value->name,
                     "category" => "memory",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);

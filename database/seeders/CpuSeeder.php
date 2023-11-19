@@ -28,6 +28,7 @@ class CpuSeeder extends Seeder
                     "title" => $value->name,
                     "category" => "cpu",
                     "price" => $value->price,
+                    "rating" => rand(0, 5),
                     "image" => $image,
                     "condition" => $condition,
                 ]);
