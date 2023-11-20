@@ -17,12 +17,18 @@ class Comments extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'product_id',
         'text',
         'rating'
