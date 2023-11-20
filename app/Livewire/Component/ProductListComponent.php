@@ -52,7 +52,8 @@ class ProductListComponent extends Component
      */
     public function mount($item, $itemProductInfo)
     {
-        //        dd($item);
+
+        //        dd($itemProductInfo->slug);
         //        $this->item = Product::join($item->category, $item->id, '=', $item->category . '.product.id');
 
         //        dd(Product::join($item->category, $item->id, '=', $item->category . '.product.id'));
@@ -81,8 +82,10 @@ class ProductListComponent extends Component
         //        dd($this->item);
         $this->itemproductinfo = $itemProductInfo;
 
-        $this->forgetComputed();
+        //        $this->__unset($this->getAttribute);
         //        dd($this->itemProductInfo);
+
+        //        dd(base_path('resources/views/compo'));
     }
 
     public function render()

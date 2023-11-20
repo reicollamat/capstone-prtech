@@ -1,11 +1,11 @@
-<div class="h-full w-full">
+<div class="h-full w-full" x-data="">
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <x-slot:page_header>
         Product Management
     </x-slot:page_header>
     <div class="flex h-full">
         <div class="flex-1 w-64 p-4">
-            <div class="flex flex-column flex-lg-row justify-between gap-2">
+            <div class="flex flex-column flex-lg-row justify-between gap-2 ">
                 <div x-data="{ isOpen: false }" class="relative inline-block ">
                     <!-- Dropdown toggle button -->
                     <button @click="isOpen = !isOpen"
@@ -44,7 +44,7 @@
                         <!-- Dropdown toggle button -->
                         <button @click="isOpen = !isOpen"
                             class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-sm bg-white text-gray-600 gap-1">
-                            <span class="mx-1">Category: SLUG</span>
+                            <span class="mx-1">Category: {{ Helper::maptopropercatetory($category_filter) }}</span>
                             <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
                                 fill="none" xmlns="http://www.w3.org/2000/svg"
                                 :class="{ 'rotate-180 transition duration-300': isOpen }">
@@ -59,13 +59,20 @@
                             x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-100"
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                            class="absolute left-0 z-20 mt-1 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
-                            <div class="bg-white rounded border-1 border-gray-300">
-                                <p class="mb-0 uppercase text-sm p-2 tracking-tight">SLUG</p>
-                                <p class="mb-0 uppercase text-sm p-2 tracking-tight">SLUG</p>
+                            class="absolute left-0 z-20 mt-1 w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                            <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
+                                @foreach ($categories as $category_key => $category_value)
+                                    <button
+                                        class="mb-0 w-full text-start uppercase text-sm p-1.5 tracking-tight rounded hover:bg-gray-100"
+                                        type="button"
+                                        wire:click.debounce="$set('category_filter', '{{ $category_key }}')">
+                                        {{ $category_value }}
+                                    </button>
+                                @endforeach
                             </div>
                         </div>
                     </div>
+
                     {{--  Brand Filter --}}
                     <div x-data="{ isOpen: false }" class="relative inline-block ">
                         <!-- Dropdown toggle button -->
@@ -92,6 +99,14 @@
                                 <p class="mb-0 uppercase text-sm p-2 tracking-tight">SLUG</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="px-2.5 transition ease-in-out duration-300 {{ $category_filter ? 'block' : 'hidden' }}"
+                        x-transition>
+                        <button wire:click.debounce="$set('category_filter', '')">
+                            <span class="text-sm text-gray-600 tracking-tight">
+                                Clear Filter
+                            </span>
+                        </button>
                     </div>
                     {{--                    searchning filter --}}
                     <div>
@@ -219,8 +234,11 @@
                         {{--                     </div> --}}
                         <livewire:component.product-list-component :item="$item" :itemProductInfo="$item"
                             :key="$item->id" />
+                        {{--                        {{ $item->slug }} --}}
                     @endforeach
-                    {{ $this->getProductList->links() }}
+                    <div class="content-center pt-3">
+                        {{ $this->getProductList->links() }}
+                    </div>
                 @else
                     <div class="flex content-center text-gray-500 p-6">
                         <h4>No Product Listed</h4>
@@ -228,12 +246,12 @@
                 @endif
 
                 {{--                {{ $this->getProductList->count() }} --}}
-                <button wire:click="$dispatch('openModal', { component: 'livewire.modals.sample-modal' })">Edit User
-                </button>
-                <button onclick="Livewire.dispatch('openModal', { component: 'livewire.modals.samplemodal' })">Edit
-                    User
-                </button>
-                <button wire:click="$dispatch('openModal', { component: 'edit-user' })">Edit User</button>
+                {{--                 <button wire:click="$dispatch('openModal', { component: 'livewire.modals.sample-modal' })">Edit User --}}
+                {{--                 </button> --}}
+                {{--                 <button onclick="Livewire.dispatch('openModal', { component: 'livewire.modals.samplemodal' })">Edit --}}
+                {{--                     User --}}
+                {{--                 </button> --}}
+                {{--                 <button wire:click="$dispatch('openModal', { component: 'edit-user' })">Edit User</button> --}}
             </div>
         </div>
         <div class="flex-none max-w-[14rem] flex flex-column gap-3 items-center content-center h-full py-4 pr-4">
@@ -257,28 +275,28 @@
                     <h6>Hot Products</h6>
                 </div>
                 {{--                 hot product items display --}}
-                {{--                 <div class="grid md:grid-cols-3 gap-1.5"> --}}
-                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                {{--                             alt="Product-Thumbnail"> --}}
-                {{--                     </button> --}}
-                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                {{--                             alt="Product-Thumbnail"> --}}
-                {{--                     </button> --}}
-                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                {{--                             alt="Product-Thumbnail"> --}}
-                {{--                     </button> --}}
-                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                {{--                             alt="Product-Thumbnail"> --}}
-                {{--                     </button> --}}
-                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                {{--                             alt="Product-Thumbnail"> --}}
-                {{--                     </button> --}}
-                {{--                 </div> --}}
+                <div class="grid md:grid-cols-3 gap-1.5">
+                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                    {{--                             alt="Product-Thumbnail"> --}}
+                    {{--                     </button> --}}
+                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                    {{--                             alt="Product-Thumbnail"> --}}
+                    {{--                     </button> --}}
+                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                    {{--                             alt="Product-Thumbnail"> --}}
+                    {{--                     </button> --}}
+                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                    {{--                             alt="Product-Thumbnail"> --}}
+                    {{--                     </button> --}}
+                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                    {{--                             alt="Product-Thumbnail"> --}}
+                    {{--                     </button> --}}
+                </div>
             </div>
 
         </div>

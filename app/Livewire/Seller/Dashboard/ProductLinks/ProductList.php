@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Seller\Dashboard\ProductLinks;
 
+use App\Helper\Helper;
 use App\Models\Product;
 use App\Models\User;
 use Livewire\Attributes\Computed;
@@ -15,8 +16,11 @@ class ProductList extends Component
 {
     use WithPagination;
 
+    //    protected $paginationTheme = 'bootstrap';
+
     //    public $totalProductCount;
 
+    public array $categories;
     public $stock_filter;
     public $category_filter;
     public $brand_filter;
@@ -32,7 +36,11 @@ class ProductList extends Component
     {
         //        $p = (Product::find(2));
         //
-        //        dd($p->SKU);
+        //        dd($p->slug);
+
+        $this->categories = Helper::categoryList();
+
+        //        dd($this->categories->array_keys());
     }
 
     #[Computed]
@@ -68,15 +76,28 @@ class ProductList extends Component
     #[Computed]
     public function getProductList()
     {
+        if ($this->category_filter) {
+            return Product::where('category', '=', $this->category_filter)
+                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
+                ->orderBy('id', 'asc')
+                ->paginate(10);
+            //            dd($this->category_filter);
+        }
 
         if ($this->quick_search_filter) {
-
-            return Product::where('title', 'ilike', "%{$this->quick_search_filter}%")->paginate(10);
+            return Product::where('title', 'ilike', "%{$this->quick_search_filter}%")
+                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
+                ->orderBy('id', 'asc')
+                ->paginate(10);
 
         } else {
 
-            return Product::select('id', 'category', 'condition', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')->paginate(10);
+            return Product::select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
+                ->orderBy('id', 'asc')
+                ->paginate(10);
         }
+
+        return Product::select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')->paginate(10);
 
     }
 

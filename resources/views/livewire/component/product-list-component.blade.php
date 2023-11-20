@@ -16,7 +16,7 @@
                 {{ $item->name }}
             </div>
             <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-800 !font-light">
-                {{ \App\Helper\Helper::maptopropercatetory($item->category) }}
+                {{ Helper::maptopropercatetory($item->category) }}
             </div>
             <div class=" mb-0  min-w-[100px] p-2 !text-gray-800 !font-light">
                 {{ $item->price }}
@@ -44,17 +44,18 @@
             :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
             <div class="overflow-hidden">
                 <div class="p-2 flex flex-col lg:flex-row">
-                    <div class="px-2.5">
-                        <div class="flex justify-center items-center p-2.5">
+                    <div class="px-6 content-center">
+                        <div class="flex flex-col justify-center items-center p-2.5 gap-2">
                             <img src="{{ asset($item->image) }}"
                                 class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-28 h-28"
                                 alt="Product-Thumbnail">
+                            <p class="text-center">+ Add Image</p>
                         </div>
-                        <p class="text-center">+ Add Image</p>
+
                     </div>
                     <div class="flex-1">
-                        <div class="flex flex-col lg:flex-row gap-1.5">
-                            <div class="p-1.5">
+                        <div class="w-full flex flex-col lg:flex-row gap-1.5">
+                            <div class="p-1.5 w-1/2">
                                 <div class="mb-3">
                                     <label for="username"
                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Display
@@ -82,10 +83,10 @@
                                     </div>
                                     <div>
                                         <label for="username"
-                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Display
-                                            Name
+                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Product
+                                            Slug
                                         </label>
-                                        <input type="text" id="username" value="{{ $item->name }}"
+                                        <input type="text" id="username" value="{{ $itemproductinfo->slug }}"
                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                             placeholder="" required>
                                         @error('username')
@@ -94,35 +95,67 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="grid lg:grid-cols-4 gap-4">
-                                        <div>
-                                            <label for="username"
-                                                class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Stock
-                                            </label>
-                                            <input type="text" id="username" value="{{ $itemproductinfo->stock }}"
-                                                class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                placeholder="" required>
-                                            @error('username')
-                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                        <div>
-                                            <label for="username"
-                                                class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Reserve
+                                    <div class="grid lg:grid-cols-2 gap-4">
+                                        <div class="grid lg:grid-cols-2 gap-4">
+                                            <div>
+                                                <label for="stock"
+                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Stock
+                                                </label>
+                                                <input type="text" id="stock"
+                                                    value="{{ $itemproductinfo->stock }}"
+                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                    placeholder="" required>
+                                                @error('username')
+                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div>
+                                                <label for="reserve"
+                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Reserve
 
-                                            </label>
-                                            <input type="text" id="username"
-                                                value="{{ $itemproductinfo->reserve }}"
-                                                class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                placeholder="" required>
-                                            @error('username')
-                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                            @enderror
+                                                </label>
+                                                <input type="text" id="reserve"
+                                                    value="{{ $itemproductinfo->reserve }}"
+                                                    class="bg-transparent text-red-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                    placeholder="" required>
+                                                @error('username')
+                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="grid lg:grid-cols-2 gap-4">
+                                            <div>
+                                                <label for="conditon"
+                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Condition
+                                                </label>
+                                                <input type="text" id="conditon"
+                                                    value="{{ $itemproductinfo->condition }}"
+                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                    placeholder="" required>
+                                                @error('username')
+                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div>
+                                                <label for="status"
+                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Status
+
+                                                </label>
+                                                <input type="text" id="status"
+                                                    value="{{ $itemproductinfo->status }}"
+                                                    class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                    placeholder="" required>
+                                                @error('username')
+                                                    <span
+                                                        class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                @enderror
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-1.5">
+                            {{-- econd half --}}
+                            <div class="p-1.5 w-1/2">
                                 <div class="grid lg:grid-cols-2 gap-4">
                                     <div>
                                         <label for="username"
