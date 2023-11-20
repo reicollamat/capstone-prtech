@@ -27,7 +27,34 @@ class Helper
             'webcam' => 'Webcam',
         ];
 
-        return $mapping[$input] ?? 'Unknown value';
+        return $mapping[$input] ?? '';
+    }
+
+    public static function categoryList(): array
+    {
+        $mapping = [
+            'storage' => 'Storage',
+            'ext_storage' => 'External Storage',
+            'int_storage' => 'Internal Storage',
+            'cpu' => 'Processor(CPU)',
+            'video_card' => 'Graphics Card',
+            'motherboard' => 'Motherboard',
+            'memory' => 'Memory (RAM)',
+            'psu' => 'Power Supply Unit (PSU)',
+            'computer_case' => 'Computer Case',
+            'case_fan' => 'Case Fan',
+            'cpu_cooler' => 'CPU Cooler',
+            'monitor' => 'Monitor',
+            'keyboard' => 'Keyboard',
+            'mouse' => 'Mouse',
+            'other_peripherals' => 'Other Peripherals',
+            'speaker' => 'Speaker',
+            'headphone' => 'Headphone',
+            'webcam' => 'Webcam',
+        ];
+
+        return $mapping;
+
     }
 
     public static function maptopropercondition($input)
