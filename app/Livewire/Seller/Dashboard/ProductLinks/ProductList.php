@@ -23,10 +23,16 @@ class ProductList extends Component
     public $quick_search_filter;
     public $select_products = [];
 
+    //    public function paginationView()
+    //    {
+    //        return 'vendor.pagination.custom-pagination-links';
+    //    }
 
     public function mount()
     {
-
+        //        $p = (Product::find(2));
+        //
+        //        dd($p->SKU);
     }
 
     #[Computed]
@@ -69,7 +75,7 @@ class ProductList extends Component
 
         } else {
 
-            return Product::paginate(10);
+            return Product::select('id', 'category', 'condition', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')->paginate(10);
         }
 
     }

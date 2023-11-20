@@ -19,13 +19,15 @@ use App\Models\Psu;
 use App\Models\Speaker;
 use App\Models\VideoCard;
 use App\Models\Webcam;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class ProductListComponent extends Component
 {
-    public $item;
-
+    public Model $item;
+    public Model $itemproductinfo;
     private $categoryMap = [
         'computer_case' => ComputerCase::class,
         'case_fan' => CaseFan::class,
@@ -45,7 +47,10 @@ class ProductListComponent extends Component
         'webcam' => Webcam::class,
     ];
 
-    public function mount($item)
+    /**
+     * @throws BindingResolutionException
+     */
+    public function mount($item, $itemProductInfo)
     {
         //        dd($item);
         //        $this->item = Product::join($item->category, $item->id, '=', $item->category . '.product.id');
@@ -62,12 +67,22 @@ class ProductListComponent extends Component
             $modelClass = $this->categoryMap[$item->category];
 
             // Resolve the model using the model class and product_id
-            $this->item = app()->make($modelClass)->where('product_id', $item->id)->get()->first();
+            $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
+
+            //            $this->item = app()->make($modelClass)
+            //                ->join('products', , '=', 'products.id')
+            //                ->where('product_id', $item->id)->first();
+            //
+            //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);
         }
         //        dd($this->item);
+        $this->itemproductinfo = $itemProductInfo;
+
+        $this->forgetComputed();
+        //        dd($this->itemProductInfo);
     }
 
     public function render()
