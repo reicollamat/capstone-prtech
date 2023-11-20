@@ -145,79 +145,89 @@
                         </p>
                     </div>
                 </div>
-                @foreach ($this->getProductList as $item)
-                    {{--                     <div wire:key="{{ $item->id }}" x-data="{ expanded: false }" class="py-2 bg-white"> --}}
-                    {{--                         <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center"> --}}
-                    {{--                             <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light"> --}}
-                    {{--                                 <input class="form-check-input" wire:model.live="select_products" --}}
-                    {{--                                     value="{{ $item->id }}" type="checkbox"> --}}
-                    {{--                             </span> --}}
-                    {{--                             <div class="relative items-center  mb-0 min-w-[60px] p-2 !text-gray-800 !font-light"> --}}
-                    {{--                                  --}}{{--                                 <img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" --}}
-                    {{--                                 <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-9 h-9" --}}
-                    {{--                                     alt="Product-Thumbnail"> --}}
-                    {{--                             </div> --}}
-                    {{--                             <div class="mb-0 min-w-[40px] p-2 !text-gray-800 !font-light"> --}}
-                    {{--                                 {{ $item->id }} --}}
-                    {{--                             </div> --}}
-                    {{--                             <div class="mb-0 min-w-[100px] text-start p-2 flex-1 !text-gray-800 !font-light"> --}}
-                    {{--                                 {{ $item->title }} --}}
-                    {{--                             </div> --}}
-                    {{--                             <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-800 !font-light"> --}}
-                    {{--                                 {{ \App\Helper\Helper::maptopropercatetory($item->category) }} --}}
-                    {{--                             </div> --}}
-                    {{--                             <div class=" mb-0  min-w-[100px] p-2 !text-gray-800 !font-light"> --}}
-                    {{--                                 {{ $item->price }} --}}
-                    {{--                             </div> --}}
-                    {{--                             <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light"> --}}
-                    {{--                                 Stock --}}
-                    {{--                             </div> --}}
-                    {{--                             <div --}}
-                    {{--                                 class="flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center"> --}}
-                    {{--                                 <button id="faqs-title-01" type="button" --}}
-                    {{--                                     class="flex items-center justify-center text-center font-semibold p-1 bg-white rounded-lg" --}}
-                    {{--                                     @click="expanded = !expanded" :aria-expanded="expanded" --}}
-                    {{--                                     aria-controls="faqs-text-01"> --}}
-                    {{--                                     <span class="transform origin-center transition duration-200 ease-out" --}}
-                    {{--                                         :class="{ '!rotate-180': expanded }"> --}}
-                    {{--                                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" --}}
-                    {{--                                             xmlns="http://www.w3.org/2000/svg"> --}}
-                    {{--                                             <path --}}
-                    {{--                                                 d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" --}}
-                    {{--                                                 fill="currentColor"></path> --}}
-                    {{--                                         </svg> --}}
-                    {{--                                     </span> --}}
-                    {{--                                 </button> --}}
-                    {{--                             </div> --}}
-                    {{--                         </div> --}}
-                    {{--                         <div id="faqs-text-01" role="region" aria-labelledby="faqs-title-01" --}}
-                    {{--                             class="grid text-sm text-slate-600 overflow-hidden transition-all duration-300 ease-in-out" --}}
-                    {{--                             :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"> --}}
-                    {{--                             <div class="overflow-hidden"> --}}
-                    {{--                                 <p class="pb-3"> --}}
-                    {{--                                     If you go over your organisations or user limit, a member of the team will reach out --}}
-                    {{--                                     about --}}
-                    {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
-                    {{--                                     accounts or --}}
-                    {{--                                     users that are over the 100-account or 1,000-user limit. --}}
-                    {{--                                     If you go over your organisations or user limit, a member of the team will reach out --}}
-                    {{--                                     about --}}
-                    {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
-                    {{--                                     accounts or --}}
-                    {{--                                     users that are over the 100-account or 1,000-user limit. If you go over your --}}
-                    {{--                                     organisations --}}
-                    {{--                                     or user limit, a member of the team will reach out about --}}
-                    {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
-                    {{--                                     accounts or --}}
-                    {{--                                     users that are over the 100-account or 1,000-user limit. --}}
-                    {{--                                 </p> --}}
-                    {{--                             </div> --}}
-                    {{--                         </div> --}}
-                    {{--                     </div> --}}
-                    <livewire:component.product-list-component :$item :key="$item->id" />
-                @endforeach
-                {{ $this->getProductList->links() }}
-                {{ $this->getProductList->count() }}
+
+                @if ($this->getProductList->count() > 0)
+                    {{--                    {{ $this->getProductList->count() }} --}}
+                    @foreach ($this->getProductList as $item)
+                        {{--                     <div wire:key="{{ $item->id }}" x-data="{ expanded: false }" class="py-2 bg-white"> --}}
+                        {{--                         <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center"> --}}
+                        {{--                             <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light"> --}}
+                        {{--                                 <input class="form-check-input" wire:model.live="select_products" --}}
+                        {{--                                     value="{{ $item->id }}" type="checkbox"> --}}
+                        {{--                             </span> --}}
+                        {{--                             <div class="relative items-center  mb-0 min-w-[60px] p-2 !text-gray-800 !font-light"> --}}
+                        {{--                                  --}}{{--                                 <img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" --}}
+                        {{--                                 <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-9 h-9" --}}
+                        {{--                                     alt="Product-Thumbnail"> --}}
+                        {{--                             </div> --}}
+                        {{--                             <div class="mb-0 min-w-[40px] p-2 !text-gray-800 !font-light"> --}}
+                        {{--                                 {{ $item->id }} --}}
+                        {{--                             </div> --}}
+                        {{--                             <div class="mb-0 min-w-[100px] text-start p-2 flex-1 !text-gray-800 !font-light"> --}}
+                        {{--                                 {{ $item->title }} --}}
+                        {{--                             </div> --}}
+                        {{--                             <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-800 !font-light"> --}}
+                        {{--                                 {{ \App\Helper\Helper::maptopropercatetory($item->category) }} --}}
+                        {{--                             </div> --}}
+                        {{--                             <div class=" mb-0  min-w-[100px] p-2 !text-gray-800 !font-light"> --}}
+                        {{--                                 {{ $item->price }} --}}
+                        {{--                             </div> --}}
+                        {{--                             <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light"> --}}
+                        {{--                                 Stock --}}
+                        {{--                             </div> --}}
+                        {{--                             <div --}}
+                        {{--                                 class="flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center"> --}}
+                        {{--                                 <button id="faqs-title-01" type="button" --}}
+                        {{--                                     class="flex items-center justify-center text-center font-semibold p-1 bg-white rounded-lg" --}}
+                        {{--                                     @click="expanded = !expanded" :aria-expanded="expanded" --}}
+                        {{--                                     aria-controls="faqs-text-01"> --}}
+                        {{--                                     <span class="transform origin-center transition duration-200 ease-out" --}}
+                        {{--                                         :class="{ '!rotate-180': expanded }"> --}}
+                        {{--                                         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" --}}
+                        {{--                                             xmlns="http://www.w3.org/2000/svg"> --}}
+                        {{--                                             <path --}}
+                        {{--                                                 d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" --}}
+                        {{--                                                 fill="currentColor"></path> --}}
+                        {{--                                         </svg> --}}
+                        {{--                                     </span> --}}
+                        {{--                                 </button> --}}
+                        {{--                             </div> --}}
+                        {{--                         </div> --}}
+                        {{--                         <div id="faqs-text-01" role="region" aria-labelledby="faqs-title-01" --}}
+                        {{--                             class="grid text-sm text-slate-600 overflow-hidden transition-all duration-300 ease-in-out" --}}
+                        {{--                             :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"> --}}
+                        {{--                             <div class="overflow-hidden"> --}}
+                        {{--                                 <p class="pb-3"> --}}
+                        {{--                                     If you go over your organisations or user limit, a member of the team will reach out --}}
+                        {{--                                     about --}}
+                        {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
+                        {{--                                     accounts or --}}
+                        {{--                                     users that are over the 100-account or 1,000-user limit. --}}
+                        {{--                                     If you go over your organisations or user limit, a member of the team will reach out --}}
+                        {{--                                     about --}}
+                        {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
+                        {{--                                     accounts or --}}
+                        {{--                                     users that are over the 100-account or 1,000-user limit. If you go over your --}}
+                        {{--                                     organisations --}}
+                        {{--                                     or user limit, a member of the team will reach out about --}}
+                        {{--                                     bespoke pricing. In the meantime, our collaborative features won't appear in --}}
+                        {{--                                     accounts or --}}
+                        {{--                                     users that are over the 100-account or 1,000-user limit. --}}
+                        {{--                                 </p> --}}
+                        {{--                             </div> --}}
+                        {{--                         </div> --}}
+                        {{--                     </div> --}}
+                        <livewire:component.product-list-component :item="$item" :itemProductInfo="$item"
+                            :key="$item->id" />
+                    @endforeach
+                    {{ $this->getProductList->links() }}
+                @else
+                    <div class="flex content-center text-gray-500 p-6">
+                        <h4>No Product Listed</h4>
+                    </div>
+                @endif
+
+                {{--                {{ $this->getProductList->count() }} --}}
                 <button wire:click="$dispatch('openModal', { component: 'livewire.modals.sample-modal' })">Edit User
                 </button>
                 <button onclick="Livewire.dispatch('openModal', { component: 'livewire.modals.samplemodal' })">Edit
@@ -226,25 +236,51 @@
                 <button wire:click="$dispatch('openModal', { component: 'edit-user' })">Edit User</button>
             </div>
         </div>
-        <div class="flex-none h-full py-12 pr-5 pl-3 justify-start bg-white">
-            <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
-            <div class="py-2">
-                <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
-                <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
-            </div>
-            <div class="py-2">
-                <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
-                <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
-            </div>
-            <div class="py-2">
-                <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
-                <p class="font-semibold">0</p>
-            </div>
-            <div>
-                <div class="flex items-center justify-center text-red-500 text-sm font-light">
-                    <h6>Hot Products</h6>
+        <div class="flex-none max-w-[14rem] flex flex-column gap-3 items-center content-center h-full py-4 pr-4">
+            <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
+                <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
+                <div class="py-2">
+                    <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
+                    <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                </div>
+                <div class="py-2">
+                    <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
+                    <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                </div>
+                <div class="py-2">
+                    <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
+                    <p class="font-semibold">0</p>
                 </div>
             </div>
+            <div class="h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
+                <div class="w-full content-center text-red-500 text-sm font-light">
+                    <h6>Hot Products</h6>
+                </div>
+                {{--                 hot product items display --}}
+                {{--                 <div class="grid md:grid-cols-3 gap-1.5"> --}}
+                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                {{--                             alt="Product-Thumbnail"> --}}
+                {{--                     </button> --}}
+                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                {{--                             alt="Product-Thumbnail"> --}}
+                {{--                     </button> --}}
+                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                {{--                             alt="Product-Thumbnail"> --}}
+                {{--                     </button> --}}
+                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                {{--                             alt="Product-Thumbnail"> --}}
+                {{--                     </button> --}}
+                {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                {{--                             alt="Product-Thumbnail"> --}}
+                {{--                     </button> --}}
+                {{--                 </div> --}}
+            </div>
+
         </div>
     </div>
 </div>
