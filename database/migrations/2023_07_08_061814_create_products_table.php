@@ -14,9 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->string('SKU')->nullable();
-            $table->string('slug')->unique()->nullable();
+            $table->string('slug')->nullable();
             $table->string('category');
-
             $table->decimal('price', 20, 2);
             $table->string('image');
             $table->string('status')->default('available');
