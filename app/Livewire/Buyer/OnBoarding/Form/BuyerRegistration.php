@@ -54,18 +54,22 @@ class BuyerRegistration extends Component
         $this->userid = Auth::user()->id ?? null;
         //        $this->userid = 1;
 
-        $user = User::find($this->userid);
+        $user = Auth::user();
 
+        // lastly for checking, if not signed in user tries to access this page redirect them so signup
+        if ($user == null) {
+            return redirect()->route('register');
+        }
 
         // get the email value of user and set it to user_email input and disables it
         if ($user != null) {
             $this->user_email = $user->email;
         }
-
+        
         // this will check if first_name and last_name in the database has been filled and will redirect to landing
         // if not page will be displayed
-        
-        // redirect the user if the information here is already filled
+
+        //         redirect the user if the information here is already filled
         if ($user->first_name != null | $user->last_name != null) {
             return redirect()->route('index_landing');
         }
