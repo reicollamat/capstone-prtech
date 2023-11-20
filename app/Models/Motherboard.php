@@ -25,6 +25,7 @@ class Motherboard extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'socket',
         'form_factor',

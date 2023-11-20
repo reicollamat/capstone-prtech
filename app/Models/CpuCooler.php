@@ -25,6 +25,7 @@ class CpuCooler extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'rpm',
         'noise_level',
@@ -43,7 +44,7 @@ class CpuCooler extends Model
      * @var array
      */
     protected $casts = [
-        'rpm'               => 'array',
-        'noise_level'       => 'array',
+        'rpm' => 'array',
+        'noise_level' => 'array',
     ];
 }

@@ -25,6 +25,7 @@ class ComputerCase extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'type',
         'color',

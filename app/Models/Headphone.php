@@ -25,6 +25,7 @@ class Headphone extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'type',
         'frequency_response',
@@ -45,6 +46,6 @@ class Headphone extends Model
      * @var array
      */
     protected $casts = [
-        'frequency_response'    => 'array',
+        'frequency_response' => 'array',
     ];
 }

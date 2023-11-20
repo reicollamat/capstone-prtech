@@ -25,6 +25,7 @@ class Webcam extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'resolutions',
         'connection',
@@ -44,7 +45,7 @@ class Webcam extends Model
      * @var array
      */
     protected $casts = [
-        'resolutions'       => 'array',
-        'os'                => 'array',
+        'resolutions' => 'array',
+        'os' => 'array',
     ];
 }

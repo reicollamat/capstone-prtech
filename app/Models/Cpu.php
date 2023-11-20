@@ -25,6 +25,7 @@ class Cpu extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'core_count',
         'core_clock',

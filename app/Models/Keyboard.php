@@ -25,6 +25,7 @@ class Keyboard extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'style',
         'switches',

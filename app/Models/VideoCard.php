@@ -25,6 +25,7 @@ class VideoCard extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'chipset',
         'memory',

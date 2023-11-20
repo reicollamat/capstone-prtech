@@ -25,6 +25,7 @@ class Mouse extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'tracking_method',
         'connection_type',

@@ -25,6 +25,7 @@ class Memory extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'speed',
         'modules',
@@ -45,7 +46,7 @@ class Memory extends Model
      * @var array
      */
     protected $casts = [
-        'speed'         => 'array',
-        'modules'       => 'array',
+        'speed' => 'array',
+        'modules' => 'array',
     ];
 }

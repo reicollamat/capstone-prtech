@@ -25,6 +25,7 @@ class IntStorage extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'capacity',
         'price_per_gb',

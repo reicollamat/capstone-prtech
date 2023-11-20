@@ -25,6 +25,7 @@ class Monitor extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'screen_size',
         'resolution',
@@ -45,6 +46,6 @@ class Monitor extends Model
      * @var array
      */
     protected $casts = [
-        'resolution'    => 'array',
+        'resolution' => 'array',
     ];
 }

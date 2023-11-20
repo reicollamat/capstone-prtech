@@ -25,6 +25,7 @@ class Speaker extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'configuration',
         'wattage',
@@ -43,6 +44,6 @@ class Speaker extends Model
      * @var array
      */
     protected $casts = [
-        'frequency_response'   => 'array',
+        'frequency_response' => 'array',
     ];
 }

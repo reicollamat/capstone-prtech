@@ -11,11 +11,6 @@ class ExtStorage extends Model
 {
     use HasFactory, AsSource, Filterable;
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +20,7 @@ class ExtStorage extends Model
         'product_id',
         'category',
         'name',
+        'brand',
         'price',
         'type',
         'interface',
@@ -37,4 +33,9 @@ class ExtStorage extends Model
         'condition',
         'purchase_count',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

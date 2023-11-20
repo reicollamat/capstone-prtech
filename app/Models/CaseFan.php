@@ -24,7 +24,7 @@ class CaseFan extends Model
     protected $fillable = [
         'product_id',
         'category',
-        'name',
+        'name', 'brand',
         'price',
         'size',
         'color',
@@ -45,8 +45,8 @@ class CaseFan extends Model
      * @var array
      */
     protected $casts = [
-        'rpm'               => 'array',
-        'airflow'           => 'array',
-        'noise_level'       => 'array',
+        'rpm' => 'array',
+        'airflow' => 'array',
+        'noise_level' => 'array',
     ];
 }
