@@ -25,6 +25,9 @@ class LoginPage extends Component
 
     public function submit()
     {
+        //TODO: validate this on the seller table, if account is not found in seller table flash message,
+        // no associated seller account is present.
+        
         $validation = $this->validate([
             'email' => 'required|email|exists:users,email',
             'password' => 'required'],
@@ -35,7 +38,7 @@ class LoginPage extends Component
         if ($validation) {
             $user = Auth::attempt($validation);
             if ($user) {
-                $this->redirect(route('seller-dashboard'));
+                $this->redirect(route('seller-landing'));
             } else {
                 // TODO: show error like no record found in database or laravel eloquest where email and password
                 session()->flash('accountlogin', 'Something went wrong, Please try again.');
