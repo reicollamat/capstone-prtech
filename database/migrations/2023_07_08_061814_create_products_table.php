@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('SKU')->nullable();
             $table->string('slug')->unique()->nullable();
             $table->string('category');
 
@@ -20,6 +21,8 @@ return new class extends Migration {
             $table->string('image');
             $table->string('status')->default('available');
             $table->string('condition');
+            $table->integer('stock')->nullable();
+            $table->integer('reserve')->nullable();
             $table->float('rating')->default(0.0);
             $table->integer('purchase_count')->default(0);
 
