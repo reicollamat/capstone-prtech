@@ -160,12 +160,15 @@ class Product extends Model
      */
     protected $fillable = [
         'title',
+        'SKU',
         'slug',
         'category',
         'price',
         'image',
         'status',
         'condition',
+        'stock',
+        'reserve',
         'rating',
         'purchase_count',
     ];
@@ -206,6 +209,7 @@ class Product extends Model
         'id',
         'title',
         'category',
+        'stock',
         'updated_at',
         'created_at',
     ];
@@ -213,6 +217,7 @@ class Product extends Model
     public $sortable = [
         'title',
         'price',
+        'stock',
         'rating',
         'purchase_count',
     ];
