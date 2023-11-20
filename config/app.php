@@ -170,6 +170,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        // our own service provider
+        App\Providers\HelperServiceProvider::class,
     ])->toArray(),
 
     /*
