@@ -16,6 +16,10 @@
     background-color: #f2f4f6;
 }
 
+.bg-background-light {
+    background-color: #effbff;
+}
+
 .tablelike > p {
     padding: 0.5rem;
 }
