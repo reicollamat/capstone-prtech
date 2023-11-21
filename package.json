@@ -23,6 +23,7 @@
     "dependencies": {
         "@alpinejs/collapse": "^3.13.2",
         "@types/node": "^20.8.2",
-        "bootstrap-icons": "^1.11.1"
+        "bootstrap-icons": "^1.11.1",
+        "chart.js": "^4.4.0"
     }
 }
