@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Screen\AsSource;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -152,6 +153,11 @@ class Product extends Model
         return $this->hasMany(Comments::class);
     }
 
+    public function sellerinformation(): BelongsTo
+    {
+        return $this->belongsTo(SellerInformation::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.
@@ -171,6 +177,8 @@ class Product extends Model
         'reserve',
         'rating',
         'purchase_count',
+        // relation to the seller id
+        'seller_id',
     ];
 
     /**

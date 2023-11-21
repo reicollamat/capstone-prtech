@@ -24,6 +24,8 @@ return new class extends Migration {
             $table->integer('reserve')->nullable();
             $table->float('rating')->default(0.0);
             $table->integer('purchase_count')->default(0);
+            // key for relationship of the seller
+            $table->unsignedBigInteger('sellerinformation_id')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
