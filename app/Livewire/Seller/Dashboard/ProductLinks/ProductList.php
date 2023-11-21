@@ -6,9 +6,11 @@ use App\Helper\Helper;
 use App\Models\Product;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+//#[Lazy]
 #[Layout('layouts.seller.seller-layout')]
 class ProductList extends Component
 {
@@ -74,9 +76,15 @@ class ProductList extends Component
         $this->resetPage();
     }
 
+    public function test()
+    {
+        sleep(1);
+    }
+
     #[Computed]
     public function getProductList()
     {
+        //        sleep(5);
         if ($this->category_filter) {
             return Product::where('category', '=', $this->category_filter)
                 ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
