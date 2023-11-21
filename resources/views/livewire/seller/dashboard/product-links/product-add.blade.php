@@ -1,60 +1,170 @@
-<div>
+<div class="lg:px-20">
+    <x-slot:page_header>
+        Add New Product
+    </x-slot:page_header>
     {{-- Be like water. --}}
-    <h1>You are in product add</h1>
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button" id="accordionExample1" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Accordion Item #1
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample1">
-                <div class="accordion-body">
-                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
-                    plugin adds the appropriate classes that we use to style each element. These classes control the
-                    overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                    this with custom CSS or overriding our default variables. It's also worth noting that just about any
-                    HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+    <div class="p-4 bg-white border border-gray-200 rounded-lg">
+        <div>
+            <h6 class="text-gray-600 text-lg tracking-wide text-start">Basic Product Information</h6>
+        </div>
+        <hr>
+        <div>
+            <div>
+                <!-- Product Name input -->
+                <div class="mb-3">
+                    <label for="email"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                        Name</label>
+                    <input type="email" id="email" wire:model.blur="email"
+                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="john.doe@company.com" required>
+                    @error('email')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 md:gap-8 ">
+                <div>
+                    <!-- Product SKU input -->
+                    <div class="mb-3">
+                        <label for="email"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                            SKU</label>
+                        <input type="email" id="email" wire:model.blur="email"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="john.doe@company.com" required>
+                        @error('email')
+                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div>
+                    <!-- Product SLUG input -->
+                    <div class="mb-3">
+                        <label for="email"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                            Slug</label>
+                        <input type="email" id="email" wire:model.blur="email"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="john.doe@company.com" required>
+                        @error('email')
+                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description"
+                    class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
+                <textarea id="description" rows="4"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Write your thoughts here..."></textarea>
+            </div>
+            <div class="grid md:grid-cols-3 md:gap-8 ">
+                <div>
+                    <!-- Product Condition input -->
+                    <div class="mb-3">
+                        <label for="condition"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                            Condtion</label>
+                        <select id="condition"
+                            class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Condition</option>
+                            <option value="brand_new">Brand New</option>
+                            <option value="used">Used</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <!-- Product Status input -->
+                    <div class="mb-3">
+                        <label for="status"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                            Status</label>
+                        <select id="status"
+                            class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option disabled selected>Status</option>
+                            <option value="available">Available</option>
+                            <option value="unavailable">Unavailable</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <!-- Product Category input -->
+                    <div class="mb-3">
+                        {{--                         <label for="category" --}}
+                        {{--                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product --}}
+                        {{--                             Category</label> --}}
+                        {{--                          --}}{{--                          <select id="category" wire:model.live="productCategory"  --}}
+                        {{--                         <select id="category" --}}
+                        {{--                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> --}}
+                        {{--                             <option disabled selected>Choose a country</option> --}}
+                        {{--                             @foreach (Helper::categoryList() as $category_key => $category_value) --}}
+                        {{--                                 <option wire:key="{{ $category_key }}" --}}
+                        {{--                                     wire:click.debounce="changeCategoryView({{ $category_key }})" --}}
+                        {{--                                     value="{{ $category_key }}">{{ $category_value }} --}}
+                        {{--                                 </option> --}}
+                        {{--                             @endforeach --}}
+                        {{--                         </select> --}}
+                        {{--  Category Filter --}}
+                        <label for="status"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                            Status</label>
+                        <div x-data="{ isOpen: false }" class="w-full relative ">
+                            <!-- Dropdown toggle button -->
+                            <button @click="isOpen = !isOpen"
+                                class="relative z-10 w-full flex flex-start border border-gray-400  p-2.5 !rounded text-sm bg-white text-gray-900 gap-1">
+                                <span class="mx-1 w-full text-start">Category:
+                                    {{ Helper::maptopropercatetory($productCategory) }}</span>
+                                <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg"
+                                    :class="{ 'rotate-180 transition duration-300': isOpen }">
+                                    <path
+                                        d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                                </span>
+                            </button>
+                            <!-- Dropdown menu -->
+                            <div x-cloak x-show="isOpen" @click.away="isOpen = false"
+                                x-transition:enter="transition ease-out duration-100"
+                                x-transition:enter-start="opacity-0 scale-90"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                x-transition:leave="transition ease-in duration-100"
+                                x-transition:leave-start="opacity-100 scale-100"
+                                x-transition:leave-end="opacity-0 scale-90"
+                                class="absolute right-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                                <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
+                                    @foreach (Helper::categoryList() as $category_key => $category_value)
+                                        <button
+                                            class="mb-0 w-full text-start uppercase text-sm p-1.5 tracking-tight rounded hover:bg-gray-100"
+                                            @click="isOpen = false" type="button"
+                                            wire:click.debounce="changeCategoryView('{{ $category_key }}')">
+                                            {{ $category_value }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Accordion Item #2
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the
-                    collapse plugin adds the appropriate classes that we use to style each element. These classes
-                    control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                    modify any of this with custom CSS or overriding our default variables. It's also worth noting that
-                    just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit
-                    overflow.
-                </div>
-            </div>
+
+    </div>
+    <div class="mt-4 p-4 bg-white border border-gray-200 rounded-lg">
+        <div>
+            <h6 class="text-gray-600 text-lg tracking-wide text-start">Specific Product Information</h6>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Accordion Item #3
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                    collapse plugin adds the appropriate classes that we use to style each element. These classes
-                    control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                    modify any of this with custom CSS or overriding our default variables. It's also worth noting that
-                    just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit
-                    overflow.
-                </div>
-            </div>
+        <hr>
+        {{ var_dump($productCategory) }}
+        <div>
+            {{--            @if (!$view) --}}
+            {{--                <h6 class="text-gray-600 text-center">Select A Category To Continue...</h6> --}}
+            {{--            @endif --}}
+            {{--            {{ var_dump($productCategory) }} --}}
+            {{-- Load Dynamic Form after choosing category --}}
+            <livewire:dynamic-component :is="$view" />
         </div>
     </div>
-
 </div>
