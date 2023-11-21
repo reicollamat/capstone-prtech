@@ -39,7 +39,7 @@
         <nav class="navbar sticky-top bg-white border-bottom md:!px-6" id="navigationbar">
             <div class="container-fluid !justify-start gap-3 md:!justify-between">
                 {{--                 responsive navbar  --}}
-                <div class="block md:hidden">
+                <div class="block lg:hidden">
                     <button class="content-center" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                         <span class="sr-only">Open main menu</span>
@@ -322,11 +322,11 @@
         </nav>
 
         <div class="flex w-full h-full" id="wrapper">
-            <div class="h-full flex-1 md:min-w-[220px] md:max-w-[220px] !bg-white border-end overflow-y-scroll"
+            <div class="h-full flex-1 lg:min-w-[220px] lg:max-w-[220px] !bg-white border-end overflow-y-scroll"
                 id="sidebar">
                 @include('layouts.seller.seller-sidebar')
             </div>
-            <div class="w-full h-full overflow-y-scroll bg-background">
+            <div class="w-full h-full overflow-y-scroll bg-background p-4">
                 @yield('content', $slot ?? '')
             </div>
         </div>
