@@ -14,7 +14,7 @@
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-8">
-            <div class="row g-3 bg-secondary-subtle my-2 pb-4 rounded">
+            <div class="row g-3 bg-secondary-subtle mt-2 mb-4 pb-4 rounded">
                 <h5 class="text-uppercase">Account Details</h5>
                 <div class="col-md-6">
                     <label for="first_name" class="form-label">First Name</label>
@@ -35,19 +35,19 @@
             </div>
             <div class="row g-3 bg-secondary-subtle my-2 pb-4 rounded">
                 <h5 class="text-uppercase">
-                    Delivery Address
-                    <button type="button" class="btn text-primary fst-italic p-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Shipping Address
+                    <button type="button" class="btn text-primary fst-italic p-0" data-bs-toggle="modal" data-bs-target="#changeAddress">
                         Change
                     </button>
                 </h5>
 
                 <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="changeAddress" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="changeAddressLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Delivery Address</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 class="modal-title fs-5" id="changeAddressLabel">Delivery Address</h1>
+                            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -154,15 +154,36 @@
                         <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
 
                         <div class="w-full mb-4">
-                            <button class="flex w-full no-underline decoration-0 text-black" type="submit">
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="flex w-full no-underline decoration-0 text-light" data-bs-toggle="modal" data-bs-target="#confirmOrder">
                                 <span
-                                    class="lg:!h-12 w-full  h-10 flex items-center justify-center uppercase font-semibold px-4 lg:!px-6 border border-black hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
-                                    Confirm Purchase
+                                    class="lg:!h-12 w-full  h-10 flex items-center justify-center uppercase font-semibold px-4 lg:!px-6 border border-black bg-blue-600 hover:bg-white hover:text-black transition duration-500 ease-in-out">
+                                    Place Order
                                 </span>
                             </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmOrder" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmOrderLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="confirmOrderLabel">Are you sure?</h1>
+                                    {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+                                    </div>
+                                    <div class="modal-body">
+                                    Please confirm your purchase.
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-dark text-light" data-bs-dismiss="modal">Back</button>
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
-                    <form action="{{route('index_cart')}}" method="GET">
+                    <form action="{{route('product_detail', ['product_id' => $product->id, 'category' => $product->category])}}" method="GET">
                         @csrf
                         <div class="w-full">
                             <button class="flex w-full no-underline decoration-0 text-light" type="submit">
