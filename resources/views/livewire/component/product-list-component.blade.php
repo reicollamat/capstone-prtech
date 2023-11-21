@@ -130,7 +130,7 @@
                                                 </label>
                                                 <select id="conditon"
                                                     class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
-                                                    <option selected>Condition</option>
+                                                    <option disabled selected>Condition</option>
                                                     <option value="brand_new">Brand New</option>
                                                     <option value="used">Used</option>
                                                 </select>
@@ -149,7 +149,7 @@
                                                 </label>
                                                 <select id="status"
                                                     class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
-                                                    <option selected>Status</option>
+                                                    <option disabled selected>Status</option>
                                                     <option value="available">Available</option>
                                                     <option value="unavailable">Unavailable</option>
                                                 </select>
@@ -182,7 +182,7 @@
                                         </label>
                                         <select id="category"
                                             class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
-                                            <option default>Category</option>
+                                            <option disabled default>Category</option>
                                             @foreach (Helper::categoryList() as $category_key => $category_value)
                                                 <option value="{{ $category_key }}">{{ $category_value }}</option>
                                             @endforeach

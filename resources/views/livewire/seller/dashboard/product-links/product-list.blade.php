@@ -4,53 +4,55 @@
         Product Management
     </x-slot:page_header>
     <div class="flex h-full">
-        <div class="flex-1 w-64 p-4">
-            {{--             <div class="flex flex-column gap-3 items-center content-center h-full"> --}}
-            {{--                 <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white"> --}}
-            {{--                     <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p> --}}
-            {{--                     <div class="py-2"> --}}
-            {{--                         <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p> --}}
-            {{--                         <p class="font-semibold">{{ $this->getTotalProductCount }}</p> --}}
-            {{--                     </div> --}}
-            {{--                     <div class="py-2"> --}}
-            {{--                         <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p> --}}
-            {{--                         <p class="font-semibold">{{ $this->getTotalProductCount }}</p> --}}
-            {{--                     </div> --}}
-            {{--                     <div class="py-2"> --}}
-            {{--                         <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p> --}}
-            {{--                         <p class="font-semibold">0</p> --}}
-            {{--                     </div> --}}
-            {{--                 </div> --}}
-            {{--                 <div class="h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white"> --}}
-            {{--                     <div class="w-full content-center text-red-500 text-sm font-light"> --}}
-            {{--                         <h6>Hot Products</h6> --}}
-            {{--                     </div> --}}
-            {{--                      --}}{{--                 hot product items display --}}
-            {{--                     <div class="grid md:grid-cols-3 gap-1.5"> --}}
-            {{--                          --}}{{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-            {{--                          --}}{{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-            {{--                          --}}{{--                             alt="Product-Thumbnail"> --}}
-            {{--                          --}}{{--                     </button> --}}
-            {{--                          --}}{{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-            {{--                          --}}{{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-            {{--                          --}}{{--                             alt="Product-Thumbnail"> --}}
-            {{--                          --}}{{--                     </button> --}}
-            {{--                          --}}{{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-            {{--                          --}}{{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-            {{--                          --}}{{--                             alt="Product-Thumbnail"> --}}
-            {{--                          --}}{{--                     </button> --}}
-            {{--                          --}}{{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-            {{--                          --}}{{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-            {{--                          --}}{{--                             alt="Product-Thumbnail"> --}}
-            {{--                          --}}{{--                     </button> --}}
-            {{--                          --}}{{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-            {{--                          --}}{{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-            {{--                          --}}{{--                             alt="Product-Thumbnail"> --}}
-            {{--                          --}}{{--                     </button> --}}
-            {{--                     </div> --}}
-            {{--                 </div> --}}
-            {{--             </div> --}}
+
+        <div class="flex-1 w-64">
             <div class="flex flex-column flex-lg-row justify-between gap-2 ">
+                <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
+                    <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
+                        <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
+                        <div class="py-2">
+                            <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
+                            <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                        </div>
+                        <div class="py-2">
+                            <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
+                            <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                        </div>
+                        <div class="py-2">
+                            <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
+                            <p class="font-semibold">0</p>
+                        </div>
+                    </div>
+                    <div class="h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
+                        <div class="w-full content-center text-red-500 text-sm font-light">
+                            <h6>Hot Products</h6>
+                        </div>
+                        {{--                 hot product items display --}}
+                        <div class="grid md:grid-cols-3 gap-1.5">
+                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                            {{--                             alt="Product-Thumbnail"> --}}
+                            {{--                     </button> --}}
+                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                            {{--                             alt="Product-Thumbnail"> --}}
+                            {{--                     </button> --}}
+                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                            {{--                             alt="Product-Thumbnail"> --}}
+                            {{--                     </button> --}}
+                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                            {{--                             alt="Product-Thumbnail"> --}}
+                            {{--                     </button> --}}
+                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
+                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
+                            {{--                             alt="Product-Thumbnail"> --}}
+                            {{--                     </button> --}}
+                        </div>
+                    </div>
+                </div>
+                {{--                 stock filter --}}
                 <div x-data="{ isOpen: false }" class="relative inline-block ">
                     <!-- Dropdown toggle button -->
                     <button @click="isOpen = !isOpen"
@@ -114,9 +116,6 @@
                                         {{ $category_value }}
                                     </button>
                                 @endforeach
-                                {{--                                @foreach ($categories as $category_key => $category_value) --}}
-                                {{--                                    --}}
-                                {{--                                @endforeach --}}
                             </div>
                         </div>
                     </div>
@@ -349,7 +348,7 @@
             </div>
         </div>
         <div
-            class="hidden d-md-flex flex-none max-w-[14rem] flex-column gap-3 items-center content-center h-full py-4 pr-4">
+            class="hidden ml-3 d-lg-flex flex-none max-w-[14rem] flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
             <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
                 <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2">
