@@ -14,36 +14,36 @@
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-lg-8">
-            
-            <div class="p-30 mb-5">
-                <h5 class="section-title position-relative text-uppercase"><span class=" pr-3">Account Details</span></h5>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label>First Name</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->first_name}}" readonly>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Last Name</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->last_name}}" readonly>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>E-mail</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->email}}" readonly>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Mobile No</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->phone_number}}" readonly>
-                    </div>
-                    <h5 class="section-title position-relative text-uppercase mt-4">
-                        Delivery Address
-                        <button type="button" class="btn text-primary p-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                            Change
-                        </button>
-                    </h5>
+            <div class="row g-3 bg-secondary-subtle my-2 pb-4 rounded">
+                <h5 class="text-uppercase">Account Details</h5>
+                <div class="col-md-6">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="first_name" value="{{$user->first_name}}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last_name" value="{{$user->last_name}}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" value="{{$user->email}}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="phone_number" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phone_number" value="{{$user->phone_number}}" readonly>
+                </div>
+            </div>
+            <div class="row g-3 bg-secondary-subtle my-2 pb-4 rounded">
+                <h5 class="text-uppercase">
+                    Delivery Address
+                    <button type="button" class="btn text-primary fst-italic p-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Change
+                    </button>
+                </h5>
 
-                    <!-- Modal -->
+                <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Delivery Address</h1>
@@ -51,55 +51,54 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <label>City</label>
-                                    <input class="form-control bg-secondary text-light" type="text" value="{{$user->country}}" readonly>
+                                <div class="col-12">
+                                    <label for="street_address_1" class="form-label">Street Address</label>
+                                    <input type="text" class="form-control bg-secondary-subtle" id="street_address_1" value="{{$user->street_address_1}}">
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Barangay</label>
-                                    <input class="form-control bg-secondary text-light" type="text" value="{{$user->city}}" readonly>
+                                <div class="col-md-5">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control bg-secondary-subtle" id="city" value="{{$user->city}}">
                                 </div>
-                                <div class="col-md-12 form-group">
-                                    <label>Street Address</label>
-                                    <input class="form-control bg-secondary text-light" type="text" value="{{$user->street_address}}" readonly>
+                                <div class="col-md-5">
+                                    <label for="state_province" class="form-label">Province</label>
+                                    <input type="text" class="form-control bg-secondary-subtle" id="state_province" value="{{$user->state_province}}">
                                 </div>
-                                <div class="col-md-6 form-group">
-                                    <label>Postal Code</label>
-                                    <input class="form-control bg-secondary text-light" type="text" value="{{$user->postal_code}}" readonly>
+                                <div class="col-md-2">
+                                    <label for="postal_code" class="form-label">Postal Code</label>
+                                    <input type="text" class="form-control bg-secondary-subtle" id="postal_code" value="{{$user->postal_code}}">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary">Change</button>
                         </div>
                         </div>
                     </div>
                     </div>
 
-                    <div class="col-md-6 form-group">
-                        <label>City</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->country}}" readonly>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Barangay</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->city}}" readonly>
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <label>Street Address</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->street_address}}" readonly>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label>Postal Code</label>
-                        <input class="form-control bg-secondary text-light" type="text" value="{{$user->postal_code}}" readonly>
-                    </div>
+                <div class="col-12">
+                    <label for="street_address_1" class="form-label">Street Address</label>
+                    <input type="text" class="form-control" id="street_address_1" value="{{$user->street_address_1}}" readonly>
+                </div>
+                <div class="col-md-5">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="city" value="{{$user->city}}" readonly>
+                </div>
+                <div class="col-md-5">
+                    <label for="state_province" class="form-label">Province</label>
+                    <input type="text" class="form-control" id="state_province" value="{{$user->state_province}}" readonly>
+                </div>
+                <div class="col-md-2">
+                    <label for="postal_code" class="form-label">Postal Code</label>
+                    <input type="text" class="form-control" id="postal_code" value="{{$user->postal_code}}" readonly>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-4">
-            <div class="card mb-2">
-                <h4 class="card-header text-center">
+            <div class="card mt-2 mb-4">
+                <h4 class="card-header text-center bg-secondary-subtle">
                     Purchase Summary
                 </h4>
                 <div class="card-body">
@@ -108,7 +107,7 @@
                         <p>{{$quantity}}x {{$product->title}}</p>
                         <p>₱{{$product->price * $quantity}}</p>
                     </div>
-                    <div class="border-bottom pt-3 pb-2">
+                    <div class="pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
                             <h6>₱{{$subtotal}}</h6>
@@ -118,7 +117,7 @@
                             <h6 class="font-weight-medium">₱ {{$shipping_value}}</h6>
                         </div>
                     </div>
-                    <div class="pt-2 bg-primary-subtle">
+                    <div class="pt-2 bg-primary-subtle border border-2 border-dark-subtle rounded">
                         <div class="d-flex justify-content-between mt-2 mx-2">
                             <h5>Total</h5>
                             <h5>₱{{$total}}</h5>
@@ -126,8 +125,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <h4 class="card-header text-center">
+            <div class="card mb-4">
+                <h4 class="card-header text-center bg-secondary-subtle">
                     Payment
                 </h4>
                 <div class="card-body mx-auto">
@@ -157,7 +156,7 @@
                         <div class="w-full mb-4">
                             <button class="flex w-full no-underline decoration-0 text-black" type="submit">
                                 <span
-                                    class="lg:!h-12 w-full  h-10 flex items-center justify-center uppercase font-semibold px-4 lg:!px-6 border border-black hover:bg-blue-500 hover:text-white transition duration-500 ease-in-out">
+                                    class="lg:!h-12 w-full  h-10 flex items-center justify-center uppercase font-semibold px-4 lg:!px-6 border border-black hover:bg-blue-600 hover:text-white transition duration-500 ease-in-out">
                                     Confirm Purchase
                                 </span>
                             </button>
