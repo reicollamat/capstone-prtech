@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function purchase_page(Request $request)
     {
-        // dd($request->query());
+        // dd($request);
         $product_id = $request->product_id;
         $quantity = $request->quantity;
         $user_id = $request->user_id;
@@ -26,7 +26,6 @@ class UserController extends Controller
         $shipping_value = 13;
         $subtotal = $product->price * $quantity;
         $total = $subtotal + $shipping_value;
-        dd($quantity);
 
         return view('pages.purchase', [
             'product' => $product,

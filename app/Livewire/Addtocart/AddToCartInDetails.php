@@ -50,28 +50,23 @@ class AddToCartInDetails extends Component
         //        dd($this->quantity, $this->user_id, $this->product_id);
     }
 
+    // redirect to purchase page
     public function buynow()
     {
-
         if (Auth::check()) {
 
-            // multiply quantity with price of the product
-            $total_price = $this->quantity * Product::find($this->product_id)->price;
-
-            CartItem::firstOrCreate([
-                'user_id' => $this->user_id,
+            $this->redirect(route('purchase_page', [
                 'product_id' => $this->product_id,
-                'quantity' => $this->quantity,
-                'total_price' => $total_price,
-            ]);
-
-            $this->redirect(route('purchase_page'));
+                'user_id' => Auth::user()->id,
+                'quantity' => $this->quantity
+            ]));
         } else {
             $this->redirect(route('login'));
         }
 
         //        dd($this->quantity, $this->user_id, $this->product_id);
     }
+
 
     public function addquantity()
     {
