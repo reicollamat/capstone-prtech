@@ -47,6 +47,25 @@ class CartSidebar extends Component
         HTML;
     }
 
+    public function render()
+    {
+        return view('livewire.cart-sidebar');
+
+    }
+
+    public function removeitem($product_id, $user_id)
+    {
+
+        $cartitem = CartItem::where('id', $product_id)->where('user_id', $user_id)->get();
+
+        if (\auth()->check()) {
+            CartItem::destroy($cartitem);
+        }
+
+        $this->mount();
+        //        $this->render();
+    }
+
     public function mount()
     {
         $this->total_price = 0;
@@ -69,24 +88,5 @@ class CartSidebar extends Component
             //            dd(Helper::maptopropercatetory('external_storage'));
 
         }
-    }
-
-    public function render()
-    {
-        return view('livewire.cart-sidebar');
-
-    }
-
-    public function removeitem($product_id, $user_id)
-    {
-
-        $cartitem = CartItem::where('id', $product_id)->where('user_id', $user_id)->get();
-
-        if (\auth()->check()) {
-            CartItem::destroy($cartitem);
-        }
-
-        $this->mount();
-        //        $this->render();
     }
 }
