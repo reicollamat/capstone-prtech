@@ -27,6 +27,7 @@ class UserController extends Controller
         $shipping_value = 13;
         $subtotal = $product->price * $quantity;
         $total = $subtotal + $shipping_value;
+        dd($quantity);
 
 
         return view('pages.purchase', [
@@ -49,7 +50,7 @@ class UserController extends Controller
         $category = $request->category;
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
-        
+
         // dd($payment_type);
 
         // Create a new Purchase instance
@@ -99,7 +100,7 @@ class UserController extends Controller
         $user_id = $request->user_id;
 
         $user = User::find($user_id);
-        $cart_items = CartItem::whereIn('id',$cart_ids)->get();
+        $cart_items = CartItem::whereIn('id', $cart_ids)->get();
         $products = Product::all();
         $shipping_value = 13;
         $subtotal = $cart_items->sum('total_price');
@@ -125,8 +126,8 @@ class UserController extends Controller
         // $category = $request->category;
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
-        
-        $cart_items = CartItem::whereIn('id',$cart_ids)->get();
+
+        $cart_items = CartItem::whereIn('id', $cart_ids)->get();
 
         // Create a new Purchase instance
         $purchase = new Purchase([
@@ -139,8 +140,7 @@ class UserController extends Controller
         $purchase->save();
 
 
-        foreach ($cart_items as $key => $value) 
-        {
+        foreach ($cart_items as $key => $value) {
             $purchaseItem = new PurchaseItem([
                 'purchase_id' => $purchase->id,
                 'product_id' => $value->product_id,
@@ -174,5 +174,4 @@ class UserController extends Controller
             'user_id' => $user_id,
         ]))->with('message', 'Purchased Order, Thank you!')->with('alert-class', 'alert-danger');
     }
-    
 }

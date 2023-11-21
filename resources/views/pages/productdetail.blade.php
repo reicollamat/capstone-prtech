@@ -112,7 +112,6 @@
                     <h1 class="mb-4">₱ {{ $product->price }}</h1>
 
 
-                    <div class="d-flex align-items-center mb-4 pt-2">
                         <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>
                         {{--                        @auth--}}
                         {{--                            <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>--}}
@@ -160,10 +159,10 @@
                         {{--                                </div>--}}
                         {{--                            </div>--}}
                         {{--                        @endauth--}}
-                        <div class="px-3 ml-auto">
+                        {{-- <div class="px-3 ml-auto"> --}}
                             {{--                            <livewire:addtowishlist.add-to-wishlist-in-details--}}
                             {{--                                    :product_id="$product->product_id"/>--}}
-                        </div>
+                        {{-- </div> --}}
 
                         {{--                        @auth--}}
                         {{--                            <div class="px-3 ml-auto">--}}
@@ -190,7 +189,6 @@
                         {{--                                </form>--}}
                         {{--                            </div>--}}
                         {{--                        @endauth--}}
-                    </div>
 
                     @auth
                         <form id="purchaseFormAuth" action="{{route('purchase_page')}}" method="GET">
