@@ -1,5 +1,5 @@
 <div>
-    <div x-data="{ expanded: false }" class="py-2 bg-white">
+    <div x-data="{ expanded: false }" class="py-2 bg-white border-b border-gray-100">
         <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center">
             <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light">
                 <input class="form-check-input" wire:model.live="select_products" value="{{ $item->id }}"
@@ -55,7 +55,7 @@
                     </div>
                     <div class="flex-1">
                         <div class="w-full flex flex-col lg:flex-row gap-1.5">
-                            <div class="p-1.5 w-1/2">
+                            <div class="p-1.5 lg:w-1/2">
                                 <div class="mb-3">
                                     <label for="username"
                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Display
@@ -96,7 +96,7 @@
                                 </div>
                                 <div>
                                     <div class="grid lg:grid-cols-2 gap-4">
-                                        <div class="grid lg:grid-cols-2 gap-4">
+                                        <div class="grid lg:grid-cols-2 gap-2">
                                             <div>
                                                 <label for="stock"
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Stock
@@ -123,62 +123,70 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="grid lg:grid-cols-2 gap-4">
+                                        <div class="grid lg:grid-cols-2 gap-2">
                                             <div>
                                                 <label for="conditon"
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Condition
                                                 </label>
-                                                <input type="text" id="conditon"
-                                                    value="{{ $itemproductinfo->condition }}"
-                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                    placeholder="" required>
-                                                @error('username')
-                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                @enderror
+                                                <select id="conditon"
+                                                    class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
+                                                    <option selected>Condition</option>
+                                                    <option value="brand_new">Brand New</option>
+                                                    <option value="used">Used</option>
+                                                </select>
+                                                {{--                                                 <input type="text" id="conditon" --}}
+                                                {{--                                                     value="{{ $itemproductinfo->condition }}" --}}
+                                                {{--                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5" --}}
+                                                {{--                                                     placeholder="" required> --}}
+                                                {{--                                                @error('username') --}}
+                                                {{--                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span> --}}
+                                                {{--                                                @enderror --}}
                                             </div>
                                             <div>
                                                 <label for="status"
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Status
 
                                                 </label>
-                                                <input type="text" id="status"
-                                                    value="{{ $itemproductinfo->status }}"
-                                                    class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                    placeholder="" required>
-                                                @error('username')
-                                                    <span
-                                                        class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                @enderror
+                                                <select id="status"
+                                                    class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
+                                                    <option selected>Status</option>
+                                                    <option value="available">Available</option>
+                                                    <option value="unavailable">Unavailable</option>
+                                                </select>
+                                                {{--                                                @error('username') --}}
+                                                {{--                                                    <span --}}
+                                                {{--                                                        class="text-sm text-red-600 space-y-1">{{ $message }}</span> --}}
+                                                {{--                                                @enderror --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {{-- econd half --}}
-                            <div class="p-1.5 w-1/2">
+                            <div class="p-1.5 lg:w-1/2">
                                 <div class="grid lg:grid-cols-2 gap-4">
                                     <div>
-                                        <label for="username"
+                                        <label for="price"
                                             class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Price
                                         </label>
                                         <input type="text" id="username" value="{{ $item->price }}"
                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                             placeholder="" required>
-                                        @error('username')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror
+                                        {{--                                        @error('username') --}}
+                                        {{--                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span> --}}
+                                        {{--                                        @enderror --}}
                                     </div>
                                     <div>
-                                        <label for="username"
-                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Display
-                                            Name
+                                        <label for="category"
+                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Category
                                         </label>
-                                        <input type="text" id="username" value="{{ $item->name }}"
-                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                            placeholder="" required>
-                                        @error('username')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror
+                                        <select id="category"
+                                            class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
+                                            <option default>Category</option>
+                                            @foreach (Helper::categoryList() as $category_key => $category_value)
+                                                <option value="{{ $category_key }}">{{ $category_value }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
