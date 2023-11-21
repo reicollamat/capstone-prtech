@@ -2,10 +2,11 @@
 @section('content')
 
     @if (session('message'))
-        <div id="notification" class="alert bg-primary text-light {{ session('alert-class', 'alert-info') }}">
+        <div id="notification" class="alert alert-primary m-2 {{ session('alert-class', 'alert-info') }}">
             {{ session('message') }}
         </div>
     @endif
+
 
     <!-- Breadcrumb Start -->
     <x-shop.breadcrumb>
@@ -62,7 +63,7 @@
                         </div>
                     </div>
                     <div class="d-flex pb-2">
-                        <div class="text-primary mr-2">
+                        <div class="text-warning mr-2">
                             <small class="bi bi-star-fill"></small>
                             <small class="bi bi-star-fill"></small>
                             <small class="bi bi-star-fill"></small>
@@ -75,19 +76,19 @@
 
                     <div class="row">
                         <div class="col">
-                            <div class="nav nav-underline nav-fill">
+                            <div class="nav nav-underline nav-fill bg-secondary-subtle">
                                 <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
                                 <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Specifications</a>
                             </div>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-pane-1">
-                                <p class="mt-2">{{ $product->description }}</p>
+                            <div class="tab-pane fade pt-2 px-2 show active" id="tab-pane-1">
+                                <p class="">{{ $product->description }}</p>
                                 <p>Upgrade your computing experience with the High-Performance Computer Part - Model HPX500.
                                 This cutting-edge component is designed to enhance your system's capabilities, offering
                                 superior performance and reliability for all your computing needs.</p>
                             </div>
-                            <div class="tab-pane fade" id="tab-pane-2">
+                            <div class="tab-pane fade pt-2 px-2" id="tab-pane-2">
                                 @includeWhen($category === 'computer_case', 'pages.product_details.computer_case')
                                 @includeWhen($category === 'case_fan', 'pages.product_details.case_fan')
                                 @includeWhen($category === 'cpu', 'pages.product_details.cpu')
@@ -110,9 +111,8 @@
 
                     
                     <h1 class="mb-4">₱ {{ $product->price }}</h1>
+                    <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>
 
-
-                        <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>
                         {{--                        @auth--}}
                         {{--                            <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>--}}
                         {{--                            --}}{{--                            <form id="cartFormAuth" action="{{route('add_to_cart')}}" method="POST">--}}
@@ -190,7 +190,7 @@
                         {{--                            </div>--}}
                         {{--                        @endauth--}}
 
-                    @auth
+                    {{-- @auth
                         <form id="purchaseFormAuth" action="{{route('purchase_page')}}" method="GET">
                             @csrf
                             <input type="text" name="product_id" value="{{$product->product_id}}" hidden>
@@ -214,7 +214,7 @@
                                 </div>
                             </button>
                         </div>
-                    @endauth
+                    @endauth --}}
 
                 </div>
             </div>
