@@ -77,4 +77,25 @@ class Helper
     {
         echo "<script>console.log('Debug Objects: ".$data."' );</script>";
     }
+
+    /**
+     * @return string
+     *
+     * Create a function that returns the string representation of time of the day for greetings
+     * to accesss use Helper::getTimeofDay()
+     */
+    public static function getTimeOfDay()
+    {
+        date_default_timezone_set('Asia/Manila'); // Set your timezone here
+
+        $time = intval(date('G')); // Get the hour in 24-hour format
+
+        if ($time >= 5 && $time < 12) {
+            return 'Morning';
+        } elseif ($time >= 12 && $time < 18) {
+            return 'Afternoon';
+        } else {
+            return 'Evening';
+        }
+    }
 }
