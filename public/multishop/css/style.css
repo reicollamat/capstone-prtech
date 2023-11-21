@@ -316,10 +316,10 @@ footer {
     transition: .5s ease-in-out;
 }
 
-.show>.dropdown-menu {
-    max-height: 800px;
-    visibility: visible;
-}
+/*.show>.dropdown-menu {*/
+/*    max-height: 800px;*/
+/*    visibility: visible;*/
+/*}*/
 
 .padding-remove {
     --bs-navbar-padding-y: 0px !important;
