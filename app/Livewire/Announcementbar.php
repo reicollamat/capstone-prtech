@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class Announcementbar extends Component
 {
-
     public $announcements = [];
 
     public function mount()

@@ -13,6 +13,7 @@ use Livewire\Component;
 class WishList extends Component
 {
     public $user_id;
+
     public $wishlist_count = 0;
 
     public $bookmarks = [];
@@ -46,7 +47,6 @@ class WishList extends Component
         }
 
     }
-
 
     public function render()
     {

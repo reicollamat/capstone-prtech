@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Layouts\UserData;
 
-use App\Models\Product;
 use App\Models\Purchase;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
@@ -50,11 +49,10 @@ class PurchaseListLayout extends Table
                 ->cantHide(),
 
             TD::make(__('Purchase Items'))
-            ->align(TD::ALIGN_CENTER)
+                ->align(TD::ALIGN_CENTER)
             // ->width('100px')
-            ->render(fn (Purchase $purchase) => 
-                Link::make(__('View'))
-                    ->route('platform.userdata.purchase.items', ['purchase'=>$purchase->id, 'user'=>$purchase->user_id])
+                ->render(fn (Purchase $purchase) => Link::make(__('View'))
+                    ->route('platform.userdata.purchase.items', ['purchase' => $purchase->id, 'user' => $purchase->user_id])
                     ->icon('bs.eye')),
 
         ];

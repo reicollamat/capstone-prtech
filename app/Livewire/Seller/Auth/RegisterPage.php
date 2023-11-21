@@ -2,13 +2,10 @@
 
 namespace App\Livewire\Seller\Auth;
 
-use App\Models\SellerAccount;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
@@ -26,9 +23,9 @@ class RegisterPage extends Component
 
     #[Rule('required', message: 'Please provide a Password ')]
     public $password;
+
     #[Rule('required|same:password', message: 'Please provide the same Password as above')]
     public $confirm_password;
-
 
     public function rules()
     {
@@ -59,7 +56,6 @@ class RegisterPage extends Component
             'password' => 'required',
         ]);
 
-
         if ($validation) {
 
             // check if email is already exist
@@ -83,11 +79,10 @@ class RegisterPage extends Component
                     }
                 }
             }
-            //            dd($validation);
+        //            dd($validation);
         } else {
             session()->flash('accountregistration', 'An error occurred. Please try again.');
         }
-
 
     }
 

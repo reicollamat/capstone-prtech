@@ -9,7 +9,7 @@ use Orchid\Screen\AsSource;
 
 class Psu extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     public function product()
     {

@@ -14,10 +14,6 @@ class PlatformProvider extends OrchidServiceProvider
 {
     /**
      * Bootstrap the application services.
-     *
-     * @param Dashboard $dashboard
-     *
-     * @return void
      */
     public function boot(Dashboard $dashboard): void
     {
@@ -34,7 +30,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-            
+
             Menu::make('Dashboard')
                 ->icon('bs.book')
                 ->route(config('platform.index')),
@@ -67,13 +63,12 @@ class PlatformProvider extends OrchidServiceProvider
             // Menu::make('Inventory')
             //     ->icon('bs.collection')
             //     ->route('platform.products.inventory'),
-                
+
             // user data screen
             Menu::make('Purchases')
                 ->icon('bs.database')
                 ->route('platform.userdata')
                 ->divider(),
-
 
             // Menu::make('Example Screen')
             //     ->icon('bs.collection')
@@ -98,7 +93,6 @@ class PlatformProvider extends OrchidServiceProvider
             //     ->icon('bs.card-text')
             //     ->route('platform.example.cards')
             //     ->divider(),
-
 
             // Menu::make('Documentation')
             //     ->title('Docs')

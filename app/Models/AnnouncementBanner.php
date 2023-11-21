@@ -9,7 +9,7 @@ use Orchid\Screen\AsSource;
 
 class AnnouncementBanner extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     protected $table = 'banner_announcements';
 

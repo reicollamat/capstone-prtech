@@ -4,7 +4,6 @@ namespace App\Livewire\Seller\OnBoarding\Form;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Rule;
@@ -49,7 +48,6 @@ class SellerRegistration extends Component
 
     #[Rule('required', message: 'Please provide your Zip/Postal Code')]
     public $user_zip_postal;
-
 
     public function mount()
     {

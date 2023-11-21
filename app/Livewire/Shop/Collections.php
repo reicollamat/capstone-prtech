@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Shop;
 
-
 use App\Models\Bookmark;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -10,11 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Locked;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-use RalphJSmit\Livewire\Urls\Facades\Url as UrlFacade;
 use Livewire\WithPagination;
+use RalphJSmit\Livewire\Urls\Facades\Url as UrlFacade;
 
 //#[Lazy]
 class Collections extends Component
@@ -45,7 +43,7 @@ class Collections extends Component
         'category_filter_url',
         'conditon_filter_url',
         'star_rating_url',
-        'price_bracket_url'
+        'price_bracket_url',
 
     ];
 
@@ -54,20 +52,25 @@ class Collections extends Component
 
     #[Url(as: 'cat-filter', history: true, keep: false)]
     public $category_filter = [];
+
     #[Url(as: 'con-filter', history: true, keep: false)]
     public $conditon_filter = [];
+
     #[Url(as: 'rating', history: true, keep: false)]
     public $star_rating_url = [];
+
     #[Url(as: 'p-filter', history: true, keep: false)]
     public $price_bracket_url = [];
 
     #[Url(as: 'sortby', history: true, keep: false)]
     public string $sortingby = 'purchase_count';
+
     public string $sortname = '';
+
     public $all_products;
+
     #[Url(as: 'order', history: true, keep: true)]
     public string $sortdirection = 'desc';
-
 
     public function sortBy(string $name = 'Bestselling', string $sort = 'purchase_count', string $direction = 'desc')
     {
@@ -153,7 +156,6 @@ class Collections extends Component
     {
         $this->userid = Auth::user()->id ?? null;
 
-
         $this->all_products = DB::table('products')->get();
 
         //      get the current url and parse it to get query string
@@ -164,7 +166,6 @@ class Collections extends Component
         if ($queryarray) {
             $this->sortingby = $queryarray['sortingby'] ?? 'purchase_count';
             $this->sortdirection = $queryarray['sortdirection'] ?? 'desc';
-
 
             //            dd($this->sortingby, $this->sortdirection);
 
@@ -239,5 +240,4 @@ class Collections extends Component
 
         return view('livewire..shop.collections');
     }
-
 }

@@ -4,15 +4,15 @@ namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
 use App\Orchid\Layouts\Product\ProductEditLayout;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
-use Illuminate\Support\Str;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ProductEditScreen extends Screen
 {
@@ -31,14 +31,12 @@ class ProductEditScreen extends Screen
         $product->all();
 
         return [
-            'product' => $product
+            'product' => $product,
         ];
     }
 
     /**
      * The name of the screen displayed in the header.
-     *
-     * @return string|null
      */
     public function name(): ?string
     {
@@ -73,7 +71,7 @@ class ProductEditScreen extends Screen
 
             Link::make(__('Cancel'))
                 ->icon('bs.x-circle')
-                ->route('platform.products')
+                ->route('platform.products'),
         ];
     }
 
@@ -99,9 +97,9 @@ class ProductEditScreen extends Screen
     }
 
     /**
-     * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Product $product)
     {
@@ -121,17 +119,14 @@ class ProductEditScreen extends Screen
 
         // ])
 
-
         // create unique slug from product title attribute
         $titleslug = Str::slug($request->collect('product')->get('title'));
         $slug = SlugService::createSlug(Product::class, 'slug', $titleslug);
-
 
         $product
             ->fill($request->collect('product')->toArray())
             ->fill(['slug' => $slug])
             ->save();
-
 
         Toast::info(__('Product was saved.'));
 

@@ -12,7 +12,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             $user = Auth::user();
             $products = Product::all();
             $shipping_value = 13;
@@ -21,7 +21,6 @@ class CartController extends Controller
             $subtotal = $cart_items->sum('total_price');
             $total = $subtotal + $shipping_value;
 
-
             return view('pages.profile.cart', [
                 'cart_items' => $cart_items,
                 'products' => $products,
@@ -29,9 +28,7 @@ class CartController extends Controller
                 'subtotal' => $subtotal,
                 'total' => $total,
             ]);
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
 
@@ -54,7 +51,6 @@ class CartController extends Controller
             'total_price' => $total_price,
         ]);
 
-
         Session::flash('message', 'Add Cart Success');
         Session::flash('alert-class', 'alert-danger');
 
@@ -64,7 +60,7 @@ class CartController extends Controller
         ]))->with('message', 'Added to Cart!')->with('alert-class', 'alert-danger');
     }
 
-    public function remove_cartitem (Request $request)
+    public function remove_cartitem(Request $request)
     {
         $cart_id = $request->cart_id;
         $user_id = $request->user_id;

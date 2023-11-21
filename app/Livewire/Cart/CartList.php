@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Cart;
 
-use App\Models\Bookmark;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -14,12 +13,13 @@ use Livewire\Component;
 #[lazy]
 class CartList extends Component
 {
-
     public string|int|null $user_id;
+
     /**
      * @var Product[]|_IH_Product_C
      */
     public $cartitems = [];
+
     public int $cartiems_count = 0;
 
     public float $total_price = 0;
@@ -32,7 +32,6 @@ class CartList extends Component
             </div>
             HTML;
     }
-
 
     public function mount()
     {
@@ -47,7 +46,7 @@ class CartList extends Component
 
             $this->cartiems_count = count($this->cartitems);
 
-            if (!empty($this->cartitems)) {
+            if (! empty($this->cartitems)) {
                 foreach ($this->cartitems as $item) {
                     $this->total_price += $item->price * $item->quantity;
                 }
@@ -84,5 +83,4 @@ class CartList extends Component
     {
         $this->mount();
     }
-
 }

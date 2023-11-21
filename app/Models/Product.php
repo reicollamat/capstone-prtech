@@ -2,34 +2,32 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Orchid\Screen\AsSource;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Kyslik\ColumnSortable\Sortable;
 use Orchid\Filters\Filterable;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
+use Orchid\Screen\AsSource;
 
 class Product extends Model
 {
-    use HasFactory, AsSource, Sluggable, Filterable, Sortable;
+    use AsSource, Filterable, HasFactory, Sluggable, Sortable;
 
     /**
      * @var string
      */
     protected $table = 'products';
 
-
     // relationship to Bookmark
     public function bookmarks()
     {
         return $this->hasMany(Bookmark::class);
     }
-
 
     public function category($category)
     {
@@ -158,7 +156,6 @@ class Product extends Model
         return $this->belongsTo(SellerInformation::class);
     }
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -183,15 +180,13 @@ class Product extends Model
 
     /**
      * Return the sluggable configuration array for this model.
-     *
-     * @return array
      */
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 

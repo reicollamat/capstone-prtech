@@ -18,8 +18,6 @@ class RecommenderScreen extends Screen
 
     /**
      * The name of the screen displayed in the header.
-     *
-     * @return string|null
      */
     public function name(): ?string
     {
@@ -44,7 +42,7 @@ class RecommenderScreen extends Screen
     public function layout(): iterable
     {
         return [
-            
+
         ];
     }
 }

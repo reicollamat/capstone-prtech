@@ -15,22 +15,34 @@ use Livewire\Component;
 class ShopInformation extends Component
 {
     public $currentStep;
+
     public $minStep = 1;
+
     public $totalSteps = 3;
 
     public $shop_name;
-    public $shop_email;
-    public $shop_phone;
-    public $shop_address;
-    public $shop_city;
-    public $shop_state_province;
-    public $shop_zip_code;
-    public $registered_name;
-    public $registered_address;
-    public $registered_city;
-    public $registered_state_province;
-    public $registered_zip_code;
 
+    public $shop_email;
+
+    public $shop_phone;
+
+    public $shop_address;
+
+    public $shop_city;
+
+    public $shop_state_province;
+
+    public $shop_zip_code;
+
+    public $registered_name;
+
+    public $registered_address;
+
+    public $registered_city;
+
+    public $registered_state_province;
+
+    public $registered_zip_code;
 
     #[Locked]
     public $user_id;
@@ -129,7 +141,5 @@ class ShopInformation extends Component
         // change the form to 3rd step if validation is passed
         $this->currentStep = 3;
 
-
     }
-
 }

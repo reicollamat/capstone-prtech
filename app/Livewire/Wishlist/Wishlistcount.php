@@ -6,12 +6,13 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use App\Helper\Helper;
 
 class Wishlistcount extends Component
 {
     public string|int|null $user_id;
+
     public int $wishlist_count = 0;
+
     /**
      * @var Product[]|\LaravelIdea\Helper\App\Models\_IH_Product_C
      */
@@ -34,7 +35,6 @@ class Wishlistcount extends Component
         }
 
     }
-
 
     public function render()
     {

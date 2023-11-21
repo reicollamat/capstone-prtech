@@ -6,7 +6,6 @@ use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\User;
-use App\Orchid\Layouts\PaymentLayout;
 use App\Orchid\Layouts\UserData\PurchaseItemsListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -25,7 +24,6 @@ class PurchaseItemsListScreen extends Screen
             ->get();
         $payment = Payment::where('purchase_id', $purchase->id)
             ->get()->first();
-        
 
         return [
             'purchase_items' => $purchase_items,
@@ -35,21 +33,19 @@ class PurchaseItemsListScreen extends Screen
 
     /**
      * The name of the screen displayed in the header.
-     *
-     * @return string|null
      */
     public function name(): ?string
     {
         // get current page url
-        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-            $url = "https://";
-        else
-                $url = "http://";
-        // Append the host(domain name, ip) to the URL.   
-        $url.= $_SERVER['HTTP_HOST'];
-        // Append the requested resource location to the URL   
-        $url.= $_SERVER['REQUEST_URI'];
-
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            $url = 'https://';
+        } else {
+            $url = 'http://';
+        }
+        // Append the host(domain name, ip) to the URL.
+        $url .= $_SERVER['HTTP_HOST'];
+        // Append the requested resource location to the URL
+        $url .= $_SERVER['REQUEST_URI'];
 
         // Use parse_url() function to parse the URL
         // and return an associative array which
@@ -60,7 +56,7 @@ class PurchaseItemsListScreen extends Screen
         parse_str($url_components['query'], $params);
 
         $title_name = 'Purchase No. '.$params['purchase'].': Details';
-        
+
         return $title_name;
     }
 
@@ -79,15 +75,15 @@ class PurchaseItemsListScreen extends Screen
     public function commandBar(): iterable
     {
         // get current page url
-        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-            $url = "https://";
-        else
-                $url = "http://";
-        // Append the host(domain name, ip) to the URL.   
-        $url.= $_SERVER['HTTP_HOST'];
-        // Append the requested resource location to the URL   
-        $url.= $_SERVER['REQUEST_URI'];
-
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            $url = 'https://';
+        } else {
+            $url = 'http://';
+        }
+        // Append the host(domain name, ip) to the URL.
+        $url .= $_SERVER['HTTP_HOST'];
+        // Append the requested resource location to the URL
+        $url .= $_SERVER['REQUEST_URI'];
 
         // Use parse_url() function to parse the URL
         // and return an associative array which

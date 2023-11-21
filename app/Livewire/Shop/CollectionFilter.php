@@ -2,16 +2,15 @@
 
 namespace App\Livewire\Shop;
 
-use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Url;
 use Livewire\Component;
-
 use RalphJSmit\Livewire\Urls\Facades\Url as UrlFacade;
 
 class CollectionFilter extends Component
 {
     public $all_products;
+
     #[Url(as: 'filter', history: true, keep: false)]
     public $category_filter = [];
 
@@ -42,7 +41,6 @@ class CollectionFilter extends Component
     {
         $this->dispatch('filter-change');
     }
-
 
     //    public function updatedCategory_filter()
     //    {
@@ -81,6 +79,4 @@ class CollectionFilter extends Component
     {
         return view('livewire..shop.collection-filter');
     }
-
-
 }

@@ -2,8 +2,8 @@
 
 namespace App\Utils;
 
-use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class Paginate
 {

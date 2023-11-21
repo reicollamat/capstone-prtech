@@ -46,7 +46,7 @@ class ShopController extends Controller
 
         // get checked categories
         if ($request->sort) {
-            if (!empty(array_diff(array_keys($request->query()), ['sort', 'direction']))) {
+            if (! empty(array_diff(array_keys($request->query()), ['sort', 'direction']))) {
                 // get products with check categories
                 $products = Product::sortable();
 
@@ -63,7 +63,6 @@ class ShopController extends Controller
             $products = $products->whereIn('category', $category_checked)->paginate(30);
         }
 
-
         Session::forget('to_search');
 
         // get all products if all categories not checked
@@ -77,7 +76,7 @@ class ShopController extends Controller
         } else {
             if ($request->to_search) {
                 $to_search = $request->to_search;
-                $products = Product::where('title', 'ilike', '%' . $to_search . '%')->sortable()->paginate(30);
+                $products = Product::where('title', 'ilike', '%'.$to_search.'%')->sortable()->paginate(30);
                 Session::put('to_search', $to_search);
 
                 return view('pages.shop', [
@@ -128,7 +127,6 @@ class ShopController extends Controller
             abort(404);
         }
 
-
         // generate 10 random models corresponds to category
         $count = 10;
 
@@ -168,7 +166,7 @@ class ShopController extends Controller
 
     public function search_result(Request $request)
     {
-        if (!empty($request->to_search)) {
+        if (! empty($request->to_search)) {
             $to_search = $request->to_search;
         }
         // dd($to_search);

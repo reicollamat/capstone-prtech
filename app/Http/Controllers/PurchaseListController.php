@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseListController extends Controller
@@ -24,9 +23,7 @@ class PurchaseListController extends Controller
                 'products' => $products,
                 'purchase_items' => $purchase_items,
             ]);
-        }
-        else
-        {
+        } else {
             return redirect('login');
         }
     }

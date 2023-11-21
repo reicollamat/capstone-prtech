@@ -10,10 +10,12 @@ use Livewire\Component;
 class Cartcount extends Component
 {
     public string|int|null $user_id;
+
     /**
      * @var Product[]|\LaravelIdea\Helper\App\Models\_IH_Product_C
      */
     public $cartitems = 0;
+
     public int $cartiems_count = 0;
 
     public function placeholder()

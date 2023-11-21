@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-
     public function purchase_page(Request $request)
     {
         // dd($request->query());
@@ -29,7 +28,6 @@ class UserController extends Controller
         $total = $subtotal + $shipping_value;
         dd($quantity);
 
-
         return view('pages.purchase', [
             'product' => $product,
             'quantity' => $quantity,
@@ -39,7 +37,6 @@ class UserController extends Controller
             'total' => $total,
         ]);
     }
-
 
     public function purchase_one(Request $request)
     {
@@ -58,7 +55,7 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_date' => now(),
             'total_amount' => $total,
-            'purchase_status' => 'processing'
+            'purchase_status' => 'processing',
         ]);
         // Save the Purchase instance
         $purchase->save();
@@ -80,18 +77,14 @@ class UserController extends Controller
         ]);
         $purchaseItem->save();
 
-
         Session::flash('message', 'Purchased Order');
         Session::flash('alert-class', 'alert-danger');
 
         return redirect(route('product_detail', [
             'product_id' => $product_id,
-            'category' => $category
+            'category' => $category,
         ]))->with('message', 'Purchased Order, Thank you!')->with('alert-class', 'alert-danger');
     }
-
-
-
 
     public function purchasecart_page(Request $request)
     {
@@ -105,7 +98,6 @@ class UserController extends Controller
         $shipping_value = 13;
         $subtotal = $cart_items->sum('total_price');
         $total = $subtotal + $shipping_value;
-
 
         return view('pages.profile.cartpurchase', [
             'products' => $products,
@@ -134,11 +126,10 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_date' => now(),
             'total_amount' => $total,
-            'purchase_status' => 'processing'
+            'purchase_status' => 'processing',
         ]);
         // Save the Purchase instance
         $purchase->save();
-
 
         foreach ($cart_items as $key => $value) {
             $purchaseItem = new PurchaseItem([
@@ -150,7 +141,6 @@ class UserController extends Controller
             $purchaseItem->save();
         }
 
-
         $purchaseItem = new Payment([
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
@@ -160,12 +150,9 @@ class UserController extends Controller
         ]);
         $purchaseItem->save();
 
-
         foreach ($cart_items as $key => $value) {
             CartItem::destroy($value->id);
         }
-
-
 
         Session::flash('message', 'Purchased Order');
         Session::flash('alert-class', 'alert-danger');

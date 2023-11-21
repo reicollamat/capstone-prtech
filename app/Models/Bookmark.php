@@ -9,7 +9,7 @@ use Orchid\Screen\AsSource;
 
 class Bookmark extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     /**
      * @var string
@@ -22,7 +22,6 @@ class Bookmark extends Model
         return $this->belongsTo(User::class);
     }
 
-    
     /**
      * The attributes that are mass assignable.
      *

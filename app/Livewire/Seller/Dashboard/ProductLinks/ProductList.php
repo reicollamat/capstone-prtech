@@ -4,10 +4,8 @@ namespace App\Livewire\Seller\Dashboard\ProductLinks;
 
 use App\Helper\Helper;
 use App\Models\Product;
-use App\Models\User;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -21,10 +19,15 @@ class ProductList extends Component
     //    public $totalProductCount;
 
     public array $categories;
+
     public $stock_filter;
+
     public $category_filter;
+
     public $brand_filter;
+
     public $quick_search_filter;
+
     public $select_products = [];
 
     //    public function paginationView()
@@ -49,7 +52,6 @@ class ProductList extends Component
         return $totalProductCount = Product::count();
     }
 
-
     //    public function test()
     //    {
     //        $this->nextPage();
@@ -71,7 +73,6 @@ class ProductList extends Component
 
         $this->resetPage();
     }
-
 
     #[Computed]
     public function getProductList()

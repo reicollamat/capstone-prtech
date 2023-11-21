@@ -32,8 +32,6 @@ class UserCartScreen extends Screen
 
     /**
      * The name of the screen displayed in the header.
-     *
-     * @return string|null
      */
     public function name(): ?string
     {
@@ -57,7 +55,7 @@ class UserCartScreen extends Screen
         return [
             Link::make(__('Back'))
                 ->icon('bs.back')
-                ->route('platform.userdata')
+                ->route('platform.userdata'),
         ];
     }
 

@@ -15,15 +15,15 @@ class CartSidebar extends Component
     use AuthorizesRequests;
 
     public string|int|null $user_id;
+
     /**
      * @var Product[]|_IH_Product_C
      */
     public $cartitems = [];
+
     public int $cartiems_count = 0;
 
     public float $total_price = 0;
-
-
 
     public function placeholder()
     {
@@ -47,8 +47,6 @@ class CartSidebar extends Component
         HTML;
     }
 
-
-
     public function mount()
     {
         $this->total_price = 0;
@@ -56,14 +54,13 @@ class CartSidebar extends Component
         if (Auth::check()) {
             $this->user_id = Auth::id();
 
-
             $this->cartitems = Product::join('cart_items', 'products.id', '=', 'cart_items.product_id')
                 ->where('user_id', $this->user_id)
                 ->get();
 
             $this->cartiems_count = count($this->cartitems);
 
-            if (!empty($this->cartitems)) {
+            if (! empty($this->cartitems)) {
                 foreach ($this->cartitems as $item) {
                     $this->total_price += $item->price * $item->quantity;
                 }
@@ -74,15 +71,14 @@ class CartSidebar extends Component
         }
     }
 
-
     public function render()
     {
         return view('livewire.cart-sidebar');
 
-
     }
 
-    public function removeitem($product_id, $user_id){
+    public function removeitem($product_id, $user_id)
+    {
 
         $cartitem = CartItem::where('id', $product_id)->where('user_id', $user_id)->get();
 
@@ -91,6 +87,6 @@ class CartSidebar extends Component
         }
 
         $this->mount();
-//        $this->render();
+        //        $this->render();
     }
 }

@@ -59,6 +59,4 @@ class Menu extends Component
     {
         return redirect()->route('index_shop');
     }
-
-
 }

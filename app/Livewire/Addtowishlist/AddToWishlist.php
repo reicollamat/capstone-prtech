@@ -5,15 +5,11 @@ namespace App\Livewire\Addtowishlist;
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Reactive;
 use Livewire\Component;
-
 
 class AddToWishlist extends Component
 {
-
     public int $count = 0;
 
     public $product_id;
@@ -25,11 +21,11 @@ class AddToWishlist extends Component
     /**
      * Mounts the product to the user's wishlist.
      *
-     * @param int $product_id The ID of the product to mount.
+     * @param  int  $product_id The ID of the product to mount.
      * @return void
+     *
      * @throws Some_Exception_Class If the product cannot be mounted.
      */
-
     #[On('wishlist-item-remount')]
     public function mount($product_id)
     {
@@ -59,7 +55,7 @@ class AddToWishlist extends Component
     {
         if (Auth::check()) {
 
-            if (!$this->added_to_wishlist) {
+            if (! $this->added_to_wishlist) {
                 Bookmark::firstOrCreate(['user_id' => $this->user_id, 'product_id' => $this->product_id]);
                 // create an event to update the count of wihshlist items
                 $this->dispatch('wishlist-item-change');
@@ -68,6 +64,4 @@ class AddToWishlist extends Component
             $this->redirect(route('login'));
         }
     }
-
-
 }

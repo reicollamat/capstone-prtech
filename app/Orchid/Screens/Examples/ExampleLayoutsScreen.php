@@ -47,9 +47,9 @@ class ExampleLayoutsScreen extends TestBaseScreen
     /**
      * The screen's layout elements.
      *
-     * @throws \Throwable
-     *
      * @return \Orchid\Screen\Layout[]
+     *
+     * @throws \Throwable
      */
     public function layout(): iterable
     {

@@ -27,7 +27,7 @@ class LoginPage extends Component
     {
         //TODO: validate this on the seller table, if account is not found in seller table flash message,
         // no associated seller account is present.
-        
+
         $validation = $this->validate([
             'email' => 'required|email|exists:users,email',
             'password' => 'required'],

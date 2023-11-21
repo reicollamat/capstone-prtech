@@ -10,6 +10,7 @@ use Livewire\Component;
 class AddToCart extends Component
 {
     public int|null|string $product_id;
+
     public int|null|string $user_id;
 
     public function mount($product_id)
@@ -33,14 +34,13 @@ class AddToCart extends Component
                 'user_id' => $this->user_id,
                 'product_id' => $this->product_id,
                 'quantity' => 1,
-                'total_price' => Product::find($this->product_id)->price
+                'total_price' => Product::find($this->product_id)->price,
             ]);
 
             $this->dispatch('cartitem-item-change');
         } else {
             $this->redirect(route('login'));
         }
-
 
         //        dd($this->quantity, $this->user_id, $this->product_id);
     }

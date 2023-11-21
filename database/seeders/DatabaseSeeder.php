@@ -23,18 +23,17 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'admin',
                 'name' => 'Admin',
                 'permissions' => '{"platform.index": "1", "platform.systems.roles": "1", "platform.systems.users": "1", "platform.systems.attachment": "1"}',
-                'created_at' => date("Y-m-d H:i:s"),
-                'updated_at' => date("Y-m-d H:i:s"),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'slug' => 'regular_user',
                 'name' => 'Regular User',
                 'permissions' => '{"platform.index": "0", "platform.systems.roles": "0", "platform.systems.users": "0", "platform.systems.attachment": "0"}',
-                'created_at' => date("Y-m-d H:i:s"),
-                'updated_at' => date("Y-m-d H:i:s"),
-            ]
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
         ]);
-
 
         // seed an admin user
         $admin = User::factory()->create([
@@ -50,10 +49,10 @@ class DatabaseSeeder extends Seeder
             'postal_code' => fake()->postcode(),
             'country' => fake()->country(),
             'permissions' => [
-                "platform.index" => true,
-                "platform.systems.roles" => true,
-                "platform.systems.users" => true,
-                "platform.systems.attachment" => true,
+                'platform.index' => true,
+                'platform.systems.roles' => true,
+                'platform.systems.users' => true,
+                'platform.systems.attachment' => true,
             ],
         ]);
 
@@ -71,10 +70,10 @@ class DatabaseSeeder extends Seeder
             'postal_code' => fake()->postcode(),
             'country' => fake()->country(),
             'permissions' => [
-                "platform.index" => false,
-                "platform.systems.roles" => false,
-                "platform.systems.users" => false,
-                "platform.systems.attachment" => false,
+                'platform.index' => false,
+                'platform.systems.roles' => false,
+                'platform.systems.users' => false,
+                'platform.systems.attachment' => false,
             ],
         ]);
 
@@ -83,13 +82,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'mai@gmail.com',
             'password' => Hash::make('1'),
             'permissions' => [
-                "platform.index" => false,
-                "platform.systems.roles" => false,
-                "platform.systems.users" => false,
-                "platform.systems.attachment" => false,
+                'platform.index' => false,
+                'platform.systems.roles' => false,
+                'platform.systems.users' => false,
+                'platform.systems.attachment' => false,
             ],
         ]);
-
 
         $admin_role_id = DB::table('roles')->where('slug', 'admin')->value('id');
         $user_role_id = DB::table('roles')->where('slug', 'user')->value('id');
@@ -103,7 +101,7 @@ class DatabaseSeeder extends Seeder
             [
                 'user_id' => 2,
                 'role_id' => 2,
-            ]
+            ],
         ]);
 
         // seed 3 regular users

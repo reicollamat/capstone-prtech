@@ -2,10 +2,8 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Lazy;
-use Livewire\Component;
 use App\Models\Product;
-
+use Livewire\Component;
 
 class Searchbar extends Component
 {
@@ -30,11 +28,12 @@ class Searchbar extends Component
         'webcam' => '2.3 Webcam',
     ];
 
-    ##create a function upon cliuckg search send a get request to search
+    //#create a function upon cliuckg search send a get request to search
 
     public $selected_category;
 
     public $search = '';
+
     public $search_return;
 
     public function mount()
@@ -46,7 +45,6 @@ class Searchbar extends Component
     {
         $this->search = '';
     }
-
 
     public function placeholder(array $params = [])
     {
@@ -69,6 +67,7 @@ class Searchbar extends Component
         } else {
             $this->search_return = '';
         }
+
         return view('livewire.searchbar');
     }
 

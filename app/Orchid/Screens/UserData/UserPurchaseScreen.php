@@ -4,7 +4,6 @@ namespace App\Orchid\Screens\UserData;
 
 use App\Models\Product;
 use App\Models\Purchase;
-use App\Models\PurchaseItem;
 use App\Models\User;
 use App\Orchid\Layouts\UserData\PurchaseListLayout;
 use Orchid\Screen\Actions\Link;
@@ -21,7 +20,7 @@ class UserPurchaseScreen extends Screen
     {
         // load current user
         $user->load(['roles']);
-            
+
         // get bookmarks.product_id inner join products.id
         $purchase = Purchase::where('user_id', $user->id)
             ->get();
@@ -35,8 +34,6 @@ class UserPurchaseScreen extends Screen
 
     /**
      * The name of the screen displayed in the header.
-     *
-     * @return string|null
      */
     public function name(): ?string
     {
@@ -60,7 +57,7 @@ class UserPurchaseScreen extends Screen
         return [
             Link::make(__('Back'))
                 ->icon('bs.back')
-                ->route('platform.userdata')
+                ->route('platform.userdata'),
         ];
     }
 

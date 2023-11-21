@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\ComputerCase;
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -17,35 +16,35 @@ class ComputerCaseSeeder extends Seeder
     {
         ComputerCase::truncate();
 
-        $json = File::get("database/product_dataset/case.json");
+        $json = File::get('database/product_dataset/case.json');
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/case/case (' . fake()->numberBetween(1, 3) . ').png';
+            $image = 'img/components/case/case ('.fake()->numberBetween(1, 3).').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (!empty($value->price)) {
+            if (! empty($value->price)) {
                 $product = Product::create([
-                    "title" => $value->name,
-                    "category" => "computer_case",
-                    "price" => $value->price,
-                    "rating" => rand(0, 5),
-                    "image" => $image,
-                    "condition" => $condition,
+                    'title' => $value->name,
+                    'category' => 'computer_case',
+                    'price' => $value->price,
+                    'rating' => rand(0, 5),
+                    'image' => $image,
+                    'condition' => $condition,
                 ]);
                 ComputerCase::create([
-                    "product_id" => $product->id,
-                    "category" => "computer_case",
-                    "name" => $value->name,
-                    "price" => $value->price,
-                    "type" => $value->type,
-                    "color" => $value->color,
-                    "psu" => $value->psu,
-                    "sidepanel" => $value->side_panel,
-                    "external_525_bays" => $value->external_525_bays,
-                    "internal_35_bays" => $value->internal_35_bays,
-                    "image" => $image,
-                    "description" => fake()->paragraph(),
-                    "condition" => $condition,
+                    'product_id' => $product->id,
+                    'category' => 'computer_case',
+                    'name' => $value->name,
+                    'price' => $value->price,
+                    'type' => $value->type,
+                    'color' => $value->color,
+                    'psu' => $value->psu,
+                    'sidepanel' => $value->side_panel,
+                    'external_525_bays' => $value->external_525_bays,
+                    'internal_35_bays' => $value->internal_35_bays,
+                    'image' => $image,
+                    'description' => fake()->paragraph(),
+                    'condition' => $condition,
                 ]);
             }
         }

@@ -27,7 +27,9 @@ use Livewire\Component;
 class ProductListComponent extends Component
 {
     public Model $item;
+
     public Model $itemproductinfo;
+
     private $categoryMap = [
         'computer_case' => ComputerCase::class,
         'case_fan' => CaseFan::class,
@@ -59,7 +61,6 @@ class ProductListComponent extends Component
         //        dd(Product::join($item->category, $item->id, '=', $item->category . '.product.id'));
         //        $test = DB::table($item->category)->join('products', $item->category . '.product_id', '=', 'products.id');
 
-
         //        dd($item->category . '.product_id');
         //        dd($test);
         // Check if the category exists in the category map
@@ -70,11 +71,11 @@ class ProductListComponent extends Component
             // Resolve the model using the model class and product_id
             $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
 
-            //            $this->item = app()->make($modelClass)
-            //                ->join('products', , '=', 'products.id')
-            //                ->where('product_id', $item->id)->first();
-            //
-            //            dd($this->item);
+        //            $this->item = app()->make($modelClass)
+        //                ->join('products', , '=', 'products.id')
+        //                ->where('product_id', $item->id)->first();
+        //
+        //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);

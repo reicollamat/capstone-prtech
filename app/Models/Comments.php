@@ -31,6 +31,6 @@ class Comments extends Model
         'user_id',
         'product_id',
         'text',
-        'rating'
+        'rating',
     ];
 }

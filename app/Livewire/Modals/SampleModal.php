@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Modals;
 
-
 use LivewireUI\Modal\ModalComponent;
 
 class SampleModal extends ModalComponent

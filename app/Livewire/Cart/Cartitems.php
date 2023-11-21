@@ -4,7 +4,6 @@ namespace App\Livewire\Cart;
 
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
@@ -17,7 +16,6 @@ class Cartitems extends Component
     public $cartitem = [];
 
     public int $testvalue = 0;
-
 
     public function placeholder()
     {
@@ -47,11 +45,9 @@ class Cartitems extends Component
 
     }
 
-
     public function remove()
     {
         $this->dispatch('cartitem-item-change');
-
 
     }
 
@@ -62,7 +58,6 @@ class Cartitems extends Component
         CartItem::where('id', $cartitem['id'])->increment('quantity');
         sleep(0.500);
         $this->dispatch('cartitem-item-change');
-
 
     }
 

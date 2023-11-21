@@ -9,7 +9,7 @@ use Orchid\Screen\AsSource;
 
 class Headphone extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     public function product()
     {

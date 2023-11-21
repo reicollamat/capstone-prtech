@@ -39,14 +39,13 @@ class AddToCartInDetails extends Component
                 'user_id' => $this->user_id,
                 'product_id' => $this->product_id,
                 'quantity' => $this->quantity,
-                'total_price' => $total_price
+                'total_price' => $total_price,
             ]);
 
             $this->dispatch('cartitem-item-change');
         } else {
             $this->redirect(route('login'));
         }
-
 
         //        dd($this->quantity, $this->user_id, $this->product_id);
     }
@@ -63,14 +62,13 @@ class AddToCartInDetails extends Component
                 'user_id' => $this->user_id,
                 'product_id' => $this->product_id,
                 'quantity' => $this->quantity,
-                'total_price' => $total_price
+                'total_price' => $total_price,
             ]);
 
             $this->redirect(route('purchase_page'));
         } else {
             $this->redirect(route('login'));
         }
-
 
         //        dd($this->quantity, $this->user_id, $this->product_id);
     }

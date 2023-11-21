@@ -9,7 +9,7 @@ use Orchid\Screen\AsSource;
 
 class ExtStorage extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     /**
      * The attributes that are mass assignable.

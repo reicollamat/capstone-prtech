@@ -61,7 +61,7 @@ class Helper
     {
         $mapping = [
             'used' => 'Used',
-            'brand_new' => 'Brand New'
+            'brand_new' => 'Brand New',
         ];
 
         return $mapping[$input] ?? 'Unknown value';
@@ -70,11 +70,11 @@ class Helper
     /**
      * Logs data to the browser console for debugging purposes.
      *
-     * @param mixed $data The data to be logged. It can be of any type.
+     * @param  mixed  $data The data to be logged. It can be of any type.
      * @return void
      */
     public static function debug_to_console($data)
     {
-        echo "<script>console.log('Debug Objects: " . $data . "' );</script>";
+        echo "<script>console.log('Debug Objects: ".$data."' );</script>";
     }
 }

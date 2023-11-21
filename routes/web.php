@@ -9,6 +9,8 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Livewire\Landing;
+use App\Livewire\Seller\Auth\LoginPage;
+use App\Livewire\Seller\Auth\RegisterPage;
 use App\Livewire\Seller\Dashboard;
 use App\Livewire\Seller\Dashboard\AnalyticsLinks\AnalyticsModelReport;
 use App\Livewire\Seller\Dashboard\OrderLinks\OrderCancellations;
@@ -27,12 +29,9 @@ use App\Livewire\Seller\Inventory;
 use App\Livewire\Seller\OnBoarding\Form\SellerRegistration;
 use App\Livewire\Seller\OnBoarding\Form\ShopInformation;
 use App\Livewire\Seller\OnBoarding\Form\ShopSuccess;
+use App\Livewire\Shop;
 use App\Livewire\Shop\Collections;
 use Illuminate\Support\Facades\Route;
-use \App\Livewire\Shop;
-use \App\Livewire\Seller\Auth\LoginPage;
-
-use \App\Livewire\Seller\Auth\RegisterPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +47,6 @@ use \App\Livewire\Seller\Auth\RegisterPage;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
 
 // get if user is_admin then redirect to designated view
 Route::get('/redirect', [LandingController::class, 'redirect']);
@@ -108,13 +106,11 @@ Route::prefix('seller')->group(function () {
     });
 });
 
-
 // shop page
 Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
 Route::get('/searchresult', [ShopController::class, 'search_result'])->name('search_result');
 // product detail page
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
-
 
 //Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
@@ -146,7 +142,6 @@ Route::middleware('auth')->group(function () {
 
     // purchase list page
     Route::get('/purchaselist', [PurchaseListController::class, 'purchase_list'])->name('purchase_list');
-
 
     // purchase page
     Route::get('/purchasepage', [UserController::class, 'purchase_page'])->name('purchase_page');
@@ -191,4 +186,4 @@ Route::prefix('explore')->group(function () {
     })->name('terms-and-conditions');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

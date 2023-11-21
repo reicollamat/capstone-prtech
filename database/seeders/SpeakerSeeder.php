@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Speaker;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -17,33 +16,33 @@ class SpeakerSeeder extends Seeder
     {
         Speaker::truncate();
 
-        $json = File::get("database/product_dataset/speakers.json");
+        $json = File::get('database/product_dataset/speakers.json');
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/speaker/speaker (' . fake()->numberBetween(1, 3) . ').png';
+            $image = 'img/components/speaker/speaker ('.fake()->numberBetween(1, 3).').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (!empty($value->price)) {
+            if (! empty($value->price)) {
                 $product = Product::create([
-                    "title" => $value->name,
-                    "category" => "speaker",
-                    "price" => $value->price,
-                    "rating" => rand(0, 5),
-                    "image" => $image,
-                    "condition" => $condition,
+                    'title' => $value->name,
+                    'category' => 'speaker',
+                    'price' => $value->price,
+                    'rating' => rand(0, 5),
+                    'image' => $image,
+                    'condition' => $condition,
                 ]);
                 Speaker::create([
-                    "product_id" => $product->id,
-                    "category" => "speaker",
-                    "name" => $value->name,
-                    "price" => $value->price,
-                    "configuration" => $value->configuration,
-                    "wattage" => $value->wattage,
-                    "frequency_response" => $value->frequency_response,
-                    "color" => $value->color,
-                    "image" => $image,
-                    "description" => fake()->paragraph(),
-                    "condition" => $condition,
+                    'product_id' => $product->id,
+                    'category' => 'speaker',
+                    'name' => $value->name,
+                    'price' => $value->price,
+                    'configuration' => $value->configuration,
+                    'wattage' => $value->wattage,
+                    'frequency_response' => $value->frequency_response,
+                    'color' => $value->color,
+                    'image' => $image,
+                    'description' => fake()->paragraph(),
+                    'condition' => $condition,
                 ]);
             }
         }

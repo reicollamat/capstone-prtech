@@ -9,11 +9,13 @@ use Livewire\Component;
 class WishlistSidebar extends Component
 {
     public $user_id;
+
     public $wishlist_count = 0;
 
     public $bookmarks = [];
 
-    public function placeholder(){
+    public function placeholder()
+    {
         return <<<'HTML'
         <div>
             <!-- Loading spinner... -->
@@ -32,6 +34,7 @@ class WishlistSidebar extends Component
         </div>
         HTML;
     }
+
     public function mount()
     {
 
@@ -44,7 +47,6 @@ class WishlistSidebar extends Component
 
             $this->wishlist_count = count($this->bookmarks);
         }
-
 
     }
 

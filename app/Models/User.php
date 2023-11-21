@@ -26,7 +26,6 @@ class User extends Authenticatable
         return $this->hasMany(Shipments::class);
     }
 
-
     // relationship to CartItem
     public function cart_item()
     {
@@ -41,14 +40,13 @@ class User extends Authenticatable
 
     public function seller(): HasOne
     {
-        return $this->hasOne(SellerInformation::class,);
+        return $this->hasOne(SellerInformation::class);
     }
 
     public function commnent(): Hasmany
     {
         return $this->hasMany(Comments::class);
     }
-
 
     /**
      * The attributes that are mass assignable.
@@ -72,7 +70,7 @@ class User extends Authenticatable
         'state_province',
         'country',
         'permissions',
-        'is_seller'
+        'is_seller',
     ];
 
     /**
@@ -94,7 +92,7 @@ class User extends Authenticatable
     protected $casts = [
         'permissions' => 'array',
         'email_verified_at' => 'datetime',
-        'is_seller' => 'boolean'
+        'is_seller' => 'boolean',
     ];
 
     /**

@@ -58,7 +58,7 @@ class ProductEditLayout extends Rows
                 ->required()
                 ->title(__('Description'))
                 ->placeholder(__('Description')),
-            
+
             Input::make('product.price')
                 ->required()
                 ->title(__('Price'))

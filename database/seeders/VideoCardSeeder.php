@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\VideoCard;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -17,35 +16,35 @@ class VideoCardSeeder extends Seeder
     {
         VideoCard::truncate();
 
-        $json = File::get("database/product_dataset/video-card.json");
+        $json = File::get('database/product_dataset/video-card.json');
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/gpu/gpu (' . fake()->numberBetween(1, 10) . ').png';
+            $image = 'img/components/gpu/gpu ('.fake()->numberBetween(1, 10).').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (!empty($value->price)) {
+            if (! empty($value->price)) {
                 $product = Product::create([
-                    "title" => $value->name,
-                    "category" => "video_card",
-                    "price" => $value->price,
-                    "rating" => rand(0, 5),
-                    "image" => $image,
-                    "condition" => $condition,
+                    'title' => $value->name,
+                    'category' => 'video_card',
+                    'price' => $value->price,
+                    'rating' => rand(0, 5),
+                    'image' => $image,
+                    'condition' => $condition,
                 ]);
                 VideoCard::create([
-                    "product_id" => $product->id,
-                    "category" => "video_card",
-                    "name" => $value->name,
-                    "price" => $value->price,
-                    "chipset" => $value->chipset,
-                    "memory" => $value->memory,
-                    "core_clock" => $value->core_clock,
-                    "boost_clock" => $value->boost_clock,
-                    "length" => $value->length,
-                    "color" => $value->color,
-                    "image" => $image,
-                    "description" => fake()->paragraph(),
-                    "condition" => $condition,
+                    'product_id' => $product->id,
+                    'category' => 'video_card',
+                    'name' => $value->name,
+                    'price' => $value->price,
+                    'chipset' => $value->chipset,
+                    'memory' => $value->memory,
+                    'core_clock' => $value->core_clock,
+                    'boost_clock' => $value->boost_clock,
+                    'length' => $value->length,
+                    'color' => $value->color,
+                    'image' => $image,
+                    'description' => fake()->paragraph(),
+                    'condition' => $condition,
                 ]);
             }
         }

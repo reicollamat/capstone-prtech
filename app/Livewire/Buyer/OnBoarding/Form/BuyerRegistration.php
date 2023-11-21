@@ -65,7 +65,7 @@ class BuyerRegistration extends Component
         if ($user != null) {
             $this->user_email = $user->email;
         }
-        
+
         // this will check if first_name and last_name in the database has been filled and will redirect to landing
         // if not page will be displayed
 
@@ -73,7 +73,6 @@ class BuyerRegistration extends Component
         if ($user->first_name != null | $user->last_name != null) {
             return redirect()->route('index_landing');
         }
-
 
     }
 

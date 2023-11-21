@@ -29,7 +29,7 @@ class CartListLayout extends Table
             TD::make('user_id', __('User ID'))
                 ->sort()
                 ->cantHide(),
-            
+
             TD::make('product_id', __('Product ID'))
                 ->sort()
                 ->cantHide(),
@@ -37,7 +37,7 @@ class CartListLayout extends Table
             TD::make('title', __('User ID'))
                 ->sort()
                 ->cantHide(),
-            
+
             TD::make('quantity', __('Quantity'))
                 ->sort()
                 ->cantHide(),

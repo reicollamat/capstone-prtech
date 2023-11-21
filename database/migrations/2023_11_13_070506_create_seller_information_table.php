@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -39,10 +40,8 @@ return new class extends Migration {
             $table->string('registered_state_province')->nullable();
             $table->string('registered_postal_code')->nullable();
 
-
             $table->string('seller_type')->nullable();
             $table->string('business_permit')->nullable();
-
 
             $table->unsignedBigInteger('user_id')->unique();
 

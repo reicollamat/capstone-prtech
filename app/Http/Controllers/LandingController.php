@@ -19,9 +19,7 @@ use App\Models\Psu;
 use App\Models\Speaker;
 use App\Models\VideoCard;
 use App\Models\Webcam;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class LandingController extends Controller
@@ -50,16 +48,14 @@ class LandingController extends Controller
         // get 8 random products for featured products
         $random_products = $products->random(8);
         $featured_products = [];
-        foreach ($random_products as $key => $value)
-        {
+        foreach ($random_products as $key => $value) {
             $featured_products[] = Product::find($value->id)->category($value->category)->first();
         }
 
         // get 8 most recent products
         $recents = $products->sortDesc()->take(8);
         $recent_products = [];
-        foreach ($recents as $key => $value)
-        {
+        foreach ($recents as $key => $value) {
             $recent_products[] = Product::find($value->id)->category($value->category)->first();
         }
 
@@ -86,19 +82,15 @@ class LandingController extends Controller
         ]);
     }
 
-
     // redirect to admin panel if the account has permission
     public function redirect()
     {
         $permissions = Auth::user()->permissions ?? '';
 
         // check permissions column
-        if($permissions['platform.index'] == 0)
-        {
+        if ($permissions['platform.index'] == 0) {
             return redirect('/');
-        }
-        else
-        {
+        } else {
             return redirect('/admin');
         }
     }

@@ -9,14 +9,13 @@ use Orchid\Screen\AsSource;
 
 class PurchaseItem extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     // relationship to purchase
     public function purchase()
     {
         return $this->belongsTo(Purchase::class);
     }
-
 
     /**
      * The attributes that are mass assignable.

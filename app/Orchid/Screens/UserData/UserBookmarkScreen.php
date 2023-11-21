@@ -6,7 +6,6 @@ use App\Models\Bookmark;
 use App\Models\Product;
 use App\Models\User;
 use App\Orchid\Layouts\UserData\BookmarkListLayout;
-use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
@@ -26,7 +25,7 @@ class UserBookmarkScreen extends Screen
     {
         // load current user
         $user->load(['roles']);
-            
+
         // get bookmarks.product_id inner join products.id
         $bookmark = Bookmark::where('user_id', $user->id)
             ->join('products', 'products.id', '=', 'bookmarks.product_id')
@@ -39,8 +38,6 @@ class UserBookmarkScreen extends Screen
 
     /**
      * The name of the screen displayed in the header.
-     *
-     * @return string|null
      */
     public function name(): ?string
     {
@@ -64,7 +61,7 @@ class UserBookmarkScreen extends Screen
         return [
             Link::make(__('Back'))
                 ->icon('bs.back')
-                ->route('platform.userdata')
+                ->route('platform.userdata'),
         ];
     }
 

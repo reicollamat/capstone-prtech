@@ -9,14 +9,13 @@ use Orchid\Screen\AsSource;
 
 class CartItem extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     // relationship to User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 
     /**
      * The attributes that are mass assignable.

@@ -2,9 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\AnnouncementBanner;
 use App\Models\Product;
-use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -17,7 +15,6 @@ class Landing extends Component
     public int $count = 0;
 
     public function mount()
-
     {
 
     }

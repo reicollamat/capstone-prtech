@@ -15,7 +15,6 @@ class Payment extends Model
         return $this->belongsTo(Purchase::class);
     }
 
-
     /**
      * The attributes that are mass assignable.
      *
@@ -28,5 +27,4 @@ class Payment extends Model
         'payment_type',
         'payment_status',
     ];
-
 }

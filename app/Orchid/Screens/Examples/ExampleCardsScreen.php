@@ -54,9 +54,9 @@ class ExampleCardsScreen extends TestBaseScreen
     /**
      * The screen's layout elements.
      *
-     * @throws \Throwable
-     *
      * @return array
+     *
+     * @throws \Throwable
      */
     public function layout(): iterable
     {

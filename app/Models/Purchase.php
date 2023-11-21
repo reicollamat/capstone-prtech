@@ -9,7 +9,7 @@ use Orchid\Screen\AsSource;
 
 class Purchase extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     // relationship to User
     public function user()
@@ -28,7 +28,6 @@ class Purchase extends Model
     {
         return $this->hasOne(Payment::class);
     }
-
 
     /**
      * The attributes that are mass assignable.

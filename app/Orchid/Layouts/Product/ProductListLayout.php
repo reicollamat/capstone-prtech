@@ -6,10 +6,9 @@ use App\Models\Product;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
-use Illuminate\Support\Str;
-use Orchid\Screen\Fields\Input;
 
 class ProductListLayout extends Table
 {
@@ -84,7 +83,7 @@ class ProductListLayout extends Table
                                 'id' => $product->id,
                             ]),
                     ])),
-            
+
             TD::make('purchase_count', __('Stock'))
                 ->width('100')
                 ->sort()

@@ -43,26 +43,23 @@ class UserDataListLayout extends Table
             TD::make(__('Bookmarks'))
                 ->align(TD::ALIGN_CENTER)
                 // ->width('100px')
-                ->render(fn (User $user) => 
-                    Link::make(__('View'))
-                        ->route('platform.userdata.bookmark', $user->id)
-                        ->icon('bs.bookmark'),),
+                ->render(fn (User $user) => Link::make(__('View'))
+                    ->route('platform.userdata.bookmark', $user->id)
+                    ->icon('bs.bookmark'), ),
 
             TD::make(__('Shopping Cart'))
                 ->align(TD::ALIGN_CENTER)
                 // ->width('100px')
-                ->render(fn (User $user) => 
-                    Link::make(__('View'))
-                        ->route('platform.userdata.cart', $user->id)
-                        ->icon('bs.cart'),),
+                ->render(fn (User $user) => Link::make(__('View'))
+                    ->route('platform.userdata.cart', $user->id)
+                    ->icon('bs.cart'), ),
 
             TD::make(__('Purchases'))
                 ->align(TD::ALIGN_CENTER)
                 // ->width('100px')
-                ->render(fn (User $user) => 
-                    Link::make(__('View'))
-                        ->route('platform.userdata.purchase', $user->id)
-                        ->icon('bs.bag'),),
+                ->render(fn (User $user) => Link::make(__('View'))
+                    ->route('platform.userdata.purchase', $user->id)
+                    ->icon('bs.bag'), ),
         ];
     }
 }

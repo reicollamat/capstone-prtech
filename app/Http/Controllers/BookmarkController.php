@@ -15,12 +15,11 @@ class BookmarkController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
 
-//            dd(gettype($user->id));
+            //            dd(gettype($user->id));
 
             $bookmarks = Product::join('bookmarks', 'products.id', '=', 'bookmarks.product_id')
                 ->where('user_id', $user->id)
                 ->get();
-
 
             return view('pages.profile.bookmark', [
                 'bookmarks' => $bookmarks,

@@ -6,7 +6,6 @@ use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Lazy;
-use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
 #[lazy]
