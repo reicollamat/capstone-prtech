@@ -10,6 +10,7 @@ class ProductAdd extends Component
 {
     // default view
     public $view = 'component.category-component.placeholder-component';
+    //    public $view = 'component.category-component.mouse-component';
 
     public array $categoryViewMap = [
         'storage' => 'component.category-component.placeholder-component',
@@ -38,7 +39,12 @@ class ProductAdd extends Component
     {
         if ($category != $this->productCategory) {
             $this->productCategory = $category;
+
+            // change active view to the selected category
+            //            dd($this->categoryViewMap[$category]);
             $this->view = $this->categoryViewMap[$category];
+            //            dd($this->view);
+            $this->mount();
         }
 
     }
