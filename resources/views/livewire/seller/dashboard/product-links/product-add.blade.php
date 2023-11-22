@@ -109,7 +109,7 @@
                         {{--  Category Filter --}}
                         <label for="status"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
-                            Status</label>
+                            Category</label>
                         <div x-data="{ isOpen: false }" class="w-full relative ">
                             <!-- Dropdown toggle button -->
                             <button @click="isOpen = !isOpen"
@@ -158,13 +158,14 @@
         </div>
         <hr>
         {{ var_dump($productCategory) }}
+        {{ var_dump($view) }}
         <div>
-            {{--            @if (!$view) --}}
-            {{--                <h6 class="text-gray-600 text-center">Select A Category To Continue...</h6> --}}
-            {{--            @endif --}}
-            {{--            {{ var_dump($productCategory) }} --}}
-            {{-- Load Dynamic Form after choosing category --}}
-            <livewire:dynamic-component :is="$view" />
+            @if (!$productCategory)
+                <h6 class="text-gray-600 text-center">Select A Category To Continue...</h6>
+            @endif
+            {{ var_dump($productCategory) }}
+            {{--              Load Dynamic Form after choosing category  --}}
+            {{--                          <livewire:dynamic-component :is="$view" />  --}}
         </div>
     </div>
 </div>
