@@ -382,3 +382,7 @@ tr.clickable-row {
     border: 10px solid transparent;
     border-bottom-color: #fff;
 }
+
+#trackAccordion:hover {
+    background-color: rgba(13, 110, 253, 0.2);
+}
