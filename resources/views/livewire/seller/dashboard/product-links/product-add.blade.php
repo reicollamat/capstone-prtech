@@ -4,20 +4,27 @@
     </x-slot:page_header>
     {{-- Be like water. --}}
     <div class="p-4 bg-white border border-gray-200 rounded-lg">
-        <div>
-            <h6 class="text-gray-600 text-lg tracking-wide text-start">Basic Product Information</h6>
+        <div class="flex justify-between items-center">
+            <div>
+                <h6 class="text-gray-600 mb-0 text-lg tracking-wide text-start">Basic Product Information</h6>
+            </div>
+            <div>
+                <button class="btn btn-outline-dark  tracking-wide">
+                    Reset
+                </button>
+            </div>
         </div>
         <hr>
         <div>
             <div>
                 <!-- Product Name input -->
                 <div class="mb-3">
-                    <label for="email"
+                    <label for="product_name"
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                         Name</label>
-                    <input type="email" id="email" wire:model.blur="email"
+                    <input type="text" id="product_name"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="john.doe@company.com" required>
+                        placeholder="Product Name" required>
                     @error('email')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
@@ -27,26 +34,27 @@
                 <div>
                     <!-- Product SKU input -->
                     <div class="mb-3">
-                        <label for="email"
+                        <label for="sku"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
                             SKU</label>
-                        <input type="email" id="email" wire:model.blur="email"
+                        <input type="text" id="sku" wire:model.blur="email"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="john.doe@company.com" required>
+                            placeholder="XXX-XXX" required>
                         @error('email')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class=" font-sm
+                            text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
                 <div>
                     <!-- Product SLUG input -->
                     <div class="mb-3">
-                        <label for="email"
+                        <label for="slug"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                             Slug</label>
-                        <input type="email" id="email" wire:model.blur="email"
+                        <input type="text" id="slug" wire:model.blur="email"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="john.doe@company.com" required>
+                            placeholder="lowercase, no spaces seprated by hyphen " required>
                         @error('email')
                             <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -114,14 +122,13 @@
                             <!-- Dropdown toggle button -->
                             <button @click="isOpen = !isOpen"
                                 class="relative z-10 w-full flex flex-start border border-gray-400  p-2.5 !rounded text-sm bg-white text-gray-900 gap-1">
-                                <span class="mx-1 w-full text-start">Category:
+                                <span class="mx-1 w-full text-start">Category :
                                     {{ Helper::maptopropercatetory($productCategory) }}</span>
                                 <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg"
                                     :class="{ 'rotate-180 transition duration-300': isOpen }">
-                                    <path
-                                        d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                                        fill="currentColor"></path>
+                                    <path d=" M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999
+                            9.70199L12 15.713Z" fill="currentColor"></path>
                                 </svg>
                                 </span>
                             </button>
@@ -137,7 +144,7 @@
                                 <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
                                     @foreach (Helper::categoryList() as $category_key => $category_value)
                                         <button
-                                            class="mb-0 w-full text-start uppercase text-sm p-1.5 tracking-tight rounded hover:bg-gray-100"
+                                            class="mb-0 w-full text-start  text-sm p-1 tracking-tight rounded hover:bg-gray-100"
                                             @click="isOpen = false" type="button"
                                             wire:click.debounce="changeCategoryView('{{ $category_key }}')">
                                             {{ $category_value }}
@@ -150,22 +157,28 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="mt-4 p-4 bg-white border border-gray-200 rounded-lg">
-        <div>
-            <h6 class="text-gray-600 text-lg tracking-wide text-start">Specific Product Information</h6>
+        <div class="flex justify-between items-center">
+            <div>
+                <h6 class="text-gray-600 mb-0 text-lg tracking-wide text-start">Specific Product Information</h6>
+            </div>
+            <div>
+                <button class="btn btn-outline-dark  tracking-wide">
+                    Reset
+                </button>
+            </div>
         </div>
         <hr>
-        {{ var_dump($productCategory) }}
-        {{ var_dump($view) }}
-        <div>
-            @if (!$productCategory)
-                <h6 class="text-gray-600 text-center">Select A Category To Continue...</h6>
-            @endif
-            {{ var_dump($productCategory) }}
+        {{--        {{ var_dump($productCategory) }} --}}
+        {{--        {{ var_dump($view) }} --}}
+        <div class="relative my-3">
+            {{--            @if (!$productCategory) --}}
+            {{--                <h6 class="text-gray-600 text-center">Select A Category To Continue...</h6> --}}
+            {{--            @endif --}}
+            {{--            {{ var_dump($productCategory) }} --}}
             {{--              Load Dynamic Form after choosing category  --}}
-            {{--                          <livewire:dynamic-component :is="$view" />  --}}
+            <livewire:dynamic-component :is="$view" :key="$view" />
         </div>
     </div>
 </div>
