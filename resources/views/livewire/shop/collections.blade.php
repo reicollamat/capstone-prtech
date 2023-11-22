@@ -584,14 +584,19 @@
                                         </div>
                                         <div
                                             class="position-relative w-auto h-auto bg-center bg-cover content-center min-h-[257px] p-2">
-                                            <a href="#">
+                                            <a
+                                                href="{{ route('product_detail', ['product_id' => $value->id, 'category' => $value->category]) }}">
                                                 <img class="h-auto max-h-[257px] w-auto object-center object-contain"
                                                     src="{{ $value->image }}" alt="product image" />
                                             </a>
                                         </div>
+                                        {{--                                        {{ $value->id }} --}}
+                                        {{--                                        {{ $value->category }} --}}
 
                                         <div class="p-2.5">
-                                            <a href="#" class="decoration-0 no-underline">
+                                            {{--                                             <a href="{{ route('product_detail', ['product_id' => $value->product_id, 'category' => $value->category]) }}" --}}
+                                            <a href="{{ route('product_detail', ['product_id' => $value->id, 'category' => $value->category]) }}"
+                                                class="decoration-0 no-underline">
                                                 <h5
                                                     class="text-lg font-semibold tracking-tight text-gray-900 text-ellipsis overflow-hidden">
                                                     {{ $value->title }}</h5>
