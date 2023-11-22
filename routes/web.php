@@ -107,7 +107,11 @@ Route::prefix('seller')->group(function () {
 });
 
 // shop page
-Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
+//Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
+Route::get('/collections', Collections::class)->name('index_shop');
+
+Route::get('/collections/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('collections-details');
+
 Route::get('/searchresult', [ShopController::class, 'search_result'])->name('search_result');
 // product detail page
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
