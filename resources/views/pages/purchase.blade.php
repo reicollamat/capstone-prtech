@@ -13,7 +13,7 @@
 <!-- Checkout Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
-        <div class="col-lg-8">
+        <div class="col-lg-7">
             <div class="row g-3 bg-secondary-subtle mt-2 mb-4 pb-4 rounded">
                 <h5 class="text-uppercase">Account Details</h5>
                 <div class="col-md-6">
@@ -96,28 +96,42 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="card mt-2 mb-4">
                 <h4 class="card-header text-center bg-secondary-subtle">
                     Purchase Summary
                 </h4>
                 <div class="card-body">
                     <h5 class="mb-3">Products</h5>
-                    <div class="d-flex justify-content-between border-bottom">
-                        <p>{{$quantity}}x {{$product->title}}</p>
-                        <p>₱{{$product->price * $quantity}}</p>
+                    <div class="card">
+                        <div class="row g-0">
+                            <div class="col-md-2 justify-content-center">
+                                <img src="{{asset($product->image)}}" class="img-fluid rounded-start mx-auto d-block py-2" alt="..." style="max-height: 80px">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body py-2">
+                                <h5 class="card-title">{{$product->title}}</h5>
+                                <div class="card-text d-flex justify-content-between">
+                                    <p>
+                                        <small class="text-body-secondary">Quantity:</small> {{$quantity}}
+                                    </p>
+                                    <p>₱{{$product->price * $quantity}}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="pt-3 pb-2">
-                        <div class="d-flex justify-content-between mb-3">
+                    <div class="mt-2 pt-3 pb-2 border-top border-secondary">
+                        <div class="d-flex justify-content-between">
                             <h6>Subtotal</h6>
                             <h6>₱{{$subtotal}}</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">₱ {{$shipping_value}}</h6>
+                            <h6 class="font-weight-medium">₱{{$shipping_value}}</h6>
                         </div>
                     </div>
-                    <div class="pt-2 bg-primary-subtle border border-2 border-dark-subtle rounded">
+                    <div class="pt-2 bg-primary-subtle border border-2 border-secondary rounded">
                         <div class="d-flex justify-content-between mt-2 mx-2">
                             <h5>Total</h5>
                             <h5>₱{{$total}}</h5>
