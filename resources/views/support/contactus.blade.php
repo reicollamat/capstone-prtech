@@ -8,21 +8,36 @@
     <div class="header d-flex justify-center mt-3 mb-8">
         <h1>Contact Us</h1>
     </div>
-    <div class="content container-fluid md:!px-32 text-justify">
-        <div class="flex justify-center text-lg">
-            <p>
-                At PR-TECH, we are on a mission to redefine e-commerce with our advanced Repurchase Intention
-                Forecasting Model. By harnessing the power of product reviews, we enhance customer loyalty and
-                retention.
-
-                Our data-driven approach employs cutting-edge data mining techniques to provide actionable insights and
-                informed decision-making. We help businesses attract and retain customers through market analysis,
-                optimize their online performance, and understand the factors influencing consumer behavior. Our
-                commitment to quality is reflected in our ISO 25010-based model, ensuring it excels in performance
-                efficiency, compatibility, and reliability.
-
-                Join us in this journey of innovation, customer-centric excellence, and the future of e-commerce!
-            </p>
+    <!-- Content div -->
+    <div class="container-fluid px-5">
+        <div class="p-4">
+            <div class="d-flex justify-content-center text-justify" id="content">
+                <p class="mb-0" style="text-align: justify">
+                    Feel free to reach out to us if you have any concerns or problems;
+                    we're here to assist you.
+                </p>
+            </div>
         </div>
+    </div>
+    <!-- Image and Contact us div -->
+    <div class="container d-flex flex-column mt-8 mb-20">
+        <img src="https://cdn.baseus.cn/admin/other/XljcS3GWwbmkoRnIRNMRo7hd5EGqSvY7.jpg" alt="Contact Us"
+            class="img-fluid mt-8 mb-8" />
+        <h3>Send us your concerns!</h3>
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="name" name="name" required />
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" class="form-control" id="email" name="email" required />
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Your Message</label>
+                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 @endsection
