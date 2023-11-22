@@ -57,6 +57,6 @@ class Menu extends Component
 
     public function allproductsbuttonclick()
     {
-        return redirect()->route('index_shop');
+        return redirect()->route('zz');
     }
 }

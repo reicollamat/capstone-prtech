@@ -161,9 +161,7 @@
                     alt="image description">
                 <img class="h-auto max-w-full" src="https://flowbite.com/docs/images/examples/image-1@2x.jpg"
                     alt="image description">
-
             </div>
-
         </div>
     </div>
 </div>
