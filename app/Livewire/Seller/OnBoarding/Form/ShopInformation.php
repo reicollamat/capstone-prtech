@@ -58,6 +58,16 @@ class ShopInformation extends Component
             $this->user_id = $user->id;
             $this->shop_email = $user->email;
         }
+        // check if the user is already a seller and
+        // if (Auth::user()->is_seller) {
+        //     // if (User::find($user->id)->seller == null) {
+        //     //     dd('test');
+        //     //     // $this->redirect(route('seller-landing'));
+        //     //
+        //     // }
+        // } else {
+        //     // return $this->redirect(route('seller-signup'));
+        // }
 
     }
 
@@ -116,21 +126,20 @@ class ShopInformation extends Component
             // create a seller information account using the $user model
             $user->seller()->create(
                 [
-                    'shop_name' => 'required',
+                    'shop_name' => $this->shop_name,
                     'shop_email' => $user->email,
-                    'shop_phone_number' => 'required',
-                    'shop_address' => 'required',
-                    'shop_city' => 'required',
-                    'shop_state_province' => 'required',
-                    'shop_postal_code' => 'required',
-                    'registered_business_name' => 'required',
-                    'registered_address' => 'required',
-                    'registered_city' => 'required',
-                    'registered_state_province' => 'required',
-                    'registered_postal_code' => 'required',
+                    'shop_phone_number' => $this->shop_phone,
+                    'shop_address' => $this->shop_address,
+                    'shop_city' => $this->shop_city,
+                    'shop_state_province' => $this->shop_state_province,
+                    'shop_postal_code' => $this->shop_zip_code,
+                    'registered_business_name' => $this->registered_name,
+                    'registered_address' => $this->registered_address,
+                    'registered_city' => $this->registered_city,
+                    'registered_state_province' => $this->registered_state_province,
+                    'registered_postal_code' => $this->registered_zip_code,
                 ]
             );
-
             //         set the is_seller to true
             $user->update(['is_seller' => true]);
 
