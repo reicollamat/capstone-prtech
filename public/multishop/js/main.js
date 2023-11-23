@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
@@ -17,24 +17,24 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
+
     // Wait for the DOM to be ready
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Add an event listener to all checkboxes with the class 'custom-control-input'
-        $('input.custom-control-input').on('change', function() {
+        $('input.custom-control-input').on('change', function () {
             // Automatically submit the form when a checkbox is checked or unchecked
             $('.category').submit();
         });
-        
+
 
 
         // if auth submits form when clicked Add To Cart
-        $('#addToCartBtn').click(function() {
+        $('#addToCartBtn').click(function () {
             $('#cartFormAuth').submit();
         });
 
         // if auth submits form when clicked Purchase Now
-        $('#purchaseBtn').click(function() {
+        $('#purchaseBtn').click(function () {
             // Update the value of #purchaseQuantityInput with the current value of #cartQuantityInput
             $('#purchaseQuantityInput').val($('#cartQuantityInput').val());
             // Submit the #purchaseFormAuth with the updated quantity value
@@ -42,7 +42,7 @@
         });
 
         // If not authenticated, submit the #formLogin
-        $('#addToCartBtn, #purchaseBtn').click(function() {
+        $('#addToCartBtn, #purchaseBtn').click(function () {
             $('#formLogin').submit();
         });
 
@@ -50,12 +50,21 @@
 
         // Fade out the notification after 3 seconds
         setTimeout(function () {
-            $('#notification').fadeOut('slow', function () {
+            $('#notif-alert').fadeOut('slow', function () {
                 $(this).remove();
             });
-        }, 3000); // 3000 milliseconds = 3 seconds
+        }, 5000); // 5000 milliseconds = 5 seconds
+
+        // [LI] Fade out the notification after 3 seconds
+        // window.livewire.on('saved', () => {
+        //     setTimeout(function () {
+        //         $('#notif-alert').fadeOut('slow', function () {
+        //             $(this).remove();
+        //         });
+        //     }, 5000); // 5000 milliseconds = 5 seconds
+        // });
     });
-    
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -65,7 +74,7 @@
         }
     });
     $('.back-to-top').click(function () {
-        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
         return false;
     });
 
@@ -78,20 +87,20 @@
         autoplay: true,
         smartSpeed: 1000,
         responsive: {
-            0:{
-                items:2
+            0: {
+                items: 2
             },
-            576:{
-                items:3
+            576: {
+                items: 3
             },
-            768:{
-                items:4
+            768: {
+                items: 4
             },
-            992:{
-                items:5
+            992: {
+                items: 5
             },
-            1200:{
-                items:6
+            1200: {
+                items: 6
             }
         }
     });
@@ -105,33 +114,33 @@
         autoplay: true,
         smartSpeed: 1000,
         responsive: {
-            0:{
-                items:1
+            0: {
+                items: 1
             },
-            576:{
-                items:2
+            576: {
+                items: 2
             },
-            768:{
-                items:3
+            768: {
+                items: 3
             },
-            992:{
-                items:4
+            992: {
+                items: 4
             }
         }
     });
 
 
     // Product Quantity
-    $('.btn-plus, .btn-minus').click(function(event) {
+    $('.btn-plus, .btn-minus').click(function (event) {
         // Prevent the default form submission behavior
         event.preventDefault();
-    
+
         // Increment or decrement the quantity value based on the clicked button
         var inputField = $(this).parent().siblings('input[name="quantity"]');
         var oldValue = parseInt(inputField.val());
         var newValue = $(this).hasClass('btn-plus') ? oldValue + 1 : (oldValue > 1 ? oldValue - 1 : 1);
         inputField.val(newValue);
     });
-    
+
 })(jQuery);
 

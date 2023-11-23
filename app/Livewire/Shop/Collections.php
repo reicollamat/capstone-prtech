@@ -152,12 +152,10 @@ class Collections extends Component
         } else {
             return Product::paginate(12);
         }
-
     }
 
     public function boot()
     {
-
     }
 
     public function mount($category = null)
@@ -219,10 +217,8 @@ class Collections extends Component
                     $this->sortname = 'Bestselling';
                     break;
             }
-
         } else {
             $this->sortname = 'Bestselling';
-
         }
 
         //        //        $this->sortBy();
@@ -230,11 +226,17 @@ class Collections extends Component
 
     public function addtowishlist($item_id)
     {
+        $product = Product::find($item_id);
+
         if (Auth::check()) {
             if (Bookmark::where(['user_id' => $this->userid, 'product_id' => $item_id])->doesntExist()) {
                 Bookmark::firstOrCreate(['user_id' => $this->userid, 'product_id' => $item_id]);
                 // create an event to update the count of wihshlist items
                 $this->dispatch('wishlist-item-change');
+
+                // display alert notification
+                session()->flash('notification', "'$product->title' added to Wishlists");
+                $this->dispatch('notif-alert');
             }
         } else {
             $this->redirect(route('login'));
