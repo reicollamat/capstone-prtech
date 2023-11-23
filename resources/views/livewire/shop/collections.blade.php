@@ -629,10 +629,10 @@
                                                     {{ $value->price }}</span>
                                             </div>
                                             <div class="flex justify-content-center gap-2">
-                                                <a href="#"
-                                                    class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm
-                                                   focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 py-1.5 text-center ">
-                                                    Buy Now</a>
+                                                <button wire:click="buynow({{ $value->id }})"
+                                                        class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 py-1.5 text-center">
+                                                    Buy Now
+                                                </button>
                                                 <div>
                                                     <livewire:addtocart.add-to-cart :product_id="$value->id" :key="$value->id"
                                                         wire:key="{{ $value->id }}" />
