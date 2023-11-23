@@ -31,7 +31,7 @@
         <div>
             <button class="btn btn-primary px-3 w-full" id="addToCartBtn" wire:click="buynow()" style="min-width: 15rem!important;">
                 <div class="text-light">
-                    <i class="fa fa-shopping-cart mr-1"></i> Buy It Now
+                    <i class="fa fa-shopping-cart mr-1"></i> Buy Now
                 </div>
             </button>
         </div>
