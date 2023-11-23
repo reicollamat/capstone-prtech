@@ -15,26 +15,45 @@ class UserController extends Controller
 {
     public function purchase_page(Request $request)
     {
-        // dd($request);
-        $product_id = $request->product_id;
-        $quantity = $request->quantity;
-        $user_id = $request->user_id;
+        if ($request->cart) {
+            // dd($request);
+            $cartitems = $request->cartitems;
+            $user = User::find($request->user);
+            $shipping_value = $request->shipping_value;
+            $subtotal = $request->subtotal;
+            $total = $request->total;
+            // dd($user);
 
-        $user = User::find($user_id);
+            return view('pages.cartpurchase', [
+                'cartitems' => $cartitems,
+                'user' => $user,
+                'shipping_value' => $shipping_value,
+                'subtotal' => $subtotal,
+                'total' => $total,
+            ]);
+        } else {
+            dd($request->user);
 
-        $product = Product::find($product_id);
-        $shipping_value = 13;
-        $subtotal = $product->price * $quantity;
-        $total = $subtotal + $shipping_value;
+            $product_id = $request->product_id;
+            $quantity = $request->quantity;
+            $user_id = $request->user_id;
 
-        return view('pages.purchase', [
-            'product' => $product,
-            'quantity' => $quantity,
-            'user' => $user,
-            'shipping_value' => $shipping_value,
-            'subtotal' => $subtotal,
-            'total' => $total,
-        ]);
+            $user = User::find($user_id);
+
+            $product = Product::find($product_id);
+            $shipping_value = 13;
+            $subtotal = $product->price * $quantity;
+            $total = $subtotal + $shipping_value;
+
+            return view('pages.purchase', [
+                'product' => $product,
+                'quantity' => $quantity,
+                'user' => $user,
+                'shipping_value' => $shipping_value,
+                'subtotal' => $subtotal,
+                'total' => $total,
+            ]);
+        }
     }
 
     public function purchase_one(Request $request)
