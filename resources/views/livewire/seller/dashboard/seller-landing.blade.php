@@ -48,7 +48,7 @@
                     </header>
                 </div>
                 <div>
-                    test
+                    Notifications
                 </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
         {{--         content --}}
         <div class="row mb-2 g-3 g-mb-4">
             <div class="col">
-                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column border !border-red-500">
+                <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column border !border-red-500">
                     <small class="text-muted d-block mb-1">Sales Today</small>
                     <p class="h3 text-black fw-light mt-auto">
                         6,851
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column">
+                <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column">
                     <small class="text-muted d-block mb-1">Visitors Today</small>
                     <p class="h3 text-black fw-light mt-auto">
                         24,668
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column">
+                <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column">
                     <small class="text-muted d-block mb-1">Pending Orders</small>
                     <p class="h3 text-black fw-light mt-auto">
                         10,000
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="p-3 bg-white rounded shadow-sm h-100 d-flex flex-column">
+                <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column ">
                     <small class="text-muted d-block mb-1">Total Earnings</small>
                     <p class="h3 text-black fw-light mt-auto">
                         65,661
@@ -97,8 +97,50 @@
                 </div>
             </div>
         </div>
-        <div>
-            
+
+        {{--         fiest chart --}}
+        <div class="my-3">
+            <div class="flex flex-wrap">
+                <div class="w-full xl:w-8/12 ">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-md rounded-lg bg-blueGray-800">
+                        <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+                            <div class="flex flex-wrap items-center">
+                                <div class="relative w-full max-w-full flex-grow flex-1">
+                                    <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-200">Overview</h6>
+                                    <h2 class="text-xl font-semibold text-white">Sales value</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 flex-auto">
+                            <div class="relative h-350-px">
+                                <canvas width="496" height="291"
+                                    style="display: block; box-sizing: border-box; height: 350px; width: 595.5px;"
+                                    id="line-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full xl:w-4/12 pl-4">
+                    <div class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-md rounded-lg bg-white">
+                        <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+                            <div class="flex flex-wrap items-center">
+                                <div class="relative w-full max-w-full flex-grow flex-1">
+                                    <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Performance</h6>
+                                    <h2 class="text-xl font-semibold text-blueGray-800">Total orders</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 flex-auto">
+                            <div class="relative h-350-px">
+                                <canvas width="221" height="291"
+                                    style="display: block; box-sizing: border-box; height: 350px; width: 265.7px;"
+                                    id="bar-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
