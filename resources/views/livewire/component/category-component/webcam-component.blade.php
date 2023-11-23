@@ -8,7 +8,7 @@
             <div class="mb-4">
                 <label for="brand" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                     Brand</label>
-                <input type="brand" id="email" wire:model.blur="email"
+                <input type="text" id="brand" wire:model.blur="email"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="A4Tech, Razer, Logitech, etc." required>
                 @error('email')
@@ -63,10 +63,10 @@
                     <select id="webcam_connection_type" multiple
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Choose One or Many</option>
-                        <option value="available">Wired</option>
-                        <option value="unavailable">Wireless (Dongle)</option>
-                        <option value="unavailable">Bluetooth</option>
-                        <option value="unavailable">Wi-Fi</option>
+                        <option value="wired">Wired</option>
+                        <option value="wireless">Wireless (Dongle)</option>
+                        <option value="bluetooth">Bluetooth</option>
+                        <option value="wifi">Wi-Fi</option>
                     </select>
                 </div>
 
@@ -74,7 +74,7 @@
             <!-- Product Name input -->
             <div class="mb-4">
             <label for="fps" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Max Frame Rate</label>
-                <input type="fps" id="email" wire:model.blur="email"
+                <input type="text" id="fps" wire:model.blur="email"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="30, 60, 120" required>
                 @error('email')
@@ -94,9 +94,9 @@
                     <select id="audio_support"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
-                        <option value="Optical">Built-in stereo microphone</option>
-                        <option value="Laser">Built-in microphone</option>
-                        <option value="Laser">N/A</option>
+                        <option value="stereo">Built-in stereo microphone</option>
+                        <option value="mono">Built-in microphone</option>
+                        <option value="n/a">N/A</option>
                     </select>
                     @error('email')
                         <span class="font-sm text-red-500">{{ $message }}</span>
