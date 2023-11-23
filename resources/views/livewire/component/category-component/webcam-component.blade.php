@@ -15,8 +15,7 @@
                     <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="grid md:grid-cols-2 gap-4">
-                <div>
+            
                     <!-- Product SKU input -->
                     <div class="mb-4">
                         <label for="price"
@@ -29,24 +28,8 @@
                             <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
-                </div>
-            </div>
+                
             <div class="grid md:grid-cols-2 md:gap-4">
-                <!-- Product SKU input -->
-                <div class="mb-4">
-                    <label for="resolution"
-                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Max Digital Video Resolution</label>
-                    <select id="resolution"
-                        class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option disabled selected>Select Below</option>
-                        <option value="HD Ready">1280 x 720 pixels/720p (HD Ready)</option>
-                        <option value="Full HD">L1920 x 1080 pixels/1080p (Full HD)</option>
-                        <option value="UHD">3840 x 2160 pixel/4K (UHD)</option>
-                    </select>
-                    @error('email')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
 
                 <!-- Product SKU input -->
                 <div class="mb-4">
@@ -70,6 +53,22 @@
                     </select>
                 </div>
 
+                <!-- Product SKU input -->
+                <div class="mb-4">
+                    <label for="resolution"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Max Digital Video Resolution</label>
+                    <select id="resolution"
+                        class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option disabled selected>Select Below</option>
+                        <option value="HD Ready">1280 x 720 pixels/720p (HD Ready)</option>
+                        <option value="Full HD">L1920 x 1080 pixels/1080p (Full HD)</option>
+                        <option value="UHD">3840 x 2160 pixel/4K (UHD)</option>
+                    </select>
+                    @error('email')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
             </div>
             <!-- Product Name input -->
             <div class="mb-4">
@@ -88,7 +87,7 @@
                     <label for="audio_support"
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Audio Support Feature<span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                             data-bs-trigger="hover focus" data-bs-placement="top"
-                            data-bs-content="The hand placement of the mouse">
+                            data-bs-content="The audio support availability on the webcam">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
                     <select id="audio_support"

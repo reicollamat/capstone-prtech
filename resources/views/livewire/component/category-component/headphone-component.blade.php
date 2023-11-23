@@ -37,7 +37,7 @@
                         Audio Output Sensitivity 
                         <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                             data-bs-trigger="hover focus" data-bs-placement="top"
-                            data-bs-content="The hand placement of the mouse">
+                            data-bs-content="The loudness of the headphone's speaker">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
                     <select id="sensitivity"
@@ -112,7 +112,7 @@
                         Microphone Availability
                         <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                             data-bs-trigger="hover focus" data-bs-placement="top"
-                            data-bs-content="The hand placement of the mouse">
+                            data-bs-content="The availability of microphone on the headphones.">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
                     <select id="mic_availability"
