@@ -20,13 +20,13 @@ class KeyboardSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/keyboard/keyboard ('.fake()->numberBetween(1, 3).').png';
+            $image = 'img/components/keyboard/keyboard (' . fake()->numberBetween(1, 3) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'title' => $value->name,
                     'category' => 'keyboard',
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     'image' => $image,
                     'condition' => $condition,
@@ -35,7 +35,7 @@ class KeyboardSeeder extends Seeder
                     'product_id' => $product->id,
                     'category' => 'keyboard',
                     'name' => $value->name,
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'style' => $value->style,
                     'switches' => $value->switches,
                     'backlit' => $value->backlit,

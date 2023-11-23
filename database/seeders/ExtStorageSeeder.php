@@ -20,13 +20,13 @@ class ExtStorageSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/extstorage/extstorage ('.fake()->numberBetween(1, 3).').png';
+            $image = 'img/components/extstorage/extstorage (' . fake()->numberBetween(1, 3) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'title' => $value->name,
                     'category' => 'ext_storage',
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     'image' => $image,
                     'condition' => $condition,
@@ -35,7 +35,7 @@ class ExtStorageSeeder extends Seeder
                     'product_id' => $product->id,
                     'category' => 'ext_storage',
                     'name' => $value->name,
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'type' => $value->type,
                     'interface' => $value->interface,
                     'capacity' => $value->capacity,

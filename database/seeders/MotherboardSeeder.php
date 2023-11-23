@@ -20,13 +20,13 @@ class MotherboardSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/mobo/mobo ('.fake()->numberBetween(1, 10).').png';
+            $image = 'img/components/mobo/mobo (' . fake()->numberBetween(1, 10) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'title' => $value->name,
                     'category' => 'motherboard',
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     'image' => $image,
                     'condition' => $condition,
@@ -35,7 +35,7 @@ class MotherboardSeeder extends Seeder
                     'product_id' => $product->id,
                     'category' => 'motherboard',
                     'name' => $value->name,
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'socket' => $value->socket,
                     'form_factor' => $value->form_factor,
                     'max_memory' => $value->max_memory,

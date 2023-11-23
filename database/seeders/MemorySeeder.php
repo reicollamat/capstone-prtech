@@ -20,13 +20,13 @@ class MemorySeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/ram/ram ('.fake()->numberBetween(1, 10).').png';
+            $image = 'img/components/ram/ram (' . fake()->numberBetween(1, 10) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'title' => $value->name,
                     'category' => 'memory',
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     'image' => $image,
                     'condition' => $condition,
@@ -35,7 +35,7 @@ class MemorySeeder extends Seeder
                     'product_id' => $product->id,
                     'category' => 'memory',
                     'name' => $value->name,
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'speed' => $value->speed,
                     'modules' => $value->modules,
                     'price_per_gb' => $value->price_per_gb,

@@ -20,13 +20,13 @@ class CaseFanSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/casefan/casefan ('.fake()->numberBetween(1, 2).').png';
+            $image = 'img/components/casefan/casefan (' . fake()->numberBetween(1, 2) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'title' => $value->name,
                     'category' => 'case_fan',
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     'image' => $image,
                     'condition' => $condition,
@@ -35,7 +35,7 @@ class CaseFanSeeder extends Seeder
                     'product_id' => $product->id,
                     'category' => 'case_fan',
                     'name' => $value->name,
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'size' => $value->size,
                     'color' => $value->color,
                     'rpm' => $value->rpm,
