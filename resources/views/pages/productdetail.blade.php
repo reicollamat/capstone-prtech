@@ -1,11 +1,9 @@
 @extends('layouts.master_layout')
 @section('content')
 
-    @if (session('message'))
-        <div id="notification" class="alert alert-primary m-2 {{ session('alert-class', 'alert-info') }}">
-            {{ session('message') }}
-        </div>
-    @endif
+    <x-notification-alert>
+        {{ session('notification') }}
+    </x-notification-alert>
 
 
     <!-- Breadcrumb Start -->
