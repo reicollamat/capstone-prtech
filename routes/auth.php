@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Livewire\Buyer\OnBoarding\Form\BuyerRegistration;
 use Illuminate\Support\Facades\Route;
 
-//Route::middleware('guest')->group(function () {
+// Route::middleware('guest')->group(function () {
 //    Route::get('register', [RegisteredUserController::class, 'create'])
 //                ->name('register');
 //
@@ -65,9 +65,9 @@ Route::group(['prefix' => 'buyer', 'middleware' => 'guest'], function () {
 
 });
 
-Route::get('buyer/on-boarding', BuyerRegistration::class);
+Route::get('buyer/on-boarding', BuyerRegistration::class)->name('buyer-on-boarding');
 
-//Route::get('buyer/on-boarding', BuyerRegistration::class);
+// Route::get('buyer/on-boarding', BuyerRegistration::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
