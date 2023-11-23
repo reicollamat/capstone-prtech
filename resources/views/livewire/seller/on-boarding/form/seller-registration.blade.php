@@ -47,7 +47,7 @@
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     <span class="text-red-600 text-xs">*</span> Email</label>
                                 <input type="email" id="user_email" wire:model.blur="user_email"
-                                    @disabled($shop_email > 1)
+                                    @disabled($user_email > 1)
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="example@gmail.com" required>
                                 @error('user_email')

@@ -1,7 +1,8 @@
-<div class="w-1/2 position-relative" x-data="{ open: false }" @mouseover="open = true" @mouseleave="open = false">
+<div class="w-1/2 position-relative" x-data="{ open: false }">
     <form wire:submit="submit">
-        <div class="input-group rounded-none">
-            <select wire:model.live="selected_category" class="form-control form-select max-w-[200px] shadow-none"
+        <div class="flex rounded-none">
+            <select wire:model.live="selected_category"
+                class="form-control form-select max-w-[200px] shadow-none custom-select"
                 aria-label="Default select example">
                 <option value="all_products" selected default>All Categories</option>
                 @foreach ($categories as $key => $value)
@@ -9,28 +10,30 @@
                     <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option>
                 @endforeach
             </select>
+            <div class="input-group" @mouseover="open = true" @mouseleave="open = false">
+                <input type="text" class="form-control p-2 custom-input-text rounded-none shadow-none"
+                    placeholder="Search PR-Tech" wire:model.live="search" name="to_search" autocomplete="off"
+                    aria-label="Search" aria-describedby="button-addon2">
+                <button type="submit" class="btn btn-outline-secondary rounded-none d-flex items-center gap-2"
+                    id="button-addon2">
+                    <div wire:loading.remove wire:target="search">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div wire:loading wire:target="search">
+                        <div class="spinner-border spinner-border-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                    Search
+                </button>
+            </div>
 
-            <input type="text" class="form-control p-2 rounded-none shadow-none" placeholder="Search PR-Tech"
-                wire:model.live="search" name="to_search" autocomplete="off" aria-label="Search"
-                aria-describedby="button-addon2">
-            <button type="submit" class="btn btn-outline-secondary rounded-none d-flex items-center gap-2"
-                id="button-addon2">
-                <div wire:loading.remove wire:target="search">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width=20 height="20" fill="currentColor"
-                            class="bi bi-search" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                        </svg>
-                    </div>
-                </div>
-                <div wire:loading wire:target="search">
-                    <div class="spinner-border spinner-border-sm" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-                Search
-            </button>
         </div>
     </form>
     <div x-cloak x-show="open"

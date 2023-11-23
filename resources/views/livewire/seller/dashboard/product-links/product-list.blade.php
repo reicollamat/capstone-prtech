@@ -1,4 +1,4 @@
-<div class="h-full w-full" x-data="">
+<div class="h-full w-full p-4" x-data="">
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <x-slot:page_header>
         Product Management
@@ -395,27 +395,3 @@
         </div>
     </div>
 </div>
-
-@assets
-    <script>
-        // this will remove the navbar height from the page height to remove scrolling
-        function setChildContainerHeight() {
-            // get the height if main wrapper
-            let parentHeight = document.getElementById("main").clientHeight;
-            // get the height of navigation bar
-            let otherElementHeight =
-                document.getElementById("navigationbar").clientHeight;
-            // get the child container where we need to set the height
-            let childContainer = document.getElementById("wrapper");
-            // apply the height to the element
-            childContainer.style.height = parentHeight - otherElementHeight + "px";
-
-            console.log(parentHeight, otherElementHeight, childContainer.style.height);
-        }
-
-        // event listener to adjust the height of the child container
-        window.addEventListener("load", setChildContainerHeight);
-        window.addEventListener("resize", setChildContainerHeight);
-        window.addEventListener("livewire:navigated", setChildContainerHeight);
-    </script>
-@endassets

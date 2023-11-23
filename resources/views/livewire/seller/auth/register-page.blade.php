@@ -1,15 +1,4 @@
 <div>
-    {{--    <nav class="navbar bg-light shadow-lg z-50"> --}}
-    {{--        <div class="container-fluid !justify-start md:!px-36"> --}}
-    {{--            <a class="navbar-brand" href="/"> --}}
-    {{--                <div class="w-[130px] sm:w-[175px] h-auto"> --}}
-    {{--                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%" --}}
-    {{--                        class="d-inline-block align-text-top" /> --}}
-    {{--                </div> --}}
-    {{--            </a> --}}
-    {{--            <h class="tracking-tight text-xl md:text-2xl">Seller Sign Up</h> --}}
-    {{--        </div> --}}
-    {{--    </nav> --}}
     <x-slot:page_header>
         Seller Sign Up
     </x-slot:page_header>

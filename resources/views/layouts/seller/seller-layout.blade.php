@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8">
@@ -72,6 +72,7 @@
                                     </div>
                                 </li>
                             </ul>
+
                             <div>
                                 <div class="flex items-center gap-1.5 mb-1.5">
                                     <p class="mb-0 text-xs  text-gray-500 font-semibold">Product Management</p>
@@ -322,11 +323,11 @@
         </nav>
 
         <div class="flex w-full h-full" id="wrapper">
-            <div class="h-full flex-1 lg:min-w-[220px] lg:max-w-[220px] !bg-white border-end overflow-y-scroll"
+            <div class="h-full flex-1 lg:min-w-[220px] lg:max-w-[220px] !bg-white border-end overflow-y-auto"
                 id="sidebar">
                 @include('layouts.seller.seller-sidebar')
             </div>
-            <div class="w-full h-full overflow-y-scroll bg-background p-4">
+            <div class="w-full h-full overflow-y-auto bg-background">
                 @yield('content', $slot ?? '')
             </div>
         </div>
@@ -337,6 +338,29 @@
     {{--    This directive is used to include the Livewire scripts --}}
     @livewireScriptConfig
     {{--    @livewireScripts --}}
+
+    <script>
+        // this will remove the navbar height from the page height to remove scrolling
+        function setChildContainerHeight() {
+            // get the height if main wrapper
+            let parentHeight = document.getElementById("main").clientHeight;
+            // get the height of navigation bar
+            let otherElementHeight =
+                document.getElementById("navigationbar").clientHeight + 1;
+            // get the child container where we need to set the height
+            let childContainer = document.getElementById("wrapper");
+            // apply the height to the element
+            childContainer.style.height = parentHeight - otherElementHeight + "px";
+
+            console.log(parentHeight, otherElementHeight, childContainer.style.height);
+        }
+
+        // event listener to adjust the height of the child container
+        window.addEventListener("load", setChildContainerHeight);
+        window.addEventListener("resize", setChildContainerHeight);
+        window.addEventListener("livewire:navigated", setChildContainerHeight);
+    </script>
+
 </body>
 
 </html>

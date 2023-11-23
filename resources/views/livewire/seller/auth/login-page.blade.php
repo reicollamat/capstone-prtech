@@ -1,19 +1,8 @@
 <div>
-    {{--    <nav class="navbar bg-light shadow-xl"> --}}
-    {{--        <div class="container-fluid !justify-start md:!px-36 "> --}}
-    {{--            <a class="navbar-brand" href="/"> --}}
-    {{--                <div class="w-[130px] sm:w-[175px] h-auto"> --}}
-    {{--                    <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="100%" height="100%" --}}
-    {{--                        class="d-inline-block align-text-top" /> --}}
-    {{--                </div> --}}
-    {{--            </a> --}}
-    {{--                        <h class="tracking-tight text-xl md:text-2xl">Seller Sign In</h> --}}
-    {{--        </div> --}}
-    {{--    </nav> --}}
     <x-slot:page_header>
         Seller Sign In
     </x-slot:page_header>
-    <section class="h-full">
+    <section class="h-screen">
         <div class="container h-full px-6 py-20">
             <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
                 <!-- Left column container with background-->

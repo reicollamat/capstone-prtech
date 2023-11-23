@@ -1,4 +1,4 @@
-<div class="lg:px-20">
+<div class="lg:px-20 p-4">
     <x-slot:page_header>
         Add New Product
     </x-slot:page_header>
