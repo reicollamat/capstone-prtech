@@ -46,7 +46,7 @@ class CartList extends Component
 
             $this->cartiems_count = count($this->cartitems);
 
-            if (! empty($this->cartitems)) {
+            if (!empty($this->cartitems)) {
                 foreach ($this->cartitems as $item) {
                     $this->total_price += $item->price * $item->quantity;
                 }
@@ -74,8 +74,28 @@ class CartList extends Component
 
             sleep(0.5);
             $this->mount();
-
         }
+    }
+
+    public function cart_checkout($cartitems)
+    {
+        $cart_items = collect($cartitems);
+        $user = Auth::user();
+        $shipping_value = 13;
+        $subtotal = $cart_items->sum('price');
+        $total = $subtotal + $shipping_value;
+
+        // dd($subtotal);
+
+        session()->flash('cart');
+        $this->redirect(route('purchase_page', [
+            'cart' => true,
+            'cartitems' => $cartitems,
+            'user' => $user,
+            'shipping_value' => $shipping_value,
+            'subtotal' => $subtotal,
+            'total' => $total,
+        ]));
     }
 
     #[On('cartitem-item-change')]
