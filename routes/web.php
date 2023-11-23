@@ -107,8 +107,10 @@ Route::prefix('seller')->group(function () {
 });
 
 // shop page
-//Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
-Route::get('/collections', Collections::class)->name('index_shop');
+// Route::get('/shop', [ShopController::class, 'index'])->name('index_shop');
+Route::get('/collections', Collections::class)->name('index_shop'); // full collections
+
+Route::get('/collections/{category}', Collections::class)->name('collections-category'); // category collections
 
 Route::get('/collections/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('collections-details');
 
@@ -116,11 +118,11 @@ Route::get('/searchresult', [ShopController::class, 'search_result'])->name('sea
 // product detail page
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
 
-//Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
+// Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
 // login-register test
-//Route::get('/logintest', [Landing::class, 'login'])->name('login');
-//Route::get('/registertest', [Landing::class, 'register'])->name('register');
+// Route::get('/logintest', [Landing::class, 'login'])->name('login');
+// Route::get('/registertest', [Landing::class, 'register'])->name('register');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
