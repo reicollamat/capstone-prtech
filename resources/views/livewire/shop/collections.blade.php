@@ -1,4 +1,10 @@
 <div>
+
+    {{-- session flash notification --}}
+    <x-notification-livewire-alert>
+        {{ session('notification') }}
+    </x-notification-livewire-alert>
+
     <span>
         {{ $sortingby }}
         {{ $sortdirection }}
