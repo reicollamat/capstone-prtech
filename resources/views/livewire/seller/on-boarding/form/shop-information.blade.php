@@ -24,7 +24,7 @@
     @endif
 
     <div>
-        <div class="container-fluid !bg-red md:!px-14 py-14 ">
+        <div class="h-screen container-fluid !bg-red md:!px-14 py-14 ">
             <div class="flex gap-6">
                 <div class="!bg-transparent self-center hidden md:block p-2.5 py-24 pl-4">
                     <ol class="relative text-gray-500 border-l border-gray-200 dark:border-gray-700 dark:text-gray-400">
@@ -309,7 +309,8 @@
                                     <h5>Registration Complete</h5>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-danger">Go To Seller Dashboard</button>
+                                    <a href="{{ route('seller-landing') }}" class="btn no-underline btn-danger">Go To
+                                        Seller Dashboard</a>
                                 </div>
                             </div>
                         </div>
