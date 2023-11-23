@@ -4,6 +4,7 @@
         {{ $sortdirection }}
         {{ $sortname }}
         {{ $search }}
+        {{ $category }}
     </span>
 
     <div>
@@ -587,7 +588,7 @@
                                             <a
                                                 href="{{ route('product_detail', ['product_id' => $value->id, 'category' => $value->category]) }}">
                                                 <img class="h-auto max-h-[257px] w-auto object-center object-contain"
-                                                    src="{{ $value->image }}" alt="product image" />
+                                                    src="{{ asset($value->image) }}" alt="product image" />
                                             </a>
                                         </div>
                                         {{--                                        {{ $value->id }} --}}

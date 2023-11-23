@@ -47,6 +47,8 @@ class Collections extends Component
 
     ];
 
+    public $category;
+
     #[url(history: true)]
     public $search;
 
@@ -139,6 +141,12 @@ class Collections extends Component
                 ->paginate(12);
         }
 
+        if ($this->category) {
+            return Product::where('category', '=', $this->category)
+                ->orderBy($this->sortingby, $this->sortdirection)
+                ->paginate(12);
+        }
+
         if ($this->sortingby && $this->sortdirection) {
             return Product::orderBy($this->sortingby, $this->sortdirection)->paginate(12);
         } else {
@@ -152,8 +160,13 @@ class Collections extends Component
 
     }
 
-    public function mount()
+    public function mount($category = null)
     {
+        // dd($category);
+        if ($category) {
+            $this->category = $category;
+        }
+
         $this->userid = Auth::user()->id ?? null;
 
         $this->all_products = DB::table('products')->get();
@@ -209,13 +222,7 @@ class Collections extends Component
 
         } else {
             $this->sortname = 'Bestselling';
-            //            $this->sortingby = 'purchase_count';
-            //            $this->sortdirection = 'desc';
 
-            //            $this->all_products = DB::table('products')
-            //                ->orderBy('purchase_count', 'desc')
-            //                ->limit(20)
-            //                ->paginate(5);
         }
 
         //        //        $this->sortBy();
