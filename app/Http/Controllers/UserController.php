@@ -76,13 +76,12 @@ class UserController extends Controller
         ]);
         $purchaseItem->save();
 
-        Session::flash('message', 'Purchased Order');
-        Session::flash('alert-class', 'alert-success');
+        Session::flash('notification', 'Order Purchased, Thank you!');
 
         return redirect(route('product_detail', [
             'product_id' => $product_id,
             'category' => $category,
-        ]))->with('message', 'Purchased Order, Thank you!')->with('alert-class', 'alert-success');
+        ]));
     }
 
     public function purchasecart_page(Request $request)
