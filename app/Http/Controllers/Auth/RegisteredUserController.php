@@ -33,7 +33,9 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            // uncomment and delete this line and below if you want to enable password limit of 8
+            'password' => ['required', 'confirmed'],
 
         ]);
 
@@ -53,6 +55,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // redirect them to the onboarding page where all information are required to be filled out
+        // return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('buyer-on-boarding');
     }
 }
