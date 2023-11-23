@@ -1,10 +1,125 @@
 <div>
     {{-- Success is as dangerous as failure. --}}
-    {{--     case fan --}}
+    {{--   webcam --}}
     <div class="grid md:grid-cols-2 gap-4">
         <div>
             {{-- First Columm --}}
+            <!-- Product Name input -->
+            <div class="mb-4">
+                <label for="brand" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                    Brand</label>
+                <input type="brand" id="email" wire:model.blur="email"
+                    class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="A4Tech, Razer, Logitech, etc." required>
+                @error('email')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <!-- Product SKU input -->
+                    <div class="mb-4">
+                        <label for="price"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                            Price</label>
+                        <input type="text" id="price" wire:model.blur="email"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="In Pesos, 1000.00" required>
+                        @error('email')
+                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 md:gap-4">
+                <!-- Product SKU input -->
+                <div class="mb-4">
+                    <label for="resolution"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Max Digital Video Resolution</label>
+                    <select id="resolution"
+                        class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option disabled selected>Select Below</option>
+                        <option value="HD Ready">1280 x 720 pixels/720p (HD Ready)</option>
+                        <option value="Full HD">L1920 x 1080 pixels/1080p (Full HD)</option>
+                        <option value="UHD">3840 x 2160 pixel/4K (UHD)</option>
+                    </select>
+                    @error('email')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
 
+                <!-- Product SKU input -->
+                <div class="mb-4">
+                    <label for="webcam_connection_type"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
+                        Webcam Connection Type
+                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                            data-bs-trigger="hover focus" data-bs-placement="top"
+                            data-bs-content="Hold down the Ctrl or Command key to select multiple options.">
+                            <i class="bi bi-patch-question"></i>
+                        </span>
+
+                    </label>
+                    <select id="webcam_connection_type" multiple
+                        class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option disabled selected>Choose One or Many</option>
+                        <option value="available">Wired</option>
+                        <option value="unavailable">Wireless (Dongle)</option>
+                        <option value="unavailable">Bluetooth</option>
+                        <option value="unavailable">Wi-Fi</option>
+                    </select>
+                </div>
+
+            </div>
+            <!-- Product Name input -->
+            <div class="mb-4">
+            <label for="fps" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Max Frame Rate</label>
+                <input type="fps" id="email" wire:model.blur="email"
+                    class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="30, 60, 120" required>
+                @error('email')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="grid md:grid-cols-2 md:gap-4">
+                <!-- Product SKU input -->
+                <div class="mb-4">
+                    <label for="audio_support"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Audio Support Feature<span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                            data-bs-trigger="hover focus" data-bs-placement="top"
+                            data-bs-content="The hand placement of the mouse">
+                            <i class="bi bi-patch-question"></i>
+                        </span></label>
+                    <select id="audio_support"
+                        class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option disabled selected>Select Below</option>
+                        <option value="Optical">Built-in stereo microphone</option>
+                        <option value="Laser">Built-in microphone</option>
+                        <option value="Laser">N/A</option>
+                    </select>
+                    @error('email')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Product SKU input -->
+                <div class="mb-4">
+                    <label for="color"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Webcam Color <span
+                            class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                            data-bs-placement="top" data-bs-content="Multiple colors can be separated by comma">
+                            <i class="bi bi-patch-question"></i>
+                        </span></label>
+                    <input type="text" id="color"
+                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="White, Black, Gray, etc." required>
+                    @error('email')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
+            </div>
         </div>
         <div>
             {{-- Second Columm --}}
