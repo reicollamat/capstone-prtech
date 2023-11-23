@@ -27,6 +27,7 @@ class AddToCart extends Component
 
     public function addtocart()
     {
+        $product = Product::find($this->product_id);
 
         if (Auth::check()) {
 
@@ -38,6 +39,10 @@ class AddToCart extends Component
             ]);
 
             $this->dispatch('cartitem-item-change');
+
+            // display alert notification
+            session()->flash('notification', "'$product->title' added to Cart");
+            $this->dispatch('notif-alert-cart');
         } else {
             $this->redirect(route('login'));
         }
