@@ -29,7 +29,7 @@
         </div>
 
 
-        <button class="btn btn-primary btn-lg text-center w-full ">
+        <button class="btn btn-primary btn-lg text-center w-full" wire:click="cart_checkout({{$cartitems}})">
             Checkout | PHP {{ $total_price ?? 0}}
         </button>
 
