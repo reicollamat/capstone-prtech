@@ -244,6 +244,25 @@ class Collections extends Component
         //        dd($item_id);
     }
 
+    // redirect to purchase page
+    public function buynow($product_id)
+    {
+        $product = Product::find($product_id);
+
+        if (Auth::check()) {
+
+            $this->redirect(route('purchase_page', [
+                'product_id' => $product_id,
+                'user_id' => Auth::user()->id,
+                'quantity' => 1
+            ]));
+        } else {
+            $this->redirect(route('login'));
+        }
+
+        //        dd($this->quantity, $this->user_id, $this->product_id);
+    }
+
     public function render()
     {
 
