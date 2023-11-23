@@ -203,6 +203,11 @@
                     </div>
                     <div>
                         <button type="submit"
+                            class="bg-transparent border border-black hover:bg-blue-700 text-gray-800 font-bold py-1.5 px-4 rounded">
+                            Reset
+                        </button>
+                        <span>|</span>
+                        <button type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-4 rounded">Update
                         </button>
                         {{--                         <span class="text-gray-400 text-sm tracking-wide"> --}}

@@ -162,7 +162,7 @@
                             <div class="flex gap-1.5 items-center">
                                 <input id="quick_search" type="search" name="serch" placeholder="Quick Search"
                                     class="bg-white w-full p-1 h-full border-gray-200 !rounded-lg text-sm focus:outline-none"
-                                    wire:model.blur="quick_search_filter">
+                                    wire:model.live="quick_search_filter">
                             </div>
 
                         </div>

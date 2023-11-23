@@ -1,9 +1,9 @@
-<div class="lg:px-20 p-4">
+<div class="px-12 py-12">
     <x-slot:page_header>
         Add New Product
     </x-slot:page_header>
     {{-- Be like water. --}}
-    <div class="p-4 bg-white border border-gray-200 rounded-lg">
+    <div class="p-4  bg-white border border-gray-200 rounded-lg">
         <div class="flex justify-between items-center">
             <div>
                 <h6 class="text-gray-600 mb-0 text-lg tracking-wide text-start">Basic Product Information</h6>

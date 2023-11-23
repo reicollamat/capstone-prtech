@@ -92,8 +92,8 @@ class ProductList extends Component
                 ->paginate(10);
             //            dd($this->category_filter);
         }
-
-        if ($this->quick_search_filter) {
+        // add check to run rerender every time
+        if ($this->quick_search_filter > 1) {
             return Product::where('title', 'ilike', "%{$this->quick_search_filter}%")
                 ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
