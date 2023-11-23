@@ -20,13 +20,13 @@ class IntStorageSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/intstorage/'.fake()->randomElement(['ssd-m2', 'ssd-sata']).' ('.fake()->numberBetween(1, 5).').png';
+            $image = 'img/components/intstorage/' . fake()->randomElement(['ssd-m2', 'ssd-sata']) . ' (' . fake()->numberBetween(1, 5) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'title' => $value->name,
                     'category' => 'int_storage',
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     'image' => $image,
                     'condition' => $condition,
@@ -35,7 +35,7 @@ class IntStorageSeeder extends Seeder
                     'product_id' => $product->id,
                     'category' => 'int_storage',
                     'name' => $value->name,
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'capacity' => $value->capacity,
                     'price_per_gb' => $value->price_per_gb,
                     'type' => $value->type,

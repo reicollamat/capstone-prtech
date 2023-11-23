@@ -20,13 +20,13 @@ class SpeakerSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/speaker/speaker ('.fake()->numberBetween(1, 3).').png';
+            $image = 'img/components/speaker/speaker (' . fake()->numberBetween(1, 3) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'title' => $value->name,
                     'category' => 'speaker',
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     'image' => $image,
                     'condition' => $condition,
@@ -35,7 +35,7 @@ class SpeakerSeeder extends Seeder
                     'product_id' => $product->id,
                     'category' => 'speaker',
                     'name' => $value->name,
-                    'price' => $value->price,
+                    'price' => $value->price * 55,
                     'configuration' => $value->configuration,
                     'wattage' => $value->wattage,
                     'frequency_response' => $value->frequency_response,
