@@ -8,10 +8,11 @@ use App\Http\Controllers\PurchaseListController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\SellerAuthMiddleware;
+use App\Http\Middleware\SellerMiddleware;
 use App\Livewire\Landing;
 use App\Livewire\Seller\Auth\LoginPage;
 use App\Livewire\Seller\Auth\RegisterPage;
-use App\Livewire\Seller\Dashboard;
 use App\Livewire\Seller\Dashboard\AnalyticsLinks\AnalyticsModelReport;
 use App\Livewire\Seller\Dashboard\OrderLinks\OrderCancellations;
 use App\Livewire\Seller\Dashboard\OrderLinks\OrderHistory;
@@ -25,10 +26,8 @@ use App\Livewire\Seller\Dashboard\ShipmentLinks\ShipmentList;
 use App\Livewire\Seller\Dashboard\ShipmentLinks\ShipmentOptions;
 use App\Livewire\Seller\Dashboard\ShopLinks\ShopManagement;
 use App\Livewire\Seller\Dashboard\ShopLinks\ShopManagementCategory;
-use App\Livewire\Seller\Inventory;
 use App\Livewire\Seller\OnBoarding\Form\SellerRegistration;
 use App\Livewire\Seller\OnBoarding\Form\ShopInformation;
-use App\Livewire\Seller\OnBoarding\Form\ShopSuccess;
 use App\Livewire\Shop;
 use App\Livewire\Shop\Collections;
 use Illuminate\Support\Facades\Route;
@@ -61,49 +60,59 @@ Route::get('/testing', Landing::class)->name('testing_page');
 // there is where the seller route group and prefix with a seller name     // seller
 Route::prefix('seller')->group(function () {
 
-    // seller registration
-    Route::get('register', RegisterPage::class)->name('seller-signup');
-    Route::get('login', LoginPage::class)->name('seller-login');
+    // seller middleware
+    Route::middleware(SellerAuthMiddleware::class)->group(function () {
 
-    // seller registration
-    Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
+        // user seller signup
+        Route::get('register', RegisterPage::class)->name('seller-signup');
+
+        // user seller login
+        Route::get('login', LoginPage::class)->name('seller-login');
+
+    });
+
+    // this route is for handling the shop information of the user
     Route::get('on-boarding/form', ShopInformation::class)->name('seller-shop-information');
-    //    Route::get('on-boarding/form/{id}', ShopInformation::class)->name('seller-shop-information-user');
-    //    Route::get('on-boarding/form/sucess', ShopSuccess::class)->name('seller-shop-information-success');
 
-    // seller dashboard
-    //    Route::get('/seller', [SellerController::class, 'dashboard'])->name('seller-dashboard');
-    //    Route::get('/seller/inventory', [SellerController::class, 'inventory'])->name('seller-inventory');
-    Route::get('/', SellerLanding::class)->name('seller-landing');
+    //
+    // Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
+    // });
 
-    Route::prefix('app')->group(function () {
-        // route groups of products tab with its child routes
-        Route::prefix('product')->group(function () {
-            Route::get('/list', ProductList::class)->name('product-list');
-            Route::get('/new', ProductAdd::class)->name('product-new');
-        });
-        // route groups of order tab with its child routes
-        Route::prefix('order')->group(function () {
-            Route::get('/list', Orderlist::class)->name('order-list');
-            Route::get('/history', OrderHistory::class)->name('order-history');
-            Route::get('/cancellations', OrderCancellations::class)->name('order-cancellations');
-            Route::get('/returns', OrderReturnsRefunds::class)->name('order-returns');
-        });
-        // route groups of shipment tab with its child routes
-        Route::prefix('shipment')->group(function () {
-            Route::get('/list', ShipmentList::class)->name('shipment-list');
-            Route::get('/history', ShipmentHistory::class)->name('shipment-history');
-            Route::get('/options', ShipmentOptions::class)->name('shipment-options');
-        });
-        // route groups of shop management tab with its child routes
-        Route::prefix('shop')->group(function () {
-            Route::get('/', Shopmanagement::class)->name('shop-management');
-            Route::get('/manage/category', ShopManagementCategory::class)->name('shop-management-category');
-        });
-        Route::prefix('analytics')->group(function () {
-            Route::get('/', AnalyticsModelReport::class)->name('analytics-model-report');
+    // createed a middleware to handle if user is a seller or not
+    Route::middleware([SellerMiddleware::class])->group(function () {
+        // seller landing page
+        Route::get('/', SellerLanding::class)->name('seller-landing');
+
+        Route::prefix('app')->group(function () {
+            // route groups of products tab with its child routes
+            Route::prefix('product')->group(function () {
+                Route::get('/list', ProductList::class)->name('product-list');
+                Route::get('/new', ProductAdd::class)->name('product-new');
+            });
+            // route groups of order tab with its child routes
+            Route::prefix('order')->group(function () {
+                Route::get('/list', Orderlist::class)->name('order-list');
+                Route::get('/history', OrderHistory::class)->name('order-history');
+                Route::get('/cancellations', OrderCancellations::class)->name('order-cancellations');
+                Route::get('/returns', OrderReturnsRefunds::class)->name('order-returns');
+            });
+            // route groups of shipment tab with its child routes
+            Route::prefix('shipment')->group(function () {
+                Route::get('/list', ShipmentList::class)->name('shipment-list');
+                Route::get('/history', ShipmentHistory::class)->name('shipment-history');
+                Route::get('/options', ShipmentOptions::class)->name('shipment-options');
+            });
+            // route groups of shop management tab with its child routes
+            Route::prefix('shop')->group(function () {
+                Route::get('/', Shopmanagement::class)->name('shop-management');
+                Route::get('/manage/category', ShopManagementCategory::class)->name('shop-management-category');
+            });
+            Route::prefix('analytics')->group(function () {
+                Route::get('/', AnalyticsModelReport::class)->name('analytics-model-report');
+            });
         });
     });
+
 });
 
 // shop page
