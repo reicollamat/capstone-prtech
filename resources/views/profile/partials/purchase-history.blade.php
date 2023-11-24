@@ -15,10 +15,16 @@
                     <a class="nav-item nav-link text-light" data-toggle="tab" href="#completed-tab">Completed</a>
                 </div>
             </div>
+
             <div class="tab-content mt-4">
-                
                 {{-- pending tab content --}}
                 <div class="tab-pane fade py-2 px-2 show active" id="pending-tab">
+                    @if (count($user->purchase) == 0)
+                        You haven't place an order yet <i class="bi bi-chevron-double-right"></i>
+                        <a href="{{route('index_shop')}}"> Make you first order</a>
+                    @endif
+                    @foreach ($user->purchase as $purchase)
+                    @if ($purchase->purchase_status == 'pending')
                     <div class="row mx-1 mb-2 align-items-center">
                         <div class="col-4 p-0">
                             Purchase ID
@@ -34,8 +40,6 @@
                         </div>
                     </div>
                     <div class="accordion accordion-flush" id="accordionFlush">
-                        @foreach ($user->purchase as $purchase)
-                        @if ($purchase->purchase_status == 'pending')
                         <div class="accordion-item border">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed d-block py-2" id="trackAccordion" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{$purchase->id}}" aria-expanded="false" aria-controls="collapse-{{$purchase->id}}">
@@ -95,15 +99,15 @@
                                 </div>
                             </div>
                         </div> {{-- accordion item --}}
-                        @endif
-                        @endforeach
                     </div>{{-- accordionFlush --}}
+                    @endif
+                    @endforeach
                     
                 </div> {{-- pending tab content --}}
 
                 {{-- completed tab content --}}
                 <div class="tab-pane fade py-2 px-2" id="completed-tab">
-                    completed
+                    completed here
                 </div>
                 
             </div>
