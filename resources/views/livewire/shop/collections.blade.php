@@ -592,7 +592,7 @@
                                         <div
                                             class="position-relative w-auto h-auto bg-center bg-cover content-center min-h-[257px] p-2">
                                             <a
-                                                href="{{ route('product_detail', ['product_id' => $value->id, 'category' => $value->category]) }}">
+                                                href="{{ route('collections-details', ['product_id' => $value->id, 'category' => $value->category]) }}">
                                                 <img class="h-auto max-h-[257px] w-auto object-center object-contain"
                                                     src="{{ asset($value->image) }}" alt="product image" />
                                             </a>
@@ -602,7 +602,7 @@
 
                                         <div class="p-2.5">
                                             {{--                                             <a href="{{ route('product_detail', ['product_id' => $value->product_id, 'category' => $value->category]) }}" --}}
-                                            <a href="{{ route('product_detail', ['product_id' => $value->id, 'category' => $value->category]) }}"
+                                            <a href="{{ route('collections-details', ['product_id' => $value->id, 'category' => $value->category]) }}"
                                                 class="decoration-0 no-underline">
                                                 <h5
                                                     class="text-lg font-semibold tracking-tight text-gray-900 text-ellipsis overflow-hidden">
@@ -630,7 +630,7 @@
                                             </div>
                                             <div class="flex justify-content-center gap-2">
                                                 <button wire:click="buynow({{ $value->id }})"
-                                                        class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 py-1.5 text-center">
+                                                    class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 py-1.5 text-center">
                                                     Buy Now
                                                 </button>
                                                 <div>
