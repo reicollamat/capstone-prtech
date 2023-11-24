@@ -3,6 +3,14 @@
 :root {
     box-sizing: border-box;
     /*--bs-white-rgb: 242, 242, 242 !important;*/
+    --primary: #0d6efd;
+    --secondary: #6c757d;
+    --success: #198754;
+    --info: #0dcaf0;
+    --warning: #ffc107;
+    --danger: #ffc107;
+    --light: #f8f9fa;
+    --dark: #212529;
 }
 
 /* alpine rule to remove flashes when page reload */
@@ -385,4 +393,18 @@ tr.clickable-row {
 
 #trackAccordion:hover {
     background-color: rgba(13, 110, 253, 0.2);
+}
+
+#profile-nav .list-group-item:hover {
+    background-color: var(--secondary);
+}
+
+#profile-nav .active {
+    background-color: var(--dark);
+    border-color: var(--dark);
+    color: var(--light);
+}
+
+#profile-nav .active:hover {
+    background-color: var(--dark);
 }
