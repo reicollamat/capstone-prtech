@@ -39,6 +39,7 @@ class Searchbar extends Component
     public function mount()
     {
         $this->selected_category = 'all_products';
+
     }
 
     public function clearsearch()

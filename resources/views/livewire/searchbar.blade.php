@@ -5,10 +5,14 @@
                 class="form-control form-select max-w-[200px] shadow-none custom-select"
                 aria-label="Default select example">
                 <option value="all_products" selected default>All Categories</option>
-                @foreach ($categories as $key => $value)
-                    <p>Key: {{ $key }}, Value: {{ $value }}</p>/
-                    <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option>
+                {{--                @foreach ($categories as $key => $value) --}}
+                {{--                    <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option> --}}
+                {{--                @endforeach --}}
+
+                @foreach (Helper::categoryList() as $category_key => $category_value)
+                    <option value={{ $category_key }} wire:key={{ $category_key }}>{{ $category_value }}</option>
                 @endforeach
+
             </select>
             <div class="input-group" @mouseover="open = true" @mouseleave="open = false">
                 <input type="text" class="form-control p-2 custom-input-text rounded-none shadow-none"
