@@ -78,7 +78,7 @@
                                 <div class="position-relative">
                                     <div>
                                         <p class="text-sm text-gray-600 mb-1 text-center">
-                                            {{ \App\Helper\Helper::maptopropercatetory($item->category) }}</p>
+                                            {{ \App\Http\Helper::maptopropercatetory($item->category) }}</p>
                                         <div class="card-title d-flex justify-center">
                                             <h5 class="card-title text-base text-center">{{ $item->title }}</h5>
                                         </div>
