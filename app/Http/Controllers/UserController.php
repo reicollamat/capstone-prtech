@@ -32,8 +32,6 @@ class UserController extends Controller
                 'total' => $total,
             ]);
         } else {
-            dd($request->user);
-
             $product_id = $request->product_id;
             $quantity = $request->quantity;
             $user_id = $request->user_id;
