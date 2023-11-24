@@ -141,20 +141,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // logged in
-    // cart page
-    Route::get('/cart', [CartController::class, 'index'])->name('index_cart');
-    // add to cart
-    Route::post('/addtocart', [CartController::class, 'add_to_cart'])->name('add_to_cart');
-    Route::post('/removecartitem', [CartController::class, 'remove_cartitem'])->name('remove_cartitem');
+    // // cart page
+    // Route::get('/cart', [CartController::class, 'index'])->name('index_cart');
+    // // add to cart
+    // Route::post('/addtocart', [CartController::class, 'add_to_cart'])->name('add_to_cart');
+    // Route::post('/removecartitem', [CartController::class, 'remove_cartitem'])->name('remove_cartitem');
 
-    // bookmark page
-    Route::get('/bookmark', [BookmarkController::class, 'index_bookmark'])->name('index_bookmark');
-    // addremove bookmark
-    Route::post('/addbookmark', [BookmarkController::class, 'add_bookmark'])->name('add_bookmark');
-    Route::post('/removebookmark', [BookmarkController::class, 'remove_bookmark'])->name('remove_bookmark');
+    // // bookmark page
+    // Route::get('/bookmark', [BookmarkController::class, 'index_bookmark'])->name('index_bookmark');
+    // // addremove bookmark
+    // Route::post('/addbookmark', [BookmarkController::class, 'add_bookmark'])->name('add_bookmark');
+    // Route::post('/removebookmark', [BookmarkController::class, 'remove_bookmark'])->name('remove_bookmark');
 
-    // purchase list page
-    Route::get('/purchaselist', [PurchaseListController::class, 'purchase_list'])->name('purchase_list');
+    // // purchase list page
+    // Route::get('/purchaselist', [PurchaseListController::class, 'purchase_list'])->name('purchase_list');
 
     // purchase page
     Route::get('/purchasepage', [UserController::class, 'purchase_page'])->name('purchase_page');
