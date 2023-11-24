@@ -71,7 +71,7 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_date' => now(),
             'total_amount' => $total,
-            'purchase_status' => 'processing',
+            'purchase_status' => 'pending',
         ]);
         // Save the Purchase instance
         $purchase->save();
@@ -117,7 +117,7 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_date' => now(),
             'total_amount' => $total,
-            'purchase_status' => 'processing',
+            'purchase_status' => 'pending',
         ]);
         $purchase->save(); // save the Purchase instance
 
