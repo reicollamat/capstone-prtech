@@ -1,9 +1,9 @@
 <div>
 
     {{-- session flash notification --}}
-    <x-notification-livewire-alert>
+    <x-notification-alert>
         {{ session('notification') }}
-    </x-notification-livewire-alert>
+    </x-notification-alert>
 
     <span>
         {{ $sortingby }}
