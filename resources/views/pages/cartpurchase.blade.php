@@ -161,7 +161,7 @@
                     Payment
                 </h4>
                 <div class="card-body mx-auto">
-                    <form action="#" method="POST">
+                    <form action="{{route('purchase_cart')}}" method="POST">
                         @csrf
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="payment_type" id="cod" value="cod" required checked>
@@ -175,13 +175,14 @@
                                 Gcash
                             </label>
                         </div>
-                        
-                        {{-- <input type="text" name="product_id" value="{{$product->id}}" hidden>
-                        <input type="text" name="category" value="{{$product->category}}" hidden>
+
+                        {{-- request values --}}
+                        @foreach ($cartitems as $item)
+                            <input type="text" name="cart_ids[]" value="{{$item['id']}}" hidden>
+                        @endforeach
                         <input type="text" name="subtotal" value="{{$subtotal}}" hidden>
                         <input type="text" name="total" value="{{$total}}" hidden>
-                        <input type="text" name="quantity" value="{{$quantity}}" hidden>
-                        <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden> --}}
+                        <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
 
                         <div class="w-full mb-4">
 
