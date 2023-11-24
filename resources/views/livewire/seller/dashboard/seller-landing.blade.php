@@ -17,7 +17,7 @@
                             </button>
                             <h1
                                 class="text-base lg:text-xl mb-0  tracking-normal font-bold text-white title dark:text-gray-100">
-                                Good {{ Helper::getTimeOfDay() }} {{ Auth::user()->first_name ?? 'Rafael' }}
+                                Good {{ CustomHelper::getTimeOfDay() }} {{ Auth::user()->first_name ?? 'Rafael' }}
                             </h1>
                             <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"
                                 class="d-none d-md-block  w-7 h-7 -rotate-12">
