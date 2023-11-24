@@ -101,51 +101,27 @@ class UserController extends Controller
         ]));
     }
 
-    public function purchasecart_page(Request $request)
-    {
-        // dd($request->cart_ids);
-        $cart_ids = $request->cart_ids;
-        $user_id = $request->user_id;
-
-        $user = User::find($user_id);
-        $cart_items = CartItem::whereIn('id', $cart_ids)->get();
-        $products = Product::all();
-        $shipping_value = 13;
-        $subtotal = $cart_items->sum('total_price');
-        $total = $subtotal + $shipping_value;
-
-        return view('pages.profile.cartpurchase', [
-            'products' => $products,
-            'cart_items' => $cart_items,
-            'user' => $user,
-            'shipping_value' => $shipping_value,
-            'subtotal' => $subtotal,
-            'total' => $total,
-        ]);
-    }
-
     public function purchase_cart(Request $request)
     {
+        // dd($request->payment_type);
         $cart_ids = $request->cart_ids;
-        // $quantity = $request->quantity;
         $subtotal = $request->subtotal;
         $total = $request->total;
-        // $category = $request->category;
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
 
         $cart_items = CartItem::whereIn('id', $cart_ids)->get();
 
-        // Create a new Purchase instance
+        // create a new Purchase instance
         $purchase = new Purchase([
             'user_id' => $user_id,
             'purchase_date' => now(),
             'total_amount' => $total,
             'purchase_status' => 'processing',
         ]);
-        // Save the Purchase instance
-        $purchase->save();
+        $purchase->save(); // save the Purchase instance
 
+        // loop to create new Cart_items instance each
         foreach ($cart_items as $key => $value) {
             $purchaseItem = new PurchaseItem([
                 'purchase_id' => $purchase->id,
@@ -156,6 +132,7 @@ class UserController extends Controller
             $purchaseItem->save();
         }
 
+        // create a new Payment instance
         $purchaseItem = new Payment([
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
@@ -163,17 +140,15 @@ class UserController extends Controller
             'payment_type' => $payment_type,
             'payment_status' => 'paid',
         ]);
-        $purchaseItem->save();
+        $purchaseItem->save(); // save the Payment instance
 
+        // remove the current Cart_items in database cuz itz purchased
         foreach ($cart_items as $key => $value) {
             CartItem::destroy($value->id);
         }
 
-        Session::flash('message', 'Purchased Order');
-        Session::flash('alert-class', 'alert-danger');
+        Session::flash('notification', 'Order Purchased, Thank you!');
 
-        return redirect(route('index_cart', [
-            'user_id' => $user_id,
-        ]))->with('message', 'Purchased Order, Thank you!')->with('alert-class', 'alert-danger');
+        return redirect(route('index_shop'));
     }
 }
