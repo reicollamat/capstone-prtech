@@ -20,7 +20,7 @@
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Price</label>
                     <input type="text" id="price" wire:model.blur="price"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="In Pesos, 1000" required>
+                        placeholder="In Pesos" required>
                     @error('price')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
@@ -34,6 +34,7 @@
                 <select id="cooler_type" wire:model.blur="cooler_type"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
+                    <option disabled selected>Select Below</option>
                     <option value="Air Cooler">Air Cooler</option>
                     <option value="AIO Cooler">AIO Cooler</option>
                 </select>

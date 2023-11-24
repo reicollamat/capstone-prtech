@@ -1,16 +1,15 @@
 <div>
     {{-- Nothing in the world is as soft and yielding as water. --}}
-    {{--     mouse --}}
     <div class="grid md:grid-cols-2 gap-4">
         <div>
             <!-- Product Name input -->
             <div class="mb-4">
                 <label for="brand" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                     Brand</label>
-                <input type="brand" id="email" wire:model.blur="email"
+                <input type="text" id="brand" wire:model.blur="brand"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Asus, Acer, Logitech, etc." required>
-                @error('email')
+                @error('brand')
                     <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
@@ -21,10 +20,10 @@
                         <label for="price"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
                             Price</label>
-                        <input type="text" id="price" wire:model.blur="email"
+                        <input type="text" id="price" wire:model.blur="price"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="In Pesos, 1000.00" required>
-                        @error('email')
+                        @error('price')
                             <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
@@ -42,7 +41,7 @@
                         <option value="Optical">Optical</option>
                         <option value="Laser">Laser</option>
                     </select>
-                    @error('email')
+                    @error('mouse_tracking_method')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
@@ -81,7 +80,7 @@
                 <input type="text" id="dpi"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="3200, 1600, 800, etc." required>
-                @error('email')
+                @error('dpi')
                     <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
@@ -102,7 +101,7 @@
                         <option value="Laser">Left</option>
                         <option value="Laser">Both</option>
                     </select>
-                    @error('email')
+                    @error('mouse_tracking_method')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
@@ -118,7 +117,7 @@
                     <input type="text" id="color"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Red, Black, Blue, etc." required>
-                    @error('email')
+                    @error('color')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
@@ -165,3 +164,4 @@
         </div>
     </div>
 </div>
+

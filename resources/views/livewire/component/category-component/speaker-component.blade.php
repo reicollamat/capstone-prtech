@@ -1,107 +1,98 @@
 <div>
     {{-- Success is as dangerous as failure. --}}
-    {{--     case fan --}}
     <div class="grid md:grid-cols-2 gap-4">
         <div>
             {{-- First Columm --}}
 
-                <!-- Product Name input -->
-                <div class="mb-4">
-                    <label for="brand" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+            <!-- Product Name input -->
+            <div class="mb-4">
+                <label for="brand" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                     Brand</label>
-                     <input type="text" id="brand" wire:model.blur="email"
+                <input type="text" id="brand" wire:model.blur="brand"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Logitech, Bose, A4Tech etc." required>
 
-                    @error('email')
+                @error('brand')
                     <span class="font-sm text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
+                @enderror
+            </div>
 
-            
-                
-                <!-- Product SKU input -->
-                <div class="mb-4">
-                    <label for="price"
-                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
-                        Price</label>
-                    <input type="text" id="price" wire:model.blur="email"
-                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="In Pesos, 1000.00" required>
-                    @error('email')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
-        
-                <!-- Product SKU input -->
-                <div class="mb-4">
-                    <label for="compatibility"
-                    class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
+            <!-- Product SKU input -->
+            <div class="mb-4">
+                <label for="price" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                    Price</label>
+                <input type="text" id="price" wire:model.blur="price"
+                    class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="In Pesos, 1000.00" required>
+                @error('price')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Product SKU input -->
+            <div class="mb-4">
+                <label for="compatibility" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
                     Compatibility
-                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                        data-bs-trigger="hover focus" data-bs-placement="top"
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                        data-bs-placement="top"
                         data-bs-content="Certain device/s that are compatible with the speaker.">
                         <i class="bi bi-patch-question"></i>
                     </span></label>
-                    <select id="compatibility"
+                <select id="compatibility"
                     class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select Below</option>
                     <option value="pc">For PC</option>
                     <option value="portable_use">For portable use </option>
                     <option value="tv/monitor">For TV/monitor</option>
                     <option value="home_theater">For home theater</option>
-                    
-                    </select>
-                    @error('email')
-                    <span class="font-sm text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
-            
 
-                <!-- Product SKU input -->
-                <div class="mb-4">
-                    <label for="speaker_connectivity"
+                </select>
+                @error('compatibility')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Product SKU input -->
+            <div class="mb-4">
+                <label for="speaker_connectivity"
                     class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
                     Speaker Connectivity Type
-                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                        data-bs-trigger="hover focus" data-bs-placement="top"
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                        data-bs-placement="top"
                         data-bs-content="Certain device/s that are compatible with the speaker.">
                         <i class="bi bi-patch-question"></i>
                     </span></label>
-                    <select id="speaker_connectivity"
+                <select id="speaker_connectivity"
                     class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select Below</option>
                     <option value="wired">Wired</option>
                     <option value="wireless">Wireless</option>
                     <option value="both">Both</option>
-                 
-                    </select>
-                    @error('email')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
 
-                 <!-- Product SKU input -->
-                <div class="mb-4">
-                    <label for="color"
-                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Color <span
-                            class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
-                            data-bs-placement="top" data-bs-content="Multiple colors can be separated by comma">
-                            <i class="bi bi-patch-question"></i>
-                        </span></label>
-                    <input type="text" id="color"
-                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="White, Black, Gray, etc." required>
-                    @error('email')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                    @enderror
-                </div>
+                </select>
+                @error('speaker_connectivity')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <!-- Product SKU input -->
+            <div class="mb-4">
+                <label for="speaker_color"
+                    class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Color
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                        data-bs-placement="top" data-bs-content="Multiple colors can be separated by comma">
+                        <i class="bi bi-patch-question"></i>
+                    </span></label>
+                <input type="text" id="color"
+                    class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="White, Black, Gray, etc." required>
+                @error('speaker_color')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
         </div>
         <div>
-            {{-- Second Columm --}}
-            {{-- pag mahaba na masyado ung contennt ng first column dito nyo lagay after ng line na to --}}
-
-            {{-- Add Product Image Div --}}
+            <!-- Add Product Image Div -->
             <div class="pb-3">
                 <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Add Product Image (Max of
                     3)</p>
@@ -140,3 +131,4 @@
         </div>
     </div>
 </div>
+
