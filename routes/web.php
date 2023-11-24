@@ -68,7 +68,6 @@ Route::prefix('seller')->group(function () {
 
         // user seller login
         Route::get('login', LoginPage::class)->name('seller-login');
-
     });
 
     // this route is for handling the shop information of the user
@@ -112,7 +111,6 @@ Route::prefix('seller')->group(function () {
             });
         });
     });
-
 });
 
 // shop page
@@ -161,8 +159,6 @@ Route::middleware('auth')->group(function () {
     // purchase page
     Route::get('/purchasepage', [UserController::class, 'purchase_page'])->name('purchase_page');
     Route::post('/purchaseone', [UserController::class, 'purchase_one'])->name('purchase_one');
-
-    Route::get('/purchasecartpage', [UserController::class, 'purchasecart_page'])->name('purchasecart_page');
     Route::post('/purchasecart', [UserController::class, 'purchase_cart'])->name('purchase_cart');
 });
 
@@ -201,4 +197,4 @@ Route::prefix('explore')->group(function () {
     })->name('terms-and-conditions');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
