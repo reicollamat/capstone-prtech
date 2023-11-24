@@ -1,7 +1,7 @@
 <div class="h-full ">
-    @if($cartiems_count > 0)
-        @foreach($cartitems as $cartitem)
-            <livewire:cart.cartitems :key="$cartitem->id" :cartitem="$cartitem"/>
+    @if ($cartiems_count > 0)
+        @foreach ($cartitems as $cartitem)
+            <livewire:cart.cartitems :key="$cartitem->id" :cartitem="$cartitem" />
         @endforeach
     @else
         <div class="flex flex-column justify-center items-center m-8 gap-2">
@@ -9,8 +9,7 @@
                 <p>Your cart is empty</p>
             </div>
             <div>
-                <a href="{{ route('index_shop') }}"
-                   class="btn btn-primary btn-lg text-center w-full ">
+                <a href="{{ route('index_shop') }}" class="btn btn-primary btn-lg text-center w-full ">
                     Start Shopping
                 </a>
             </div>
@@ -28,12 +27,9 @@
                 Items </p>
         </div>
 
-
-        <button class="btn btn-primary btn-lg text-center w-full" wire:click="cart_checkout({{$cartitems}})">
-            Checkout | PHP {{ $total_price ?? 0}}
-        </button>
+        {{-- <button class="btn btn-primary btn-lg text-center w-full" wire:click="cart_checkout({{$cartitems}})"> --}}
+        {{--     Checkout | PHP {{ $total_price ?? 0}} --}}
+        {{-- </button> --}}
 
     </div>
 </div>
-
-
