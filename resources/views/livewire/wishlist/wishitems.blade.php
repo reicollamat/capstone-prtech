@@ -17,7 +17,7 @@
             <div class="card-body mb-0" style="padding: 0.75rem!important;">
                 <div class="card-title d-flex justify-between mb-0">
                     <a class="text-lg decoration-0 text-decoration-none text-black"
-                        href="{{ route('product_detail', ['product_id' => $bookmark->id, 'category' => $bookmark->category]) }}">{{ $bookmark->title }}</a>
+                        href="{{ route('collections-details', ['product_id' => $bookmark->id, 'category' => $bookmark->category]) }}">{{ $bookmark->title }}</a>
                     <h5 class="text-lg text-gray-600 mb-0">
                         <small class="text-body-secondary text-sm">PHP</small>
                         {{ $bookmark->price }}

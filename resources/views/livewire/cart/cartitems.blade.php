@@ -15,7 +15,7 @@
             <div class="card-body mb-0" style="padding: 0.50rem!important;">
                 <div class="card-title d-flex justify-between mb-0">
                     <a class="text-lg decoration-0 text-decoration-none text-black" {{--                       href="{{route('product_detail', ['product_id' => $cartitem->product_id, 'category' => $cartitem->category])}}">{{ $cartitem->product_id }}</a> --}}
-                        href="/shop/{{ $cartitem->product_id }}/{{ $cartitem->category }}/details">{{ $cartitem->title }}
+                        href="/collections/{{ $cartitem->product_id }}/{{ $cartitem->category }}/details">{{ $cartitem->title }}
                     </a>
                     <h5 class="text-lg text-gray-600 mb-0">
                         <small class="text-body-secondary text-sm">PHP</small>
