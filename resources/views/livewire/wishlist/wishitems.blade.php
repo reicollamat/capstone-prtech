@@ -26,8 +26,8 @@
                 <div class="card-text">
                     <p class="mb-0 mt-0">{{ $bookmark->slug }}</p>
                     <p class="mb-2"><small
-                            class="text-body-secondary">{{ \App\Http\Helper::maptopropercatetory($bookmark->category) }}
-                            | {{ \App\Http\Helper::maptopropercondition($bookmark->condition) }}
+                            class="text-body-secondary">{{ CustomHelper::maptopropercatetory($bookmark->category) }}
+                            | {{ CustomHelper::maptopropercondition($bookmark->condition) }}
                             | {{ strtoupper($bookmark->status) }}</small>
                     </p>
                     <a href="#" wire:click="remove"

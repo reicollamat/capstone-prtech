@@ -42,7 +42,7 @@ class ProductList extends Component
         //
         //        dd($p->slug);
 
-        $this->categories = Helper::categoryList();
+        // $this->categories = Helper::categoryList();
 
         //        dd($this->categories->array_keys());
     }
