@@ -12,7 +12,7 @@
     <div class="container-fluid px-5">
         <div class="p-4">
             <div class="d-flex justify-content-center text-justify" id="content">
-                <p class="mb-0" style="text-align: justify">
+                <p class="mb-0 text-center">
                     Feel free to reach out to us if you have any concerns or problems;
                     we're here to assist you.
                 </p>
@@ -20,10 +20,10 @@
         </div>
     </div>
     <!-- Image and Contact us div -->
-    <div class="container d-flex flex-column mt-8 mb-20">
+    <div class="container d-flex flex-column mt-8 mb-16">
         <img src="https://cdn.baseus.cn/admin/other/XljcS3GWwbmkoRnIRNMRo7hd5EGqSvY7.jpg" alt="Contact Us"
-            class="img-fluid mt-8 mb-8" />
-        <h3>Send us your concerns!</h3>
+            class="img-fluid mb-4" />
+        <h4>Send us your concerns!</h4>
         <form>
             <div class="mb-3">
                 <label for="name" class="form-label">Your Name</label>
