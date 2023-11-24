@@ -16,7 +16,7 @@
                 {{ $item->name }}
             </div>
             <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-800 !font-light">
-                {{ Helper::maptopropercatetory($item->category) }}
+                {{ CustomHelper::maptopropercatetory($item->category) }}
             </div>
             <div class=" mb-0  min-w-[100px] p-2 !text-gray-800 !font-light">
                 {{ $item->price }}
@@ -183,7 +183,7 @@
                                         <select id="category"
                                             class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
                                             <option disabled default>Category</option>
-                                            @foreach (Helper::categoryList() as $category_key => $category_value)
+                                            @foreach (CustomHelper::categoryList() as $category_key => $category_value)
                                                 <option value="{{ $category_key }}">{{ $category_value }}</option>
                                             @endforeach
                                         </select>

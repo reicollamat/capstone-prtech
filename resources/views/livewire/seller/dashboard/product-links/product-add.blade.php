@@ -123,14 +123,13 @@
                             <button @click="isOpen = !isOpen"
                                 class="relative z-10 w-full flex flex-start border border-gray-400  p-2.5 !rounded text-sm bg-white text-gray-900 gap-1">
                                 <span class="mx-1 w-full text-start">Category :
-                                    {{ Helper::maptopropercatetory($productCategory) }}</span>
+                                    {{ CustomHelper::maptopropercatetory($productCategory) }}</span>
                                 <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
                                     fill="none" xmlns="http://www.w3.org/2000/svg"
                                     :class="{ 'rotate-180 transition duration-300': isOpen }">
                                     <path d=" M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999
                             9.70199L12 15.713Z" fill="currentColor"></path>
                                 </svg>
-                                </span>
                             </button>
                             <!-- Dropdown menu -->
                             <div x-cloak x-show="isOpen" @click.away="isOpen = false"
@@ -142,7 +141,7 @@
                                 x-transition:leave-end="opacity-0 scale-90"
                                 class="absolute right-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                                 <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
-                                    @foreach (Helper::categoryList() as $category_key => $category_value)
+                                    @foreach (CustomHelper::categoryList() as $category_key => $category_value)
                                         <button
                                             class="mb-0 w-full text-start  text-sm p-1 tracking-tight rounded hover:bg-gray-100"
                                             @click="isOpen = false" type="button"

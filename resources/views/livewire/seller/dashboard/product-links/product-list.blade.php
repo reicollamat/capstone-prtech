@@ -91,7 +91,8 @@
                         <!-- Dropdown toggle button -->
                         <button @click="isOpen = !isOpen"
                             class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-sm bg-white text-gray-600 gap-1">
-                            <span class="mx-1">Category: {{ Helper::maptopropercatetory($category_filter) }}</span>
+                            <span class="mx-1">Category:
+                                {{ CustomHelper::maptopropercatetory($category_filter) }}</span>
                             <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
                                 fill="none" xmlns="http://www.w3.org/2000/svg"
                                 :class="{ 'rotate-180 transition duration-300': isOpen }">
@@ -108,7 +109,7 @@
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                             class="absolute left-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                             <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
-                                @foreach (Helper::categoryList() as $category_key => $category_value)
+                                @foreach (CustomHelper::categoryList() as $category_key => $category_value)
                                     <button
                                         class="mb-0 w-full text-start uppercase text-sm p-1.5 tracking-tight rounded hover:bg-gray-100"
                                         type="button"
