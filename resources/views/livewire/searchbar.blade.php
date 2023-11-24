@@ -9,7 +9,7 @@
                 {{--                    <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option> --}}
                 {{--                @endforeach --}}
 
-                @foreach (Helper::categoryList() as $category_key => $category_value)
+                @foreach (CustomHelper::categoryList() as $category_key => $category_value)
                     <option value={{ $category_key }} wire:key={{ $category_key }}>{{ $category_value }}</option>
                 @endforeach
 
