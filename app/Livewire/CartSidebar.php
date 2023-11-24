@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Helper\Helper;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

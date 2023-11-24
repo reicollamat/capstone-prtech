@@ -1,36 +1,12 @@
 <?php
 
-namespace App\Helper;
+namespace App\Http;
 
 class Helper
 {
-    public static function maptopropercatetory($input)
-    {
-        $mapping = [
-            //            'storage' => 'Storage',
-            'case_fan' => 'Case Fan',
-            'computer_case' => 'Computer Case',
-            'cpu' => 'Processor(CPU)',
-            'cpu_cooler' => 'CPU Cooler',
-            'ext_storage' => 'External Storage',
-            'headphone' => 'Headphone',
-            'keyboard' => 'Keyboard',
-            'memory' => 'Memory (RAM)',
-            'monitor' => 'Monitor',
-            'motherboard' => 'Motherboard',
-            'mouse' => 'Mouse',
-            'other_peripherals' => 'Other Peripherals',
-            'psu' => 'Power Supply Unit (PSU)',
-            'speaker' => 'Speaker',
-            'video_card' => 'Graphics Card',
-            'webcam' => 'Webcam',
-        ];
-
-        return $mapping[$input] ?? '';
-    }
-
     public static function categoryList(): array
     {
+
         $mapping = [
             //            'storage' => 'Storage',
             'case_fan' => 'Case Fan',
@@ -72,10 +48,6 @@ class Helper
      * @param  mixed  $data The data to be logged. It can be of any type.
      * @return void
      */
-    public static function debug_to_console($data)
-    {
-        echo "<script>console.log('Debug Objects: ".$data."' );</script>";
-    }
 
     /**
      * @return string

@@ -11,10 +11,10 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $files = glob(app_path('Helpers').'/*.php');
-        foreach ($files as $key => $file) {
-            require_once $file;
-        }
+        // $files = glob(app_path('Helper').'/*.php');
+        // foreach ($files as $key => $file) {
+        //     require_once $file;
+        // }
     }
 
     /**
@@ -22,6 +22,6 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+
     }
 }
