@@ -20,7 +20,7 @@
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Price</label>
                     <input type="text" id="price" wire:model.blur="price"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="In Pesos, 1000" required>
+                        placeholder="In Pesos" required>
                     @error('price')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
@@ -70,8 +70,11 @@
                 <select id="fanrgb" wire:model.blur="fanrgb"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
-                    <option value="Yes">Yes</option>
+                    <option disabled selected>Select Below</option>
                     <option value="No">No</option>
+                    <option value="RGB 12V">RGB 12V</option>
+                    <option value="aRGB 5V">aRGB 5V</option>
+                    <option value="Via Controller">Via Controller</option>
                 </select>
                 @error('fanrpm')
                     <span class="font-sm text-red-500">{{ $message }}</span>
@@ -86,6 +89,7 @@
                 <select id="fan_connection" wire:model.blur="fan_connection"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
+                    <option disabled selected>Select Below</option>
                     <option value="PWM">PWM</option>
                     <option value="DC">DC</option>
                     <option value="PWM + DC">PWM + DC</option>
@@ -98,9 +102,7 @@
         </div>
 
         <div>
-            {{-- Second Columm --}}
-            {{-- pag mahaba na masyado ung contennt ng first column dito nyo lagay after ng line na to --}}
-            {{-- Add Product Image Div --}}
+            <!-- Add Product Image Div -->
             <div class="pb-3">
                 <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Add Product Image (Max
                     of

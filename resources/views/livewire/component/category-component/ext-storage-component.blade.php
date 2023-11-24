@@ -46,6 +46,7 @@
                 <select id="extstorage_type" wire:model.blur="extstorage_type"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
+                    <option disabled selected>Select Below</option>
                     <option value="External Hard Drive">External Hard Drive</option>
                     <option value="External Solid State Drive">External Solid State Drive</option>
                     <option value="USB Flash Drive">USB Flash Drive</option>
@@ -62,6 +63,7 @@
                 <select id="extstorage_int" wire:model.blur="extstorage_int"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
+                    <option disabled selected>Select Below</option>
                     <option value="SATA">SATA</option>
                     <option value="NVMe">NVMe</option>
                     <option value="USB">USB</option>

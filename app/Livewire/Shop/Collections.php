@@ -259,8 +259,6 @@ class Collections extends Component
         } else {
             $this->redirect(route('login'));
         }
-
-        //        dd($this->quantity, $this->user_id, $this->product_id);
     }
 
     public function render()
