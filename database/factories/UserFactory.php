@@ -18,16 +18,19 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => fake('fil_PH')->userName(),
+            'first_name' => fake('fil_PH')->firstName(),
+            'last_name' => fake('fil_PH')->lastName(),
+            'email' => fake('fil_PH')->unique()->safeEmail(),
+            'birthdate' => fake('fil_PH')->date(),
+            'sex' => fake('fil_PH')->randomElement(['male', 'female']),
             'email_verified_at' => now(),
             'password' => Hash::make('1'),
-            'phone_number' => fake()->phoneNumber(),
-            'street_address_1' => fake()->streetAddress(),
-            'city' => fake()->city(),
-            'postal_code' => fake()->postcode(),
+            'phone_number' => fake('fil_PH')->phoneNumber(),
+            'street_address_1' => fake('fil_PH')->streetAddress(),
+            'state_province' => fake()->randomElement(['Metro Manila', 'Cavite', 'Bulacan', 'Laguna', 'Batangas', 'Rizal', 'Pampanga', 'Quezon', 'Nueva Ecija', 'Zambales', 'Tarlac', 'Benguet', 'Pangasinan', 'Iloilo', 'Leyte', 'Cebu', 'Negros Occidental', 'Davao del Sur', 'Maguindanao', 'Lanao del Norte']),
+            'city' => fake('fil_PH')->city(),
+            'postal_code' => fake('fil_PH')->postcode(),
             'country' => 'Phillipines',
             'permissions' => [
                 'platform.index' => '0',
