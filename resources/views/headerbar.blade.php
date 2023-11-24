@@ -51,6 +51,7 @@
                                     src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&h=764&q=100"
                                     alt="">
                                 <p class="mb-0 text-sm">{{ Auth::user()->name }}</p>
+                                <i class="bi bi-chevron-down"></i>
                             </button>
 
                             <div x-cloak x-show="isProfileOpen" @click.away="isProfileOpen = false"
@@ -62,13 +63,12 @@
                                 x-transition:leave-end="opacity-0 scale-90"
                                 class="absolute right-0 z-20 w-max py-3 overflow-hidden origin-top-right bg-transparent front rounded">
                                 <div class="dropdown-arrow bg-white  rounded shadow border-1 border-gray-300 ">
-                                    <a href="#"
+                                    <a href="{{route('profile.edit')}}"
                                         class="block w-full text-start px-3  font-semibold py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <div class="flex gap-2 justify-start items-center text-start">
                                             <i class="bi bi-person-fill text-gray-800 text-lg"></i>
                                             <span>Profile</span>
                                         </div>
-
                                     </a>
                                     <a href="#"
                                         class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
