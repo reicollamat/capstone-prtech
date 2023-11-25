@@ -86,6 +86,7 @@ Route::prefix('seller')->group(function () {
         Route::get('/', SellerLanding::class)->name('seller-landing');
 
         Route::prefix('app')->group(function () {
+
             // route groups of products tab with its child routes
             Route::prefix('product')->group(function () {
                 Route::get('/list', ProductList::class)->name('product-list');
@@ -110,7 +111,7 @@ Route::prefix('seller')->group(function () {
                 Route::get('/manage/category', ShopManagementCategory::class)->name('shop-management-category');
             });
             Route::prefix('analytics')->group(function () {
-                Route::get('/', AnalyticsModelReport::class)->name('analytics-model-report');
+                Route::get('/stocksense', AnalyticsModelReport::class)->name('analytics-model-report');
             });
         });
     });
@@ -204,4 +205,4 @@ Route::prefix('explore')->group(function () {
     })->name('terms-and-conditions');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
