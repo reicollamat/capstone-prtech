@@ -38,7 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \RalphJSmit\Livewire\Urls\Middleware\LivewireUrlsMiddleware::class,
-            UpgradeToHttpsUnderNgrok::class,
+            // UpgradeToHttpsUnderNgrok::class,
         ],
 
         'api' => [
