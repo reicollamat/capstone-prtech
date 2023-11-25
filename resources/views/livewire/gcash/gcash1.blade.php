@@ -2,7 +2,7 @@
     <div class=" text-gray-500 mb-5">
         <div>
             <div>Merchant</div>
-            <div>Amount Due</div>
+            <div>Amount Due: {{$total}}</div>
         </div>
     </div>
     <div class="mt-5 text-center">
