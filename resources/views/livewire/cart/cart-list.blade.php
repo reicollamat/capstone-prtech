@@ -27,9 +27,16 @@
                 Items </p>
         </div>
 
-        <button class="btn btn-primary btn-lg text-center w-full" wire:click="cart_checkout({{ $cartitems }})">
-            Checkout | PHP {{ $total_price ?? 0 }}
-        </button>
+        {{-- check if there is an item in the cart --}}
+        @if ($cartiems_count > 0)
+            <button class="btn btn-primary btn-lg text-center w-full" wire:click="cart_checkout({{ $cartitems }})">
+                Checkout | PHP {{ $total_price ?? 0 }}
+            </button>
+        @else
+            <button class="btn btn-primary btn-lg text-center w-full">
+                Checkout | PHP {{ $total_price ?? 0 }}
+            </button>
+        @endif
 
     </div>
 </div>
