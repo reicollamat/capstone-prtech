@@ -38,8 +38,11 @@
         </div>
         <ul>
             <li class="p-1.5 text-sm rounded-sm">
-                <a href="{{ route('product-list') }}"
-                    class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} "
+                {{-- <a href="{{ route('product-list') }}" --}}
+                {{--     class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
+                <a href="{{ route('analytics-model-report') }}"
+                    class="no-underline  {{ Route::is('analytics-model-report') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
+                    decoration-0"
                     wire:navigate>
                     <div class="flex items-center gap-1.5">
                         <svg height="1.5rem" width="1.5rem" version="1.1" id="Layer_1"
@@ -119,16 +122,16 @@
 
                 </a>
             </li>
-            <li class="p-1.5 text-sm" text-sm>
-                <a href="{{ route('shipment-history') }}" class="no-underline transition decoration-0 text-gray-800"
-                    wire:navigate>
-                    <div class="flex items-center gap-1.5">
-                        <i class="bi bi-plus-square  text-lg"></i>
-                        <span>Shipment History</span>
-                    </div>
+            {{-- <li class="p-1.5 text-sm" text-sm> --}}
+            {{--     <a href="{{ route('shipment-history') }}" class="no-underline transition decoration-0 text-gray-800" --}}
+            {{--         wire:navigate> --}}
+            {{--         <div class="flex items-center gap-1.5"> --}}
+            {{--             <i class="bi bi-plus-square  text-lg"></i> --}}
+            {{--             <span>Shipment History</span> --}}
+            {{--         </div> --}}
 
-                </a>
-            </li>
+            {{--     </a> --}}
+            {{-- </li> --}}
         </ul>
     </div>
     <div>
@@ -163,15 +166,15 @@
 
                 </a>
             </li>
-            <li class="p-1.5 text-sm">
-                <a href="{{ route('order-history') }}" class="no-underline decoration-0 text-gray-800" wire:navigate>
-                    <div class="flex items-center gap-1.5">
-                        <i class="bi bi-truck text-lg"></i>
-                        <span>Order History</span>
-                    </div>
+            {{-- <li class="p-1.5 text-sm"> --}}
+            {{--     <a href="{{ route('order-history') }}" class="no-underline decoration-0 text-gray-800" wire:navigate> --}}
+            {{--         <div class="flex items-center gap-1.5"> --}}
+            {{--             <i class="bi bi-truck text-lg"></i> --}}
+            {{--             <span>Order History</span> --}}
+            {{--         </div> --}}
 
-                </a>
-            </li>
+            {{--     </a> --}}
+            {{-- </li> --}}
         </ul>
 
     </div>
