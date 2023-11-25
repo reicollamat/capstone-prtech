@@ -593,7 +593,7 @@
                                             class="position-relative w-auto h-auto bg-center bg-cover content-center min-h-[257px] p-2">
                                             <a
                                                 href="{{ route('collections-details', ['product_id' => $value->id, 'category' => $value->category]) }}">
-                                                <img class="h-auto max-h-[257px] w-auto object-center object-contain"
+                                                <img class="h-auto object-cover max-h-[200px] w-auto object-center object-contain"
                                                     src="{{ asset($value->image) }}" alt="product image" />
                                             </a>
                                         </div>

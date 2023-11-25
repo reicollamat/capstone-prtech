@@ -189,7 +189,7 @@
                 <div class="px-6 py-4 border-0">
                     <div class="flex flex-wrap items-center">
                         <div class="relative w-full max-w-full flex-grow flex-1">
-                            <h3 class="font-bold text-lg text-blueGray-700">Page visits</h3>
+                            <h3 class="font-bold text-lg text-blueGray-700">Viewed Products</h3>
                         </div>
                     </div>
                 </div>
