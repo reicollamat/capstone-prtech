@@ -1,3 +1,8 @@
+
+<x-notification-alert>
+    {{ session('notification') }}
+</x-notification-alert>
+
 <h5 class="border-bottom border-secondary pb-2 mb-4">Account Details</h5>
 <form action="{{route('profile.update')}}" method="POST">
     @csrf
@@ -53,16 +58,6 @@
                         Save Changes
                     </span>
                 </button>
-        
-                @if (session('status') === 'profile-updated')
-                    <p
-                        x-data="{ show: true }"
-                        x-show="show"
-                        x-transition
-                        x-init="setTimeout(() => show = false, 2000)"
-                        class="text-sm text-gray-600 dark:text-gray-400"
-                    >{{ __('Saved.') }}</p>
-                @endif
             </div>
         </div>
     </div>
@@ -107,16 +102,6 @@
                             Update
                         </span>
                     </button>
-        
-                    @if (session('status') === 'password-updated')
-                        <p
-                            x-data="{ show: true }"
-                            x-show="show"
-                            x-transition
-                            x-init="setTimeout(() => show = false, 2000)"
-                            class="text-sm text-gray-600 dark:text-gray-400"
-                        >{{ __('Saved.') }}</p>
-                    @endif
                 </div>
             </form>
         </section>
