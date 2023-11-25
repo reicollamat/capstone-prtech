@@ -23,10 +23,9 @@
                         You haven't place an order yet <i class="bi bi-chevron-double-right"></i>
                         <a href="{{route('index_shop')}}"> Make you first order</a>
                     @endif
-                    @foreach ($user->purchase as $purchase)
-                    @if ($purchase->purchase_status == 'pending')
+
                     <div class="row mx-1 mb-2 align-items-center">
-                        <div class="col-4 p-0">
+                        <div class="col-2 p-0">
                             Purchase ID
                         </div>
                         <div class="col-4 p-0">
@@ -38,23 +37,31 @@
                         <div class="col-2 p-0">
                             Total Price
                         </div>
+                        <div class="col-2 p-0">
+                            Payment Type
+                        </div>
                     </div>
+                    @foreach ($user->purchase as $purchase)
+                    @if ($purchase->purchase_status == 'pending')
                     <div class="accordion accordion-flush" id="accordionFlush">
                         <div class="accordion-item border">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed d-block py-2" id="trackAccordion" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{$purchase->id}}" aria-expanded="false" aria-controls="collapse-{{$purchase->id}}">
                                     <div class="row text-center">
-                                        <div class="col-4">
+                                        <div class="col-2">
                                             0000{{$purchase->id}}
                                         </div>
                                         <div class="col-4">
                                             {{$purchase->purchase_date}}
                                         </div>
                                         <div class="col-2">
-                                            {{count($user->purchase)}}
+                                            {{count($purchase->purchase_item)}}
                                         </div>
                                         <div class="col-2">
                                             ₱{{$purchase->total_amount}}
+                                        </div>
+                                        <div class="col-2">
+                                            {{$purchase->payment->payment_type}}
                                         </div>
                                         <i class="bi bi-chevron-compact-down text-primary"></i>
                                     </div>
