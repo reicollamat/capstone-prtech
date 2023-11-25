@@ -31,13 +31,35 @@
         </div>
     </div>
     <div class="mt-12 flex justify-center no-underline">
-        <button
-            wire:click="gcash2()"
-            target="_blank"
-            class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline"
-        >
-            Next
-        </button>
+        @if ($cart_ids)
+        {{-- if route came from purchase_cart --}}
+        <form wire:submit="gcash2()">
+            <input type="text" wire:model="cart_ids" hidden>
+            <input type="text" wire:model="subtotal" hidden>
+            <input type="text" wire:model="total" hidden>
+            <input type="text" wire:model="payment_type" hidden>
+            <input type="text" wire:model="user_id" hidden>
+            
+            <button type="submit" target="_blank" class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline">
+                Next
+            </button>
+        </form>
+        @else
+        {{-- if route came from purchase_one --}}
+        <form wire:submit="gcash2()">
+            <input type="text" wire:model="user_id" hidden>
+            <input type="text" wire:model="product_id" hidden>
+            <input type="text" wire:model="quantity" hidden>
+            <input type="text" wire:model="subtotal" hidden>
+            <input type="text" wire:model="total" hidden>
+            <input type="text" wire:model="category" hidden>
+            <input type="text" wire:model="payment_type" hidden>
+            
+            <button type="submit" target="_blank" class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline">
+                Next
+            </button>
+        </form>
+        @endif
     </div>
     <div class="mt-4 mb-5 flex justify-center no-underline">
         <a href="" class="no-underline">Create an account</a>

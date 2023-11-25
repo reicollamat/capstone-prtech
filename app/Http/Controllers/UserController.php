@@ -64,7 +64,7 @@ class UserController extends Controller
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
 
-        // dd($payment_type);
+        // redirect here if payment = gcash
         if ($payment_type == 'gcash') {
             return redirect(route('gcash1', [
                 'product_id' => $product_id,
@@ -100,7 +100,7 @@ class UserController extends Controller
             'purchase_id' => $purchase->id,
             'date_of_payment' => now(),
             'payment_type' => $payment_type,
-            'payment_status' => 'paid',
+            'payment_status' => 'pending',
         ]);
         $purchaseItem->save();
 
@@ -120,6 +120,18 @@ class UserController extends Controller
         $total = $request->total;
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
+
+        // redirect here if payment = gcash
+        if ($payment_type == 'gcash') {
+            // dd($cart_ids);
+            return redirect(route('gcash1', [
+                'cart_ids[]' => $cart_ids,
+                'subtotal' => $subtotal,
+                'total' => $total,
+                'payment_type' => $payment_type,
+                'user_id' => $user_id,
+            ]));
+        }
 
         $cart_items = CartItem::whereIn('id', $cart_ids)->get();
 
@@ -149,7 +161,7 @@ class UserController extends Controller
             'purchase_id' => $purchase->id,
             'date_of_payment' => now(),
             'payment_type' => $payment_type,
-            'payment_status' => 'paid',
+            'payment_status' => 'pending',
         ]);
         $purchaseItem->save(); // save the Payment instance
 
