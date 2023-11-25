@@ -25,13 +25,23 @@
         </div>
     </div>
     <div class="mt-12 flex justify-center no-underline">
-        <button
-        wire:click="gcash3()"
-        target="_blank"
-        class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline"
-        >
-        Submit Code
-        </button>
+        @if ($cart_ids)
+            <form wire:submit="gcash3()">
+                <input type="text" wire:model="cart_ids" hidden>
+                <input type="text" wire:model="subtotal" hidden>
+                <input type="text" wire:model="total" hidden>
+                <input type="text" wire:model="payment_type" hidden>
+                <input type="text" wire:model="user_id" hidden>
+                
+                <button type="submit" target="_blank" class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline">
+                    Next
+                </button>
+            </form>
+        @else
+            <button wire:click="gcash3()" target="_blank" class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline">
+                Submit Code
+            </button>
+        @endif
     </div>
     <div class="mt-4 mb-5 flex justify-center no-underline">
         <a href="" class="no-underline">Resend authentication code</a>
