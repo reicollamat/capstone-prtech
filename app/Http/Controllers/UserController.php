@@ -65,6 +65,17 @@ class UserController extends Controller
         $user_id = $request->user_id;
 
         // dd($payment_type);
+        if ($payment_type == 'gcash') {
+            return redirect(route('gcash1', [
+                'product_id' => $product_id,
+                'quantity' => $quantity,
+                'subtotal' => $subtotal,
+                'total' => $total,
+                'category' => $category,
+                'payment_type' => $payment_type,
+                'user_id' => $user_id,
+            ]));
+        }
 
         // Create a new Purchase instance
         $purchase = new Purchase([

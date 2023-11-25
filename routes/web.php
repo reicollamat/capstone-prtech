@@ -10,6 +10,9 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\SellerAuthMiddleware;
 use App\Http\Middleware\SellerMiddleware;
+use App\Livewire\Gcash\Gcash1;
+use App\Livewire\Gcash\Gcash2;
+use App\Livewire\Gcash\Gcash3;
 use App\Livewire\Landing;
 use App\Livewire\Seller\Auth\LoginPage;
 use App\Livewire\Seller\Auth\RegisterPage;
@@ -158,6 +161,10 @@ Route::middleware('auth')->group(function () {
 
     // purchase page
     Route::get('/purchasepage', [UserController::class, 'purchase_page'])->name('purchase_page');
+    Route::get('/payment1', Gcash1::class)->name('gcash1');
+    Route::get('/payment2', Gcash2::class)->name('gcash2');
+    Route::get('/payment3', Gcash3::class)->name('gcash3');
+
     Route::post('/purchaseone', [UserController::class, 'purchase_one'])->name('purchase_one');
     Route::post('/purchasecart', [UserController::class, 'purchase_cart'])->name('purchase_cart');
 });
