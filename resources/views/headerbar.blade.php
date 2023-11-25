@@ -27,15 +27,19 @@
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                         class="absolute right-0 z-20 w-96 py-3 overflow-hidden origin-top-right bg-transparent front rounded">
                         <div class="dropdown-arrow bg-white rounded shadow border-1 border-gray-300 ">
-
-                            <div class="flex justify-center gap-2 py-2 px-2">
-                                <p class="mb-0 font-base text-gray-700 ">My Notifications</p>
+                            <div class="content-center gap-2 py-2.5 px-2">
+                                <p class="mb-0 text-base text-gray-600 ">My Notifications</p>
                                 <i class="bi bi-bell"></i>
                             </div>
                             <hr class="my-0">
                             <div class="w-full h-full flex justify-center">
-                                <div class="flex justify-center items-center p-3 text-gray-700">
-                                    <h6 class="mb-0">Notifications Empty</h6>
+                                <div class="w-full text-gray-700">
+                                    {{-- <h6 class="mb-0">Notifications Empty</h6> --}}
+                                    <div class="notification-body w-full p-1.5 border-t-2 border-b-2 border-gray-100">
+                                        <div>
+                                            <p>Your Wishlist Items is back in Stock!</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +67,7 @@
                                 x-transition:leave-end="opacity-0 scale-90"
                                 class="absolute right-0 z-20 w-max py-3 overflow-hidden origin-top-right bg-transparent front rounded">
                                 <div class="dropdown-arrow bg-white  rounded shadow border-1 border-gray-300 ">
-                                    <a href="{{route('profile.edit')}}"
+                                    <a href="{{ route('profile.edit') }}"
                                         class="block w-full text-start px-3  font-semibold py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <div class="flex gap-2 justify-start items-center text-start">
                                             <i class="bi bi-person-fill text-gray-800 text-lg"></i>
