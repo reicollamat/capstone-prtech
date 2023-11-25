@@ -42,7 +42,7 @@
 
 </head>
 
-<body>
+<body class="bg-body-tertiary">
 
     {{--    <livewire:announcementbar /> --}}
     @include('headerbar')
