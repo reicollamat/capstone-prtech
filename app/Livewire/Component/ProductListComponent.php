@@ -93,4 +93,9 @@ class ProductListComponent extends Component
     {
         return view('livewire.component.product-list-component');
     }
+
+    public function save()
+    {
+
+    }
 }
