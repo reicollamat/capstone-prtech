@@ -22,7 +22,7 @@
                     <label for="product_name"
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                         Name</label>
-                    <input type="text" id="product_name"
+                    <input type="text" id="product_name" wire:model.blur="productName"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Product Name" required>
                     @error('email')
@@ -37,7 +37,7 @@
                         <label for="sku"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
                             SKU</label>
-                        <input type="text" id="sku" wire:model.blur="email"
+                        <input type="text" id="sku" wire:model.blur="productSKU"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="XXX-XXX" required>
                         @error('email')
@@ -52,7 +52,7 @@
                         <label for="slug"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                             Slug</label>
-                        <input type="text" id="slug" wire:model.blur="email"
+                        <input type="text" id="slug" wire:model.blur="productSlug"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="lowercase, no spaces seprated by hyphen " required>
                         @error('email')
@@ -64,7 +64,7 @@
             <div class="mb-3">
                 <label for="description"
                     class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
-                <textarea id="description" rows="4"
+                <textarea id="description" rows="4" wire:model.blur="productDescription"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write your thoughts here..."></textarea>
             </div>
@@ -75,7 +75,7 @@
                         <label for="condition"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
                             Condtion</label>
-                        <select id="condition"
+                        <select id="condition" wire:model.blur="productCondition"
                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Condition</option>
                             <option value="brand_new">Brand New</option>
@@ -89,7 +89,7 @@
                         <label for="status"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                             Status</label>
-                        <select id="status"
+                        <select id="status" wire:model.blur="productStatus"
                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option disabled selected>Status</option>
                             <option value="available">Available</option>
@@ -169,6 +169,7 @@
             </div>
         </div>
         <hr>
+        {{ $productName }}
         {{--        {{ var_dump($productCategory) }} --}}
         {{--        {{ var_dump($view) }} --}}
         <div class="relative my-3">
@@ -177,7 +178,8 @@
             {{--            @endif --}}
             {{--            {{ var_dump($productCategory) }} --}}
             {{--              Load Dynamic Form after choosing category  --}}
-            <livewire:dynamic-component :is="$view" :key="$view" />
+            <livewire:dynamic-component :is="$view" :key="$view" :productName="$productName" :productSlug="$productSlug"
+                :productCategory="$productCategory" :productSKU="$productSKU" :productDescription="$productDescription" :productCondition="$productCondition" :productStatus="$productStatus" />
         </div>
     </div>
 </div>
