@@ -7,12 +7,13 @@
             <!-- Brand and Price -->
             <div class="grid md:grid-cols-2 gap-4">
                 <div class="mb-4">
-                    <label for="brand"
-                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Brand</label>
-                    <input type="text" id="brand" wire:model.blur="brand"
+                    <label for="cpu_name" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">CPU
+                        Brand, Name, Title
+                    </label>
+                    <input type="text" id="cpu_name" wire:model.blur="cpu_name"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="AMD, Intel, etc." required>
-                    @error('brand')
+                    @error('cpu_name')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
