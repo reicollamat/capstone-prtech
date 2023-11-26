@@ -37,6 +37,8 @@ class CpuComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
+    public $cpu_name;
+
     public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
     {
         $this->productName = $productName;
