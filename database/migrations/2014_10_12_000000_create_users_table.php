@@ -34,7 +34,6 @@ return new class extends Migration
 
             // seller account specific
             $table->boolean('is_seller')->default(false)->nullable();
-            $table->unsignedBigInteger('seller_id')->default(null)->nullable();
 
             $table->rememberToken();
             $table->timestamps();

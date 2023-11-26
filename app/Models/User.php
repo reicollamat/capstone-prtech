@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function seller(): HasOne
     {
-        return $this->hasOne(SellerInformation::class);
+        return $this->hasOne(Seller::class);
     }
 
     public function commnent(): Hasmany

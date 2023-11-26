@@ -153,7 +153,7 @@ class Product extends Model
 
     public function sellerinformation(): BelongsTo
     {
-        return $this->belongsTo(SellerInformation::class);
+        return $this->belongsTo(Seller::class);
     }
 
     /**
@@ -162,6 +162,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'seller_id',
         'title',
         'SKU',
         'slug',
