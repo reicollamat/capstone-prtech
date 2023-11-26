@@ -235,8 +235,8 @@ class Collections extends Component
                 $this->dispatch('wishlist-item-change');
 
                 // display alert notification
-                session()->flash('notification', "'$product->title' added to Wishlists");
-                $this->dispatch('notif-alert');
+                session()->flash('notification-livewire', "'$product->title' added to Wishlists");
+                $this->dispatch('notif-alert-wishlist');
             }
         } else {
             $this->redirect(route('login'));
