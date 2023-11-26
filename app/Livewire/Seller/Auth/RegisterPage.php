@@ -72,18 +72,17 @@ class RegisterPage extends Component
                     $user = Auth::attempt($validation);
                     if ($user) {
                         // redirect to comlpete account details in seller
-                        $this->redirect(route('seller-shop-informationn'));
+                        $this->redirect(route('seller-shop-information'));
                     } else {
                         // TODO: show error like no record found in database or laravel eloquest where email and password
                         session()->flash('accountregistration', 'Something went wrong, Please try again.');
                     }
                 }
             }
-        //            dd($validation);
+            //            dd($validation);
         } else {
             session()->flash('accountregistration', 'An error occurred. Please try again.');
         }
-
     }
 
     public function render()
