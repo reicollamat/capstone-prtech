@@ -95,14 +95,15 @@ class UserController extends Controller
         ]);
         $purchaseItem->save();
 
-        $purchaseItem = new Payment([
+        $payment = new Payment([
             'user_id' => $user_id,
-            'purchase_id' => $purchase->id,
-            'date_of_payment' => now(),
+            'purchase_item_id' => $purchaseItem->id,
+            'date_of_payment' => null,
             'payment_type' => $payment_type,
-            'payment_status' => 'pending',
+            'payment_status' => 'unpaid',
+            'reference_code' => 'samplecode',
         ]);
-        $purchaseItem->save();
+        $payment->save();
 
         Session::flash('notification', 'Order Purchased, Thank you!');
 
@@ -153,17 +154,18 @@ class UserController extends Controller
                 'total_price' => $value->total_price,
             ]);
             $purchaseItem->save();
-        }
 
-        // create a new Payment instance
-        $purchaseItem = new Payment([
-            'user_id' => $user_id,
-            'purchase_id' => $purchase->id,
-            'date_of_payment' => now(),
-            'payment_type' => $payment_type,
-            'payment_status' => 'pending',
-        ]);
-        $purchaseItem->save(); // save the Payment instance
+            // create a new Payment instance
+            $payment = new Payment([
+                'user_id' => $user_id,
+                'purchase_item_id' => $purchaseItem->id,
+                'date_of_payment' => null,
+                'payment_type' => $payment_type,
+                'payment_status' => 'unpaid',
+                'reference_code' => 'samplecode',
+            ]);
+            $payment->save();
+        }
 
         // remove the current Cart_items in database cuz itz purchased
         foreach ($cart_items as $key => $value) {
