@@ -3,8 +3,9 @@
         <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center">
             <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light">
                 <input class="form-check-input" wire:model.live="select_products" value="{{ $item->id }}"
-                    type="checkbox">
+                    type="checkbox" id="select_products">
             </span>
+            <label for="select_products" class="sr-only"></label>
             <div class="relative items-center  mb-0 min-w-[60px] p-2 !text-gray-800 !font-light">
                 {{--                 <img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" --}}
                 <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-9 h-9" alt="Product-Thumbnail">
