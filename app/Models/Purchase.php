@@ -23,11 +23,11 @@ class Purchase extends Model
         return $this->hasMany(PurchaseItem::class);
     }
 
-    // relationship to Payment
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
-    }
+    // // relationship to Payment
+    // public function payment()
+    // {
+    //     return $this->hasOne(Payment::class);
+    // }
 
     /**
      * The attributes that are mass assignable.
