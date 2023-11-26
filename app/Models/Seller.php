@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SellerInformation extends Model
+class Seller extends Model
 {
     use HasFactory;
 
@@ -30,6 +30,7 @@ class SellerInformation extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'shop_name',
         'registered_business_name',
         'shop_email',
@@ -44,8 +45,6 @@ class SellerInformation extends Model
         'registered_postal_code',
         'seller_type',
         'business_permit',
-        //reference of user id
-        'user_id',
     ];
 
     /**

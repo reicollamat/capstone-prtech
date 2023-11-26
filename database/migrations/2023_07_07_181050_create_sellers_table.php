@@ -8,24 +8,14 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * 'shop_name',
-     * 'registered_business_name',
-     * 'pickup_address',
-     * 'email',
-     * 'phone_number',
-     * 'seller_type',
-     * 'registered_address',
-     * 'city',
-     * 'postal_code',
-     * 'tin_number',
-     * 'business_permit',
-     * 'user_id'
      */
     public function up(): void
     {
-        Schema::create('seller_information', function (Blueprint $table) {
+        Schema::create('sellers', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
             $table->string('shop_name')->nullable();
             $table->string('shop_email')->nullable();
             $table->string('shop_phone_number')->nullable();
@@ -43,8 +33,7 @@ return new class extends Migration
             $table->string('seller_type')->nullable();
             $table->string('business_permit')->nullable();
 
-            $table->unsignedBigInteger('user_id')->unique();
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -54,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('seller_information');
+        Schema::dropIfExists('sellers');
     }
 };
