@@ -37,11 +37,13 @@ class LoginPage extends Component
 
         if ($validation) {
             $user = Auth::attempt($validation);
+            // dd($user);
+
             if ($user) {
                 $this->redirect(route('seller-landing'));
             } else {
                 // TODO: show error like no record found in database or laravel eloquest where email and password
-                session()->flash('accountlogin', 'Something went wrong, Please try again.');
+                session()->flash('accountlogin', 'Something went wrong, Please try again.'.$user);
             }
         } else {
             session()->flash('accountlogin', 'Something went wrong, Please try again.');
