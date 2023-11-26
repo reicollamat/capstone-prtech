@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Memory;
 use App\Models\Product;
+use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -24,6 +25,7 @@ class MemorySeeder extends Seeder
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([
+                    'seller_id' => Seller::find(1)->id,
                     'title' => $value->name,
                     'category' => 'memory',
                     'price' => $value->price * 55,
