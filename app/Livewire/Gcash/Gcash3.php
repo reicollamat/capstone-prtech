@@ -85,17 +85,19 @@ class Gcash3 extends Component
                     'total_price' => $value->total_price,
                 ]);
                 $purchaseItem->save();
+
+                // create a new Payment instance
+                $payment = new Payment([
+                    'user_id' => $this->user_id,
+                    'purchase_item_id' => $purchaseItem->id,
+                    'date_of_payment' => now(),
+                    'payment_type' => $this->payment_type,
+                    'payment_status' => 'paid',
+                    'reference_code' => 'samplecode',
+                ]);
+                $payment->save();
             }
 
-            // create a new Payment instance
-            $purchaseItem = new Payment([
-                'user_id' => $this->user_id,
-                'purchase_id' => $purchase->id,
-                'date_of_payment' => now(),
-                'payment_type' => $this->payment_type,
-                'payment_status' => 'paid',
-            ]);
-            $purchaseItem->save(); // save the Payment instance
 
             // remove the current Cart_items in database cuz itz purchased
             foreach ($cart_items as $key => $value) {
@@ -126,14 +128,15 @@ class Gcash3 extends Component
             ]);
             $purchaseItem->save();
 
-            $purchaseItem = new Payment([
+            $payment = new Payment([
                 'user_id' => $this->user_id,
-                'purchase_id' => $purchase->id,
+                'purchase_item_id' => $purchaseItem->id,
                 'date_of_payment' => now(),
                 'payment_type' => $this->payment_type,
                 'payment_status' => 'paid',
+                'reference_code' => 'samplecode',
             ]);
-            $purchaseItem->save();
+            $payment->save();
 
             session()->flash('notification', 'Order Purchased, Thank you!');
 

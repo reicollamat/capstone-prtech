@@ -3,6 +3,7 @@
 namespace App\Livewire\Addtowishlist;
 
 use App\Models\Bookmark;
+use App\Models\Product;
 use Auth;
 use Livewire\Component;
 
@@ -32,6 +33,8 @@ class AddToWishlistInDetails extends Component
     {
         //        dd($this->quantity, $this->user_id, $this->product_id);
 
+        $product = Product::find($this->product_id);
+
         if (Auth::check()) {
 
             //            dd($this->product_id);
@@ -40,6 +43,10 @@ class AddToWishlistInDetails extends Component
 
             // create an event to update the count of wihshlist items
             $this->dispatch('wishlist-item-change');
+
+            // display alert notification
+            session()->flash('notification-livewire', "'$product->title' added to Wishlists");
+            $this->dispatch('notif-alert-wishlist');
         } else {
             $this->redirect(route('login'));
         }

@@ -10,9 +10,9 @@ class Payment extends Model
     use HasFactory;
 
     // relationship to Purchase
-    public function purchase()
+    public function purchase_item()
     {
-        return $this->belongsTo(Purchase::class);
+        return $this->belongsTo(PurchaseItem::class);
     }
 
     /**
@@ -22,9 +22,10 @@ class Payment extends Model
      */
     protected $fillable = [
         'user_id',
-        'purchase_id',
+        'purchase_item_id',
         'date_of_payment',
         'payment_type',
         'payment_status',
+        'reference_code',
     ];
 }
