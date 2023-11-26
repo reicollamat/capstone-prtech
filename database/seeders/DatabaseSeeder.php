@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Product;
+use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'city' => fake()->city(),
             'postal_code' => fake()->postcode(),
             'country' => fake()->country(),
+            'is_seller' => true,
             'permissions' => [
                 'platform.index' => true,
                 'platform.systems.roles' => true,
@@ -108,6 +110,9 @@ class DatabaseSeeder extends Seeder
         // User::factory()
         //     ->count(3)
         //     ->create();
+
+        // call seller factory for testing - uncomment if done
+        Seller::factory()->create();
 
         // seed dataset
         $this->call([
