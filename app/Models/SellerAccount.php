@@ -15,9 +15,9 @@ class SellerAccount extends Model
     /**
      * Get the Seller Information associated with the seller account.
      */
-    public function sellerinformation(): HasOne
+    public function seller(): HasOne
     {
-        return $this->hasOne(SellerInformation::class);
+        return $this->hasOne(Seller::class);
     }
 
     /**

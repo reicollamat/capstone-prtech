@@ -151,7 +151,7 @@ class Product extends Model
         return $this->hasMany(Comments::class);
     }
 
-    public function sellerinformation(): BelongsTo
+    public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Seller\Dashboard\ShopLinks;
 
-use App\Models\SellerInformation;
+use App\Models\Seller;
 use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -12,7 +12,7 @@ class ShopManagement extends Component
 {
     public User $user;
 
-    public SellerInformation $seller;
+    public Seller $seller;
 
     public function mount()
     {
