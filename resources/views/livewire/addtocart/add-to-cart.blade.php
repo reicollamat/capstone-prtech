@@ -6,7 +6,7 @@
         x-show="show"
         x-transition:leave.duration.500ms
         x-init="@this.on('notif-alert-cart', () => { show = true; setTimeout(() => { show = false;}, 5000) })">
-            {{ session('notification') }}
+            {{ session('notification-livewire') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     

@@ -1,8 +1,13 @@
 @extends('layouts.master_layout')
 @section('content')
 
+    {{-- session flash notification --}}
     <x-notification-alert>
+        @if (session('notification-livewire'))
+        {{ session('notification-livewire') }}
+        @else
         {{ session('notification') }}
+        @endif
     </x-notification-alert>
 
 
@@ -53,7 +58,7 @@
 
             <div class="col-lg-7 h-auto mb-30 text-dark">
                 <div class="h-100">
-                    <div class="d-flex items-center align-middle text-center justify-content-between">
+                    <div class="d-flex items-center align-middle justify-content-between">
                         <h3>{{ $product->name }}</h3>
                         <div class="bg-primary-subtle rounded">
                             <livewire:addtowishlist.add-to-wishlist-in-details
