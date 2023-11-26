@@ -2,8 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\Product;
-use Livewire\Attributes\Computed;
+use App\Mail\OrderShipped;
+use Exception;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -28,13 +29,6 @@ class Landing extends Component
         HTML;
     }
 
-    #[Computed]
-    public function getProducts()
-    {
-        return Product::paginate(10);
-
-    }
-
     public function render()
     {
         return view('livewire.landing');
@@ -44,5 +38,19 @@ class Landing extends Component
     public function increment()
     {
         $this->count++;
+    }
+
+    public string $mailStatus;
+
+    public function sendMail()
+    {
+        // hinde ko alam kung bakit pero pag unang pindot dito nag rereload ung page, pero minsan inde naman
+        // TODO: pass the id of order inside OrderShipped function, then query the order based on that id on the OrderShipped.php to display the items and total??
+        try {
+            Mail::to('richmond.billones@gmail.com')->send(new OrderShipped());
+            $this->mailStatus = 'Email Sent';
+        } catch (Exception $e) {
+            $this->mailStatus = 'There was an error sending the email: '.$e->getMessage();
+        }
     }
 }
