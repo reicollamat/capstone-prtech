@@ -33,6 +33,18 @@ class ProductAdd extends Component
         'other_peripherals' => 'component.category-component.placeholder-component',
     ];
 
+    public $productName;
+
+    public $productSKU;
+
+    public $productSlug;
+
+    public $productDescription;
+
+    public $productCondition;
+
+    public $productStatus;
+
     public $productCategory;
 
     public function changeCategoryView($category)
@@ -44,7 +56,7 @@ class ProductAdd extends Component
             //            dd($this->categoryViewMap[$category]);
             $this->view = $this->categoryViewMap[$category];
             //            dd($this->view);
-            $this->mount();
+            // $this->mount();
         }
 
     }
