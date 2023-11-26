@@ -1,5 +1,7 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
+    {{ $productName }}
+    {{ $productSKU }}
     <div class="grid md:grid-cols-2 gap-4">
         <div>
             <!-- Brand and Price -->
@@ -104,44 +106,80 @@
         <div>
             <!-- Add Product Image Div -->
             <div class="pb-3">
-                <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Add Product Image (Max
-                    of
-                    3)</p>
+                <p class="block mb-1 text-base font-medium text-gray-600 dark:text-white pl-1">Add Product Image</p>
+                <p class="block mb-1 text-sm font-medium text-gray-500 dark:text-white pl-1">To Upload Multiple Images,
+                    Select them all before uploading</p>
             </div>
 
-            <div class="flex items-center justify-center w-full">
-                <label for="dropzone-file"
-                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                        </svg>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
-                                to
-                                upload</span>
-                            or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)
-                        </p>
-                    </div>
-                    <input id="dropzone-file" type="file" class="hidden" multiple />
-                </label>
-            </div>
+            <form wire:submit.prevent="submit">
+                <div class="flex items-center justify-center w-full">
+                    <label for="dropzone-file"
+                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                            </svg>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
+                                    to
+                                    upload</span>
+                                or drag and drop</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)
+                            </p>
+                        </div>
+                        <input id="dropzone-file" type="file" wire:model="productImages" class="hidden" multiple />
+                        @error('productImages.*')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </label>
+                </div>
+                <button type="submit">
+                    Submit
+                </button>
+            </form>
+
+            <div wire:loading wire:target="productImages">Uploading...</div>
 
             <div class="py-3">
-                <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Image Preview</p>
+                <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Image Preview (Click Image
+                    To Preview)</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-1 h-auto">
 
-                <img class="h-auto max-w-full" src="https://flowbite.com/docs/images/examples/image-1@2x.jpg"
-                    alt="image description">
-                <img class="h-auto max-w-full" src="https://flowbite.com/docs/images/examples/image-1@2x.jpg"
-                    alt="image description">
-                <img class="h-auto max-w-full" src="https://flowbite.com/docs/images/examples/image-1@2x.jpg"
-                    alt="image description">
+            <div class="grid md:grid-cols-3 gap-1 h-auto">
+                @if ($productImages)
+                    @foreach ($productImages as $image)
+                        <!-- Button trigger modal -->
+                        <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            wire:click="$set('previewImage', '{{ $image->temporaryUrl() }}')">
+                            <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
+                                alt="image description">
+                        </button>
+                    @endforeach
+                @endif
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content p-4">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img class="h-auto max-w-full border border-gray-400" src="{{ $previewImage }}"
+                                alt="Image Preview">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
