@@ -126,7 +126,7 @@
                             Length (mm)</label>
                         <input type="text" id="length_psu" wire:model.blur="length_psu"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="175mm" required>
+                            placeholder="175" required>
                         @error('length_psu')
                             <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -139,7 +139,7 @@
                             (mm)</label>
                         <input type="text" id="length_gpu" wire:model.blur="length_gpu"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="340mm" required>
+                            placeholder="340" required>
                         @error('length_gpu')
                             <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror

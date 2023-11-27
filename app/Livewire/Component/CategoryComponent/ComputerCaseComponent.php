@@ -75,6 +75,22 @@ class ComputerCaseComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'size' => 'required',
+            'dimensions_lwh' => 'required',
+            'case_color' => 'required',
+            'sidepanel' => 'required|not_in:Click to Select',
+            'ssd_bays' => 'required|integer',
+            'hdd_bays' => 'required|integer',
+            'length_psu' => 'required|integer',
+            'length_gpu' => 'required|integer',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

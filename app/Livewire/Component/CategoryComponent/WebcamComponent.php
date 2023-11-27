@@ -67,6 +67,18 @@ class WebcamComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate ([
+        'productImages.*' => 'image|max:5120',
+        'brand' => 'required',
+        'price' => 'required|integer',
+        'webcam_connection_type' => 'required|not_in:Click to Select',
+        'resolution' => 'required|not_in:Click to Select',
+        'webcam_fps' => 'required|integer',
+        'audio_support' => 'required|not_in:Click to Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

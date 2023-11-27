@@ -71,6 +71,20 @@ class MemoryComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate ([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'mem_gen' => 'required|not_in:Click to Select',
+            'mem_cap' => 'required|integer',
+            'mem_speed' => 'required|integer',
+            'mem_latency' => 'required|integer',
+            'mem_color' => 'required',
+            'mem_rgb' => 'required|not_in:Click to Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

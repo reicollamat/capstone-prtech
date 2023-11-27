@@ -69,6 +69,19 @@ class MonitorComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate ([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'native_resolution' => 'required|not_in:Click to Select',
+            'input_signal' => 'required|not_in:Click to Select',
+            'refresh_rate' => 'required|not_in:Click to Select',
+            'screen_size' => 'required|integer',
+            'monitor_color' => 'required',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

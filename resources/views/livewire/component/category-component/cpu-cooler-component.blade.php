@@ -63,7 +63,7 @@
                         Fan RPM</label>
                     <input type="text" id="cfan_rpm" wire:model.blur="cfan_rpm"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="900 RPM" required>
+                        placeholder="900" required>
                     @error('cfan_rpm')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror

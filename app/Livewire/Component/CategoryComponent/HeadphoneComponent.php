@@ -69,6 +69,19 @@ class HeadphoneComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|interger',
+            'sensitivity' =>  'required|not_in:Click to Select',
+            'headphone_connection_type' => 'required|not_in:Click to Select',
+            'noise_control' => 'required|not_in:Click to Select',
+            'mic_availability' => 'required|not_in:Click to Select',
+            'color' => 'required',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

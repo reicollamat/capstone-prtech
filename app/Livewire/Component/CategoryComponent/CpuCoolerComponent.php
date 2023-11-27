@@ -65,6 +65,17 @@ class CpuCoolerComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'cooler_type' => 'required|not_in:Click to Select',
+            'cooler_size' => 'required|integer',
+            'cfan_rpm' => 'required|integer',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

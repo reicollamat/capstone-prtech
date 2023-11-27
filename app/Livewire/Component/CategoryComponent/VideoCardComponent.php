@@ -71,6 +71,20 @@ class VideoCardComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate ([
+        'productImages.*' => 'image|max:5120',
+        'brand' => 'required',
+        'price' => 'required|integer',
+        'gpu_chipset' => 'required|not_in:Click to Select',
+        'gpu_vram' => 'required|integer',
+        'gpu_pcie' => 'required',
+        'gpu_base' => 'required|integer',
+        'gpu_boost' => 'required|integer',
+        'gpu_size' => 'required',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {
