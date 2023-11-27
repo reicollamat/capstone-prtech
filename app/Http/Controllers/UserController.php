@@ -87,6 +87,16 @@ class UserController extends Controller
         // Save the Purchase instance
         $purchase->save();
 
+        $payment = new Payment([
+            'user_id' => $user_id,
+            'purchase_id' => $purchase->id,
+            'date_of_payment' => null,
+            'payment_type' => $payment_type,
+            'payment_status' => 'unpaid',
+            'reference_code' => 'samplecode',
+        ]);
+        $payment->save();
+
         $purchaseItem = new PurchaseItem([
             'purchase_id' => $purchase->id,
             'product_id' => $product_id,
@@ -94,16 +104,6 @@ class UserController extends Controller
             'total_price' => $subtotal,
         ]);
         $purchaseItem->save();
-
-        $payment = new Payment([
-            'user_id' => $user_id,
-            'purchase_item_id' => $purchaseItem->id,
-            'date_of_payment' => null,
-            'payment_type' => $payment_type,
-            'payment_status' => 'unpaid',
-            'reference_code' => 'samplecode',
-        ]);
-        $payment->save();
 
         Session::flash('notification', 'Order Purchased, Thank you!');
 
@@ -145,6 +145,17 @@ class UserController extends Controller
         ]);
         $purchase->save(); // save the Purchase instance
 
+        // create a new Payment instance
+        $payment = new Payment([
+            'user_id' => $user_id,
+            'purchase_id' => $purchase->id,
+            'date_of_payment' => null,
+            'payment_type' => $payment_type,
+            'payment_status' => 'unpaid',
+            'reference_code' => 'samplecode',
+        ]);
+        $payment->save();
+
         // loop to create new Cart_items instance each
         foreach ($cart_items as $key => $value) {
             $purchaseItem = new PurchaseItem([
@@ -154,17 +165,6 @@ class UserController extends Controller
                 'total_price' => $value->total_price,
             ]);
             $purchaseItem->save();
-
-            // create a new Payment instance
-            $payment = new Payment([
-                'user_id' => $user_id,
-                'purchase_item_id' => $purchaseItem->id,
-                'date_of_payment' => null,
-                'payment_type' => $payment_type,
-                'payment_status' => 'unpaid',
-                'reference_code' => 'samplecode',
-            ]);
-            $payment->save();
         }
 
         // remove the current Cart_items in database cuz itz purchased

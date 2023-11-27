@@ -76,6 +76,17 @@ class Gcash3 extends Component
             ]);
             $purchase->save(); // save the Purchase instance
 
+            // create a new Payment instance
+            $payment = new Payment([
+                'user_id' => $this->user_id,
+                'purchase_id' => $purchase->id,
+                'date_of_payment' => now(),
+                'payment_type' => $this->payment_type,
+                'payment_status' => 'paid',
+                'reference_code' => 'samplecode',
+            ]);
+            $payment->save();
+
             // loop to create new Cart_items instance each
             foreach ($cart_items as $key => $value) {
                 $purchaseItem = new PurchaseItem([
@@ -85,17 +96,6 @@ class Gcash3 extends Component
                     'total_price' => $value->total_price,
                 ]);
                 $purchaseItem->save();
-
-                // create a new Payment instance
-                $payment = new Payment([
-                    'user_id' => $this->user_id,
-                    'purchase_item_id' => $purchaseItem->id,
-                    'date_of_payment' => now(),
-                    'payment_type' => $this->payment_type,
-                    'payment_status' => 'paid',
-                    'reference_code' => 'samplecode',
-                ]);
-                $payment->save();
             }
 
 
@@ -120,6 +120,16 @@ class Gcash3 extends Component
             // Save the Purchase instance
             $purchase->save();
 
+            $payment = new Payment([
+                'user_id' => $this->user_id,
+                'purchase_id' => $purchase->id,
+                'date_of_payment' => now(),
+                'payment_type' => $this->payment_type,
+                'payment_status' => 'paid',
+                'reference_code' => 'samplecode',
+            ]);
+            $payment->save();
+
             $purchaseItem = new PurchaseItem([
                 'purchase_id' => $purchase->id,
                 'product_id' => $this->product_id,
@@ -127,16 +137,6 @@ class Gcash3 extends Component
                 'total_price' => $this->subtotal,
             ]);
             $purchaseItem->save();
-
-            $payment = new Payment([
-                'user_id' => $this->user_id,
-                'purchase_item_id' => $purchaseItem->id,
-                'date_of_payment' => now(),
-                'payment_type' => $this->payment_type,
-                'payment_status' => 'paid',
-                'reference_code' => 'samplecode',
-            ]);
-            $payment->save();
 
             session()->flash('notification', 'Order Purchased, Thank you!');
 
