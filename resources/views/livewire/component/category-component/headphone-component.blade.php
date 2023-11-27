@@ -38,7 +38,7 @@
                             data-bs-content="The loudness of the headphone's speaker">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <select id="sensitivity"
+                    <select id="sensitivity" wire:model.blur="sensitivity"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="<99">Up to 99 dB</option>
@@ -63,7 +63,7 @@
                     </span>
 
                 </label>
-                <select id="headphone_connection_type" multiple
+                <select id="headphone_connection_type" wire:model.blur="headphone_connection_type" multiple
                     class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Choose One or Many</option>
                     <option value="jack">3.5mm audio jack</option>
@@ -87,7 +87,7 @@
                     </span>
 
                 </label>
-                <select id="noise_control" multiple
+                <select id="noise_control" wire:model.blur="noise_control" multiple
                     class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Choose One or Many</option>
                     <option value="hybrid"> Hybrid Noise Cancellation</option>
@@ -112,7 +112,7 @@
                             data-bs-content="The availability of microphone on the headphones.">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <select id="mic_availability"
+                    <select id="mic_availability" wire:model.blur="mic_availability"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="available">Yes</option>
@@ -131,7 +131,7 @@
                             data-bs-placement="top" data-bs-content="Multiple colors can be separated by comma">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <input type="text" id="color"
+                    <input type="text" id="color" wire:model.blur="color"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="White, Black, Gray, etc." required>
                     @error('color')

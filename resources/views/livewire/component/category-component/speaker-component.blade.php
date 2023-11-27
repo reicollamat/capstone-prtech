@@ -38,7 +38,7 @@
                         data-bs-content="Certain device/s that are compatible with the speaker.">
                         <i class="bi bi-patch-question"></i>
                     </span></label>
-                <select id="compatibility"
+                <select id="compatibility" wire:model.blur="compatibility"
                     class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select Below</option>
                     <option value="pc">For PC</option>
@@ -62,7 +62,7 @@
                         data-bs-content="Certain device/s that are compatible with the speaker.">
                         <i class="bi bi-patch-question"></i>
                     </span></label>
-                <select id="speaker_connectivity"
+                <select id="speaker_connectivity" wire:model.blur="speaker_conenctivity"
                     class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select Below</option>
                     <option value="wired">Wired</option>
@@ -83,7 +83,7 @@
                         data-bs-placement="top" data-bs-content="Multiple colors can be separated by comma">
                         <i class="bi bi-patch-question"></i>
                     </span></label>
-                <input type="text" id="color"
+                <input type="text" id="speaker_color" wire:model.blur="speaker_color"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="White, Black, Gray, etc." required>
                 @error('speaker_color')

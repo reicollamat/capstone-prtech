@@ -31,7 +31,7 @@
             <div class="mb-4">
                 <label for="keyboard_conn"
                     class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Connection</label>
-                <select id="keyboard_type" wire:model.blur="keyboard_type"
+                <select id="keyboard_type" wire:model.blur="keyboard_conn"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option disabled selected>Select Below</option>
@@ -39,7 +39,7 @@
                     <option value="Dual Mode">Dual Mode (Wired + Bluetooth)</option>
                     <option value="Tri-Mode">Tri-Mode (Wired + Bluetooth + 2.4Ghz Dongle)</option>
                 </select>
-                @error('keyboard_type')
+                @error('keyboard_conn')
                     <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>

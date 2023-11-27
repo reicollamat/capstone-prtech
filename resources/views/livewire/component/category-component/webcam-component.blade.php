@@ -19,10 +19,10 @@
             <div class="mb-4">
                 <label for="price" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
                     Price</label>
-                <input type="text" id="price" wire:model.blur="email"
+                <input type="text" id="price" wire:model.blur="price"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="In Pesos, 1000.00" required>
-                @error('email')
+                @error('price')
                     <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
@@ -41,7 +41,7 @@
                         </span>
 
                     </label>
-                    <select id="webcam_connection_type" multiple
+                    <select id="webcam_connection_type" wire:model.blur="webcam_connection_type" multiple
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Choose One or Many</option>
                         <option value="wired">Wired</option>
@@ -49,6 +49,9 @@
                         <option value="bluetooth">Bluetooth</option>
                         <option value="wifi">Wi-Fi</option>
                     </select>
+                    @error('webcam_connection_type')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <!-- Product SKU input -->
@@ -56,7 +59,7 @@
                     <label for="resolution"
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Max Digital Video
                         Resolution</label>
-                    <select id="resolution"
+                    <select id="resolution" wire:model.blur="resolution"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="HD Ready">1280 x 720 pixels/720p (HD Ready)</option>
@@ -73,7 +76,7 @@
             <div class="mb-4">
                 <label for="webcam_fps" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Max
                     Frame Rate</label>
-                <input type="text" id="fps" wire:model.blur="email"
+                <input type="text" id="fps" wire:model.blur="webcam_fps"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="30, 60, 120" required>
                 @error('webcam_fps')
@@ -91,7 +94,7 @@
                             data-bs-content="The audio support availability on the webcam">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <select id="audio_support"
+                    <select id="audio_support" wire:model.blur="audio_support"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="stereo">Built-in stereo microphone</option>
@@ -111,7 +114,7 @@
                             data-bs-placement="top" data-bs-content="Multiple colors can be separated by comma">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <input type="text" id="color"
+                    <input type="text" id="webcam_color" wire:model.blur="webcam_color"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="White, Black, Gray, etc." required>
                     @error('webcam_color')

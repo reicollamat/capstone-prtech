@@ -41,7 +41,7 @@
                             data-bs-content="The number of pixels in each dimension that can be displayed on a screen.">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <select id="native_resolution"
+                    <select id="native_resolution" wire:model.blur="native_resolution"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="wide1">1920x1080 [16:9]</option>
@@ -76,7 +76,7 @@
                         </span>
 
                     </label>
-                    <select id="input_signal" multiple
+                    <select id="input_signal" wire:model.blur="input_signal" multiple
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Choose One or Many</option>
                         <option value="hdmi">HDMI</option>
@@ -100,7 +100,7 @@
                             data-bs-content="The frequency that a display updates the onscreen image.">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <select id="refresh_rate"
+                    <select id="refresh_rate" wire:model.blur="refresh_rate"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="<70">Up to 70 Hz</option>
@@ -126,7 +126,7 @@
                             data-bs-placement="top" data-bs-content="Enter the accurate screen size">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <input type="text" id="screen_size"
+                    <input type="text" id="screen_size" wire:model.blur="screen_size"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="22.9, 17.9, 39.9 etc." required>
                     @error('screen_size')
@@ -143,7 +143,7 @@
                             data-bs-content="Multiple colors can be separated by comma">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <input type="text" id="color"
+                    <input type="text" id="monitor_color" wire:model.blur="monitor_color"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="White, Black, Gray, etc." required>
                     @error('monitor_color')

@@ -35,7 +35,7 @@
                     <label for="mouse_tracking_method"
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Mouse Tracking
                         Method</label>
-                    <select id="mouse_tracking_method"
+                    <select id="mouse_tracking_method" wire:model.blur="mouse_tracking_method"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="Optical">Optical</option>
@@ -58,7 +58,7 @@
                         </span>
 
                     </label>
-                    <select id="mouse_connection_type" multiple
+                    <select id="mouse_connection_type" wire:model.blur="mouse_connection_type" multiple
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Choose One or Many</option>
                         <option value="available">Wired</option>
@@ -66,6 +66,9 @@
                         <option value="unavailable">Bluetooth</option>
                         <option value="n/a">N/A</option>
                     </select>
+                    @error('mouse_connection_type')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
                 </div>
 
             </div>
@@ -77,7 +80,7 @@
                         data-bs-content="Multiple DPI can be separated by commma">
                         <i class="bi bi-patch-question"></i>
                     </span></label>
-                <input type="text" id="dpi"
+                <input type="text" id="dpi" wire:model.blur="dpi"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="3200, 1600, 800, etc." required>
                 @error('dpi')
@@ -87,21 +90,21 @@
             <div class="grid md:grid-cols-2 md:gap-4">
                 <!-- Product SKU input -->
                 <div class="mb-4">
-                    <label for="mouse_tracking_method"
+                    <label for="orientation"
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Mouse Hand
                         Orientation <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                             data-bs-trigger="hover focus" data-bs-placement="top"
                             data-bs-content="The hand placement of the mouse">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <select id="mouse_tracking_method"
+                    <select id="orientation" wire:model.blur="orientation"
                         class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select Below</option>
                         <option value="Optical">Right</option>
                         <option value="Laser">Left</option>
                         <option value="Laser">Both</option>
                     </select>
-                    @error('mouse_tracking_method')
+                    @error('orientation')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
@@ -114,7 +117,7 @@
                             data-bs-placement="top" data-bs-content="Multiple colors can be separated by comma">
                             <i class="bi bi-patch-question"></i>
                         </span></label>
-                    <input type="text" id="color"
+                    <input type="text" id="color" wire:model.blur="color"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Red, Black, Blue, etc." required>
                     @error('color')

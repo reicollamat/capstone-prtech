@@ -37,7 +37,7 @@
                 <input type="text" id="base_clock" wire:model.blur="base_clock"
                     class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="2.9 Ghz" required>
-                @error('baseclock')
+                @error('base_clock')
                     <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>

@@ -101,7 +101,7 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                @error('mb_form')
+                @error('mb_pcgen')
                     <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
