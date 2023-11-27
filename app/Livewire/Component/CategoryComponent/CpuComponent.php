@@ -69,6 +69,19 @@ class CpuComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate([
+            'productImages.*' => 'image|max:5120',
+            'cpu_name' => 'required',
+            'price' => 'required|integer',
+            'base_clock' => 'required',
+            'boost_clock' => 'required',
+            'tdp' => 'required',
+            'igpu' => 'required|not_in:Click To Select',
+            'oc_unlocked' => 'required|not_in:Click To Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {
