@@ -2,8 +2,9 @@
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     {{ $productName }}
     {{ $productSKU }}
-    <div class="grid md:grid-cols-2 gap-4">
-        <form wire:submit.prevent="submit">
+    <form wire:submit.prevent="submit">
+        <div class="grid md:grid-cols-2 gap-4">
+
             <div>
                 <!-- Brand and Price -->
                 <div class="grid md:grid-cols-2 gap-4">
@@ -78,7 +79,7 @@
                     <select id="igpu" wire:model.blur="igpu"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
-                        <option disabled selected>Select Below</option>
+                        <option selected>Click To Select</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -96,7 +97,7 @@
                     <select id="oc_unlocked" wire:model.blur="oc_unlocked"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
-                        <option disabled selected>Select Below</option>
+                        <option selected>Click To Select</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                         <option value="Factory Overclocked">Factory Overclocked</option>
@@ -186,6 +187,6 @@
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
