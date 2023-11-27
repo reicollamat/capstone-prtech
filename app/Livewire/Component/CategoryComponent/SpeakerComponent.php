@@ -37,8 +37,42 @@ class SpeakerComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
+    public $brand;
+
+    public $price;
+
+    public $compatibility;
+
+    public $speaker_connectivity;
+
+    public $speaker_color;
+
+    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    {
+        $this->productName = $productName;
+        $this->productSKU = $productSKU;
+        $this->productSlug = $productSlug;
+        $this->productDescription = $productDescription;
+        $this->productCondition = $productCondition;
+        $this->productStatus = $productStatus;
+        $this->productCategory = $productCategory;
+    }
+
     public function render()
     {
         return view('livewire.component.category-component.speaker-component');
+    }
+
+    public function submit()
+    {
+        $links = [];
+        $storeas = [];
+        foreach ($this->productImages as $image) {
+            $links[] = $image->temporaryUrl();
+            $path = $image->store('product-image-uploads');
+
+            $storeas[] = $path;
+        }
+        dd($storeas);
     }
 }

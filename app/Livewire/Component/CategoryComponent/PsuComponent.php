@@ -37,8 +37,46 @@ class PsuComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
+    public $brand;
+
+    public $price;
+
+    public $psu_form;
+
+    public $psu_watts;
+
+    public $psu_eff;
+
+    public $psu_color;
+
+    public $psu_mod;
+
+    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    {
+        $this->productName = $productName;
+        $this->productSKU = $productSKU;
+        $this->productSlug = $productSlug;
+        $this->productDescription = $productDescription;
+        $this->productCondition = $productCondition;
+        $this->productStatus = $productStatus;
+        $this->productCategory = $productCategory;
+    }
+
     public function render()
     {
         return view('livewire.component.category-component.psu-component');
+    }
+
+    public function submit()
+    {
+        $links = [];
+        $storeas = [];
+        foreach ($this->productImages as $image) {
+            $links[] = $image->temporaryUrl();
+            $path = $image->store('product-image-uploads');
+
+            $storeas[] = $path;
+        }
+        dd($storeas);
     }
 }

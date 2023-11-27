@@ -39,6 +39,18 @@ class CpuComponent extends Component
 
     public $cpu_name;
 
+    public $price;
+
+    public $base_clock;
+
+    public $boost_clock;
+
+    public $tdp;
+
+    public $igpu;
+
+    public $oc_unlocked;
+
     public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
     {
         $this->productName = $productName;

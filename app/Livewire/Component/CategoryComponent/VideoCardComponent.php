@@ -37,8 +37,48 @@ class VideoCardComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
+    public $brand;
+
+    public $price;
+
+    public $gpu_chipset;
+
+    public $gpu_vram;
+
+    public $gpu_pcie;
+
+    public $gpu_base;
+
+    public $gpu_boost;
+
+    public $gpu_size;
+
+    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    {
+        $this->productName = $productName;
+        $this->productSKU = $productSKU;
+        $this->productSlug = $productSlug;
+        $this->productDescription = $productDescription;
+        $this->productCondition = $productCondition;
+        $this->productStatus = $productStatus;
+        $this->productCategory = $productCategory;
+    }
+
     public function render()
     {
         return view('livewire.component.category-component.video-card-component');
+    }
+
+    public function submit()
+    {
+        $links = [];
+        $storeas = [];
+        foreach ($this->productImages as $image) {
+            $links[] = $image->temporaryUrl();
+            $path = $image->store('product-image-uploads');
+
+            $storeas[] = $path;
+        }
+        dd($storeas);
     }
 }

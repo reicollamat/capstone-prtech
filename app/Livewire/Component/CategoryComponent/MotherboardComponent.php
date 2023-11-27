@@ -37,8 +37,46 @@ class MotherboardComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
+    public $brand;
+
+    public $price;
+
+    public $mb_socket;
+
+    public $mb_form;
+
+    public $mb_slot;
+
+    public $max_mem;
+
+    public $mb_pcgen;
+
+    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    {
+        $this->productName = $productName;
+        $this->productSKU = $productSKU;
+        $this->productSlug = $productSlug;
+        $this->productDescription = $productDescription;
+        $this->productCondition = $productCondition;
+        $this->productStatus = $productStatus;
+        $this->productCategory = $productCategory;
+    }
+
     public function render()
     {
         return view('livewire.component.category-component.motherboard-component');
+    }
+
+    public function submit()
+    {
+        $links = [];
+        $storeas = [];
+        foreach ($this->productImages as $image) {
+            $links[] = $image->temporaryUrl();
+            $path = $image->store('product-image-uploads');
+
+            $storeas[] = $path;
+        }
+        dd($storeas);
     }
 }
