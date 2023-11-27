@@ -170,10 +170,10 @@
                                             class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5" >
                                             @foreach ($this->orderstatus_options as $status)
                                                 <option value="{{$status}}"
-                                                @if ($status == $item->order_status)
-                                                    selected
+                                                @if ($status == $item->purchase_status)
+                                                    selected>
                                                 @endif
-                                                >{{$status}}</option>
+                                                {{$status}}</option>
                                             @endforeach
                                         </select>
                                     </div>
