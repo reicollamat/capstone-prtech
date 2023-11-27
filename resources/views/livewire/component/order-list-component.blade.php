@@ -85,9 +85,9 @@
                                             Payment Date
                                         </label>
                                         @if ($item->date_of_payment == null)
-                                            <input type="text" id="date_of_payment" value=""
+                                            <input type="text" id="date_of_payment" value="unpaid"
                                                 wire:model.blur="date_of_payment"
-                                                class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                class="bg-transparent !border-b-2 border-gray-600 text-red-300 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" disabled>
                                         @else
                                             <input type="text" id="date_of_payment" value="{{ date('d-M-y', strtotime($item->date_of_payment)) }}"

@@ -59,7 +59,7 @@ class OrderListComponent extends Component
 
     public function render()
     {
-        $this->orderstatus_options = ['pending', 'completed', 'to_ship', 'shipping', 'cancellation', 'returnrefund', 'failed_delivery'];
+        $this->orderstatus_options = ['pending', 'completed', 'to_ship', 'shipping'];
 
         $this->paymentstatus_options = ['paid', 'unpaid'];
 

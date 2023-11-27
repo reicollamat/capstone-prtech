@@ -10,46 +10,62 @@
             <div class="flex flex-column flex-lg-row justify-between gap-2 ">
                 <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
                     <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
-                        <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
-                        <div class="py-2">
+                        <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
+                        <div class="py-2 text-center">
                             <p class="text-sm font-base text-gray-500 mb-1">Total Orders Listed</p>
                             <p class="font-semibold">{{ $this->getTotalPurchaseCount }}</p>
                         </div>
-                        <div class="py-2">
-                            <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
-                            <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                        <div class="py-2 text-center flex justify-center">
+                            <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Pending</p>
+                                <p class="font-semibold">{{ $this->getTotalPendingCount }}</p>
+                            </div>
+                            <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Completed</p>
+                                <p class="font-semibold">{{ $this->getTotalCompletedCount }}</p>
+                            </div>
                         </div>
-                        <div class="py-2">
-                            <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
-                            <p class="font-semibold">0</p>
-                        </div>
-                    </div>
-                    <div class="h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
-                        <div class="w-full content-center text-red-500 text-sm font-light">
-                            <h6>Hot Products</h6>
-                        </div>
-                        {{--                 hot product items display --}}
-                        <div class="grid md:grid-cols-3 gap-1.5">
-                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                            {{--                             alt="Product-Thumbnail"> --}}
-                            {{--                     </button> --}}
-                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                            {{--                             alt="Product-Thumbnail"> --}}
-                            {{--                     </button> --}}
-                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                            {{--                             alt="Product-Thumbnail"> --}}
-                            {{--                     </button> --}}
-                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                            {{--                             alt="Product-Thumbnail"> --}}
-                            {{--                     </button> --}}
-                            {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                            {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                            {{--                             alt="Product-Thumbnail"> --}}
-                            {{--                     </button> --}}
+                        <div x-data="{ expanded: false }" class="bg-white">
+                            <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center">
+                                <div class="w-full flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center">
+                                    <button id="faqs-title-01" type="button" class="flex items-center justify-center text-center p-1 bg-white rounded-lg"
+                                        @click="expanded = !expanded" :aria-expanded="expanded" aria-controls="faqs-text-01">
+                                        more..
+                                    </button>
+                                </div>
+                            </div>
+                            <div x-cloak id="faqs-text-01" role="region" aria-labelledby="faqs-title-01"
+                                class="grid text-sm text-slate-600 overflow-hidden rounded transition-all duration-300 ease-in-out "
+                                :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
+                                <div class="overflow-hidden">
+                                    <div class="py-2 text-center flex justify-center">
+                                        <div class="px-2">
+                                            <p class="text-xs font-base text-gray-500 mb-1">To Ship</p>
+                                            <p class="font-semibold">{{ $this->getTotalToShipCount }}</p>
+                                        </div>
+                                        <div class="px-2">
+                                            <p class="text-xs font-base text-gray-500 mb-1">Shipping</p>
+                                            <p class="font-semibold">{{ $this->getTotalShippingCount }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="py-2 text-center flex justify-center">
+                                        <div class="px-2">
+                                            <p class="text-xs font-base text-gray-500 mb-1">Cancellation</p>
+                                            <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
+                                        </div>
+                                        <div class="px-2">
+                                            <p class="text-xs font-base text-gray-500 mb-1">Return/Refund</p>
+                                            <p class="font-semibold">{{ $this->getTotalReturnRefundCount }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="py-2 text-center">
+                                        <div class="px-2">
+                                            <p class="text-xs font-base text-gray-500 mb-1">Failed Delivery</p>
+                                            <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- payment type filter --}}
+                    {{-- payment status filter --}}
                     <div x-data="{ isOpen: false }" class="relative inline-block ">
                         <!-- Dropdown toggle button -->
                         <button @click="isOpen = !isOpen"
@@ -112,12 +128,13 @@
                             class="absolute left-0 z-20 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                             <div class="bg-white rounded border-1 border-gray-300">
                                 <button
+                                    wire:click.debounce="$set('category_filter', 'paid')"
                                     class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
-                                    @click="isOpen = false">In Stock
+                                    @click="isOpen = false">Paid
                                 </button>
                                 <button
                                     class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
-                                    @click="isOpen = false">Out of Stock
+                                    @click="isOpen = false">Unpaid
                                 </button>
                             </div>
                         </div>
@@ -347,34 +364,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
-                <div class="w-full content-center text-red-500 text-sm font-light">
-                    <h6>Hot Products</h6>
-                </div>
-                {{--                 hot product items display --}}
-                <div class="grid md:grid-cols-3 gap-1.5">
-                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                    {{--                             alt="Product-Thumbnail"> --}}
-                    {{--                     </button> --}}
-                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                    {{--                             alt="Product-Thumbnail"> --}}
-                    {{--                     </button> --}}
-                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                    {{--                             alt="Product-Thumbnail"> --}}
-                    {{--                     </button> --}}
-                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                    {{--                             alt="Product-Thumbnail"> --}}
-                    {{--                     </button> --}}
-                    {{--                     <button class="content-center p-2 border rounded border-gray-100"> --}}
-                    {{--                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}}
-                    {{--                             alt="Product-Thumbnail"> --}}
-                    {{--                     </button> --}}
                 </div>
             </div>
         </div>
