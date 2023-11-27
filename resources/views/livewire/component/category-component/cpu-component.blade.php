@@ -96,7 +96,7 @@
                     <select id="oc_unlocked" wire:model.blur="oc_unlocked"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
-                        <option disabled selected>Click to Select</option>
+                        <option disabled selected>Select Below</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                         <option value="Factory Overclocked">Factory Overclocked</option>
