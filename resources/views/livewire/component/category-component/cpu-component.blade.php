@@ -2,7 +2,7 @@
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     {{ $productName }}
     {{ $productSKU }}
-    <form wire:submit.prevent="submit">
+    <form wire:submit="submit">
         <div class="grid md:grid-cols-2 gap-4">
             <div>
                 <!-- Brand and Price -->
@@ -78,7 +78,7 @@
                     <select id="igpu" wire:model.blur="igpu"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
-                        <option disabled selected>Click to Select</option>
+                        <option selected>Click to Select</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -96,7 +96,7 @@
                     <select id="oc_unlocked" wire:model.blur="oc_unlocked"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
-                        <option disabled selected>Select Below</option>
+                        <option selected>Select Below</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                         <option value="Factory Overclocked">Factory Overclocked</option>
@@ -184,8 +184,8 @@
                                     alt="Image Preview">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -194,4 +194,3 @@
         </div>
     </form>
 </div>
-

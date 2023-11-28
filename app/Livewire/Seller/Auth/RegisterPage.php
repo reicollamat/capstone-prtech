@@ -7,24 +7,24 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('livewire.seller.auth.auth-layout')]
 #[Title('Seller Signup')]
 class RegisterPage extends Component
 {
-    #[Rule('required|min:3', message: 'Please provide a Username')]
+    #[Validate('required|min:3', message: 'Please provide a Username')]
     public $username;
 
-    #[Rule('required', message: 'Please provide a Email Address')]
+    #[Validate('required', message: 'Please provide a Email Address')]
     public $email;
 
-    #[Rule('required', message: 'Please provide a Password ')]
+    #[Validate('required', message: 'Please provide a Password ')]
     public $password;
 
-    #[Rule('required|same:password', message: 'Please provide the same Password as above')]
+    #[Validate('required|same:password', message: 'Please provide the same Password as above')]
     public $confirm_password;
 
     public function rules()
@@ -79,7 +79,7 @@ class RegisterPage extends Component
                     }
                 }
             }
-            //            dd($validation);
+        //            dd($validation);
         } else {
             session()->flash('accountregistration', 'An error occurred. Please try again.');
         }

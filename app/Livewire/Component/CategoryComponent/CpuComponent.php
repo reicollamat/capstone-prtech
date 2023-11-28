@@ -37,18 +37,25 @@ class CpuComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
+    #[Validate('required', message: 'Please provide a CPU Name')]
     public $cpu_name;
 
+    #[Validate('required', message: 'Please provide a CPU Price')]
     public $price;
 
+    #[Validate('required', message: 'Please provide a CPU Clock')]
     public $base_clock;
 
+    #[Validate('required', message: 'Please provide a CPU Clock')]
     public $boost_clock;
 
+    #[Validate('required', message: 'Please provide a CPU TDP')]
     public $tdp;
 
+    #[Validate('required', message: 'Please provide a CPU IGPU if available')]
     public $igpu;
 
+    #[Validate('required', message: 'Please provide a CPU Unlocked if available')]
     public $oc_unlocked;
 
     public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
@@ -70,6 +77,13 @@ class CpuComponent extends Component
     public function submit()
     {
         $validator = $this->validate([
+            'productName' => 'required',
+            'productSKU' => 'required',
+            'productSlug' => 'required',
+            'productDescription' => 'required',
+            'productCondition' => 'required|not_in:Select Condition',
+            'productStatus' => 'required|not_in:Select Status',
+            'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'cpu_name' => 'required',
             'price' => 'required|integer',
@@ -80,16 +94,26 @@ class CpuComponent extends Component
             'oc_unlocked' => 'required|not_in:Click to Select',
         ]);
 
-        dd($validator);
+        $this->dispatch('on-save');
 
-        $links = [];
-        $storeas = [];
-        foreach ($this->productImages as $image) {
-            $links[] = $image->temporaryUrl();
-            $path = $image->store('product-image-uploads');
+        if ($validator) {
 
-            $storeas[] = $path;
+            dd($validator);
         }
-        dd($storeas);
+
+        // if ($validator) {
+        //     dd($validator);
+        // }
+        // dd($validator);
+
+        // $links = [];
+        // $storeas = [];
+        // foreach ($this->productImages as $image) {
+        //     $links[] = $image->temporaryUrl();
+        //     $path = $image->store('product-image-uploads');
+        //
+        //     $storeas[] = $path;
+        // }
+        // dd($storeas);
     }
 }

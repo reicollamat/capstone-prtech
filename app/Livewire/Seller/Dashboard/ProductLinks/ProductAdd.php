@@ -3,6 +3,8 @@
 namespace App\Livewire\Seller\Dashboard\ProductLinks;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('layouts.seller.seller-layout')]
@@ -33,18 +35,25 @@ class ProductAdd extends Component
         'other_peripherals' => 'component.category-component.placeholder-component',
     ];
 
+    #[Validate('required', message: 'Please provide a Product Name')]
     public $productName;
 
+    #[Validate('required', message: 'Please provide a Product SKU')]
     public $productSKU;
 
+    #[Validate('required', message: 'Please provide a Product Slug')]
     public $productSlug;
 
+    #[Validate('required', message: 'Please provide a Product Description')]
     public $productDescription;
 
+    #[Validate('required|not_in:Select Condition', message: 'Please provide a Product Condition')]
     public $productCondition;
 
+    #[Validate('required|not_in:Select Status', message: 'Please provide a Product Status')]
     public $productStatus;
 
+    #[Validate('required', message: 'Please provide a Product Category')]
     public $productCategory;
 
     public function changeCategoryView($category)
@@ -69,5 +78,21 @@ class ProductAdd extends Component
     public function render()
     {
         return view('livewire..seller.dashboard.product-links.product-add');
+    }
+
+    #[On('on-save')]
+    public function save()
+    {
+        $validation = $this->validate([
+            'productName' => 'required',
+            'productSKU' => 'required',
+            'productSlug' => 'required',
+            'productDescription' => 'required',
+            'productCondition' => 'required|not_in:Select Condition',
+            'productStatus' => 'required|not_in:Select Status',
+            'productCategory' => 'required',
+        ]);
+
+        // dd($validation);
     }
 }

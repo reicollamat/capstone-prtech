@@ -4,18 +4,18 @@ namespace App\Livewire\Seller\Auth;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 #[Layout('livewire.seller.auth.auth-layout')]
 #[Title('Seller Login')]
 class LoginPage extends Component
 {
-    #[Rule('required|email', message: 'Please provide a Email Address')]
+    #[Validate('required|email', message: 'Please provide a Email Address')]
     public $email;
 
-    #[Rule('required', message: 'Please provide a Password ')]
+    #[Validate('required', message: 'Please provide a Password ')]
     public $password;
 
     public function render()
