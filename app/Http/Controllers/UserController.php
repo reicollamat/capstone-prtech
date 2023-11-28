@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\User;
+use App\Models\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -105,6 +106,15 @@ class UserController extends Controller
         ]);
         $purchaseItem->save();
 
+        $notification = new UserNotification([
+            'user_id' => $user_id,
+            'purchase_id' => $purchase->id,
+            'tag' => 'order_placed',
+            'title' => 'Order #' . $purchase->id . ' Placed',
+            'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
+        ]);
+        $notification->save();
+
         Session::flash('notification', 'Order Purchased, Thank you!');
 
         return redirect(route('product_detail', [
@@ -166,6 +176,15 @@ class UserController extends Controller
             ]);
             $purchaseItem->save();
         }
+
+        $notification = new UserNotification([
+            'user_id' => $user_id,
+            'purchase_id' => $purchase->id,
+            'tag' => 'order_placed',
+            'title' => 'Order #' . $purchase->id . ' Placed',
+            'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
+        ]);
+        $notification->save();
 
         // remove the current Cart_items in database cuz itz purchased
         foreach ($cart_items as $key => $value) {

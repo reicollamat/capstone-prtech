@@ -3,6 +3,7 @@
 namespace App\Livewire\Gcash;
 
 use App\Models\CartItem;
+use App\Models\UserNotification;
 use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
@@ -98,6 +99,15 @@ class Gcash3 extends Component
                 $purchaseItem->save();
             }
 
+            $notification = new UserNotification([
+                'user_id' => $this->user_id,
+                'purchase_id' => $purchase->id,
+                'tag' => 'order_placed',
+                'title' => 'Order #' . $purchase->id . ' Placed',
+                'message' => 'Our logistics partner will attempt parcel delivery within the day.',
+            ]);
+            $notification->save();
+
 
             // remove the current Cart_items in database cuz itz purchased
             foreach ($cart_items as $key => $value) {
@@ -137,6 +147,15 @@ class Gcash3 extends Component
                 'total_price' => $this->subtotal,
             ]);
             $purchaseItem->save();
+
+            $notification = new UserNotification([
+                'user_id' => $this->user_id,
+                'purchase_id' => $purchase->id,
+                'tag' => 'order_placed',
+                'title' => 'Order #' . $purchase->id . ' Placed',
+                'message' => 'Our logistics partner will attempt parcel delivery within the day.',
+            ]);
+            $notification->save();
 
             session()->flash('notification', 'Order Purchased, Thank you!');
 
