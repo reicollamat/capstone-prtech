@@ -69,6 +69,18 @@ class KeyboardComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'keyboard_conn' => 'required|not_in:Click to Select',
+            'keyboard_layout' => 'required|not_in:Click to Select',
+            'keyboard_switch' => 'required|not_in:Click to Select',
+            'keyboard_lighting' => 'required|not_in:Click to Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

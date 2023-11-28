@@ -76,8 +76,8 @@ class CpuComponent extends Component
             'base_clock' => 'required',
             'boost_clock' => 'required',
             'tdp' => 'required',
-            'igpu' => 'required|not_in:Click To Select',
-            'oc_unlocked' => 'required|not_in:Click To Select',
+            'igpu' => 'required|not_in:Click to Select',
+            'oc_unlocked' => 'required|not_in:Click to Select',
         ]);
 
         dd($validator);

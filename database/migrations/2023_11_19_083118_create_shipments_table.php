@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             // user specific
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();

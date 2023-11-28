@@ -10,12 +10,14 @@ class Shipments extends Model
 {
     use HasFactory;
 
-    public function user(): BelongsTo
+    public function purchase(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Purchase::class);
     }
 
     protected $fillable = [
+        'purchase_id',
+        'user_id',
         'email',
         'phone_number',
         'street_address_1',

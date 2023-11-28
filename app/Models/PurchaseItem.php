@@ -17,11 +17,11 @@ class PurchaseItem extends Model
         return $this->belongsTo(Purchase::class);
     }
 
-    // relationship to Payment
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
-    }
+    // // relationship to Payment
+    // public function payment()
+    // {
+    //     return $this->hasOne(Payment::class);
+    // }
 
     /**
      * The attributes that are mass assignable.

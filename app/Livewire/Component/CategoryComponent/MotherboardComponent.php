@@ -69,6 +69,19 @@ class MotherboardComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate ([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'mb_socket' => 'required',
+            'mb_form' => 'required|not_in:Click to Select',
+            'mb_slot' => 'required|not_in:Click to Select',
+            'max_mem' => 'required|integer',
+            'mb_pcgen' => 'required|not_in:Click to Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

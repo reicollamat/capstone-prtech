@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\User;
+use App\Models\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -87,6 +88,16 @@ class UserController extends Controller
         // Save the Purchase instance
         $purchase->save();
 
+        $payment = new Payment([
+            'user_id' => $user_id,
+            'purchase_id' => $purchase->id,
+            'date_of_payment' => null,
+            'payment_type' => $payment_type,
+            'payment_status' => 'unpaid',
+            'reference_code' => 'samplecode',
+        ]);
+        $payment->save();
+
         $purchaseItem = new PurchaseItem([
             'purchase_id' => $purchase->id,
             'product_id' => $product_id,
@@ -95,15 +106,14 @@ class UserController extends Controller
         ]);
         $purchaseItem->save();
 
-        $payment = new Payment([
+        $notification = new UserNotification([
             'user_id' => $user_id,
-            'purchase_item_id' => $purchaseItem->id,
-            'date_of_payment' => null,
-            'payment_type' => $payment_type,
-            'payment_status' => 'unpaid',
-            'reference_code' => 'samplecode',
+            'purchase_id' => $purchase->id,
+            'tag' => 'order_placed',
+            'title' => 'Order #' . $purchase->id . ' Placed',
+            'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
         ]);
-        $payment->save();
+        $notification->save();
 
         Session::flash('notification', 'Order Purchased, Thank you!');
 
@@ -145,6 +155,17 @@ class UserController extends Controller
         ]);
         $purchase->save(); // save the Purchase instance
 
+        // create a new Payment instance
+        $payment = new Payment([
+            'user_id' => $user_id,
+            'purchase_id' => $purchase->id,
+            'date_of_payment' => null,
+            'payment_type' => $payment_type,
+            'payment_status' => 'unpaid',
+            'reference_code' => 'samplecode',
+        ]);
+        $payment->save();
+
         // loop to create new Cart_items instance each
         foreach ($cart_items as $key => $value) {
             $purchaseItem = new PurchaseItem([
@@ -154,18 +175,16 @@ class UserController extends Controller
                 'total_price' => $value->total_price,
             ]);
             $purchaseItem->save();
-
-            // create a new Payment instance
-            $payment = new Payment([
-                'user_id' => $user_id,
-                'purchase_item_id' => $purchaseItem->id,
-                'date_of_payment' => null,
-                'payment_type' => $payment_type,
-                'payment_status' => 'unpaid',
-                'reference_code' => 'samplecode',
-            ]);
-            $payment->save();
         }
+
+        $notification = new UserNotification([
+            'user_id' => $user_id,
+            'purchase_id' => $purchase->id,
+            'tag' => 'order_placed',
+            'title' => 'Order #' . $purchase->id . ' Placed',
+            'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
+        ]);
+        $notification->save();
 
         // remove the current Cart_items in database cuz itz purchased
         foreach ($cart_items as $key => $value) {

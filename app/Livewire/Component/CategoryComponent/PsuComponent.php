@@ -69,6 +69,19 @@ class PsuComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate ([
+        'productImages.*' => 'image|max:5120',
+        'brand' => 'required',
+        'price' => 'required|integer',
+        'psu_form' => 'required|not_in:Click to Select',
+        'psu_watts' => 'required|integer',
+        'psu_eff' => 'required|not_in:Click to Select',
+        'psu_color' => 'required',
+        'psu_mod' => 'required|not_in:Click to Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

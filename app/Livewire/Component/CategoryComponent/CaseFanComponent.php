@@ -69,6 +69,19 @@ class CaseFanComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'fan_size' => 'required|integer',
+            'fan_cfm' => 'required|integer',
+            'fan_rpm' => 'required|integer',
+            'fan_rgb' => 'required|not_in:Click to Select',
+            'fan_connection' => 'required|not_in:Click to Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {

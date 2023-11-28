@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('user_notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
-            $table->timestamp('date_of_payment')->nullable();
-            $table->string('payment_type');
-            $table->string('payment_status');
-            $table->string('reference_code');
+            $table->string('tag')->nullable();
+
+            // [product_restock, placed_order, order_toship, order_shipping, order_complete]
+            $table->string('notif_category')->nullable();
+            $table->string('title');
+            $table->string('message');
+
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('user_notifications');
     }
 };

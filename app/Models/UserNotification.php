@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class UserNotification extends Model
 {
     use HasFactory;
 
-    // relationship to Purchase
-    public function purchase()
+    // relationship to User
+    public function user()
     {
-        return $this->belongsTo(Purchase::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -22,10 +22,9 @@ class Payment extends Model
      */
     protected $fillable = [
         'user_id',
-        'purchase_id',
-        'date_of_payment',
-        'payment_type',
-        'payment_status',
-        'reference_code',
+        'tag',
+        'notif_category',
+        'title',
+        'message',
     ];
 }

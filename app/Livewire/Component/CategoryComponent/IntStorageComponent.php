@@ -41,7 +41,7 @@ class IntStorageComponent extends Component
 
     public $price;
 
-    public $instorage_cap;
+    public $intstorage_cap;
 
     public $intstorage_type;
 
@@ -65,6 +65,17 @@ class IntStorageComponent extends Component
 
     public function submit()
     {
+        $validator = $this->validate([
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'intstorage_cap' => 'required|integer',
+            'intstorage_type' => 'required|not_in:Click to Select',
+            'intstorage_int' => 'required|not_in:Click to Select',
+        ]);
+
+        dd($validator);
+
         $links = [];
         $storeas = [];
         foreach ($this->productImages as $image) {
