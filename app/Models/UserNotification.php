@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class UserNotification extends Model
 {
     use HasFactory;
 
@@ -22,6 +22,7 @@ class Notification extends Model
      */
     protected $fillable = [
         'user_id',
+        'tag',
         'notif_category',
         'title',
         'message',
