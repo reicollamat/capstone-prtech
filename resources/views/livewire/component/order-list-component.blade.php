@@ -1,28 +1,101 @@
 <div>
+    {{-- {{$item}} --}}
+    {{-- <form wire:submit="$parent.update_paymentpurchase()"> --}}
     <div x-data="{ expanded: false }" class="py-2 bg-white border-b border-gray-100">
-        <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center">
+        <div class="flex flex-column flex-sm-row flex-shrink-0 min-w-full  items-center text-center tablelike">
             <div class="relative items-center  mb-0 min-w-[60px] p-2 !text-gray-800 !font-light">
                 <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-9 h-9" alt="Product-Thumbnail">
             </div>
             <div class="mb-0 min-w-[40px] p-2 !text-gray-800 !font-light">
                 {{ $item->id }}
             </div>
-            <div class="mb-0 min-w-[100px] text-start p-2 flex-1 !text-gray-800 !font-light">
+            <div class="mb-0 min-w-[100px] flex-1 text-start p-2 !text-gray-800 !font-light">
                 {{ $item->title }}
             </div>
             {{-- <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
                 {{ $item->quantity }}
             </div> --}}
-            <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
+            <div class="mb-0 min-w-[100px] flex-1 p-2 !text-gray-800 !font-light">
                 {{ $item->total_price }}
             </div>
-            <div class=" mb-0 min-w-[100px] p-2 flex-1 !text-gray-800 !font-light">
-                {{ $item->payment_status }}
-            </div>
-            <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
-                {{ $item->purchase_status }}
-            </div>
-            <div class="flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center">
+            
+            @if ($item->payment_type == 'cod')
+                <div class="mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
+                    <select wire:model="payment_status"
+                        class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
+                        @foreach ($this->paymentstatus_options as $status)
+                            <option value="{{$status}}">
+                                {{$status}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @else
+                <div class="mb-0 min-w-[100px] p-2 !text-green-600 !font-light">
+                    paid
+                </div>
+            @endif
+
+            @if ($item->purchase_status == 'completed')
+                <div class="mb-0 min-w-[100px] p-2 !text-green-600 !font-light">
+                    {{$item->purchase_status}}
+                </div>
+            @elseif ($item->purchase_status == 'cancellation')
+                <div class="mb-0 min-w-[100px] p-2 !text-red-600 !font-light">
+                    {{$item->purchase_status}}
+                </div>
+            @elseif ($item->purchase_status == 'return_refund')
+                <div class="mb-0 min-w-[100px] p-2 !text-red-600 !font-light">
+                    {{$item->purchase_status}}
+                </div>
+            @elseif ($item->purchase_status == 'failed_delivery')
+                <div class="mb-0 min-w-[100px] p-2 !text-red-600 !font-light">
+                    {{$item->purchase_status}}
+                </div>
+            @elseif ($item->purchase_status == 'pending')
+                <div class="mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
+                    <select wire:model="purchase_status"
+                        class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5" >
+                        @foreach ($this->orderstatus_options as $key => $status)
+                            <option value="{{$status}}">
+                                {{$status}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            @elseif ($item->purchase_status == 'to_ship')
+                <div class="mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
+                    <select wire:model="purchase_status"
+                        class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5" >
+                        @foreach ($this->orderstatus_options as $key => $status)
+                            @if ($key > 0)
+                                <option value="{{$status}}">
+                                    {{$status}}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            @elseif ($item->purchase_status == 'shipping')
+                <div class="mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
+                    <select wire:model="purchase_status"
+                        class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5" >
+                        @foreach ($this->orderstatus_options as $key => $status)
+                            @if ($key > 1)
+                                <option value="{{$status}}">
+                                    {{$status}}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            @else
+                <div class="mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
+                    {{$item->purchase_status}}
+                </div>
+            @endif
+
+            <div class="flex justify-center mb-0 min-w-[60px] p-2 !text-gray-600 !font-light items-center">
                 <button id="faqs-title-01" type="button"
                     class="flex items-center justify-center text-center font-semibold p-1 bg-white rounded-lg"
                     @click="expanded = !expanded" :aria-expanded="expanded" aria-controls="faqs-text-01">
@@ -34,6 +107,11 @@
                                 fill="currentColor"></path>
                         </svg>
                     </span>
+                </button>
+            </div>
+            <div class="flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center">
+                <button type="button" wire:click="update_status({{$item}})"
+                    class="bg-blue-500 hover:bg-blue-700 text-white text-sm p-2 rounded">Update
                 </button>
             </div>
         </div>
@@ -166,31 +244,19 @@
                                         <label for="order_status"
                                             class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Order Status
                                         </label>
-                                        <select id="order_status" wire:model.blur="order_status"
-                                            class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5" >
-                                            @foreach ($this->orderstatus_options as $status)
-                                                <option value="{{$status}}"
-                                                @if ($status == $item->purchase_status)
-                                                    selected>
-                                                @endif
-                                                {{$status}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" id="purchase_status" value="{{ $item->purchase_status }}"
+                                            wire:model.blur="purchase_status"
+                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                            placeholder="" disabled>
                                     </div>
                                     <div>
                                         <label for="status"
                                             class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Payment Status
                                         </label>
-                                        <select id="status" wire:model.blur="product_status"
-                                            class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
-                                            @foreach ($this->paymentstatus_options as $status)
-                                                <option value="{{$status}}"
-                                                @if ($status == $item->payment_status)
-                                                    selected
-                                                @endif
-                                                >{{$status}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input type="text" id="payment_status" value="{{ $item->payment_status }}"
+                                            wire:model.blur="payment_status"
+                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                            placeholder="" disabled>
                                         {{-- @error('product_status')
                                             <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                         @enderror --}}
@@ -201,7 +267,7 @@
                         </div>
                     </div>
                 </div>
-                <hr class="my-2">
+                {{-- <hr class="my-2">
                 <div class="px-8 flex justify-end !pb-2">
                     <div>
                         <button type="submit"
@@ -209,14 +275,16 @@
                             Reset
                         </button>
                         <span class="mx-1.5">|</span>
-                        <button type="submit"
+                        <button type="button"
+                            wire:click="update({{$item->purchase_status}})"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1.5 px-4 rounded">Update
                         </button>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
         </div>
     </div>
     {{--    {{ $item->SKU }} --}}
+    {{-- </form> --}}
 </div>

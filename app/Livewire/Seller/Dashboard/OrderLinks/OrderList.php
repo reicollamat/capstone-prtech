@@ -6,11 +6,13 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\Seller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\On;
 
 #[Layout('layouts.seller.seller-layout')]
 class OrderList extends Component
@@ -35,6 +37,7 @@ class OrderList extends Component
 
     public $seller;
 
+    protected $listeners = ['refreshComponent' => '$refresh'];
 
     //    public function paginationView()
     //    {
@@ -139,6 +142,23 @@ class OrderList extends Component
         return count($faileddelivery->where('purchase_status', 'failed_delivery')->get());
     }
 
+    // #[On('resetPage')]
+    public function update_paymentpurchase($purchase_id, $payment_status)
+    {
+        dd($payment_status);
+        // Purchase::where('id', 3)->update(['title' => 'Updated title']);
+
+        $this->seller = Seller::where('user_id', Auth::id())->get()->first();
+        // query for purchased items of products from current seller
+        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
+            ->where('seller_id', $this->seller->id);
+
+        // dd('ydiyu');
+        $this->resetPage();
+    }
+
 
 
     public function updated($quick_search_filter)
@@ -170,8 +190,7 @@ class OrderList extends Component
         } else {
 
             // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')
-                ->paginate(10);
+            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
         return $this->purchase_items->paginate(10);
@@ -180,6 +199,10 @@ class OrderList extends Component
 
     public function render()
     {
+        $this->orderstatus_options = ['pending', 'completed', 'to_ship', 'shipping'];
+
+        $this->paymentstatus_options = ['paid', 'unpaid'];
+
         return view('livewire..seller.dashboard.order-links.order-list');
     }
 }
