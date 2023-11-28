@@ -22,7 +22,7 @@ class NotificationList extends Component
             //     dd(UserNotification::where('user_id', $this->user_id)->get());
             // }
             // dd(UserNotification::where('user_id', $this->user_id)->get());
-            $this->notifications = UserNotification::where('user_id', $this->user_id)->get();
+            $this->notifications = UserNotification::where('user_id', $this->user_id)->orderBy('id', 'desc')->get();
 
             $this->notifications_count = count($this->notifications);
 
