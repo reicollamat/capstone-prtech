@@ -6,7 +6,7 @@
     </x-slot:page_header>
     <div class="flex h-full">
 
-        <div class="flex-1 w-64">
+        <div class="flex-1 w-64 border">
             <div class="flex flex-column flex-lg-row justify-between gap-2 ">
                 <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
                     <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
@@ -209,7 +209,7 @@
                         <p class="mb-0  min-w-[60px] !text-gray-400 !font-light border-b-2 border-blue-300">
                             IMG
                         </p>
-                        <p class="mb-0 min-w-[40px]  !text-gray-400 !font-light border-b-2 border-blue-300">
+                        <p class="mb-0 min-w-[40px] !text-gray-400 !font-light border-b-2 border-blue-300">
                             #
                         </p>
                         <p class="mb-0 min-w-[100px] flex-1 text-start !text-gray-400 !font-light border-b-2 border-blue-300">
@@ -218,18 +218,21 @@
                         {{-- <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light border-b-2 border-blue-300">
                             Quantity
                         </p> --}}
-                        <p class=" mb-0  min-w-[100px]  !text-gray-400 !font-light border-b-2 border-blue-300">
+                        <p class="mb-0 min-w-[100px] flex-1 !text-gray-400 !font-light border-b-2 border-blue-300">
                             Total Price
                         </p>
 
-                        <p class=" mb-0  min-w-[100px] flex-1  !text-gray-400 !font-light border-b-2 border-blue-300">
-                            Payment Status
+                        <p class="mb-0 min-w-[100px] !text-gray-400 !font-light border-b-2 border-blue-300">
+                            Payment
                         </p>
-                        <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light border-b-2 border-blue-300">
-                            Order Status
+                        <p class="mb-0 min-w-[100px] !text-gray-400 !font-light border-b-2 border-blue-300">
+                            Order
                         </p>
-                        <p class=" mb-0 min-w-[100px]  !text-gray-400 !font-light border-b-2 border-blue-300">
-                            Action
+                        <p class="mb-0 min-w-[60px] !text-gray-400 !font-light border-b-2 border-blue-300">
+                            Details
+                        </p>
+                        <p class="mb-0 min-w-[100px] !text-gray-400 !font-light border-b-2 border-blue-300">
+                            Update
                         </p>
                     </div>
                 </div>
@@ -283,8 +286,7 @@
                         {{--                    {{ $this->getPurchaseItemList->count() }} --}}
                         @foreach ($this->getPurchaseItemList as $item)
                             {{-- @dd($item) --}}
-                            <livewire:component.order-list-component :item="$item" :itemProductInfo="$item"
-                                :key="$item->id" />
+                            <livewire:component.order-list-component  :key="$item->id" :item="$item" :itemProductInfo="$item" />
                             {{--                        {{ $item->slug }} --}}
                         @endforeach
                         <div class="content-center pt-3">
