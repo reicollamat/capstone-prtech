@@ -557,20 +557,49 @@
                                                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Order
                                                                         Status
                                                                     </label>
-                                                                    <input type="text" id="purchase_status"
-                                                                        value="{{ $item->purchase_status }}"
-                                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                        placeholder="" disabled>
+                                                                    @if ($item->purchase_status == 'pending')
+                                                                        <input type="text" id="purchase_status"
+                                                                            value="{{ $item->purchase_status }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-blue-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    @elseif ($item->purchase_status == 'completed')
+                                                                        <input type="text" id="purchase_status"
+                                                                            value="{{ $item->purchase_status }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-green-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    @elseif ($item->purchase_status == 'failed_delivery')
+                                                                        <input type="text" id="purchase_status"
+                                                                            value="{{ $item->purchase_status }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    @elseif ($item->purchase_status == 'cancellation')
+                                                                        <input type="text" id="purchase_status"
+                                                                            value="{{ $item->purchase_status }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    @else
+                                                                        <input type="text" id="purchase_status"
+                                                                            value="{{ $item->purchase_status }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    @endif
                                                                 </div>
                                                                 <div>
                                                                     <label for="status"
                                                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Payment
                                                                         Status
                                                                     </label>
-                                                                    <input type="text" id="payment_status"
-                                                                        value="{{ $item->payment_status }}"
-                                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                        placeholder="" disabled>
+                                                                    @if ($item->payment_status == 'paid')
+                                                                        <input type="text" id="payment_status"
+                                                                            value="{{ $item->payment_status }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-green-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    @else
+                                                                        <input type="text" id="payment_status"
+                                                                            value="{{ $item->payment_status }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
