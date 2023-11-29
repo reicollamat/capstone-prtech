@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->decimal('price');
             $table->decimal('screen_size', 8, 1);
-            $table->json('resolution');
+            $table->string('resolution');
             $table->integer('refresh_rate')->nullable();
             $table->decimal('response_time', 8, 2)->nullable();
             $table->string('panel_type')->nullable();
