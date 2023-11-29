@@ -6,7 +6,7 @@
 
     {{-- session flash notification --}}
     {{-- for add-to-cart --}}
-    <div class="alert alert-primary rounded alert-dismissible fade show" role="alert" style="display: none; position: fixed; top: 20px; left: 25%; width: 50%; z-index:9999;" 
+    <div class="alert alert-primary rounded alert-dismissible fade show" role="alert" style="display: none; position: fixed; top: 20px; right: 25px; width: 25%; z-index:9999; font-size: 14px;" 
         x-data="{show: false}" 
         x-show="show"
         x-transition:leave.duration.500ms
