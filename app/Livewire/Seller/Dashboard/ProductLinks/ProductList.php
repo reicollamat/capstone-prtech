@@ -93,7 +93,8 @@ class ProductList extends Component
         }
         // add check to run rerender every time
         if ($this->quick_search_filter > 1) {
-            return Product::where('title', 'ilike', "%{$this->quick_search_filter}%")
+            // return Product::where('title', 'ilike', "%{$this->quick_search_filter}%") // POSTGRES
+            return Product::where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
                 ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
