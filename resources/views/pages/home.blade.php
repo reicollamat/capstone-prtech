@@ -108,7 +108,7 @@
             <x-slot:category>Case</x-slot:category>
             <x-slot:count>{{ $computer_case->count() }}</x-slot:count>
         </x-home.category>
-        
+
         <x-home.category>
             <x-slot:cat_value>href="{{route('index_shop', ['case_fan' => 'on'])}}"</x-slot:cat_value>
             img/components/casefan/casefan (1).png
@@ -278,7 +278,7 @@
 <!-- Recent Products Start -->
 <div class="container-fluid pt-5 pb-3">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="text-dark pr-3">Recent Products</span></h2>
-    
+
     {{-- owl-carousel --}}
     <div class="container-fluid">
         <div class="row px-xl-5">

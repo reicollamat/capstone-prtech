@@ -14,4 +14,8 @@
         <p>Click me to test email </p>
     </button>
     {{ $mailStatus }}
+    {{ public_path() }}
+    {{--    {{ storage_path('') }} --}}
+    {{--    {{ Storage::url('/product-image-uploads/UuCISu2FNIoCMbbu03GT1NwU0hTG2V2NWs9hAeXr.jpg') }} --}}
+    <img src="{{ asset('/product-image-uploads/UuCISu2FNIoCMbbu03GT1NwU0hTG2V2NWs9hAeXr.jpg') }}" alt="">
 </div>

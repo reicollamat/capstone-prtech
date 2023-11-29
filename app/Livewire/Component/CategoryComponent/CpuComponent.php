@@ -2,6 +2,11 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
+use App\Models\Cpu;
+use App\Models\Product;
+use App\Models\Seller;
+use App\Models\User;
+use Auth;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -37,8 +42,8 @@ class CpuComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
-    #[Validate('required', message: 'Please provide a CPU Name')]
-    public $cpu_name;
+    #[Validate('required', message: 'Please provide a CPU Core / Threads Count')]
+    public $cpu_core_threads;
 
     #[Validate('required', message: 'Please provide a CPU Price')]
     public $price;
@@ -93,7 +98,7 @@ class CpuComponent extends Component
             'productStatus' => 'required|not_in:Select Status',
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
-            'cpu_name' => 'required',
+            'cpu_core_threads' => 'required',
             'price' => 'required|integer',
             'base_clock' => 'required',
             'boost_clock' => 'required',
@@ -104,9 +109,53 @@ class CpuComponent extends Component
             'reserve_stocks' => 'required|integer',
         ]);
 
-        if ($validator) {
+        // $links = [];
+        $storeas = [];
 
-            dd($validator);
+        if ($validator) {
+            // create a array of image filename and store in ain storage/app/product-image-uploads
+            foreach ($this->productImages as $image) {
+                // $links[] = $image->temporaryUrl();
+                $path = $image->store('product-image-uploads', 'real_public');
+                $storeas[] = $path;
+            }
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $product = Product::create([
+                'seller_id' => User::find(Auth::user()->id)->seller->id,
+                'title' => $validator['productName'],
+                'slug' => $validator['productSlug'],
+                'SKU' => $validator['productSKU'],
+                'category' => $validator['productCategory'],
+                'price' => $validator['price'],
+                // 'rating' => 0,
+                'stocks' => $validator['stocks'],
+                'reserve' => $validator['reserve_stocks'],
+                'image' => implode(',', $storeas),
+                // 'image' => ($storeas),
+                'condition' => $validator['productCondition'],
+            ]);
+            $cpu = Cpu::create([
+                'product_id' => $product->id,
+                'category' => $validator['productCategory'],
+                'name' => $validator['productName'],
+                'price' => $validator['price'],
+                'core_count' => $validator['cpu_core_threads'],
+                'core_clock' => $validator['base_clock'],
+                'boost_clock' => $validator['boost_clock'],
+                'tdp' => $validator['tdp'],
+                'graphics' => $validator['igpu'],
+                // 'smt' => $value->smt,
+                'description' => $validator['productDescription'],
+                'condition' => $validator['productCondition'],
+            ]);
+            if ($product && $cpu) {
+                $this->dispatch('product-saved');
+                $this->reset();
+                dd($cpu);
+            }
+
+            // dd(User::find(Auth::user()->id)->seller->id);
         }
 
         // if ($validator) {
@@ -114,14 +163,6 @@ class CpuComponent extends Component
         // }
         // dd($validator);
 
-        // $links = [];
-        // $storeas = [];
-        // foreach ($this->productImages as $image) {
-        //     $links[] = $image->temporaryUrl();
-        //     $path = $image->store('product-image-uploads');
-        //
-        //     $storeas[] = $path;
-        // }
-        // dd($storeas);
+        // dd($storeas, $path);
     }
 }

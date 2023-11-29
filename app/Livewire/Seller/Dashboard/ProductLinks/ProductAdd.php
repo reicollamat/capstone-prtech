@@ -100,4 +100,10 @@ class ProductAdd extends Component
 
         // dd($validation);
     }
+
+    #[On('product-saved')]
+    public function resetInputs()
+    {
+        $this->reset();
+    }
 }
