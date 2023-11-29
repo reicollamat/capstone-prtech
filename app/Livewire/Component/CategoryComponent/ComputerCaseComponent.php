@@ -37,25 +37,41 @@ class ComputerCaseComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
+    #[Validate('required', message: 'Please provide a brand')]
     public $brand;
 
+    #[Validate('required', message: 'Please provide a price')]
     public $price;
 
+    #[Validate('required', message: 'Please provide the case size')]
     public $size;
 
+    #[Validate('required', message: 'Please provide the case dimensions')]
     public $dimensions_lwh;
 
+    #[Validate('required', message: 'Please provide the case color')]
     public $case_color;
 
+    #[Validate('required', message: 'Please provide a classification')]
     public $sidepanel;
 
+    #[Validate('required', message: 'Please provide an input')]
     public $ssd_bays;
 
+    #[Validate('required', message: 'Please provide an input')]
     public $hdd_bays;
 
+    #[Validate('required', message: 'Please provide an input')]
     public $length_psu;
 
+    #[Validate('required', message: 'Please provide an input')]
     public $length_gpu;
+
+    #[Validate('required', message: 'Please provide stocks available')]
+    public $stocks;
+
+    #[Validate('required', message: 'Please provide a reserve stock if available')]
+    public $reserve_stocks;
 
     public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
     {
@@ -76,6 +92,13 @@ class ComputerCaseComponent extends Component
     public function submit()
     {
         $validator = $this->validate([
+            'productName' => 'required',
+            'productSKU' => 'required',
+            'productSlug' => 'required',
+            'productDescription' => 'required',
+            'productCondition' => 'required|not_in:Select Condition',
+            'productStatus' => 'required|not_in:Select Status',
+            'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
             'price' => 'required|integer',
@@ -87,18 +110,28 @@ class ComputerCaseComponent extends Component
             'hdd_bays' => 'required|integer',
             'length_psu' => 'required|integer',
             'length_gpu' => 'required|integer',
+            'stocks' => 'required|integer',
+            'reserve_stocks' => 'required|integer',
         ]);
 
-        dd($validator);
+        if ($validator) {
 
-        $links = [];
-        $storeas = [];
-        foreach ($this->productImages as $image) {
-            $links[] = $image->temporaryUrl();
-            $path = $image->store('product-image-uploads');
-
-            $storeas[] = $path;
+            dd($validator);
         }
-        dd($storeas);
+
+        // if ($validator) {
+        //     dd($validator);
+        // }
+        // dd($validator);
+
+        // $links = [];
+        // $storeas = [];
+        // foreach ($this->productImages as $image) {
+        //     $links[] = $image->temporaryUrl();
+        //     $path = $image->store('product-image-uploads');
+        //
+        //     $storeas[] = $path;
+        // }
+        // dd($storeas);
     }
 }
