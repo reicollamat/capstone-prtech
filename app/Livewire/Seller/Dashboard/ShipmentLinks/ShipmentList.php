@@ -19,25 +19,12 @@ class ShipmentList extends Component
 {
     use WithPagination;
 
-    //    protected $paginationTheme = 'bootstrap';
-
-    //    public $totalProductCount;
-
-    public array $categories;
-
-    public $stock_filter;
-
-    public $category_filter;
-
-    public $brand_filter;
-
     public $quick_search_filter;
 
-    public $select_products = [];
+    public $set_to_shipping;
+    public $set_to_complete;
 
     public $seller;
-
-    protected $listeners = ['refreshComponent' => '$refresh'];
 
     //    public function paginationView()
     //    {
@@ -124,18 +111,6 @@ class ShipmentList extends Component
     }
 
 
-
-    public function updated($quick_search_filter)
-    {
-        // $property: The name of the current property that was updated
-        $this->resetPage();
-    }
-
-    public function test()
-    {
-        sleep(1);
-    }
-
     #[Computed]
     public function getToShipList()
     {
@@ -192,7 +167,7 @@ class ShipmentList extends Component
             ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'to_ship');
+            ->where('purchase_status', 'complete');
 
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
