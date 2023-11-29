@@ -83,6 +83,7 @@ class ProductAdd extends Component
     #[On('on-save')]
     public function save()
     {
+        // dd('test');
         $validation = $this->validate([
             'productName' => 'required',
             'productSKU' => 'required',
@@ -92,6 +93,10 @@ class ProductAdd extends Component
             'productStatus' => 'required|not_in:Select Status',
             'productCategory' => 'required',
         ]);
+
+        // if ($validation) {
+        //     dd($validation);
+        // }
 
         // dd($validation);
     }
