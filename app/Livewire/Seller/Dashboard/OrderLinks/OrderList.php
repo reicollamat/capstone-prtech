@@ -30,6 +30,7 @@ class OrderList extends Component
 
     public $orderstatus_filter;
     public $paymentstatus_filter;
+    public $paymenttype_filter;
 
     public $payment_status;
     public $purchase_status;
@@ -186,7 +187,7 @@ class OrderList extends Component
             ->where('seller_id', $this->seller->id);
 
 
-        // sleep(5);
+        //
         if ($this->orderstatus_filter) {
 
             return $this->purchase_items->where('purchase_status', '=', $this->orderstatus_filter)
@@ -194,10 +195,18 @@ class OrderList extends Component
                 ->paginate(10);
         }
 
-
+        //
         if ($this->paymentstatus_filter) {
 
             return $this->purchase_items->where('payment_status', '=', $this->paymentstatus_filter)
+                ->orderBy('purchase_items.id', 'asc')
+                ->paginate(10);
+        }
+
+        //
+        if ($this->paymenttype_filter) {
+
+            return $this->purchase_items->where('payment_type', '=', $this->paymenttype_filter)
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         }
@@ -223,20 +232,8 @@ class OrderList extends Component
                     ->paginate(10);
             }
         }
-
-        if ($this->clear_search) {
-            $this->redirect(OrderList::class);
-        }
-
         //
         else {
-            // query for purchased items of products from current seller
-            $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-                ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-                ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-                ->where('seller_id', $this->seller->id);
-
-            // dd($this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10));
 
             return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
