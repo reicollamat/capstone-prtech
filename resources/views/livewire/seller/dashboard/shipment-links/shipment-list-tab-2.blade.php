@@ -17,7 +17,7 @@
 
 <div class="bg-white overflow-x-auto rounded-lg p-3">
     <div class="grid grid-cols-12 text-center text-sm">
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300"></div>
+        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">IMG</div>
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">#</div>
         <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Price
@@ -94,9 +94,6 @@
                                                 wire:model.blur="product_name"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" disabled>
-                                            {{-- @error('product_name')
-                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                @enderror --}}
                                         </div>
                                         <div class="grid lg:grid-cols-2 mb-3 gap-4">
                                             <div>
@@ -109,9 +106,6 @@
                                                     wire:model.blur="product_purchase_date"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
-                                                {{-- @error('product_sku')
-                                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                    @enderror --}}
                                             </div>
                                             <div>
                                                 <label for="date_of_payment"
@@ -121,7 +115,7 @@
                                                 @if ($item->date_of_payment == null)
                                                     <input type="text" id="date_of_payment" value="unpaid"
                                                         wire:model.blur="date_of_payment"
-                                                        class="bg-transparent !border-b-2 border-gray-600 text-red-300 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
                                                 @else
                                                     <input type="text" id="date_of_payment"
@@ -130,9 +124,6 @@
                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
                                                 @endif
-                                                {{-- @error('product_slug')
-                                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                    @enderror --}}
                                             </div>
                                         </div>
                                         <div>
@@ -146,9 +137,6 @@
                                                         value="{{ $item->payment_type }}" wire:model.blur="payment_type"
                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
-                                                    {{-- @error('product_stock')
-                                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                        @enderror --}}
                                                 </div>
                                                 <div>
                                                     <label for="reference_code"
@@ -161,9 +149,6 @@
                                                         wire:model.blur="reference_code"
                                                         class="bg-transparent !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
-                                                    {{-- @error('product_reserve')
-                                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                        @enderror --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -180,9 +165,6 @@
                                                     wire:model.blur="quantity"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
-                                                {{-- @error('product_price')
-                                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                    @enderror --}}
                                             </div>
                                             <div>
                                                 <label for="total_price"
@@ -193,9 +175,6 @@
                                                     value="{{ $item->total_price }}" wire:model.blur="total__price"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
-                                                {{-- @error('product_price')
-                                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                    @enderror --}}
                                             </div>
                                         </div>
                                         <div class="grid lg:grid-cols-2 gap-2">
@@ -220,9 +199,6 @@
                                                     wire:model.blur="payment_status"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
-                                                {{-- @error('product_status')
-                                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                                    @enderror --}}
                                             </div>
                                         </div>
                                     </div>
