@@ -130,18 +130,12 @@ class ShipmentList extends Component
             return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
-        if ($this->set_to_complete) {
-            // dd($this->set_to_shipping);
-
-            Purchase::where('id', $this->set_to_complete)->update(['purchase_status' => 'complete']);
-
-            // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
-        }
-
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+            return $this->purchase_items
+                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
+                ->where('purchases.purchase_status', 'to_ship')
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         } else {
@@ -163,9 +157,23 @@ class ShipmentList extends Component
             ->where('seller_id', $this->seller->id)
             ->where('purchase_status', 'shipping');
 
+
+
+        if ($this->set_to_complete) {
+            // dd($this->set_to_shipping);
+
+            Purchase::where('id', $this->set_to_complete)->update(['purchase_status' => 'complete']);
+
+            // return collection of purchased items of products from current seller
+            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+        }
+
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+            return $this->purchase_items
+                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
+                ->where('purchases.purchase_status', 'shipping')
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         } else {
@@ -189,7 +197,10 @@ class ShipmentList extends Component
 
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+            return $this->purchase_items
+                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
+                ->where('purchases.purchase_status', 'complete')
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         } else {

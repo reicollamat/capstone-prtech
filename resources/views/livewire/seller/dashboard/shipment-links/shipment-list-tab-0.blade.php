@@ -7,7 +7,7 @@
                 <span class="input-group-text" id="basic-addon1">
                     <i class="bi bi-search"></i>
                 </span>
-                <input id="quick_search" type="search" name="serch" placeholder="Search Order #"
+                <input id="quick_search" type="search" name="serch" placeholder="Search To Ship"
                     class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
                     wire:model.live="quick_search_filter">
             </div>
