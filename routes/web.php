@@ -95,6 +95,7 @@ Route::prefix('seller')->group(function () {
             // route groups of order tab with its child routes
             Route::prefix('order')->group(function () {
                 Route::get('/list', Orderlist::class)->name('order-list');
+                Route::post('/list-update', [OrderList::class, 'update_status'])->name('order-list-update');
                 Route::get('/history', OrderHistory::class)->name('order-history');
                 Route::get('/cancellations', OrderCancellations::class)->name('order-cancellations');
                 Route::get('/returns', OrderReturnsRefunds::class)->name('order-returns');
@@ -205,4 +206,4 @@ Route::prefix('explore')->group(function () {
     })->name('terms-and-conditions');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
