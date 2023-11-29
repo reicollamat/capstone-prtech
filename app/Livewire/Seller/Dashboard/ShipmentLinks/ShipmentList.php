@@ -121,6 +121,24 @@ class ShipmentList extends Component
             ->where('seller_id', $this->seller->id)
             ->where('purchase_status', 'to_ship');
 
+        if ($this->set_to_shipping) {
+            // dd($this->set_to_shipping);
+
+            Purchase::where('id', $this->set_to_shipping)->update(['purchase_status' => 'shipping']);
+
+            // return collection of purchased items of products from current seller
+            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+        }
+
+        if ($this->set_to_complete) {
+            // dd($this->set_to_shipping);
+
+            Purchase::where('id', $this->set_to_complete)->update(['purchase_status' => 'complete']);
+
+            // return collection of purchased items of products from current seller
+            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+        }
+
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
             return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
@@ -128,7 +146,7 @@ class ShipmentList extends Component
                 ->paginate(10);
         } else {
 
-            // return collection of purchased items of products from current seller
+            // return collection of shipment items of products from current seller
             return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 

@@ -91,7 +91,6 @@
                                                 Product Name
                                             </label>
                                             <input type="text" id="product_name" value="{{ $item->title }}"
-                                                wire:model.blur="product_name"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" disabled>
                                         </div>
@@ -103,7 +102,6 @@
                                                 </label>
                                                 <input type="text" id="purchase_date"
                                                     value="{{ date('d-M-y', strtotime($item->purchase_date)) }}"
-                                                    wire:model.blur="product_purchase_date"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
                                             </div>
@@ -114,13 +112,11 @@
                                                 </label>
                                                 @if ($item->date_of_payment == null)
                                                     <input type="text" id="date_of_payment" value="unpaid"
-                                                        wire:model.blur="date_of_payment"
-                                                        class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        class="bg-transparent !border-b-2 border-red-600 text-red-500 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
                                                 @else
                                                     <input type="text" id="date_of_payment"
                                                         value="{{ date('d-M-y', strtotime($item->date_of_payment)) }}"
-                                                        wire:model.blur="date_of_payment"
                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
                                                 @endif
@@ -134,7 +130,7 @@
                                                         Type
                                                     </label>
                                                     <input type="text" id="payment_type"
-                                                        value="{{ $item->payment_type }}" wire:model.blur="payment_type"
+                                                        value="{{ $item->payment_type }}"
                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
                                                 </div>
@@ -146,7 +142,6 @@
                                                     </label>
                                                     <input type="text" id="reference_code"
                                                         value="{{ $item->reference_code }}"
-                                                        wire:model.blur="reference_code"
                                                         class="bg-transparent !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" disabled>
                                                 </div>
@@ -162,7 +157,6 @@
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Quantity
                                                 </label>
                                                 <input type="text" id="quantity" value="{{ $item->quantity }}"
-                                                    wire:model.blur="quantity"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
                                             </div>
@@ -172,7 +166,7 @@
                                                     Price
                                                 </label>
                                                 <input type="text" id="total_price"
-                                                    value="{{ $item->total_price }}" wire:model.blur="total__price"
+                                                    value="{{ $item->total_price }}"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
                                             </div>
@@ -183,22 +177,49 @@
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Order
                                                     Status
                                                 </label>
-                                                <input type="text" id="purchase_status"
-                                                    value="{{ $item->purchase_status }}"
-                                                    wire:model.blur="purchase_status"
-                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                    placeholder="" disabled>
+                                                @if ($item->purchase_status == 'pending')
+                                                    <input type="text" id="purchase_status"
+                                                        value="{{ $item->purchase_status }}"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-blue-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        placeholder="" disabled>
+                                                @elseif ($item->purchase_status == 'completed')
+                                                    <input type="text" id="purchase_status"
+                                                        value="{{ $item->purchase_status }}"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-green-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        placeholder="" disabled>
+                                                @elseif ($item->purchase_status == 'failed_delivery')
+                                                    <input type="text" id="purchase_status"
+                                                        value="{{ $item->purchase_status }}"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        placeholder="" disabled>
+                                                @elseif ($item->purchase_status == 'cancellation')
+                                                    <input type="text" id="purchase_status"
+                                                        value="{{ $item->purchase_status }}"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        placeholder="" disabled>
+                                                @else
+                                                    <input type="text" id="purchase_status"
+                                                        value="{{ $item->purchase_status }}"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        placeholder="" disabled>
+                                                @endif
                                             </div>
                                             <div>
                                                 <label for="status"
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Payment
                                                     Status
                                                 </label>
-                                                <input type="text" id="payment_status"
-                                                    value="{{ $item->payment_status }}"
-                                                    wire:model.blur="payment_status"
-                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                    placeholder="" disabled>
+                                                @if ($item->payment_status == 'paid')
+                                                    <input type="text" id="payment_status"
+                                                        value="{{ $item->payment_status }}"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-green-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        placeholder="" disabled>
+                                                @else
+                                                    <input type="text" id="payment_status"
+                                                        value="{{ $item->payment_status }}"
+                                                        class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                        placeholder="" disabled>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
