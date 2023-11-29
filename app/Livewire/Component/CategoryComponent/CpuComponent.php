@@ -58,6 +58,12 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU Unlocked if available')]
     public $oc_unlocked;
 
+    #[Validate('required', message: 'Please provide stocks available')]
+    public $stocks;
+
+    #[Validate('required', message: 'Please provide a CPU Reserve Stock if available')]
+    public $reserve_stocks;
+
     public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
     {
         $this->productName = $productName;
@@ -76,6 +82,8 @@ class CpuComponent extends Component
 
     public function submit()
     {
+        $this->dispatch('on-save');
+
         $validator = $this->validate([
             'productName' => 'required',
             'productSKU' => 'required',
@@ -92,9 +100,9 @@ class CpuComponent extends Component
             'tdp' => 'required',
             'igpu' => 'required|not_in:Click to Select',
             'oc_unlocked' => 'required|not_in:Click to Select',
+            'stocks' => 'required|integer',
+            'reserve_stocks' => 'required|integer',
         ]);
-
-        $this->dispatch('on-save');
 
         if ($validator) {
 
