@@ -19,7 +19,7 @@
                 {{ $item->total_price }}
             </div>
 
-            @if ($item->payment_type == 'cod')
+            @if ($item->payment_type == 'cod' && $item->payment_status == 'unpaid')
                 <div class="mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
                     <select wire:model="payment_status"
                         class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
@@ -44,7 +44,7 @@
                 <div class="mb-0 min-w-[100px] p-2 !text-red-600 !font-light">
                     {{ $item->purchase_status }}
                 </div>
-            @elseif ($item->purchase_status == 'return_refund')
+            @elseif ($item->purchase_status == 'returnrefund')
                 <div class="mb-0 min-w-[100px] p-2 !text-red-600 !font-light">
                     {{ $item->purchase_status }}
                 </div>
@@ -139,9 +139,6 @@
                                         wire:model.blur="product_name"
                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                         placeholder="" disabled>
-                                    {{-- @error('product_name')
-                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                    @enderror --}}
                                 </div>
                                 <div class="grid lg:grid-cols-2 mb-3 gap-4">
                                     <div>
@@ -154,9 +151,6 @@
                                             wire:model.blur="product_purchase_date"
                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                             placeholder="" disabled>
-                                        {{-- @error('product_sku')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror --}}
                                     </div>
                                     <div>
                                         <label for="date_of_payment"
@@ -175,9 +169,6 @@
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" disabled>
                                         @endif
-                                        {{-- @error('product_slug')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div>
@@ -191,9 +182,6 @@
                                                 wire:model.blur="payment_type"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" disabled>
-                                            {{-- @error('product_stock')
-                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                            @enderror --}}
                                         </div>
                                         <div>
                                             <label for="reference_code"
@@ -205,9 +193,6 @@
                                                 value="{{ $item->reference_code }}" wire:model.blur="reference_code"
                                                 class="bg-transparent !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" disabled>
-                                            {{-- @error('product_reserve')
-                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                            @enderror --}}
                                         </div>
                                     </div>
                                 </div>
@@ -224,9 +209,6 @@
                                             wire:model.blur="quantity"
                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                             placeholder="" disabled>
-                                        {{-- @error('product_price')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror --}}
                                     </div>
                                     <div>
                                         <label for="total_price"
@@ -237,9 +219,6 @@
                                             wire:model.blur="total__price"
                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                             placeholder="" disabled>
-                                        {{-- @error('product_price')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror --}}
                                     </div>
                                 </div>
                                 <div class="grid lg:grid-cols-2 gap-2">
@@ -262,9 +241,6 @@
                                             value="{{ $item->payment_status }}" wire:model.blur="payment_status"
                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                             placeholder="" disabled>
-                                        {{-- @error('product_status')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror --}}
                                     </div>
                                 </div>
                             </div>
