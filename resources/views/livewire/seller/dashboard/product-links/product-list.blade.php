@@ -122,32 +122,32 @@
                     </div>
 
                     {{--  Brand Filter --}}
-                    <div x-data="{ isOpen: false }" class="relative inline-block ">
-                        <!-- Dropdown toggle button -->
-                        <button @click="isOpen = !isOpen"
-                            class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-sm bg-white text-gray-600 gap-1">
-                            <span class="mx-1">Brand: SLUG</span>
-                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg"
-                                :class="{ 'rotate-180 transition duration-300': isOpen }">
-                                <path
-                                    d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                                    fill="currentColor"></path>
-                            </svg>
-                        </button>
-                        <!-- Dropdown menu -->
-                        <div x-cloak x-show="isOpen" @click.away="isOpen = false"
-                            x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-100"
-                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                            class="absolute left-0 z-20 mt-1 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
-                            <div class="bg-white rounded border-1 border-gray-300">
-                                <p class="mb-0 uppercase text-sm p-2 tracking-tight">SLUG</p>
-                                <p class="mb-0 uppercase text-sm p-2 tracking-tight">SLUG</p>
-                            </div>
-                        </div>
-                    </div>
+                    {{-- <div x-data="{ isOpen: false }" class="relative inline-block "> --}}
+                    {{--     <!-- Dropdown toggle button --> --}}
+                    {{--     <button @click="isOpen = !isOpen" --}}
+                    {{--         class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-sm bg-white text-gray-600 gap-1"> --}}
+                    {{--         <span class="mx-1">Brand: SLUG</span> --}}
+                    {{--         <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" --}}
+                    {{--             fill="none" xmlns="http://www.w3.org/2000/svg" --}}
+                    {{--             :class="{ 'rotate-180 transition duration-300': isOpen }"> --}}
+                    {{--             <path --}}
+                    {{--                 d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" --}}
+                    {{--                 fill="currentColor"></path> --}}
+                    {{--         </svg> --}}
+                    {{--     </button> --}}
+                    {{--     <!-- Dropdown menu --> --}}
+                    {{--     <div x-cloak x-show="isOpen" @click.away="isOpen = false" --}}
+                    {{--         x-transition:enter="transition ease-out duration-100" --}}
+                    {{--         x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" --}}
+                    {{--         x-transition:leave="transition ease-in duration-100" --}}
+                    {{--         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" --}}
+                    {{--         class="absolute left-0 z-20 mt-1 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front"> --}}
+                    {{--         <div class="bg-white rounded border-1 border-gray-300"> --}}
+                    {{--             <p class="mb-0 uppercase text-sm p-2 tracking-tight">SLUG</p> --}}
+                    {{--             <p class="mb-0 uppercase text-sm p-2 tracking-tight">SLUG</p> --}}
+                    {{--         </div> --}}
+                    {{--     </div> --}}
+                    {{-- </div> --}}
                     <div class="px-2.5 transition ease-in-out duration-300 {{ $category_filter ? 'block' : 'hidden' }}"
                         x-transition>
                         <button wire:click.debounce="$set('category_filter', '')">
@@ -165,8 +165,7 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="bi bi-search"></i>
                                     </span>
-                                    <input id="quick_search" type="search" name="serch"
-                                        placeholder="Quick Search"
+                                    <input id="quick_search" type="search" name="serch" placeholder="Quick Search"
                                         class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
                                         wire:model.live="quick_search_filter">
                                 </div>
