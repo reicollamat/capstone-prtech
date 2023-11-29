@@ -32,6 +32,19 @@
                     </div>
                 </div>
 
+                <!-- Cores / Threads -->
+                <div class="mb-4">
+                    <label for="cores_threads"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Cores /
+                        Threads</label>
+                    <input type="text" id="cores_threads" wire:model.blur="cores_threads"
+                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="4 / 8" required>
+                    @error('cores_threads')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 <!-- CPU Base Clock -->
                 <div class="mb-4">
                     <label for="base_clock"
@@ -108,7 +121,7 @@
             </div>
 
             <div>
-                <!-- Brand and Price -->
+                <!-- Stocks and Reserved -->
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="mb-4">
                         <label for="stocks"
@@ -134,6 +147,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <!-- Add Product Image Div -->
                 <div class="pb-3">
                     <p class="block mb-1 text-base font-medium text-gray-600 dark:text-white pl-1">Add Product Image</p>
@@ -221,3 +235,4 @@
         </div>
     </form>
 </div>
+

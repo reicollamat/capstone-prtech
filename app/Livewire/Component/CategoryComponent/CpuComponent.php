@@ -40,7 +40,7 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU Name')]
     public $cpu_name;
 
-    #[Validate('required', message: 'Please provide a CPU Price')]
+    #[Validate('required', message: 'Please provide a price')]
     public $price;
 
     #[Validate('required', message: 'Please provide a CPU Clock')]
@@ -93,6 +93,7 @@ class CpuComponent extends Component
             'productStatus' => 'required|not_in:Select Status',
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
+            'cores_threads' => 'required',
             'cpu_name' => 'required',
             'price' => 'required|integer',
             'base_clock' => 'required',
