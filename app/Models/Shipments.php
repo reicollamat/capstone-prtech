@@ -20,7 +20,7 @@ class Shipments extends Model
         'user_id',
         'email',
         'phone_number',
-        'status',
+        'shipment_status',
         'referenceId',
         'shippeddate',
         'street_address_1',

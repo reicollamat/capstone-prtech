@@ -242,10 +242,17 @@ class OrderList extends Component
 
         // dd($item);
         Purchase::where('id', $purchase_id)->update(['purchase_status' => $this->purchase_status]);
-        Payment::where('purchase_id', $purchase_id)->update([
-            'payment_status' => $this->payment_status,
-            'date_of_payment' => now(),
-        ]);
+
+        if ($payment_type != 'cod') {
+            Payment::where('purchase_id', $purchase_id)->update([
+                'payment_status' => $this->payment_status,
+                'date_of_payment' => now(),
+            ]);
+        } else {
+            Payment::where('purchase_id', $purchase_id)->update([
+                'payment_status' => $this->payment_status,
+            ]);
+        }
 
         if (!Shipments::where('purchase_id', $purchase_id)->exists()) {
             // dd('test');
@@ -254,9 +261,9 @@ class OrderList extends Component
                 'user_id' => $user->id,
                 'email' => $user->email,
                 'phone_number' => $user->phone_number,
-                'status' => 'to_ship',
+                'shipment_status' => 'to_ship',
                 'referenceId' => random_int(100000, 999999),
-                'shippeddate' => now(),
+                // 'shippeddate' => now(),
                 'street_address_1' => $user->street_address_1,
                 'state_province' => $user->state_province,
                 'city' => $user->city,
@@ -279,7 +286,7 @@ class OrderList extends Component
             $notification->save();
 
             Shipments::where('purchase_id', $purchase_id)->update([
-                'status' => $this->purchase_status,
+                'shipment_status' => $this->purchase_status,
                 'shippeddate' => now(),
             ]);
         } elseif ($this->purchase_status == 'to_ship') {
@@ -293,7 +300,7 @@ class OrderList extends Component
             ]);
             $notification->save();
 
-            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
+            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
         } elseif ($this->purchase_status == 'shipping') {
 
             $notification = new UserNotification([
@@ -306,7 +313,7 @@ class OrderList extends Component
             ]);
             $notification->save();
 
-            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
+            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
         } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'cod') {
 
             $notification = new UserNotification([
@@ -318,7 +325,7 @@ class OrderList extends Component
             ]);
             $notification->save();
 
-            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
+            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
         } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'gcash') {
 
             $notification = new UserNotification([
@@ -330,7 +337,7 @@ class OrderList extends Component
             ]);
             $notification->save();
 
-            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
+            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
         }
 
         return redirect(route('order-list'));

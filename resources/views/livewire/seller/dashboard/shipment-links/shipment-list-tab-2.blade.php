@@ -18,7 +18,7 @@
 <div class="bg-white overflow-x-auto rounded-lg p-3">
     <div class="grid grid-cols-12 text-center text-sm">
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">IMG</div>
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">#</div>
+        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Ref-ID</div>
         <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Price
         </div>
@@ -38,8 +38,8 @@
                             <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-9 h-9"
                                 alt="Product-Thumbnail">
                         </div>
-                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                            {{ $item->id }}
+                        <div class="col-span-1 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                            [{{ $item->referenceId }}]
                         </div>
                         <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
                             {{ $item->title }}
@@ -51,7 +51,7 @@
                             {{ date('d-M-y', strtotime($item->purchase_date)) }}
                         </div>
                         <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                            datehere
+                            {{ date('d-M-y', strtotime($item->shippeddate)) }}
                         </div>
                         <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
                             <button type="button"
@@ -171,7 +171,7 @@
                                                     placeholder="" disabled>
                                             </div>
                                         </div>
-                                        <div class="grid lg:grid-cols-2 gap-2">
+                                        <div class="mb-3 grid lg:grid-cols-2 gap-2">
                                             <div>
                                                 <label for="order_status"
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Order
@@ -221,6 +221,15 @@
                                                         placeholder="" disabled>
                                                 @endif
                                             </div>
+                                        </div>
+                                        <div class="">
+                                            <label for="referenceId"
+                                                class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                Shipment Reference ID
+                                            </label>
+                                            <input type="text" id="referenceId" value="#{{ $item->referenceId }}"
+                                                class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                placeholder="" disabled>
                                         </div>
                                     </div>
 
