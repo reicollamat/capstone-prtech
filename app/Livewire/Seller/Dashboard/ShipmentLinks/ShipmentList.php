@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\Seller;
+use App\Models\Shipments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
@@ -36,11 +37,12 @@ class ShipmentList extends Component
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+        $this->shipment_items = Shipments::join('purchases', 'shipments.purchase_id', '=', 'purchases.id')
+            ->join('purchase_items', 'purchases.id', '=', 'purchase_items.purchase_id')
+            ->join('products', 'purchase_items.product_id', '=', 'products.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id);
-        // dd($this->purchase_items->get());
+        // dd($this->shipment_items->get());
     }
 
     #[Computed]
@@ -101,7 +103,7 @@ class ShipmentList extends Component
 
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+        $this->shipment_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
             ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id);
@@ -115,47 +117,50 @@ class ShipmentList extends Component
     public function getToShipList()
     {
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+        $this->shipment_items = Shipments::join('purchases', 'shipments.purchase_id', '=', 'purchases.id')
+            ->join('purchase_items', 'purchases.id', '=', 'purchase_items.purchase_id')
+            ->join('products', 'purchase_items.product_id', '=', 'products.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'to_ship');
+            ->where('shipments.status', 'to_ship');
 
         if ($this->set_to_shipping) {
             // dd($this->set_to_shipping);
 
             Purchase::where('id', $this->set_to_shipping)->update(['purchase_status' => 'shipping']);
+            Shipments::where('purchase_id', $this->set_to_shipping)->update(['status' => 'shipping']);
 
             // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->shipment_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            return $this->purchase_items
+            return $this->shipment_items
                 ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
                 ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
                 ->where('purchases.purchase_status', 'to_ship')
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         } else {
-
+            // dd($this->shipment_items->get());
             // return collection of shipment items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->shipment_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
-        return $this->purchase_items->paginate(10);
+        return $this->shipment_items->paginate(10);
     }
 
     #[Computed]
     public function getShippingList()
     {
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+        $this->shipment_items = Shipments::join('purchases', 'shipments.purchase_id', '=', 'purchases.id')
+            ->join('purchase_items', 'purchases.id', '=', 'purchase_items.purchase_id')
+            ->join('products', 'purchase_items.product_id', '=', 'products.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'shipping');
+            ->where('shipments.status', 'shipping');
 
 
 
@@ -163,14 +168,15 @@ class ShipmentList extends Component
             // dd($this->set_to_shipping);
 
             Purchase::where('id', $this->set_to_complete)->update(['purchase_status' => 'complete']);
+            Shipments::where('purchase_id', $this->set_to_shipping)->update(['status' => 'complete']);
 
             // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->shipment_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            return $this->purchase_items
+            return $this->shipment_items
                 ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
                 ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
                 ->where('purchases.purchase_status', 'shipping')
@@ -179,25 +185,26 @@ class ShipmentList extends Component
         } else {
 
             // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->shipment_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
-        return $this->purchase_items->paginate(10);
+        return $this->shipment_items->paginate(10);
     }
 
     #[Computed]
     public function getDeliveredList()
     {
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+        $this->shipment_items = Shipments::join('purchases', 'shipments.purchase_id', '=', 'purchases.id')
+            ->join('purchase_items', 'purchases.id', '=', 'purchase_items.purchase_id')
+            ->join('products', 'purchase_items.product_id', '=', 'products.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'complete');
+            ->where('shipments.status', 'complete');
 
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            return $this->purchase_items
+            return $this->shipment_items
                 ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
                 ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
                 ->where('purchases.purchase_status', 'complete')
@@ -206,10 +213,10 @@ class ShipmentList extends Component
         } else {
 
             // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->shipment_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
-        return $this->purchase_items->paginate(10);
+        return $this->shipment_items->paginate(10);
     }
 
 

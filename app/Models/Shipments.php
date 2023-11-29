@@ -20,11 +20,14 @@ class Shipments extends Model
         'user_id',
         'email',
         'phone_number',
+        'status',
+        'referenceId',
+        'shippeddate',
         'street_address_1',
         'street_address_2',
+        'state_province',
         'city',
         'postal_code',
-        'state_province',
         'country',
     ];
 }

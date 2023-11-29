@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use App\Models\Seller;
+use App\Models\Shipments;
+use App\Models\User;
 use App\Models\UserNotification;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -235,6 +237,9 @@ class OrderList extends Component
         $purchase_id = $request->purchase_id;
         $user_id = $request->user_id;
         $payment_type = $request->payment_type;
+        $user = User::find($user_id);
+
+
         // dd($item);
         Purchase::where('id', $purchase_id)->update(['purchase_status' => $this->purchase_status]);
         Payment::where('purchase_id', $purchase_id)->update([
@@ -242,7 +247,28 @@ class OrderList extends Component
             'date_of_payment' => now(),
         ]);
 
+        if (!Shipments::where('purchase_id', $purchase_id)->exists()) {
+            // dd('test');
+            $shipment = new Shipments([
+                'purchase_id' => $purchase_id,
+                'user_id' => $user->id,
+                'email' => $user->email,
+                'phone_number' => $user->phone_number,
+                'status' => 'to_ship',
+                'referenceId' => random_int(100000, 999999),
+                'shippeddate' => now(),
+                'street_address_1' => $user->street_address_1,
+                'state_province' => $user->state_province,
+                'city' => $user->city,
+                'postal_code' => $user->postal_code,
+                'country' => $user->country,
+            ]);
+            $shipment->save();
+        }
+
+
         if ($this->purchase_status == 'completed') {
+
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase_id,
@@ -251,7 +277,13 @@ class OrderList extends Component
                 'message' => 'Order #' . $purchase_id . ' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
+
+            Shipments::where('purchase_id', $purchase_id)->update([
+                'status' => $this->purchase_status,
+                'shippeddate' => now(),
+            ]);
         } elseif ($this->purchase_status == 'to_ship') {
+
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase_id,
@@ -260,7 +292,10 @@ class OrderList extends Component
                 'message' => 'Payment for order #' . $purchase_id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
             ]);
             $notification->save();
+
+            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
         } elseif ($this->purchase_status == 'shipping') {
+
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase_id,
@@ -270,7 +305,10 @@ class OrderList extends Component
                 #' . $purchase_id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
             ]);
             $notification->save();
+
+            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
         } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'cod') {
+
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase_id,
@@ -279,7 +317,10 @@ class OrderList extends Component
                 'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
             ]);
             $notification->save();
+
+            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
         } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'gcash') {
+
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase_id,
@@ -288,6 +329,8 @@ class OrderList extends Component
                 'message' => 'Our logistics partner will attempt parcel delivery within the day.',
             ]);
             $notification->save();
+
+            Shipments::where('purchase_id', $purchase_id)->update(['status' => $this->purchase_status]);
         }
 
         return redirect(route('order-list'));
