@@ -254,7 +254,10 @@ class OrderList extends Component
         $payment_type = $request->payment_type;
         // dd($item);
         Purchase::where('id', $purchase_id)->update(['purchase_status' => $this->purchase_status]);
-        Payment::where('purchase_id', $purchase_id)->update(['payment_status' => $this->payment_status]);
+        Payment::where('purchase_id', $purchase_id)->update([
+            'payment_status' => $this->payment_status,
+            'date_of_payment' => now(),
+        ]);
 
         if ($this->purchase_status == 'completed') {
             $notification = new UserNotification([

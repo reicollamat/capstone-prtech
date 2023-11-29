@@ -469,7 +469,6 @@
                                                                 </label>
                                                                 <input type="text" id="product_name"
                                                                     value="{{ $item->title }}"
-                                                                    wire:model.blur="product_name"
                                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                     placeholder="" disabled>
                                                             </div>
@@ -481,7 +480,6 @@
                                                                     </label>
                                                                     <input type="text" id="purchase_date"
                                                                         value="{{ date('d-M-y', strtotime($item->purchase_date)) }}"
-                                                                        wire:model.blur="product_purchase_date"
                                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                         placeholder="" disabled>
                                                                 </div>
@@ -493,13 +491,11 @@
                                                                     @if ($item->date_of_payment == null)
                                                                         <input type="text" id="date_of_payment"
                                                                             value="unpaid"
-                                                                            wire:model.blur="date_of_payment"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-300 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                             placeholder="" disabled>
                                                                     @else
                                                                         <input type="text" id="date_of_payment"
                                                                             value="{{ date('d-M-y', strtotime($item->date_of_payment)) }}"
-                                                                            wire:model.blur="date_of_payment"
                                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                             placeholder="" disabled>
                                                                     @endif
@@ -514,7 +510,6 @@
                                                                         </label>
                                                                         <input type="text" id="payment_type"
                                                                             value="{{ $item->payment_type }}"
-                                                                            wire:model.blur="payment_type"
                                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                             placeholder="" disabled>
                                                                     </div>
@@ -526,7 +521,6 @@
                                                                         </label>
                                                                         <input type="text" id="reference_code"
                                                                             value="{{ $item->reference_code }}"
-                                                                            wire:model.blur="reference_code"
                                                                             class="bg-transparent !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                             placeholder="" disabled>
                                                                     </div>
@@ -543,7 +537,6 @@
                                                                     </label>
                                                                     <input type="text" id="quantity"
                                                                         value="{{ $item->quantity }}"
-                                                                        wire:model.blur="quantity"
                                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                         placeholder="" disabled>
                                                                 </div>
@@ -554,7 +547,6 @@
                                                                     </label>
                                                                     <input type="text" id="total_price"
                                                                         value="{{ $item->total_price }}"
-                                                                        wire:model.blur="total__price"
                                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                         placeholder="" disabled>
                                                                 </div>
@@ -567,7 +559,6 @@
                                                                     </label>
                                                                     <input type="text" id="purchase_status"
                                                                         value="{{ $item->purchase_status }}"
-                                                                        wire:model.blur="purchase_status"
                                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                         placeholder="" disabled>
                                                                 </div>
@@ -578,7 +569,6 @@
                                                                     </label>
                                                                     <input type="text" id="payment_status"
                                                                         value="{{ $item->payment_status }}"
-                                                                        wire:model.blur="payment_status"
                                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                                         placeholder="" disabled>
                                                                 </div>
