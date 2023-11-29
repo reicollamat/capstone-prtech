@@ -161,9 +161,15 @@
                         <div class="relative text-gray-600">
                             <label for="quick_search" class="sr-only">Search</label>
                             <div class="flex gap-1.5 items-center">
-                                <input id="quick_search" type="search" name="serch" placeholder="Quick Search"
-                                    class="bg-white w-full p-1 h-full border-gray-200 !rounded-lg text-sm focus:outline-none"
-                                    wire:model.live="quick_search_filter">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="bi bi-search"></i>
+                                    </span>
+                                    <input id="quick_search" type="search" name="serch"
+                                        placeholder="Quick Search"
+                                        class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
+                                        wire:model.live="quick_search_filter">
+                                </div>
                             </div>
 
                         </div>
