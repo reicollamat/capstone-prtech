@@ -46,11 +46,6 @@ class OrderList extends Component
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    //    public function paginationView()
-    //    {
-    //        return 'vendor.pagination.custom-pagination-links';
-    //    }
-
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
@@ -160,22 +155,10 @@ class OrderList extends Component
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id);
 
-        // dd('ydiyu');
         $this->resetPage();
     }
 
 
-
-    public function updated($quick_search_filter)
-    {
-        // $property: The name of the current property that was updated
-        $this->resetPage();
-    }
-
-    public function test()
-    {
-        sleep(1);
-    }
 
     #[Computed]
     public function getPurchaseItemList()
