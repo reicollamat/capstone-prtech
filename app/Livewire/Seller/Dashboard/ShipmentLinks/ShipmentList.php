@@ -57,13 +57,7 @@ class ShipmentList extends Component
     }
 
     #[Computed]
-    public function getTotalProductCount()
-    {
-        return $totalProductCount = Product::count();
-    }
-
-    #[Computed]
-    public function getTotalPurchaseCount()
+    public function getTotalShipmentCount()
     {
         $all = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
             ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
@@ -72,16 +66,7 @@ class ShipmentList extends Component
         return count($all->get());
     }
 
-    #[Computed]
-    public function getTotalPendingCount()
-    {
-        $pending = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        return count($pending->where('purchase_status', 'pending')->get());
-    }
-
+    // for Delivered shipment
     #[Computed]
     public function getTotalCompletedCount()
     {
@@ -113,26 +98,6 @@ class ShipmentList extends Component
     }
 
     #[Computed]
-    public function getTotalCancellationCount()
-    {
-        $cancellation = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        return count($cancellation->where('purchase_status', 'cancellation')->get());
-    }
-
-    #[Computed]
-    public function getTotalReturnRefundCount()
-    {
-        $returnrefund = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        return count($returnrefund->where('purchase_status', 'returnrefund')->get());
-    }
-
-    #[Computed]
     public function getTotalFailedDeliveryCount()
     {
         $faileddelivery = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
@@ -142,7 +107,6 @@ class ShipmentList extends Component
         return count($faileddelivery->where('purchase_status', 'failed_delivery')->get());
     }
 
-    // #[On('resetPage')]
     public function update_paymentpurchase($purchase_id, $payment_status)
     {
         dd($payment_status);
@@ -173,19 +137,67 @@ class ShipmentList extends Component
     }
 
     #[Computed]
-    public function getPurchaseItemList()
+    public function getToShipList()
     {
-        // sleep(5);
-        if ($this->category_filter) {
-            return $this->purchase_items->where('payment_status', '=', 'paid')
+        // query for purchased items of products from current seller
+        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
+            ->where('seller_id', $this->seller->id)
+            ->where('purchase_status', 'to_ship');
+
+        // add check to run rerender every time
+        if ($this->quick_search_filter > 0) {
+            return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
+        } else {
+
+            // return collection of purchased items of products from current seller
+            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
+
+        return $this->purchase_items->paginate(10);
+    }
+
+    #[Computed]
+    public function getShippingList()
+    {
+        // query for purchased items of products from current seller
+        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
+            ->where('seller_id', $this->seller->id)
+            ->where('purchase_status', 'shipping');
+
         // add check to run rerender every time
-        if ($this->quick_search_filter > 1) {
-            return Product::where('title', 'ilike', "%{$this->quick_search_filter}%")
-                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
-                ->orderBy('id', 'asc')
+        if ($this->quick_search_filter > 0) {
+            return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+                ->orderBy('purchase_items.id', 'asc')
+                ->paginate(10);
+        } else {
+
+            // return collection of purchased items of products from current seller
+            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+        }
+
+        return $this->purchase_items->paginate(10);
+    }
+
+    #[Computed]
+    public function getDeliveredList()
+    {
+        // query for purchased items of products from current seller
+        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
+            ->where('seller_id', $this->seller->id)
+            ->where('purchase_status', 'to_ship');
+
+        // add check to run rerender every time
+        if ($this->quick_search_filter > 0) {
+            return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+                ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         } else {
 
