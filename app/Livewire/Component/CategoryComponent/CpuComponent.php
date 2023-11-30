@@ -151,8 +151,8 @@ class CpuComponent extends Component
             ]);
             if ($product && $cpu) {
                 $this->dispatch('product-saved');
-                $this->reset();
-                dd($cpu);
+                // $this->reset();
+                // dd($cpu);
             }
 
             // dd(User::find(Auth::user()->id)->seller->id);
