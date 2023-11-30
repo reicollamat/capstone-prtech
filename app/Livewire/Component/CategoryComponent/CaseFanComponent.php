@@ -103,7 +103,6 @@ class CaseFanComponent extends Component
         ]);
 
         if ($validator) {
-
             dd($validator);
         }
 

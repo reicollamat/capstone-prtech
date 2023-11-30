@@ -8,6 +8,16 @@ use Livewire\Component;
 #[Layout('layouts.seller.seller-layout')]
 class AnalyticsModelReport extends Component
 {
+    public function shopEngagement()
+    {
+
+    }
+
+    public function shopSentiment()
+    {
+
+    }
+
     public function render()
     {
         return view('livewire..seller.dashboard.analytics-links.analytics-model-report');
