@@ -163,11 +163,11 @@
             <div>
                 <h6 class="text-gray-600 mb-0 text-lg tracking-wide text-start">Specific Product Information</h6>
             </div>
-            <div>
-                <button class="btn btn-outline-dark  tracking-wide">
-                    Reset
-                </button>
-            </div>
+            {{-- <div> --}}
+            {{--     <button class="btn btn-outline-dark  tracking-wide"> --}}
+            {{--         Reset --}}
+            {{--     </button> --}}
+            {{-- </div> --}}
         </div>
         <hr>
         {{ $productName }}

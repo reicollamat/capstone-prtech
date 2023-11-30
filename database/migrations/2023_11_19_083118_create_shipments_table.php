@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
 
             // delivery specifc
-            $table->string('status')->nullable();
+            $table->string('shipment_status')->nullable();
             $table->string('referenceId')->unique();
             $table->dateTime('shippeddate')->nullable();
 

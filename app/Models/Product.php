@@ -156,6 +156,11 @@ class Product extends Model
         return $this->belongsTo(Seller::class);
     }
 
+    public function purchase_items(): HasMany
+    {
+        return $this->hasMany(PurchaseItem::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

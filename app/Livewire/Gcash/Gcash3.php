@@ -84,7 +84,7 @@ class Gcash3 extends Component
                 'date_of_payment' => now(),
                 'payment_type' => $this->payment_type,
                 'payment_status' => 'paid',
-                'reference_code' => 'samplecode',
+                'reference_code' => '#samplecode',
             ]);
             $payment->save();
 
@@ -136,7 +136,7 @@ class Gcash3 extends Component
                 'date_of_payment' => now(),
                 'payment_type' => $this->payment_type,
                 'payment_status' => 'paid',
-                'reference_code' => 'samplecode',
+                'reference_code' => '#samplecode',
             ]);
             $payment->save();
 

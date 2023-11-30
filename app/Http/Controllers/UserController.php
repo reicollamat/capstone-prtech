@@ -94,7 +94,7 @@ class UserController extends Controller
             'date_of_payment' => null,
             'payment_type' => $payment_type,
             'payment_status' => 'unpaid',
-            'reference_code' => 'samplecode',
+            'reference_code' => '#samplecode',
         ]);
         $payment->save();
 
@@ -162,7 +162,7 @@ class UserController extends Controller
             'date_of_payment' => null,
             'payment_type' => $payment_type,
             'payment_status' => 'unpaid',
-            'reference_code' => 'samplecode',
+            'reference_code' => '#samplecode',
         ]);
         $payment->save();
 

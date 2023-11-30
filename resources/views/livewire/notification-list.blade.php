@@ -84,13 +84,17 @@
                                     </div>
                                 @endif
                                 @if ($notification->tag == 'completed')
-                                    <div class="flex flex-col text-start m-1 p-2 bg-blue-200 rounded">
+                                <form action="{{route('leave_review')}}" method="GET">
+
+                                    <input type="text" name="purchase_id" value="{{$notification->purchase_id}}" hidden>
+                                    <button class="flex flex-col text-start m-1 p-2 bg-blue-200 rounded">
                                         <div class="flex flex-row">
                                             <i class="bi bi-bell mr-2"></i>
                                             <h6>{{$notification->title}}</h6>
                                         </div>
                                         <p class="p-0 m-0">{{$notification->message}}</p>
-                                    </div>
+                                    </button>
+                                </form>
                                 @endif
                                 @if ($notification->tag == 'product_restock')
                                     <div class="flex flex-col text-start m-1 p-2 bg-blue-200 rounded">
