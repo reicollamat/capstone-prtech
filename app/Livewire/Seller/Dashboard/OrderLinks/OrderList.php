@@ -289,6 +289,10 @@ class OrderList extends Component
                 'shipment_status' => $this->purchase_status,
                 'shippeddate' => now(),
             ]);
+            Payment::where('purchase_id', $purchase_id)->update([
+                'payment_status' => 'paid',
+                'date_of_payment' => now(),
+            ]);
         } elseif ($this->purchase_status == 'to_ship') {
 
             $notification = new UserNotification([

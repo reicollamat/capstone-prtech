@@ -22,6 +22,7 @@ class UserNotification extends Model
      */
     protected $fillable = [
         'user_id',
+        'purchase_id',
         'tag',
         'notif_category',
         'title',

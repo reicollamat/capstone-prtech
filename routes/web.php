@@ -14,6 +14,7 @@ use App\Livewire\Gcash\Gcash1;
 use App\Livewire\Gcash\Gcash2;
 use App\Livewire\Gcash\Gcash3;
 use App\Livewire\Landing;
+use App\Livewire\LeaveReview;
 use App\Livewire\Seller\Auth\LoginPage;
 use App\Livewire\Seller\Auth\RegisterPage;
 use App\Livewire\Seller\Dashboard\AnalyticsLinks\AnalyticsModelReport;
@@ -129,6 +130,8 @@ Route::get('/collections/{product_id}/{category}/details', [ShopController::clas
 Route::get('/searchresult', [ShopController::class, 'search_result'])->name('search_result');
 // product detail page
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
+
+Route::get('/leave_review', [LeaveReview::class, 'review_page'])->name('leave_review');
 
 // Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 

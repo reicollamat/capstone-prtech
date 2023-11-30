@@ -30,6 +30,13 @@ class NotificationList extends Component
         }
     }
 
+    public function to_review($purchase_id)
+    {
+        // dd($purchase_id);
+        $this->dispatch('purchase_id', $purchase_id);
+        $this->redirect(LeaveReview::class, navigate: true);
+    }
+
     public function render()
     {
         return view('livewire.notification-list');
