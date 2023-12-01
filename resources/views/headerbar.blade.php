@@ -2,7 +2,7 @@
     <div class="md:mx-16">
         <div class="flex justify-between !text-sm !text-gray-800 tracking-normal">
             <div class="flex text-center align-middle self-center items-center ">
-                <a href="{{ route('seller-landing') }}" class="decoration-0 no-underline !text-sm !text-green-800 ">Seller
+                <a href="{{ route('seller-landing') }}" class="decoration-0 no-underline !text-sm !text-gray-800 ">Seller
                     Portal</a>
                 <span class="mx-1.5">|</span>
                 <a href="{{ route('seller-signup') }}" class="decoration-0 no-underline !text-sm !text-gray-800 ">Become
