@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\Seller;
 use App\Models\User;
 use Auth;
-use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -18,25 +17,26 @@ class CpuComponent extends Component
 
     public $previewImage;
 
-    #[Reactive]
+    public $previewImageIndex;
+
+    #[Validate('required', message: 'Please provide a CPU Name')]
     public $productName;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU SKU')]
     public $productSKU;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Slug')]
     public $productSlug;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Description')]
     public $productDescription;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Condition')]
     public $productCondition;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Status')]
     public $productStatus;
 
-    #[Reactive]
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -69,14 +69,14 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU Reserve Stock if available')]
     public $reserve_stocks;
 
-    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    public function mount($productCategory)
     {
-        $this->productName = $productName;
-        $this->productSKU = $productSKU;
-        $this->productSlug = $productSlug;
-        $this->productDescription = $productDescription;
-        $this->productCondition = $productCondition;
-        $this->productStatus = $productStatus;
+        // $this->productName = $productName;
+        // $this->productSKU = $productSKU;
+        // $this->productSlug = $productSlug;
+        // $this->productDescription = $productDescription;
+        // $this->productCondition = $productCondition;
+        // $this->productStatus = $productStatus;
         $this->productCategory = $productCategory;
     }
 
@@ -158,11 +158,16 @@ class CpuComponent extends Component
             // dd(User::find(Auth::user()->id)->seller->id);
         }
 
-        // if ($validator) {
-        //     dd($validator);
-        // }
-        // dd($validator);
+    }
 
-        // dd($storeas, $path);
+    public function setImage($imageurl, $imageindex): void
+    {
+        $this->previewImage = $imageurl;
+        $this->previewImageIndex = $imageindex;
+    }
+
+    public function removePhoto($imageindex): void
+    {
+        array_splice($this->productImages, $imageindex, 1);
     }
 }
