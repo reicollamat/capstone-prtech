@@ -49,7 +49,7 @@ class Collections extends Component
 
     public $category;
 
-    #[url(history: true)]
+    #[url(as: 'q', history: true)]
     public $search;
 
     #[Url(as: 'cat-filter', history: true, keep: false)]
@@ -97,7 +97,7 @@ class Collections extends Component
     public function getProducts()
     {
         if ($this->search && $this->category_filter && $this->conditon_filter) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('category', $this->category_filter)
                 ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
@@ -105,13 +105,13 @@ class Collections extends Component
         }
 
         if ($this->search && $this->category_filter) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('category', $this->category_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
         if ($this->search && $this->conditon_filter) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
@@ -136,7 +136,7 @@ class Collections extends Component
         }
 
         if ($this->search) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
@@ -154,12 +154,10 @@ class Collections extends Component
         }
     }
 
-    public function boot()
-    {
-    }
 
     public function mount($category = null)
     {
+        // dd(Product::where('id', 1455)->select('image')->get());
         // dd($category);
         if ($category) {
             $this->category = $category;
@@ -254,7 +252,7 @@ class Collections extends Component
             $this->redirect(route('purchase_page', [
                 'product_id' => $product_id,
                 'user_id' => Auth::user()->id,
-                'quantity' => 1
+                'quantity' => 1,
             ]));
         } else {
             $this->redirect(route('login'));
