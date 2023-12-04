@@ -108,3 +108,12 @@
     position: absolute;
     inset: 0;
 }
+
+
+body.swal2-toast-shown .swal2-container{
+    width: 400px !important;
+}
+
+.swal2-popup.swal2-toast.swal2-icon-success {
+    border: rgba(30, 41, 59, 0.2) 1px solid;
+}
