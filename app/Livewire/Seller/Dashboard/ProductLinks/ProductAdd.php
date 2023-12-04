@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Seller\Dashboard\ProductLinks;
 
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -10,6 +11,7 @@ use Livewire\Component;
 #[Layout('layouts.seller.seller-layout')]
 class ProductAdd extends Component
 {
+    use LivewireAlert;
     // default view
     public $view = 'component.category-component.placeholder-component';
     //    public $view = 'component.category-component.mouse-component';
@@ -62,7 +64,6 @@ class ProductAdd extends Component
             $this->productCategory = $category;
 
             // change active view to the selected category
-            //            dd($this->categoryViewMap[$category]);
             $this->view = $this->categoryViewMap[$category];
             //            dd($this->view);
             // $this->mount();
@@ -80,30 +81,11 @@ class ProductAdd extends Component
         return view('livewire..seller.dashboard.product-links.product-add');
     }
 
-    #[On('on-save')]
-    public function save()
-    {
-        // dd('test');
-        $validation = $this->validate([
-            'productName' => 'required',
-            'productSKU' => 'required',
-            'productSlug' => 'required',
-            'productDescription' => 'required',
-            'productCondition' => 'required|not_in:Select Condition',
-            'productStatus' => 'required|not_in:Select Status',
-            'productCategory' => 'required',
-        ]);
-
-        // if ($validation) {
-        //     dd($validation);
-        // }
-
-        // dd($validation);
-    }
 
     #[On('product-saved')]
     public function resetInputs()
     {
-        $this->reset();
+        $this->alert('success', 'Successssssssssssssssssssssss', [
+            'position' => 'top-end']);
     }
 }
