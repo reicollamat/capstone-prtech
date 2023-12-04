@@ -7,12 +7,14 @@ use App\Models\Product;
 use App\Models\Seller;
 use App\Models\User;
 use Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class CpuComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;
@@ -31,10 +33,10 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU Description')]
     public $productDescription;
 
-    #[Validate('required', message: 'Please provide a CPU Condition')]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide a CPU Condition')]
     public $productCondition;
 
-    #[Validate('required', message: 'Please provide a CPU Status')]
+    #[Validate('required|not_in:Select Status', message: 'Please provide a CPU Status')]
     public $productStatus;
 
     public $productCategory;
@@ -57,10 +59,10 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU TDP')]
     public $tdp;
 
-    #[Validate('required', message: 'Please provide a CPU IGPU if available')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide a CPU IGPU if available')]
     public $igpu;
 
-    #[Validate('required', message: 'Please provide a CPU Unlocked if available')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide a CPU Unlocked if available')]
     public $oc_unlocked;
 
     #[Validate('required', message: 'Please provide stocks available')]
@@ -89,6 +91,11 @@ class CpuComponent extends Component
     {
         $this->dispatch('on-save');
 
+        $this->alert('success', 'Product has been created successfully.', [
+            'position' => 'top-end']);
+
+        // dd('test');
+
         $validator = $this->validate([
             'productName' => 'required',
             'productSKU' => 'required',
@@ -108,6 +115,8 @@ class CpuComponent extends Component
             'stocks' => 'required|integer',
             'reserve_stocks' => 'required|integer',
         ]);
+
+        // dd($validator);
 
         // $links = [];
         $storeas = [];
@@ -129,9 +138,10 @@ class CpuComponent extends Component
                 'category' => $validator['productCategory'],
                 'price' => $validator['price'],
                 // 'rating' => 0,
-                'stocks' => $validator['stocks'],
+                'stock' => $validator['stocks'],
                 'reserve' => $validator['reserve_stocks'],
-                'image' => implode(',', $storeas),
+                // 'image' => implode(',', $storeas),
+                'image' => $storeas,
                 // 'image' => ($storeas),
                 'condition' => $validator['productCondition'],
             ]);
@@ -150,9 +160,12 @@ class CpuComponent extends Component
                 'condition' => $validator['productCondition'],
             ]);
             if ($product && $cpu) {
-                $this->dispatch('product-saved');
+                $this->alert('success', 'Product has been created successfully.', [
+                    'position' => 'top-end']);
                 $this->reset();
-                dd($cpu);
+            } else {
+                $this->alert('error', 'Product has not been created.', [
+                    'position' => 'top-end']);
             }
 
             // dd(User::find(Auth::user()->id)->seller->id);
@@ -169,5 +182,16 @@ class CpuComponent extends Component
     public function removePhoto($imageindex): void
     {
         array_splice($this->productImages, $imageindex, 1);
+    }
+
+    public function tryAlert()
+    {
+        // $this->dispatch('product-saved');
+        // $this->alert('success', 'Successssssssssssssssssssssss', [
+        //     'position' => 'top-end']);
+        // $this->alert('error', 'Success', [
+        //     'position' => 'top-end']);
+        // $this->alert('success', 'Success is approaching!');
+        // dd('tse');
     }
 }
