@@ -230,4 +230,8 @@ class Product extends Model
         'rating',
         'purchase_count',
     ];
+
+    protected $casts = [
+        'image' => 'array',
+    ];
 }
