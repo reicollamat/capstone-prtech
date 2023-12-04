@@ -30,6 +30,9 @@ class BuyerRegistration extends Component
     public $user_phone;
 
     #[Rule('required', message: 'Please provide you Birthdate')]
+    #[Rule('date', message: 'Please provide a valid Birthdate')]
+    #[Rule('before: today', message: 'Your Birthdate cannot be in the future or today')]
+    #[Rule('before_or_equal: -18 years', message: 'You must be at least 18 years old')]
     public $user_birthdate;
 
     #[Rule('required', message: 'Please provide Sex/Gender')]
@@ -90,7 +93,7 @@ class BuyerRegistration extends Component
             'last_name' => 'required',
             'user_email' => 'required',
             'user_phone' => 'required',
-            'user_birthdate' => 'required',
+            'user_birthdate' => 'required|date|before: today|before_or_equal: -18 years',
             'user_sex' => 'required',
             'user_address_1' => 'required',
             'user_address_2' => '',
@@ -98,6 +101,8 @@ class BuyerRegistration extends Component
             'user_state_province' => 'required',
             'user_zip_postal' => 'required',
         ]);
+
+        dd($validator);
 
         if ($validator) {
             $user = User::find($this->userid)->update([
@@ -121,5 +126,10 @@ class BuyerRegistration extends Component
                 $this->redirect(abort(505, 'Something went wrong!'));
             }
         }
+    }
+
+    public function delete(User $user)
+    {
+
     }
 }
