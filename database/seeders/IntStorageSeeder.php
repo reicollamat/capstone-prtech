@@ -30,7 +30,7 @@ class IntStorageSeeder extends Seeder
                     'category' => 'int_storage',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => $image,
+                    'image' => [$image],
                     'condition' => $condition,
                 ]);
                 IntStorage::create([

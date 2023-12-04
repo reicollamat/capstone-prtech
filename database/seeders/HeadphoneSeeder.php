@@ -30,7 +30,7 @@ class HeadphoneSeeder extends Seeder
                     'category' => 'headphone',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => $image,
+                    'image' => [$image],
                     'condition' => $condition,
                 ]);
                 Headphone::create([

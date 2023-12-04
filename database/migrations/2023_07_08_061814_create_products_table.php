@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->string('category');
             $table->decimal('price', 20, 2);
-            $table->string('image');
+            $table->text('image');
             $table->string('status')->default('available');
             $table->string('condition');
             $table->integer('stock')->nullable();

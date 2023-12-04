@@ -30,7 +30,7 @@ class MemorySeeder extends Seeder
                     'category' => 'memory',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => $image,
+                    'image' => [$image],
                     'condition' => $condition,
                 ]);
                 Memory::create([

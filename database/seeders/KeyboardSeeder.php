@@ -30,7 +30,7 @@ class KeyboardSeeder extends Seeder
                     'category' => 'keyboard',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => $image,
+                    'image' => [$image],
                     'condition' => $condition,
                 ]);
                 Keyboard::create([

@@ -30,7 +30,7 @@ class ExtStorageSeeder extends Seeder
                     'category' => 'ext_storage',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => $image,
+                    'image' => [$image],
                     'condition' => $condition,
                 ]);
                 ExtStorage::create([

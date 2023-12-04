@@ -30,7 +30,7 @@ class WebcamSeeder extends Seeder
                     'category' => 'webcam',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => $image,
+                    'image' => [$image],
                     'condition' => $condition,
                 ]);
                 Webcam::create([
