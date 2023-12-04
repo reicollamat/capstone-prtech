@@ -3,18 +3,24 @@
         Add New Product
     </x-slot:page_header>
     {{-- Be like water. --}}
-    <div class="mb-2 gap-1.5 flex justify-start  items-center">
-        <div>
-            <h6 class="text-gray-600 mb-0 text-lg tracking-wide text-start">Select
-                Product
-                Category
-                To Start</h6>
+    <div class="mb-2 flex justify-between  items-center">
+        <div class="flex gap-1.5 items-center">
+            <div>
+                <h6 class="text-gray-600 mb-0 text-lg tracking-wide text-start">Select
+                    Product
+                    Category
+                    To Start</h6>
+            </div>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
+                data-bs-placement="right"
+                data-bs-content="Selecting Category first make us dynamically change specific product fields.">
+                <i class="bi bi-question-circle"></i>
+            </span>
         </div>
-        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
-            data-bs-placement="right"
-            data-bs-content="Selecting Category first make us dynamically change specific product fields.">
-            <i class="bi bi-question-circle"></i>
-        </span></label>
+        <div>
+            <button type="reset" wire:click="resetInputs" class="btn btn-outline-secondary btn-sm" >Reset</button>
+        </div>
+
     </div>
     <div class="mb-3 p-4 bg-white border border-gray-200 rounded-lg">
         <div class="flex justify-center items-center">

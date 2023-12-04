@@ -23,4 +23,9 @@
     <button type="button" wire:click="tryAlert">
         <p>Try Alert</p>
     </button>
+
+
+    <div class="border-1 border-green-600">
+        hh
+    </div>
 </div>

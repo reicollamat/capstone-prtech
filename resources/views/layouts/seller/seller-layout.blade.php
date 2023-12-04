@@ -339,6 +339,9 @@
     @livewireScriptConfig
     {{--    @livewireScripts --}}
 
+    {{--  Livewire Alert  --}}
+    <x-livewire-alert::scripts />
+
     <script>
         // this will remove the navbar height from the page height to remove scrolling
         function setChildContainerHeight() {
