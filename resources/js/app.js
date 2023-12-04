@@ -1,12 +1,18 @@
 import "./bootstrap";
 
+import Swal from "sweetalert2";
+
+window.Swal = Swal;
+
+import ToastComponent from '../../vendor/usernotnull/tall-toasts/resources/js/tall-toasts'
+
 import {
     Livewire,
     Alpine,
 } from "../../vendor/livewire/livewire/dist/livewire.esm";
 import collapse from "@alpinejs/collapse";
 
-Alpine.plugin(collapse);
+// Alpine.plugin(ToastComponent);
 
 Livewire.start();
 

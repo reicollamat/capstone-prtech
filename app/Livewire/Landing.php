@@ -5,12 +5,15 @@ namespace App\Livewire;
 use App\Mail\OrderShipped;
 use Exception;
 use Illuminate\Support\Facades\Mail;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Usernotnull\Toast\Concerns\WireToast;
 
 class Landing extends Component
 {
+    use LivewireAlert;
     use WithPagination;
 
     public int $count = 0;
@@ -49,7 +52,15 @@ class Landing extends Component
             Mail::to('raycollamat11@gmail.com')->send(new OrderShipped());
             $this->mailStatus = 'Email Sent';
         } catch (Exception $e) {
-            $this->mailStatus = 'There was an error sending the email: ' . $e->getMessage();
+            $this->mailStatus = 'There was an error sending the email: '.$e->getMessage();
         }
+    }
+
+    public function tryAlert()
+    {
+        $this->alert('success', 'Success', [
+            'position' => 'top-end']);
+        // $this->alert('success', 'Success is approaching!');
+        // dd('tse');
     }
 }

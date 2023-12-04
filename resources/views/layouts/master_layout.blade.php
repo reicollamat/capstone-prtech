@@ -44,6 +44,7 @@
 
 <body class="bg-body-tertiary">
 
+
     {{--    <livewire:announcementbar /> --}}
     @include('headerbar')
     @include('layouts.topbar')
@@ -76,6 +77,16 @@
     @livewireScriptConfig
     {{--    @livewireScripts --}}
 
+    {{-- Livewire Alert --}}
+    <livewire:toasts />
+
+    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+
+    {{--  Livewire Alert  --}}
+    {{-- <livewire:toasts /> --}}
+      <x-livewire-alert::scripts />
+    {{-- <x-livewire-alert::flash />     --}}
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="{{ asset('multishop/lib/easing/easing.min.js') }}"></script>
@@ -87,9 +98,6 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('multishop/js/main.js') }}"></script>
-
-    {{-- larvel notify js --}}
-    {{-- @notifyJs --}}
 </body>
 
 </html>
