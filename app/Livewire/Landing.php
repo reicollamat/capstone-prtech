@@ -58,8 +58,17 @@ class Landing extends Component
 
     public function tryAlert()
     {
-        $this->alert('success', 'Success', [
-            'position' => 'top-end']);
+        $this->alert('question', 'How are you today?', [
+            'showConfirmButton' => true,
+            'confirmButtonText' => 'Good',
+            'onConfirmed' => 'confirmed'
+        ]);
+        // $this->alert('success', 'Successssssssssssssssssssssss', [
+        //     'position' => 'top-end']);
+        //
+        // $this->redirectRoute('collections');
+        // $this->alert('error', 'Success', [
+        //     'position' => 'top-end']);
         // $this->alert('success', 'Success is approaching!');
         // dd('tse');
     }
