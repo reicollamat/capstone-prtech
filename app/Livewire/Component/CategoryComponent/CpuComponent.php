@@ -17,6 +17,7 @@ class CpuComponent extends Component
     use WithFileUploads;
 
     public $previewImage;
+
     public $previewImageIndex;
 
     #[Validate('required', message: 'Please provide a CPU Name')]

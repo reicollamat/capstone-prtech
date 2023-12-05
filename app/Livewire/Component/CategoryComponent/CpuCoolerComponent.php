@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -9,6 +10,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class CpuCoolerComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;

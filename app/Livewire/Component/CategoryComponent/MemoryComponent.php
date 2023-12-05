@@ -2,16 +2,18 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use Livewire\Attributes\Reactive;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class MemoryComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;
+
     public $previewImageIndex;
 
     #[Validate('required', message: 'Please provide a CPU Name')]
@@ -80,7 +82,7 @@ class MemoryComponent extends Component
 
     public function submit()
     {
-        $validator = $this->validate ([
+        $validator = $this->validate([
             'productName' => 'required',
             'productSKU' => 'required',
             'productSlug' => 'required',

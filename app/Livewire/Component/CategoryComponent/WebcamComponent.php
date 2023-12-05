@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class WebcamComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;
@@ -89,8 +91,6 @@ class WebcamComponent extends Component
             'resolution' => 'required|not_in:Click to Select',
             'webcam_fps' => 'required|integer',
             'audio_support' => 'required|not_in:Click to Select',
-            'stocks' => 'required|integer',
-            'reserve_stocks' => 'required|integer',
             'stocks' => 'required|integer',
             'reserve_stocks' => 'required|integer',
         ]);

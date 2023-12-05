@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class MotherboardComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;
