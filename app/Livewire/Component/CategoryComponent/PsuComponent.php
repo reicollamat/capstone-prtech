@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -13,25 +12,26 @@ class PsuComponent extends Component
 
     public $previewImage;
 
-    #[Reactive]
+    public $previewImageIndex;
+
+    #[Validate('required', message: 'Please provide a CPU Name')]
     public $productName;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU SKU')]
     public $productSKU;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Slug')]
     public $productSlug;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Description')]
     public $productDescription;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide a CPU Condition')]
     public $productCondition;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Status', message: 'Please provide a CPU Status')]
     public $productStatus;
 
-    #[Reactive]
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -64,14 +64,9 @@ class PsuComponent extends Component
     #[Validate('required', message: 'Please provide a reserve stock if available')]
     public $reserve_stocks;
 
-    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    public function mount($productCategory)
     {
-        $this->productName = $productName;
-        $this->productSKU = $productSKU;
-        $this->productSlug = $productSlug;
-        $this->productDescription = $productDescription;
-        $this->productCondition = $productCondition;
-        $this->productStatus = $productStatus;
+
         $this->productCategory = $productCategory;
     }
 
@@ -82,24 +77,24 @@ class PsuComponent extends Component
 
     public function submit()
     {
-        $validator = $this->validate ([
-        'productName' => 'required',
-        'productSKU' => 'required',
-        'productSlug' => 'required',
-        'productDescription' => 'required',
-        'productCondition' => 'required|not_in:Select Condition',
-        'productStatus' => 'required|not_in:Select Status',
-        'productCategory' => 'required',
-        'productImages.*' => 'image|max:5120',
-        'brand' => 'required',
-        'price' => 'required|integer',
-        'psu_form' => 'required|not_in:Click to Select',
-        'psu_watts' => 'required|integer',
-        'psu_eff' => 'required|not_in:Click to Select',
-        'psu_color' => 'required',
-        'psu_mod' => 'required|not_in:Click to Select',
-        'stocks' => 'required|integer',
-        'reserve_stocks' => 'required|integer',
+        $validator = $this->validate([
+            'productName' => 'required',
+            'productSKU' => 'required',
+            'productSlug' => 'required',
+            'productDescription' => 'required',
+            'productCondition' => 'required|not_in:Select Condition',
+            'productStatus' => 'required|not_in:Select Status',
+            'productCategory' => 'required',
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'psu_form' => 'required|not_in:Click to Select',
+            'psu_watts' => 'required|integer',
+            'psu_eff' => 'required|not_in:Click to Select',
+            'psu_color' => 'required',
+            'psu_mod' => 'required|not_in:Click to Select',
+            'stocks' => 'required|integer',
+            'reserve_stocks' => 'required|integer',
         ]);
 
         if ($validator) {

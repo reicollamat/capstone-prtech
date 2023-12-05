@@ -13,25 +13,26 @@ class ExtStorageComponent extends Component
 
     public $previewImage;
 
-    #[Reactive]
+    public $previewImageIndex;
+
+    #[Validate('required', message: 'Please provide a CPU Name')]
     public $productName;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU SKU')]
     public $productSKU;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Slug')]
     public $productSlug;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Description')]
     public $productDescription;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide a CPU Condition')]
     public $productCondition;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Status', message: 'Please provide a CPU Status')]
     public $productStatus;
 
-    #[Reactive]
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -41,7 +42,7 @@ class ExtStorageComponent extends Component
     public $brand;
 
     #[Validate('required', message: 'Please provide a price')]
-    public $price;  
+    public $price;
 
     #[Validate('required', message: 'Please provide a storage capacity')]
     public $extstorage_cap;
@@ -58,14 +59,9 @@ class ExtStorageComponent extends Component
     #[Validate('required', message: 'Please provide a reserve stock if available')]
     public $reserve_stocks;
 
-    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    public function mount($productCategory)
     {
-        $this->productName = $productName;
-        $this->productSKU = $productSKU;
-        $this->productSlug = $productSlug;
-        $this->productDescription = $productDescription;
-        $this->productCondition = $productCondition;
-        $this->productStatus = $productStatus;
+
         $this->productCategory = $productCategory;
     }
 

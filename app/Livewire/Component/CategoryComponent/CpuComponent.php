@@ -4,7 +4,6 @@ namespace App\Livewire\Component\CategoryComponent;
 
 use App\Models\Cpu;
 use App\Models\Product;
-use App\Models\Seller;
 use App\Models\User;
 use Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -18,7 +17,6 @@ class CpuComponent extends Component
     use WithFileUploads;
 
     public $previewImage;
-
     public $previewImageIndex;
 
     #[Validate('required', message: 'Please provide a CPU Name')]
@@ -73,12 +71,6 @@ class CpuComponent extends Component
 
     public function mount($productCategory)
     {
-        // $this->productName = $productName;
-        // $this->productSKU = $productSKU;
-        // $this->productSlug = $productSlug;
-        // $this->productDescription = $productDescription;
-        // $this->productCondition = $productCondition;
-        // $this->productStatus = $productStatus;
         $this->productCategory = $productCategory;
     }
 
@@ -89,13 +81,8 @@ class CpuComponent extends Component
 
     public function submit()
     {
-        $this->dispatch('on-save');
-
-        $this->alert('success', 'Product has been created successfully.', [
-            'position' => 'top-end']);
-
         // dd('test');
-
+        // VALIDATE THE INPUT VALUES ACCORDING TO THE VALIDATION RULES
         $validator = $this->validate([
             'productName' => 'required',
             'productSKU' => 'required',
@@ -118,13 +105,13 @@ class CpuComponent extends Component
 
         // dd($validator);
 
-        // $links = [];
+        // CREATE A ARRAY TO STORE THE IMAGE PATH
         $storeas = [];
 
         if ($validator) {
+
             // create a array of image filename and store in ain storage/app/product-image-uploads
             foreach ($this->productImages as $image) {
-                // $links[] = $image->temporaryUrl();
                 $path = $image->store('product-image-uploads', 'real_public');
                 $storeas[] = $path;
             }
@@ -137,14 +124,13 @@ class CpuComponent extends Component
                 'SKU' => $validator['productSKU'],
                 'category' => $validator['productCategory'],
                 'price' => $validator['price'],
-                // 'rating' => 0,
                 'stock' => $validator['stocks'],
                 'reserve' => $validator['reserve_stocks'],
                 // 'image' => implode(',', $storeas),
-                'image' => $storeas,
-                // 'image' => ($storeas),
+                'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
             ]);
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
             $cpu = Cpu::create([
                 'product_id' => $product->id,
                 'category' => $validator['productCategory'],
@@ -159,7 +145,9 @@ class CpuComponent extends Component
                 'description' => $validator['productDescription'],
                 'condition' => $validator['productCondition'],
             ]);
+            // CHECK IF BOTH QUERIES ARE SUCCESSFULL
             if ($product && $cpu) {
+                // dd($product, $cpu);
                 $this->alert('success', 'Product has been created successfully.', [
                     'position' => 'top-end']);
                 $this->reset();
@@ -168,30 +156,35 @@ class CpuComponent extends Component
                     'position' => 'top-end']);
             }
 
-            // dd(User::find(Auth::user()->id)->seller->id);
+        } else {
+            $this->alert('error', 'Unkown error has occurred', [
+                'position' => 'top-end']);
         }
-
     }
 
+    /**
+     * Sets the image URL and index for the preview image.
+     *
+     * @param  string  $imageurl The URL of the image.
+     * @param  int  $imageindex The index of the image.
+     *
+     * @throws \Exception
+     */
     public function setImage($imageurl, $imageindex): void
     {
         $this->previewImage = $imageurl;
         $this->previewImageIndex = $imageindex;
     }
 
+    /**
+     * Removes a photo from the productImages array at the specified index.
+     *
+     * @param  int  $imageindex The index of the photo to remove.
+     *
+     * @throws \Exception If the index is out of bounds.
+     */
     public function removePhoto($imageindex): void
     {
         array_splice($this->productImages, $imageindex, 1);
-    }
-
-    public function tryAlert()
-    {
-        // $this->dispatch('product-saved');
-        // $this->alert('success', 'Successssssssssssssssssssssss', [
-        //     'position' => 'top-end']);
-        // $this->alert('error', 'Success', [
-        //     'position' => 'top-end']);
-        // $this->alert('success', 'Success is approaching!');
-        // dd('tse');
     }
 }
