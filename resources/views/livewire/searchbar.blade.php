@@ -36,7 +36,6 @@
                     Search
                 </button>
             </div>
-
         </div>
     </form>
     <div x-cloak x-show="open"
@@ -53,11 +52,11 @@
                                 class="text-decoration-none text-black">
                                 <div
                                     class="d-flex h-full outline outline-1 outline-gray-200 p-0.5 hover:bg-gray-200 transition-all duration-300">
-                                    <div class="w-16 h-full">
-                                        <img src="{{ asset($product_search->image) }}" alt="image"
-                                            class="w-full h-full" />
+                                    <div class=" w-20 h-auto content-center">
+                                        <img src="{{ asset($product_search->image[0]) }}" alt="image"
+                                            class="w-20 h-20 object-contain" />
                                     </div>
-                                    <div class="flex-grow-1 d-flex flex-col ml-3">
+                                    <div class="flex-1 d-flex flex-col ml-3">
                                         <div>
                                             <h1 class="text-lg">{{ $product_search->title }}</h1>
                                         </div>
