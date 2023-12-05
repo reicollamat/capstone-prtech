@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('seller_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            $table->string('SKU')->nullable();
+            $table->string('sku')->nullable();
             $table->string('slug')->nullable();
             $table->string('category');
             $table->decimal('price', 20, 2);
-            $table->text('image');
+            $table->text('image')->default(json_encode(['img/no-image-placeholder.png']))->nullable();
             $table->string('status')->default('available');
             $table->string('condition');
             $table->integer('stock')->nullable();
