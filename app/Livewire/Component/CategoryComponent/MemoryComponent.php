@@ -2,9 +2,13 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Attributes\Validate;
+use App\Models\User;
+use App\Models\Memory;
+use App\Models\Product;
 use Livewire\Component;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class MemoryComponent extends Component
@@ -47,6 +51,9 @@ class MemoryComponent extends Component
 
     #[Validate('required', message: 'Please provide a selection')]
     public $mem_gen;
+
+    #[Validate('required', message: 'Please provide how many memory modules')]
+    public $modules;
 
     #[Validate('required', message: 'Please provide memory capacity')]
     public $mem_cap;
@@ -94,6 +101,7 @@ class MemoryComponent extends Component
             'brand' => 'required',
             'price' => 'required|integer',
             'mem_gen' => 'required|not_in:Click to Select',
+            'modules' => 'required',
             'mem_cap' => 'required|integer',
             'mem_speed' => 'required|integer',
             'mem_latency' => 'required|integer',
@@ -103,9 +111,66 @@ class MemoryComponent extends Component
             'reserve_stocks' => 'required|integer',
         ]);
 
-        if ($validator) {
+        // dd($validator);
 
-            dd($validator);
+        // CREATE A ARRAY TO STORE THE IMAGE PATH
+        $storeas = [];
+
+        if ($validator) {
+            // create a array of image filename and store in ain storage/app/product-image-uploads
+            foreach ($this->productImages as $image) {
+                $path = $image->store('product-image-uploads', 'real_public');
+                $storeas[] = $path;
+            }
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $product = Product::create([
+                'seller_id' => User::find(Auth::user()->id)->seller->id,
+                'title' => $validator['productName'],
+                'slug' => $validator['productSlug'],
+                'SKU' => $validator['productSKU'],
+                'category' => $validator['productCategory'],
+                'price' => $validator['price'],
+                'stock' => $validator['stocks'],
+                'reserve' => $validator['reserve_stocks'],
+                // 'image' => implode(',', $storeas),
+                'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+                'condition' => $validator['productCondition'],
+            ]);
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $memory = Memory::create([
+                'product_id' => $product->id,
+                'category' => $validator['productCategory'],
+                'name' => $validator['productName'],
+                'brand' => $validator['brand'],
+                'price' => $validator['price'],
+                'speed' => $validator['mem_speed'],
+                'cas_latency' => $validator['mem_latency'],
+                'modules' => $validator['modules'],
+                'color' => $validator['mem_color'],
+                // 'smt' => $value->smt,
+                'description' => $validator['productDescription'],
+                'condition' => $validator['productCondition'],
+            ]);
+
+            // dd($memory, $product);
+
+            // CHECK IF BOTH QUERIES ARE SUCCESSFULL
+            if ($product && $memory) {
+                // dd($product, $cpu);
+                $this->alert('success', 'Product has been created successfully.', [
+                    'position' => 'top-end'
+                ]);
+                $this->reset();
+            } else {
+                $this->alert('error', 'Product has not been created.', [
+                    'position' => 'top-end'
+                ]);
+            }
+        } else {
+            $this->alert('error', 'Unkown error has occurred', [
+                'position' => 'top-end'
+            ]);
         }
 
         // if ($validator) {
