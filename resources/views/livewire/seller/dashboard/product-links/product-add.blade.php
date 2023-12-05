@@ -227,7 +227,7 @@
                 {{ 'For ' . CustomHelper::maptopropercatetory($productCategory) }}</h6>
         </div>
     </div>
-    <div class="p-4 bg-white border border-gray-200 rounded-lg">
+    <div>
         <div class="relative my-3">
             <livewire:dynamic-component :is="$view" :key="$view" :productCategory="$productCategory" />
         </div>
