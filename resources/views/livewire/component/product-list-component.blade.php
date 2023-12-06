@@ -8,8 +8,9 @@
             <label for="select_products" class="sr-only"></label>
             <div class="relative items-center  mb-0 min-w-[60px] p-2 !text-gray-800 !font-light">
                 {{--                 <img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" --}}
-                <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-9 h-9" alt="Product-Thumbnail">
+                <img src="{{ asset($item->image[12]) }}" class="rounded-lg mx-auto d-block w-9 h-9" alt="Product-Thumbnail">
             </div>
+{{--            @dd($item)--}}
             <div class="mb-0 min-w-[40px] p-2 !text-gray-800 !font-light">
                 {{ $item->id }}
             </div>
@@ -47,7 +48,7 @@
                 <div class="p-2 flex flex-col lg:flex-row">
                     <div class="px-6 content-center">
                         <div class="flex flex-col justify-center items-center p-2.5 gap-2">
-                            <img src="{{ asset($item->image) }}"
+                            <img src="{{ asset($item->image[0]) }}"
                                 class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-28 h-28"
                                 alt="Product-Thumbnail">
                             <p class="text-center">+ Add Image</p>
