@@ -97,7 +97,8 @@ class Collections extends Component
     public function getProducts()
     {
         if ($this->search && $this->category_filter && $this->conditon_filter) {
-            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('category', $this->category_filter)
                 ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
@@ -105,52 +106,63 @@ class Collections extends Component
         }
 
         if ($this->search && $this->category_filter) {
-            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('category', $this->category_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
         if ($this->search && $this->conditon_filter) {
-            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->category_filter && $this->conditon_filter) {
-            return Product::whereIn('condition', $this->conditon_filter)->whereIn('category', $this->category_filter)
+            return Product::with('product_images')
+                ->whereIn('condition', $this->conditon_filter)->whereIn('category', $this->category_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->category_filter) {
-            return Product::whereIn('category', $this->category_filter)
+            return Product::with('product_images')
+                ->whereIn('category', $this->category_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->conditon_filter) {
-            return Product::whereIn('condition', $this->conditon_filter)
+            return Product::with('product_images')
+                ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->search) {
-            return Product::where(strtolower('title'), 'like', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->category) {
-            return Product::where('category', '=', $this->category)
+            return Product::with('product_images')
+                ->where('category', '=', $this->category)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->sortingby && $this->sortdirection) {
-            return Product::orderBy($this->sortingby, $this->sortdirection)->paginate(12);
-        } else {
-            return Product::paginate(12);
+            return Product::with('product_images')
+                ->orderBy($this->sortingby, $this->sortdirection)->paginate(12);
+        }
+        //
+        else {
+            return Product::with('product_images')
+                ->paginate(12);
         }
     }
 

@@ -12,8 +12,8 @@
     {{-- session flash notification --}}
     {{-- for add-to-wishlist --}}
     <div class="alert alert-primary rounded alert-dismissible fade show" role="alert"
-        style="display: none; position: fixed; top: 20px; right: 25px; width: 25%; z-index:9999; font-size: 14px;" x-data="{ show: false }"
-        x-show="show" x-transition:leave.duration.500ms x-init="@this.on('notif-alert-wishlist', () => {
+        style="display: none; position: fixed; top: 20px; right: 25px; width: 25%; z-index:9999; font-size: 14px;"
+        x-data="{ show: false }" x-show="show" x-transition:leave.duration.500ms x-init="@this.on('notif-alert-wishlist', () => {
             show = true;
             setTimeout(() => { show = false; }, 5000)
         })">
@@ -609,8 +609,10 @@
                                             class="position-relative w-auto h-auto bg-center bg-cover content-center min-h-[257px] p-2">
                                             <a
                                                 href="{{ route('collections-details', ['product_id' => $value->id, 'category' => $value->category]) }}">
+                                                {{-- @dd($value->product_images[0]->image_paths) --}}
                                                 <img class="h-auto max-h-[200px] w-auto object-center object-contain"
-                                                    src="{{ asset($value->image[0]) }}" alt="product image" />
+                                                    src="{{ asset($value->product_images[0]->image_paths) }}"
+                                                    alt="product image" />
                                             </a>
                                         </div>
                                         {{--                                        {{ $value->id }} --}}
