@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Seller\Dashboard;
 
+use App\Models\Product;
 use App\Models\Seller;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -21,7 +22,6 @@ class SellerLanding extends Component
         // $this->getTotalEarnings();
 
     }
-
     public function render()
     {
         return view('livewire..seller.dashboard.seller-landing');
@@ -36,12 +36,19 @@ class SellerLanding extends Component
         return $metrics;
     }
 
-    // #[Computed]
-    // public function getTotalOrders()
-    // {
-    //     // dd($this->seller_id);
-    //     $metrics =
-    //
-    //     return $metrics;
-    // }
+    #[Computed]
+    public function getTotalOrders()
+    {
+        // dd($this->seller_id);
+        // $metrics =
+
+        $orders = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->where('seller_id', $this->seller_id)
+            ->groupBy('purchase_id')->toSql();
+
+        dd($orders);
+
+        return 0;
+    }
 }
