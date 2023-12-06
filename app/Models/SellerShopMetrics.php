@@ -21,7 +21,8 @@ class SellerShopMetrics extends Model
      * @var array
      */
     protected $fillable = [
+        'seller_id',
         'total_earnings',
-
+        'target_sales',
     ];
 }

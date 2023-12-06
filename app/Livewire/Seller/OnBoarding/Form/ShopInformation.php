@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Seller\OnBoarding\Form;
 
+use App\Models\SellerShopMetrics;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
@@ -14,6 +16,8 @@ use Livewire\Component;
 #[Title('Shop Information')]
 class ShopInformation extends Component
 {
+    use LivewireAlert;
+
     public $currentStep;
 
     public $minStep = 1;
@@ -106,7 +110,7 @@ class ShopInformation extends Component
 
     public function SecondStepSubmit()
     {
-        $this->validate(
+        $validator = $this->validate(
             [
                 'registered_name' => 'required',
                 'registered_address' => 'required',
@@ -115,6 +119,7 @@ class ShopInformation extends Component
                 'registered_zip_code' => 'required',
             ]
         );
+
         sleep(0.5);
 
         // add here the database query for creation of seller shop information.
@@ -122,9 +127,11 @@ class ShopInformation extends Component
 
         $user = User::find($this->user_id);
 
+        // dd($user);
+
         try {
             // create a seller information account using the $user model
-            $user->seller()->create(
+            $seller = $user->seller()->create(
                 [
                     'shop_name' => $this->shop_name,
                     'shop_email' => $user->email,
@@ -140,6 +147,24 @@ class ShopInformation extends Component
                     'registered_postal_code' => $this->registered_zip_code,
                 ]
             );
+
+            $seller_metrics = SellerShopMetrics::create([
+                'seller_id' => $seller->id,
+            ]);
+
+            if ($seller && $seller_metrics) {
+                $this->alert('success', 'Shop information created successfully',[
+                    'position' => 'center',
+                    'toast' => false,
+                ]);
+
+                // change the form to 3rd step if validation is passed
+                $this->currentStep = 3;
+
+            } else {
+                $this->redirect(abort(500, 'Something went wrong!'));
+            }
+
             //         set the is_seller to true
             $user->update(['is_seller' => true]);
 
@@ -147,8 +172,15 @@ class ShopInformation extends Component
             abort(500, $e->getMessage());
         }
 
-        // change the form to 3rd step if validation is passed
-        $this->currentStep = 3;
+
 
     }
+
+    // public function testalert()
+    // {
+    //     $this->alert('success', 'Shop information created successfully',[
+    //         'position' => 'center',
+    //         'toast' => false,
+    //     ]);
+    // }
 }

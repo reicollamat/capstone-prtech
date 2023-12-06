@@ -4,12 +4,15 @@ namespace App\Livewire\Component\CategoryComponent;
 
 use App\Models\Cpu;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\User;
 use Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+
+use function Livewire\store;
 
 class CpuComponent extends Component
 {
@@ -82,6 +85,7 @@ class CpuComponent extends Component
 
     public function submit()
     {
+        // dd($validator);
         // dd('test');
         // VALIDATE THE INPUT VALUES ACCORDING TO THE VALIDATION RULES
         $validator = $this->validate([
@@ -109,6 +113,7 @@ class CpuComponent extends Component
         // CREATE A ARRAY TO STORE THE IMAGE PATH
         $storeas = [];
 
+
         if ($validator) {
 
             // create a array of image filename and store in ain storage/app/product-image-uploads
@@ -128,9 +133,30 @@ class CpuComponent extends Component
                 'stock' => $validator['stocks'],
                 'reserve' => $validator['reserve_stocks'],
                 // 'image' => implode(',', $storeas),
-                'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+                // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
             ]);
+
+            // loop through the images from the file upload
+            // if there are many images in the array loop it and  create a row in db
+            if (count($storeas) > 0) {
+                foreach ($storeas as $image) {
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_paths' => $image,
+                    ]);
+                }
+            // else if there is only one image in the array create a row in db with no image
+            } else {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => 'img/no-image-placeholder.png',
+                ]);
+            }
+
+            // $images = ProductImage::create([
+            //     'image_paths' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+            // ]);
             // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
             $cpu = Cpu::create([
                 'product_id' => $product->id,

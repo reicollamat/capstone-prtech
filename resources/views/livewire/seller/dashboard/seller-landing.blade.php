@@ -126,10 +126,11 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column ">
-                        <small class="text-muted d-block mb-1">Total Earnings</small>
+                    <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column" wire:poll.120s>
+                        <small class="text-muted d-block mb-1">Total Earnings <span class="text-xs text-gray-500">Updated every 2 minutes</span></small>
                         <p class="h3 text-black fw-light mt-auto">
-                            65,661
+                            {{ $this->getTotalEarnings->total_earnings ?? 0 }}
+{{--                            @dd($this->getTotalEarnings->total_earnings)--}}
                         </p>
                     </div>
                 </div>
