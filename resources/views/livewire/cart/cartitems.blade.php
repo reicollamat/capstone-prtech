@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col-md-3 d-flex p-2 justify-center">
-            <img src="/{{ $cartitem->image }}" class="img-fluid img-thumbnail rounded-start border-0 self-center"
+            <img src="/{{ $cartitem->image[0] }}" class="img-fluid img-thumbnail rounded-start border-0 self-center"
                 alt="item image" style="height: 80%!important;">
         </div>
         <div class="col-md-9 self-center">
