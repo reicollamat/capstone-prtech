@@ -28,7 +28,7 @@ class OrderShipped extends Mailable
     {
         return new Envelope(
             from: new Address('prtech.business@gmail.com', 'PR-TECH'),
-            subject: 'PR-TECH Order Process Complete',
+            subject: 'PR-TECH Order Process Information',
         );
     }
 
