@@ -314,7 +314,7 @@
                                 <div x-data="{ expanded: false }" class="border-b border-gray-100">
                                     <div class="grid grid-cols-12 text-center">
                                         <div class="col-span-1 my-4 !text-gray-800 !font-light">
-                                            <img src="{{ asset($item->image[0]) }}"
+                                            <img src="{{ asset($item->product_images[0]->image_paths) }}"
                                                 class="rounded-lg mx-auto d-block w-9 h-9" alt="Product-Thumbnail">
                                         </div>
                                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
@@ -453,7 +453,7 @@
                                             <div class="p-2 flex flex-col lg:flex-row">
                                                 <div class="px-6 content-center">
                                                     <div class="flex flex-col justify-center items-center p-2.5 gap-2">
-                                                        <img src="{{ asset($item->image[0]) }}"
+                                                        <img src="{{ asset($item->product_images[0]->image_paths) }}"
                                                             class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-28 h-28"
                                                             alt="Product-Thumbnail">
                                                     </div>
