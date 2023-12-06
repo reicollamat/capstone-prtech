@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\CpuCooler;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class CpuCoolerSeeder extends Seeder
                     'category' => 'cpu_cooler',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 CpuCooler::create([
                     'product_id' => $product->id,
                     'category' => 'cpu_cooler',
@@ -42,7 +49,7 @@ class CpuCoolerSeeder extends Seeder
                     'noise_level' => $value->noise_level,
                     'color' => $value->color,
                     'size' => $value->size,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

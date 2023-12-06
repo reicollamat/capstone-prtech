@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\CaseFan;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -21,18 +22,24 @@ class CaseFanSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/casefan/casefan ('.fake()->numberBetween(1, 2).').png';
+            $image = 'img/components/casefan/casefan (' . fake()->numberBetween(1, 2) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
                     'seller_id' => Seller::find(1)->id,
                     'title' => $value->name,
                     'category' => 'case_fan',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 CaseFan::create([
                     'product_id' => $product->id,
                     'category' => 'case_fan',
@@ -44,7 +51,7 @@ class CaseFanSeeder extends Seeder
                     'airflow' => $value->airflow,
                     'noise_level' => $value->noise_level,
                     'pwm' => $value->pwm,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Mouse;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class MouseSeeder extends Seeder
                     'category' => 'mouse',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 Mouse::create([
                     'product_id' => $product->id,
                     'category' => 'mouse',
@@ -43,7 +50,7 @@ class MouseSeeder extends Seeder
                     'max_dpi' => $value->max_dpi,
                     'hand_orientation' => $value->hand_orientation,
                     'color' => $value->color,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

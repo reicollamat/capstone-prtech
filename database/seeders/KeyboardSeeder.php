@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Keyboard;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class KeyboardSeeder extends Seeder
                     'category' => 'keyboard',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 Keyboard::create([
                     'product_id' => $product->id,
                     'category' => 'keyboard',
@@ -44,7 +51,7 @@ class KeyboardSeeder extends Seeder
                     'tenkeyless' => $value->tenkeyless,
                     'connection_type' => $value->connection_type,
                     'color' => $value->color,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

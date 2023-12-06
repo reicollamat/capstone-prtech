@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Headphone;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class HeadphoneSeeder extends Seeder
                     'category' => 'headphone',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 Headphone::create([
                     'product_id' => $product->id,
                     'category' => 'headphone',
@@ -44,7 +51,7 @@ class HeadphoneSeeder extends Seeder
                     'wireless' => $value->wireless,
                     'enclosure_type' => $value->enclosure_type,
                     'color' => $value->color,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

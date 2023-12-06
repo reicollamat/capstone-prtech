@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Memory;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class MemorySeeder extends Seeder
                     'category' => 'memory',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 Memory::create([
                     'product_id' => $product->id,
                     'category' => 'memory',
@@ -44,7 +51,7 @@ class MemorySeeder extends Seeder
                     'color' => $value->color,
                     'first_word_latency' => $value->first_word_latency,
                     'cas_latency' => $value->cas_latency,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

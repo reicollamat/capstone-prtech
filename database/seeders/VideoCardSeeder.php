@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\VideoCard;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class VideoCardSeeder extends Seeder
                     'category' => 'video_card',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 VideoCard::create([
                     'product_id' => $product->id,
                     'category' => 'video_card',
@@ -44,7 +51,7 @@ class VideoCardSeeder extends Seeder
                     'boost_clock' => $value->boost_clock,
                     'length' => $value->length,
                     'color' => $value->color,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

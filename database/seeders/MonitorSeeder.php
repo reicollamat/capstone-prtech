@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Monitor;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class MonitorSeeder extends Seeder
                     'category' => 'monitor',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 Monitor::create([
                     'product_id' => $product->id,
                     'category' => 'monitor',
@@ -44,7 +51,7 @@ class MonitorSeeder extends Seeder
                     'response_time' => $value->response_time,
                     'panel_type' => $value->panel_type,
                     'aspect_ratio' => $value->aspect_ratio,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

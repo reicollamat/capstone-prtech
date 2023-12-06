@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Cpu;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class CpuSeeder extends Seeder
                     'category' => 'cpu',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 Cpu::create([
                     'product_id' => $product->id,
                     'category' => 'cpu',
@@ -44,7 +51,7 @@ class CpuSeeder extends Seeder
                     'tdp' => $value->tdp,
                     'graphics' => $value->graphics,
                     'smt' => $value->smt,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);

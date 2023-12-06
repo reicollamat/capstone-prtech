@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\ComputerCase;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -30,9 +31,15 @@ class ComputerCaseSeeder extends Seeder
                     'category' => 'computer_case',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
-                    'image' => [$image],
+                    // 'image' => [$image],
                     'condition' => $condition,
                 ]);
+
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => $image,
+                ]);
+
                 ComputerCase::create([
                     'product_id' => $product->id,
                     'category' => 'computer_case',
@@ -44,7 +51,7 @@ class ComputerCaseSeeder extends Seeder
                     'sidepanel' => $value->side_panel,
                     'external_525_bays' => $value->external_525_bays,
                     'internal_35_bays' => $value->internal_35_bays,
-                    'image' => $image,
+                    // 'image' => $image,
                     'description' => fake()->paragraph(),
                     'condition' => $condition,
                 ]);
