@@ -40,7 +40,7 @@ class CartList extends Component
         if (Auth::check()) {
             $this->user_id = Auth::id();
 
-            $this->cartitems = Product::join('cart_items', 'products.id', '=', 'cart_items.product_id')
+            $this->cartitems = CartItem::with('product')
                 ->where('user_id', $this->user_id)
                 ->get();
 
