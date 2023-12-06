@@ -87,6 +87,8 @@ class ProductListComponent extends Component
         //        dd($this->itemProductInfo);
 
         //        dd(base_path('resources/views/compo'));
+
+        // dd($item);
     }
 
     public function render()
