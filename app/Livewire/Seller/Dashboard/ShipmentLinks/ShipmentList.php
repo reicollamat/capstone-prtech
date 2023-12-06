@@ -122,9 +122,9 @@ class ShipmentList extends Component
     public function getToShipList()
     {
         // query for purchased items of products from current seller
-        $this->shipment_items = Shipments::join('purchases', 'shipments.purchase_id', '=', 'purchases.id')
-            ->join('purchase_items', 'purchases.id', '=', 'purchase_items.purchase_id')
-            ->join('products', 'purchase_items.product_id', '=', 'products.id')
+        $this->shipment_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->join('shipments', 'purchases.id', '=', 'shipments.purchase_id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id)
             ->where('shipments.shipment_status', 'to_ship');
@@ -160,9 +160,9 @@ class ShipmentList extends Component
     public function getShippingList()
     {
         // query for purchased items of products from current seller
-        $this->shipment_items = Shipments::join('purchases', 'shipments.purchase_id', '=', 'purchases.id')
-            ->join('purchase_items', 'purchases.id', '=', 'purchase_items.purchase_id')
-            ->join('products', 'purchase_items.product_id', '=', 'products.id')
+        $this->shipment_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->join('shipments', 'purchases.id', '=', 'shipments.purchase_id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id)
             ->where('shipments.shipment_status', 'shipping');
@@ -204,9 +204,9 @@ class ShipmentList extends Component
     public function getDeliveredList()
     {
         // query for purchased items of products from current seller
-        $this->shipment_items = Shipments::join('purchases', 'shipments.purchase_id', '=', 'purchases.id')
-            ->join('purchase_items', 'purchases.id', '=', 'purchase_items.purchase_id')
-            ->join('products', 'purchase_items.product_id', '=', 'products.id')
+        $this->shipment_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+            ->join('shipments', 'purchases.id', '=', 'shipments.purchase_id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id)
             ->where('shipments.shipment_status', 'completed');

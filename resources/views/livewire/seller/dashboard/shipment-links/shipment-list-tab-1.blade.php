@@ -40,7 +40,7 @@
                                 alt="Product-Thumbnail">
                         </div>
                         <div class="col-span-1 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                            [{{ $item->referenceId }}]
+                            {{ $item->referenceId }}
                         </div>
                         <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
                             {{ $item->title }}
