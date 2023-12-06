@@ -38,7 +38,7 @@
                         <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
                             <img src="{{ asset($item->image[0]) }}" class="rounded-lg mx-auto d-block w-9 h-9"
                                 alt="Product-Thumbnail">
-                            {{ $item->image[] }}
+                            {{ $item->image[0] }}
                         </div>
                         <div class="col-span-1 mb-0 py-3 text-sm !text-gray-800 !font-light">
                             [{{ $item->referenceId }}]
