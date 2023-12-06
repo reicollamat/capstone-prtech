@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -29,6 +31,11 @@ class Purchase extends Model
         return $this->hasOne(Payment::class);
     }
 
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,6 +43,7 @@ class Purchase extends Model
      */
     protected $fillable = [
         'user_id',
+        'seller_id',
         'purchase_date',
         'total_amount',
         'purchase_status',

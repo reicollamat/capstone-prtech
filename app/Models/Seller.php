@@ -30,6 +30,11 @@ class Seller extends Model
         return $this->hasMany(SellerShopMetrics::class);
     }
 
+    public function sellerOrders(): HasMany
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
