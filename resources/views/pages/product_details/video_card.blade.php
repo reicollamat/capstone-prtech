@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Chipset:</strong>
         </td>
         <td>
-            @if ($product->chipset === null)
+            @if ($categoryproduct->chipset === null)
                 None
             @else
-                {{ $product->chipset }}
+                {{ $categoryproduct->chipset }}
             @endif
         </td>
     </tr>
@@ -50,10 +49,10 @@
             <strong class="text-dark mr-3">Memory:</strong>
         </td>
         <td>
-            @if ($product->memory === null)
+            @if ($categoryproduct->memory === null)
                 None
             @else
-                {{ $product->memory }} GB
+                {{ $categoryproduct->memory }} GB
             @endif
         </td>
     </tr>
@@ -62,10 +61,10 @@
             <strong class="text-dark mr-3">Core Clock:</strong>
         </td>
         <td>
-            @if ($product->core_clock === null)
+            @if ($categoryproduct->core_clock === null)
                 None
             @else
-                {{ $product->core_clock }} MHz
+                {{ $categoryproduct->core_clock }} MHz
             @endif
         </td>
     </tr>
@@ -74,10 +73,10 @@
             <strong class="text-dark mr-3">Boost Clock:</strong>
         </td>
         <td>
-            @if ($product->boost_clock === null)
+            @if ($categoryproduct->boost_clock === null)
                 None
             @else
-                {{ $product->boost_clock }} MHz
+                {{ $categoryproduct->boost_clock }} MHz
             @endif
         </td>
     </tr>
@@ -86,10 +85,10 @@
             <strong class="text-dark mr-3">Length:</strong>
         </td>
         <td>
-            @if ($product->length === null)
+            @if ($categoryproduct->length === null)
                 None
             @else
-                {{ $product->length }} mm
+                {{ $categoryproduct->length }} mm
             @endif
         </td>
     </tr>
@@ -98,10 +97,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>

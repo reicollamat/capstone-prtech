@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Configuration:</strong>
         </td>
         <td>
-            @if ($product->configuration === null)
+            @if ($categoryproduct->configuration === null)
                 None
             @else
-                {{ $product->configuration }}
+                {{ $categoryproduct->configuration }}
             @endif
         </td>
     </tr>
@@ -50,10 +49,10 @@
             <strong class="text-dark mr-3">Wattage:</strong>
         </td>
         <td>
-            @if ($product->wattage === null)
+            @if ($categoryproduct->wattage === null)
                 None
             @else
-                {{ $product->wattage }} W
+                {{ $categoryproduct->wattage }} W
             @endif
         </td>
     </tr>
@@ -62,13 +61,13 @@
             <strong class="text-dark mr-3">Frequency response:</strong>
         </td>
         <td>
-            @if ($product->frequency_response === null)
+            @if ($categoryproduct->frequency_response === null)
                 None
             @else
-                @if (is_array($product->noise_level) && count($product->noise_level) > 1)
-                    {{ min($product->noise_level) }} Hz - {{ max($product->noise_level) }} kHz
+                @if (is_array($categoryproduct->noise_level) && count($categoryproduct->noise_level) > 1)
+                    {{ min($categoryproduct->noise_level) }} Hz - {{ max($categoryproduct->noise_level) }} kHz
                 @else
-                    {{ $product->noise_level }} kHz
+                    {{ $categoryproduct->noise_level }} kHz
                 @endif
             @endif
         </td>
@@ -78,10 +77,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>

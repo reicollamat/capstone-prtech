@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Type:</strong>
         </td>
         <td>
-            @if ($product->type === null)
+            @if ($categoryproduct->type === null)
                 None
             @else
-                {{ $product->type }}
+                {{ $categoryproduct->type }}
             @endif
         </td>
     </tr>
@@ -50,10 +49,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>
@@ -62,10 +61,10 @@
             <strong class="text-dark mr-3">PSU:</strong>
         </td>
         <td>
-            @if ($product->psu === null)
+            @if ($categoryproduct->psu === null)
                 None
             @else
-                {{ $product->psu }}
+                {{ $categoryproduct->psu }}
             @endif
         </td>
     </tr>
@@ -74,10 +73,10 @@
             <strong class="text-dark mr-3">Side Panel:</strong>
         </td>
         <td>
-            @if ($product->sidepanel === null)
+            @if ($categoryproduct->sidepanel === null)
                 None
             @else
-                {{ $product->sidepanel }}
+                {{ $categoryproduct->sidepanel }}
             @endif
         </td>
     </tr>
@@ -86,10 +85,10 @@
             <strong class="text-dark mr-3">External 5.25" Bays:</strong>
         </td>
         <td>
-            @if ($product->external_525_bays === null)
+            @if ($categoryproduct->external_525_bays === null)
                 None
             @else
-                {{ $product->external_525_bays }}
+                {{ $categoryproduct->external_525_bays }}
             @endif
         </td>
     </tr>
@@ -98,10 +97,10 @@
             <strong class="text-dark mr-3">Internal 3.5" Bays:</strong>
         </td>
         <td>
-            @if ($product->internal_35_bays === null)
+            @if ($categoryproduct->internal_35_bays === null)
                 None
             @else
-                {{ $product->internal_35_bays }}
+                {{ $categoryproduct->internal_35_bays }}
             @endif
         </td>
     </tr>

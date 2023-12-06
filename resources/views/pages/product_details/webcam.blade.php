@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,63 +24,62 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Resolutions:</strong>
         </td>
         <td>
-            @if ($product->resolutions === null)
+            @if ($categoryproduct->resolutions === null)
                 None
             @else
-                @if (is_array($product->resolutions))
-                    {{ implode(', ', $product->resolutions) }}
+                @if (is_array($categoryproduct->resolutions))
+                    {{ implode(', ', $categoryproduct->resolutions) }}
                 @endif
             @endif
         </td>
     </tr>
     <tr>
-        <tr>
-            <td class="header">
-                <strong class="text-dark mr-3">Connection:</strong>
-            </td>
-            <td>
-                @if ($product->connection === null)
-                    None
-                @else
-                    {{ $product->connection }}
-                @endif
-            </td>
-        </tr>
+    <tr>
         <td class="header">
-            <strong class="text-dark mr-3">Focus type:</strong>
+            <strong class="text-dark mr-3">Connection:</strong>
         </td>
         <td>
-            @if ($product->focus_type === null)
+            @if ($categoryproduct->connection === null)
                 None
             @else
-                {{ $product->focus_type }}
+                {{ $categoryproduct->connection }}
             @endif
         </td>
+    </tr>
+    <td class="header">
+        <strong class="text-dark mr-3">Focus type:</strong>
+    </td>
+    <td>
+        @if ($categoryproduct->focus_type === null)
+            None
+        @else
+            {{ $categoryproduct->focus_type }}
+        @endif
+    </td>
     </tr>
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Operating System:</strong>
         </td>
         <td>
-            @if ($product->os === null)
+            @if ($categoryproduct->os === null)
                 None
             @else
-                @if (is_array($product->os))
-                    {{ implode(', ', $product->os) }}
+                @if (is_array($categoryproduct->os))
+                    {{ implode(', ', $categoryproduct->os) }}
                 @endif
             @endif
         </td>
@@ -90,10 +89,10 @@
             <strong class="text-dark mr-3">FOV Angle:</strong>
         </td>
         <td>
-            @if ($product->fov === null)
+            @if ($categoryproduct->fov === null)
                 None
             @else
-                {{ $product->fov }}°
+                {{ $categoryproduct->fov }}°
             @endif
         </td>
     </tr>

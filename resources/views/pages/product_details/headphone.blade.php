@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,10 +24,10 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
@@ -38,10 +38,10 @@
             <strong class="text-dark mr-3">Type:</strong>
         </td>
         <td>
-            @if ($product->type === null)
+            @if ($categoryproduct->type === null)
                 None
             @else
-                {{ $product->type }}
+                {{ $categoryproduct->type }}
             @endif
         </td>
     </tr>
@@ -50,13 +50,13 @@
             <strong class="text-dark mr-3">Frequency Response:</strong>
         </td>
         <td>
-            @if ($product->frequency_response === null)
+            @if ($categoryproduct->frequency_response === null)
                 None
             @else
-                @if (is_array($product->frequency_response) && count($product->frequency_response) > 1)
-                    {{ min($product->frequency_response) }} Hz - {{ max($product->frequency_response) }} kHz
+                @if (is_array($categoryproduct->frequency_response) && count($categoryproduct->frequency_response) > 1)
+                    {{ min($categoryproduct->frequency_response) }} Hz - {{ max($categoryproduct->frequency_response) }} kHz
                 @else
-                    {{ $product->frequency_response }} kHz
+                    {{ $categoryproduct->frequency_response }} kHz
                 @endif
             @endif
         </td>
@@ -66,10 +66,10 @@
             <strong class="text-dark mr-3">Microphone:</strong>
         </td>
         <td>
-            @if ($product->microphone === null)
+            @if ($categoryproduct->microphone === null)
                 None
             @else
-                @if ($product->microphone === 1)
+                @if ($categoryproduct->microphone === 1)
                     Yes
                 @else
                     No
@@ -82,10 +82,10 @@
             <strong class="text-dark mr-3">Wireless:</strong>
         </td>
         <td>
-            @if ($product->wireless === null)
+            @if ($categoryproduct->wireless === null)
                 None
             @else
-                @if ($product->wireless === 1)
+                @if ($categoryproduct->wireless === 1)
                     Yes
                 @else
                     No
@@ -98,10 +98,10 @@
             <strong class="text-dark mr-3">Enclosure type:</strong>
         </td>
         <td>
-            @if ($product->enclosure_type === null)
+            @if ($categoryproduct->enclosure_type === null)
                 None
             @else
-                {{ $product->enclosure_type }}
+                {{ $categoryproduct->enclosure_type }}
             @endif
         </td>
     </tr>
@@ -110,10 +110,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>

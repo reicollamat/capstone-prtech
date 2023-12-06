@@ -46,7 +46,7 @@ class ShopController extends Controller
 
         // get checked categories
         if ($request->sort) {
-            if (! empty(array_diff(array_keys($request->query()), ['sort', 'direction']))) {
+            if (!empty(array_diff(array_keys($request->query()), ['sort', 'direction']))) {
                 // get products with check categories
                 $products = Product::sortable();
 
@@ -76,7 +76,7 @@ class ShopController extends Controller
         } else {
             if ($request->to_search) {
                 $to_search = $request->to_search;
-                $products = Product::where('title', 'ilike', '%'.$to_search.'%')->sortable()->paginate(30);
+                $products = Product::where('title', 'ilike', '%' . $to_search . '%')->sortable()->paginate(30);
                 Session::put('to_search', $to_search);
 
                 return view('pages.shop', [
@@ -121,7 +121,7 @@ class ShopController extends Controller
             $modelClass = $categoryMap[$category];
 
             // Resolve the model using the model class and product_id
-            $product = app()->make($modelClass)->where('product_id', $product_id)->get()->first();
+            $categoryproduct = app()->make($modelClass)->where('product_id', $product_id)->get()->first();
         } else {
             // Handle the case when the category doesn't exist
             abort(404);
@@ -157,8 +157,10 @@ class ShopController extends Controller
             abort(404);
         }
 
+        // dd($categoryproduct->product->core_count);
+
         return view('pages.productdetail', [
-            'product' => $product,
+            'categoryproduct' => $categoryproduct,
             'category' => $category,
             'random_models' => $random_models,
         ]);
@@ -166,7 +168,7 @@ class ShopController extends Controller
 
     public function search_result(Request $request)
     {
-        if (! empty($request->to_search)) {
+        if (!empty($request->to_search)) {
             $to_search = $request->to_search;
         }
         // dd($to_search);

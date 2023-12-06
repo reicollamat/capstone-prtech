@@ -1,15 +1,13 @@
 @extends('layouts.master_layout')
 @section('content')
-
     {{-- session flash notification --}}
     <x-notification-alert>
         @if (session('notification-livewire'))
-        {{ session('notification-livewire') }}
+            {{ session('notification-livewire') }}
         @else
-        {{ session('notification') }}
+            {{ session('notification') }}
         @endif
     </x-notification-alert>
-
 
     <!-- Breadcrumb Start -->
     <x-shop.breadcrumb>
@@ -27,42 +25,51 @@
                     <div class="row border border-dark rounded">
                         <div class="col-lg-10">
                             <div class="carousel-inner p-5">
-                                <div class="carousel-item active">
-                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
-                                </div>
+                                @foreach ($categoryproduct->product->product_images as $key => $image)
+                                    @if ($key == 0)
+                                        <div class="carousel-item active">
+                                            <img src="{{ asset($image->image_paths) }}" class="d-block w-100"
+                                                alt="...">
+                                        </div>
+                                    @else
+                                        <div class="carousel-item">
+                                            <img src="{{ asset($image->image_paths) }}" class="d-block w-100"
+                                                alt="...">
+                                        </div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-lg-2 d-flex align-items-center p-0">
                             <div class="carousel-indicators position-relative d-block">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="width: 50px">
-                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
-                                </button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="width: 50px">
-                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
-                                </button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="width: 50px">
-                                    <img src="{{asset($product->image)}}" class="d-block w-100" alt="...">
-                                </button>
+                                @foreach ($categoryproduct->product->product_images as $key => $image)
+                                    @if ($key == 0)
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="{{ $key }}" class="active" aria-current="true"
+                                            aria-label="Slide {{ $key }}" style="width: 50px">
+                                            <img src="{{ asset($image->image_paths) }}" class="d-block w-100"
+                                                alt="...">
+                                        </button>
+                                    @else
+                                        <button type="button" data-bs-target="#carouselExampleIndicators"
+                                            data-bs-slide-to="{{ $key }}" aria-current="true"
+                                            aria-label="Slide {{ $key }}" style="width: 50px">
+                                            <img src="{{ asset($image->image_paths) }}" class="d-block w-100"
+                                                alt="...">
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-
             <div class="col-lg-7 h-auto mb-30 text-dark">
                 <div class="h-100">
                     <div class="d-flex items-center align-middle justify-content-between">
-                        <h3>{{ $product->name }}</h3>
+                        <h3>{{ $categoryproduct->product->title }}</h3>
                         <div class="bg-primary-subtle rounded">
-                            <livewire:addtowishlist.add-to-wishlist-in-details
-                                :product_id="$product->product_id"/>
+                            <livewire:addtowishlist.add-to-wishlist-in-details :product_id="$categoryproduct->product->id" />
                         </div>
                     </div>
                     <div class="d-flex pb-2">
@@ -76,23 +83,26 @@
                         <small class="pb-1">(0 Reviews)</small>
                     </div>
 
-
                     <div class="row">
                         <div class="col">
                             <div class="nav nav-underline nav-fill bg-secondary-subtle">
-                                <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                                <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Specifications</a>
+                                <a class="nav-item nav-link text-dark active" data-toggle="tab"
+                                    href="#tab-pane-1">Description</a>
+                                <a class="nav-item nav-link text-dark" data-toggle="tab"
+                                    href="#tab-pane-2">Specifications</a>
                             </div>
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane fade pt-2 px-2 show active" id="tab-pane-1">
-                                <p class="">{{ $product->description }}</p>
+                                <p class="">{{ $categoryproduct->product->description }}</p>
                                 <p>Upgrade your computing experience with the High-Performance Computer Part - Model HPX500.
-                                This cutting-edge component is designed to enhance your system's capabilities, offering
-                                superior performance and reliability for all your computing needs.</p>
+                                    This cutting-edge component is designed to enhance your system's capabilities, offering
+                                    superior performance and reliability for all your computing needs.</p>
                             </div>
                             <div class="tab-pane fade pt-2 px-2" id="tab-pane-2">
-                                @includeWhen($category === 'computer_case', 'pages.product_details.computer_case')
+                                @includeWhen(
+                                    $category === 'computer_case',
+                                    'pages.product_details.computer_case')
                                 @includeWhen($category === 'case_fan', 'pages.product_details.case_fan')
                                 @includeWhen($category === 'cpu', 'pages.product_details.cpu')
                                 @includeWhen($category === 'cpu_cooler', 'pages.product_details.cpu_cooler')
@@ -112,86 +122,85 @@
                         </div>
                     </div>
 
-                    
-                    <h1 class="mb-4">₱ {{ $product->price }}</h1>
-                    <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>
+                    <h1 class="mb-4">₱ {{ $categoryproduct->product->price }}</h1>
+                    <livewire:addtocart.add-to-cart-in-details :product_id="$categoryproduct->product->id" />
 
-                        {{--                        @auth--}}
-                        {{--                            <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/>--}}
-                        {{--                            --}}{{--                            <form id="cartFormAuth" action="{{route('add_to_cart')}}" method="POST">--}}
-                        {{--                            --}}{{--                                @csrf--}}
-                        {{--                            --}}{{--                                <input type="text" name="product_id" value="{{$product->product_id}}" hidden>--}}
-                        {{--                            --}}{{--                                <input type="text" name="category" value="{{$product->category}}" hidden>--}}
-                        {{--                            --}}{{--                                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>--}}
-                        {{--                            --}}{{--                                <div class="input-group quantity mr-3" style="width: 130px;">--}}
-                        {{--                            --}}{{--                                    <div class="input-group-btn">--}}
-                        {{--                            --}}{{--                                        <button class="btn btn-primary btn-minus">--}}
-                        {{--                            --}}{{--                                            <i class="fa fa-minus"></i>--}}
-                        {{--                            --}}{{--                                        </button>--}}
-                        {{--                            --}}{{--                                    </div>--}}
-                        {{--                            --}}{{--                                    <input type="text" class="form-control bg-light border-0 text-center"--}}
-                        {{--                            --}}{{--                                           name="quantity" value="1" id="cartQuantityInput">--}}
-                        {{--                            --}}{{--                                    <div class="input-group-btn">--}}
-                        {{--                            --}}{{--                                        <button class="btn btn-primary btn-plus">--}}
-                        {{--                            --}}{{--                                            <i class="fa fa-plus"></i>--}}
-                        {{--                            --}}{{--                                        </button>--}}
-                        {{--                            --}}{{--                                    </div>--}}
-                        {{--                            --}}{{--                                </div>--}}
-                        {{--                            --}}{{--                            </form>--}}
-                        {{--                        @else--}}
-                        {{--                            <form id="formLogin" action="{{route('login')}}">--}}
-                        {{--                                @csrf--}}
-                        {{--                                <button class="btn btn-primary px-3" id="addToCartBtn">--}}
-                        {{--                                    <div class="text-light">--}}
-                        {{--                                        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart--}}
-                        {{--                                    </div>--}}
-                        {{--                                </button>--}}
-                        {{--                            </form>--}}
-                        {{--                            <div class="input-group quantity mr-3" style="width: 130px;">--}}
-                        {{--                                <div class="input-group-btn">--}}
-                        {{--                                    <button class="btn btn-primary btn-minus">--}}
-                        {{--                                        <i class="fa fa-minus"></i>--}}
-                        {{--                                    </button>--}}
-                        {{--                                </div>--}}
-                        {{--                                <input type="text" class="form-control bg-light border-0 text-center" name="quantity"--}}
-                        {{--                                       value="1">--}}
-                        {{--                                <div class="input-group-btn">--}}
-                        {{--                                    <button class="btn btn-primary btn-plus">--}}
-                        {{--                                        <i class="fa fa-plus"></i>--}}
-                        {{--                                    </button>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                        @endauth--}}
-                        {{-- <div class="px-3 ml-auto"> --}}
-                            {{--                            <livewire:addtowishlist.add-to-wishlist-in-details--}}
-                            {{--                                    :product_id="$product->product_id"/>--}}
-                        {{-- </div> --}}
+                    {{--                        @auth --}}
+                    {{--                            <livewire:addtocart.add-to-cart-in-details :product_id="$product->product_id"/> --}}
+                    {{--                            --}}{{--                            <form id="cartFormAuth" action="{{route('add_to_cart')}}" method="POST"> --}}
+                    {{--                            --}}{{--                                @csrf --}}
+                    {{--                            --}}{{--                                <input type="text" name="product_id" value="{{$product->product_id}}" hidden> --}}
+                    {{--                            --}}{{--                                <input type="text" name="category" value="{{$product->category}}" hidden> --}}
+                    {{--                            --}}{{--                                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden> --}}
+                    {{--                            --}}{{--                                <div class="input-group quantity mr-3" style="width: 130px;"> --}}
+                    {{--                            --}}{{--                                    <div class="input-group-btn"> --}}
+                    {{--                            --}}{{--                                        <button class="btn btn-primary btn-minus"> --}}
+                    {{--                            --}}{{--                                            <i class="fa fa-minus"></i> --}}
+                    {{--                            --}}{{--                                        </button> --}}
+                    {{--                            --}}{{--                                    </div> --}}
+                    {{--                            --}}{{--                                    <input type="text" class="form-control bg-light border-0 text-center" --}}
+                    {{--                            --}}{{--                                           name="quantity" value="1" id="cartQuantityInput"> --}}
+                    {{--                            --}}{{--                                    <div class="input-group-btn"> --}}
+                    {{--                            --}}{{--                                        <button class="btn btn-primary btn-plus"> --}}
+                    {{--                            --}}{{--                                            <i class="fa fa-plus"></i> --}}
+                    {{--                            --}}{{--                                        </button> --}}
+                    {{--                            --}}{{--                                    </div> --}}
+                    {{--                            --}}{{--                                </div> --}}
+                    {{--                            --}}{{--                            </form> --}}
+                    {{--                        @else --}}
+                    {{--                            <form id="formLogin" action="{{route('login')}}"> --}}
+                    {{--                                @csrf --}}
+                    {{--                                <button class="btn btn-primary px-3" id="addToCartBtn"> --}}
+                    {{--                                    <div class="text-light"> --}}
+                    {{--                                        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart --}}
+                    {{--                                    </div> --}}
+                    {{--                                </button> --}}
+                    {{--                            </form> --}}
+                    {{--                            <div class="input-group quantity mr-3" style="width: 130px;"> --}}
+                    {{--                                <div class="input-group-btn"> --}}
+                    {{--                                    <button class="btn btn-primary btn-minus"> --}}
+                    {{--                                        <i class="fa fa-minus"></i> --}}
+                    {{--                                    </button> --}}
+                    {{--                                </div> --}}
+                    {{--                                <input type="text" class="form-control bg-light border-0 text-center" name="quantity" --}}
+                    {{--                                       value="1"> --}}
+                    {{--                                <div class="input-group-btn"> --}}
+                    {{--                                    <button class="btn btn-primary btn-plus"> --}}
+                    {{--                                        <i class="fa fa-plus"></i> --}}
+                    {{--                                    </button> --}}
+                    {{--                                </div> --}}
+                    {{--                            </div> --}}
+                    {{--                        @endauth --}}
+                    {{-- <div class="px-3 ml-auto"> --}}
+                    {{--                            <livewire:addtowishlist.add-to-wishlist-in-details --}}
+                    {{--                                    :product_id="$product->product_id"/> --}}
+                    {{-- </div> --}}
 
-                        {{--                        @auth--}}
-                        {{--                            <div class="px-3 ml-auto">--}}
-                        {{--                                --}}{{--                                <form action="{{route('add_bookmark')}}" method="POST">--}}
-                        {{--                                --}}{{--                                    @csrf--}}
-                        {{--                                --}}{{--                                    <input type="text" name="product_id" value="{{$product->product_id}}" hidden>--}}
-                        {{--                                --}}{{--                                    <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>--}}
-                        {{--                                --}}{{--                                    <button type="submit" class="btn btn-outline-primary btn-square">--}}
-                        {{--                                --}}{{--                                        <i class="fas fa-heart"></i>--}}
-                        {{--                                --}}{{--                                    </button>--}}
-                        {{--                                --}}{{--                                </form>--}}
+                    {{--                        @auth --}}
+                    {{--                            <div class="px-3 ml-auto"> --}}
+                    {{--                                --}}{{--                                <form action="{{route('add_bookmark')}}" method="POST"> --}}
+                    {{--                                --}}{{--                                    @csrf --}}
+                    {{--                                --}}{{--                                    <input type="text" name="product_id" value="{{$product->product_id}}" hidden> --}}
+                    {{--                                --}}{{--                                    <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden> --}}
+                    {{--                                --}}{{--                                    <button type="submit" class="btn btn-outline-primary btn-square"> --}}
+                    {{--                                --}}{{--                                        <i class="fas fa-heart"></i> --}}
+                    {{--                                --}}{{--                                    </button> --}}
+                    {{--                                --}}{{--                                </form> --}}
 
-                        {{--                                <livewire:addtowishlist.add-to-wishlist-in-details--}}
-                        {{--                                        :product_id="$product->product_id"/>--}}
+                    {{--                                <livewire:addtowishlist.add-to-wishlist-in-details --}}
+                    {{--                                        :product_id="$product->product_id"/> --}}
 
-                        {{--                            </div>--}}
-                        {{--                        @else--}}
-                        {{--                            <div class="px-3 ml-auto">--}}
-                        {{--                                <form action="{{route('login')}}">--}}
-                        {{--                                    @csrf--}}
-                        {{--                                    <button type="submit" class="btn btn-outline-primary btn-square">--}}
-                        {{--                                        <i class="fas fa-heart"></i>--}}
-                        {{--                                    </button>--}}
-                        {{--                                </form>--}}
-                        {{--                            </div>--}}
-                        {{--                        @endauth--}}
+                    {{--                            </div> --}}
+                    {{--                        @else --}}
+                    {{--                            <div class="px-3 ml-auto"> --}}
+                    {{--                                <form action="{{route('login')}}"> --}}
+                    {{--                                    @csrf --}}
+                    {{--                                    <button type="submit" class="btn btn-outline-primary btn-square"> --}}
+                    {{--                                        <i class="fas fa-heart"></i> --}}
+                    {{--                                    </button> --}}
+                    {{--                                </form> --}}
+                    {{--                            </div> --}}
+                    {{--                        @endauth --}}
 
                     {{-- @auth
                         <form id="purchaseFormAuth" action="{{route('purchase_page')}}" method="GET">
@@ -226,8 +235,8 @@
         <br class="mb-4">
 
         <div class="row px-xl-5">
-            <div class="col-md-8">
-                <h4 class="mb-4">3 reviews for "{{$product->name}}"</h4>
+            <div class="col-md-12">
+                <h4 class="mb-4">3 reviews for "{{ $categoryproduct->product->title }}"</h4>
                 <!-- dummy customer reviews -->
 
                 <x-shop.cus_review>
@@ -241,7 +250,8 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </x-slot:cus_star>
-                    <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver napakabait..  Diko pa na testing pero the best sa packaging Godbless.</p>
+                    <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver
+                        napakabait.. Diko pa na testing pero the best sa packaging Godbless.</p>
                 </x-shop.cus_review>
 
                 <x-shop.cus_review>
@@ -255,7 +265,9 @@
                         <i class="far fa-star"></i>
                         <i class="far fa-star"></i>
                     </x-slot:cus_star>
-                    <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor. Dismaya lang  ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box  knowing almost 20K ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>
+                    <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor.
+                        Dismaya lang ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box knowing almost 20K
+                        ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>
                 </x-shop.cus_review>
 
                 <x-shop.cus_review>
@@ -269,10 +281,11 @@
                         <i class="fas fa-star-half-alt"></i>
                         <i class="far fa-star"></i>
                     </x-slot:cus_star>
-                    <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible with the OS installed in computer but the connector foe headphone is functioning well.</p>
+                    <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible
+                        with the OS installed in computer but the connector foe headphone is functioning well.</p>
                 </x-shop.cus_review>
             </div>
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <h4 class="mb-4">Leave a review</h4>
                 <small>Your email address will not be published. Required fields are marked *</small>
                 <div class="d-flex my-3">
@@ -302,7 +315,7 @@
                         <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
                     </div>
                 </form>
-            </div>
+            </div> --}}
         </div>
 
         {{-- <div class="row px-xl-5">
@@ -465,22 +478,23 @@
     </div>
     <!-- Shop Detail End -->
 
-
     <!-- Products Start -->
     <div class="container-fluid py-5">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                    class="pr-3">You May Also Like</span></h2>
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">You May Also
+                Like</span></h2>
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
-                    @foreach($random_models as $value)
+                    {{-- @dd($random_models) --}}
+                    @foreach ($random_models as $value)
                         <x-home.product_showcase>
+                            {{-- @dd($value) --}}
                             <a class="h6 text-decoration-none" style="font-size: 0.9rem"
-                               href="{{route('product_detail', ['product_id' => $value->product_id, 'category' => $value->category])}}">
-                                {{ $value->name }}
+                                href="{{ route('product_detail', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
+                                {{ $value->product->title }}
                             </a>
-                            <x-slot:image>{{ $value->image }}</x-slot:image>
-                            <x-slot:price>{{ $value->price }}</x-slot:price>
+                            <x-slot:image>{{ $value->product->product_images[0]->image_paths }}</x-slot:image>
+                            <x-slot:price>{{ $value->product->price }}</x-slot:price>
                             <x-slot:purchasecount>{{ $value->purchase_count }}</x-slot:purchasecount>
                         </x-home.product_showcase>
                     @endforeach
@@ -489,5 +503,4 @@
         </div>
     </div>
     <!-- Products End -->
-
 @endsection
