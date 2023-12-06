@@ -120,8 +120,7 @@
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column">
                         <small class="text-muted d-block mb-1">Pending Orders</small>
                         <p class="h3 text-black fw-light mt-auto">
-                            10,000
-
+                            {{ $this->getTotalOrders ?? 0 }}
                         </p>
                     </div>
                 </div>
