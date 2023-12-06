@@ -18,7 +18,7 @@ class EmailHelper
      *
      * @throws Some_Exception_Class Description of exception.
      */
-    public static function sendEmail($email, $subject, $message, $orderId)
+    public static function sendEmail($email, $orderId)
     {
         $mailStatus = '';
         try {
@@ -27,7 +27,6 @@ class EmailHelper
         } catch (Exception $e) {
             $mailStatus = 'There was an error sending the email: '.$e->getMessage();
         }
-
         return $mailStatus;
     }
 }
