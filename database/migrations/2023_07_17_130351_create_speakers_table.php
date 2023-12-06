@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('wattage')->nullable();
             $table->json('frequency_response')->nullable();
             $table->string('color')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->string('condition');

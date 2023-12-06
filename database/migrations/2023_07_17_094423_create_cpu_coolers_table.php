@@ -22,7 +22,7 @@ return new class extends Migration
             $table->json('noise_level')->nullable();
             $table->string('color')->nullable();
             $table->integer('size')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->string('condition');

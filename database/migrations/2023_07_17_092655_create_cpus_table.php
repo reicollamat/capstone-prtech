@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('tdp');
             $table->string('graphics')->nullable();
             $table->boolean('smt')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description')->nullable();
             $table->string('status')->default('available');
             $table->string('condition');

@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -23,7 +24,7 @@ return new class extends Migration {
             $table->string('color')->nullable();
             $table->string('first_word_latency')->nullable();
             $table->string('cas_latency');
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description')->nullable();
             $table->string('status')->default('available');
             $table->string('condition');

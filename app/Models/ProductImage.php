@@ -7,22 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
-class Bookmark extends Model
+class ProductImage extends Model
 {
     use AsSource, Filterable, HasFactory;
 
     /**
      * @var string
      */
-    protected $table = 'bookmarks';
+    protected $table = 'product_images';
 
     // relationship to User
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    // relationship to Product
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -34,7 +28,7 @@ class Bookmark extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
         'product_id',
+        'image_paths',
     ];
 }

@@ -23,10 +23,22 @@ class Product extends Model
      */
     protected $table = 'products';
 
+    // relationship to ProductImage
+    public function product_images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
     // relationship to Bookmark
     public function bookmarks()
     {
         return $this->hasMany(Bookmark::class);
+    }
+
+    // relationship to CartItem
+    public function cart_items()
+    {
+        return $this->hasMany(CartItem::class);
     }
 
     public function category($category)
