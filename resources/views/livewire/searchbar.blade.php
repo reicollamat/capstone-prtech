@@ -13,7 +13,7 @@
                 @endforeach
 
             </select>
-            <div class="input-group" @mouseover="open = true" >
+            <div class="input-group" @mouseover="open = true">
                 <input type="text" class="form-control p-2 custom-input-text rounded-none shadow-none"
                     placeholder="Search PR-Tech" wire:model.live="search" name="to_search" autocomplete="off"
                     aria-label="Search" aria-describedby="button-addon2">
@@ -53,8 +53,9 @@
                                 <div
                                     class="d-flex h-full outline outline-1 outline-gray-200 p-0.5 hover:bg-gray-200 transition-all duration-300">
                                     <div class=" w-20 h-auto content-center">
-                                        <img src="{{ asset($product_search->image[0]) }}" alt="image"
-                                            class="w-20 h-20 object-contain" />
+                                        {{-- @dd($product_search->product_images[0]->image_paths) --}}
+                                        <img src="{{ asset($product_search->product_images[0]->image_paths) }}"
+                                            alt="image" class="w-20 h-20 object-contain" />
                                     </div>
                                     <div class="flex-1 d-flex flex-col ml-3">
                                         <div>
