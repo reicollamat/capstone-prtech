@@ -16,6 +16,7 @@ class UserController extends Controller
 {
     public function purchase_page(Request $request)
     {
+        // dd($request->cartitems);
         if ($request->cart) {
             // dd($request);
             $cartitems = $request->cartitems;
