@@ -38,7 +38,7 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.ordershipped-template',
+            view: 'email.ordershipped-template_2',
         );
     }
 
