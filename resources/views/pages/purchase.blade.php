@@ -114,7 +114,8 @@
                         <div class="card">
                             <div class="row g-0">
                                 <div class="col-md-2 justify-content-center">
-                                    <img src="{{ asset($product->image[0]) }}"
+                                    {{-- @dd($product->product_images[0]->image_paths) --}}
+                                    <img src="{{ asset($product->product_images[0]->image_paths) }}"
                                         class="img-fluid rounded-start mx-auto d-block py-2" alt="..."
                                         style="max-height: 80px">
                                 </div>
