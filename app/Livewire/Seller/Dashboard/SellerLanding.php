@@ -45,10 +45,10 @@ class SellerLanding extends Component
         $orders = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
             ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
             ->where('seller_id', $this->seller_id)
-            ->groupBy('purchase_id')->toSql();
+            ->groupBy('purchase_id')->count();
 
-        dd($orders);
+        // dd($orders);
 
-        return 0;
+        return $orders;
     }
 }
