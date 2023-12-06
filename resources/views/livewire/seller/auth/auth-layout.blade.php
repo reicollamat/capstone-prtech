@@ -119,6 +119,9 @@
     @livewireScriptConfig
     {{--    @livewireScripts --}}
 
+    {{--  Livewire Alert  --}}
+    <x-livewire-alert::scripts />
+
 </body>
 
 </html>
