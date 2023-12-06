@@ -49,7 +49,7 @@ class Landing extends Component
         // hinde ko alam kung bakit pero pag unang pindot dito nag rereload ung page, pero minsan inde naman
         // TODO: pass the id of order inside OrderShipped function, then query the order based on that id on the OrderShipped.php to display the items and total??
         try {
-            Mail::to('raycollamat11@gmail.com')->send(new OrderShipped());
+            Mail::to('richmond.billones@gmail.com')->send(new OrderShipped());
             $this->mailStatus = 'Email Sent';
         } catch (Exception $e) {
             $this->mailStatus = 'There was an error sending the email: '.$e->getMessage();
