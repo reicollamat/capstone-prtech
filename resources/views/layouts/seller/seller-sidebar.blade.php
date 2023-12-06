@@ -192,15 +192,24 @@
 
                 </a>
             </li>
-            <li class="p-1.5 text-sm">
-                <a href="{{ route('shop-management-category') }}" class="no-underline decoration-0 text-gray-800"
-                    wire:navigate>
-                    <div class="flex items-center gap-1.5">
-                        <i class="bi bi-truck text-lg"></i>
-                        <span>Shop Categories</span>
-                    </div>
-                </a>
-            </li>
+            {{-- <li class="p-1.5 text-sm"> --}}
+            {{--     <a href="{{ route('shop-management-category') }}" class="no-underline decoration-0 text-gray-800" --}}
+            {{--         wire:navigate> --}}
+            {{--         <div class="flex items-center gap-1.5"> --}}
+            {{--             <i class="bi bi-truck text-lg"></i> --}}
+            {{--             <span>Shop Categories</span> --}}
+            {{--         </div> --}}
+            {{--     </a> --}}
+            {{-- </li> --}}
+             <li class="p-1.5 text-sm">
+                 <a href="{{ route('shop-management-metrics') }}"
+                    class="no-underline decoration-0 text-gray-800" wire:navigate>
+                     <div class="flex items-center gap-1.5">
+                         <i class="bi bi-truck text-lg"></i>
+                         <span>Shop Metric Settings</span>
+                     </div>
+                 </a>
+             </li>
         </ul>
     </div>
 </div>
