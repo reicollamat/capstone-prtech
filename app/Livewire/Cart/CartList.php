@@ -46,7 +46,7 @@ class CartList extends Component
 
             $this->cartiems_count = count($this->cartitems);
 
-            if (!empty($this->cartitems)) {
+            if (! empty($this->cartitems)) {
                 // dd($this->cartitems);
                 foreach ($this->cartitems as $item) {
                     // dd($item);
@@ -81,6 +81,8 @@ class CartList extends Component
 
     public function cart_checkout($cartitems)
     {
+
+        // dd('test');
         $cart_items = collect($cartitems);
         $user = Auth::user();
         $shipping_value = 13;
@@ -96,6 +98,7 @@ class CartList extends Component
             'subtotal' => $subtotal,
             'total' => $total,
         ]));
+
     }
 
     #[On('cartitem-item-change')]
