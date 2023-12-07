@@ -58,6 +58,22 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        // seed a seller sample user
+        $seller_sample = User::factory()->create([
+            'name' => 'seller_sample',
+            'first_name' => 'Rayseller',
+            'last_name' => 'Selerrr',
+            'email' => 'seller@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('1'),
+            'phone_number' => fake()->phoneNumber(),
+            'street_address_1' => fake()->streetAddress(),
+            'city' => fake()->city(),
+            'postal_code' => fake()->postcode(),
+            'country' => fake()->country(),
+            'is_seller' => true,
+        ]);
+
         // seed an regular user
         $user = User::factory()->create([
             'name' => 'user',
@@ -91,6 +107,7 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+
         $admin_role_id = DB::table('roles')->where('slug', 'admin')->value('id');
         $user_role_id = DB::table('roles')->where('slug', 'user')->value('id');
 
@@ -112,7 +129,24 @@ class DatabaseSeeder extends Seeder
         //     ->create();
 
         // call seller factory for testing - uncomment if done
+        // for admin user
         Seller::factory()->create();
+
+        // for seller_sample user
+        Seller::factory()->create([
+            'user_id' => $seller_sample->id,
+            'registered_business_name' => $seller_sample->first_name . ' ' . $seller_sample->last_name,
+            'shop_email' => $seller_sample->email,
+            'shop_phone_number' => $seller_sample->phone_number,
+            'shop_address' => $seller_sample->street_address_1,
+            'shop_city' => $seller_sample->city,
+            'shop_state_province' => $seller_sample->state_province,
+            'shop_postal_code' => $seller_sample->postal_code,
+            'registered_address' => $seller_sample->street_address_1,
+            'registered_city' => $seller_sample->city,
+            'registered_state_province' => $seller_sample->state_province,
+            'registered_postal_code' => $seller_sample->postal_code,
+        ]);
 
         // seed dataset
         $this->call([

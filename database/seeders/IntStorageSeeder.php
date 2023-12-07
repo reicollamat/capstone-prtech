@@ -26,7 +26,7 @@ class IntStorageSeeder extends Seeder
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([
-                    'seller_id' => Seller::find(1)->id,
+                    'seller_id' => Seller::find(fake()->numberBetween(1, 2))->id,
                     'title' => $value->name,
                     'category' => 'int_storage',
                     'price' => $value->price * 55,
