@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Purchase;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -16,9 +17,9 @@ class OrderShipped extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public Purchase $order)
     {
-        //
+        // dd($order->purchase_items);
     }
 
     /**
