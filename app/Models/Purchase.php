@@ -47,6 +47,7 @@ class Purchase extends Model
         'reference_number',
         'purchase_date',
         'total_amount',
+        'completion_date',
         'purchase_status',
     ];
 }
