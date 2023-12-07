@@ -30,7 +30,7 @@ class Seller extends Model
         return $this->hasMany(SellerShopMetrics::class);
     }
 
-    public function sellerOrders(): HasMany
+    public function purchases(): HasMany
     {
         return $this->hasMany(Purchase::class);
     }
