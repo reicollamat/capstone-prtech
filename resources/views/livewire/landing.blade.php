@@ -26,6 +26,21 @@
 
 
     <div class="border-1 border-green-600">
-        hh
+        {{ $mailStatus }}
     </div>
+
+    {{ $purchase }}
+
+    @foreach($purchase->purchase_items as $items)
+
+        <div style="width: 100%">
+            {{ $items->quantity }}
+            {{ $items->product->title }}
+            <span style="text-align: right">
+                {{ $items->total_price }}
+            </span>
+
+        </div>
+
+    @endforeach
 </div>

@@ -508,10 +508,11 @@
                                           font-size: 0pt;
                                           line-height: 0pt;
                                           text-align: right;
+                                          padding-right: 15px;
                                         "
                                                                     >
                                                                         <img
-                                                                            src="images/free.jpg"
+                                                                            src="https://prtech.store/laravel/public/img/logo-no-background.png"
                                                                             width="118"
                                                                             height="38"
                                                                             border="0"
@@ -521,21 +522,11 @@
                                                                 </tr>
                                                             </table>
                                                         </th>
-                                                        <th
-                                                            class="column-empty"
-                                                            width="1"
-                                                            style="
-                                    font-size: 0pt;
-                                    line-height: 0pt;
-                                    padding: 0;
-                                    margin: 0;
-                                    font-weight: normal;
-                                  "
-                                                        ></th>
+
                                                         <th
                                                             class="column-dir"
                                                             dir="ltr"
-                                                            width="200"
+                                                            width="100%"
                                                             style="
                                     font-size: 0pt;
                                     line-height: 0pt;
@@ -555,18 +546,15 @@
                                                                     <td
                                                                         class="img m-center mpb10"
                                                                         style="
-                                          font-size: 0pt;
-                                          line-height: 0pt;
+                                          font-size: 10pt;
                                           text-align: left;
+                                          color: #1c1c7d;
                                         "
                                                                     >
-                                                                        <img
-                                                                            src="images/logo.png"
-                                                                            width="197"
-                                                                            height="14"
-                                                                            border="0"
-                                                                            alt=""
-                                                                        />
+                                                                        <p>
+                                                                            Gear up for the future! Your order is
+                                                                            on its way.
+                                                                        </p>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -613,10 +601,10 @@
                                     text-align: left;
                                   "
                                                         >
-                                                            <img
+                                                            <image
                                                                 src="https://prtech.store/laravel/public/img/login_reg.png"
                                                                 width="325"
-                                                                height="400"
+                                                                height="300 "
                                                                 border="0"
                                                                 alt=""
                                                             />
@@ -725,7 +713,7 @@
                                               "
                                                                                 >
                                                                                     <a
-                                                                                        href="#"
+                                                                                        href="https://prtech.store/support/track-order"
                                                                                         target="_blank"
                                                                                         class="link"
                                                                                         style="
@@ -763,7 +751,7 @@
                                         bgcolor="#ffffff"
                                     >
                                         <tr>
-                                            <td class="p30-15" style="padding: 20px 0px">
+                                            <td class="p30-15" style="padding: 20px 10px 0px">
                                                 <table
                                                     width="100%"
                                                     border="0"
@@ -776,15 +764,15 @@
                                                             style="
                                     color: #000000;
                                     font-family: 'Noto Serif', Georgia, serif;
-                                    font-size: 16px;
+                                    font-size: 20px;
                                     text-align: center;
-                                    line-height: 16px;
+                                    line-height: 20px;
                                     padding: 0px 20px;
-                                    padding-bottom: 20px;
+                                    padding-bottom: 10px;
                                     text-transform: uppercase;
                                   "
                                                         >
-                                                            Order Items
+                                                            Ordered Items
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -796,58 +784,68 @@
                                     <table
                                         width="100%"
                                         border="0"
-                                        cellspacing="0"
-                                        cellpadding="0"
+                                        cellspacing="5px"
+                                        cellpadding="5px"
                                         bgcolor="#ffffff"
                                     >
                                         <tr>
                                             <td class="p30-15" style="padding: 20px 10px">
                                                 <table
                                                     width="100%"
-                                                    border="0"
                                                     cellspacing="0"
                                                     cellpadding="0"
+                                                    style="
+                                border: 1px solid rgb(128,128,128);
+                                border-collapse: collapse;
+                              "
                                                 >
-                                                    <tr>
-                                                        <td
-                                                            class="section-title"
+                                                    {{-- // HERE --}}
+                                                    @foreach ($order->purchase_items as $item)
+                                                        <tr
                                                             style="
+                                  border-bottom: 1px solid rgb(128,128,128);
+                                  border-collapse: collapse;
+                                ">
+                                                            <td class="section-title"
+                                                                style="
                                     color: #000000;
                                     font-family: 'Noto Serif', Georgia, serif;
                                     font-size: 16px;
                                     line-height: 16px;
                                     text-align: start;
-                                    padding: 0px 20px;
-                                    padding-bottom: 20px;
+                                    padding: 15px;
                                     text-transform: uppercase;
-                                  "
-                                                        >
-                                                            item picure and name and quantity?
-                                                        </td>
-                                                        <td
-                                                            class="section-title"
-                                                            style="
+                                  ">
+                                                                {{ $item->product->title }}
+                                                            </td>
+                                                            <td class="section-title"
+                                                                style="
                                     color: #000000;
                                     font-family: 'Noto Serif', Georgia, serif;
                                     font-size: 16px;
                                     line-height: 16px;
                                     text-align: start;
-                                    padding: 0px 20px;
-                                    padding-bottom: 20px;
+                                    padding: 15px;
+                                  ">
+                                                                {{ $item->quantity }}x
+                                                            </td>
+                                                            <td class="section-title"
+                                                                style="
+                                    color: #000000;
+                                    font-family: 'Noto Serif', Georgia, serif;
+                                    font-size: 16px;
+                                    line-height: 16px;
+                                    text-align: start;
+                                    padding: 15px;
                                     text-transform: uppercase;
-                                  "
-                                                        >
-                                                            price total
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
+                                  ">
+                                                                {{ $item->total_price }}
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                     </table>
 
                                     <!-- END Two Columns -->
-
-                                    <!-- Two Columns -->
                                     <table
                                         width="100%"
                                         border="0"
@@ -871,64 +869,29 @@
                                     font-family: 'Noto Serif', Georgia, serif;
                                     font-size: 16px;
                                     line-height: 16px;
-                                    text-align: start;
+                                    text-align: end;
                                     padding: 0px 20px;
                                     padding-bottom: 20px;
                                     text-transform: uppercase;
                                   "
                                                         >
-                                                            item picure and name and quantity?
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table
-                                        width="100%"
-                                        border="0"
-                                        cellspacing="0"
-                                        cellpadding="0"
-                                        bgcolor="#ffffff"
-                                    >
-                                        <tr>
-                                            <td class="p30-15" style="padding: 0px 10px">
-                                                <table
-                                                    width="100%"
-                                                    border="0"
-                                                    cellspacing="0"
-                                                    cellpadding="0"
-                                                >
-                                                    <tr>
-                                                        <td
-                                                            class="section-title"
-                                                            style="
-                                    color: #000000;
-                                    font-family: 'Noto Serif', Georgia, serif;
-                                    font-size: 16px;
-                                    line-height: 16px;
-                                    text-align: start;
-                                    padding: 0px 20px;
-                                    padding-bottom: 20px;
-                                    text-transform: uppercase;
-                                  "
-                                                        >
-                                                            item picure and name and quantity?
+                                                            Sub Total
                                                         </td>
                                                         <td
                                                             class="section-title"
                                                             style="
                                     color: #000000;
                                     font-family: 'Noto Serif', Georgia, serif;
-                                    font-size: 16px;
-                                    line-height: 16px;
+                                    font-size: 20px;
+                                    line-height: 20px;
                                     text-align: start;
                                     padding: 0px 20px;
                                     padding-bottom: 20px;
+                                    padding-top: 20px;
                                     text-transform: uppercase;
                                   "
                                                         >
-                                                            SubTotal
+                                                            PHP {{ $order->total_amount }}
                                                         </td>
                                                     </tr>
                                                 </table>
