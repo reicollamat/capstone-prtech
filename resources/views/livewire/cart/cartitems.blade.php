@@ -34,18 +34,18 @@
                     <div class="d-flex items-center justify-start self-center gap-3">
                         <div class="input-group input-group-sm w-auto border-1 border-gray-300 rounded">
                             <button type="button" class="input-group-text font-black btn btn-ghost"
-                                wire:click.prevent="addquantity({{ $cartitem }})" wire:click="remove"
-                                wire:key="addquantitybutton" id="inputGroup-sizingadd-sm">+
+                                wire:click="addquantity({{ $cartitem }})" wire:key="addquantitybutton"
+                                id="inputGroup-sizingadd-sm">+
                             </button>
                             <input type="text" class="form-control text-center border-0"
-                                aria-label="Sizing example input" value="{{ $cartitem->quantity }}"
+                                aria-label="Sizing example input" value="{{ $item_quantity }}"
                                 style="max-width: 2.5rem!important;" aria-describedby="inputGroup-sizing-sm">
                             <button type="button" class="input-group-text font-black btn btn-ghost"
-                                wire:click.prevent="minusquantity({{ $cartitem }})" wire:click="remove"
-                                wire:key="minusquantitybutton" id="inputGroup-sizingminus-sm">-
+                                wire:click="minusquantity({{ $cartitem }})" wire:key="minusquantitybutton"
+                                id="inputGroup-sizingminus-sm">-
                             </button>
                         </div>
-                        <button href="#" wire:click.prevent="remove" wire:key="linktoremove"
+                        <button wire:key="linktoremove"
                             wire:click="$parent.removecartitem({{ $cartitem->id }}, {{ $user_id }})"
                             class="small decoration-0 no-underline text-gray-700 rounded border-gray-400 border-1 p-1">
                             Remove
