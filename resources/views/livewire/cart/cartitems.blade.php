@@ -21,7 +21,7 @@
                     </a>
                     <h5 class="text-lg text-gray-600 mb-0">
                         <small class="text-body-secondary text-sm">PHP</small>
-                        {{ $cartitem->product->price }}
+                        {{ $cartitem->total_price }}
                     </h5>
 
                 </div>

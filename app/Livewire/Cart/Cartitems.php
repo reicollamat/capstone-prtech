@@ -54,8 +54,10 @@ class Cartitems extends Component
     // #[Renderless]
     public function addquantity($cartitem)
     {
-
-        CartItem::where('id', $cartitem['id'])->increment('quantity');
+        $cart_item = CartItem::find($cartitem['id']);
+        $cart_item->increment('quantity');
+        $cart_item->total_price = $cart_item->quantity * $cart_item->total_price;
+        $cart_item->save();
         sleep(0.500);
         $this->dispatch('cartitem-item-change');
     }

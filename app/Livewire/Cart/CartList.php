@@ -46,11 +46,11 @@ class CartList extends Component
 
             $this->cartiems_count = count($this->cartitems);
 
-            if (! empty($this->cartitems)) {
+            if (!empty($this->cartitems)) {
                 // dd($this->cartitems);
                 foreach ($this->cartitems as $item) {
                     // dd($item);
-                    $this->total_price += $item->total_price * $item->quantity;
+                    $this->total_price += $item->total_price;
                 }
             }
 
@@ -98,7 +98,6 @@ class CartList extends Component
             'subtotal' => $subtotal,
             'total' => $total,
         ]));
-
     }
 
     #[On('cartitem-item-change')]
