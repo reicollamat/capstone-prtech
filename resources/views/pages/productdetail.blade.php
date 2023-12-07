@@ -92,7 +92,10 @@
                             <small class="bi bi-star-half"></small>
                             <small class="bi bi-star"></small> --}}
                         </div>
-                        <small class="pb-1">Rating:{{ $categoryproduct->product->rating }} (0 Reviews)</small>
+                        <small class="pb-1">
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">{{ $categoryproduct->product->rating }}</span>
+                            (0 Reviews)</small>
                     </div>
 
                     <div class="d-flex">
