@@ -24,7 +24,11 @@ class UserController extends Controller
             $shipping_value = $request->shipping_value;
             $subtotal = $request->subtotal;
             $total = $request->total;
-            // dd($user);
+
+            // dd($user->cart_item);
+            // foreach ($user->cart_item as $key => $item) {
+            //     dd($item->product);
+            // }
 
             return view('pages.cartpurchase', [
                 'cartitems' => $cartitems,

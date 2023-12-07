@@ -122,26 +122,26 @@
                                 <div id="collapseOne" class="accordion-collapse collapse show"
                                     data-bs-parent="#accordionExample">
                                     <div class="accordion-body p-0">
-                                        {{-- @dd($cartitems) --}}
-                                        @foreach ($cartitems as $key => $item)
+                                        {{-- @dd($user->cart_item) --}}
+                                        @foreach ($user->cart_item as $key => $item)
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-md-2 justify-content-center">
-                                                        {{-- @dd($item['product']['product_images'][$key]['image_paths']) --}}
-                                                        <img src="{{ asset($item['product']['product_images'][0]['image_paths']) }}"
+                                                        {{-- @dd($item->product) --}}
+                                                        <img src="{{ asset($item->product->product_images[0]->image_paths) }}"
                                                             class="img-fluid rounded-start mx-auto d-block py-2"
                                                             alt="..." style="max-height: 80px">
                                                     </div>
                                                     <div class="col-md-10">
                                                         <div class="card-body py-2">
                                                             {{-- @dd($item['product']['title']) --}}
-                                                            <h5 class="card-title">{{ $item['product']['title'] }}</h5>
+                                                            <h5 class="card-title">{{ $item->product->title }}</h5>
                                                             <div class="card-text d-flex justify-content-between">
                                                                 <p>
                                                                     <small class="text-body-secondary">Quantity:</small>
-                                                                    {{ $item['quantity'] }}
+                                                                    {{ $item->quantity }}
                                                                 </p>
-                                                                <p>₱{{ $item['product']['price'] * $item['quantity'] }}
+                                                                <p>₱{{ $item->total_price }}
                                                                 </p>
                                                             </div>
                                                         </div>
