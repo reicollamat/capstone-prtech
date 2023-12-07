@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ReferenceGeneratorHelper;
 use App\Models\CartItem;
 use App\Models\Payment;
 use App\Models\Product;
@@ -116,7 +117,7 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #' . $purchase->id . ' Placed',
+            'title' => 'Order #'.$purchase->id.' Placed',
             'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
         ]);
         $notification->save();
@@ -169,12 +170,12 @@ class UserController extends Controller
             $purchase = new Purchase([
                 'user_id' => $user_id,
                 'seller_id' => $key,
+                'reference_number' => ReferenceGeneratorHelper::generateReferenceString(),
                 'purchase_date' => now(),
                 'total_amount' => $total_amount,
                 'purchase_status' => 'pending',
             ]);
             $purchase->save();
-
 
             $payment = new Payment([
                 'user_id' => $user_id,
@@ -182,7 +183,7 @@ class UserController extends Controller
                 'date_of_payment' => null,
                 'payment_type' => $payment_type,
                 'payment_status' => 'unpaid',
-                'reference_code' => '#samplecode',
+                'reference_code' => ReferenceGeneratorHelper::generateReferenceString(),
             ]);
             $payment->save();
 
@@ -203,12 +204,11 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #' . $purchase->id . ' Placed',
+                'title' => 'Order #'.$purchase->id.' Placed',
                 'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
             ]);
             $notification->save();
         }
-
 
         // remove the current Cart_items in database cuz itz purchased
         $cart_items = CartItem::whereIn('id', $cart_ids)->get();
