@@ -20,7 +20,7 @@ class Purchase extends Model
     }
 
     // relationship to PurchaseItem
-    public function purchase_item()
+    public function purchase_items()
     {
         return $this->hasMany(PurchaseItem::class);
     }
@@ -44,6 +44,7 @@ class Purchase extends Model
     protected $fillable = [
         'user_id',
         'seller_id',
+        'reference_number',
         'purchase_date',
         'total_amount',
         'purchase_status',
