@@ -72,15 +72,39 @@
                             <livewire:addtowishlist.add-to-wishlist-in-details :product_id="$categoryproduct->product->id" />
                         </div>
                     </div>
+
                     <div class="d-flex pb-2">
                         <div class="text-warning mr-2">
-                            <small class="bi bi-star-fill"></small>
+
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i > $categoryproduct->product->rating)
+                                    @for ($i = $categoryproduct->product->rating; $i < 5; $i++)
+                                        <small class="bi bi-star"></small>
+                                    @endfor
+                                @else
+                                    <small class="bi bi-star-fill"></small>
+                                @endif
+                            @endfor
+
+                            {{-- <small class="bi bi-star-fill"></small>
                             <small class="bi bi-star-fill"></small>
                             <small class="bi bi-star-fill"></small>
                             <small class="bi bi-star-half"></small>
-                            <small class="bi bi-star"></small>
+                            <small class="bi bi-star"></small> --}}
                         </div>
-                        <small class="pb-1">(0 Reviews)</small>
+                        <small class="pb-1">Rating:{{ $categoryproduct->product->rating }} (0 Reviews)</small>
+                    </div>
+
+                    <div class="d-flex">
+                        <h5 class="italic">
+                            <i class="bi bi-shop"></i> {{ $categoryproduct->product->seller->shop_name }}
+                        </h5>
+                    </div>
+
+                    <div class="d-flex">
+                        <h6 class="italic">
+                            <i class="bi bi-telephone-fill"></i> {{ $categoryproduct->product->seller->shop_phone_number }}
+                        </h6>
                     </div>
 
                     <div class="row">

@@ -157,7 +157,7 @@ class ShopController extends Controller
             abort(404);
         }
 
-        // dd($categoryproduct->product->core_count);
+        // dd($categoryproduct->product->seller);
 
         return view('pages.productdetail', [
             'categoryproduct' => $categoryproduct,
