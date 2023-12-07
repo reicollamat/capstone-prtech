@@ -67,80 +67,56 @@ class OrderList extends Component
     #[Computed]
     public function getTotalPurchaseCount()
     {
-        $all = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $all = Purchase::where('seller_id', $this->seller->id);
         return count($all->get());
     }
 
     #[Computed]
     public function getTotalPendingCount()
     {
-        $pending = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $pending = Purchase::where('seller_id', $this->seller->id);
         return count($pending->where('purchase_status', 'pending')->get());
     }
 
     #[Computed]
     public function getTotalCompletedCount()
     {
-        $completed = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $completed = Purchase::where('seller_id', $this->seller->id);
         return count($completed->where('purchase_status', 'completed')->get());
     }
 
     #[Computed]
     public function getTotalToShipCount()
     {
-        $to_ship = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $to_ship = Purchase::where('seller_id', $this->seller->id);
         return count($to_ship->where('purchase_status', 'to_ship')->get());
     }
 
     #[Computed]
     public function getTotalShippingCount()
     {
-        $shipping = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $shipping = Purchase::where('seller_id', $this->seller->id);
         return count($shipping->where('purchase_status', 'shipping')->get());
     }
 
     #[Computed]
     public function getTotalCancellationCount()
     {
-        $cancellation = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $cancellation = Purchase::where('seller_id', $this->seller->id);
         return count($cancellation->where('purchase_status', 'cancellation')->get());
     }
 
     #[Computed]
     public function getTotalReturnRefundCount()
     {
-        $returnrefund = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $returnrefund = Purchase::where('seller_id', $this->seller->id);
         return count($returnrefund->where('purchase_status', 'returnrefund')->get());
     }
 
     #[Computed]
     public function getTotalFailedDeliveryCount()
     {
-        $faileddelivery = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+        $faileddelivery = Purchase::where('seller_id', $this->seller->id);
         return count($faileddelivery->where('purchase_status', 'failed_delivery')->get());
     }
 
@@ -169,7 +145,7 @@ class OrderList extends Component
         $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
             ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
+            ->where('purchases.seller_id', $this->seller->id);
 
 
         //

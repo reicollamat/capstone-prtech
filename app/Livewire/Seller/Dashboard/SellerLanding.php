@@ -40,15 +40,15 @@ class SellerLanding extends Component
     public function getTotalOrders()
     {
         // dd($this->seller_id);
-        // $metrics =
+        // // $metrics =
 
-        $orders = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->where('seller_id', $this->seller_id)
-            ->groupBy('purchase_id')->count();
+        // $orders = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
+        //     ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
+        //     ->where('seller_id', $this->seller_id)
+        //     ->groupBy('purchase_id')->count();
 
-        // dd($orders);
+        // // dd($orders);
 
-        return $orders;
+        // return $orders;
     }
 }
