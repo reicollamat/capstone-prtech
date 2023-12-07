@@ -474,7 +474,7 @@
                                                                             Date of Purchase
                                                                         </label>
                                                                         <input type="text" id="payment_type"
-                                                                            value="{{ date('M d, Y', strtotime($purchase->purchase_date)) }}"
+                                                                            value="{{ date('M d, Y (h:i a)', strtotime($purchase->purchase_date)) }}"
                                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                             placeholder="" disabled>
                                                                     </div>
@@ -485,7 +485,7 @@
                                                                         </label>
                                                                         @if ($purchase->purchase_status == 'completed')
                                                                             <input type="text" id="reference_code"
-                                                                                value="[completion_date]"
+                                                                                value="{{ date('M d, Y (h:i a)', strtotime($purchase->completion_date)) }}"
                                                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                                 placeholder="" disabled>
                                                                         @else
@@ -536,7 +536,7 @@
                                                                     </label>
                                                                     @if ($purchase->payment->date_of_payment)
                                                                         <input type="text" id="purchase_date"
-                                                                            value="{{ date('d-M-y', strtotime($purchase->payment->date_of_payment)) }}"
+                                                                            value="{{ date('M d, Y (h:i a)', strtotime($purchase->payment->date_of_payment)) }}"
                                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                             placeholder="" disabled>
                                                                     @else
