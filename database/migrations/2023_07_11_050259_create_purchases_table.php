@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('seller_id')->constrained()->cascadeOnDelete();
+            $table->string('reference_number');
             $table->timestamp('purchase_date');
             $table->decimal('total_amount', 20, 2);
             $table->string('purchase_status');
