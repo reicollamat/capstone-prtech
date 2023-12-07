@@ -233,7 +233,7 @@ class OrderList extends Component
             ]);
         }
 
-        if (!Shipments::where('purchase_id', $purchase_id)->exists()) {
+        if (!$this->purchase_status == 'pending' || !Shipments::where('purchase_id', $purchase_id)->exists()) {
             // dd('test');
             $shipment = new Shipments([
                 'purchase_id' => $purchase_id,
@@ -264,6 +264,9 @@ class OrderList extends Component
             ]);
             $notification->save();
 
+            Purchase::where('id', $purchase_id)->update([
+                'completion_date' => now(),
+            ]);
             Shipments::where('purchase_id', $purchase_id)->update([
                 'shipment_status' => $this->purchase_status,
                 'shippeddate' => now(),
