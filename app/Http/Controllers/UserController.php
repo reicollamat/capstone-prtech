@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ReferenceGeneratorHelper;
 use App\Models\CartItem;
 use App\Models\Payment;
 use App\Models\Product;
@@ -85,9 +86,13 @@ class UserController extends Controller
 
         $product = Product::find($product_id);
 
+        //generate reference number for purchase
+        $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+
         $purchase = new Purchase([
             'user_id' => $user_id,
             'seller_id' => $product->seller_id,
+            'reference_number' => $puchase_reference_number,
             'purchase_date' => now(),
             'total_amount' => $total,
             'purchase_status' => 'pending',
@@ -157,8 +162,6 @@ class UserController extends Controller
         // groupby seller lahat ng cartitems
         $cartitems_per_seller = $cartitems->groupBy('seller_id')->all();
 
-        // dd($cartitems_per_seller);
-
         // loop for each seller to save purchase per seller
         foreach ($cartitems_per_seller as $key => $seller_items) {
             // dd($seller_items);
@@ -166,9 +169,13 @@ class UserController extends Controller
             //get total_amount of current seller_items
             $total_amount = $seller_items->sum('total_price');
 
+            //generate reference number for purchase
+            $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+
             $purchase = new Purchase([
                 'user_id' => $user_id,
                 'seller_id' => $key,
+                'reference_number' => $puchase_reference_number,
                 'purchase_date' => now(),
                 'total_amount' => $total_amount,
                 'purchase_status' => 'pending',

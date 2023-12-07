@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Gcash;
 
+use App\Helpers\ReferenceGeneratorHelper;
 use App\Models\CartItem;
 use App\Models\UserNotification;
 use App\Models\Payment;
@@ -83,9 +84,13 @@ class Gcash3 extends Component
                 //get total_amount of current seller_items
                 $total_amount = $seller_items->sum('total_price');
 
+                //generate reference number for purchase
+                $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+
                 $purchase = new Purchase([
                     'user_id' => $this->user_id,
                     'seller_id' => $key,
+                    'reference_number' => $puchase_reference_number,
                     'purchase_date' => now(),
                     'total_amount' => $total_amount,
                     'purchase_status' => 'pending',
@@ -140,9 +145,13 @@ class Gcash3 extends Component
         else {
             $product = Product::find($this->product_id);
 
+            //generate reference number for purchase
+            $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+
             $purchase = new Purchase([
                 'user_id' => $this->user_id,
                 'seller_id' => $product->seller_id,
+                'reference_number' => $puchase_reference_number,
                 'purchase_date' => now(),
                 'total_amount' => $this->total,
                 'purchase_status' => 'pending',
