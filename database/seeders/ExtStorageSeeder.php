@@ -26,7 +26,7 @@ class ExtStorageSeeder extends Seeder
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([
-                    'seller_id' => Seller::find(fake()->numberBetween(1, 2))->id,
+                    'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
                     'title' => $value->name,
                     'category' => 'ext_storage',
                     'price' => $value->price * 55,
