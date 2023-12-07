@@ -147,6 +147,9 @@ class OrderList extends Component
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('purchases.seller_id', $this->seller->id);
 
+        $test = Purchase::where('purchases.seller_id', $this->seller->id);
+        // dd($test->paginate(10));
+
 
         //
         if ($this->orderstatus_filter) {
@@ -196,7 +199,7 @@ class OrderList extends Component
         //
         else {
 
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $test->orderBy('id', 'asc')->paginate(10);
         }
 
         return $this->purchase_items->paginate(10);
