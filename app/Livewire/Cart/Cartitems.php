@@ -19,6 +19,8 @@ class Cartitems extends Component
 
     public int $testvalue = 0;
 
+    public $item_quantity;
+
     public function placeholder()
     {
         return <<<'HTML'
@@ -38,6 +40,8 @@ class Cartitems extends Component
 
         $this->testvalue = 0;
 
+        $this->item_quantity = $cartitem->quantity;
+
         //        dd($this->cartitem);
     }
 
@@ -56,8 +60,9 @@ class Cartitems extends Component
     {
         $cart_item = CartItem::find($cartitem['id']);
         $cart_item->increment('quantity');
-        $cart_item->total_price = $cart_item->quantity * $cart_item->total_price;
+        $cart_item->total_price = $cart_item->total_price + $cart_item->product->price;
         $cart_item->save();
+        $this->item_quantity++;
         sleep(0.500);
         $this->dispatch('cartitem-item-change');
     }
@@ -66,7 +71,11 @@ class Cartitems extends Component
     public function minusquantity($cartitem)
     {
         if ($cartitem['quantity'] > 1) {
-            CartItem::where('id', $cartitem['id'])->decrement('quantity');
+            $cart_item = CartItem::find($cartitem['id']);
+            $cart_item->decrement('quantity');
+            $cart_item->total_price = $cart_item->total_price - $cart_item->product->price;
+            $cart_item->save();
+            $this->item_quantity--;
         }
         sleep(.500);
         $this->dispatch('cartitem-item-change');
