@@ -120,22 +120,6 @@ class OrderList extends Component
         return count($faileddelivery->where('purchase_status', 'failed_delivery')->get());
     }
 
-    // #[On('resetPage')]
-    public function update_paymentpurchase($purchase_id, $payment_status)
-    {
-        dd($payment_status);
-        // Purchase::where('id', 3)->update(['title' => 'Updated title']);
-
-        $this->seller = Seller::where('user_id', Auth::id())->get()->first();
-        // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-
-        $this->resetPage();
-    }
-
 
 
     #[Computed]
@@ -210,6 +194,7 @@ class OrderList extends Component
     {
         // dd($request->purchase_status);
 
+        $this->seller = Seller::where('user_id', Auth::id())->get()->first();
         $this->payment_status = $request->payment_status;
         $this->purchase_status = $request->purchase_status;
 
@@ -218,31 +203,31 @@ class OrderList extends Component
         $payment_type = $request->payment_type;
         $user = User::find($user_id);
 
-
         // dd($item);
-        Purchase::where('id', $purchase_id)->update(['purchase_status' => $this->purchase_status]);
+        // Purchase::where('id', $purchase_id)->update(['purchase_status' => $this->purchase_status]);
 
-        if ($payment_type != 'cod') {
-            Payment::where('purchase_id', $purchase_id)->update([
-                'payment_status' => $this->payment_status,
-                'date_of_payment' => now(),
-            ]);
-        } else {
-            Payment::where('purchase_id', $purchase_id)->update([
-                'payment_status' => $this->payment_status,
-            ]);
-        }
+        // if ($payment_type != 'cod') {
+        //     Payment::where('purchase_id', $purchase_id)->update([
+        //         'payment_status' => $this->payment_status,
+        //         'date_of_payment' => now(),
+        //     ]);
+        // } else {
+        //     Payment::where('purchase_id', $purchase_id)->update([
+        //         'payment_status' => $this->payment_status,
+        //     ]);
+        // }
 
-        if (!$this->purchase_status == 'pending' || !Shipments::where('purchase_id', $purchase_id)->exists()) {
+        // set to to_ship
+        if ($this->purchase_status == 'pending' || !Shipments::where('purchase_id', $purchase_id)->exists()) {
             // dd('test');
             $shipment = new Shipments([
+                'shipment_number' => random_int(10000000, 99999999),
                 'purchase_id' => $purchase_id,
                 'user_id' => $user->id,
+                'seller_id' => $this->seller->id,
                 'email' => $user->email,
                 'phone_number' => $user->phone_number,
                 'shipment_status' => 'to_ship',
-                'referenceId' => random_int(100000, 999999),
-                // 'shippeddate' => now(),
                 'street_address_1' => $user->street_address_1,
                 'state_province' => $user->state_province,
                 'city' => $user->city,
@@ -250,92 +235,88 @@ class OrderList extends Component
                 'country' => $user->country,
             ]);
             $shipment->save();
-        }
+
+            Purchase::where('id', $purchase_id)->update(['purchase_status' => 'to_ship']);
 
 
-        if ($this->purchase_status == 'completed') {
-
-            $notification = new UserNotification([
-                'user_id' => $user_id,
-                'purchase_id' => $purchase_id,
-                'tag' => 'completed',
-                'title' => 'Share your feedback! click here',
-                'message' => 'Order #' . $purchase_id . ' is completed. Your feedback matters to others! Rate the products by date',
-            ]);
-            $notification->save();
-
-            Purchase::where('id', $purchase_id)->update([
-                'completion_date' => now(),
-            ]);
-            Shipments::where('purchase_id', $purchase_id)->update([
-                'shipment_status' => $this->purchase_status,
-                'shippeddate' => now(),
-            ]);
-            Payment::where('purchase_id', $purchase_id)->update([
-                'payment_status' => 'paid',
-                'date_of_payment' => now(),
-            ]);
-        } elseif ($this->purchase_status == 'to_ship') {
-
+            //notify from 'pending' to 'to_ship'
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase_id,
                 'tag' => 'to_ship',
-                'title' => 'Payment Confirmed',
-                'message' => 'Payment for order #' . $purchase_id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                'title' => 'Purchase Confirmed',
+                'message' => 'Purchase for order #' . $purchase_id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
             ]);
             $notification->save();
 
-            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
-        } elseif ($this->purchase_status == 'shipping') {
-
-            $notification = new UserNotification([
-                'user_id' => $user_id,
-                'purchase_id' => $purchase_id,
-                'tag' => 'shipping',
-                'title' => 'Shipped Out',
-                'message' => 'Parcel parcel no for your order
-                #' . $purchase_id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
-            ]);
-            $notification->save();
-
-            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
-        } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'cod') {
-
-            $notification = new UserNotification([
-                'user_id' => $user_id,
-                'purchase_id' => $purchase_id,
-                'tag' => 'failed_delivery',
-                'title' => 'Out for Delivery',
-                'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
-            ]);
-            $notification->save();
-
-            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
-        } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'gcash') {
-
-            $notification = new UserNotification([
-                'user_id' => $user_id,
-                'purchase_id' => $purchase_id,
-                'tag' => 'failed_delivery',
-                'title' => 'Out for Delivery',
-                'message' => 'Our logistics partner will attempt parcel delivery within the day.',
-            ]);
-            $notification->save();
-
-            Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
+            return redirect(route('order-list'));
         }
 
-        return redirect(route('order-list'));
+        // redirect to to_ship list
+        elseif ($this->purchase_status == 'to_ship') {
+
+            return redirect(route('shipment-list'));
+        }
+
+        // redirect to shipping list
+        elseif ($this->purchase_status == 'shipping') {
+
+            return redirect(route('shipment-list'));
+        }
+
+        // completed
+        elseif ($this->purchase_status == 'completed') {
+
+            // $notification = new UserNotification([
+            //     'user_id' => $user_id,
+            //     'purchase_id' => $purchase_id,
+            //     'tag' => 'completed',
+            //     'title' => 'Share your feedback! click here',
+            //     'message' => 'Order #' . $purchase_id . ' is completed. Your feedback matters to others! Rate the products by date',
+            // ]);
+            // $notification->save();
+
+            // Purchase::where('id', $purchase_id)->update([
+            //     'completion_date' => now(),
+            // ]);
+            // Shipments::where('purchase_id', $purchase_id)->update([
+            //     'shipment_status' => $this->purchase_status,
+            //     'shipped_date' => now(),
+            // ]);
+            // Payment::where('purchase_id', $purchase_id)->update([
+            //     'payment_status' => 'paid',
+            //     'date_of_payment' => now(),
+            // ]);
+        } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'cod') {
+
+            // $notification = new UserNotification([
+            //     'user_id' => $user_id,
+            //     'purchase_id' => $purchase_id,
+            //     'tag' => 'failed_delivery',
+            //     'title' => 'Out for Delivery',
+            //     'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
+            // ]);
+            // $notification->save();
+
+            // Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
+        } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'gcash') {
+
+            // $notification = new UserNotification([
+            //     'user_id' => $user_id,
+            //     'purchase_id' => $purchase_id,
+            //     'tag' => 'failed_delivery',
+            //     'title' => 'Out for Delivery',
+            //     'message' => 'Our logistics partner will attempt parcel delivery within the day.',
+            // ]);
+            // $notification->save();
+
+            // Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
+        }
     }
 
 
     public function render()
     {
-        $this->orderstatus_options = ['pending', 'to_ship', 'shipping', 'completed', 'failed_delivery'];
-
-        $this->paymentstatus_options = ['paid', 'unpaid'];
-
         return view('livewire..seller.dashboard.order-links.order-list');
     }
 }

@@ -253,10 +253,10 @@
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Date</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amt</div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment</div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase</div>
+                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Status</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Actions</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Details</div>
-                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Update</div>
                 </div>
                 {{-- loading indicator --}}
                 <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
@@ -309,13 +309,21 @@
                             {{-- @dd($purchase) --}}
                             <form action="{{ route('order-list-update') }}" method="POST">
                                 @csrf
+
+                                <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
+                                <input type="text" name="purchase_status"
+                                    value="{{ $purchase->purchase_status }}" hidden>
+                                <input type="text" name="user_id" value="{{ $purchase->user_id }}" hidden>
+                                <input type="text" name="payment_type"
+                                    value="{{ $purchase->payment->payment_type }}" hidden>
+
                                 <div x-data="{ expanded: false }" class="border-b border-gray-100">
                                     <div class="grid grid-cols-12 text-center">
                                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
                                             {{ $purchase->id }}
                                         </div>
                                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
-                                            {{ $purchase->user->name }}
+                                            {{ $purchase->user->first_name }} {{ $purchase->user->last_name }}
                                         </div>
                                         <div class="col-span-2 my-4 !text-gray-800 !font-light">
                                             {{ date('d-M-y', strtotime($purchase->purchase_date)) }}
@@ -324,98 +332,73 @@
                                             {{ $purchase->total_amount }}
                                         </div>
 
-                                        <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
-                                        <input type="text" name="user_id" value="{{ $purchase->user_id }}"
-                                            hidden>
-                                        <input type="text" name="payment_type"
-                                            value="{{ $purchase->payment->payment_type }}" hidden>
-
-                                        @if ($purchase->payment->payment_type == 'cod' && $purchase->payment->payment_status == 'unpaid')
-                                            <select name="payment_status"
-                                                class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                @foreach ($this->paymentstatus_options as $key => $status)
-                                                    <option value="{{ $status }}" @selected($purchase->payment->payment_status)>
-                                                        {{ $status }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                        {{-- payment status --}}
+                                        @if ($purchase->payment->payment_status == 'unpaid')
+                                            <div class="col-span-1 text-sm my-4 !text-red-600 !font-light">
+                                                <input type="text" name="payment_status" value="unpaid" hidden>
+                                                Unpaid ({{ $purchase->payment->payment_type }})
+                                            </div>
                                         @else
-                                            <div class="col-span-2 text-sm my-4 !text-green-600 !font-light">
+                                            <div class="col-span-1 text-sm my-4 !text-green-600 !font-light">
                                                 <input type="text" name="payment_status" value="paid" hidden>
-                                                paid
+                                                Paid ({{ $purchase->payment->payment_type }})
                                             </div>
                                         @endif
 
+                                        {{-- purchase status --}}
+                                        <div class="col-span-2 my-4 !text-gray-900 !font-light">
+                                            {{ $purchase->purchase_status }}
+                                        </div>
+
+                                        {{-- purchase actions --}}
                                         @if ($purchase->purchase_status == 'completed')
-                                            <div class="col-span-2 text-sm my-4 !text-green-600 !font-light">
-                                                <input type="text" name="purchase_status" value="completed"
-                                                    hidden />
-                                                {{ $purchase->purchase_status }}
-                                            </div>
-                                        @elseif ($purchase->purchase_status == 'cancellation')
-                                            <div class="col-span-2 text-sm my-4 !text-red-600 !font-light">
-                                                <input type="text" name="purchase_status" value="cancellation"
-                                                    hidden />
-                                                {{ $purchase->purchase_status }}
-                                            </div>
-                                        @elseif ($purchase->purchase_status == 'returnrefund')
-                                            <div class="col-span-2 text-sm my-4 !text-red-600 !font-light">
-                                                <input type="text" name="purchase_status" value="returnrefund"
-                                                    hidden />
-                                                {{ $purchase->purchase_status }}
-                                            </div>
-                                        @elseif ($purchase->purchase_status == 'failed_delivery')
-                                            <div class="col-span-2 text-sm my-4 !text-red-600 !font-light">
-                                                <input type="text" name="purchase_status" value="failed_delivery"
-                                                    hidden />
-                                                {{ $purchase->purchase_status }}
+                                            <div class="col-span-2 text-2xl my-auto !text-green-600 !font-light">
+                                                <i class="bi bi-check-square-fill"></i>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'pending')
-                                            <select name="purchase_status"
-                                                class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                @foreach ($this->orderstatus_options as $key => $status)
-                                                    @if ($purchase->purchase_status == $status)
-                                                        <option value="{{ $status }}" seleted>
-                                                        @else
-                                                        <option value="{{ $status }}">
-                                                    @endif
-                                                    {{ $status }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
+                                                <button type="submit"
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
+                                                    Prepare for Shipment
+                                                </button>
+                                            </div>
                                         @elseif ($purchase->purchase_status == 'to_ship')
-                                            <select name="purchase_status"
-                                                class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                @foreach ($this->orderstatus_options as $key => $status)
-                                                    @if ($key > 0)
-                                                        @if ($purchase->purchase_status == $status)
-                                                            <option value="{{ $status }}" seleted>
-                                                            @else
-                                                            <option value="{{ $status }}">
-                                                        @endif
-                                                        {{ $status }}
-                                                        </option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
+                                            <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
+                                                    Manage Shipments <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
+                                            </div>
                                         @elseif ($purchase->purchase_status == 'shipping')
-                                            <div class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                <select name="purchase_status">
-                                                    @foreach ($this->orderstatus_options as $key => $status)
-                                                        @if ($key > 1)
-                                                            @if ($purchase->purchase_status == $status)
-                                                                <option value="{{ $status }}" seleted>
-                                                                @else
-                                                                <option value="{{ $status }}">
-                                                            @endif
-                                                            {{ $status }}
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
+                                            <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
+                                                    Manage Shipments <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
+                                            </div>
+                                        @elseif ($purchase->purchase_status == 'cancellation')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
+                                            </div>
+                                        @elseif ($purchase->purchase_status == 'returnrefund')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
+                                            </div>
+                                        @elseif ($purchase->purchase_status == 'failed_delivery')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
                                             </div>
                                         @else
-                                            <div class="col-span-2 text-sm my-4 !text-gray-800 !font-light">
+                                            <div class="col-span-2 my-4 !text-gray-800 !font-light">
                                                 {{ $purchase->purchase_status }}
                                             </div>
                                         @endif
@@ -437,15 +420,10 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <div class="col-span-1 text-sm mx-auto my-auto !text-gray-800 !font-light">
-                                            <button type="submit"
-                                                class="bg-blue-500 hover:bg-blue-700 text-white text-sm p-2 rounded">Update
-                                            </button>
-                                        </div>
                                     </div>
 
                                     <div x-cloak id="faqs-text-01" role="region" aria-labelledby="faqs-title-01"
-                                        class="grid text-sm border-t-2 border-blue-100 text-slate-600 overflow-hidden rounded transition-all duration-300 ease-in-out bg-background-light "
+                                        class="grid text-sm text-slate-600 overflow-hidden rounded transition-all duration-300 ease-in-out bg-background-light "
                                         :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
                                         <div class="overflow-hidden border-t-2 border-blue-100">
                                             <h5 class="pl-4 pt-2">More details..</h5>
