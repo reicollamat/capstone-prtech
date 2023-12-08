@@ -7,37 +7,37 @@
     <div class="flex h-full">
         <div class="tab-wrapper flex-1 w-64" x-data="{ activeTab: 0 }">
             <div class="flex flex-column flex-lg-row justify-between gap-2 ">
-                <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
+                {{-- <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
                     <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
                         <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                         <div class="py-2 text-center">
                             <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
                             <p class="font-semibold">
-                                {{ $this->getTotalShipmentCount }}
+                                {{ $total_shipment ?? 0 }}
                             </p>
                         </div>
                         <div class="py-2 text-center flex justify-center">
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">To Ship</p>
                                 <p class="font-semibold">
-                                    {{ $this->getTotalToShipCount }}
+                                    {{ $total_to_ship_count ?? 0 }}
                                 </p>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Shipping</p>
                                 <p class="font-semibold">
-                                    {{ $this->getTotalShippingCount }}
+                                    {{ $total_shipping_count ?? 0 }}
                                 </p>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Delivered</p>
                                 <p class="font-semibold">
-                                    {{ $this->getTotalFailedDeliveryCount }}
+                                    {{ $total_failed_delivery_count ?? 0 }}
                                 </p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div
                     class="bg-white w-full p-1 h-full border-gray-200 !rounded-lg text-sm focus:outline-none lg:items-center mb-3">
@@ -47,7 +47,7 @@
                         <button @click="activeTab = 1" class="tab-control p-2 rounded"
                             :class="{ 'active bg-blue-300': activeTab === 1 }">Shipping</button>
                         <button @click="activeTab = 2" class="tab-control p-2 rounded"
-                            :class="{ 'active bg-blue-300': activeTab === 2 }">Delivered</button>
+                            :class="{ 'active bg-green-300': activeTab === 2 }">Delivered</button>
                     </div>
                 </div>
             </div>
@@ -78,30 +78,30 @@
                 <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
-                    <p class="font-semibold">{{ $this->getTotalShipmentCount }}</p>
+                    <p class="font-semibold">{{ $total_shipment ?? 0 }}</p>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">To Ship</p>
-                        <p class="font-semibold">{{ $this->getTotalToShipCount }}</p>
+                        <p class="font-semibold">{{ $total_to_ship_count ?? 0 }}</p>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Shipping</p>
-                        <p class="font-semibold">{{ $this->getTotalShippingCount }}</p>
+                        <p class="font-semibold">{{ $total_shipping_count ?? 0 }}</p>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Delivered</p>
-                        <p class="font-semibold">{{ $this->getTotalCompletedCount }}</p>
+                        <p class="font-semibold">{{ $total_completed_count ?? 0 }}</p>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Failed Delivery</p>
-                        <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
+                        <p class="font-semibold">{{ $total_failed_delivery_count ?? 0 }}</p>
                     </div>
                 </div>
             </div>
