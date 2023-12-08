@@ -580,92 +580,85 @@
                         </div>
                     </div>
 
-                    {{--                    {{ var_dump($category_filter) }} --}}
-
                     <div x-transition>
                         <div class="grid grid-cols-2  lg:grid-cols-4 gap-3 p-3">
-                            @foreach ($this->getProducts as $value)
-                                {{--                            @foreach ($all_products as $value) --}}
-                                <div wire:key="{{ $value->id }}">
+
+                            {{-- product showcases --}}
+                            @foreach ($this->getProducts as $product)
+                                <div wire:key="{{ $product->id }}">
                                     <div
                                         class="w-full h-full max-w-sm bg-white border border-gray-200 rounded-lg hover:shadow-2xl hover:transition position-relative">
                                         <div>
-                                            {{--                                             <livewire:addtowishlist.add-to-wishlist :key="$value->id" --}}
-                                            {{--                                                 :product_id="$value->id" /> --}}
                                             <div class="position-absolute top-0 end-0 mt-1 mr-2.5 z-[30]">
-                                                {{--                                                @if ($added_to_wishlist) --}}
-                                                {{--                                                    <button wire:click="addtowishlist({{ $value->id }})"> --}}
-                                                {{--                                                        <i class="bi bi-heart-fill" style="font-size: 1.5rem"></i> --}}
-
-                                                {{--                                                    </button> --}}
-                                                {{--                                                @else --}}
-                                                <button wire:click="addtowishlist({{ $value->id }})">
-                                                    <i class="bi bi-heart" style="font-size: 1.5rem"></i>
-                                                </button>
-                                                {{--                                                @endif --}}
+                                                @if ($this->check_bookmark($product->id))
+                                                    <button wire:click="removefromwishlist({{ $product->id }})">
+                                                        <i class="bi bi-heart-fill" style="font-size: 1.5rem"></i>
+                                                    </button>
+                                                @else
+                                                    <button wire:click="addtowishlist({{ $product->id }})">
+                                                        <i class="bi bi-heart" style="font-size: 1.5rem"></i>
+                                                    </button>
+                                                @endif
                                             </div>
                                         </div>
-                                        <div
-                                            class="position-relative w-auto h-auto bg-center bg-cover content-center min-h-[257px] p-2">
-                                            <a
-                                                href="{{ route('collections-details', ['product_id' => $value->id, 'category' => $value->category]) }}">
-                                                {{-- @dd($value->product_images[0]->image_paths) --}}
+                                        <div class="btn w-full"
+                                            wire:click="to_details_page({{ $product->id }}, '{{ $product->category }}')">
+                                            <div
+                                                class="position-relative w-auto h-auto bg-center bg-cover content-center min-h-[257px] p-2">
                                                 <img class="h-auto max-h-[200px] w-auto object-center object-contain"
-                                                    src="{{ asset($value->product_images[0]->image_paths) }}"
+                                                    src="{{ asset($product->product_images[0]->image_paths) }}"
                                                     alt="product image" />
-                                            </a>
-                                        </div>
-                                        {{--                                        {{ $value->id }} --}}
-                                        {{--                                        {{ $value->category }} --}}
+                                            </div>
 
-                                        <div class="p-2.5">
-                                            {{--                                             <a href="{{ route('product_detail', ['product_id' => $value->product_id, 'category' => $value->category]) }}" --}}
-                                            <a href="{{ route('collections-details', ['product_id' => $value->id, 'category' => $value->category]) }}"
-                                                class="decoration-0 no-underline">
+                                            <div class="p-2.5">
                                                 <h5
                                                     class="text-lg font-semibold tracking-tight text-gray-900 text-ellipsis overflow-hidden">
-                                                    {{ $value->title }}</h5>
-                                            </a>
-                                            <div class="flex items-center mt-2.5 mb-2.5">
-                                                @for ($i = 0; $i < intval($value->rating); $i++)
-                                                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                        viewBox="0 0 22 20">
-                                                        <path
-                                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                                                    </svg>
-                                                @endfor
-                                                <span
-                                                    class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{{ $value->rating }}</span>
-                                            </div>
-                                            <div class="mb-2.5">
-                                                <span class="text-xl font-medium text-gray-900 ">PHP
-                                                    {{ $value->price }}</span>
-                                            </div>
-                                            <div class="flex justify-content-center gap-2">
-                                                <button wire:click="buynow({{ $value->id }})"
-                                                    class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 py-1.5 text-center">
-                                                    Buy Now
-                                                </button>
-                                                <div>
-                                                    <livewire:addtocart.add-to-cart :product_id="$value->id" :key="$value->id"
-                                                        wire:key="{{ $value->id }}" />
+                                                    {{ $product->title }}</h5>
+                                                <h6 class="text-sm italic text-gray-600 text-ellipsis overflow-hidden">
+                                                    <i class="bi bi-shop"></i> {{ $product->seller->shop_name }}
+                                                </h6>
+                                                <div class="d-flex content-center mt-2.5 mb-2.5">
+                                                    @for ($i = 0; $i < intval($product->rating); $i++)
+                                                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                            viewBox="0 0 22 20">
+                                                            <path
+                                                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                        </svg>
+                                                    @endfor
+                                                    <span
+                                                        class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">{{ $product->rating }}</span>
                                                 </div>
-
+                                                <div class="mb-2.5">
+                                                    <span class="text-xl font-medium text-gray-900 ">PHP
+                                                        {{ $product->price }}</span>
+                                                </div>
                                             </div>
                                         </div>
+
+                                        <div class="flex justify-content-center gap-2 pb-4">
+                                            <button wire:click="buynow({{ $product->id }})"
+                                                class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center">
+                                                Buy Now
+                                            </button>
+                                            <div>
+                                                <livewire:addtocart.add-to-cart :product_id="$product->id" :key="$product->id"
+                                                    wire:key="{{ $product->id }}" />
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
                             @endforeach
-                            {{--                            {{ $this->getProducts->links() }} --}}
+                            {{-- product showcases --}}
                         </div>
+
                         <div class="p-3 flex justify-center">
                             {{ $this->getProducts->links() }}
                         </div>
 
                     </div>
-                    {{--                    {{ $all_products->links() }} --}}
                 </div>
 
             </div>
