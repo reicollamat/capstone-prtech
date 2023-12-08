@@ -14,16 +14,18 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
 
+            $table->string('shipment_number')->unique();
             $table->foreignId('purchase_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('seller_id')->constrained()->cascadeOnDelete();
             // user specific
             $table->string('email')->nullable();
             $table->string('phone_number')->nullable();
 
             // delivery specifc
             $table->string('shipment_status')->nullable();
-            $table->string('referenceId')->unique();
-            $table->dateTime('shippeddate')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('shipped_date')->nullable();
 
             // address
             $table->string('street_address_1')->nullable();

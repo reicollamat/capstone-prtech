@@ -31,6 +31,12 @@ class Purchase extends Model
         return $this->hasOne(Payment::class);
     }
 
+    // relationship to Shipments
+    public function shipment()
+    {
+        return $this->hasOne(Shipments::class);
+    }
+
     public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class);
