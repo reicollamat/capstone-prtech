@@ -22,6 +22,9 @@ class Collections extends Component
     #[Locked]
     public $userid;
 
+    #[Locked]
+    public $user;
+
     public function placeholder(array $params = [])
     {
         return view('livewire.placeholder.shop-placeholder', $params);
@@ -166,6 +169,16 @@ class Collections extends Component
         }
     }
 
+    #[Computed]
+    public function check_bookmark($product_id)
+    {
+        if ($this->user->bookmark->contains('product_id', $product_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function mount($category = null)
     {
@@ -176,6 +189,7 @@ class Collections extends Component
         }
 
         $this->userid = Auth::user()->id ?? null;
+        $this->user = Auth::user() ?? null;
 
         $this->all_products = DB::table('products')->get();
 
@@ -254,6 +268,24 @@ class Collections extends Component
         //        dd($item_id);
     }
 
+    public function removefromwishlist($product_id)
+    {
+        $bookmarkitem = Bookmark::where('product_id', $product_id)->where('user_id', $this->userid)->get();
+        // dd($bookmarkitem);
+        Bookmark::destroy($bookmarkitem);
+
+        // create an event to update the count of wihshlist items
+        $this->dispatch('wishlist-item-change');
+
+        sleep(0.5);
+        $this->mount();
+
+        $product = Product::find($product_id);
+        // display alert notification
+        session()->flash('notification-livewire', "'$product->title' removed from Wishlists");
+        $this->dispatch('notif-alert-wishlist');
+    }
+
     // redirect to purchase page
     public function buynow($product_id)
     {
@@ -269,6 +301,11 @@ class Collections extends Component
         } else {
             $this->redirect(route('login'));
         }
+    }
+
+    public function to_details_page($product_id, $category)
+    {
+        return redirect(route('collections-details', ['product_id' => $product_id, 'category' => $category]));
     }
 
     public function render()
