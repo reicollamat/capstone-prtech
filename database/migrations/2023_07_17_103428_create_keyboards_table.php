@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('style');
             $table->string('switches')->nullable();
             $table->string('backlit')->nullable();
-            $table->boolean('tenkeyless');
+            $table->boolean('tenkeyless')->nullable();
             $table->string('connection_type');
             $table->string('color')->nullable();
             // $table->string('image')->default('img/showcase1.jpg');

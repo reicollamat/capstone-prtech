@@ -159,12 +159,12 @@
                                 data-bs-content="Certain device/s that are compatible with the speaker.">
                                 <i class="bi bi-patch-question"></i>
                             </span></label>
-                        <select id="speaker_connectivity" wire:model.blur="speaker_conenctivity"
+                        <select id="speaker_connectivity" wire:model.blur="speaker_connectivity"
                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option>Click to Select</option>
-                            <option value="wired">Wired</option>
-                            <option value="wireless">Wireless</option>
-                            <option value="both">Both</option>
+                            <option value="Wired">Wired</option>
+                            <option value="Wireless">Wireless</option>
+                            <option value="Both">Both</option>
 
                         </select>
                         @error('speaker_connectivity')

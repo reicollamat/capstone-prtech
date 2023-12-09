@@ -96,6 +96,7 @@ class ExtStorageComponent extends Component
             'extstorage_cap' => 'required|integer',
             'extstorage_type' => 'required|not_in:Click to Select',
             'extstorage_int' => 'required|not_in:Click to Select',
+            'extstorage_color' => 'required',
             'stocks' => 'required|integer',
             'reserve_stocks' => 'required|integer',
         ]);

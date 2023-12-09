@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('socket');
             $table->string('form_factor');
             $table->integer('max_memory');
-            $table->integer('memory_slots');
+            $table->integer('memory_slots')->nullable();
             $table->string('color')->nullable();
             // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');

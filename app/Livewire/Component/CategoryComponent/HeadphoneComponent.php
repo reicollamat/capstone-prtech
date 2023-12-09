@@ -65,7 +65,7 @@ class HeadphoneComponent extends Component
     #[Validate('required', message: 'Please provide headphone color')]
     public $color;
 
-    #[Validate('required', message: 'Please provide headphone color')]
+    #[Validate('required', message: 'Please provide headphone enclosure type')]
     public $enclosure_type;
 
     #[Validate('required', message: 'Please provide stocks available')]

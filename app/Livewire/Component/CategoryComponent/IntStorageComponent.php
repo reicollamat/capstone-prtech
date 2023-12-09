@@ -62,6 +62,9 @@ class IntStorageComponent extends Component
     #[Validate('required', message: 'Please provide storage form factor')]
     public $intstorage_ff;
 
+    #[Validate('required', message: 'Please provide cache')]
+    public $intstorage_cache;
+
     #[Validate('required', message: 'Please provide stocks available')]
     public $stocks;
 

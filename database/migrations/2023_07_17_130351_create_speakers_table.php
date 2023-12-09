@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('brand')->nullable();
             $table->decimal('price');
-            $table->decimal('configuration', 8, 1);
+            $table->decimal('configuration', 8, 1)->nullable();
             $table->string('wattage')->nullable();
             $table->json('frequency_response')->nullable();
             $table->string('color')->nullable();
