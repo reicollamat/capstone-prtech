@@ -204,10 +204,6 @@ class ShipmentList extends Component
 
     public function render()
     {
-        $this->orderstatus_options = ['pending', 'completed', 'to_ship', 'shipping'];
-
-        $this->paymentstatus_options = ['paid', 'unpaid'];
-
         return view('livewire..seller.dashboard.shipment-links.shipment-list');
     }
 }

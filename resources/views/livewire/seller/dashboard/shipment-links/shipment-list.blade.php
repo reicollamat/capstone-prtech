@@ -12,7 +12,8 @@
                         <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                         <div class="py-2 text-center">
                             <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
-                            <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            <input type="text"
+                                class="font-semibold bg-transparent w-full text-center form-control-lg"
                                 wire:model="total_shipment" disabled>
                         </div>
                         <div class="py-2 text-center flex justify-center">
