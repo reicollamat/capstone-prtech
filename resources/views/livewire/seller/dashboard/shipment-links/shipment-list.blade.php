@@ -13,28 +13,28 @@
                         <div class="py-2 text-center">
                             <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
                             <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                wire:model="total_shipment">
+                                wire:model="total_shipment" disabled>
                         </div>
                         <div class="py-2 text-center flex justify-center">
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Delivered</p>
                                 <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                    wire:model="total_completed_count">
+                                    wire:model="total_completed_count" disabled>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">To Ship</p>
                                 <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                    wire:model="total_shipping_count">
+                                    wire:model="total_shipping_count" disabled>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Shipping</p>
                                 <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                    wire:model="total_to_ship_count">
+                                    wire:model="total_to_ship_count" disabled>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Failed Deliverey</p>
                                 <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                    wire:model="total_failed_delivery_count">
+                                    wire:model="total_failed_delivery_count" disabled>
                             </div>
                         </div>
                     </div>
@@ -80,34 +80,34 @@
                 <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
                     <input type="text" class="font-semibold bg-transparent w-full text-center"
-                        wire:model="total_shipment">
+                        wire:model="total_shipment" disabled>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">To Ship</p>
                         <input type="text" class="font-semibold bg-transparent w-full text-center"
-                            wire:model="total_to_ship_count">
+                            wire:model="total_to_ship_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Shipping</p>
                         <input type="text" class="font-semibold bg-transparent w-full text-center"
-                            wire:model="total_shipping_count">
+                            wire:model="total_shipping_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Delivered</p>
                         <input type="text" class="font-semibold bg-transparent w-full text-center"
-                            wire:model="total_completed_count">
+                            wire:model="total_completed_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Failed Delivery</p>
                         <input type="text" class="font-semibold bg-transparent w-full text-center"
-                            wire:model="total_failed_delivery_count">
+                            wire:model="total_failed_delivery_count" disabled>
                     </div>
                 </div>
             </div>
