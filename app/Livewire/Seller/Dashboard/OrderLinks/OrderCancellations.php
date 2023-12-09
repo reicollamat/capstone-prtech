@@ -4,6 +4,7 @@ namespace App\Livewire\Seller\Dashboard\OrderLinks;
 
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchaseCancellationInfo;
 use App\Models\PurchaseItem;
 use App\Models\Seller;
 use App\Models\Shipments;
@@ -22,8 +23,7 @@ class OrderCancellations extends Component
 
     public $quick_search_filter;
 
-    public $set_to_shipping;
-    public $set_to_complete;
+    public $set_to_cancellation_approved;
 
     public $seller;
 
@@ -37,69 +37,49 @@ class OrderCancellations extends Component
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        // dd($this->purchase_items->get());
+        $this->cancellations = Purchase::where('purchases.seller_id', $this->seller->id)
+            ->where('purchase_status', 'cancellation_pending');
+        // dd($this->cancellations->get());
     }
 
 
     #[Computed]
-    public function getTotalCancellations()
-    {
-        $to_ship = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        return count($to_ship->where('purchase_status', 'cancellation')->get());
-    }
-
-
-    #[Computed]
-    public function getCancellations()
+    public function getCancellationPending()
     {
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'cancellation');
+        $this->cancellations = Purchase::where('purchases.seller_id', $this->seller->id)
+            ->where('purchase_status', 'cancellation_pending');
 
-        if ($this->set_to_shipping) {
-            // dd($this->set_to_shipping);
+        if ($this->set_to_cancellation_approved) {
+            dd($this->set_to_cancellation_approved);
 
-            Purchase::where('id', $this->set_to_shipping)->update(['purchase_status' => 'shipping']);
-            Shipments::where('purchase_id', $this->set_to_shipping)->update(['shipment_status' => 'shipping']);
+            Purchase::where('id', $this->set_to_cancellation_approved)->update(['purchase_status' => 'cancellation_approved']);
+            PurchaseCancellationInfo::where('purchase_id', $this->set_to_cancellation_approved)->update(['status' => 'cancellation_approved']);
 
             // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->cancellations->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
 
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            return $this->purchase_items
+            return $this->cancellations
                 ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
                 ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
                 ->where('purchases.purchase_status', 'to_ship')
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         } else {
-            // dd($this->purchase_items->get());
+            // dd($this->cancellations->get());
             // return collection of shipment items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->cancellations->orderBy('id', 'asc')->paginate(10);
         }
 
-        return $this->purchase_items->paginate(10);
+        return $this->cancellations->paginate(10);
     }
 
 
     public function render()
     {
-        $this->orderstatus_options = ['pending', 'completed', 'to_ship', 'shipping'];
-
-        $this->paymentstatus_options = ['paid', 'unpaid'];
-
         return view('livewire..seller.dashboard.order-links.order-cancellations');
     }
 }
