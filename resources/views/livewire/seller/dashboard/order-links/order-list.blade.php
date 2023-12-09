@@ -51,22 +51,18 @@
                                             <p class="font-semibold">{{ $this->getTotalShippingCount }}</p>
                                         </div>
                                         <div class="px-2">
-                                            <p class="text-xs font-base text-gray-500 mb-1">Failed Delivery</p>
-                                            <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
-                                        </div>
-                                        <div class="px-2">
                                             <p class="text-xs font-base text-gray-500 mb-1">To Ship</p>
                                             <p class="font-semibold">{{ $this->getTotalToShipCount }}</p>
                                         </div>
                                     </div>
                                     <div class="py-2 text-center flex justify-center">
                                         <div class="px-2">
-                                            <p class="text-xs font-base text-gray-500 mb-1">Cancellation</p>
-                                            <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
+                                            <p class="text-xs font-base text-gray-500 mb-1">Failed Deliveries</p>
+                                            <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
                                         </div>
                                         <div class="px-2">
-                                            <p class="text-xs font-base text-gray-500 mb-1">Return/Refund</p>
-                                            <p class="font-semibold">{{ $this->getTotalReturnRefundCount }}</p>
+                                            <p class="text-xs font-base text-gray-500 mb-1">Cancellations</p>
+                                            <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +92,7 @@
                         x-transition:leave="transition ease-in duration-100"
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                         class="absolute left-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
-                        <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
+                        <div class="grid grid-cols-2 gap-2 p-2 bg-white rounded border-1 border-gray-300">
                             @foreach ($this->orderstatus_list as $key => $status)
                                 <button
                                     class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
@@ -376,26 +372,23 @@
                                                     Manage Shipments <i class="bi bi-box-arrow-up-right text-sm"></i>
                                                 </button>
                                             </div>
-                                        @elseif ($purchase->purchase_status == 'cancellation')
-                                            <div class="col-span-2 my-auto !font-light">
-                                                <button type="submit"
-                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
-                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
-                                                </button>
-                                            </div>
-                                        @elseif ($purchase->purchase_status == 'returnrefund')
-                                            <div class="col-span-2 my-auto !font-light">
-                                                <button type="submit"
-                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
-                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
-                                                </button>
-                                            </div>
                                         @elseif ($purchase->purchase_status == 'failed_delivery')
                                             <div class="col-span-2 my-auto !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
                                                     Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
                                                 </button>
+                                            </div>
+                                        @elseif ($purchase->purchase_status == 'cancellation_pending')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
+                                            </div>
+                                        @elseif ($purchase->purchase_status == 'cancellation_approved')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <p class="text-red-600">Order Cancelled</p>
                                             </div>
                                         @else
                                             <div class="col-span-2 my-4 !text-gray-800 !font-light">
@@ -664,20 +657,16 @@
                                     <p class="font-semibold">{{ $this->getTotalShippingCount }}</p>
                                 </div>
                             </div>
-                            <div class="py-2 text-center flex justify-center">
-                                <div class="px-2">
-                                    <p class="text-xs font-base text-gray-500 mb-1">Cancellation</p>
-                                    <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
-                                </div>
-                                <div class="px-2">
-                                    <p class="text-xs font-base text-gray-500 mb-1">Return/Refund</p>
-                                    <p class="font-semibold">{{ $this->getTotalReturnRefundCount }}</p>
-                                </div>
-                            </div>
                             <div class="py-2 text-center">
                                 <div class="px-2">
-                                    <p class="text-xs font-base text-gray-500 mb-1">Failed Delivery</p>
+                                    <p class="text-xs font-base text-gray-500 mb-1">Failed Deliveries</p>
                                     <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
+                                </div>
+                            </div>
+                            <div class="py-2 text-center flex justify-center">
+                                <div class="px-2">
+                                    <p class="text-xs font-base text-gray-500 mb-1">Cancellations</p>
+                                    <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
                                 </div>
                             </div>
                         </div>

@@ -53,13 +53,10 @@ class OrderList extends Component
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        // dd($this->purchase_items->get());
+        $this->purchases = Purchase::where('purchases.seller_id', $this->seller->id);
+        // dd($this->purchases->get());
 
-        $this->orderstatus_list = ['pending', 'completed', 'to_ship', 'shipping', 'cancellation', 'returnrefund', 'failed_delivery'];
+        $this->orderstatus_list = ['pending', 'completed', 'to_ship', 'shipping', 'cancellation_request', 'cancellation_approved', 'failed_delivery'];
         // dd($this->orderstatus_list);
 
     }
@@ -106,12 +103,12 @@ class OrderList extends Component
         return count($cancellation->where('purchase_status', 'cancellation')->get());
     }
 
-    #[Computed]
-    public function getTotalReturnRefundCount()
-    {
-        $returnrefund = Purchase::where('seller_id', $this->seller->id);
-        return count($returnrefund->where('purchase_status', 'returnrefund')->get());
-    }
+    // #[Computed]
+    // public function getTotalReturnRefundCount()
+    // {
+    //     $returnrefund = Purchase::where('seller_id', $this->seller->id);
+    //     return count($returnrefund->where('purchase_status', 'returnrefund')->get());
+    // }
 
     #[Computed]
     public function getTotalFailedDeliveryCount()
@@ -126,19 +123,14 @@ class OrderList extends Component
     public function getPurchaseItemList()
     {
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('purchases.seller_id', $this->seller->id);
-
-        $test = Purchase::where('purchases.seller_id', $this->seller->id);
+        $this->purchases = Purchase::where('purchases.seller_id', $this->seller->id);
         // dd($test->paginate(10));
 
 
         //
         if ($this->orderstatus_filter) {
 
-            return $this->purchase_items->where('purchase_status', '=', $this->orderstatus_filter)
+            return $this->purchases->where('purchase_status', '=', $this->orderstatus_filter)
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         }
@@ -146,7 +138,7 @@ class OrderList extends Component
         //
         if ($this->paymentstatus_filter) {
 
-            return $this->purchase_items->where('payment_status', '=', $this->paymentstatus_filter)
+            return $this->purchases->where('payment_status', '=', $this->paymentstatus_filter)
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         }
@@ -154,7 +146,7 @@ class OrderList extends Component
         //
         if ($this->paymenttype_filter) {
 
-            return $this->purchase_items->where('payment_type', '=', $this->paymenttype_filter)
+            return $this->purchases->where('payment_type', '=', $this->paymenttype_filter)
                 ->orderBy('purchase_items.id', 'asc')
                 ->paginate(10);
         }
@@ -175,7 +167,7 @@ class OrderList extends Component
 
                 return $search;
             } elseif ($this->search_method == 'purchase_id') {
-                return $this->purchase_items->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
+                return $this->purchases->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
                     ->orderBy('purchase_items.id', 'asc')
                     ->paginate(10);
             }
@@ -183,10 +175,10 @@ class OrderList extends Component
         //
         else {
 
-            return $test->orderBy('id', 'asc')->paginate(10);
+            return $this->purchases->orderBy('id', 'asc')->paginate(10);
         }
 
-        return $this->purchase_items->paginate(10);
+        return $this->purchases->paginate(10);
     }
 
 
@@ -264,30 +256,14 @@ class OrderList extends Component
             return redirect(route('shipment-list'));
         }
 
-        // completed
-        elseif ($this->purchase_status == 'completed') {
+        // redirect to cancellation list
+        elseif ($this->purchase_status == 'cancellation_pending') {
 
-            // $notification = new UserNotification([
-            //     'user_id' => $user_id,
-            //     'purchase_id' => $purchase_id,
-            //     'tag' => 'completed',
-            //     'title' => 'Share your feedback! click here',
-            //     'message' => 'Order #' . $purchase_id . ' is completed. Your feedback matters to others! Rate the products by date',
-            // ]);
-            // $notification->save();
+            return redirect(route('order-cancellations'));
+        }
 
-            // Purchase::where('id', $purchase_id)->update([
-            //     'completion_date' => now(),
-            // ]);
-            // Shipments::where('purchase_id', $purchase_id)->update([
-            //     'shipment_status' => $this->purchase_status,
-            //     'shipped_date' => now(),
-            // ]);
-            // Payment::where('purchase_id', $purchase_id)->update([
-            //     'payment_status' => 'paid',
-            //     'date_of_payment' => now(),
-            // ]);
-        } elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'cod') {
+        //
+        elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'cod') {
 
             // $notification = new UserNotification([
             //     'user_id' => $user_id,
