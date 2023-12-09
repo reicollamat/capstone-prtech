@@ -172,7 +172,7 @@ class Collections extends Component
     #[Computed]
     public function check_bookmark($product_id)
     {
-        if ($this->user->bookmark->contains('product_id', $product_id)) {
+        if (Auth::user() && $this->user->bookmark->contains('product_id', $product_id)) {
             return true;
         } else {
             return false;
