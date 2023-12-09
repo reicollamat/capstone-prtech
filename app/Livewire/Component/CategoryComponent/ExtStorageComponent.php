@@ -2,10 +2,15 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Models\User;
+use App\Models\Product;
+use Livewire\Component;
+use App\Models\ExtStorage;
+use App\Models\ProductImage;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Validate;
-use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ExtStorageComponent extends Component
@@ -17,22 +22,22 @@ class ExtStorageComponent extends Component
 
     public $previewImageIndex;
 
-    #[Validate('required', message: 'Please provide a CPU Name')]
+    #[Validate('required', message: 'Please provide product name')]
     public $productName;
 
-    #[Validate('required', message: 'Please provide a CPU SKU')]
+    #[Validate('required', message: 'Please provide product SKU')]
     public $productSKU;
 
-    #[Validate('required', message: 'Please provide a CPU Slug')]
+    #[Validate('required', message: 'Please provide product slug')]
     public $productSlug;
 
-    #[Validate('required', message: 'Please provide a CPU Description')]
+    #[Validate('required', message: 'Please provide product description')]
     public $productDescription;
 
-    #[Validate('required|not_in:Select Condition', message: 'Please provide a CPU Condition')]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide product condition')]
     public $productCondition;
 
-    #[Validate('required|not_in:Select Status', message: 'Please provide a CPU Status')]
+    #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
     public $productStatus;
 
     public $productCategory;
@@ -40,20 +45,23 @@ class ExtStorageComponent extends Component
     #[Validate(['productImages.*' => 'image|max:5120'])]
     public $productImages = [];
 
-    #[Validate('required', message: 'Please provide a brand')]
+    #[Validate('required', message: 'Please provide brand')]
     public $brand;
 
-    #[Validate('required', message: 'Please provide a price')]
+    #[Validate('required', message: 'Please provide price')]
     public $price;
 
-    #[Validate('required', message: 'Please provide a storage capacity')]
+    #[Validate('required', message: 'Please provide storage capacity')]
     public $extstorage_cap;
 
-    #[Validate('required', message: 'Please provide a storage type')]
+    #[Validate('required', message: 'Please provide storage type')]
     public $extstorage_type;
 
-    #[Validate('required', message: 'Please provide a storage interface')]
+    #[Validate('required', message: 'Please provide storage interface')]
     public $extstorage_int;
+
+    #[Validate('required', message: 'Please provide storage color')]
+    public $extstorage_color;
 
     #[Validate('required', message: 'Please provide stocks available')]
     public $stocks;
@@ -92,10 +100,88 @@ class ExtStorageComponent extends Component
             'reserve_stocks' => 'required|integer',
         ]);
 
-        if ($validator) {
+        // dd($validator);
 
-            dd($validator);
+        $storeas = [];
+
+        if ($validator) {
+            // create a array of image filename and store in ain storage/app/product-image-uploads
+            foreach ($this->productImages as $image) {
+                $path = $image->store('product-image-uploads', 'real_public');
+                $storeas[] = $path;
+            }
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $product = Product::create([
+                'seller_id' => User::find(Auth::user()->id)->seller->id,
+                'title' => $validator['productName'],
+                'slug' => $validator['productSlug'],
+                'SKU' => $validator['productSKU'],
+                'category' => $validator['productCategory'],
+                'price' => $validator['price'],
+                'stock' => $validator['stocks'],
+                'reserve' => $validator['reserve_stocks'],
+                // 'image' => implode(',', $storeas),
+                'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+                'condition' => $validator['productCondition'],
+            ]);
+
+            // loop through the images from the file upload
+            // if there are many images in the array loop it and  create a row in db
+            if (count($storeas) > 0) {
+                foreach ($storeas as $image) {
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_paths' => $image,
+                    ]);
+                }
+                // else if there is only one image in the array create a row in db with no image
+            } else {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => 'img/no-image-placeholder.png',
+                ]);
+            }
+
+            // $images = ProductImage::create([
+            //     'image_paths' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+            // ]);
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $extstorage = ExtStorage::create([
+                'product_id' => $product->id,
+                'category' => $validator['productCategory'],
+                'name' => $validator['productName'],
+                'brand' => $validator['brand'],
+                'price' => $validator['price'],
+                'capacity' => $validator['extstorage_cap'],
+                'type' => $validator['extstorage_type'],
+                'interface' => $validator['extstorage_int'],
+                'color' => $validator['extstorage_color'],
+                'description' => $validator['productDescription'],
+                'condition' => $validator['productCondition'],
+            ]);
+
+            // dd($extstorage, $product);
+
+            // CHECK IF BOTH QUERIES ARE SUCCESSFULL
+            if ($product && $extstorage) {
+                // dd($product, $extstorage);
+                $this->alert('success', 'Product has been created successfully.', [
+                    'position' => 'top-end'
+                ]);
+                $this->reset();
+            } else {
+                $this->alert('error', 'Product has not been created.', [
+                    'position' => 'top-end'
+                ]);
+            }
+        } else {
+            $this->alert('error', 'Unkown error has occurred', [
+                'position' => 'top-end'
+            ]);
         }
+
 
         // if ($validator) {
         //     dd($validator);

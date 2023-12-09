@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -22,7 +21,7 @@ return new class extends Migration
             $table->integer('memory');
             $table->integer('core_clock')->nullable();
             $table->integer('boost_clock')->nullable();
-            $table->integer('length')->nullable();
+            $table->string('length')->nullable();
             $table->string('color')->nullable();
             // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');

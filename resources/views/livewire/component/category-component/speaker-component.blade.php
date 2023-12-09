@@ -11,9 +11,8 @@
                     <input type="text" id="product_name" wire:model.blur="productName"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Product Name" required>
-                    @if ($productName < 0)
-                        <span class="font-sm text-red-500">This field is required</span>
-                    @endif
+                    @if ($productName < 0) <span class="font-sm text-red-500">This field is required</span>
+                        @endif
                 </div>
             </div>
             <div class="grid md:grid-cols-2 md:gap-8 ">
@@ -26,9 +25,8 @@
                         <input type="text" id="sku" wire:model.blur="productSKU"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="XXX-XXX" required>
-                        @if ($productSKU < 0)
-                            <span class="font-sm text-red-500">This field is required</span>
-                        @endif
+                        @if ($productSKU < 0) <span class="font-sm text-red-500">This field is required</span>
+                            @endif
                     </div>
                 </div>
                 <div>
@@ -40,9 +38,8 @@
                         <input type="text" id="slug" wire:model.blur="productSlug"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="lowercase, no spaces seprated by hyphen " required>
-                        @if ($productSlug < 0)
-                            <span class="font-sm text-red-500">This field is required</span>
-                        @endif
+                        @if ($productSlug < 0) <span class="font-sm text-red-500">This field is required</span>
+                            @endif
                     </div>
                 </div>
             </div>
@@ -52,9 +49,8 @@
                 <textarea id="description" rows="4" wire:model.blur="productDescription"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write your thoughts here..." required></textarea>
-                @if ($productDescription < 0)
-                    <span class="font-sm text-red-500">This field is required</span>
-                @endif
+                @if ($productDescription < 0) <span class="font-sm text-red-500">This field is required</span>
+                    @endif
             </div>
             <div class="grid md:grid-cols-3 md:gap-8 ">
                 <div>
@@ -71,7 +67,7 @@
                             <option value="used">Used</option>
                         </select>
                         @error($productCondition)
-                            <span class="font-sm text-red-500">This field is required</span>
+                        <span class="font-sm text-red-500">This field is required</span>
                         @enderror
                     </div>
                 </div>
@@ -89,7 +85,7 @@
                             <option value="unavailable">Unavailable</option>
                         </select>
                         @error($productStatus)
-                            <span class="font-sm text-red-500">This field is required</span>
+                        <span class="font-sm text-red-500">This field is required</span>
                         @enderror
                     </div>
                 </div>
@@ -112,7 +108,7 @@
                             placeholder="Logitech, Bose, A4Tech etc." required>
 
                         @error('brand')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -125,7 +121,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="In Pesos, 1000.00" required>
                         @error('price')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -141,7 +137,7 @@
                             </span></label>
                         <select id="compatibility" wire:model.blur="compatibility"
                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option disabled selected>Click to Select</option>
+                            <option>Click to Select</option>
                             <option value="pc">For PC</option>
                             <option value="portable_use">For portable use</option>
                             <option value="tv/monitor">For TV/monitor</option>
@@ -149,7 +145,7 @@
 
                         </select>
                         @error('compatibility')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -165,14 +161,14 @@
                             </span></label>
                         <select id="speaker_connectivity" wire:model.blur="speaker_conenctivity"
                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option disabled selected>Click to Select</option>
+                            <option>Click to Select</option>
                             <option value="wired">Wired</option>
                             <option value="wireless">Wireless</option>
                             <option value="both">Both</option>
 
                         </select>
                         @error('speaker_connectivity')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -189,7 +185,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="White, Black, Gray, etc." required>
                         @error('speaker_color')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -205,7 +201,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock Currently On-Hand" required>
                             @error('stocks')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -217,7 +213,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock to Hold" required>
                             @error('reserve_stocks')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -231,37 +227,31 @@
                             Select them all before uploading</p>
                     </div>
 
-                    <form wire:submit.prevent="submit">
-                        <div class="flex items-center justify-center w-full">
-                            <label for="dropzone-file"
-                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                                            class="font-semibold">Click
-                                            to
-                                            upload</span>
-                                        or drag and drop</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
-                                        800x400px)
-                                    </p>
-                                </div>
-                                <input id="dropzone-file" type="file" wire:model="productImages" class="hidden"
-                                    multiple />
-                                @error('productImages.*')
-                                    <span class="error">{{ $message }}</span>
-                                @enderror
-                            </label>
-                        </div>
-                        <button type="submit">
-                            Submit
-                        </button>
-                    </form>
+                    <div class="flex items-center justify-center w-full">
+                        <label for="dropzone-file"
+                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                </svg>
+                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                        class="font-semibold">Click
+                                        to
+                                        upload</span>
+                                    or drag and drop</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
+                                    800x400px)
+                                </p>
+                            </div>
+                            <input id="dropzone-file" type="file" wire:model="productImages" class="hidden" multiple />
+                            @error('productImages.*')
+                            <span class="error">{{ $message }}</span>
+                            @enderror
+                        </label>
+                    </div>
 
                     <div wire:loading wire:target="productImages">Uploading...</div>
 
@@ -274,15 +264,14 @@
 
                     <div class="grid md:grid-cols-3 gap-1 h-auto">
                         @if ($productImages)
-                            @foreach ($productImages as $image)
-                                <!-- Button trigger modal -->
-                                <button type="button" class="" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                    wire:click="$set('previewImage', '{{ $image->temporaryUrl() }}')">
-                                    <img class="h-auto max-w-full border border-gray-400"
-                                        src="{{ $image->temporaryUrl() }}" alt="image description">
-                                </button>
-                            @endforeach
+                        @foreach ($productImages as $image)
+                        <!-- Button trigger modal -->
+                        <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            wire:click="$set('previewImage', '{{ $image->temporaryUrl() }}')">
+                            <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
+                                alt="image description">
+                        </button>
+                        @endforeach
                         @endif
                     </div>
 

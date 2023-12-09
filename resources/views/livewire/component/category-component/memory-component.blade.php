@@ -206,7 +206,7 @@
                     <div class="mb-4">
                         <label for="mem_rgb"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">RGB</label>
-                        <select id="mem_gen" wire:model.blur="mem_rgb"
+                        <select id="mem_rgb" wire:model.blur="mem_rgb"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             required>
                             <option>Click to Select</option>
@@ -246,39 +246,11 @@
                             @enderror
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    <!-- Stocks and Reserved -->
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="mb-4">
-                            <label for="stocks"
-                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Stocks
-                            </label>
-                            <input type="text" id="stocks" wire:model.blur="stocks"
-                                class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Stock Currently On-Hand" required>
-                            @error('stocks')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="reserve_stocks"
-                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Reserved
-                                Stocks</label>
-                            <input type="text" id="reserve_stocks" wire:model.blur="reserve_stocks"
-                                class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Stock to Hold" required>
-                            @error('reserve_stocks')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
 
                     <!-- Add Product Image Div -->
                     <div class="pb-3">
-                        <p class="block mb-1 text-base font-medium text-gray-600 dark:text-white pl-1">Add Product
+                        <p class="block mb-1 text-base font-medium text-gray-600 dark:text-white pl-1">Add
+                            Product
                             Image
                         </p>
                         <p class="block mb-1 text-sm font-medium text-gray-500 dark:text-white pl-1">To Upload
@@ -316,7 +288,8 @@
                     <div wire:loading wire:target="productImages">Uploading...</div>
 
                     <div class="py-3">
-                        <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Image Preview
+                        <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Image
+                            Preview
                             (Click
                             Image
                             To Preview)</p>

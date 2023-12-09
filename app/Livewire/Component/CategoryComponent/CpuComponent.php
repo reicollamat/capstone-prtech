@@ -3,16 +3,16 @@
 namespace App\Livewire\Component\CategoryComponent;
 
 use App\Models\Cpu;
-use App\Models\Product;
-use App\Models\ProductImage;
 use App\Models\User;
-use Auth;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Attributes\Validate;
+use App\Models\Product;
 use Livewire\Component;
-use Livewire\Features\SupportFileUploads\WithFileUploads;
-
+use App\Models\ProductImage;
 use function Livewire\store;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class CpuComponent extends Component
 {
@@ -146,7 +146,7 @@ class CpuComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-            // else if there is only one image in the array create a row in db with no image
+                // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -157,6 +157,7 @@ class CpuComponent extends Component
             // $images = ProductImage::create([
             //     'image_paths' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
             // ]);
+
             // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
             $cpu = Cpu::create([
                 'product_id' => $product->id,

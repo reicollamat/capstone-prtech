@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Memory;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\ProductImage;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -20,22 +21,22 @@ class MemoryComponent extends Component
 
     public $previewImageIndex;
 
-    #[Validate('required', message: 'Please provide a CPU Name')]
+    #[Validate('required', message: 'Please provide product name')]
     public $productName;
 
-    #[Validate('required', message: 'Please provide a CPU SKU')]
+    #[Validate('required', message: 'Please provide product SKU')]
     public $productSKU;
 
-    #[Validate('required', message: 'Please provide a CPU Slug')]
+    #[Validate('required', message: 'Please provide product slug')]
     public $productSlug;
 
-    #[Validate('required', message: 'Please provide a CPU Description')]
+    #[Validate('required', message: 'Please provide product description')]
     public $productDescription;
 
-    #[Validate('required|not_in:Select Condition', message: 'Please provide a CPU Condition')]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide product condition')]
     public $productCondition;
 
-    #[Validate('required|not_in:Select Status', message: 'Please provide a CPU Status')]
+    #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
     public $productStatus;
 
     public $productCategory;
@@ -137,6 +138,28 @@ class MemoryComponent extends Component
                 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
             ]);
+
+            // loop through the images from the file upload
+            // if there are many images in the array loop it and  create a row in db
+            if (count($storeas) > 0) {
+                foreach ($storeas as $image) {
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_paths' => $image,
+                    ]);
+                }
+                // else if there is only one image in the array create a row in db with no image
+            } else {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => 'img/no-image-placeholder.png',
+                ]);
+            }
+
+            // $images = ProductImage::create([
+            //     'image_paths' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+            // ]);
+
             // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
             $memory = Memory::create([
                 'product_id' => $product->id,
@@ -144,6 +167,7 @@ class MemoryComponent extends Component
                 'name' => $validator['productName'],
                 'brand' => $validator['brand'],
                 'price' => $validator['price'],
+                'mem_gen' => $validator['mem_gen'],
                 'speed' => $validator['mem_speed'],
                 'cas_latency' => $validator['mem_latency'],
                 'modules' => $validator['modules'],
@@ -157,7 +181,7 @@ class MemoryComponent extends Component
 
             // CHECK IF BOTH QUERIES ARE SUCCESSFULL
             if ($product && $memory) {
-                // dd($product, $cpu);
+                // dd($product, $memory);
                 $this->alert('success', 'Product has been created successfully.', [
                     'position' => 'top-end'
                 ]);
