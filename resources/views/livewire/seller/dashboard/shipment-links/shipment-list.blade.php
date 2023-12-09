@@ -7,37 +7,38 @@
     <div class="flex h-full">
         <div class="tab-wrapper flex-1 w-64" x-data="{ activeTab: 0 }">
             <div class="flex flex-column flex-lg-row justify-between gap-2 ">
-                {{-- <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
+                <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
                     <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
                         <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                         <div class="py-2 text-center">
                             <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
-                            <p class="font-semibold">
-                                {{ $total_shipment ?? 0 }}
-                            </p>
+                            <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                wire:model="total_shipment">
                         </div>
                         <div class="py-2 text-center flex justify-center">
                             <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Delivered</p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_completed_count">
+                            </div>
+                            <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">To Ship</p>
-                                <p class="font-semibold">
-                                    {{ $total_to_ship_count ?? 0 }}
-                                </p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_shipping_count">
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Shipping</p>
-                                <p class="font-semibold">
-                                    {{ $total_shipping_count ?? 0 }}
-                                </p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_to_ship_count">
                             </div>
                             <div class="px-2">
-                                <p class="text-xs font-base text-gray-500 mb-1">Delivered</p>
-                                <p class="font-semibold">
-                                    {{ $total_failed_delivery_count ?? 0 }}
-                                </p>
+                                <p class="text-xs font-base text-gray-500 mb-1">Failed Deliverey</p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_failed_delivery_count">
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
                 <div
                     class="bg-white w-full p-1 h-full border-gray-200 !rounded-lg text-sm focus:outline-none lg:items-center mb-3">
@@ -78,30 +79,35 @@
                 <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
-                    <p class="font-semibold">{{ $total_shipment ?? 0 }}</p>
+                    <input type="text" class="font-semibold bg-transparent w-full text-center"
+                        wire:model="total_shipment">
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">To Ship</p>
-                        <p class="font-semibold">{{ $total_to_ship_count ?? 0 }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_to_ship_count">
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Shipping</p>
-                        <p class="font-semibold">{{ $total_shipping_count ?? 0 }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_shipping_count">
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Delivered</p>
-                        <p class="font-semibold">{{ $total_completed_count ?? 0 }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_completed_count">
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Failed Delivery</p>
-                        <p class="font-semibold">{{ $total_failed_delivery_count ?? 0 }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_failed_delivery_count">
                     </div>
                 </div>
             </div>

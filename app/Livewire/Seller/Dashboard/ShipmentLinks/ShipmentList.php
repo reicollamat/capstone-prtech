@@ -64,42 +64,6 @@ class ShipmentList extends Component
             ->get());
     }
 
-    // #[Computed]
-    // public function getTotalShipmentCount()
-    // {
-    //     $all = Shipments::where('seller_id', $this->seller->id);
-    //     return count($all->get());
-    // }
-
-    // // for Delivered shipment
-    // #[Computed]
-    // public function getTotalCompletedCount()
-    // {
-    //     $completed = Shipments::where('seller_id', $this->seller->id);
-    //     return count($completed->where('shipment_status', 'completed')->get());
-    // }
-
-    // #[Computed]
-    // public function getTotalToShipCount()
-    // {
-    //     $to_ship = Shipments::where('seller_id', $this->seller->id);
-    //     return count($to_ship->where('shipment_status', 'to_ship')->get());
-    // }
-
-    // #[Computed]
-    // public function getTotalShippingCount()
-    // {
-    //     $shipping = Shipments::where('seller_id', $this->seller->id);
-    //     return count($shipping->where('shipment_status', 'shipping')->get());
-    // }
-
-    // #[Computed]
-    // public function getTotalFailedDeliveryCount()
-    // {
-    //     $faileddelivery = Shipments::where('seller_id', $this->seller->id);
-    //     return count($faileddelivery->where('shipment_status', 'failed_delivery')->get());
-    // }
-
 
     #[Computed]
     public function getToShipList()
