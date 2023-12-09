@@ -96,7 +96,7 @@ class HeadphoneComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|interger',
+            'price' => 'required|integer',
             'sensitivity' => 'required|not_in:Click to Select',
             'headphone_connection_type' => 'required|not_in:Click to Select',
             'noise_control' => 'required|not_in:Click to Select',
@@ -129,7 +129,7 @@ class HeadphoneComponent extends Component
                 'stock' => $validator['stocks'],
                 'reserve' => $validator['reserve_stocks'],
                 // 'image' => implode(',', $storeas),
-                'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+                // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
             ]);
 

@@ -125,7 +125,7 @@ class MouseComponent extends Component
                 'stock' => $validator['stocks'],
                 'reserve' => $validator['reserve_stocks'],
                 // 'image' => implode(',', $storeas),
-                'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+                // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
             ]);
 

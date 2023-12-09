@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->integer('capacity');
             $table->decimal('price_per_gb', 8, 3)->nullable();
             $table->string('type')->nullable();
-            $table->integer('cache')->nullable();
+            $table->string('cache')->nullable();
             $table->string('form_factor');
             $table->string('interface');
             // $table->string('image')->default('img/showcase1.jpg');
