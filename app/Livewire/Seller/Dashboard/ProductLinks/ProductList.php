@@ -4,6 +4,8 @@ namespace App\Livewire\Seller\Dashboard\ProductLinks;
 
 use App\Http\Helper;
 use App\Models\Product;
+use App\Models\Seller;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -31,6 +33,14 @@ class ProductList extends Component
 
     public $select_products = [];
 
+    public $seller;
+
+    public $total_products_count;
+    public $total_available_count;
+    public $total_brandnew_count;
+    public $total_used_count;
+    public float $total_products_rating;
+
     //    public function paginationView()
     //    {
     //        return 'vendor.pagination.custom-pagination-links';
@@ -38,13 +48,21 @@ class ProductList extends Component
 
     public function mount()
     {
-        //        $p = (Product::find(2));
-        //
-        //        dd($p->slug);
+        $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
-        // $this->categories = Helper::categoryList();
+        $this->total_products_count = Product::where('seller_id', $this->seller->id)->count();
 
-        //        dd($this->categories->array_keys());
+        $this->total_available_count = Product::where('seller_id', $this->seller->id)->where('status', 'available')->count();
+
+        $this->total_brandnew_count = Product::where('seller_id', $this->seller->id)->where('condition', 'brand_new')->count();
+
+        $this->total_used_count = Product::where('seller_id', $this->seller->id)->where('condition', 'used')->count();
+
+        // overall rating of all seller's products
+        $this->total_products_rating = Product::where('seller_id', $this->seller->id)->sum('rating') / $this->total_products_count;
+        $this->total_products_rating = number_format((float)$this->total_products_rating, 2, '.', '');
+
+        // dd($this->total_products_rating);
     }
 
     #[Computed]
@@ -98,16 +116,14 @@ class ProductList extends Component
                 ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
-
         } else {
 
-            return Product::select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
+            return Product::where('seller_id', $this->seller->id)
                 ->orderBy('id', 'asc')
                 ->paginate(10);
         }
 
-        return Product::select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')->paginate(10);
-
+        return Product::where('seller_id', $this->seller->id)->paginate(10);
     }
 
     public function render()
