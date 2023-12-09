@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
 
             // delivery specifc
-            $table->string('shipment_status')->nullable();
+            $table->string('shipment_status');
             $table->dateTime('start_date')->nullable();
             $table->dateTime('shipped_date')->nullable();
 
@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('postal_code')->nullable();
             $table->string('country')->nullable();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

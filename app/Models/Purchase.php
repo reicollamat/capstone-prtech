@@ -19,6 +19,12 @@ class Purchase extends Model
         return $this->belongsTo(User::class);
     }
 
+    // relationship to Seller
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
+    }
+
     // relationship to PurchaseItem
     public function purchase_items()
     {
@@ -37,10 +43,18 @@ class Purchase extends Model
         return $this->hasOne(Shipments::class);
     }
 
-    public function seller(): BelongsTo
+    // relationship to PurchaseCancellationInfo
+    public function purchase_cancellation_info()
     {
-        return $this->belongsTo(Seller::class);
+        return $this->hasOne(PurchaseCancellationInfo::class);
     }
+
+    // relationship to PurchaseReturnrefundInfo
+    public function purchase_returnrefund_info()
+    {
+        return $this->hasOne(PurchaseReturnrefundInfo::class);
+    }
+
 
     /**
      * The attributes that are mass assignable.
