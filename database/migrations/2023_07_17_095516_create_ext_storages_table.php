@@ -8,7 +8,8 @@ return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void {
+    public function up(): void
+    {
         Schema::create('ext_storages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
@@ -19,6 +20,7 @@ return new class extends Migration {
             $table->string('type');
             $table->string('interface')->nullable();
             $table->integer('capacity');
+            $table->decimal('price_per_gb', 8, 3)->nullable();
             $table->string('color')->nullable();
             // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
@@ -33,7 +35,8 @@ return new class extends Migration {
     /**
      * Reverse the migrations.
      */
-    public function down(): void {
+    public function down(): void
+    {
         Schema::dropIfExists('ext_storages');
     }
 };
