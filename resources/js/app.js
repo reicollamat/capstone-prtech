@@ -1,5 +1,7 @@
 import "./bootstrap";
 
+// import "./charts/analytics-model-report-header.js"
+
 import Swal from "sweetalert2";
 
 window.Swal = Swal;

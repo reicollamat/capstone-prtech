@@ -51,8 +51,5 @@
         </div>
 
     </div>
+    @vite(['resources/js/analytics-model-report-header.js'])
 </div>
-
-@assets
-    @vite(['resources/js/charts/analytics-model-report-header.js'])
-@endassets

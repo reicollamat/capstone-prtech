@@ -9,7 +9,7 @@ export default defineConfig({
             input: [
                 "resources/css/app.css",
                 "resources/js/app.js",
-                "resources/js/charts/analytics-model-report-header.js",
+                "resources/js/analytics-model-report-header.js",
             ],
             refresh: true,
         }),

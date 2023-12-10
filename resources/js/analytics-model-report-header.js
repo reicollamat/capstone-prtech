@@ -62,7 +62,7 @@ const config = {
 };
 
 // render init block
-const myChart = new Chart(document.getElementById("myChart"), config);
+// const myChart = new Chart(document.getElementById("myChart"), config);
 
 const myChart_2 = new Chart(
     document.getElementById("shop-perception-chart"),
