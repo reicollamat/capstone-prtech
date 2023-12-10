@@ -81,11 +81,11 @@
                             <div class="progress-bar !bg-red-600" style="width: 33.33%"></div>
                         </div>
 
-                        step 1 of 3
+                        {{-- step 1 of 3
                         <button wire:click="move">
                             click me
-                        </button>
-                        {{ $currentStep }}
+                        </button> --}}
+                        {{-- {{ $currentStep }} --}}
                         <div>
                             <div class="w-full p-8">
                                 <form wire:submit="FirstStepSubmit">
@@ -318,13 +318,13 @@
                             </div>
                         </div>
 
-                        <div class="">
+                        {{-- <div class="">
                             step 3 of 3
                             <button wire:click="move">
                                 click me
                             </button>
                             {{ $currentStep }}
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>

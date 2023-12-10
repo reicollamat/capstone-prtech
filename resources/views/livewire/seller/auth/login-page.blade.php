@@ -8,7 +8,7 @@
                 <!-- Left column container with background-->
                 <div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
                     {{--                    <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" --}}
-                    <img src="/img/396555896_852107473310756_4771051241956245430_n.jpg" class="w-full" alt="Phone image" />
+                    <img src="/img/login_reg.png" class="w-full" alt="Phone image" />
                 </div>
 
                 <!-- Right column container with form -->
