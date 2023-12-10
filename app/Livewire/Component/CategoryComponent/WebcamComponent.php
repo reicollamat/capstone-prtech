@@ -57,6 +57,9 @@ class WebcamComponent extends Component
     public $resolution;
 
     #[Validate('required', message: 'Please provide an input')]
+    public $webcam_os;
+
+    #[Validate('required', message: 'Please provide an input')]
     public $webcam_fps;
 
     #[Validate('required', message: 'Please provide a selection')]
@@ -92,6 +95,7 @@ class WebcamComponent extends Component
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
             'price' => 'required|integer',
+            'webcam_os' => 'required',
             'webcam_connection_type' => 'required|not_in:Click to Select',
             'resolution' => 'required|not_in:Click to Select',
             'webcam_fps' => 'required|integer',
@@ -154,6 +158,7 @@ class WebcamComponent extends Component
                 'name' => $validator['productName'],
                 'brand' => $validator['brand'],
                 'price' => $validator['price'],
+                'os' => $validator['webcam_os'],
                 'connection' => $validator['webcam_connection_type'],
                 'resolutions' => $validator['resolution'],
                 'webcam_fps' => $validator['webcam_fps'],
