@@ -10,6 +10,7 @@ export default defineConfig({
                 "resources/css/app.css",
                 "resources/js/app.js",
                 "resources/js/analytics-model-report-header.js",
+                "resources/js/chartjs.js",
             ],
             refresh: true,
         }),
