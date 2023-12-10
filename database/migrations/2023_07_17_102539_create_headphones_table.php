@@ -20,8 +20,9 @@ return new class extends Migration {
             $table->string('type');
             $table->json('frequency_response')->nullable();
             $table->boolean('microphone');
-            $table->boolean('wireless');
-            $table->string('enclosure_type');
+            $table->boolean('wireless')->nullable();
+            $table->string('connection_type')->nullable();
+            $table->string('noise_control')->nullable();
             $table->string('color')->nullable();
             // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');

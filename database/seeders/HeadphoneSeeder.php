@@ -49,7 +49,7 @@ class HeadphoneSeeder extends Seeder
                     'frequency_response' => $value->frequency_response,
                     'microphone' => $value->microphone,
                     'wireless' => $value->wireless,
-                    'enclosure_type' => $value->enclosure_type,
+                    // 'enclosure_type' => $value->enclosure_type,
                     'color' => $value->color,
                     // 'image' => $image,
                     'description' => fake()->paragraph(),
