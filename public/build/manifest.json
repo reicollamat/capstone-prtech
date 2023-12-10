@@ -1,0 +1,39 @@
+{
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons-d0346eea.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-5b2dd4d4.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-b28d4e1e.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-7a00f215.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
+    "assets": [
+      "assets/bootstrap-icons-5b2dd4d4.woff2",
+      "assets/bootstrap-icons-d0346eea.woff"
+    ],
+    "css": [
+      "assets/app-7a00f215.css"
+    ],
+    "file": "assets/app-c99699cd.js",
+    "imports": [
+      "resources/js/charts/analytics-model-report-header.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/charts/analytics-model-report-header.js": {
+    "file": "assets/analytics-model-report-header-a009a8c6.js",
+    "isEntry": true,
+    "src": "resources/js/charts/analytics-model-report-header.js"
+  }
+}
