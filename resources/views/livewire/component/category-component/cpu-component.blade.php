@@ -26,13 +26,14 @@
                 <!-- Product Name input -->
                 <div class="mb-4">
                     <label for="product_name"
-                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                           class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                         Name</label>
                     <input type="text" id="product_name" wire:model.blur="productName"
-                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Product Name" required>
-                    @if ($productName < 0) <span class="font-sm text-red-500">This field is required</span>
-                        @endif
+                           class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Product Name" required>
+                    @error('productName')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
             <div class="grid md:grid-cols-2 md:gap-8 ">
@@ -40,54 +41,57 @@
                     <!-- Product SKU input -->
                     <div class="mb-4">
                         <label for="sku"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                               class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
                             SKU</label>
                         <input type="text" id="sku" wire:model.blur="productSKU"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="XXX-XXX" required>
-                        @if ($productSKU < 0) <span class="font-sm text-red-500">This field is required</span>
-                            @endif
+                               class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="XXX-XXX" required>
+                        @error('productSKU')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
                 <div>
                     <!-- Product SLUG input -->
                     <div class="mb-4">
                         <label for="slug"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                               class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                             Slug</label>
                         <input type="text" id="slug" wire:model.blur="productSlug"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="lowercase, no spaces seprated by hyphen " required>
-                        @if ($productSlug < 0) <span class="font-sm text-red-500">This field is required</span>
-                            @endif
+                               class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="lowercase, no spaces seprated by hyphen " required>
+                        @error('productSlug')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
             </div>
             <div class="mb-4">
                 <label for="description"
-                    class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
+                       class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
                 <textarea id="description" rows="4" wire:model.blur="productDescription"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Write your thoughts here..." required></textarea>
-                @if ($productDescription < 0) <span class="font-sm text-red-500">This field is required</span>
-                    @endif
+                          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Write your thoughts here..." required></textarea>
+                @error('productDescription')
+                <span class="font-sm text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="grid md:grid-cols-3 md:gap-8 ">
                 <div>
                     <!-- Product Condition input -->
                     <div class="mb-4">
                         <label for="condition"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                               class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
                             Condtion</label>
                         <select id="condition" wire:model.blur="productCondition" name="condition"
-                            class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            required>
+                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
                             <option>Select Condition</option>
                             <option value="brand_new">Brand New</option>
                             <option value="used">Used</option>
                         </select>
-                        @error($productCondition)
-                        <span class="font-sm text-red-500">This field is required</span>
+                        @error('productCondition')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -95,22 +99,23 @@
                     <!-- Product Status input -->
                     <div class="mb-4">
                         <label for="status"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
+                               class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
                             Status</label>
                         <select id="status" wire:model.blur="productStatus" name="status"
-                            class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            required>
+                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
                             <option>Select Status</option>
                             <option value="available">Available</option>
                             <option value="unavailable">Unavailable</option>
                         </select>
-                        @error($productStatus)
-                        <span class="font-sm text-red-500">This field is required</span>
+                        @error('productStatus')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
             </div>
         </div>
+
 
         <div class="mb-4 p-4 bg-white border border-gray-200 rounded-lg">
             <div class="grid md:grid-cols-2 gap-4">
@@ -126,7 +131,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="AMD, Intel, etc." required>
                             @error('cpu_core_threads')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -137,23 +142,23 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="In Pesos" required>
                             @error('price')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
 
                     {{-- <!-- Cores / Threads --> --}}
                     {{-- <div class="mb-4"> --}}
-                        {{-- <label for="cores_threads" --}} {{--
+                    {{-- <label for="cores_threads" --}} {{--
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Cores / --}}
-                            {{-- Threads</label> --}}
-                        {{-- <input type="text" id="cores_threads" wire:model.blur="cores_threads" --}} {{--
+                    {{-- Threads</label> --}}
+                    {{-- <input type="text" id="cores_threads" wire:model.blur="cores_threads" --}} {{--
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             --}} {{-- placeholder="4 / 8" required> --}}
-                        {{-- @error('cores_threads') --}}
-                        {{-- <span class="font-sm text-red-500">{{ $message }}</span> --}}
-                        {{-- @enderror --}}
-                        {{-- </div> --}}
+                    {{-- @error('cores_threads') --}}
+                    {{-- <span class="font-sm text-red-500">{{ $message }}</span> --}}
+                    {{-- @enderror --}}
+                    {{-- </div> --}}
 
                     <!-- CPU Base Clock -->
                     <div class="mb-4">
@@ -164,7 +169,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="2.9 Ghz" required>
                         @error('base_clock')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -177,7 +182,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="3.6 Ghz" required>
                         @error('boost_clock')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -189,7 +194,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="65 Watts" required>
                         @error('tdp')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -206,7 +211,7 @@
                             <option value="No">No</option>
                         </select>
                         @error('igpu')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -225,7 +230,7 @@
                             <option value="Factory Overclocked">Factory Overclocked</option>
                         </select>
                         @error('oc_unlocked')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -241,7 +246,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock Currently On-Hand" required>
                             @error('stocks')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -253,14 +258,15 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock to Hold" required>
                             @error('reserve_stocks')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
 
                     <!-- Add Product Image Div -->
                     <div class="pb-3">
-                        <p class="block mb-1 text-base font-medium text-gray-600 dark:text-white pl-1">Add Product Image
+                        <p class="block mb-1 text-base font-medium text-gray-600 dark:text-white pl-1">Add Product
+                            Image
                         </p>
                         <p class="block mb-1 text-sm font-medium text-gray-500 dark:text-white pl-1">To Upload Multiple
                             Images,
@@ -286,9 +292,10 @@
                                     800x400px)
                                 </p>
                             </div>
-                            <input id="dropzone-file" type="file" wire:model="productImages" class="hidden" multiple />
+                            <input id="dropzone-file" type="file" wire:model="productImages" class="hidden"
+                                multiple />
                             @error('productImages.*')
-                            <span class="error">{{ $message }}</span>
+                                <span class="error">{{ $message }}</span>
                             @enderror
                         </label>
                     </div>
@@ -305,15 +312,15 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="grid md:grid-cols-3 gap-1 h-auto">
                             @if ($productImages)
-                            @foreach ($productImages as $image)
-                            <!-- Button trigger modal -->
-                            <button type="button" @click="showModal = !showModal" data-bs-target="#exampleModal"
-                                wire:key="{{ $loop->index }}"
-                                wire:click="setImage('{{ $image->temporaryUrl() }}', {{ $loop->index }})">
-                                <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
-                                    alt="image description">
-                            </button>
-                            @endforeach
+                                @foreach ($productImages as $image)
+                                    <!-- Button trigger modal -->
+                                    <button type="button" @click="showModal = !showModal"
+                                        data-bs-target="#exampleModal" wire:key="{{ $loop->index }}"
+                                        wire:click="setImage('{{ $image->temporaryUrl() }}', {{ $loop->index }})">
+                                        <img class="h-auto max-w-full border border-gray-400"
+                                            src="{{ $image->temporaryUrl() }}" alt="image description">
+                                    </button>
+                                @endforeach
                             @endif
                         </div>
 
@@ -340,11 +347,13 @@
                                 </div>
                                 <div class="w-full flex gap-2 pt-3 justify-end">
                                     <button type="button" class="btn btn-outline-danger"
-                                        wire:click="removePhoto({{ $previewImageIndex }})" @click="showModal = false">
+                                        wire:click="removePhoto({{ $previewImageIndex }})"
+                                        @click="showModal = false">
                                         Remove
                                         Photo
                                     </button>
-                                    <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        @click="showModal = false">
                                         Close
                                     </button>
                                 </div>
