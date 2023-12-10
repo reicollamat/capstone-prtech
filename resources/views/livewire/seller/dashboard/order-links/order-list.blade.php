@@ -51,22 +51,18 @@
                                             <p class="font-semibold">{{ $this->getTotalShippingCount }}</p>
                                         </div>
                                         <div class="px-2">
-                                            <p class="text-xs font-base text-gray-500 mb-1">Failed Delivery</p>
-                                            <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
-                                        </div>
-                                        <div class="px-2">
                                             <p class="text-xs font-base text-gray-500 mb-1">To Ship</p>
                                             <p class="font-semibold">{{ $this->getTotalToShipCount }}</p>
                                         </div>
                                     </div>
                                     <div class="py-2 text-center flex justify-center">
                                         <div class="px-2">
-                                            <p class="text-xs font-base text-gray-500 mb-1">Cancellation</p>
-                                            <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
+                                            <p class="text-xs font-base text-gray-500 mb-1">Failed Deliveries</p>
+                                            <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
                                         </div>
                                         <div class="px-2">
-                                            <p class="text-xs font-base text-gray-500 mb-1">Return/Refund</p>
-                                            <p class="font-semibold">{{ $this->getTotalReturnRefundCount }}</p>
+                                            <p class="text-xs font-base text-gray-500 mb-1">Cancellations</p>
+                                            <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +92,7 @@
                         x-transition:leave="transition ease-in duration-100"
                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                         class="absolute left-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
-                        <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
+                        <div class="grid grid-cols-2 gap-2 p-2 bg-white rounded border-1 border-gray-300">
                             @foreach ($this->orderstatus_list as $key => $status)
                                 <button
                                     class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
@@ -249,16 +245,14 @@
             <hr>
             <div class="bg-white overflow-x-auto rounded-lg p-3">
                 <div class="grid grid-cols-12 text-center text-sm">
-                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">IMG</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">#</div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Price
-                    </div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment
-                    </div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase</div>
+                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Date</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amt</div>
+                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Status</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Actions</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Details</div>
-                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Update</div>
                 </div>
                 {{-- loading indicator --}}
                 <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
@@ -307,120 +301,98 @@
 
                 <div wire:loading.remove x-transition>
                     @if ($this->getPurchaseItemList->count() > 0)
-                        {{--                    {{ $this->getPurchaseItemList->count() }} --}}
-                        @foreach ($this->getPurchaseItemList as $key => $item)
-                            {{-- {{ $item->purchase_status }} --}}
+                        @foreach ($this->getPurchaseItemList as $key => $purchase)
+                            {{-- @dd($purchase) --}}
                             <form action="{{ route('order-list-update') }}" method="POST">
                                 @csrf
+
+                                <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
+                                <input type="text" name="purchase_status"
+                                    value="{{ $purchase->purchase_status }}" hidden>
+                                <input type="text" name="user_id" value="{{ $purchase->user_id }}" hidden>
+                                <input type="text" name="payment_type"
+                                    value="{{ $purchase->payment->payment_type }}" hidden>
+
                                 <div x-data="{ expanded: false }" class="border-b border-gray-100">
                                     <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 my-4 !text-gray-800 !font-light">
-                                            <img src="{{ asset($item->image) }}"
-                                                class="rounded-lg mx-auto d-block w-9 h-9" alt="Product-Thumbnail">
+                                        <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
+                                            {{ $purchase->id }}
                                         </div>
                                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
-                                            {{ $item->id }}
-                                        </div>
-                                        <div class="col-span-2 my-4 text-sm !text-gray-800 !font-light">
-                                            {{ $item->title }}
+                                            {{ $purchase->user->first_name }} {{ $purchase->user->last_name }}
                                         </div>
                                         <div class="col-span-2 my-4 !text-gray-800 !font-light">
-                                            {{ $item->total_price }}
+                                            {{ date('d-M-y', strtotime($purchase->purchase_date)) }}
+                                        </div>
+                                        <div class="col-span-2 my-4 !text-gray-800 !font-light">
+                                            {{ $purchase->total_amount }}
                                         </div>
 
-                                        <input type="text" name="purchase_id" value="{{ $item->purchase_id }}"
-                                            hidden>
-                                        <input type="text" name="user_id" value="{{ $item->user_id }}" hidden>
-                                        <input type="text" name="payment_type" value="{{ $item->payment_type }}"
-                                            hidden>
-
-                                        @if ($item->payment_type == 'cod' && $item->payment_status == 'unpaid')
-                                            <select name="payment_status"
-                                                class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                @foreach ($this->paymentstatus_options as $key => $status)
-                                                    <option value="{{ $status }}" @selected($item->payment_status)>
-                                                        {{ $status }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                        {{-- payment status --}}
+                                        @if ($purchase->payment->payment_status == 'unpaid')
+                                            <div class="col-span-1 text-sm my-4 !text-red-600 !font-light">
+                                                <input type="text" name="payment_status" value="unpaid" hidden>
+                                                Unpaid ({{ $purchase->payment->payment_type }})
+                                            </div>
                                         @else
-                                            <div class="col-span-2 text-sm my-4 !text-green-600 !font-light">
+                                            <div class="col-span-1 text-sm my-4 !text-green-600 !font-light">
                                                 <input type="text" name="payment_status" value="paid" hidden>
-                                                paid
+                                                Paid ({{ $purchase->payment->payment_type }})
                                             </div>
                                         @endif
 
-                                        @if ($item->purchase_status == 'completed')
-                                            <div class="col-span-2 text-sm my-4 !text-green-600 !font-light">
-                                                <input type="text" name="purchase_status" value="completed"
-                                                    hidden />
-                                                {{ $item->purchase_status }}
+                                        {{-- purchase status --}}
+                                        <div class="col-span-2 my-4 !text-gray-900 !font-light">
+                                            {{ $purchase->purchase_status }}
+                                        </div>
+
+                                        {{-- purchase actions --}}
+                                        @if ($purchase->purchase_status == 'completed')
+                                            <div class="col-span-2 text-2xl my-auto !text-green-600 !font-light">
+                                                <i class="bi bi-check-square-fill"></i>
                                             </div>
-                                        @elseif ($item->purchase_status == 'cancellation')
-                                            <div class="col-span-2 text-sm my-4 !text-red-600 !font-light">
-                                                <input type="text" name="purchase_status" value="cancellation"
-                                                    hidden />
-                                                {{ $item->purchase_status }}
+                                        @elseif ($purchase->purchase_status == 'pending')
+                                            <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
+                                                <button type="submit"
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
+                                                    Prepare for Shipment
+                                                </button>
                                             </div>
-                                        @elseif ($item->purchase_status == 'returnrefund')
-                                            <div class="col-span-2 text-sm my-4 !text-red-600 !font-light">
-                                                <input type="text" name="purchase_status" value="returnrefund"
-                                                    hidden />
-                                                {{ $item->purchase_status }}
+                                        @elseif ($purchase->purchase_status == 'to_ship')
+                                            <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
+                                                    Manage Shipments <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
                                             </div>
-                                        @elseif ($item->purchase_status == 'failed_delivery')
-                                            <div class="col-span-2 text-sm my-4 !text-red-600 !font-light">
-                                                <input type="text" name="purchase_status" value="failed_delivery"
-                                                    hidden />
-                                                {{ $item->purchase_status }}
+                                        @elseif ($purchase->purchase_status == 'shipping')
+                                            <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
+                                                    Manage Shipments <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
                                             </div>
-                                        @elseif ($item->purchase_status == 'pending')
-                                            <select name="purchase_status"
-                                                class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                @foreach ($this->orderstatus_options as $key => $status)
-                                                    @if ($item->purchase_status == $status)
-                                                        <option value="{{ $status }}" seleted>
-                                                        @else
-                                                        <option value="{{ $status }}">
-                                                    @endif
-                                                    {{ $status }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        @elseif ($item->purchase_status == 'to_ship')
-                                            <select name="purchase_status"
-                                                class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                @foreach ($this->orderstatus_options as $key => $status)
-                                                    @if ($key > 0)
-                                                        @if ($item->purchase_status == $status)
-                                                            <option value="{{ $status }}" seleted>
-                                                            @else
-                                                            <option value="{{ $status }}">
-                                                        @endif
-                                                        {{ $status }}
-                                                        </option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        @elseif ($item->purchase_status == 'shipping')
-                                            <div class="col-span-2 text-sm m-4 rounded !text-gray-800 !font-light">
-                                                <select name="purchase_status">
-                                                    @foreach ($this->orderstatus_options as $key => $status)
-                                                        @if ($key > 1)
-                                                            @if ($item->purchase_status == $status)
-                                                                <option value="{{ $status }}" seleted>
-                                                                @else
-                                                                <option value="{{ $status }}">
-                                                            @endif
-                                                            {{ $status }}
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
-                                                </select>
+                                        @elseif ($purchase->purchase_status == 'failed_delivery')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
+                                            </div>
+                                        @elseif ($purchase->purchase_status == 'cancellation_pending')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
+                                            </div>
+                                        @elseif ($purchase->purchase_status == 'cancellation_approved')
+                                            <div class="col-span-2 my-auto !font-light">
+                                                <p class="text-red-600">Order Cancelled</p>
                                             </div>
                                         @else
-                                            <div class="col-span-2 text-sm my-4 !text-gray-800 !font-light">
-                                                {{ $item->purchase_status }}
+                                            <div class="col-span-2 my-4 !text-gray-800 !font-light">
+                                                {{ $purchase->purchase_status }}
                                             </div>
                                         @endif
 
@@ -441,172 +413,189 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <div class="col-span-1 text-sm mx-auto my-auto !text-gray-800 !font-light">
-                                            <button type="submit"
-                                                class="bg-blue-500 hover:bg-blue-700 text-white text-sm p-2 rounded">Update
-                                            </button>
-                                        </div>
                                     </div>
+
                                     <div x-cloak id="faqs-text-01" role="region" aria-labelledby="faqs-title-01"
-                                        class="grid text-sm border-t-2 border-blue-100 text-slate-600 overflow-hidden rounded transition-all duration-300 ease-in-out bg-background-light "
+                                        class="grid text-sm text-slate-600 overflow-hidden rounded transition-all duration-300 ease-in-out bg-background-light "
                                         :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
-                                        <div class="overflow-hidden">
-                                            <div class="p-2 flex flex-col lg:flex-row">
-                                                <div class="px-6 content-center">
-                                                    <div class="flex flex-col justify-center items-center p-2.5 gap-2">
-                                                        <img src="{{ asset($item->image) }}"
-                                                            class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-28 h-28"
-                                                            alt="Product-Thumbnail">
-                                                    </div>
-                                                </div>
+                                        <div class="overflow-hidden border-t-2 border-blue-100">
+                                            <h5 class="pl-4 pt-2">More details..</h5>
+                                            <div class="px-2 flex flex-col lg:flex-row">
                                                 <div class="flex-1">
                                                     <div class="w-full flex flex-col lg:flex-row gap-1.5">
                                                         <div class="p-1.5 lg:w-1/2">
-                                                            <div class="mb-3">
+                                                            <div class="mb-2">
                                                                 <label for="product_name"
                                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                                                    Product Name
+                                                                    Order Reference Number
                                                                 </label>
                                                                 <input type="text" id="product_name"
-                                                                    value="{{ $item->title }}"
-                                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                    value="samplerefcode"
+                                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                     placeholder="" disabled>
-                                                            </div>
-                                                            <div class="grid lg:grid-cols-2 mb-3 gap-4">
-                                                                <div>
-                                                                    <label for="purchase_date"
-                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                                                        Purchase Date
-                                                                    </label>
-                                                                    <input type="text" id="purchase_date"
-                                                                        value="{{ date('d-M-y', strtotime($item->purchase_date)) }}"
-                                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                        placeholder="" disabled>
-                                                                </div>
-                                                                <div>
-                                                                    <label for="date_of_payment"
-                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                                                        Payment Date
-                                                                    </label>
-                                                                    @if ($item->date_of_payment == null)
-                                                                        <input type="text" id="date_of_payment"
-                                                                            value="unpaid"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    @else
-                                                                        <input type="text" id="date_of_payment"
-                                                                            value="{{ date('d-M-y', strtotime($item->date_of_payment)) }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-xs focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="grid lg:grid-cols-2 gap-4">
-                                                                    <div>
-                                                                        <label for="payment_type"
-                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Payment
-                                                                            Type
-                                                                        </label>
-                                                                        <input type="text" id="payment_type"
-                                                                            value="{{ $item->payment_type }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label for="reference_code"
-                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Reference
-                                                                            Code
-
-                                                                        </label>
-                                                                        <input type="text" id="reference_code"
-                                                                            value="{{ $item->reference_code }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                         {{-- second half --}}
                                                         <div class="p-1.5 lg:w-1/2">
-
-                                                            <div class="mb-3 grid lg:grid-cols-2 gap-4">
-                                                                <div>
-                                                                    <label for="quantity"
-                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Quantity
-                                                                    </label>
-                                                                    <input type="text" id="quantity"
-                                                                        value="{{ $item->quantity }}"
-                                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                        placeholder="" disabled>
-                                                                </div>
-                                                                <div>
-                                                                    <label for="total_price"
-                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Total
-                                                                        Price
-                                                                    </label>
-                                                                    <input type="text" id="total_price"
-                                                                        value="{{ $item->total_price }}"
-                                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                        placeholder="" disabled>
+                                                            <div class="mb-2">
+                                                                <div class="grid lg:grid-cols-2 gap-4">
+                                                                    <div>
+                                                                        <label for="payment_type"
+                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                            Date of Purchase
+                                                                        </label>
+                                                                        <input type="text" id="payment_type"
+                                                                            value="{{ date('M d, Y (h:i a)', strtotime($purchase->purchase_date)) }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                            placeholder="" disabled>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="reference_code"
+                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                            Completion Date
+                                                                        </label>
+                                                                        @if ($purchase->purchase_status == 'completed')
+                                                                            <input type="text" id="reference_code"
+                                                                                value="{{ date('M d, Y (h:i a)', strtotime($purchase->completion_date)) }}"
+                                                                                class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                                placeholder="" disabled>
+                                                                        @else
+                                                                            <input type="text" id="reference_code"
+                                                                                value="Waiting.."
+                                                                                class="bg-transparent !border-b-2 border-gray-600 text-gray-700 italic focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                                placeholder="" disabled>
+                                                                        @endif
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="grid lg:grid-cols-2 gap-2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="px-2 pb-4 flex flex-col lg:flex-row">
+                                                <div class="flex-1">
+                                                    <div class="w-full flex flex-col lg:flex-row gap-1.5">
+                                                        <div class="p-1.5 lg:w-1/3">
+                                                            <div class="mb-2">
                                                                 <div>
-                                                                    <label for="order_status"
-                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Order
-                                                                        Status
+                                                                    <label for="purchase_date"
+                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                        Payment Type
                                                                     </label>
-                                                                    @if ($item->purchase_status == 'pending')
-                                                                        <input type="text" id="purchase_status"
-                                                                            value="{{ $item->purchase_status }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-blue-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                    @if ($purchase->payment->payment_type == 'cod')
+                                                                        <input type="text" id="purchase_date"
+                                                                            value="COD (Cash On Delivery)"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                             placeholder="" disabled>
-                                                                    @elseif ($item->purchase_status == 'completed')
-                                                                        <input type="text" id="purchase_status"
-                                                                            value="{{ $item->purchase_status }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-green-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    @elseif ($item->purchase_status == 'failed_delivery')
-                                                                        <input type="text" id="purchase_status"
-                                                                            value="{{ $item->purchase_status }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    @elseif ($item->purchase_status == 'cancellation')
-                                                                        <input type="text" id="purchase_status"
-                                                                            value="{{ $item->purchase_status }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    @else
-                                                                        <input type="text" id="purchase_status"
-                                                                            value="{{ $item->purchase_status }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    @endif
-                                                                </div>
-                                                                <div>
-                                                                    <label for="status"
-                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Payment
-                                                                        Status
-                                                                    </label>
-                                                                    @if ($item->payment_status == 'paid')
-                                                                        <input type="text" id="payment_status"
-                                                                            value="{{ $item->payment_status }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-green-600 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                                                            placeholder="" disabled>
-                                                                    @else
-                                                                        <input type="text" id="payment_status"
-                                                                            value="{{ $item->payment_status }}"
-                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-500 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                    @elseif ($purchase->payment->payment_type == 'gcash')
+                                                                        <input type="text" id="purchase_date"
+                                                                            value="GCash"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                             placeholder="" disabled>
                                                                     @endif
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        {{-- second half --}}
+                                                        <div class="p-1.5 lg:w-1/3">
+                                                            <div class="mb-2">
+                                                                <div>
+                                                                    <label for="purchase_date"
+                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                        Date of Payment
+                                                                    </label>
+                                                                    @if ($purchase->payment->date_of_payment)
+                                                                        <input type="text" id="purchase_date"
+                                                                            value="{{ date('M d, Y (h:i a)', strtotime($purchase->payment->date_of_payment)) }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                            placeholder="" disabled>
+                                                                    @else
+                                                                        <input type="text" id="purchase_date"
+                                                                            value="unpaid"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-red-600 italic focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                            placeholder="" disabled>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-1.5 lg:w-1/3">
+                                                            <div class="mb-2">
+                                                                <div>
+                                                                    <label for="purchase_date"
+                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                        Payment Reference Code
+                                                                    </label>
+                                                                    <input type="text" id="purchase_date"
+                                                                        value="{{ $purchase->payment->reference_code }}"
+                                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                        placeholder="" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="border-t-4 border-blue-100 flex flex-col lg:flex-row">
+                                                <h4 class="mx-auto mt-2">ITEMS</h4>
+                                            </div>
+                                            {{-- @dd($purchase) --}}
+                                            @foreach ($purchase->purchase_items as $item)
+                                                {{-- @dd($item) --}}
+                                                <div class="p-2 flex flex-col lg:flex-row">
+                                                    <div class="px-6 content-center">
+                                                        <div
+                                                            class="flex flex-col justify-center items-center p-2.5 gap-2">
+                                                            <img src="{{ asset($item->product->product_images[0]->image_paths) }}"
+                                                                class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-28 h-28"
+                                                                alt="Product-Thumbnail">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 my-auto">
+                                                        <div class="w-full flex flex-col lg:flex-row gap-1.5">
+                                                            <div class="p-1.5 lg:w-1/2">
+                                                                <div class="mb-3">
+                                                                    <label for="product_name"
+                                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                        Product Name
+                                                                    </label>
+                                                                    <input type="text" id="product_name"
+                                                                        value="{{ $item->product->title }}"
+                                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                        placeholder="" disabled>
+                                                                </div>
+                                                            </div>
+                                                            {{-- second half --}}
+                                                            <div class="p-1.5 lg:w-1/2">
+
+                                                                <div class="mb-3 grid lg:grid-cols-2 gap-4">
+                                                                    <div>
+                                                                        <label for="quantity"
+                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Quantity
+                                                                        </label>
+                                                                        <input type="text" id="quantity"
+                                                                            value="{{ $item->quantity }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="total_price"
+                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Total
+                                                                            Price
+                                                                        </label>
+                                                                        <input type="text" id="total_price"
+                                                                            value="{{ $item->total_price }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                                            placeholder="" disabled>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
 
@@ -668,20 +657,16 @@
                                     <p class="font-semibold">{{ $this->getTotalShippingCount }}</p>
                                 </div>
                             </div>
-                            <div class="py-2 text-center flex justify-center">
-                                <div class="px-2">
-                                    <p class="text-xs font-base text-gray-500 mb-1">Cancellation</p>
-                                    <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
-                                </div>
-                                <div class="px-2">
-                                    <p class="text-xs font-base text-gray-500 mb-1">Return/Refund</p>
-                                    <p class="font-semibold">{{ $this->getTotalReturnRefundCount }}</p>
-                                </div>
-                            </div>
                             <div class="py-2 text-center">
                                 <div class="px-2">
-                                    <p class="text-xs font-base text-gray-500 mb-1">Failed Delivery</p>
+                                    <p class="text-xs font-base text-gray-500 mb-1">Failed Deliveries</p>
                                     <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
+                                </div>
+                            </div>
+                            <div class="py-2 text-center flex justify-center">
+                                <div class="px-2">
+                                    <p class="text-xs font-base text-gray-500 mb-1">Cancellations</p>
+                                    <p class="font-semibold">{{ $this->getTotalCancellationCount }}</p>
                                 </div>
                             </div>
                         </div>

@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Style:</strong>
         </td>
         <td>
-            @if ($product->style === null)
+            @if ($categoryproduct->style === null)
                 None
             @else
-                {{ $product->style }}
+                {{ $categoryproduct->style }}
             @endif
         </td>
     </tr>
@@ -50,10 +49,10 @@
             <strong class="text-dark mr-3">Switches:</strong>
         </td>
         <td>
-            @if ($product->switches === null)
+            @if ($categoryproduct->switches === null)
                 None
             @else
-                {{ $product->switches }}
+                {{ $categoryproduct->switches }}
             @endif
         </td>
     </tr>
@@ -62,10 +61,10 @@
             <strong class="text-dark mr-3">Backlit:</strong>
         </td>
         <td>
-            @if ($product->backlit === null)
+            @if ($categoryproduct->backlit === null)
                 None
             @else
-                {{ $product->backlit }}
+                {{ $categoryproduct->backlit }}
             @endif
         </td>
     </tr>
@@ -74,10 +73,10 @@
             <strong class="text-dark mr-3">Tenkeyless:</strong>
         </td>
         <td>
-            @if ($product->tenkeyless === null)
+            @if ($categoryproduct->tenkeyless === null)
                 None
             @else
-                @if ($product->tenkeyless === 1)
+                @if ($categoryproduct->tenkeyless === 1)
                     Yes
                 @else
                     No
@@ -90,10 +89,10 @@
             <strong class="text-dark mr-3">Connection type:</strong>
         </td>
         <td>
-            @if ($product->connection_type === null)
+            @if ($categoryproduct->connection_type === null)
                 None
             @else
-                {{ $product->connection_type }}
+                {{ $categoryproduct->connection_type }}
             @endif
         </td>
     </tr>
@@ -102,10 +101,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>

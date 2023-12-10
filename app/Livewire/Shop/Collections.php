@@ -22,6 +22,9 @@ class Collections extends Component
     #[Locked]
     public $userid;
 
+    #[Locked]
+    public $user;
+
     public function placeholder(array $params = [])
     {
         return view('livewire.placeholder.shop-placeholder', $params);
@@ -49,7 +52,7 @@ class Collections extends Component
 
     public $category;
 
-    #[url(history: true)]
+    #[url(as: 'q', history: true)]
     public $search;
 
     #[Url(as: 'cat-filter', history: true, keep: false)]
@@ -97,7 +100,8 @@ class Collections extends Component
     public function getProducts()
     {
         if ($this->search && $this->category_filter && $this->conditon_filter) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('category', $this->category_filter)
                 ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
@@ -105,67 +109,87 @@ class Collections extends Component
         }
 
         if ($this->search && $this->category_filter) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('category', $this->category_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
         if ($this->search && $this->conditon_filter) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->category_filter && $this->conditon_filter) {
-            return Product::whereIn('condition', $this->conditon_filter)->whereIn('category', $this->category_filter)
+            return Product::with('product_images')
+                ->whereIn('condition', $this->conditon_filter)->whereIn('category', $this->category_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->category_filter) {
-            return Product::whereIn('category', $this->category_filter)
+            return Product::with('product_images')
+                ->whereIn('category', $this->category_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->conditon_filter) {
-            return Product::whereIn('condition', $this->conditon_filter)
+            return Product::with('product_images')
+                ->whereIn('condition', $this->conditon_filter)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->search) {
-            return Product::where('title', 'ilike', "%{$this->search}%")
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->category) {
-            return Product::where('category', '=', $this->category)
+            return Product::with('product_images')
+                ->where('category', '=', $this->category)
                 ->orderBy($this->sortingby, $this->sortdirection)
                 ->paginate(12);
         }
 
         if ($this->sortingby && $this->sortdirection) {
-            return Product::orderBy($this->sortingby, $this->sortdirection)->paginate(12);
-        } else {
-            return Product::paginate(12);
+            return Product::with('product_images')
+                ->orderBy($this->sortingby, $this->sortdirection)->paginate(12);
+        }
+        //
+        else {
+            return Product::with('product_images')
+                ->paginate(12);
         }
     }
 
-    public function boot()
+    #[Computed]
+    public function check_bookmark($product_id)
     {
+        if (Auth::user() && $this->user->bookmark->contains('product_id', $product_id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
     public function mount($category = null)
     {
+        // dd(Product::where('id', 1455)->select('image')->get());
         // dd($category);
         if ($category) {
             $this->category = $category;
         }
 
         $this->userid = Auth::user()->id ?? null;
+        $this->user = Auth::user() ?? null;
 
         $this->all_products = DB::table('products')->get();
 
@@ -244,6 +268,24 @@ class Collections extends Component
         //        dd($item_id);
     }
 
+    public function removefromwishlist($product_id)
+    {
+        $bookmarkitem = Bookmark::where('product_id', $product_id)->where('user_id', $this->userid)->get();
+        // dd($bookmarkitem);
+        Bookmark::destroy($bookmarkitem);
+
+        // create an event to update the count of wihshlist items
+        $this->dispatch('wishlist-item-change');
+
+        sleep(0.5);
+        $this->mount();
+
+        $product = Product::find($product_id);
+        // display alert notification
+        session()->flash('notification-livewire', "'$product->title' removed from Wishlists");
+        $this->dispatch('notif-alert-wishlist');
+    }
+
     // redirect to purchase page
     public function buynow($product_id)
     {
@@ -254,11 +296,16 @@ class Collections extends Component
             $this->redirect(route('purchase_page', [
                 'product_id' => $product_id,
                 'user_id' => Auth::user()->id,
-                'quantity' => 1
+                'quantity' => 1,
             ]));
         } else {
             $this->redirect(route('login'));
         }
+    }
+
+    public function to_details_page($product_id, $category)
+    {
+        return redirect(route('collections-details', ['product_id' => $product_id, 'category' => $category]));
     }
 
     public function render()

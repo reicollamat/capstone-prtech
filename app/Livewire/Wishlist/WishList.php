@@ -37,15 +37,13 @@ class WishList extends Component
             //                ->where('user_id', $this->user_id)
             //                ->get();
 
-            $this->bookmarks = Bookmark::where('user_id', $this->user_id)
-                ->select('id')
+            $this->bookmarks = Bookmark::with('product')
+                ->where('user_id', $this->user_id)
                 ->get();
-
             $this->wishlist_count = count($this->bookmarks);
 
-            //            dd($this->bookmarks);
+            // dd($this->bookmarks);
         }
-
     }
 
     public function render()
@@ -65,7 +63,6 @@ class WishList extends Component
 
             sleep(0.5);
             $this->mount();
-
         }
     }
 

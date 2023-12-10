@@ -12,11 +12,11 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $files = glob(app_path('Helpers').'/*.php');
-        foreach ($files as $key => $file) {
-            require_once $file;
-            Log::channel('stderr')->info("Loaded $file\n");
-        }
+        // $files = glob(app_path('Helpers').'/*.php');
+        // foreach ($files as $key => $file) {
+        //     require_once $file;
+        //     Log::channel('stderr')->info("Loaded $file\n");
+        // }
 
     }
 

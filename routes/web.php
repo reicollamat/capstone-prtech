@@ -30,6 +30,7 @@ use App\Livewire\Seller\Dashboard\ShipmentLinks\ShipmentList;
 use App\Livewire\Seller\Dashboard\ShipmentLinks\ShipmentOptions;
 use App\Livewire\Seller\Dashboard\ShopLinks\ShopManagement;
 use App\Livewire\Seller\Dashboard\ShopLinks\ShopManagementCategory;
+use App\Livewire\Seller\Dashboard\ShopLinks\ShopMetricSettings;
 use App\Livewire\Seller\OnBoarding\Form\SellerRegistration;
 use App\Livewire\Seller\OnBoarding\Form\ShopInformation;
 use App\Livewire\Shop;
@@ -56,8 +57,6 @@ Route::get('/redirect', [LandingController::class, 'redirect']);
 
 // landing page / home page
 Route::get('/', [LandingController::class, 'index'])->name('index_landing');
-
-Route::get('/collections', Collections::class)->name('collections');
 
 Route::get('/testing', Landing::class)->name('testing_page');
 
@@ -111,6 +110,7 @@ Route::prefix('seller')->group(function () {
             Route::prefix('shop')->group(function () {
                 Route::get('/', Shopmanagement::class)->name('shop-management');
                 Route::get('/manage/category', ShopManagementCategory::class)->name('shop-management-category');
+                Route::get('/manage/metrics', ShopMetricSettings::class)->name('shop-management-metrics');
             });
             Route::prefix('analytics')->group(function () {
                 Route::get('/stocksense', AnalyticsModelReport::class)->name('analytics-model-report');

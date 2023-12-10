@@ -3,6 +3,7 @@
 namespace App\Livewire\Wishlist;
 
 use App\Models\Bookmark;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Lazy;
@@ -34,12 +35,10 @@ class Wishitems extends Component
         //        $this->bookmark = $bookmark_id->id;
 
         //        $this->bookmark = Bookmark::where('id', $bookmark_id->id)->get();
-        $this->bookmark = DB::table('products')->join('bookmarks', 'products.id', '=', 'bookmarks.product_id')
-            ->where('bookmarks.id', $bookmark_id->id)->first();
+        $this->bookmark = Bookmark::where('id', $bookmark_id)->first();
 
         //
-        //        dd($this->bookmark->product_id);
-
+        // dd($this->bookmark);
     }
 
     public function render()

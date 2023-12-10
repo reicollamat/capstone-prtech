@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,7 +12,7 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            {{ $product->status }}
+            {{ $categoryproduct->status }}
         </td>
     </tr>
     <tr>
@@ -20,20 +20,19 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            {{ $product->condition }}
+            {{ $categoryproduct->condition }}
         </td>
     </tr>
-
 
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>
@@ -42,10 +41,10 @@
             <strong class="text-dark mr-3">Size:</strong>
         </td>
         <td>
-            @if ($product->size === null)
+            @if ($categoryproduct->size === null)
                 None
             @else
-                {{ $product->size }}
+                {{ $categoryproduct->size }}
             @endif
         </td>
     </tr>
@@ -54,13 +53,13 @@
             <strong class="text-dark mr-3">RPM:</strong>
         </td>
         <td>
-            @if ($product->rpm === null)
+            @if ($categoryproduct->rpm === null)
                 None
             @else
-                @if (is_array($product->rpm) && count($product->rpm) > 1)
-                    {{ min($product->rpm) }} - {{ max($product->rpm) }} RPM
+                @if (is_array($categoryproduct->rpm) && count($categoryproduct->rpm) > 1)
+                    {{ min($categoryproduct->rpm) }} - {{ max($categoryproduct->rpm) }} RPM
                 @else
-                    {{ $product->rpm }} RPM
+                    {{ $categoryproduct->rpm }} RPM
                 @endif
             @endif
         </td>
@@ -70,13 +69,13 @@
             <strong class="text-dark mr-3">Airflow:</strong>
         </td>
         <td>
-            @if ($product->airflow === null)
+            @if ($categoryproduct->airflow === null)
                 None
             @else
-                @if (is_array($product->airflow) && count($product->airflow) > 1)
-                    {{ min($product->airflow) }} - {{ max($product->airflow) }} CFM
+                @if (is_array($categoryproduct->airflow) && count($categoryproduct->airflow) > 1)
+                    {{ min($categoryproduct->airflow) }} - {{ max($categoryproduct->airflow) }} CFM
                 @else
-                    {{ $product->airflow }} CFM
+                    {{ $categoryproduct->airflow }} CFM
                 @endif
             @endif
         </td>
@@ -86,13 +85,13 @@
             <strong class="text-dark mr-3">Noise Level:</strong>
         </td>
         <td>
-            @if ($product->noise_level === null)
+            @if ($categoryproduct->noise_level === null)
                 None
             @else
-                @if (is_array($product->noise_level) && count($product->noise_level) > 1)
-                    {{ min($product->noise_level) }} - {{ max($product->noise_level) }} dB
+                @if (is_array($categoryproduct->noise_level) && count($categoryproduct->noise_level) > 1)
+                    {{ min($categoryproduct->noise_level) }} - {{ max($categoryproduct->noise_level) }} dB
                 @else
-                    {{ $product->noise_level }} dB
+                    {{ $categoryproduct->noise_level }} dB
                 @endif
             @endif
         </td>
@@ -102,10 +101,10 @@
             <strong class="text-dark mr-3">Pulse Width Modulation:</strong>
         </td>
         <td>
-            @if ($product->pwm === null)
+            @if ($categoryproduct->pwm === null)
                 None
             @else
-                @if ($product->pwm === 1)
+                @if ($categoryproduct->pwm === 1)
                     Yes
                 @else
                     No

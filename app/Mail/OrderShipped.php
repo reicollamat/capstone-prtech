@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Purchase;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -16,9 +17,9 @@ class OrderShipped extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(public Purchase $order)
     {
-        //
+        // dd($order->purchase_items);
     }
 
     /**
@@ -28,7 +29,7 @@ class OrderShipped extends Mailable
     {
         return new Envelope(
             from: new Address('prtech.business@gmail.com', 'PR-TECH'),
-            subject: 'PR-TECH Order Process Complete',
+            subject: 'PR-TECH Order Process Information',
         );
     }
 
@@ -38,7 +39,7 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.ordershipped-template',
+            view: 'email.ordershipped-template_2',
         );
     }
 

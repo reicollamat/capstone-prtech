@@ -33,6 +33,14 @@ class ProductList extends Component
 
     public $select_products = [];
 
+    public $seller;
+
+    public $total_products_count;
+    public $total_available_count;
+    public $total_brandnew_count;
+    public $total_used_count;
+    public float $total_products_rating;
+
     //    public function paginationView()
     //    {
     //        return 'vendor.pagination.custom-pagination-links';
@@ -41,14 +49,20 @@ class ProductList extends Component
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
-        // dd($this->seller);
-        //        $p = (Product::find(2));
-        //
-        //        dd($p->slug);
 
-        // $this->categories = Helper::categoryList();
+        $this->total_products_count = Product::where('seller_id', $this->seller->id)->count();
 
-        //        dd($this->categories->array_keys());
+        $this->total_available_count = Product::where('seller_id', $this->seller->id)->where('status', 'available')->count();
+
+        $this->total_brandnew_count = Product::where('seller_id', $this->seller->id)->where('condition', 'brand_new')->count();
+
+        $this->total_used_count = Product::where('seller_id', $this->seller->id)->where('condition', 'used')->count();
+
+        // overall rating of all seller's products
+        $this->total_products_rating = Product::where('seller_id', $this->seller->id)->sum('rating') / $this->total_products_count;
+        $this->total_products_rating = number_format((float)$this->total_products_rating, 2, '.', '');
+
+        // dd($this->total_products_rating);
     }
 
     #[Computed]
@@ -90,7 +104,6 @@ class ProductList extends Component
         //        sleep(5);
         if ($this->category_filter) {
             return Product::where('category', '=', $this->category_filter)
-                ->where('seller_id', $this->seller->id)
                 ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
@@ -99,20 +112,18 @@ class ProductList extends Component
         // add check to run rerender every time
         if ($this->quick_search_filter > 1) {
             // return Product::where('title', 'ilike', "%{$this->quick_search_filter}%") // POSTGRES
-            return Product::where('seller_id', $this->seller->id)
-                ->where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
+            return Product::where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
                 ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
         } else {
 
             return Product::where('seller_id', $this->seller->id)
-                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
         }
 
-        return Product::select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')->paginate(10);
+        return Product::where('seller_id', $this->seller->id)->paginate(10);
     }
 
     public function render()

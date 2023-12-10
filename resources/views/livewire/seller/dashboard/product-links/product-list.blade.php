@@ -9,16 +9,43 @@
             <div class="flex flex-column flex-lg-row justify-between gap-2 ">
                 <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
                     <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
-                        <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
+                        <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                         <div class="py-2">
-                            <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
-                            <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                            <p class="text-sm text-center font-base text-gray-500 mb-1">Total Products Listed</p>
+                            <input type="text"
+                                class="font-semibold bg-transparent w-full text-center form-control-lg"
+                                wire:model="total_products_count" disabled>
                         </div>
-                        <div class="py-2">
-                            <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
-                            <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                        <div class="py-2 text-center">
+                            <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Available Products</p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_available_count" disabled>
+                            </div>
                         </div>
-                        <div class="py-2">
+                        <div class="py-2 text-center flex justify-center">
+                            <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Brand New</p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_brandnew_count" disabled>
+                            </div>
+                            <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Used</p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_used_count" disabled>
+                            </div>
+                        </div>
+                        <div class="py-2 text-center flex justify-center">
+                            <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Overall Products Rating</p>
+                                <div class="flex w-50 mx-auto px-5">
+                                    <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
+                                    <input type="text" class="font-semibold bg-transparent"
+                                        wire:model="total_products_rating" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-2 text-center">
                             <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
                             <p class="font-semibold">0</p>
                         </div>
@@ -165,7 +192,8 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <i class="bi bi-search"></i>
                                     </span>
-                                    <input id="quick_search" type="search" name="serch" placeholder="Quick Search"
+                                    <input id="quick_search" type="search" name="serch"
+                                        placeholder="Quick Search"
                                         class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
                                         wire:model.live="quick_search_filter">
                                 </div>
@@ -330,6 +358,7 @@
                             {{--                             </div> --}}
                             {{--                         </div> --}}
                             {{--                     </div> --}}
+                            {{-- @dd($item) --}}
                             <livewire:component.product-list-component :item="$item" :itemProductInfo="$item"
                                 :key="$item->id" />
                             {{--                        {{ $item->slug }} --}}
@@ -356,16 +385,42 @@
         <div
             class="hidden ml-3 d-lg-flex flex-none max-w-[14rem] flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
             <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
-                <p class="text-xs font-light uppercase text-gray-700 max-w-7xl">Overview</p>
+                <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2">
-                    <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
-                    <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                    <p class="text-sm text-center font-base text-gray-500 mb-1">Total Products Listed</p>
+                    <input type="text" class="font-semibold bg-transparent w-full text-center form-control-lg"
+                        wire:model="total_products_count" disabled>
                 </div>
-                <div class="py-2">
-                    <p class="text-sm font-base text-gray-500 mb-1">Total Products Listed</p>
-                    <p class="font-semibold">{{ $this->getTotalProductCount }}</p>
+                <div class="py-2 text-center">
+                    <div class="px-2">
+                        <p class="text-xs font-base text-gray-500 mb-1">Available Products</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_available_count" disabled>
+                    </div>
                 </div>
-                <div class="py-2">
+                <div class="py-2 text-center flex justify-center">
+                    <div class="px-2">
+                        <p class="text-xs font-base text-gray-500 mb-1">Brand New</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_brandnew_count" disabled>
+                    </div>
+                    <div class="px-2">
+                        <p class="text-xs font-base text-gray-500 mb-1">Used</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_used_count" disabled>
+                    </div>
+                </div>
+                <div class="py-2 text-center flex justify-center">
+                    <div class="px-2">
+                        <p class="text-xs font-base text-gray-500 mb-1">Overall Products Rating</p>
+                        <div class="flex w-50 mx-auto px-5">
+                            <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
+                            <input type="text" class="font-semibold bg-transparent"
+                                wire:model="total_products_rating" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
                     <p class="font-semibold">0</p>
                 </div>

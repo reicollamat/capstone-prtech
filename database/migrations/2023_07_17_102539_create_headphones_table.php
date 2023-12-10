@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -21,10 +20,11 @@ return new class extends Migration
             $table->string('type');
             $table->json('frequency_response')->nullable();
             $table->boolean('microphone');
-            $table->boolean('wireless');
-            $table->string('enclosure_type');
+            $table->boolean('wireless')->nullable();
+            $table->string('connection_type')->nullable();
+            $table->string('noise_control')->nullable();
             $table->string('color')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->string('condition');

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->string('focus_type')->nullable();
             $table->json('os');
             $table->string('fov')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->string('condition');

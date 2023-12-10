@@ -2,36 +2,43 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
+use App\Models\IntStorage;
+use App\Models\User;
+use App\Models\Product;
+use Livewire\Component;
+use App\Models\ProductImage;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Validate;
-use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class IntStorageComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;
+    public $previewImageIndex;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide product name')]
     public $productName;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide product SKU')]
     public $productSKU;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide product slug')]
     public $productSlug;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide product description')]
     public $productDescription;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide product condition')]
     public $productCondition;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
     public $productStatus;
 
-    #[Reactive]
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -52,20 +59,21 @@ class IntStorageComponent extends Component
     #[Validate('required', message: 'Please provide storage interface')]
     public $intstorage_int;
 
+    #[Validate('required', message: 'Please provide storage form factor')]
+    public $intstorage_ff;
+
+    #[Validate('required', message: 'Please provide cache')]
+    public $intstorage_cache;
+
     #[Validate('required', message: 'Please provide stocks available')]
     public $stocks;
 
     #[Validate('required', message: 'Please provide a reserve stock if available')]
     public $reserve_stocks;
 
-    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    public function mount($productCategory)
     {
-        $this->productName = $productName;
-        $this->productSKU = $productSKU;
-        $this->productSlug = $productSlug;
-        $this->productDescription = $productDescription;
-        $this->productCondition = $productCondition;
-        $this->productStatus = $productStatus;
+
         $this->productCategory = $productCategory;
     }
 
@@ -90,14 +98,95 @@ class IntStorageComponent extends Component
             'intstorage_cap' => 'required|integer',
             'intstorage_type' => 'required|not_in:Click to Select',
             'intstorage_int' => 'required|not_in:Click to Select',
+            'intstorage_ff' => 'required|not_in:Click to Select',
+            'intstorage_cache' => 'required',
             'stocks' => 'required|integer',
             'reserve_stocks' => 'required|integer',
         ]);
 
-        if ($validator) {
+        // dd($validator);
 
-            dd($validator);
+        $storeas = [];
+
+        if ($validator) {
+            // create a array of image filename and store in ain storage/app/product-image-uploads
+            foreach ($this->productImages as $image) {
+                $path = $image->store('product-image-uploads', 'real_public');
+                $storeas[] = $path;
+            }
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $product = Product::create([
+                'seller_id' => User::find(Auth::user()->id)->seller->id,
+                'title' => $validator['productName'],
+                'slug' => $validator['productSlug'],
+                'SKU' => $validator['productSKU'],
+                'category' => $validator['productCategory'],
+                'price' => $validator['price'],
+                'stock' => $validator['stocks'],
+                'reserve' => $validator['reserve_stocks'],
+                // 'image' => implode(',', $storeas),
+                // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+                'condition' => $validator['productCondition'],
+            ]);
+
+            // loop through the images from the file upload
+            // if there are many images in the array loop it and  create a row in db
+            if (count($storeas) > 0) {
+                foreach ($storeas as $image) {
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_paths' => $image,
+                    ]);
+                }
+                // else if there is only one image in the array create a row in db with no image
+            } else {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => 'img/no-image-placeholder.png',
+                ]);
+            }
+
+            // $images = ProductImage::create([
+            //     'image_paths' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+            // ]);
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $intstorage = IntStorage::create([
+                'product_id' => $product->id,
+                'category' => $validator['productCategory'],
+                'name' => $validator['productName'],
+                'brand' => $validator['brand'],
+                'price' => $validator['price'],
+                'capacity' => $validator['intstorage_cap'],
+                'type' => $validator['intstorage_type'],
+                'interface' => $validator['intstorage_int'],
+                'form_factor' => $validator['intstorage_ff'],
+                'cache' => $validator['intstorage_cache'],
+                'description' => $validator['productDescription'],
+                'condition' => $validator['productCondition'],
+            ]);
+
+            // dd($intstorage, $product);
+
+            // CHECK IF BOTH QUERIES ARE SUCCESSFULL
+            if ($product && $intstorage) {
+                // dd($product, $intstorage);
+                $this->alert('success', 'Product has been created successfully.', [
+                    'position' => 'top-end'
+                ]);
+                $this->reset();
+            } else {
+                $this->alert('error', 'Product has not been created.', [
+                    'position' => 'top-end'
+                ]);
+            }
+        } else {
+            $this->alert('error', 'Unkown error has occurred', [
+                'position' => 'top-end'
+            ]);
         }
+
 
         // if ($validator) {
         //     dd($validator);

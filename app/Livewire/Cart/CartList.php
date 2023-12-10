@@ -40,15 +40,17 @@ class CartList extends Component
         if (Auth::check()) {
             $this->user_id = Auth::id();
 
-            $this->cartitems = Product::join('cart_items', 'products.id', '=', 'cart_items.product_id')
+            $this->cartitems = CartItem::with('product')
                 ->where('user_id', $this->user_id)
                 ->get();
 
             $this->cartiems_count = count($this->cartitems);
 
             if (!empty($this->cartitems)) {
+                // dd($this->cartitems);
                 foreach ($this->cartitems as $item) {
-                    $this->total_price += $item->price * $item->quantity;
+                    // dd($item);
+                    $this->total_price += $item->total_price;
                 }
             }
 
@@ -79,13 +81,13 @@ class CartList extends Component
 
     public function cart_checkout($cartitems)
     {
+
+        // dd('test');
         $cart_items = collect($cartitems);
         $user = Auth::user();
         $shipping_value = 13;
-        $subtotal = $cart_items->sum('price');
+        $subtotal = $this->total_price;
         $total = $subtotal + $shipping_value;
-
-        // dd($subtotal);
 
         session()->flash('cart');
         $this->redirect(route('purchase_page', [

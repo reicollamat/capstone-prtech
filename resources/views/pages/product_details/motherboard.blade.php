@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Socket:</strong>
         </td>
         <td>
-            @if ($product->socket === null)
+            @if ($categoryproduct->socket === null)
                 None
             @else
-                {{ $product->socket }}
+                {{ $categoryproduct->socket }}
             @endif
         </td>
     </tr>
@@ -50,10 +49,10 @@
             <strong class="text-dark mr-3">Form Factor:</strong>
         </td>
         <td>
-            @if ($product->form_factor === null)
+            @if ($categoryproduct->form_factor === null)
                 None
             @else
-                {{ $product->form_factor }}
+                {{ $categoryproduct->form_factor }}
             @endif
         </td>
     </tr>
@@ -62,10 +61,10 @@
             <strong class="text-dark mr-3">Max memory:</strong>
         </td>
         <td>
-            @if ($product->max_memory === null)
+            @if ($categoryproduct->max_memory === null)
                 None
             @else
-                {{ $product->max_memory }} GB
+                {{ $categoryproduct->max_memory }} GB
             @endif
         </td>
     </tr>
@@ -74,10 +73,10 @@
             <strong class="text-dark mr-3">Memory Slots:</strong>
         </td>
         <td>
-            @if ($product->memory_slots === null)
+            @if ($categoryproduct->memory_slots === null)
                 None
             @else
-                {{ $product->memory_slots }}
+                {{ $categoryproduct->memory_slots }}
             @endif
         </td>
     </tr>
@@ -86,10 +85,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>

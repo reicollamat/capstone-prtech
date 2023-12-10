@@ -12,6 +12,7 @@ class CustomHelper
             'computer_case' => 'Computer Case',
             'cpu' => 'Processor(CPU)',
             'cpu_cooler' => 'CPU Cooler',
+            'int_storage' => 'Internal Storage',
             'ext_storage' => 'External Storage',
             'headphone' => 'Headphone',
             'keyboard' => 'Keyboard',

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,11 +17,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('brand')->nullable();
             $table->decimal('price');
-            $table->decimal('configuration', 8, 1);
+            $table->decimal('configuration', 8, 1)->nullable();
             $table->string('wattage')->nullable();
             $table->json('frequency_response')->nullable();
             $table->string('color')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->string('condition');

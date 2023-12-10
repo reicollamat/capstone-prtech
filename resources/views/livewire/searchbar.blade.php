@@ -1,4 +1,4 @@
-<div class="w-1/2 position-relative" x-data="{ open: false }">
+<div class="w-1/2 position-relative" x-data="{ open: false }" @mouseleave="open = false">
     <form wire:submit="submit">
         <div class="flex rounded-none">
             <select wire:model.live="selected_category"
@@ -8,13 +8,12 @@
                 {{--                @foreach ($categories as $key => $value) --}}
                 {{--                    <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option> --}}
                 {{--                @endforeach --}}
-
                 @foreach (CustomHelper::categoryList() as $category_key => $category_value)
                     <option value={{ $category_key }} wire:key={{ $category_key }}>{{ $category_value }}</option>
                 @endforeach
 
             </select>
-            <div class="input-group" @mouseover="open = true" @mouseleave="open = false">
+            <div class="input-group" @mouseover="open = true">
                 <input type="text" class="form-control p-2 custom-input-text rounded-none shadow-none"
                     placeholder="Search PR-Tech" wire:model.live="search" name="to_search" autocomplete="off"
                     aria-label="Search" aria-describedby="button-addon2">
@@ -37,7 +36,6 @@
                     Search
                 </button>
             </div>
-
         </div>
     </form>
     <div x-cloak x-show="open"
@@ -54,11 +52,12 @@
                                 class="text-decoration-none text-black">
                                 <div
                                     class="d-flex h-full outline outline-1 outline-gray-200 p-0.5 hover:bg-gray-200 transition-all duration-300">
-                                    <div class="w-16 h-full">
-                                        <img src="{{ asset($product_search->image) }}" alt="image"
-                                            class="w-full h-full" />
+                                    <div class=" w-20 h-auto content-center">
+                                        {{-- @dd($product_search->product_images[0]->image_paths) --}}
+                                        <img src="{{ asset($product_search->product_images[0]->image_paths) }}"
+                                            alt="image" class="w-20 h-20 object-contain" />
                                     </div>
-                                    <div class="flex-grow-1 d-flex flex-col ml-3">
+                                    <div class="flex-1 d-flex flex-col ml-3">
                                         <div>
                                             <h1 class="text-lg">{{ $product_search->title }}</h1>
                                         </div>

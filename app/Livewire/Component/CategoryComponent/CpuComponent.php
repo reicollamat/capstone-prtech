@@ -4,42 +4,46 @@ namespace App\Livewire\Component\CategoryComponent;
 
 use App\Models\Cpu;
 use App\Models\Product;
-use App\Models\Seller;
+use App\Models\ProductImage;
 use App\Models\User;
-use Auth;
-use Livewire\Attributes\Reactive;
+use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
+use function Livewire\store;
+
 class CpuComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;
 
-    #[Reactive]
+    public $previewImageIndex;
+
+    #[Validate('required', message: 'Please provide a CPU Name')]
     public $productName;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU SKU')]
     public $productSKU;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Slug')]
     public $productSlug;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide a CPU Description')]
     public $productDescription;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide a CPU Condition')]
     public $productCondition;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Status', message: 'Please provide a CPU Status')]
     public $productStatus;
 
-    #[Reactive]
     public $productCategory;
 
-    #[Validate(['productImages.*' => 'image|max:5120'])]
+    #[Validate(['productImages.*' => 'image|max:2048'])]
     public $productImages = [];
 
     #[Validate('required', message: 'Please provide a CPU Core / Threads Count')]
@@ -57,10 +61,10 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU TDP')]
     public $tdp;
 
-    #[Validate('required', message: 'Please provide a CPU IGPU if available')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide a CPU IGPU if available')]
     public $igpu;
 
-    #[Validate('required', message: 'Please provide a CPU Unlocked if available')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide a CPU Unlocked if available')]
     public $oc_unlocked;
 
     #[Validate('required', message: 'Please provide stocks available')]
@@ -69,14 +73,8 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU Reserve Stock if available')]
     public $reserve_stocks;
 
-    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    public function mount($productCategory)
     {
-        $this->productName = $productName;
-        $this->productSKU = $productSKU;
-        $this->productSlug = $productSlug;
-        $this->productDescription = $productDescription;
-        $this->productCondition = $productCondition;
-        $this->productStatus = $productStatus;
         $this->productCategory = $productCategory;
     }
 
@@ -87,8 +85,9 @@ class CpuComponent extends Component
 
     public function submit()
     {
-        $this->dispatch('on-save');
-
+        // dd($validator);
+        // dd('test');
+        // VALIDATE THE INPUT VALUES ACCORDING TO THE VALIDATION RULES
         $validator = $this->validate([
             'productName' => 'required',
             'productSKU' => 'required',
@@ -109,13 +108,15 @@ class CpuComponent extends Component
             'reserve_stocks' => 'required|integer',
         ]);
 
-        // $links = [];
+        // dd($validator);
+
+        // CREATE A ARRAY TO STORE THE IMAGE PATH
         $storeas = [];
 
         if ($validator) {
+
             // create a array of image filename and store in ain storage/app/product-image-uploads
             foreach ($this->productImages as $image) {
-                // $links[] = $image->temporaryUrl();
                 $path = $image->store('product-image-uploads', 'real_public');
                 $storeas[] = $path;
             }
@@ -128,13 +129,35 @@ class CpuComponent extends Component
                 'SKU' => $validator['productSKU'],
                 'category' => $validator['productCategory'],
                 'price' => $validator['price'],
-                // 'rating' => 0,
-                'stocks' => $validator['stocks'],
+                'stock' => $validator['stocks'],
                 'reserve' => $validator['reserve_stocks'],
-                'image' => implode(',', $storeas),
-                // 'image' => ($storeas),
+                // 'image' => implode(',', $storeas),
+                // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
             ]);
+
+            // loop through the images from the file upload
+            // if there are many images in the array loop it and  create a row in db
+            if (count($storeas) > 0) {
+                foreach ($storeas as $image) {
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_paths' => $image,
+                    ]);
+                }
+            // else if there is only one image in the array create a row in db with no image
+            } else {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => 'img/no-image-placeholder.png',
+                ]);
+            }
+
+            // $images = ProductImage::create([
+            //     'image_paths' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+            // ]);
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
             $cpu = Cpu::create([
                 'product_id' => $product->id,
                 'category' => $validator['productCategory'],
@@ -149,20 +172,46 @@ class CpuComponent extends Component
                 'description' => $validator['productDescription'],
                 'condition' => $validator['productCondition'],
             ]);
+            // CHECK IF BOTH QUERIES ARE SUCCESSFULL
             if ($product && $cpu) {
-                $this->dispatch('product-saved');
-                // $this->reset();
-                // dd($cpu);
+                // dd($product, $cpu);
+                $this->alert('success', 'Product has been created successfully.', [
+                    'position' => 'top-end']);
+                $this->reset();
+            } else {
+                $this->alert('error', 'Product has not been created.', [
+                    'position' => 'top-end']);
             }
 
-            // dd(User::find(Auth::user()->id)->seller->id);
+        } else {
+            $this->alert('error', 'Unkown error has occurred', [
+                'position' => 'top-end']);
         }
+    }
 
-        // if ($validator) {
-        //     dd($validator);
-        // }
-        // dd($validator);
+    /**
+     * Sets the image URL and index for the preview image.
+     *
+     * @param  string  $imageurl The URL of the image.
+     * @param  int  $imageindex The index of the image.
+     *
+     * @throws \Exception
+     */
+    public function setImage($imageurl, $imageindex): void
+    {
+        $this->previewImage = $imageurl;
+        $this->previewImageIndex = $imageindex;
+    }
 
-        // dd($storeas, $path);
+    /**
+     * Removes a photo from the productImages array at the specified index.
+     *
+     * @param  int  $imageindex The index of the photo to remove.
+     *
+     * @throws \Exception If the index is out of bounds.
+     */
+    public function removePhoto($imageindex): void
+    {
+        array_splice($this->productImages, $imageindex, 1);
     }
 }

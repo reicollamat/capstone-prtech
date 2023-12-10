@@ -81,6 +81,7 @@
                                 @error('user_birthdate')
                                     <span class="font-sm text-red-500">{{ $message }}</span>
                                 @enderror
+                                {{ $user_birthdate }}
                             </div>
                             <div>
                                 <label for="user_sex"
@@ -114,10 +115,10 @@
                             <div class="mt-6">
                                 <label for="user_address_2"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Address Line 2</label>
+                                    Address Line 2 (Type n/a if not provided)</label>
                                 <input type="text" id="user_address_2" wire:model.blur="user_address_2"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Address" required>
+                                    placeholder="Address">
                             </div>
                             <div class="mt-6">
                                 <div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -178,6 +179,12 @@
                         {{--                                </div> --}}
                         {{--                            </span> --}}
                         {{--                        </button> --}}
+                        <button class="flex no-underline decoration-0 text-black" type="button" wire:click="delete" wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">
+                            <span
+                                class="lg:!h-12 w-full  h-10 flex items-center text-black justify-center uppercase font-semibold rounded-sm px-4 lg:!px-6 border border-secondary hover:bg-yellow-500 hover:!text-black transition duration-500 ease-in-out">
+                                Cancel
+                            </span>
+                        </button>
                         <button class="flex no-underline decoration-0 text-black" type="submit">
                             <span
                                 class="lg:!h-12 w-full  h-10 flex items-center text-primary justify-center uppercase font-semibold rounded-sm px-4 lg:!px-6 border border-primary hover:bg-blue-600 hover:!text-white transition duration-500 ease-in-out">
@@ -189,11 +196,8 @@
                                     </div>
                                 </span>
                                 Proceed
-
                             </span>
-
                         </button>
-
                     </div>
                 </form>
             </div>

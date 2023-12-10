@@ -4,13 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::create('cpus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
@@ -24,7 +22,7 @@ return new class extends Migration
             $table->integer('tdp');
             $table->string('graphics')->nullable();
             $table->boolean('smt')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description')->nullable();
             $table->string('status')->default('available');
             $table->string('condition');
@@ -37,8 +35,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists('cpus');
     }
 };

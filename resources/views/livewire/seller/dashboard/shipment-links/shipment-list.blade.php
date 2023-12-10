@@ -12,28 +12,30 @@
                         <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                         <div class="py-2 text-center">
                             <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
-                            <p class="font-semibold">
-                                {{ $this->getTotalShipmentCount }}
-                            </p>
+                            <input type="text"
+                                class="font-semibold bg-transparent w-full text-center form-control-lg"
+                                wire:model="total_shipment" disabled>
                         </div>
                         <div class="py-2 text-center flex justify-center">
                             <div class="px-2">
+                                <p class="text-xs font-base text-gray-500 mb-1">Delivered</p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_completed_count" disabled>
+                            </div>
+                            <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">To Ship</p>
-                                <p class="font-semibold">
-                                    {{ $this->getTotalToShipCount }}
-                                </p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_shipping_count" disabled>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Shipping</p>
-                                <p class="font-semibold">
-                                    {{ $this->getTotalShippingCount }}
-                                </p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_to_ship_count" disabled>
                             </div>
                             <div class="px-2">
-                                <p class="text-xs font-base text-gray-500 mb-1">Delivered</p>
-                                <p class="font-semibold">
-                                    {{ $this->getTotalFailedDeliveryCount }}
-                                </p>
+                                <p class="text-xs font-base text-gray-500 mb-1">Failed Deliverey</p>
+                                <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                    wire:model="total_failed_delivery_count" disabled>
                             </div>
                         </div>
                     </div>
@@ -47,7 +49,7 @@
                         <button @click="activeTab = 1" class="tab-control p-2 rounded"
                             :class="{ 'active bg-blue-300': activeTab === 1 }">Shipping</button>
                         <button @click="activeTab = 2" class="tab-control p-2 rounded"
-                            :class="{ 'active bg-blue-300': activeTab === 2 }">Delivered</button>
+                            :class="{ 'active bg-green-300': activeTab === 2 }">Delivered</button>
                     </div>
                 </div>
             </div>
@@ -78,30 +80,35 @@
                 <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Total Shipment Listed</p>
-                    <p class="font-semibold">{{ $this->getTotalShipmentCount }}</p>
+                    <input type="text" class="font-semibold bg-transparent w-full text-center"
+                        wire:model="total_shipment" disabled>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">To Ship</p>
-                        <p class="font-semibold">{{ $this->getTotalToShipCount }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_to_ship_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Shipping</p>
-                        <p class="font-semibold">{{ $this->getTotalShippingCount }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_shipping_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Delivered</p>
-                        <p class="font-semibold">{{ $this->getTotalCompletedCount }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_completed_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-sm font-base text-gray-500 mb-1">Failed Delivery</p>
-                        <p class="font-semibold">{{ $this->getTotalFailedDeliveryCount }}</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_failed_delivery_count" disabled>
                     </div>
                 </div>
             </div>

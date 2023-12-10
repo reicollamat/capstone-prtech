@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Screen size:</strong>
         </td>
         <td>
-            @if ($product->screen_size === null)
+            @if ($categoryproduct->screen_size === null)
                 None
             @else
-                {{ $product->screen_size }}"
+                {{ $categoryproduct->screen_size }}"
             @endif
         </td>
     </tr>
@@ -50,13 +49,13 @@
             <strong class="text-dark mr-3">Resolution:</strong>
         </td>
         <td>
-            @if ($product->resolution === null)
+            @if ($categoryproduct->resolution === null)
                 None
             @else
-                @if (is_array($product->resolution) && count($product->resolution) > 1)
-                    {{ min($product->resolution) }} x {{ max($product->resolution) }}
+                @if (is_array($categoryproduct->resolution) && count($categoryproduct->resolution) > 1)
+                    {{ min($categoryproduct->resolution) }} x {{ max($categoryproduct->resolution) }}
                 @else
-                    {{ $product->resolution }}
+                    {{ $categoryproduct->resolution }}
                 @endif
             @endif
         </td>
@@ -66,10 +65,10 @@
             <strong class="text-dark mr-3">Refresh rate:</strong>
         </td>
         <td>
-            @if ($product->refresh_rate === null)
+            @if ($categoryproduct->refresh_rate === null)
                 None
             @else
-                {{ $product->refresh_rate }} Hz
+                {{ $categoryproduct->refresh_rate }} Hz
             @endif
         </td>
     </tr>
@@ -78,10 +77,10 @@
             <strong class="text-dark mr-3">Response Time:</strong>
         </td>
         <td>
-            @if ($product->response_time === null)
+            @if ($categoryproduct->response_time === null)
                 None
             @else
-                {{ $product->response_time }} ms
+                {{ $categoryproduct->response_time }} ms
             @endif
         </td>
     </tr>
@@ -90,10 +89,10 @@
             <strong class="text-dark mr-3">Panel type:</strong>
         </td>
         <td>
-            @if ($product->panel_type === null)
+            @if ($categoryproduct->panel_type === null)
                 None
             @else
-                {{ $product->panel_type }}
+                {{ $categoryproduct->panel_type }}
             @endif
         </td>
     </tr>
@@ -102,10 +101,10 @@
             <strong class="text-dark mr-3">Aspect ratio:</strong>
         </td>
         <td>
-            @if ($product->aspect_ratio === null)
+            @if ($categoryproduct->aspect_ratio === null)
                 None
             @else
-                {{ $product->aspect_ratio }}
+                {{ $categoryproduct->aspect_ratio }}
             @endif
         </td>
     </tr>

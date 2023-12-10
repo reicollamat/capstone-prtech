@@ -200,12 +200,21 @@
 
                                         </a>
                                     </li>
+                                    {{-- <li class="p-1.5 text-sm"> --}}
+                                    {{--     <a href="{{ route('shop-management-category') }}" --}}
+                                    {{--         class="no-underline decoration-0 text-gray-800" wire:navigate> --}}
+                                    {{--         <div class="flex items-center gap-1.5"> --}}
+                                    {{--             <i class="bi bi-truck text-lg"></i> --}}
+                                    {{--             <span>Shop Categories</span> --}}
+                                    {{--         </div> --}}
+                                    {{--     </a> --}}
+                                    {{-- </li> --}}
                                     <li class="p-1.5 text-sm">
                                         <a href="{{ route('shop-management-category') }}"
                                             class="no-underline decoration-0 text-gray-800" wire:navigate>
                                             <div class="flex items-center gap-1.5">
                                                 <i class="bi bi-truck text-lg"></i>
-                                                <span>Shop Categories</span>
+                                                <span>Shop Metrics Settings</span>
                                             </div>
                                         </a>
                                     </li>
@@ -259,6 +268,13 @@
                 </div>
                 <div class="hidden md:block">
                     @if (Auth::user())
+                        <div class="relative inline-block">
+                            <a class="text-gray-600 no-underline" href="{{ route('index_landing') }}">
+                                <i class="bi bi-box-arrow-left text-sm">
+                                    <span>exit</span>
+                                </i>
+                            </a>
+                        </div>
                         <div x-data="{ isOpen: false }" class="relative inline-block ">
                             <!-- Dropdown toggle button -->
                             <button @click="isOpen = !isOpen"
@@ -338,6 +354,9 @@
     {{--    This directive is used to include the Livewire scripts --}}
     @livewireScriptConfig
     {{--    @livewireScripts --}}
+
+    {{--  Livewire Alert  --}}
+    <x-livewire-alert::scripts />
 
     <script>
         // this will remove the navbar height from the page height to remove scrolling

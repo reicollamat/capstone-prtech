@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Type:</strong>
         </td>
         <td>
-            @if ($product->type === null)
+            @if ($categoryproduct->type === null)
                 None
             @else
-                {{ $product->type }}
+                {{ $categoryproduct->type }}
             @endif
         </td>
     </tr>
@@ -50,10 +49,10 @@
             <strong class="text-dark mr-3">Interface:</strong>
         </td>
         <td>
-            @if ($product->interface === null)
+            @if ($categoryproduct->interface === null)
                 None
             @else
-                {{ $product->interface }}
+                {{ $categoryproduct->interface }}
             @endif
         </td>
     </tr>
@@ -62,10 +61,10 @@
             <strong class="text-dark mr-3">Capacity:</strong>
         </td>
         <td>
-            @if ($product->capacity === null)
+            @if ($categoryproduct->capacity === null)
                 None
             @else
-                {{ $product->capacity }} GB
+                {{ $categoryproduct->capacity }} GB
             @endif
         </td>
     </tr>
@@ -74,10 +73,10 @@
             <strong class="text-dark mr-3">Price per GB:</strong>
         </td>
         <td>
-            @if ($product->price_per_gb === null)
+            @if ($categoryproduct->price_per_gb === null)
                 None
             @else
-                ₱ {{ $product->price_per_gb }}
+                ₱ {{ $categoryproduct->price_per_gb }}
             @endif
         </td>
     </tr>
@@ -86,10 +85,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>

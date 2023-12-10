@@ -9,8 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::create('memories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
@@ -22,10 +21,10 @@ return new class extends Migration
             $table->json('modules');
             $table->decimal('price_per_gb', 8, 3)->nullable();
             $table->string('color')->nullable();
-            $table->string('first_word_latency');
+            $table->string('first_word_latency')->nullable();
             $table->string('cas_latency');
-            $table->string('image')->default('img/showcase1.jpg');
-            $table->longText('description');
+            // $table->string('image')->default('img/showcase1.jpg');
+            $table->longText('description')->nullable();
             $table->string('status')->default('available');
             $table->string('condition');
             $table->integer('purchase_count')->default(0);
@@ -37,8 +36,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists('memories');
     }
 };

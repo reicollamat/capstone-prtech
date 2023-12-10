@@ -18,7 +18,9 @@
                     </a>
                 </li>
                 <div x-data="{ open: false }" class="nav-item ">
-                    <button @mouseover="open = ! open" type="button" class="nav-link text-white">Products</button>
+                    <a href="{{ route('index_shop') }}" class="no-underline">
+                        <button @mouseover="open = ! open" type="button" class="nav-link text-white">Products</button>
+                    </a>
                     <div x-cloak x-show="open" @mouseover.away="open = false" class="w-full position-absolute left-0"
                         x-transition:enter.duration.250ms x-transition:leave.duration.250ms>
                         <div class="w-full h-auto p-8 bg-white text-black shadow z-50">

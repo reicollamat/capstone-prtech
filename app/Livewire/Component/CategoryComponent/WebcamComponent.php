@@ -2,36 +2,43 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use Livewire\Attributes\Reactive;
-use Livewire\Attributes\Validate;
+use App\Models\User;
+use App\Models\Product;
 use Livewire\Component;
+use App\Models\ProductImage;
+use App\Models\Webcam;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class WebcamComponent extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public $previewImage;
 
-    #[Reactive]
+    public $previewImageIndex;
+
+    #[Validate('required', message: 'Please provide product name')]
     public $productName;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide product SKU')]
     public $productSKU;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide product slug')]
     public $productSlug;
 
-    #[Reactive]
+    #[Validate('required', message: 'Please provide product description')]
     public $productDescription;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Condition', message: 'Please provide product condition')]
     public $productCondition;
 
-    #[Reactive]
+    #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
     public $productStatus;
 
-    #[Reactive]
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -50,6 +57,9 @@ class WebcamComponent extends Component
     public $resolution;
 
     #[Validate('required', message: 'Please provide an input')]
+    public $webcam_os;
+
+    #[Validate('required', message: 'Please provide an input')]
     public $webcam_fps;
 
     #[Validate('required', message: 'Please provide a selection')]
@@ -61,14 +71,9 @@ class WebcamComponent extends Component
     #[Validate('required', message: 'Please provide a reserve stock if available')]
     public $reserve_stocks;
 
-    public function mount($productName, $productSKU, $productSlug, $productDescription, $productCondition, $productStatus, $productCategory)
+    public function mount($productCategory)
     {
-        $this->productName = $productName;
-        $this->productSKU = $productSKU;
-        $this->productSlug = $productSlug;
-        $this->productDescription = $productDescription;
-        $this->productCondition = $productCondition;
-        $this->productStatus = $productStatus;
+
         $this->productCategory = $productCategory;
     }
 
@@ -79,30 +84,107 @@ class WebcamComponent extends Component
 
     public function submit()
     {
-        $validator = $this->validate ([
-        'productName' => 'required',
-        'productSKU' => 'required',
-        'productSlug' => 'required',
-        'productDescription' => 'required',
-        'productCondition' => 'required|not_in:Select Condition',
-        'productStatus' => 'required|not_in:Select Status',
-        'productCategory' => 'required',
-        'productImages.*' => 'image|max:5120',
-        'brand' => 'required',
-        'price' => 'required|integer',
-        'webcam_connection_type' => 'required|not_in:Click to Select',
-        'resolution' => 'required|not_in:Click to Select',
-        'webcam_fps' => 'required|integer',
-        'audio_support' => 'required|not_in:Click to Select',
-        'stocks' => 'required|integer',
-        'reserve_stocks' => 'required|integer',
-        'stocks' => 'required|integer',
-        'reserve_stocks' => 'required|integer',
-    ]);
+        $validator = $this->validate([
+            'productName' => 'required',
+            'productSKU' => 'required',
+            'productSlug' => 'required',
+            'productDescription' => 'required',
+            'productCondition' => 'required|not_in:Select Condition',
+            'productStatus' => 'required|not_in:Select Status',
+            'productCategory' => 'required',
+            'productImages.*' => 'image|max:5120',
+            'brand' => 'required',
+            'price' => 'required|integer',
+            'webcam_os' => 'required',
+            'webcam_connection_type' => 'required|not_in:Click to Select',
+            'resolution' => 'required|not_in:Click to Select',
+            'webcam_fps' => 'required|integer',
+            'audio_support' => 'required|not_in:Click to Select',
+            'stocks' => 'required|integer',
+            'reserve_stocks' => 'required|integer',
+        ]);
+
+        // dd($validator);
+
+        $storeas = [];
 
         if ($validator) {
+            // create a array of image filename and store in ain storage/app/product-image-uploads
+            foreach ($this->productImages as $image) {
+                $path = $image->store('product-image-uploads', 'real_public');
+                $storeas[] = $path;
+            }
 
-            dd($validator);
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $product = Product::create([
+                'seller_id' => User::find(Auth::user()->id)->seller->id,
+                'title' => $validator['productName'],
+                'slug' => $validator['productSlug'],
+                'SKU' => $validator['productSKU'],
+                'category' => $validator['productCategory'],
+                'price' => $validator['price'],
+                'stock' => $validator['stocks'],
+                'reserve' => $validator['reserve_stocks'],
+                // 'image' => implode(',', $storeas),
+                // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+                'condition' => $validator['productCondition'],
+            ]);
+
+            // loop through the images from the file upload
+            // if there are many images in the array loop it and  create a row in db
+            if (count($storeas) > 0) {
+                foreach ($storeas as $image) {
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_paths' => $image,
+                    ]);
+                }
+                // else if there is only one image in the array create a row in db with no image
+            } else {
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image_paths' => 'img/no-image-placeholder.png',
+                ]);
+            }
+
+            // $images = ProductImage::create([
+            //     'image_paths' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+            // ]);
+
+            // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+            $webcam = Webcam::create([
+                'product_id' => $product->id,
+                'category' => $validator['productCategory'],
+                'name' => $validator['productName'],
+                'brand' => $validator['brand'],
+                'price' => $validator['price'],
+                'os' => $validator['webcam_os'],
+                'connection' => $validator['webcam_connection_type'],
+                'resolutions' => $validator['resolution'],
+                'webcam_fps' => $validator['webcam_fps'],
+                'audio_support' => $validator['audio_support'],
+                'description' => $validator['productDescription'],
+                'condition' => $validator['productCondition'],
+            ]);
+
+            // dd($webcam, $product);
+
+            // CHECK IF BOTH QUERIES ARE SUCCESSFULL
+            if ($product && $webcam) {
+                // dd($product, $webcam);
+                $this->alert('success', 'Product has been created successfully.', [
+                    'position' => 'top-end'
+                ]);
+                $this->reset();
+            } else {
+                $this->alert('error', 'Product has not been created.', [
+                    'position' => 'top-end'
+                ]);
+            }
+        } else {
+            $this->alert('error', 'Unkown error has occurred', [
+                'position' => 'top-end'
+            ]);
         }
 
         // if ($validator) {

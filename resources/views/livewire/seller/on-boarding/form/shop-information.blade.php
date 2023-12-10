@@ -268,6 +268,9 @@
                                     <button type="button" class="btn btn-ghost"
                                         wire:click="$set('currentStep', 1)">Back
                                     </button>
+                                    {{-- <button type="button" class="btn btn-ghost" --}}
+                                    {{--        wire:click="testalert">test --}}
+                                    {{-- </button> --}}
                                     <button type="submit" class="btn btn-danger">
                                         <div wire:loading.remove wire:target="SecondStepSubmit">
                                             Next

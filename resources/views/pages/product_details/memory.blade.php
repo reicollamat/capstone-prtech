@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,27 +24,26 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Speed:</strong>
         </td>
         <td>
-            @if ($product->speed === null)
+            @if ($categoryproduct->speed === null)
                 None
             @else
-                @if (is_array($product->speed) && count($product->speed) > 1)
-                    DDR{{ min($product->speed) }} - {{ max($product->speed) }}
+                @if (is_array($categoryproduct->speed) && count($categoryproduct->speed) > 1)
+                    DDR{{ min($categoryproduct->speed) }} - {{ max($categoryproduct->speed) }}
                 @else
-                    DDR{{ $product->speed }}
+                    DDR{{ $categoryproduct->speed }}
                 @endif
             @endif
         </td>
@@ -54,13 +53,13 @@
             <strong class="text-dark mr-3">Modules:</strong>
         </td>
         <td>
-            @if ($product->modules === null)
+            @if ($categoryproduct->modules === null)
                 None
             @else
-                @if (is_array($product->modules) && count($product->modules) > 1)
-                    {{ min($product->modules) }} x {{ max($product->modules) }}GB
+                @if (is_array($categoryproduct->modules) && count($categoryproduct->modules) > 1)
+                    {{ min($categoryproduct->modules) }} x {{ max($categoryproduct->modules) }}GB
                 @else
-                    {{ $product->modules }}GB
+                    {{ $categoryproduct->modules }}GB
                 @endif
             @endif
         </td>
@@ -70,10 +69,10 @@
             <strong class="text-dark mr-3">Price per GB:</strong>
         </td>
         <td>
-            @if ($product->price_per_gb === null)
+            @if ($categoryproduct->price_per_gb === null)
                 None
             @else
-                {{ $product->price_per_gb }}
+                {{ $categoryproduct->price_per_gb }}
             @endif
         </td>
     </tr>
@@ -82,10 +81,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>
@@ -94,10 +93,10 @@
             <strong class="text-dark mr-3">First Word Latency:</strong>
         </td>
         <td>
-            @if ($product->first_word_latency === null)
+            @if ($categoryproduct->first_word_latency === null)
                 None
             @else
-                {{ $product->first_word_latency }} ns
+                {{ $categoryproduct->first_word_latency }} ns
             @endif
         </td>
     </tr>
@@ -106,10 +105,10 @@
             <strong class="text-dark mr-3">CAS Latency:</strong>
         </td>
         <td>
-            @if ($product->cas_latency === null)
+            @if ($categoryproduct->cas_latency === null)
                 None
             @else
-                {{ $product->cas_latency }}
+                {{ $categoryproduct->cas_latency }}
             @endif
         </td>
     </tr>

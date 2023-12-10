@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('seller_id')->constrained()->cascadeOnDelete();
+            $table->string('reference_number');
             $table->timestamp('purchase_date');
             $table->decimal('total_amount', 20, 2);
+            $table->timestamp('completion_date')->nullable();
             $table->string('purchase_status');
             $table->softDeletes();
             $table->timestamps();

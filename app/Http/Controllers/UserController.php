@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ReferenceGeneratorHelper;
 use App\Models\CartItem;
 use App\Models\Payment;
 use App\Models\Product;
@@ -16,6 +17,7 @@ class UserController extends Controller
 {
     public function purchase_page(Request $request)
     {
+        // dd($request->cartitems);
         if ($request->cart) {
             // dd($request);
             $cartitems = $request->cartitems;
@@ -23,7 +25,11 @@ class UserController extends Controller
             $shipping_value = $request->shipping_value;
             $subtotal = $request->subtotal;
             $total = $request->total;
-            // dd($user);
+
+            // dd($user->cart_item);
+            // foreach ($user->cart_item as $key => $item) {
+            //     dd($item->product);
+            // }
 
             return view('pages.cartpurchase', [
                 'cartitems' => $cartitems,
@@ -78,14 +84,19 @@ class UserController extends Controller
             ]));
         }
 
-        // Create a new Purchase instance
+        $product = Product::find($product_id);
+
+        //generate reference number for purchase
+        $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+
         $purchase = new Purchase([
             'user_id' => $user_id,
+            'seller_id' => $product->seller_id,
+            'reference_number' => $puchase_reference_number,
             'purchase_date' => now(),
             'total_amount' => $total,
             'purchase_status' => 'pending',
         ]);
-        // Save the Purchase instance
         $purchase->save();
 
         $payment = new Payment([
@@ -132,7 +143,7 @@ class UserController extends Controller
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
 
-        // redirect here if payment = gcash
+        // redirect here if payment is GCASH
         if ($payment_type == 'gcash') {
             // dd($cart_ids);
             return redirect(route('gcash1', [
@@ -144,49 +155,70 @@ class UserController extends Controller
             ]));
         }
 
-        $cart_items = CartItem::whereIn('id', $cart_ids)->get();
+        // get all CartItems from currect user
+        $cartitems = CartItem::join('products', 'cart_items.product_id', '=', 'products.id')
+            ->where('user_id', $user_id)
+            ->get();
+        // groupby seller lahat ng cartitems
+        $cartitems_per_seller = $cartitems->groupBy('seller_id')->all();
 
-        // create a new Purchase instance
-        $purchase = new Purchase([
-            'user_id' => $user_id,
-            'purchase_date' => now(),
-            'total_amount' => $total,
-            'purchase_status' => 'pending',
-        ]);
-        $purchase->save(); // save the Purchase instance
+        // loop for each seller to save purchase per seller
+        foreach ($cartitems_per_seller as $key => $seller_items) {
+            // dd($seller_items);
 
-        // create a new Payment instance
-        $payment = new Payment([
-            'user_id' => $user_id,
-            'purchase_id' => $purchase->id,
-            'date_of_payment' => null,
-            'payment_type' => $payment_type,
-            'payment_status' => 'unpaid',
-            'reference_code' => '#samplecode',
-        ]);
-        $payment->save();
+            //get total_amount of current seller_items
+            $total_amount = $seller_items->sum('total_price');
 
-        // loop to create new Cart_items instance each
-        foreach ($cart_items as $key => $value) {
-            $purchaseItem = new PurchaseItem([
-                'purchase_id' => $purchase->id,
-                'product_id' => $value->product_id,
-                'quantity' => $value->quantity,
-                'total_price' => $value->total_price,
+            //generate reference number for purchase
+            $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+
+            $purchase = new Purchase([
+                'user_id' => $user_id,
+                'seller_id' => $key,
+                'reference_number' => $puchase_reference_number,
+                'purchase_date' => now(),
+                'total_amount' => $total_amount,
+                'purchase_status' => 'pending',
             ]);
-            $purchaseItem->save();
+            $purchase->save();
+
+
+            $payment = new Payment([
+                'user_id' => $user_id,
+                'purchase_id' => $purchase->id,
+                'date_of_payment' => null,
+                'payment_type' => $payment_type,
+                'payment_status' => 'unpaid',
+                'reference_code' => '#samplecode',
+            ]);
+            $payment->save();
+
+            //loop for each item to save purchase_items per seller
+            foreach ($seller_items as $key => $item) {
+                // dd($item);
+                $purchaseItem = new PurchaseItem([
+                    'purchase_id' => $purchase->id,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                    'total_price' => $item->total_price,
+                ]);
+                $purchaseItem->save();
+            }
+
+            // create usernotification for each purchase
+            $notification = new UserNotification([
+                'user_id' => $user_id,
+                'purchase_id' => $purchase->id,
+                'tag' => 'order_placed',
+                'title' => 'Order #' . $purchase->id . ' Placed',
+                'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
+            ]);
+            $notification->save();
         }
 
-        $notification = new UserNotification([
-            'user_id' => $user_id,
-            'purchase_id' => $purchase->id,
-            'tag' => 'order_placed',
-            'title' => 'Order #' . $purchase->id . ' Placed',
-            'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
-        ]);
-        $notification->save();
 
         // remove the current Cart_items in database cuz itz purchased
+        $cart_items = CartItem::whereIn('id', $cart_ids)->get();
         foreach ($cart_items as $key => $value) {
             CartItem::destroy($value->id);
         }

@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $product->purchase_count }}
+            {{ $categoryproduct->purchase_count }}
         </td>
     </tr>
     <tr>
@@ -12,10 +12,10 @@
             <strong class="text-dark mr-3">Status:</strong>
         </td>
         <td>
-            @if ($product->status === null)
+            @if ($categoryproduct->status === null)
                 None
             @else
-                {{ $product->status }}
+                {{ $categoryproduct->status }}
             @endif
         </td>
     </tr>
@@ -24,24 +24,23 @@
             <strong class="text-dark mr-3">Condition:</strong>
         </td>
         <td>
-            @if ($product->condition === null)
+            @if ($categoryproduct->condition === null)
                 None
             @else
-                {{ $product->condition }}
+                {{ $categoryproduct->condition }}
             @endif
         </td>
     </tr>
 
-    
     <tr>
         <td class="header">
             <strong class="text-dark mr-3">Tracking method:</strong>
         </td>
         <td>
-            @if ($product->tracking_method === null)
+            @if ($categoryproduct->tracking_method === null)
                 None
             @else
-                {{ $product->tracking_method }}
+                {{ $categoryproduct->tracking_method }}
             @endif
         </td>
     </tr>
@@ -50,10 +49,10 @@
             <strong class="text-dark mr-3">Connection type:</strong>
         </td>
         <td>
-            @if ($product->connection_type === null)
+            @if ($categoryproduct->connection_type === null)
                 None
             @else
-                {{ $product->connection_type }}
+                {{ $categoryproduct->connection_type }}
             @endif
         </td>
     </tr>
@@ -62,10 +61,10 @@
             <strong class="text-dark mr-3">Max DPI:</strong>
         </td>
         <td>
-            @if ($product->max_dpi === null)
+            @if ($categoryproduct->max_dpi === null)
                 None
             @else
-                {{ $product->max_dpi }}
+                {{ $categoryproduct->max_dpi }}
             @endif
         </td>
     </tr>
@@ -74,10 +73,10 @@
             <strong class="text-dark mr-3">Hand orientation:</strong>
         </td>
         <td>
-            @if ($product->hand_orientation === null)
+            @if ($categoryproduct->hand_orientation === null)
                 None
             @else
-                {{ $product->hand_orientation }}
+                {{ $categoryproduct->hand_orientation }}
             @endif
         </td>
     </tr>
@@ -86,10 +85,10 @@
             <strong class="text-dark mr-3">Color:</strong>
         </td>
         <td>
-            @if ($product->color === null)
+            @if ($categoryproduct->color === null)
                 None
             @else
-                {{ $product->color }}
+                {{ $categoryproduct->color }}
             @endif
         </td>
     </tr>

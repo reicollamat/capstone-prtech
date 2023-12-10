@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -21,10 +20,10 @@ return new class extends Migration
             $table->string('style');
             $table->string('switches')->nullable();
             $table->string('backlit')->nullable();
-            $table->boolean('tenkeyless');
+            $table->boolean('tenkeyless')->nullable();
             $table->string('connection_type');
             $table->string('color')->nullable();
-            $table->string('image')->default('img/showcase1.jpg');
+            // $table->string('image')->default('img/showcase1.jpg');
             $table->longText('description');
             $table->string('status')->default('available');
             $table->string('condition');

@@ -76,6 +76,6 @@ class Searchbar extends Component
 
     public function submit()
     {
-        $this->redirect(route('collections', ['search' => $this->search]));
+        $this->redirectRoute('index_shop', ['q' => $this->search]);
     }
 }
