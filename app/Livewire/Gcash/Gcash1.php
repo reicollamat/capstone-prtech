@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class Gcash1 extends Component
 {
-    public $cart_ids;
+    public $is_cart;
     public $user_id;
     public $product_id;
     public $quantity;
@@ -21,7 +21,7 @@ class Gcash1 extends Component
 
     public function mount(Request $request)
     {
-        $this->cart_ids = $request->cart_ids;
+        $this->is_cart = $request->is_cart;
         $this->user_id = Auth::id();
         $this->product_id = $request->product_id;
         $this->quantity = $request->quantity;
@@ -34,10 +34,10 @@ class Gcash1 extends Component
     public function render()
     {
         // if route came from purchase_cart
-        if ($this->cart_ids) {
-            // dd($this->cart_ids);
+        if ($this->is_cart) {
+            // dd($this->is_cart);
             return view('livewire.gcash.gcash1', [
-                'cart_ids' => $this->cart_ids,
+                'is_cart' => $this->is_cart,
                 'subtotal' => $this->subtotal,
                 'total' => $this->total,
                 'payment_type' => $this->payment_type,
@@ -61,9 +61,9 @@ class Gcash1 extends Component
 
     public function gcash2()
     {
-        if ($this->cart_ids) {
+        if ($this->is_cart) {
             $this->redirect(route('gcash2', [
-                'cart_ids' => $this->cart_ids,
+                'is_cart' => $this->is_cart,
                 'subtotal' => $this->subtotal,
                 'total' => $this->total,
                 'payment_type' => $this->payment_type,
