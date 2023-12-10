@@ -3,16 +3,16 @@
 namespace App\Livewire\Component\CategoryComponent;
 
 use App\Models\Cpu;
-use App\Models\User;
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\ProductImage;
-use function Livewire\store;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+
+use function Livewire\store;
 
 class CpuComponent extends Component
 {
@@ -43,7 +43,7 @@ class CpuComponent extends Component
 
     public $productCategory;
 
-    #[Validate(['productImages.*' => 'image|max:5120'])]
+    #[Validate(['productImages.*' => 'image|max:2048'])]
     public $productImages = [];
 
     #[Validate('required', message: 'Please provide a CPU Core / Threads Count')]
@@ -113,7 +113,6 @@ class CpuComponent extends Component
         // CREATE A ARRAY TO STORE THE IMAGE PATH
         $storeas = [];
 
-
         if ($validator) {
 
             // create a array of image filename and store in ain storage/app/product-image-uploads
@@ -146,7 +145,7 @@ class CpuComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-                // else if there is only one image in the array create a row in db with no image
+            // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
