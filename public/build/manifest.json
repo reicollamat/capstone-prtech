@@ -12,6 +12,11 @@
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/js/analytics-model-report-header.js": {
+    "file": "assets/analytics-model-report-header-a009a8c6.js",
+    "isEntry": true,
+    "src": "resources/js/analytics-model-report-header.js"
+  },
   "resources/js/app.css": {
     "file": "assets/app-7a00f215.css",
     "src": "resources/js/app.css"
@@ -24,16 +29,8 @@
     "css": [
       "assets/app-7a00f215.css"
     ],
-    "file": "assets/app-c99699cd.js",
-    "imports": [
-      "resources/js/charts/analytics-model-report-header.js"
-    ],
+    "file": "assets/app-5896a5b1.js",
     "isEntry": true,
     "src": "resources/js/app.js"
-  },
-  "resources/js/charts/analytics-model-report-header.js": {
-    "file": "assets/analytics-model-report-header-a009a8c6.js",
-    "isEntry": true,
-    "src": "resources/js/charts/analytics-model-report-header.js"
   }
 }
