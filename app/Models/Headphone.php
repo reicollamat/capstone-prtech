@@ -11,11 +11,6 @@ class Headphone extends Model
 {
     use AsSource, Filterable, HasFactory;
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -28,10 +23,12 @@ class Headphone extends Model
         'brand',
         'price',
         'type',
+        'connection_type',
         'frequency_response',
         'microphone',
         'wireless',
         'enclosure_type',
+        'noise_control',
         'color',
         'image',
         'description',
@@ -39,7 +36,6 @@ class Headphone extends Model
         'condition',
         'purchase_count',
     ];
-
     /**
      * The attributes that should be cast to native types.
      *
@@ -47,5 +43,13 @@ class Headphone extends Model
      */
     protected $casts = [
         'frequency_response' => 'array',
+        'noise_control' => 'array',
+        'connection_type' => 'array',
+
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
