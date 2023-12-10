@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    <form wire:submit.prevent="save">
+    {{-- <form wire:submit="save"> --}}
         {{-- <div class="p-4  bg-white border border-gray-200 rounded-lg"> --}}
         {{--     <div class="flex justify-between items-center"> --}}
         {{--         <div> --}}
@@ -220,7 +220,7 @@
         {{-- <button type="submit"> --}}
         {{--     test --}}
         {{-- </button> --}}
-    </form>
+    {{-- </form> --}}
     <div class="mb-2 gap-1.5 flex justify-start  items-center">
         <div>
             <h6 class="text-gray-600 mb-0 text-lg tracking-wide text-start">Product Information
