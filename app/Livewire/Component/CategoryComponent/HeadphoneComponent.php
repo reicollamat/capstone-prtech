@@ -3,13 +3,13 @@
 namespace App\Livewire\Component\CategoryComponent;
 
 use App\Models\Headphone;
-use App\Models\User;
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\ProductImage;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class HeadphoneComponent extends Component
@@ -53,19 +53,19 @@ class HeadphoneComponent extends Component
     #[Validate('required', message: 'Please provide headphone sensitivity')]
     public $sensitivity;
 
-    #[Validate('required', message: 'Please provide headphone connection type')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide headphone connection type')]
     public $headphone_connection_type;
 
-    #[Validate('required', message: 'Please provide headphone noise control')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide headphone noise control')]
     public $noise_control;
 
-    #[Validate('required', message: 'Please provide headphone mic availability')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide headphone mic availability')]
     public $mic_availability;
 
     #[Validate('required', message: 'Please provide headphone color')]
     public $color;
 
-    #[Validate('required', message: 'Please provide headphone enclosure type')]
+    #[Validate('required|not_in:Click to Select', message: 'Please provide headphone enclosure type')]
     public $enclosure_type;
 
     #[Validate('required', message: 'Please provide stocks available')]
@@ -108,7 +108,7 @@ class HeadphoneComponent extends Component
         ]);
 
         // dd($validator);
-
+        //
         $storeas = [];
 
         if ($validator) {
@@ -142,7 +142,7 @@ class HeadphoneComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-                // else if there is only one image in the array create a row in db with no image
+            // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -161,12 +161,13 @@ class HeadphoneComponent extends Component
                 'name' => $validator['productName'],
                 'brand' => $validator['brand'],
                 'price' => $validator['price'],
+                'type' => $validator['enclosure_type'],
                 'frequency_response' => $validator['sensitivity'],
-                'type' => $validator['headphone_connection_type'],
+                'connection_type' => $validator['headphone_connection_type'],
                 'noise_control' => $validator['noise_control'],
                 'microphone' => $validator['mic_availability'],
                 'color' => $validator['color'],
-                'enclosure_type' => $validator['enclosure_type'],
+                // 'enclosure_type' => $validator['enclosure_type'],
                 'description' => $validator['productDescription'],
                 'condition' => $validator['productCondition'],
             ]);
@@ -177,17 +178,17 @@ class HeadphoneComponent extends Component
             if ($product && $headphone) {
                 // dd($product, $headphone);
                 $this->alert('success', 'Product has been created successfully.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
                 $this->reset();
             } else {
                 $this->alert('error', 'Product has not been created.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
             }
         } else {
             $this->alert('error', 'Unkown error has occurred', [
-                'position' => 'top-end'
+                'position' => 'top-end',
             ]);
         }
 
