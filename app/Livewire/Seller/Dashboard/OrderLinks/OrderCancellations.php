@@ -24,6 +24,7 @@ class OrderCancellations extends Component
     public $quick_search_filter;
 
     public $set_to_cancellation_approved;
+    public $delete_cancellation_approved;
 
     public $seller;
 
@@ -47,31 +48,50 @@ class OrderCancellations extends Component
     public function getCancellationPending()
     {
         // query for purchased items of products from current seller
-        $this->cancellations = Purchase::where('purchases.seller_id', $this->seller->id)
+        $this->cancellations = Purchase::where('seller_id', $this->seller->id)
             ->where('purchase_status', 'cancellation_pending');
 
         if ($this->set_to_cancellation_approved) {
-            dd($this->set_to_cancellation_approved);
+            // dd($this->set_to_cancellation_approved);
 
             Purchase::where('id', $this->set_to_cancellation_approved)->update(['purchase_status' => 'cancellation_approved']);
-            PurchaseCancellationInfo::where('purchase_id', $this->set_to_cancellation_approved)->update(['status' => 'cancellation_approved']);
+            PurchaseCancellationInfo::where('purchase_id', $this->set_to_cancellation_approved)->update(['approved_date' => now()]);
 
             // return collection of purchased items of products from current seller
-            return $this->cancellations->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->cancellations->orderBy('updated_at', 'desc')->paginate(10);
+        }
+        //
+        else {
+            // dd($this->cancellations->get());
+
+            // return collection of shipment items of products from current seller
+            return $this->cancellations->orderBy('updated_at', 'desc')->paginate(10);
         }
 
-        // add check to run rerender every time
-        if ($this->quick_search_filter > 0) {
-            return $this->cancellations
-                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
-                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
-                ->where('purchases.purchase_status', 'to_ship')
-                ->orderBy('purchase_items.id', 'asc')
-                ->paginate(10);
-        } else {
+        return $this->cancellations->paginate(10);
+    }
+
+    #[Computed]
+    public function getCancellationApproved()
+    {
+        // query for purchased items of products from current seller
+        $this->cancellations = Purchase::where('seller_id', $this->seller->id)
+            ->where('purchase_status', 'cancellation_approved');
+
+        if ($this->delete_cancellation_approved) {
+            // dd($this->delete_cancellation_approved);
+
+            Purchase::destroy($this->delete_cancellation_approved);
+
+            // return collection of purchased items of products from current seller
+            return $this->cancellations->orderBy('updated_at', 'desc')->paginate(10);
+        }
+        //
+        else {
             // dd($this->cancellations->get());
+
             // return collection of shipment items of products from current seller
-            return $this->cancellations->orderBy('id', 'asc')->paginate(10);
+            return $this->cancellations->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->cancellations->paginate(10);
