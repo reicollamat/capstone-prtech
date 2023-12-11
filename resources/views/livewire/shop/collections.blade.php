@@ -30,7 +30,7 @@
     </span>
 
     <div>
-        <div class="container-fluid sm:!px-16 ">
+        <div class="container-fluid sm:!px-16 py-4">
             <div class="d-flex justify-end ">
                 <div class="position-relative">
                     <div x-data="{ open: false }" x-on:click.outside="open = false">

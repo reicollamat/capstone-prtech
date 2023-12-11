@@ -154,9 +154,15 @@
                         </div>
                         <div class="p-4 flex-auto">
                             <div class="relative h-350-px">
-                                <canvas width="496" height="291"
-                                    style="display: block; box-sizing: border-box; height: 300px; width: 100%;"
-                                    id="line-chart"></canvas>
+                                <div class=" inset-0">
+                                    <div class="flex items-end w-full h-full overflow-hidden">
+                                        <canvas width="496" height="291" id="shop-sales-chart"></canvas>
+                                    </div>
+                                </div>
+                                {{-- <canvas width="496" height="291" --}}
+                                {{--     style="display: block; box-sizing: border-box; height: 300px; width: 100%;" --}}
+                                {{--     id="shop-sales-chart"> --}}
+                                {{-- </canvas>  --}}
                             </div>
                         </div>
                     </div>
@@ -478,7 +484,7 @@
         {{-- </div> --}}
     </div>
 
-    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    {{-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas> --}}
 
 </div>
 
@@ -486,64 +492,27 @@
     <script>
         // This Javascript will get executed every time this component is loaded onto the page...
         console.log('hello');
-        var xyValues = [{
-                x: 50,
-                y: 7
-            },
-            {
-                x: 60,
-                y: 8
-            },
-            {
-                x: 70,
-                y: 8
-            },
-            {
-                x: 80,
-                y: 9
-            },
-            {
-                x: 90,
-                y: 9
-            },
-            {
-                x: 100,
-                y: 9
-            },
-            {
-                x: 110,
-                y: 10
-            },
-            {
-                x: 120,
-                y: 11
-            },
-            {
-                x: 130,
-                y: 14
-            },
-            {
-                x: 140,
-                y: 14
-            },
-            {
-                x: 150,
-                y: 15
-            }
-        ];
 
-        new Chart("myChart", {
-            type: "scatter",
+        new Chart("shop-sales-chart", {
+            type: "line",
             data: {
+                labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
                 datasets: [{
-                    pointRadius: 4,
-                    pointBackgroundColor: "rgb(0,0,255)",
-                    data: xyValues
+                    borderColor: '#36A2EB',
+                    data: [12,13,234,2,12,12],
+                    backgroundColor: '#9BD0F5',
+                    pointStyle: 'circle',
+                    pointRadius: 10,
+                    pointHoverRadius: 15
                 }]
             },
             options: {
-                legend: {
-                    display: false
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
                 },
                 scales: {
                     y: {

@@ -3,6 +3,7 @@
 namespace App\Livewire\Seller\Dashboard;
 
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Seller;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
@@ -37,6 +38,12 @@ class SellerLanding extends Component
     }
 
     #[Computed]
+    public function getVisitors()
+    {
+
+    }
+
+    #[Computed]
     public function getTotalOrders()
     {
         // dd($this->seller_id);
@@ -50,5 +57,11 @@ class SellerLanding extends Component
         // // dd($orders);
 
         // return $orders;
+    }
+
+    #[Computed]
+    public function getSalesToday()
+    {
+        // return Purchase::
     }
 }
