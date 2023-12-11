@@ -358,7 +358,7 @@
     {{--  Livewire Alert  --}}
     <x-livewire-alert::scripts />
 
-    <script>
+    <script data-navigate-once>
         // this will remove the navbar height from the page height to remove scrolling
         function setChildContainerHeight() {
             // get the height if main wrapper
@@ -374,10 +374,16 @@
             console.log(parentHeight, otherElementHeight, childContainer.style.height);
         }
 
+        function sayhello()
+        {
+            console.log('hello');
+        }
+
         // event listener to adjust the height of the child container
         window.addEventListener("load", setChildContainerHeight);
         window.addEventListener("resize", setChildContainerHeight);
         window.addEventListener("livewire:navigated", setChildContainerHeight);
+        window.addEventListener("livewire:navigated", sayhello);
     </script>
 
 </body>
