@@ -193,6 +193,9 @@ Route::prefix('support')->group(function () {
     Route::get('/support-center', function () {
         return view('support.supportcenter');
     })->name('support-center');
+    Route::get('/shipping-fee-table', function () {
+        return view('support.shippingfee');
+    })->name('shipping-fee-table');
 });
 
 // explore page group

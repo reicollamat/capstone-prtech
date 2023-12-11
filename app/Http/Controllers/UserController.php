@@ -39,7 +39,9 @@ class UserController extends Controller
             $user = User::find($user_id);
 
             $product = Product::find($product_id);
-            $shipping_value = 13;
+
+            $shipping_value = 13; // Value displayed on the Cartpurchase page
+
             $subtotal = $product->price * $quantity;
             $total = $subtotal + $shipping_value;
 
@@ -114,7 +116,7 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #' . $purchase->id . ' Placed',
+            'title' => 'Order #'.$purchase->id.' Placed',
             'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
         ]);
         $notification->save();
@@ -174,7 +176,6 @@ class UserController extends Controller
             ]);
             $purchase->save();
 
-
             $payment = new Payment([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
@@ -202,12 +203,11 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #' . $purchase->id . ' Placed',
+                'title' => 'Order #'.$purchase->id.' Placed',
                 'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
             ]);
             $notification->save();
         }
-
 
         // remove the current Cart_items in database cuz itz purchased
         $cart_items = CartItem::where('user_id', $user_id)->get();
