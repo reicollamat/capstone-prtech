@@ -25,13 +25,10 @@ class ProfileController extends Controller
             $is_mypurchase = 0;
         }
         $user = $request->user();
-        $purchases = collect($user->purchase);
-        $pending = $purchases->where('purchase_status', 'pending');
         // dd(count($user->purchase));
 
         return view('profile.profile', [
             'user' => $user,
-            'pending' => $pending,
             'is_mypurchase' => $is_mypurchase,
         ]);
     }

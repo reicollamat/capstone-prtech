@@ -1,14 +1,14 @@
 import "./bootstrap";
 
-
-
-// import "./charts/analytics-model-report-header.js"
+import Chart from "chart.js/auto";
 
 import Swal from "sweetalert2";
 
+window.Chart = Chart;
+
 window.Swal = Swal;
 
-import ToastComponent from '../../vendor/usernotnull/tall-toasts/resources/js/tall-toasts'
+import ToastComponent from "../../vendor/usernotnull/tall-toasts/resources/js/tall-toasts";
 
 import {
     Livewire,

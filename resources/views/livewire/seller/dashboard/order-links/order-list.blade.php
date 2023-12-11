@@ -430,7 +430,7 @@
                                                                     Order Reference Number
                                                                 </label>
                                                                 <input type="text" id="product_name"
-                                                                    value="samplerefcode"
+                                                                    value="{{ $purchase->reference_number }}"
                                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                     placeholder="" disabled>
                                                             </div>

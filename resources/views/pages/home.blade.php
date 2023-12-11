@@ -16,7 +16,8 @@
                             <x-slot:img_path>img/showcase1.jpg</x-slot:img_path>
                             <x-slot:title>Your Trusted PC Components Shop</x-slot:title>
                             <x-slot:description>
-                                Embrace the power of customization with our unmatched collection of PC parts, perfect for
+                                Embrace the power of customization with our unmatched collection of PC parts, perfect
+                                for
                                 building your dream gaming rig or upgrading your existing setup.
                             </x-slot:description>
                             <x-slot:href>{{ route('index_shop') }}</x-slot:href>
@@ -26,7 +27,8 @@
                             <x-slot:img_path>img/showcase3.jpg</x-slot:img_path>
                             <x-slot:title>Gaming Peripherals</x-slot:title>
                             <x-slot:description>
-                                Dependable and secure online shopping experience for customers seeking high-quality computer
+                                Dependable and secure online shopping experience for customers seeking high-quality
+                                computer
                                 parts and peripherals.
                             </x-slot:description>
                             <x-slot:href>{{ route('index_shop') }}</x-slot:href>
@@ -36,7 +38,8 @@
                             <x-slot:img_path>img/showcase2.jpg</x-slot:img_path>
                             <x-slot:title>Quality Assurance</x-slot:title>
                             <x-slot:description>
-                                Experience a seamless blend of premium quality and unbeatable value with our curated range
+                                Experience a seamless blend of premium quality and unbeatable value with our curated
+                                range
                                 of PC parts and gaming peripherals. Why compromise when you can have it all?
                             </x-slot:description>
                             <x-slot:href>{{ route('index_shop') }}</x-slot:href>
@@ -104,28 +107,28 @@
                 class="text-dark pr-3">Categories</span></h2>
         <div class="row px-xl-5 pb-3">
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['computer_case' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'computer_case') }}"</x-slot:cat_value>
                 img/components/case/case (1).png
                 <x-slot:category>Case</x-slot:category>
                 <x-slot:count>{{ $computer_case->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['case_fan' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'case_fan') }}"</x-slot:cat_value>
                 img/components/casefan/casefan (1).png
                 <x-slot:category>Case Fan</x-slot:category>
                 <x-slot:count>{{ $case_fan->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['cpu' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'cpu') }}"</x-slot:cat_value>
                 img/components/cpu/cpu (2).png
                 <x-slot:category>CPU</x-slot:category>
                 <x-slot:count>{{ $cpu->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['cpu_cooler' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'cpu_cooler') }}"</x-slot:cat_value>
                 img/components/cpucooler/cpucooler (1).png
                 <x-slot:category>CPU Cooler</x-slot:category>
                 <x-slot:count>{{ $cpu_cooler->count() }}</x-slot:count>
@@ -139,77 +142,77 @@
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['video_card' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'video_card') }}"</x-slot:cat_value>
                 img/components/gpu/gpu (1).png
                 <x-slot:category>Video Card</x-slot:category>
                 <x-slot:count>{{ $video_card->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['headphone' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'headphone') }}"</x-slot:cat_value>
                 img/components/headphone/headphone (1).png
                 <x-slot:category>Headphone</x-slot:category>
                 <x-slot:count>{{ $headphone->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['int_storage' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'int_storage') }}"</x-slot:cat_value>
                 img/components/intstorage/ssd-sata (1).png
                 <x-slot:category>Internal storage</x-slot:category>
                 <x-slot:count>{{ $int_storage->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['keyboard' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'keyboard') }}"</x-slot:cat_value>
                 img/components/keyboard/keyboard (1).png
                 <x-slot:category>Keyboard</x-slot:category>
                 <x-slot:count>{{ $keyboard->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['motherboard' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'motherboard') }}"</x-slot:cat_value>
                 img/components/mobo/mobo (1).png
                 <x-slot:category>Motherboard</x-slot:category>
                 <x-slot:count>{{ $motherboard->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['monitor' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'monitor') }}"</x-slot:cat_value>
                 img/components/monitor/monitor (1).png
                 <x-slot:category>Monitor</x-slot:category>
                 <x-slot:count>{{ $monitor->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['mouse' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', '$mouse') }}"</x-slot:cat_value>
                 img/components/mouse/mouse (1).png
                 <x-slot:category>Mouse</x-slot:category>
                 <x-slot:count>{{ $mouse->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['psu' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'psu') }}"</x-slot:cat_value>
                 img/components/psu/psu (1).png
                 <x-slot:category>Power Supply</x-slot:category>
                 <x-slot:count>{{ $psu->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['memory' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'memory') }}"</x-slot:cat_value>
                 img/components/ram/ram (1).png
                 <x-slot:category>Memory</x-slot:category>
                 <x-slot:count>{{ $memory->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['speaker' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'speaker') }}"</x-slot:cat_value>
                 img/components/speaker/speaker (1).png
                 <x-slot:category>Speaker</x-slot:category>
                 <x-slot:count>{{ $speaker->count() }}</x-slot:count>
             </x-home.category>
 
             <x-home.category>
-                <x-slot:cat_value>href="{{ route('index_shop', ['webcam' => 'on']) }}"</x-slot:cat_value>
+                <x-slot:cat_value>href="{{ route('collections-category', 'webcam') }}"</x-slot:cat_value>
                 img/components/webcam/webcam (1).png
                 <x-slot:category>Webcam</x-slot:category>
                 <x-slot:count>{{ $webcam->count() }}</x-slot:count>
@@ -232,7 +235,7 @@
                         @foreach ($featured_products as $value)
                             <x-home.product_showcase>
                                 <a class="h6 text-decoration-none" style="font-size: 0.9rem"
-                                    href="{{ route('product_detail', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
+                                    href="{{ route('collections-details', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
                                     {{ $value->product->title }}
                                 </a>
                                 <x-slot:image>{{ $value->product->product_images[0]->image_paths }}</x-slot:image>
@@ -288,7 +291,7 @@
                         @foreach ($recent_products as $value)
                             <x-home.product_showcase>
                                 <a class="h6 text-decoration-none" style="font-size: 0.9rem"
-                                    href="{{ route('product_detail', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
+                                    href="{{ route('collections-details', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
                                     {{ $value->product->title }}
                                 </a>
                                 <x-slot:image>{{ $value->product->product_images[0]->image_paths }}</x-slot:image>

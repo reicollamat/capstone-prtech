@@ -305,6 +305,7 @@ class Collections extends Component
 
     public function to_details_page($product_id, $category)
     {
+        // dd('test');
         return redirect(route('collections-details', ['product_id' => $product_id, 'category' => $category]));
     }
 

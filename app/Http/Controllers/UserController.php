@@ -20,19 +20,12 @@ class UserController extends Controller
         // dd($request->cartitems);
         if ($request->cart) {
             // dd($request);
-            $cartitems = $request->cartitems;
             $user = User::find($request->user);
             $shipping_value = $request->shipping_value;
             $subtotal = $request->subtotal;
             $total = $request->total;
 
-            // dd($user->cart_item);
-            // foreach ($user->cart_item as $key => $item) {
-            //     dd($item->product);
-            // }
-
             return view('pages.cartpurchase', [
-                'cartitems' => $cartitems,
                 'user' => $user,
                 'shipping_value' => $shipping_value,
                 'subtotal' => $subtotal,
@@ -136,8 +129,8 @@ class UserController extends Controller
 
     public function purchase_cart(Request $request)
     {
-        // dd($request->payment_type);
-        $cart_ids = $request->cart_ids;
+        // dd($request->is_cart);
+        $is_cart = $request->is_cart;
         $subtotal = $request->subtotal;
         $total = $request->total;
         $payment_type = $request->payment_type;
@@ -145,9 +138,8 @@ class UserController extends Controller
 
         // redirect here if payment is GCASH
         if ($payment_type == 'gcash') {
-            // dd($cart_ids);
             return redirect(route('gcash1', [
-                'cart_ids[]' => $cart_ids,
+                'is_cart' => $is_cart,
                 'subtotal' => $subtotal,
                 'total' => $total,
                 'payment_type' => $payment_type,
@@ -218,7 +210,7 @@ class UserController extends Controller
 
 
         // remove the current Cart_items in database cuz itz purchased
-        $cart_items = CartItem::whereIn('id', $cart_ids)->get();
+        $cart_items = CartItem::where('user_id', $user_id)->get();
         foreach ($cart_items as $key => $value) {
             CartItem::destroy($value->id);
         }

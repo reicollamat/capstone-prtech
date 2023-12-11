@@ -81,9 +81,6 @@ class CartList extends Component
 
     public function cart_checkout($cartitems)
     {
-
-        // dd('test');
-        $cart_items = collect($cartitems);
         $user = Auth::user();
         $shipping_value = 13;
         $subtotal = $this->total_price;
@@ -92,7 +89,6 @@ class CartList extends Component
         session()->flash('cart');
         $this->redirect(route('purchase_page', [
             'cart' => true,
-            'cartitems' => $cartitems,
             'user' => $user,
             'shipping_value' => $shipping_value,
             'subtotal' => $subtotal,

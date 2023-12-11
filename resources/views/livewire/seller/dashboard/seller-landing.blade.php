@@ -126,10 +126,11 @@
                 </div>
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column" wire:poll.120s>
-                        <small class="text-muted d-block mb-1">Total Earnings <span class="text-xs text-gray-500">Updated every 2 minutes</span></small>
+                        <small class="text-muted d-block mb-1">Total Earnings <span
+                                class="text-xs text-gray-500">Updated every 2 minutes</span></small>
                         <p class="h3 text-black fw-light mt-auto">
                             {{ $this->getTotalEarnings->total_earnings ?? 0 }}
-{{--                            @dd($this->getTotalEarnings->total_earnings)--}}
+                            {{--                            @dd($this->getTotalEarnings->total_earnings) --}}
                         </p>
                     </div>
                 </div>
@@ -477,4 +478,83 @@
         {{-- </div> --}}
     </div>
 
+    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
 </div>
+
+@script
+    <script>
+        // This Javascript will get executed every time this component is loaded onto the page...
+        console.log('hello');
+        var xyValues = [{
+                x: 50,
+                y: 7
+            },
+            {
+                x: 60,
+                y: 8
+            },
+            {
+                x: 70,
+                y: 8
+            },
+            {
+                x: 80,
+                y: 9
+            },
+            {
+                x: 90,
+                y: 9
+            },
+            {
+                x: 100,
+                y: 9
+            },
+            {
+                x: 110,
+                y: 10
+            },
+            {
+                x: 120,
+                y: 11
+            },
+            {
+                x: 130,
+                y: 14
+            },
+            {
+                x: 140,
+                y: 14
+            },
+            {
+                x: 150,
+                y: 15
+            }
+        ];
+
+        new Chart("myChart", {
+            type: "scatter",
+            data: {
+                datasets: [{
+                    pointRadius: 4,
+                    pointBackgroundColor: "rgb(0,0,255)",
+                    data: xyValues
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        // display: false,
+                    },
+                    x: {
+                        // display: false,
+                    },
+                },
+            }
+        });
+    </script>
+@endscript

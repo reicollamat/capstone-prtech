@@ -196,9 +196,7 @@
                             </div>
 
                             {{-- request values --}}
-                            @foreach ($cartitems as $item)
-                                <input type="text" name="cart_ids[]" value="{{ $item['id'] }}" hidden>
-                            @endforeach
+                            <input type="text" name="is_cart" value="{{ true }}" hidden>
                             <input type="text" name="subtotal" value="{{ $subtotal }}" hidden>
                             <input type="text" name="total" value="{{ $total }}" hidden>
                             <input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>

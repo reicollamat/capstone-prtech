@@ -268,13 +268,13 @@
                 </div>
                 <div class="hidden md:block">
                     @if (Auth::user())
-                        <div class="relative inline-block">
-                            <a class="text-gray-600 no-underline" href="{{ route('index_landing') }}">
-                                <i class="bi bi-box-arrow-left text-sm">
-                                    <span>exit</span>
-                                </i>
-                            </a>
-                        </div>
+                        {{-- <div class="relative inline-block"> --}}
+                        {{--     <a class="text-gray-600 no-underline" href="{{ route('index_landing') }}"> --}}
+                        {{--         <i class="bi bi-box-arrow-left text-sm"> --}}
+                        {{--             <span>exit</span> --}}
+                        {{--         </i> --}}
+                        {{--     </a> --}}
+                        {{-- </div> --}}
                         <div x-data="{ isOpen: false }" class="relative inline-block ">
                             <!-- Dropdown toggle button -->
                             <button @click="isOpen = !isOpen"
