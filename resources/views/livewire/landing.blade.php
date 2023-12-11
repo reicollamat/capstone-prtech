@@ -31,16 +31,16 @@
 
     {{ $purchase }}
 
-    @foreach($purchase->purchase_items as $items)
+{{--    @foreach($purchase->purchase_items as $items)--}}
 
-        <div style="width: 100%">
-            {{ $items->quantity }}
-            {{ $items->product->title }}
-            <span style="text-align: right">
-                {{ $items->total_price }}
-            </span>
+{{--        <div style="width: 100%">--}}
+{{--            {{ $items->quantity }}--}}
+{{--            {{ $items->product->title }}--}}
+{{--            <span style="text-align: right">--}}
+{{--                {{ $items->total_price }}--}}
+{{--            </span>--}}
 
-        </div>
+{{--        </div>--}}
 
-    @endforeach
+{{--    @endforeach--}}
 </div>
