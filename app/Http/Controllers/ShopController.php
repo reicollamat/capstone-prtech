@@ -95,6 +95,19 @@ class ShopController extends Controller
 
     public function product_detail($product_id, $category)
     {
+        // dd('test');
+
+        // Query the product based on the product ID
+        $product = Product::where('id', $product_id)->first();
+
+        // Incrase the product view count on each page visits
+        $product->increment('view_count');
+
+
+        // dd($product);
+
+        // $product = Product::find($product_id);
+
         // Define a map of categories to their respective models
         $categoryMap = [
             'computer_case' => ComputerCase::class,
