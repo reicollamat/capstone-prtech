@@ -33,7 +33,7 @@ class MonitorSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
-                    'weight' => rand(1.5, 3),
+                    // 'weight' => rand(1.5, 3),
                     'weight' => fake()->randomFloat(2, 1.5, 2.5),
                 ]);
 
