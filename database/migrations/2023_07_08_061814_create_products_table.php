@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('reserve')->nullable();
             $table->float('rating')->default(0.0);
             $table->integer('purchase_count')->default(0);
-
+            $table->integer('view_count')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
