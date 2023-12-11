@@ -49,7 +49,7 @@
                         Unsaved changes...
                     </span>
                 </div>
-                <button type="submit" class="btn btn-outline-danger">Submit Changes</button>
+                <button type="submit" class="btn btn-outline-danger" >Submit Changes</button>
             </div>
         </form>
     </div>
