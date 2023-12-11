@@ -62,7 +62,7 @@ class Landing extends Component
         //     $this->mailStatus = 'There was an error sending the email: '.$e->getMessage();
         // }
 
-        $this->mailStatus = EmailHelper::sendEmail('richmond.billones@gmail.com', Purchase::find(2));
+        $this->mailStatus = EmailHelper::sendEmail('richmond.billones@gmail.com', 6);
 
         $orders = Purchase::find(2);
 
