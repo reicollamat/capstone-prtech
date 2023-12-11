@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->timestamp('request_date');
             $table->string('status');
+            $table->string('reason');
             $table->string('refund_option');
             $table->timestamp('approved_date')->nullable();
             $table->timestamp('returned_date')->nullable();

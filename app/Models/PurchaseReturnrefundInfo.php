@@ -32,6 +32,7 @@ class PurchaseReturnrefundInfo extends Model
         'seller_id',
         'request_date',
         'status',
+        'reason',
         'refund_option', // full-refund or partial-refund
         'approved_date',
         'returned_date',
