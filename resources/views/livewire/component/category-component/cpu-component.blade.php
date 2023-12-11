@@ -116,14 +116,15 @@
                 {{-- Product Weight --}}
                 <div class="mb-4">
                     <label for="product_weight"
-                           class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product Weight (in KG)
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product Weight (in
+                        KG)
                     </label>
-                    <input type="number" id="product_weight" wire:model.blur="product_weight"
-                           min="0.01" step="0.01"
-                           class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="" required>
+                    <input type="number" id="product_weight" wire:model.blur="product_weight" min="0.01"
+                        step="0.01"
+                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="0.30" required>
                     @error('product_weight')
-                    <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
