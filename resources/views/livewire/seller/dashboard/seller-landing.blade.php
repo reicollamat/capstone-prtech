@@ -1,6 +1,6 @@
 <div class="h-full w-full ">
     {{-- Stop trying to control. --}}
-    <div class="relatve bg-blue-500 pb-40 pt-8">
+    <div class="relatve bg-blue-500 pb-44 pt-8">
         <div>
             <div class="header welcome transition duration-300 ease-in-out px-4">
                 <div class="p-2 d-md-flex lg:!justify-between gap-2 items-center bg-transparent rounded mb-2">
@@ -83,7 +83,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -91,28 +90,28 @@
             </div>
 
             {{--         content --}}
-            <div class="row mb-2 g-2 g-mb-4 px-4 mx-0">
+            <div class="row mb-2 g-2 g-mb-4 px-8 mx-0">
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column border !border-red-500">
                         <small class="text-muted d-block mb-1">Sales Today</small>
                         <p class="h3 text-black fw-light mt-auto">
-                            6,851
+                            {{ $this->getSalesToday() ?? 0 }}
 
                             <small class="text-base text-success">
-                                10.08 %
+                                {{ number_format($this->getSalesTodayPercentage(), 2) }} %
                             </small>
                         </p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column">
-                        <small class="text-muted d-block mb-1">Visitors Today</small>
+                        <small class="text-muted d-block mb-1">Visitors</small>
                         <p class="h3 text-black fw-light mt-auto">
-                            24,668
+                            {{ $this->getVisitors() ?? 0 }}
 
-                            <small class="text-base text-danger">
-                                -30.76 %
-                            </small>
+                            {{-- <small class="text-base text-danger"> --}}
+                            {{--     -30.76 % --}}
+                            {{-- </small> --}}
                         </p>
                     </div>
                 </div>
@@ -125,9 +124,9 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column" wire:poll.120s>
+                    <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column" wire:poll.300s>
                         <small class="text-muted d-block mb-1">Total Earnings <span
-                                class="text-xs text-gray-500">Updated every 2 minutes</span></small>
+                                class="text-xs text-gray-500">Updated every 5 minutes</span></small>
                         <p class="h3 text-black fw-light mt-auto">
                             {{ $this->getTotalEarnings->total_earnings ?? 0 }}
                             {{--                            @dd($this->getTotalEarnings->total_earnings) --}}
@@ -139,11 +138,11 @@
     </div>
     <div>
         {{--         fiest chart --}}
-        <div class=" -my-32 px-3">
+        <div class="-my-32 px-3">
             <div class="flex flex-wrap">
                 <div class="w-full xl:w-8/12 ">
                     <div
-                        class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-md rounded-lg bg-blueGray-800">
+                        class="relative flex flex-col min-w-0 break-words w-full h-full mb-8 shadow-md rounded-lg bg-blueGray-800">
                         <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
                             <div class="flex flex-wrap items-center">
                                 <div class="relative w-full max-w-full flex-grow flex-1">
@@ -154,8 +153,8 @@
                         </div>
                         <div class="p-4 flex-auto">
                             <div class="relative h-350-px">
-                                <div class=" inset-0">
-                                    <div class="flex items-end w-full h-full overflow-hidden">
+                                <div class="inset-0">
+                                    <div class="flex items-end w-full h-full overflow-hidden" wire:ignore>
                                         <canvas width="496" height="291" id="shop-sales-chart"></canvas>
                                     </div>
                                 </div>
@@ -168,8 +167,9 @@
                     </div>
                 </div>
                 <div class="w-full xl:w-4/12 lg:pl-6">
-                    <div class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-md rounded-lg bg-white">
-                        <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words w-full h-full mb-8 shadow-md rounded-lg bg-white">
+                        <div class="rounded-t mb-0 px-4 pt-3 bg-transparent">
                             <div class="flex flex-wrap items-center">
                                 <div class="relative w-full max-w-full flex-grow flex-1">
                                     <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Performance</h6>
@@ -177,11 +177,47 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="p-4 flex-auto">
-                            <div class="relative h-350-px">
-                                <canvas width="221" height="291"
-                                    style="display: block; box-sizing: border-box; height: 300px; width: 100%;"
-                                    id="bar-chart"></canvas>
+                        <div class="px-4 flex-auto">
+                            <div class="relative h-350-px" style="height:auto">
+                                <div class="relative overflow-x-auto sm:rounded-lg">
+                                    <table
+                                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        <thead
+                                            class="text-xs py-2.5 text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                                            <tr>
+                                                <th scope="col" class="py-1.5">
+                                                    Reference #
+                                                </th>
+                                                <th scope="col" class="py-1.5">
+                                                    Amount
+                                                </th>
+                                                <th scope="col" class="py-1.5">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($this->getOrders as $item)
+                                                <tr
+                                                    class="bg-white text-base dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                    <th scope="row"
+                                                        class="py-2.5 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        {{ $item->reference_number }}
+                                                    </th>
+                                                    <td class="py-2.5 text-base">
+                                                        {{ $item->total_amount }}
+                                                    </td>
+                                                    <td class="py-2.5 text-base">
+                                                        <a class="decoration-0 no-underline text-gray-600" href="{{ route('order-list') }}">View</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+{{--                                @foreach ($this->getOrders as $item)--}}
+{{--                                    <p>{{ $item->reference_number }}</p>--}}
+{{--                                @endforeach--}}
                             </div>
                         </div>
                     </div>
@@ -485,7 +521,7 @@
     </div>
 
     {{-- <canvas id="myChart" style="width:100%;max-width:700px"></canvas> --}}
-
+    {{--    {{ var_dump($total_earnings_percentage) }} --}}
 </div>
 
 @script
@@ -496,14 +532,14 @@
         new Chart("shop-sales-chart", {
             type: "line",
             data: {
-                labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+                labels: {!! json_encode($chart_labels) !!},
                 datasets: [{
-                    borderColor: '#36A2EB',
-                    data: [12,13,234,2,12,12],
-                    backgroundColor: '#9BD0F5',
+                    borderColor: '#009aff',
+                    data: {!! json_encode($chart_data) !!},
+                    backgroundColor: '#bae0ff',
                     pointStyle: 'circle',
-                    pointRadius: 10,
-                    pointHoverRadius: 15
+                    pointRadius: 7,
+                    pointHoverRadius: 7.5
                 }]
             },
             options: {
