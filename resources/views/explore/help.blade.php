@@ -19,7 +19,11 @@
             explore and find answers promptly, saving valuable time. Need
             personalized assistance or have specific inquiries? Our dedicated
             support team is readily available; simply visit our Contact Page
+<<<<<<< Updated upstream
             <a href="http://localhost:3333/contactus.html">here</a> to connect
+=======
+            <a href="/support/contact-us">here</a> to connect
+>>>>>>> Stashed changes
             with us. Engage with a dynamic user community in our Facebook
             <a href="https://www.facebook.com/PR-TECH">here</a> — share your
             experiences, seek advice, and contribute valuable feedback to help
