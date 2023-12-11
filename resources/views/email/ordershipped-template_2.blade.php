@@ -601,10 +601,10 @@
                                     text-align: left;
                                   "
                                                         >
-                                                            <image
+                                                            <img
                                                                 src="https://prtech.store/laravel/public/img/login_reg.png"
                                                                 width="325"
-                                                                height="300 "
+                                                                height="300"
                                                                 border="0"
                                                                 alt=""
                                                             />
@@ -667,7 +667,7 @@
                                           padding-bottom: 20px;
                                         "
                                                                     >
-                                                                        #BF38459023H
+                                                                        {{ $order->reference_number }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
