@@ -2,19 +2,14 @@
 
 namespace App\Livewire\Seller\Dashboard\OrderLinks;
 
-use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseCancellationInfo;
-use App\Models\PurchaseItem;
 use App\Models\Seller;
-use App\Models\Shipments;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\On;
 
 #[Layout('layouts.seller.seller-layout')]
 class OrderCancellations extends Component
@@ -24,6 +19,7 @@ class OrderCancellations extends Component
     public $quick_search_filter;
 
     public $set_to_cancellation_approved;
+
     public $delete_cancellation_approved;
 
     public $seller;
@@ -42,7 +38,6 @@ class OrderCancellations extends Component
             ->where('purchase_status', 'cancellation_pending');
         // dd($this->cancellations->get());
     }
-
 
     #[Computed]
     public function getCancellationPending()
@@ -96,7 +91,6 @@ class OrderCancellations extends Component
 
         return $this->cancellations->paginate(10);
     }
-
 
     public function render()
     {

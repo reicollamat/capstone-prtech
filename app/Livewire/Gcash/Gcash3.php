@@ -4,11 +4,11 @@ namespace App\Livewire\Gcash;
 
 use App\Helpers\ReferenceGeneratorHelper;
 use App\Models\CartItem;
-use App\Models\UserNotification;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
+use App\Models\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -16,12 +16,19 @@ use Livewire\Component;
 class Gcash3 extends Component
 {
     public $is_cart;
+
     public $user_id;
+
     public $product_id;
+
     public $quantity;
+
     public $subtotal;
+
     public $total;
+
     public $category;
+
     public $payment_type;
 
     public function mount(Request $request)
@@ -97,7 +104,6 @@ class Gcash3 extends Component
                 ]);
                 $purchase->save();
 
-
                 $payment = new Payment([
                     'user_id' => $this->user_id,
                     'purchase_id' => $purchase->id,
@@ -125,7 +131,7 @@ class Gcash3 extends Component
                     'user_id' => $this->user_id,
                     'purchase_id' => $purchase->id,
                     'tag' => 'order_placed',
-                    'title' => 'Order #' . $purchase->id . ' Placed',
+                    'title' => 'Order #'.$purchase->id.' Placed',
                     'message' => 'Our logistics partner will attempt parcel delivery within the day.',
                 ]);
                 $notification->save();
@@ -141,7 +147,7 @@ class Gcash3 extends Component
 
             return redirect(route('index_shop'));
         }
-        // saving purchase for ONE item 
+        // saving purchase for ONE item
         else {
             $product = Product::find($this->product_id);
 
@@ -180,7 +186,7 @@ class Gcash3 extends Component
                 'user_id' => $this->user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #' . $purchase->id . ' Placed',
+                'title' => 'Order #'.$purchase->id.' Placed',
                 'message' => 'Our logistics partner will attempt parcel delivery within the day.',
             ]);
             $notification->save();

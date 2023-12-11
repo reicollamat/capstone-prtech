@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use App\Models\Webcam;
 use App\Models\ProductImage;
 use App\Models\Seller;
+use App\Models\Webcam;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -22,9 +22,9 @@ class WebcamSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/webcam/webcam (' . fake()->numberBetween(1, 3) . ').png';
+            $image = 'img/components/webcam/webcam ('.fake()->numberBetween(1, 3).').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (!empty($value->price)) {
+            if (! empty($value->price)) {
                 $product = Product::create([
                     'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
                     'title' => $value->name,

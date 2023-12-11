@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Gcash;
 
-use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,12 +10,19 @@ use Livewire\Component;
 class Gcash1 extends Component
 {
     public $is_cart;
+
     public $user_id;
+
     public $product_id;
+
     public $quantity;
+
     public $subtotal;
+
     public $total;
+
     public $category;
+
     public $payment_type;
 
     public function mount(Request $request)

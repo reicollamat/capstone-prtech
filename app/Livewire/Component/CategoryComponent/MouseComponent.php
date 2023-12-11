@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use App\Models\User;
 use App\Models\Mouse;
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\ProductImage;
-use Livewire\Attributes\Reactive;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class MouseComponent extends Component
@@ -19,6 +18,7 @@ class MouseComponent extends Component
     use WithFileUploads;
 
     public $previewImage;
+
     public $previewImageIndex;
 
     #[Validate('required', message: 'Please provide product name')]
@@ -38,6 +38,7 @@ class MouseComponent extends Component
 
     #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
     public $productStatus;
+
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -138,7 +139,7 @@ class MouseComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-                // else if there is only one image in the array create a row in db with no image
+            // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -172,20 +173,19 @@ class MouseComponent extends Component
             if ($product && $mouse) {
                 // dd($product, $mouse);
                 $this->alert('success', 'Product has been created successfully.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
                 $this->reset();
             } else {
                 $this->alert('error', 'Product has not been created.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
             }
         } else {
             $this->alert('error', 'Unkown error has occurred', [
-                'position' => 'top-end'
+                'position' => 'top-end',
             ]);
         }
-
 
         // if ($validator) {
         //     dd($validator);

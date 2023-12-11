@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Seller\Dashboard\ProductLinks;
 
-use App\Http\Helper;
 use App\Models\Product;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +35,13 @@ class ProductList extends Component
     public $seller;
 
     public $total_products_count;
+
     public $total_available_count;
+
     public $total_brandnew_count;
+
     public $total_used_count;
+
     public float $total_products_rating;
 
     //    public function paginationView()
@@ -60,7 +63,7 @@ class ProductList extends Component
 
         // overall rating of all seller's products
         $this->total_products_rating = Product::where('seller_id', $this->seller->id)->sum('rating') / $this->total_products_count;
-        $this->total_products_rating = number_format((float)$this->total_products_rating, 2, '.', '');
+        $this->total_products_rating = number_format((float) $this->total_products_rating, 2, '.', '');
 
         // dd($this->total_products_rating);
     }

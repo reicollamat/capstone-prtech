@@ -5,7 +5,6 @@ namespace App\Livewire\Seller\Dashboard\OrderLinks;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Purchase;
-use App\Models\PurchaseItem;
 use App\Models\Seller;
 use App\Models\Shipments;
 use App\Models\User;
@@ -17,7 +16,6 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\On;
 
 #[Layout('layouts.seller.seller-layout')]
 class OrderList extends Component
@@ -31,13 +29,17 @@ class OrderList extends Component
     public array $orderstatus_list;
 
     public $orderstatus_filter;
+
     public $paymentstatus_filter;
+
     public $paymenttype_filter;
 
     public $payment_status;
+
     public $purchase_status;
 
     public $quick_search_filter;
+
     public $clear_search;
 
     public $select_products = [];
@@ -65,6 +67,7 @@ class OrderList extends Component
     public function getTotalPurchaseCount()
     {
         $all = Purchase::where('seller_id', $this->seller->id);
+
         return count($all->get());
     }
 
@@ -72,6 +75,7 @@ class OrderList extends Component
     public function getTotalPendingCount()
     {
         $pending = Purchase::where('seller_id', $this->seller->id);
+
         return count($pending->where('purchase_status', 'pending')->get());
     }
 
@@ -79,6 +83,7 @@ class OrderList extends Component
     public function getTotalCompletedCount()
     {
         $completed = Purchase::where('seller_id', $this->seller->id);
+
         return count($completed->where('purchase_status', 'completed')->get());
     }
 
@@ -86,6 +91,7 @@ class OrderList extends Component
     public function getTotalToShipCount()
     {
         $to_ship = Purchase::where('seller_id', $this->seller->id);
+
         return count($to_ship->where('purchase_status', 'to_ship')->get());
     }
 
@@ -93,6 +99,7 @@ class OrderList extends Component
     public function getTotalShippingCount()
     {
         $shipping = Purchase::where('seller_id', $this->seller->id);
+
         return count($shipping->where('purchase_status', 'shipping')->get());
     }
 
@@ -100,6 +107,7 @@ class OrderList extends Component
     public function getTotalCancellationCount()
     {
         $cancellation = Purchase::where('seller_id', $this->seller->id);
+
         return count($cancellation->where('purchase_status', 'cancellation')->get());
     }
 
@@ -114,10 +122,9 @@ class OrderList extends Component
     public function getTotalFailedDeliveryCount()
     {
         $faileddelivery = Purchase::where('seller_id', $this->seller->id);
+
         return count($faileddelivery->where('purchase_status', 'failed_delivery')->get());
     }
-
-
 
     #[Computed]
     public function getPurchaseItemList()
@@ -125,7 +132,6 @@ class OrderList extends Component
         // query for purchased items of products from current seller
         $this->purchases = Purchase::where('purchases.seller_id', $this->seller->id);
         // dd($test->paginate(10));
-
 
         //
         if ($this->orderstatus_filter) {
@@ -181,7 +187,6 @@ class OrderList extends Component
         return $this->purchases->paginate(10);
     }
 
-
     public function update_status(Request $request)
     {
         // dd($request->purchase_status);
@@ -230,14 +235,13 @@ class OrderList extends Component
 
             Purchase::where('id', $purchase_id)->update(['purchase_status' => 'to_ship']);
 
-
             //notify from 'pending' to 'to_ship'
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase_id,
                 'tag' => 'to_ship',
                 'title' => 'Purchase Confirmed',
-                'message' => 'Purchase for order #' . $purchase_id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                'message' => 'Purchase for order #'.$purchase_id.' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
             ]);
             $notification->save();
 
@@ -295,7 +299,6 @@ class OrderList extends Component
             // Shipments::where('purchase_id', $purchase_id)->update(['shipment_status' => $this->purchase_status]);
         }
     }
-
 
     public function render()
     {

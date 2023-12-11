@@ -214,4 +214,4 @@ Route::prefix('explore')->group(function () {
     })->name('terms-and-conditions');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

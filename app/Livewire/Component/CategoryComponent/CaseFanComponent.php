@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use App\Models\User;
 use App\Models\CaseFan;
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\ProductImage;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class CaseFanComponent extends Component
@@ -144,7 +144,7 @@ class CaseFanComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-                // else if there is only one image in the array create a row in db with no image
+            // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -179,17 +179,17 @@ class CaseFanComponent extends Component
             if ($product && $casefan) {
                 // dd($product, $cpu);
                 $this->alert('success', 'Product has been created successfully.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
                 $this->reset();
             } else {
                 $this->alert('error', 'Product has not been created.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
             }
         } else {
             $this->alert('error', 'Unkown error has occurred', [
-                'position' => 'top-end'
+                'position' => 'top-end',
             ]);
         }
 

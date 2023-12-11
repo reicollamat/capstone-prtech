@@ -3,13 +3,13 @@
 namespace App\Livewire\Component\CategoryComponent;
 
 use App\Models\Monitor;
-use App\Models\User;
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\ProductImage;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class MonitorComponent extends Component
@@ -143,7 +143,7 @@ class MonitorComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-                // else if there is only one image in the array create a row in db with no image
+            // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -178,20 +178,19 @@ class MonitorComponent extends Component
             if ($product && $monitor) {
                 // dd($product, $monitor);
                 $this->alert('success', 'Product has been created successfully.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
                 $this->reset();
             } else {
                 $this->alert('error', 'Product has not been created.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
             }
         } else {
             $this->alert('error', 'Unkown error has occurred', [
-                'position' => 'top-end'
+                'position' => 'top-end',
             ]);
         }
-
 
         // if ($validator) {
         //     dd($validator);

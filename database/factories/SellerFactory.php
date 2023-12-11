@@ -23,7 +23,7 @@ class SellerFactory extends Factory
             //reference of user id
             'user_id' => $user->id,
             'shop_name' => fake()->randomElement(['ByteBazaar', 'TechnoTronics', 'ChipMasters', 'CircuitSavvy', 'MegaByte Mart', 'PowerPC Plaza', 'LogicLinks', 'Pixel Palace', 'CyberSphere', 'Quantum Quest', 'Infotech Emporium', 'ElectroGeeks', 'TechTrove', 'Silicon Valley Store', 'ByteBlitz', 'MicroTech Hub', 'PC Planet', 'InnovateTech', 'Cybernaut Central', 'DataDreams Hub']),
-            'registered_business_name' => $user->first_name . ' ' . $user->last_name,
+            'registered_business_name' => $user->first_name.' '.$user->last_name,
             'shop_email' => $user->email,
             'shop_phone_number' => $user->phone_number,
             'shop_address' => $user->street_address_1,

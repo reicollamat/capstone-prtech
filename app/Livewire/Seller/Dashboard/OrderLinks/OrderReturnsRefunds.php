@@ -4,16 +4,13 @@ namespace App\Livewire\Seller\Dashboard\OrderLinks;
 
 use App\Models\Product;
 use App\Models\Purchase;
-use App\Models\PurchaseItem;
 use App\Models\Seller;
 use App\Models\Shipments;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\On;
 
 #[Layout('layouts.seller.seller-layout')]
 class OrderReturnsRefunds extends Component
@@ -23,6 +20,7 @@ class OrderReturnsRefunds extends Component
     public $quick_search_filter;
 
     public $set_to_shipping;
+
     public $set_to_complete;
 
     public $seller;
@@ -44,7 +42,6 @@ class OrderReturnsRefunds extends Component
         // dd($this->purchase_items->get());
     }
 
-
     #[Computed]
     public function getTotalReturnRefund()
     {
@@ -52,9 +49,9 @@ class OrderReturnsRefunds extends Component
             ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
             ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
             ->where('seller_id', $this->seller->id);
+
         return count($to_ship->where('purchase_status', 'returnrefund')->get());
     }
-
 
     #[Computed]
     public function getReturnRefund()
@@ -92,7 +89,6 @@ class OrderReturnsRefunds extends Component
 
         return $this->purchase_items->paginate(10);
     }
-
 
     public function render()
     {

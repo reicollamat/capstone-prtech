@@ -102,7 +102,7 @@ class BuyerRegistration extends Component
             'user_zip_postal' => 'required',
         ]);
 
-        dd($validator);
+        // dd($validator);
 
         if ($validator) {
             $user = User::find($this->userid)->update([

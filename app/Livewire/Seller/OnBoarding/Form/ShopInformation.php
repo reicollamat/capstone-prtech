@@ -153,7 +153,7 @@ class ShopInformation extends Component
             ]);
 
             if ($seller && $seller_metrics) {
-                $this->alert('success', 'Shop information created successfully',[
+                $this->alert('success', 'Shop information created successfully', [
                     'position' => 'center',
                     'toast' => false,
                 ]);
@@ -171,8 +171,6 @@ class ShopInformation extends Component
         } catch (Exception $e) {
             abort(500, $e->getMessage());
         }
-
-
 
     }
 

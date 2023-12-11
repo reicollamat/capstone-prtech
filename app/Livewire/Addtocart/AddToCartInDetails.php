@@ -63,7 +63,7 @@ class AddToCartInDetails extends Component
             $this->redirect(route('purchase_page', [
                 'product_id' => $this->product_id,
                 'user_id' => Auth::user()->id,
-                'quantity' => $this->quantity
+                'quantity' => $this->quantity,
             ]));
         } else {
             $this->redirect(route('login'));
@@ -71,7 +71,6 @@ class AddToCartInDetails extends Component
 
         //        dd($this->quantity, $this->user_id, $this->product_id);
     }
-
 
     public function addquantity()
     {

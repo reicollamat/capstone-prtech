@@ -11,10 +11,8 @@ class EmailHelper
     /**
      * Sends an email with the given email, subject, and message.
      *
-     * @param string $email The email address to send the email to.
-     * @param $orderId
+     * @param  string  $email The email address to send the email to.
      * @return string The status of the email sending
-     *
      */
     public static function sendEmail($email, $orderId): string
     {

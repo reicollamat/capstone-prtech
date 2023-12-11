@@ -2,19 +2,14 @@
 
 namespace App\Livewire\Seller\Dashboard\ShipmentLinks;
 
-use App\Models\Product;
-use App\Models\Purchase;
-use App\Models\PurchaseItem;
 use App\Models\Seller;
 use App\Models\Shipments;
 use App\Models\UserNotification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\On;
 
 #[Layout('layouts.seller.seller-layout')]
 class ShipmentList extends Component
@@ -24,12 +19,17 @@ class ShipmentList extends Component
     public $quick_search_filter;
 
     public $set_to_shipping;
+
     public $set_to_complete;
 
     public $total_shipment = 0;
+
     public $total_completed_count = 0;
+
     public $total_to_ship_count = 0;
+
     public $total_shipping_count = 0;
+
     public $total_failed_delivery_count = 0;
 
     public $seller;
@@ -42,7 +42,6 @@ class ShipmentList extends Component
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
-
 
         $this->total_shipment = count(Shipments::where('seller_id', $this->seller->id)
             ->get());
@@ -63,7 +62,6 @@ class ShipmentList extends Component
             ->where('shipment_status', 'failed_delivery')
             ->get());
     }
-
 
     #[Computed]
     public function getToShipList()
@@ -89,12 +87,13 @@ class ShipmentList extends Component
                 'tag' => 'shipping',
                 'title' => 'Shipped Out',
                 'message' => 'Parcel parcel no for your order
-                #' . $shipment->purchase->id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                #'.$shipment->purchase->id.' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
             ]);
             $notification->save();
 
             sleep(0.5);
             $this->mount();
+
             // return collection of shipment items of products from current seller
             return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
@@ -137,7 +136,7 @@ class ShipmentList extends Component
                 'shipped_date' => now(),
             ]);
 
-            if ($shipment->purchase->payment->payment_type == "cod") {
+            if ($shipment->purchase->payment->payment_type == 'cod') {
                 $shipment->purchase->payment->update([
                     'payment_status' => 'paid',
                     'date_of_payment' => now(),
@@ -150,12 +149,13 @@ class ShipmentList extends Component
                 'purchase_id' => $shipment->purchase->id,
                 'tag' => 'completed',
                 'title' => 'Share your feedback! click here',
-                'message' => 'Order #' . $shipment->purchase->id . ' is completed. Your feedback matters to others! Rate the products by date',
+                'message' => 'Order #'.$shipment->purchase->id.' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
 
             sleep(0.5);
             $this->mount();
+
             // return collection of shipment items of products from current seller
             return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
@@ -200,7 +200,6 @@ class ShipmentList extends Component
 
         return $this->shipment_items->paginate(10);
     }
-
 
     public function render()
     {

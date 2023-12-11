@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Orchid\Filters\Filter;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Select;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class ProductStatusFilter extends Filter
 {
@@ -38,6 +40,8 @@ class ProductStatusFilter extends Filter
      * Get the display fields.
      *
      * @return Field[]
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function display(): iterable
     {

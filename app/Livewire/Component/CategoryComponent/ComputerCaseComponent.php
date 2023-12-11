@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use App\Models\User;
-use App\Models\Product;
-use Livewire\Component;
 use App\Models\ComputerCase;
+use App\Models\Product;
 use App\Models\ProductImage;
-use Livewire\Attributes\Reactive;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class ComputerCaseComponent extends Component
@@ -19,6 +18,7 @@ class ComputerCaseComponent extends Component
     use WithFileUploads;
 
     public $previewImage;
+
     public $previewImageIndex;
 
     #[Validate('required', message: 'Please provide product name')]
@@ -151,7 +151,7 @@ class ComputerCaseComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-                // else if there is only one image in the array create a row in db with no image
+            // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -188,17 +188,17 @@ class ComputerCaseComponent extends Component
             if ($product && $case) {
                 // dd($product, $cpu);
                 $this->alert('success', 'Product has been created successfully.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
                 $this->reset();
             } else {
                 $this->alert('error', 'Product has not been created.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
             }
         } else {
             $this->alert('error', 'Unkown error has occurred', [
-                'position' => 'top-end'
+                'position' => 'top-end',
             ]);
         }
 
