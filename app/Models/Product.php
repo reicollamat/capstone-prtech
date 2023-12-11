@@ -187,6 +187,7 @@ class Product extends Model
         'price',
         'image',
         'status',
+        'weight',
         'condition',
         'stock',
         'reserve',

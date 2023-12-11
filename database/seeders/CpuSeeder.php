@@ -33,6 +33,8 @@ class CpuSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    // 'weight' => rand(0.25, 0.4),
+                    'weight' => fake()->randomFloat(2, 0.25, 0.5),
                 ]);
 
                 ProductImage::create([

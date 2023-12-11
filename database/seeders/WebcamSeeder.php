@@ -33,6 +33,9 @@ class WebcamSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    // 'weight' => rand(0.3, 0.5),
+                    'weight' => fake()->randomFloat(2, 0.3, 0.5),
+
                 ]);
 
                 ProductImage::create([

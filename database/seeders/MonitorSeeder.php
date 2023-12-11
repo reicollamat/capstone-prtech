@@ -22,9 +22,9 @@ class MonitorSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/monitor/monitor (' . fake()->numberBetween(1, 3) . ').png';
+            $image = 'img/components/monitor/monitor ('.fake()->numberBetween(1, 3).').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (!empty($value->price)) {
+            if (! empty($value->price)) {
                 $product = Product::create([
                     'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
                     'title' => $value->name,
@@ -33,6 +33,8 @@ class MonitorSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    'weight' => rand(1.5, 3),
+                    'weight' => fake()->randomFloat(2, 1.5, 2.5),
                 ]);
 
                 ProductImage::create([

@@ -33,6 +33,7 @@ class SpeakerSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    'weight' => fake()->randomFloat(2, 0.8, 1),
                 ]);
 
                 ProductImage::create([

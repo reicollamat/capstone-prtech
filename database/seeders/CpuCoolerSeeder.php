@@ -22,9 +22,9 @@ class CpuCoolerSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/cpucooler/cpucooler (' . fake()->numberBetween(1, 2) . ').png';
+            $image = 'img/components/cpucooler/cpucooler ('.fake()->numberBetween(1, 2).').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (!empty($value->price)) {
+            if (! empty($value->price)) {
                 $product = Product::create([
                     'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
                     'title' => $value->name,
@@ -33,6 +33,7 @@ class CpuCoolerSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    'weight' => fake()->randomFloat(2, 0.6, 0.8),
                 ]);
 
                 ProductImage::create([

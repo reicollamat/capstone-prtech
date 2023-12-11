@@ -33,6 +33,9 @@ class VideoCardSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    // 'weight' => rand(0.8, 1.2),
+                    'weight' => fake()->randomFloat(2, 0.6, 1.2),
+
                 ]);
 
                 ProductImage::create([

@@ -33,6 +33,8 @@ class CaseFanSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    // 'weight' => rand(0.120, 0.3),
+                    'weight' => fake()->randomFloat(2, 0.120, 0.3),
                 ]);
 
                 ProductImage::create([

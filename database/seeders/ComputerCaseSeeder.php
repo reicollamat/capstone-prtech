@@ -33,6 +33,8 @@ class ComputerCaseSeeder extends Seeder
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    // 'weight' => rand(2.5, 5),
+                    'weight' => fake()->randomFloat(2, 2.5, 5),
                 ]);
 
                 ProductImage::create([

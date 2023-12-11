@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('sku')->nullable();
             $table->string('slug')->nullable();
             $table->string('category');
+            $table->float('weight')->default(0.00)->nullable();
             $table->decimal('price', 20, 2);
             // $table->string('image')->default(json_encode(['img/no-image-placeholder.png']))->nullable();
             $table->string('status')->default('available');
