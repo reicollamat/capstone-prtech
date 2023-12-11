@@ -60,7 +60,7 @@
                         </div>
                     @endif
 
-                    @foreach ($user->purchase as $purchase)
+                    @foreach ($user->purchase as $key => $purchase)
                         @if ($purchase->purchase_status == 'pending' || $purchase->purchase_status == 'to_ship')
                             <div class="accordion accordion-flush" id="accordionFlush">
                                 <div class="accordion-item border">
@@ -103,10 +103,43 @@
                                             @elseif ($purchase->purchase_status == 'to_ship')
                                                 <h6 class="my-auto ml-4">Status: Preparing order for shipment</h6>
                                             @endif
-                                            <button type="button"
-                                                class="mt-2 mb-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="mt-2 mb-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#requestCancelModal{{$key}}">
                                                 Cancel Order
                                             </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="requestCancelModal{{$key}}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="modalLabel">Reason for order cancellation:</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body mx-2">
+                                                    <p class="text-gray-500 text-start mx-2">Reference Number: {{$purchase->reference_number}}</p>
+                                                    Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}?
+                                                    <div class="text-start mx-2 mt-2">
+                                                        Items:
+                                                        @foreach ($purchase->purchase_items as $purchase_item)
+                                                            <div>
+                                                                - {{$purchase_item->product->title}}
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                    <form action="{{route('profile.request_cancel_order')}}" method="POST">
+                                                        @csrf
+                                                        <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
+                                                        <input type="text" name="user_id" value="{{ $user->id }}" hidden>
+                                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                                    </form>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            </div>
                                         </div>
                                         @foreach ($purchase->purchase_items as $purchase_item)
                                             <div class="visually-hidden">

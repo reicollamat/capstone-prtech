@@ -148,6 +148,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::post('/profile', [ProfileController::class, 'request_cancel_order'])->name('profile.request_cancel_order');
+
     // logged in
     // // cart page
     // Route::get('/cart', [CartController::class, 'index'])->name('index_cart');

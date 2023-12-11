@@ -43,7 +43,7 @@ class User extends Authenticatable
         return $this->hasOne(Seller::class);
     }
 
-    public function comment(): Hasmany
+    public function comments(): Hasmany
     {
         return $this->hasMany(Comments::class);
     }

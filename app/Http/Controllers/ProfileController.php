@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Product;
+use App\Models\Purchase;
+use App\Models\PurchaseCancellationInfo;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +50,28 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('notification', 'Profile Updated!');
+    }
+
+    /**
+     * Request cancellation of order
+     */
+    public function request_cancel_order(Request $request): RedirectResponse
+    {
+        $purchase = Purchase::find($request->purchase_id);
+        $user = User::find($request->user_id);
+
+        // dd($purchase->purchase_status);
+        $shipment = new PurchaseCancellationInfo([
+            'purchase_id' => $purchase->id,
+            'user_id' => $user->id,
+            'seller_id' => $purchase->seller->id,
+            'request_date' => now(),
+        ]);
+        $shipment->save();
+        $purchase->update(['purchase_status' => 'cancellation_pending']);
+
+
+        return Redirect::route('profile.edit', ['is_mypurchase' => true])->with('notification', 'Profile Updated!');
     }
 
     /**
