@@ -192,6 +192,7 @@ class Product extends Model
         'reserve',
         'rating',
         'purchase_count',
+        'view_count',
         // relation to the seller id
         'seller_id',
     ];
@@ -231,6 +232,7 @@ class Product extends Model
         'title',
         'category',
         'stock',
+        'view_count',
         'updated_at',
         'created_at',
     ];
@@ -240,6 +242,7 @@ class Product extends Model
         'price',
         'stock',
         'rating',
+        'view_count',
         'purchase_count',
     ];
 
