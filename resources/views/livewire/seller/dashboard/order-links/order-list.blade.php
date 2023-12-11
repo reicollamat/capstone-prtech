@@ -245,10 +245,10 @@
             <hr>
             <div class="bg-white overflow-x-auto rounded-lg p-3">
                 <div class="grid grid-cols-12 text-center text-sm">
-                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">#</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Reference#</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Date</div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amt</div>
+                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amt</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Status</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Actions</div>
@@ -315,8 +315,8 @@
 
                                 <div x-data="{ expanded: false }" class="border-b border-gray-100">
                                     <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
-                                            {{ $purchase->id }}
+                                        <div class="col-span-2 my-4 text-sm !text-gray-800 !font-light">
+                                            {{ $purchase->reference_number }}
                                         </div>
                                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
                                             {{ $purchase->user->first_name }} {{ $purchase->user->last_name }}
@@ -324,7 +324,7 @@
                                         <div class="col-span-2 my-4 !text-gray-800 !font-light">
                                             {{ date('d-M-y', strtotime($purchase->purchase_date)) }}
                                         </div>
-                                        <div class="col-span-2 my-4 !text-gray-800 !font-light">
+                                        <div class="col-span-1 my-4 !text-gray-800 !font-light">
                                             {{ $purchase->total_amount }}
                                         </div>
 
@@ -341,17 +341,15 @@
                                             </div>
                                         @endif
 
-                                        {{-- purchase status --}}
-                                        <div class="col-span-2 my-4 !text-gray-900 !font-light">
-                                            {{ $purchase->purchase_status }}
-                                        </div>
-
-                                        {{-- purchase actions --}}
+                                        {{-- purchase --}}
                                         @if ($purchase->purchase_status == 'completed')
-                                            <div class="col-span-2 text-2xl my-auto !text-green-600 !font-light">
-                                                <i class="bi bi-check-square-fill"></i>
+                                            <div class="col-span-4 my-auto !text-green-600 !font-light">
+                                                <i class="bi bi-check-square-fill"></i> Order Completed
                                             </div>
                                         @elseif ($purchase->purchase_status == 'pending')
+                                            <div class="col-span-2 my-auto !text-blue-500 !font-light">
+                                                <i class="bi bi-exclamation-square-fill"></i> Pending Order
+                                            </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
                                                     class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
@@ -359,6 +357,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'to_ship')
+                                            <div class="col-span-2 my-auto !text-gray-900 !font-light">
+                                                <i class="bi bi-box-fill"></i></i> Pending Shipment
+                                            </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
@@ -366,6 +367,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'shipping')
+                                            <div class="col-span-2 my-4 !text-gray-900 !font-light">
+                                                {{ $purchase->purchase_status }}
+                                            </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
@@ -373,6 +377,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'failed_delivery')
+                                            <div class="col-span-2 my-4 !text-gray-900 !font-light">
+                                                {{ $purchase->purchase_status }}
+                                            </div>
                                             <div class="col-span-2 my-auto !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
@@ -380,6 +387,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'cancellation_pending')
+                                        <div class="col-span-2 my-4 !text-red-600 !font-light">
+                                            <i class="bi bi-x-square-fill"></i> Pending Cancellation
+                                        </div>
                                             <div class="col-span-2 my-auto !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
@@ -387,10 +397,19 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'cancellation_approved')
+                                            <div class="col-span-2 my-4 !text-red-600 !font-light">
+                                                <i class="bi bi-x-square-fill"></i> Order Cancelled
+                                            </div>
                                             <div class="col-span-2 my-auto !font-light">
-                                                <p class="text-red-600">Order Cancelled</p>
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
                                             </div>
                                         @else
+                                            <div class="col-span-2 my-4 !text-gray-900 !font-light">
+                                                {{ $purchase->purchase_status }}
+                                            </div>
                                             <div class="col-span-2 my-4 !text-gray-800 !font-light">
                                                 {{ $purchase->purchase_status }}
                                             </div>

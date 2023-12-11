@@ -175,7 +175,7 @@ class OrderList extends Component
         //
         else {
 
-            return $this->purchases->orderBy('id', 'asc')->paginate(10);
+            return $this->purchases->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->purchases->paginate(10);
@@ -210,7 +210,7 @@ class OrderList extends Component
         // }
 
         // set to to_ship
-        if ($this->purchase_status == 'pending' || !Shipments::where('purchase_id', $purchase_id)->exists()) {
+        if ($this->purchase_status == 'pending') {
             // dd('test');
             $shipment = new Shipments([
                 'shipment_number' => random_int(10000000, 99999999),
@@ -258,6 +258,12 @@ class OrderList extends Component
 
         // redirect to cancellation list
         elseif ($this->purchase_status == 'cancellation_pending') {
+
+            return redirect(route('order-cancellations'));
+        }
+
+        // redirect to cancellation list
+        elseif ($this->purchase_status == 'cancellation_approved') {
 
             return redirect(route('order-cancellations'));
         }

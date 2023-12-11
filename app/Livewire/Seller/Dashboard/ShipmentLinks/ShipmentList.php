@@ -96,7 +96,7 @@ class ShipmentList extends Component
             sleep(0.5);
             $this->mount();
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         // add check to run rerender every time
@@ -110,7 +110,7 @@ class ShipmentList extends Component
         } else {
 
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->shipment_items->paginate(10);
@@ -157,7 +157,7 @@ class ShipmentList extends Component
             sleep(0.5);
             $this->mount();
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         // add check to run rerender every time
@@ -171,7 +171,7 @@ class ShipmentList extends Component
         } else {
 
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->shipment_items->paginate(10);
@@ -195,7 +195,7 @@ class ShipmentList extends Component
         } else {
 
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->shipment_items->paginate(10);
