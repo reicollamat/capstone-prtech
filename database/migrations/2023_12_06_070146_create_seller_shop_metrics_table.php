@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('seller_shop_metrics', function (Blueprint $table) {
             $table->id();
             $table->float('total_earnings')->default(0)->nullable();
-            $table->integer('target_sales')->default(0)->nullable();
+            $table->integer('target_sales')->default(10000)->nullable();
             $table->unsignedBigInteger('seller_id');
             $table->timestamps();
         });
