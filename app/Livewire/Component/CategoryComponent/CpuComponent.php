@@ -138,6 +138,8 @@ class CpuComponent extends Component
                 // 'image' => implode(',', $storeas),
                 // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
+                'status' => $validator['productStatus'],
+                'weight' => $validator['product_weight'],
             ]);
 
             // loop through the images from the file upload
