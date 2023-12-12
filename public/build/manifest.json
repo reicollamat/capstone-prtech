@@ -1,6 +1,6 @@
 {
-  "_auto-a7dedb8f.js": {
-    "file": "assets/auto-a7dedb8f.js"
+  "_auto-5842a5d9.js": {
+    "file": "assets/auto-5842a5d9.js"
   },
   "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
     "file": "assets/bootstrap-icons-d0346eea.woff",
@@ -11,14 +11,14 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-de496c9b.css",
+    "file": "assets/app-b96e3961.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/analytics-model-report-header.js": {
-    "file": "assets/analytics-model-report-header-99655b55.js",
+    "file": "assets/analytics-model-report-header-f66b1f98.js",
     "imports": [
-      "_auto-a7dedb8f.js"
+      "_auto-5842a5d9.js"
     ],
     "isEntry": true,
     "src": "resources/js/analytics-model-report-header.js"
@@ -35,17 +35,17 @@
     "css": [
       "assets/app-7a00f215.css"
     ],
-    "file": "assets/app-f2641d63.js",
+    "file": "assets/app-892a59c3.js",
     "imports": [
-      "_auto-a7dedb8f.js"
+      "_auto-5842a5d9.js"
     ],
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/js/chartjs.js": {
-    "file": "assets/chartjs-a4b9ef93.js",
+    "file": "assets/chartjs-6299713a.js",
     "imports": [
-      "_auto-a7dedb8f.js"
+      "_auto-5842a5d9.js"
     ],
     "isEntry": true,
     "src": "resources/js/chartjs.js"
