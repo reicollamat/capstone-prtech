@@ -367,8 +367,8 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'shipping')
-                                            <div class="col-span-2 my-4 !text-gray-900 !font-light">
-                                                {{ $purchase->purchase_status }}
+                                            <div class="col-span-2 my-auto !text-gray-900 !font-light">
+                                                <i class="bi bi-truck"></i> Shipping Parcel
                                             </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
@@ -377,8 +377,8 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'failed_delivery')
-                                            <div class="col-span-2 my-4 !text-gray-900 !font-light">
-                                                {{ $purchase->purchase_status }}
+                                            <div class="col-span-2 my-auto !text-red-600 !font-light">
+                                                <i class="bi bi-truck-flatbed"></i> Failed Delivery
                                             </div>
                                             <div class="col-span-2 my-auto !font-light">
                                                 <button type="submit"

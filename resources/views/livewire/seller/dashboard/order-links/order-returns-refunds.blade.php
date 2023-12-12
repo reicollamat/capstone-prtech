@@ -9,13 +9,10 @@
         <div class="bg-white overflow-x-auto rounded-lg p-3">
             <div class="grid grid-cols-12 text-center text-sm">
                 <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">IMG</div>
-                <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">#</div>
-                <div class="col-span-4 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
-                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Price
-                </div>
-                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchased On
-                </div>
-                <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment</div>
+                <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Ref#</div>
+                <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
+                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchased On</div>
+                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Request Date</div>
                 <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Details</div>
             </div>
 
