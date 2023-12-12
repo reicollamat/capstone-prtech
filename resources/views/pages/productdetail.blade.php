@@ -93,9 +93,11 @@
                             <small class="bi bi-star"></small> --}}
                         </div>
                         <small class="pb-1">
-                            <span
-                                class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">{{ $categoryproduct->product->rating }}</span>
-                            (0 Reviews)</small>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
+                                {{ $categoryproduct->product->rating }}
+                            </span>
+                                ({{$categoryproduct->product->comments->count()}} Reviews)
+                        </small>
                     </div>
 
                     <div class="d-flex">
@@ -159,54 +161,32 @@
 
         <div class="row px-xl-5">
             <div class="col-md-12">
-                <h4 class="mb-4">3 reviews for "{{ $categoryproduct->product->title }}"</h4>
+                {{-- @dd($categoryproduct->product->comments->count()) --}}
+                <h4 class="mb-4">{{$categoryproduct->product->comments->count()}} reviews for "{{ $categoryproduct->product->title }}"</h4>
                 <!-- dummy customer reviews -->
 
-                <x-shop.cus_review>
-                    <x-slot:img_path>img/user1.png</x-slot:img_path>
-                    <x-slot:cus_name>Leaz Goe Gauys</x-slot:cus_name>
-                    <x-slot:cus_date>09 Feb 2021</x-slot:cus_date>
-                    <x-slot:cus_star>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </x-slot:cus_star>
-                    <p>Fully protected ang item. Super ganda at mabilis lang dumating. And thank you sa nag deliver
-                        napakabait.. Diko pa na testing pero the best sa packaging Godbless.</p>
-                </x-shop.cus_review>
-
-                <x-shop.cus_review>
-                    <x-slot:img_path>img/user2.png</x-slot:img_path>
-                    <x-slot:cus_name>Eyho Waht</x-slot:cus_name>
-                    <x-slot:cus_date>24 May 2019</x-slot:cus_date>
-                    <x-slot:cus_star>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <i class="far fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </x-slot:cus_star>
-                    <p>Ayos naman kompleto ang mga items na inorder ko. So far di ko pa na natest kasi wala pa processor.
-                        Dismaya lang ako kasi bubble wrap lang ginamit at di ito nilagay sa malaking box knowing almost 20K
-                        ang amount ng order ko kasi merong monitor na baka mabasag at matupi ang motherboard.</p>
-                </x-shop.cus_review>
-
-                <x-shop.cus_review>
-                    <x-slot:img_path>img/user3.png</x-slot:img_path>
-                    <x-slot:cus_name>Nhoe Caph Foereal</x-slot:cus_name>
-                    <x-slot:cus_date>14 Mar 2019</x-slot:cus_date>
-                    <x-slot:cus_star>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <i class="far fa-star"></i>
-                    </x-slot:cus_star>
-                    <p>Item was shipped immediately, well packaged, connector for mic is not working, maybe its compatible
-                        with the OS installed in computer but the connector foe headphone is functioning well.</p>
-                </x-shop.cus_review>
+                <div class="overflow-auto bg-secondary-subtle p-2 border border-2 rounded" style="max-height: 600px">
+                    @foreach ($categoryproduct->product->comments as $comment)
+                        <x-shop.cus_review>
+                            <x-slot:img_path>img/user{{fake()->numberBetween(1, 3)}}.png</x-slot:img_path>
+                            {{-- <x-slot:cus_name>{{$comment->user->first_name}} {{$comment->user->last_name}}</x-slot:cus_name> --}}
+                            <x-slot:cus_name>Sample Name</x-slot:cus_name>
+                            <x-slot:cus_date>{{date('d M Y', strtotime($comment->created_at))}}</x-slot:cus_date>
+                            <x-slot:cus_star>
+                                @for ($i = 0; $i < intval($comment->rating); $i++)
+                                        <small class="bi bi-star-fill"></small>
+                                @endfor
+                                <small class="pb-1">
+                                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
+                                        {{ $comment->rating }}
+                                    </span>
+                                </small>
+                            </x-slot:cus_star>
+                            <p>{{$comment->text}}</p>
+                        </x-shop.cus_review>
+                    @endforeach
+                </div>
+                
             </div>
             {{-- <div class="col-md-4">
                 <h4 class="mb-4">Leave a review</h4>
