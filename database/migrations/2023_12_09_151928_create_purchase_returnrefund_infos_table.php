@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchase_returnrefund_infos', function (Blueprint $table) {
+        Schema::create('item_returnrefund_infos', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('purchase_item_id')->constrained()->cascadeOnDelete();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchase_returnrefund_infos');
+        Schema::dropIfExists('item_returnrefund_infos');
     }
 };

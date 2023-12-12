@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('returnrefund_images', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('purchase_returnrefund_info_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('item_returnrefund_info_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->string('img_path');
