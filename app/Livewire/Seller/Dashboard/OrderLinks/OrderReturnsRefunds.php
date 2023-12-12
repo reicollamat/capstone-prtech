@@ -4,7 +4,7 @@ namespace App\Livewire\Seller\Dashboard\OrderLinks;
 
 use App\Models\Product;
 use App\Models\Purchase;
-use App\Models\PurchaseReturnrefundInfo;
+use App\Models\ItemReturnrefundInfo;
 use App\Models\Seller;
 use App\Models\Shipments;
 use Illuminate\Support\Facades\Auth;
@@ -36,8 +36,7 @@ class OrderReturnsRefunds extends Component
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         // query for purchased items of products from current seller
-        $this->returnrefund_items = PurchaseReturnrefundInfo::where('seller_id', $this->seller->id);
-        dd($this->returnrefund_items->get());
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id);
     }
 
 
@@ -45,7 +44,7 @@ class OrderReturnsRefunds extends Component
     public function getReturnrefundPending()
     {
         // query for purchased items of products from current seller
-        $this->returnrefund_items = PurchaseReturnrefundInfo::where('seller_id', $this->seller->id)
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
             ->where('status', 'returnrefund_pending');
 
         if ($this->set_to_shipping) {
@@ -65,6 +64,33 @@ class OrderReturnsRefunds extends Component
         }
 
         return $this->returnrefund_items->paginate(10);
+    }
+
+    #[Computed]
+    public function getReturnProduct()
+    {
+        // query for purchased items of products from current seller
+        $this->return_products = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund_approved')
+            ->where('status', 'return_product_shipping');
+
+        if ($this->set_to_shipping) {
+            // dd($this->set_to_shipping);
+
+            Purchase::where('id', $this->set_to_shipping)->update(['purchase_status' => 'shipping']);
+            Shipments::where('purchase_id', $this->set_to_shipping)->update(['shipment_status' => 'shipping']);
+
+            // return collection of purchased items of products from current seller
+            return $this->return_products->orderBy('purchase_items.id', 'asc')->paginate(10);
+        }
+        //
+        else {
+            // dd($this->return_products->get());
+            // return collection of shipment items of products from current seller
+            return $this->return_products->orderBy('request_date', 'desc')->paginate(10);
+        }
+
+        return $this->return_products->paginate(10);
     }
 
     public function render()

@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseCancellationInfo;
 use App\Models\PurchaseItem;
-use App\Models\PurchaseReturnrefundInfo;
+use App\Models\ItemReturnrefundInfo;
 use App\Models\ReturnrefundImage;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -93,7 +93,7 @@ class ProfileController extends Controller
 
 
         // save a new database returnrefund info
-        $returnrefund_info = new PurchaseReturnrefundInfo([
+        $returnrefund_info = new ItemReturnrefundInfo([
             'purchase_item_id' => $purchase_item->id,
             'user_id' => $user->id,
             'seller_id' => $purchase_item->purchase->seller_id,
@@ -110,11 +110,11 @@ class ProfileController extends Controller
                 $img_path = $image->storeAs(
                     'returnrefund_imgs',
                     $purchase_item->id . '-' . $key . '-' . 'returnrefund_img' . '.' . $image->getClientOriginalExtension(),
-                    'public'
+                    'real_public'
                 );
 
                 $returnrefund_img = new ReturnrefundImage([
-                    'purchase_returnrefund_info_id' => $returnrefund_info->id,
+                    'item_returnrefund_info_id' => $returnrefund_info->id,
                     'user_id' => $user->id,
                     'img_path' => $img_path,
                 ]);

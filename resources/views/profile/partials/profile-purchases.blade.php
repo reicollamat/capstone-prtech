@@ -68,13 +68,13 @@
 
                     @foreach ($user->purchase as $key => $purchase)
                         @if ($purchase->purchase_status == 'pending' || $purchase->purchase_status == 'to_ship')
-                            <div class="accordion accordion-flush" id="accordionFlush">
+                            <div class="accordion accordion-flush" id="accordionFlushPending">
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed d-block py-2" id="trackAccordion"
                                             type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse-{{ $purchase->id }}" aria-expanded="false"
-                                            aria-controls="collapse-{{ $purchase->id }}">
+                                            data-bs-target="#collapsePending-{{ $key }}" aria-expanded="false"
+                                            aria-controls="collapsePending-{{ $key }}">
                                             <div class="row text-center">
                                                 <div class="col-2">
                                                     {{ $purchase->reference_number }}
@@ -100,8 +100,8 @@
                                     </h2>
                                 </div> {{-- accordion header --}}
 
-                                <div id="collapse-{{ $purchase->id }}" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionFlush">
+                                <div id="collapsePending-{{ $key }}" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushPending">
                                     <div class="accordion-body bg-secondary-subtle p-2">
                                         <div class="flex justify-content-between">
                                             @if ($purchase->purchase_status == 'pending')
@@ -222,15 +222,15 @@
                         </div>
                     @endif
 
-                    @foreach ($user->purchase as $purchase)
+                    @foreach ($user->purchase as $key => $purchase)
                         @if ($purchase->purchase_status == 'shipping')
-                            <div class="accordion accordion-flush" id="accordionFlush">
+                            <div class="accordion accordion-flush" id="accordionFlushShipping">
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed d-block py-2" id="trackAccordion"
                                             type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse-{{ $purchase->id }}" aria-expanded="false"
-                                            aria-controls="collapse-{{ $purchase->id }}">
+                                            data-bs-target="#collapseShipping-{{ $key }}" aria-expanded="false"
+                                            aria-controls="collapseShipping-{{ $key }}">
                                             <div class="row text-center">
                                                 <div class="col-2">
                                                     {{ $purchase->reference_number }}
@@ -259,8 +259,8 @@
                                     </h2>
                                 </div> {{-- accordion header --}}
 
-                                <div id="collapse-{{ $purchase->id }}" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionFlush">
+                                <div id="collapseShipping-{{ $key }}" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushShipping">
                                     <div class="accordion-body bg-secondary-subtle p-2">
                                         @foreach ($purchase->purchase_items as $purchase_item)
                                             <div class="visually-hidden">
@@ -332,15 +332,15 @@
                         </div>
                     @endif
 
-                    @foreach ($user->purchase as $purchase)
+                    @foreach ($user->purchase as $key => $purchase)
                         @if ($purchase->purchase_status == 'completed')
-                            <div class="accordion accordion-flush" id="accordionFlush">
+                            <div class="accordion accordion-flush" id="accordionFlushCompleted">
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed d-block py-2" id="trackAccordion"
                                             type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapse-{{ $purchase->id }}" aria-expanded="false"
-                                            aria-controls="collapse-{{ $purchase->id }}">
+                                            data-bs-target="#collapseCompleted-{{ $key }}" aria-expanded="false"
+                                            aria-controls="collapseCompleted-{{ $key }}">
                                             <div class="row text-center">
                                                 <div class="col-2">
                                                     {{ $purchase->reference_number }}
@@ -369,8 +369,8 @@
                                     </h2>
                                 </div> {{-- accordion header --}}
 
-                                <div id="collapse-{{ $purchase->id }}" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionFlush">
+                                <div id="collapseCompleted-{{ $key }}" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushCompleted">
                                     <div class="accordion-body bg-secondary-subtle p-2">
                                         @foreach ($purchase->purchase_items as $key => $purchase_item)
                                             <div class="visually-hidden">
@@ -403,82 +403,81 @@
                                                                         Review Product
                                                                     </button>
                                                                 </div>
-                                                                    @if ($purchase_item->purchase_returnrefund_info)
-                                                                        <div class="col-2 text-center">
-                                                                            <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i> Pending return/refund request</p>
-                                                                        </div>
-                                                                    @else
-                                                                        <div class="col-2 text-end">
-                                                                            <!-- Button trigger modal -->
-                                                                            <button type="button" class="bg-secondary text-light text-sm p-2 rounded" data-bs-toggle="modal" data-bs-target="#returnRefundModal{{$key}}">
-                                                                                Return/Refund
-                                                                            </button>
+                                                                @if ($purchase_item->item_returnrefund_info)
+                                                                    <div class="col-2 text-center">
+                                                                        <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i> Pending return/refund request</p>
+                                                                    </div>
+                                                                @else
+                                                                    <div class="col-2 text-end">
+                                                                        <!-- Button trigger modal -->
+                                                                        <button type="button" class="bg-secondary text-light text-sm p-2 rounded" data-bs-toggle="modal" data-bs-target="#returnRefundModal{{$key}}">
+                                                                            Return/Refund
+                                                                        </button>
 
-                                                                            <!-- Modal -->
-                                                                            <div class="modal fade" id="returnRefundModal{{$key}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                                                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                                                    <div class="modal-content">
-                                                                                        <form action="{{ route('profile.request_returnrefund') }}" method="POST" enctype="multipart/form-data">
-                                                                                            @csrf
-                                                                                            <div class="modal-header">
-                                                                                                <h1 class="modal-title fs-5" id="modalLabel">Reason for return/refund:</h1>
-                                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        <!-- Modal -->
+                                                                        <div class="modal fade" id="returnRefundModal{{$key}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                <div class="modal-content">
+                                                                                    <form action="{{ route('profile.request_returnrefund') }}" method="POST" enctype="multipart/form-data">
+                                                                                        @csrf
+                                                                                        <div class="modal-header">
+                                                                                            <h1 class="modal-title fs-5" id="modalLabel">Reason for return/refund:</h1>
+                                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                        </div>
+                                                                                        <div class="modal-body text-start mx-2">
+                                                                                            <p class="text-gray-500 text-center mx-2">{{$purchase_item->product->title}}</p>
+                                                                                            {{-- Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}? --}}
+                                                                                            Please complete the following form in requesting a return/refund item to {{ $purchase->seller->shop_name }} shop.
+                                                                                            <div class="mx-2 my-4" x-data="{lists: [{id: 1, name: 'Product Defect or Damage'}, {id: 2, name: 'Wrong Product Received'}, {id: 3, name: 'Not Compatible'}, {id: 4, name: 'Quality Concerns'}], reason: ''}">
+                                                                                                <h4>Reason for return/refund:</h4>
+                                                                                                <template x-for="list in lists" :key="list.id">
+                                                                                                    <div class="form-check ml-4">
+                                                                                                        <input class="form-check-input" x-model="reason" type="radio" :value="list.name" :id="list.name" required>
+                                                                                                        <label :for="list.name" x-text="list.name"></label>
+                                                                                                    </div>
+                                                                                                </template>
+                                                                                                <p>Selected value: <code x-text="reason"></code></p>
                                                                                             </div>
-                                                                                            <div class="modal-body text-start mx-2">
-                                                                                                <p class="text-gray-500 text-center mx-2">{{$purchase_item->product->title}}</p>
-                                                                                                {{-- Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}? --}}
-                                                                                                Please complete the following form in requesting a return/refund item to {{ $purchase->seller->shop_name }} shop.
-                                                                                                <div class="mx-2 my-4" x-data="{lists: [{id: 1, name: 'Product Defect or Damage'}, {id: 2, name: 'Wrong Product Received'}, {id: 3, name: 'Not Compatible'}, {id: 4, name: 'Quality Concerns'}], reason: ''}">
-                                                                                                    <h4>Reason for return/refund:</h4>
-                                                                                                    <template x-for="list in lists" :key="list.id">
-                                                                                                        <div class="form-check ml-4">
-                                                                                                            <input class="form-check-input" x-model="reason" type="radio" :value="list.name" :id="list.name" required>
-                                                                                                            <label :for="list.name" x-text="list.name"></label>
-                                                                                                        </div>
-                                                                                                    </template>
-                                                                                                    <p>Selected value: <code x-text="reason"></code></p>
-                                                                                                </div>
-                                                                                                <div class="mx-2 my-4" x-data="{lists: [{id: 1, name: 'Original Packaging'}, {id: 2, name: 'Unused/Unworn'}], condition: ''}">
-                                                                                                    <h4>Condition of the product:</h4>
-                                                                                                    <template x-for="list in lists" :key="list.id">
-                                                                                                        <div class="form-check ml-4">
-                                                                                                            <input class="form-check-input" x-model="condition" type="radio" :value="list.name" :id="list.name" required>
-                                                                                                            <label :for="list.name" x-text="list.name"></label>
-                                                                                                        </div>
-                                                                                                    </template>
-                                                                                                    <p>Selected value: <code x-text="condition"></code></p>
-                                                                                                </div>
-
-                                                                                                <div class="mx-2 my-4">
-                                                                                                    <h4>Photographic evidence:</h4>
-                                                                                                    <small>You can select multiple images</small>
-                                                                                                    <input type="file" class="form-control mt-2 @error('files') is-invalid @enderror" name="evidence_imgs[]" id="evidence_imgs" multiple>
-                                                                                                    @error('evidence_imgs')
-                                                                                                        <small class="text-red-500">{{$message}}</small>
-                                                                                                    @enderror
-                                                                                                </div>
-
-                                                                                                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
-                                                                                                <input type="text" name="purchase_item_id" value="{{$purchase_item->id}}" hidden>
-
-                                                                                                <div class="form-check ml-28">
-                                                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
-                                                                                                    <label class="form-check-label text-sm" for="flexCheckDefault">
-                                                                                                        I have read and accept the <a href="#">Return/Refund Policy</a> of PR-Tech.
-                                                                                                    </label>
-                                                                                                </div>
+                                                                                            <div class="mx-2 my-4" x-data="{lists: [{id: 1, name: 'Original Packaging'}, {id: 2, name: 'Unused/Unworn'}], condition: ''}">
+                                                                                                <h4>Condition of the product:</h4>
+                                                                                                <template x-for="list in lists" :key="list.id">
+                                                                                                    <div class="form-check ml-4">
+                                                                                                        <input class="form-check-input" x-model="condition" type="radio" :value="list.name" :id="list.name" required>
+                                                                                                        <label :for="list.name" x-text="list.name"></label>
+                                                                                                    </div>
+                                                                                                </template>
+                                                                                                <p>Selected value: <code x-text="condition"></code></p>
                                                                                             </div>
-                                                                                            <div class="modal-footer">
-                                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                                                <button type="submit" class="btn btn-danger">Submit</button>
+
+                                                                                            <div class="mx-2 my-4">
+                                                                                                <h4>Photographic evidence:</h4>
+                                                                                                <small>You can select multiple images (5.12 MB max)</small>
+                                                                                                <input type="file" class="form-control mt-2 @error('files') is-invalid @enderror" name="evidence_imgs[]" id="evidence_imgs" multiple required>
+                                                                                                @error('evidence_imgs')
+                                                                                                    <small class="text-red-500">{{$message}}</small>
+                                                                                                @enderror
                                                                                             </div>
-                                                                                        </form>
-                                                                                    </div>
+
+                                                                                            <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
+                                                                                            <input type="text" name="purchase_item_id" value="{{$purchase_item->id}}" hidden>
+
+                                                                                            <div class="form-check ml-28">
+                                                                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                                                                                                <label class="form-check-label text-sm" for="flexCheckDefault">
+                                                                                                    I have read and accept the <a href="#">Return/Refund Policy</a> of PR-Tech.
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                                                                        </div>
+                                                                                    </form>
                                                                                 </div>
                                                                             </div>
-                                                                    @endif
-
-                                                                </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
