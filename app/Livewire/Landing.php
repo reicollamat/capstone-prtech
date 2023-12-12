@@ -13,6 +13,8 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class Landing extends Component
 {
@@ -20,6 +22,7 @@ class Landing extends Component
     use WithPagination;
 
     public int $count = 0;
+
     public string $mailStatus;
 
     public function mount()
@@ -76,18 +79,14 @@ class Landing extends Component
         // dd($purchase_items->product);
         // dd($purchase_items_product_information);
 
-
         //
         // $reference = ReferenceGeneratorHelper::generateReferenceString();
         //
         // dd($reference);
 
-
         // generate 16 unique reference string that consist of numberes and letters
 
-
     }
-
 
     public function tryAlert()
     {
@@ -104,5 +103,20 @@ class Landing extends Component
         //     'position' => 'top-end']);
         // $this->alert('success', 'Success is approaching!');
         // dd('tse');
+    }
+
+    public function testapi()
+    {
+        // dd(base_path().'/python-scripts/test.py');
+
+        $process = new Process(['python3', base_path().'/python-scripts/test.py', 'hello']);
+        $process->run();
+
+        // executes after the command finishes
+        if (! $process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        dd($process->getOutput());
     }
 }
