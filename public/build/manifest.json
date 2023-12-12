@@ -11,7 +11,7 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-f22a8e11.css",
+    "file": "assets/app-945ab00e.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
