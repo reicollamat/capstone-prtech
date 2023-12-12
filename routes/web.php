@@ -8,6 +8,7 @@ use App\Http\Controllers\PurchaseListController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WordCloudController;
 use App\Http\Middleware\SellerAuthMiddleware;
 use App\Http\Middleware\SellerMiddleware;
 use App\Livewire\Gcash\Gcash1;
@@ -51,6 +52,8 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::post('generate', [WordCloudController::class, 'generatePositiveWordCloud'])->name('generate_positive_word_cloud');
 
 // get if user is_admin then redirect to designated view
 Route::get('/redirect', [LandingController::class, 'redirect']);
