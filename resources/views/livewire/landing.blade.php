@@ -43,4 +43,13 @@
 {{--        </div>--}}
 
 {{--    @endforeach--}}
+{{--       <form action="{{ route('generate_positive_word_cloud') }}" method="POST"> --}}
+{{--          @csrf --}}
+{{--           <button type="submit"> --}}
+{{--               Submit --}}
+{{--           </button> --}}
+{{--       </form> --}}
+      <button wire:click="testapi">
+          <p>click me to test api</p>
+      </button>
 </div>
