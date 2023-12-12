@@ -49,12 +49,6 @@ class Purchase extends Model
         return $this->hasOne(PurchaseCancellationInfo::class);
     }
 
-    // relationship to PurchaseReturnrefundInfo
-    public function purchase_returnrefund_info()
-    {
-        return $this->hasOne(PurchaseReturnrefundInfo::class);
-    }
-
 
     /**
      * The attributes that are mass assignable.

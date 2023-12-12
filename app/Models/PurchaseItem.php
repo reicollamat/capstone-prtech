@@ -23,9 +23,9 @@ class PurchaseItem extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function purchase_returnrefund_info()
+    public function item_returnrefund_info()
     {
-        return $this->hasOne(PurchaseReturnrefundInfo::class);
+        return $this->hasOne(ItemReturnrefundInfo::class);
     }
 
     // // relationship to Payment

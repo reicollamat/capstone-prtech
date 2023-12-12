@@ -9,14 +9,14 @@ class ReturnrefundImage extends Model
 {
     use HasFactory;
 
-    public function purchase_returnrefund_info()
+    public function item_returnrefund_info()
     {
-        return $this->belongsTo(PurchaseReturnrefundInfo::class);
+        return $this->belongsTo(ItemReturnrefundInfo::class);
     }
 
 
     protected $fillable = [
-        'purchase_returnrefund_info_id',
+        'item_returnrefund_info_id',
         'user_id',
         'img_path',
     ];
