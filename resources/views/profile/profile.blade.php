@@ -27,6 +27,10 @@
                         href="#purchasehistory-tab">
                         <i class="bi bi-bag-fill"></i> Purchases
                     </a>
+                    <a class="btn list-group-item rounded-0 text-start" data-toggle="tab"
+                        href="#returnrefund-tab">
+                        <i class="bi bi-box-fill"></i> Return/Refund
+                    </a>
                     <a class="btn list-group-item rounded-0 text-start" data-toggle="tab" href="#cart-tab">
                         <i class="bi bi-cart-fill"></i> Cart
                     </a>
@@ -45,14 +49,9 @@
                         @include('profile.partials.account-details')
                     </div>
 
-                    {{-- Addresses content --}}
-                    <div class="tab-pane fade" id="addresses-tab">
-                        <h5>Addresses:</h5>
-                    </div>
-
-                    {{-- Purchases content --}}
-                    <div class="tab-pane fade show active" id="purchasehistory-tab">
-                        @include('profile.partials.profile-purchases')
+                    {{-- ReturnRefund content --}}
+                    <div class="tab-pane fade" id="returnrefund-tab">
+                        @include('profile.partials.profile-returnrefund')
                     </div>
 
                     {{-- Cart content --}}
@@ -63,6 +62,16 @@
                     {{-- Wishlist content --}}
                     <div class="tab-pane fade" id="wishlist-tab">
                         <h5>Wishlist:</h5>
+                    </div>
+
+                    {{-- Addresses content --}}
+                    <div class="tab-pane fade" id="addresses-tab">
+                        <h5>Addresses:</h5>
+                    </div>
+
+                    {{-- Purchases content --}}
+                    <div class="tab-pane fade show active" id="purchasehistory-tab">
+                        @include('profile.partials.profile-purchases')
                     </div>
                 </div>
             </div>
@@ -79,6 +88,10 @@
                     </a>
                     <a class="btn list-group-item rounded-0 text-start" data-toggle="tab" href="#purchasehistory-tab">
                         <i class="bi bi-bag-fill"></i> Purchases
+                    </a>
+                    <a class="btn list-group-item rounded-0 text-start" data-toggle="tab"
+                        href="#returnrefund-tab">
+                        <i class="bi bi-box-fill"></i> Return/Refund
                     </a>
                     <a class="btn list-group-item rounded-0 text-start" data-toggle="tab" href="#cart-tab">
                         <i class="bi bi-cart-fill"></i> Cart
@@ -98,14 +111,9 @@
                         @include('profile.partials.account-details')
                     </div>
 
-                    {{-- Addresses content --}}
-                    <div class="tab-pane fade" id="addresses-tab">
-                        <h5>Addresses:</h5>
-                    </div>
-
-                    {{-- Purchase History content --}}
-                    <div class="tab-pane fade" id="purchasehistory-tab">
-                        @include('profile.partials.profile-purchases')
+                    {{-- ReturnRefund content --}}
+                    <div class="tab-pane fade" id="returnrefund-tab">
+                        <h5>Return Refund:</h5>
                     </div>
 
                     {{-- Cart content --}}
@@ -116,6 +124,16 @@
                     {{-- Wishlist content --}}
                     <div class="tab-pane fade" id="wishlist-tab">
                         <h5>Wishlist:</h5>
+                    </div>
+
+                    {{-- Addresses content --}}
+                    <div class="tab-pane fade" id="addresses-tab">
+                        <h5>Addresses:</h5>
+                    </div>
+
+                    {{-- Purchase History content --}}
+                    <div class="tab-pane fade" id="purchasehistory-tab">
+                        @include('profile.partials.profile-purchases')
                     </div>
                 </div>
             </div>

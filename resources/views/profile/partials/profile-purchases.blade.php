@@ -1,4 +1,10 @@
-<h5>Purchase History:</h5>
+
+<div class="d-flex justify-content-between mb-2">
+    <h5>Purchase History:</h5>
+    <a href="{{route('profile.edit', ['is_mypurchase' => 1])}}" class="btn bg-primary text-light p-2 rounded mt-0">
+        <i class="bi bi-arrow-clockwise">Refresh</i>
+    </a>
+</div>
 
 <div class="card text-center mb-10">
     <div class="card-body px-0">
@@ -34,8 +40,8 @@
                 <div class="tab-pane fade py-2 px-2 show active" id="pending-tab">
                     @if (count($user->purchase->where('purchase_status', 'pending')) == 0)
                         <div class="mb-4">
-                            You haven't place an order yet <i class="bi bi-chevron-double-right"></i>
-                            <a href="{{ route('index_shop') }}"> Make you first order</a>
+                            You have no pending orders yet <i class="bi bi-chevron-double-right"></i>
+                            <a href="{{ route('index_shop') }}"> Start shopping </a>
                         </div>
                     @else
                         <div class="row mx-1 mb-2 align-items-center">
@@ -91,7 +97,7 @@
                                                 <i class="bi bi-chevron-compact-down text-primary"></i>
                                             </div>
                                         </button>
-
+                                    </h2>
                                 </div> {{-- accordion header --}}
 
                                 <div id="collapse-{{ $purchase->id }}" class="accordion-collapse collapse"
@@ -113,16 +119,16 @@
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="modalLabel">Reason for order cancellation:</h1>
+                                                    <h1 class="modal-title fs-5" id="modalLabel"><i class="bi bi-exclamation-triangle-fill"></i> Confirmation</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="modal-body mx-2">
-                                                    <p class="text-gray-500 text-start mx-2">Reference Number: {{$purchase->reference_number}}</p>
+                                                <div class="modal-body text-start mx-2">
+                                                    <p class="text-gray-500 text-center mx-2">Reference Number: {{$purchase->reference_number}}</p>
                                                     Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}?
-                                                    <div class="text-start mx-2 mt-2">
+                                                    <div class="mx-2 mt-2">
                                                         Items:
                                                         @foreach ($purchase->purchase_items as $purchase_item)
-                                                            <div>
+                                                            <div class="mx-4">
                                                                 - {{$purchase_item->product->title}}
                                                             </div>
                                                         @endforeach
@@ -183,13 +189,14 @@
                 <div class="tab-pane fade py-2 px-2" id="shipping-tab">
                     <h6 class="text-yellow-500 italic mb-4">You can not cancel orders anymore after
                         shipment <i class="bi bi-exclamation-triangle-fill"></i>
-                        <p class="text-gray-500">Please read our <a href="#">policy</a>.</p>
+                        <p class="text-gray-500">Please read our <a href="{{route('shipping-return-policy')}}">policy</a>.</p>
                     </h6>
                     @if (count($user->purchase->where('purchase_status', 'shipping')) == 0)
                         <div class="mb-4">
                             You have no shipping orders.
                         </div>
                     @else
+                        <hr>
                         <div class="row mx-1 mb-2 align-items-center">
                             <div class="col-2 p-0">
                                 Reference #
@@ -249,7 +256,7 @@
                                                 <i class="bi bi-chevron-compact-down text-primary"></i>
                                             </div>
                                         </button>
-
+                                    </h2>
                                 </div> {{-- accordion header --}}
 
                                 <div id="collapse-{{ $purchase->id }}" class="accordion-collapse collapse"
@@ -359,13 +366,13 @@
                                                 <i class="bi bi-chevron-compact-down text-primary"></i>
                                             </div>
                                         </button>
-
+                                    </h2>
                                 </div> {{-- accordion header --}}
 
                                 <div id="collapse-{{ $purchase->id }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlush">
                                     <div class="accordion-body bg-secondary-subtle p-2">
-                                        @foreach ($purchase->purchase_items as $purchase_item)
+                                        @foreach ($purchase->purchase_items as $key => $purchase_item)
                                             <div class="visually-hidden">
                                                 {{ $product = App\Models\Product::find($purchase_item->product_id) }}
                                             </div>
@@ -390,17 +397,87 @@
                                                                 <div class="col-2 text-center">
                                                                     <h5>₱{{ $purchase_item->total_price }}</h5>
                                                                 </div>
-                                                                <div class="col-2 text-end">
+                                                                <div class="col-2 text-center">
                                                                     <button type="button"
                                                                         class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded">
                                                                         Review Product
                                                                     </button>
                                                                 </div>
-                                                                <div class="col-2 text-end">
-                                                                    <button type="button"
-                                                                        class="bg-transparent text-red-500 text-sm p-2 rounded">
-                                                                        Return/Refund
-                                                                    </button>
+                                                                    @if ($purchase_item->purchase_returnrefund_info)
+                                                                        <div class="col-2 text-center">
+                                                                            <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i> Pending return/refund request</p>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="col-2 text-end">
+                                                                            <!-- Button trigger modal -->
+                                                                            <button type="button" class="bg-secondary text-light text-sm p-2 rounded" data-bs-toggle="modal" data-bs-target="#returnRefundModal{{$key}}">
+                                                                                Return/Refund
+                                                                            </button>
+
+                                                                            <!-- Modal -->
+                                                                            <div class="modal fade" id="returnRefundModal{{$key}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                    <div class="modal-content">
+                                                                                        <form action="{{ route('profile.request_returnrefund') }}" method="POST" enctype="multipart/form-data">
+                                                                                            @csrf
+                                                                                            <div class="modal-header">
+                                                                                                <h1 class="modal-title fs-5" id="modalLabel">Reason for return/refund:</h1>
+                                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                            </div>
+                                                                                            <div class="modal-body text-start mx-2">
+                                                                                                <p class="text-gray-500 text-center mx-2">{{$purchase_item->product->title}}</p>
+                                                                                                {{-- Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}? --}}
+                                                                                                Please complete the following form in requesting a return/refund item to {{ $purchase->seller->shop_name }} shop.
+                                                                                                <div class="mx-2 my-4" x-data="{lists: [{id: 1, name: 'Product Defect or Damage'}, {id: 2, name: 'Wrong Product Received'}, {id: 3, name: 'Not Compatible'}, {id: 4, name: 'Quality Concerns'}], reason: ''}">
+                                                                                                    <h4>Reason for return/refund:</h4>
+                                                                                                    <template x-for="list in lists" :key="list.id">
+                                                                                                        <div class="form-check ml-4">
+                                                                                                            <input class="form-check-input" x-model="reason" type="radio" :value="list.name" :id="list.name" required>
+                                                                                                            <label :for="list.name" x-text="list.name"></label>
+                                                                                                        </div>
+                                                                                                    </template>
+                                                                                                    <p>Selected value: <code x-text="reason"></code></p>
+                                                                                                </div>
+                                                                                                <div class="mx-2 my-4" x-data="{lists: [{id: 1, name: 'Original Packaging'}, {id: 2, name: 'Unused/Unworn'}], condition: ''}">
+                                                                                                    <h4>Condition of the product:</h4>
+                                                                                                    <template x-for="list in lists" :key="list.id">
+                                                                                                        <div class="form-check ml-4">
+                                                                                                            <input class="form-check-input" x-model="condition" type="radio" :value="list.name" :id="list.name" required>
+                                                                                                            <label :for="list.name" x-text="list.name"></label>
+                                                                                                        </div>
+                                                                                                    </template>
+                                                                                                    <p>Selected value: <code x-text="condition"></code></p>
+                                                                                                </div>
+
+                                                                                                <div class="mx-2 my-4">
+                                                                                                    <h4>Photographic evidence:</h4>
+                                                                                                    <small>You can select multiple images</small>
+                                                                                                    <input type="file" class="form-control mt-2 @error('files') is-invalid @enderror" name="evidence_imgs[]" id="evidence_imgs" multiple>
+                                                                                                    @error('evidence_imgs')
+                                                                                                        <small class="text-red-500">{{$message}}</small>
+                                                                                                    @enderror
+                                                                                                </div>
+
+                                                                                                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
+                                                                                                <input type="text" name="purchase_item_id" value="{{$purchase_item->id}}" hidden>
+
+                                                                                                <div class="form-check ml-28">
+                                                                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                                                                                                    <label class="form-check-label text-sm" for="flexCheckDefault">
+                                                                                                        I have read and accept the <a href="#">Return/Refund Policy</a> of PR-Tech.
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="modal-footer">
+                                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                                <button type="submit" class="btn btn-danger">Submit</button>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                    @endif
+
                                                                 </div>
                                                             </div>
                                                         </div>
