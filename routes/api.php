@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\testcontroller;
+use App\Http\Controllers\WordCloudController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('product', testcontroller::class);
+// Route::apiResource('product', testcontroller::class);
 //
 //Route::apiResource('product/{$id}', testcontroller::class);
+
+// Route::post('/generate', [WordCloudController::class, 'generatePositiveWordCloud'])->name('generate_positive_word_cloud');
