@@ -151,7 +151,7 @@ class CpuComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-            // else if there is only one image in the array create a row in db with no image
+                // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,

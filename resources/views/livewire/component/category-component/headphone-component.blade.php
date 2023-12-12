@@ -12,7 +12,7 @@
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Product Name" required>
                     @error('productName')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                    <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -27,7 +27,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="XXX-XXX" required>
                         @error('productSKU')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="lowercase, no spaces seprated by hyphen " required>
                         @error('productSlug')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write your thoughts here..." required></textarea>
                 @error('productDescription')
-                    <span class="font-sm text-red-500">{{ $message }}</span>
+                <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
             <div class="grid md:grid-cols-3 md:gap-8 ">
@@ -71,7 +71,7 @@
                             <option value="used">Used</option>
                         </select>
                         @error('productCondition')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -89,9 +89,22 @@
                             <option value="unavailable">Unavailable</option>
                         </select>
                         @error('productStatus')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
+                </div>
+                <!-- Product Weight -->
+                <div class="mb-4">
+                    <label for="product_weight"
+                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product Weight (in
+                        KG)
+                    </label>
+                    <input type="number" id="product_weight" wire:model.blur="product_weight" min="0.01" step="0.01"
+                        class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="0.30" required>
+                    @error('product_weight')
+                    <span class="font-sm text-red-500">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -109,7 +122,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Sony, JBL, Logitech, etc." required>
                         @error('brand')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="grid md:grid-cols-2 gap-4">
@@ -123,7 +136,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="In Pesos, 1000.00" required>
                             @error('price')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -146,7 +159,7 @@
                                 <option value=">108 dB & above">108 dB & above</option>
                             </select>
                             @error('sensitivity')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -170,7 +183,7 @@
                             <option value="wireless">Wireless 2.4Ghz</option>
                         </select>
                         @error('headphone_connection_type')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -194,7 +207,7 @@
                             <option value="n/a">N/A</option>
                         </select>
                         @error('noise_control')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -217,7 +230,7 @@
                                 <option value="0">None</option>
                             </select>
                             @error('mic_availability')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -234,7 +247,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="White, Black, Gray, etc." required>
                             @error('color')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -250,7 +263,7 @@
                                 <option value="Supra Aural">Supra Aural</option>
                             </select>
                             @error('enclosure_type')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -267,7 +280,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock Currently On-Hand" required>
                             @error('stocks')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -279,7 +292,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock to Hold" required>
                             @error('reserve_stocks')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -313,10 +326,9 @@
                                     800x400px)
                                 </p>
                             </div>
-                            <input id="dropzone-file" type="file" wire:model="productImages" class="hidden"
-                                multiple />
+                            <input id="dropzone-file" type="file" wire:model="productImages" class="hidden" multiple />
                             @error('productImages.*')
-                                <span class="error">{{ $message }}</span>
+                            <span class="error">{{ $message }}</span>
                             @enderror
                         </label>
                     </div>
@@ -332,15 +344,14 @@
 
                     <div class="grid md:grid-cols-3 gap-1 h-auto">
                         @if ($productImages)
-                            @foreach ($productImages as $image)
-                                <!-- Button trigger modal -->
-                                <button type="button" class="" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                    wire:click="$set('previewImage', '{{ $image->temporaryUrl() }}')">
-                                    <img class="h-auto max-w-full border border-gray-400"
-                                        src="{{ $image->temporaryUrl() }}" alt="image description">
-                                </button>
-                            @endforeach
+                        @foreach ($productImages as $image)
+                        <!-- Button trigger modal -->
+                        <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            wire:click="$set('previewImage', '{{ $image->temporaryUrl() }}')">
+                            <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
+                                alt="image description">
+                        </button>
+                        @endforeach
                         @endif
                     </div>
 
