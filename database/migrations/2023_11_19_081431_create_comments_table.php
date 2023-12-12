@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->text('text')->nullable();
             $table->float('rating')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function comments(): Hasmany
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comment::class);
     }
 
     // relationship to Notification
