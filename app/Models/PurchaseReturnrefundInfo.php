@@ -25,6 +25,11 @@ class PurchaseReturnrefundInfo extends Model
         return $this->belongsTo(Seller::class);
     }
 
+    public function returnrefund_images()
+    {
+        return $this->hasMany(ReturnrefundImage::class);
+    }
+
 
     protected $fillable = [
         'purchase_item_id',
@@ -33,8 +38,9 @@ class PurchaseReturnrefundInfo extends Model
         'request_date',
         'status',
         'reason',
+        'condition',
         'refund_option', // full-refund or partial-refund
-        'approved_date',
+        'agreement_date',
         'returned_date',
     ];
 }

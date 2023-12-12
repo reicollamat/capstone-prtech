@@ -23,6 +23,11 @@ class PurchaseItem extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function purchase_returnrefund_info()
+    {
+        return $this->hasOne(PurchaseReturnrefundInfo::class);
+    }
+
     // // relationship to Payment
     // public function payment()
     // {
