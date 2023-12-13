@@ -234,7 +234,7 @@
             <div class="relative bg-white rounded shadow shadow-cyan-500/50">
                 <div class="px-3 pt-6 pb-6 text-center relative z-10">
                     <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Positive Sentiment Overtime</h4>
-                    <h3 class="text-2xl text-gray-700 font-semibold leading-tight my-1.5 text-green-600">{{ $this->getPositveCommnetsCount }}</h3>
+                    <h3 class="text-2xl font-semibold leading-tight my-1.5 text-green-600">{{ $this->getPositveCommentsCount() }}</h3>
                     {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
                 </div>
                 <div class="absolute inset-0 pt-12">
@@ -246,7 +246,7 @@
             <div class="relative bg-white rounded shadow shadow-cyan-500/50">
                 <div class="px-3 pt-6 pb-6 text-center relative z-10">
                     <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Negative Sentiment Overtime</h4>
-                    <h3 class="text-2xl text-gray-700 font-semibold leading-tight my-1.5 text-red-600">3,682</h3>
+                    <h3 class="text-2xl  font-semibold leading-tight my-1.5 text-red-600">{{ $this->getNegativeCommentsCount() }}</h3>
                     {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
                 </div>
                 <div class="absolute inset-0 pt-12">
@@ -256,10 +256,10 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4 grid lg:grid-cols-2 gap-4">
+        <div class="mt-4 grid lg:grid-cols-2 gap-4" wire:init="fetchNegativeCommentsApi">
             <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                 <button type="button" @click="showModal = !showModal">
-                    <img src="{{ asset('storage/2023-12-14_positive.png') }}"
+                    <img src="{{ asset($fetchNegativeCommentsApi) }}"
                         class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="">
                 </button>
 
