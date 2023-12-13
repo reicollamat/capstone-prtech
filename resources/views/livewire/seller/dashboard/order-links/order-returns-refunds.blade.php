@@ -153,10 +153,10 @@
                                     </div>
                                     <div class="px-4">
                                         <h5>Photographic evidence:</h5>
-                                        <div class="grid grid-flow-col auto-cols-max gap-3">
+                                        <div class="grid grid-flow-col auto-cols-max gap-3 mb-3">
                                             @foreach ($item->returnrefund_images as $image)
                                                 <img src="{{ asset($image->img_path) }}"
-                                                    class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-40 h-40"
+                                                    class="rounded-xl border border-gray-600 d-block h-40"
                                                     alt="Product-Thumbnail">
                                             @endforeach
                                         </div>
