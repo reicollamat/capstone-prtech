@@ -7,30 +7,44 @@ use App\Helpers\ReferenceGeneratorHelper;
 use App\Mail\OrderShipped;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
+use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 
 class Landing extends Component
 {
     use LivewireAlert;
     use WithPagination;
 
+    public $asset;
+
     public int $count = 0;
 
     public string $mailStatus;
+
+    public $purchase;
+
+    public $readyToLoad = false;
 
     public function mount()
     {
         $this->purchase = Purchase::find(2);
 
         // dd($this->purchase_items);
+
+        // $this->testapi();
     }
+
+    // public function rendered()
+    // {
+    //     $this->testapi();
+    //     // dd('test');
+    // }
 
     public function placeholder()
     {
@@ -51,8 +65,6 @@ class Landing extends Component
     {
         $this->count++;
     }
-
-    public $purchase;
 
     public function sendMail()
     {
@@ -107,16 +119,51 @@ class Landing extends Component
 
     public function testapi()
     {
+        // Get the current date and time using Carbon
+        $currentDateTime = Carbon::now();
+
         // dd(base_path().'/python-scripts/test.py');
 
-        $process = new Process(['python3', base_path().'/python-scripts/test.py', 'hello']);
-        $process->run();
+        // dd(public_path('storage'));
 
-        // executes after the command finishes
-        if (! $process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+        $response = Http::post('http://magi001.pythonanywhere.com/generatenegative', [
+            'reviews' => 'John',
+        ]);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            // Access the response body as an array or JSON
+            $data = $response->headers(); // If the response is in JSON format
+
+            $imageData = $response->body(); // Get the image data
+            // dd($imageData);
+
+            // Format the date and time to be used in the file name
+            $fileName = $currentDateTime->format('Y-m-d').'_1_pw.png'; // Rename it to date and p for positive and w for wordlcloud
+
+            // Save the image to a file
+            $imagePath = public_path('storage'); // Change the path as needed
+            file_put_contents($imagePath.'/'.$fileName, $imageData);
+
+            $this->asset = 'storage/'.$fileName;
+
+        // dd(asset('storage/'.$fileName));
+
+        // dd($data);
+        // Process the data
+        } else {
+            // Handle the failed request
+            $statusCode = $response->status(); // Get the status code
+            $errorBody = $response->body(); // Get the error body
+            // dd($statusCode, $errorBody);
+            // Handle the error
         }
 
-        dd($process->getOutput());
+        // sleep(30);
     }
+    // public function readyLoad()
+    // {
+    //     $this->readyToLoad = true;
+    //     $this->testapi();
+    // }
 }
