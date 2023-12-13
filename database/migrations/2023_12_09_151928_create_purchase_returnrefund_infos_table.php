@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchase_returnrefund_infos', function (Blueprint $table) {
+        Schema::create('item_returnrefund_infos', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('purchase_item_id')->constrained()->cascadeOnDelete();
@@ -21,8 +21,9 @@ return new class extends Migration
             $table->timestamp('request_date');
             $table->string('status');
             $table->string('reason');
-            $table->string('refund_option');
-            $table->timestamp('approved_date')->nullable();
+            $table->string('condition');
+            $table->string('refund_option')->nullable();
+            $table->timestamp('agreement_date')->nullable();
             $table->timestamp('returned_date')->nullable();
 
             $table->softDeletes();
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchase_returnrefund_infos');
+        Schema::dropIfExists('item_returnrefund_infos');
     }
 };

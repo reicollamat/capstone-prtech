@@ -43,7 +43,7 @@
                                             <span>Profile</span>
                                         </div>
                                     </a>
-                                    <a href="{{route('profile.edit', ['is_mypurchase' => 1])}}"
+                                    <a href="{{route('profile.edit', ['profile_activetab' => 'purchases'])}}"
                                         class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
 
                                         <div class="flex gap-2 items-center">

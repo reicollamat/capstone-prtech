@@ -39,6 +39,9 @@ class ComputerCaseComponent extends Component
     #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
     public $productStatus;
 
+    #[Validate('required|numeric', message: 'Please provide product weight')]
+    public $product_weight;
+
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -100,6 +103,7 @@ class ComputerCaseComponent extends Component
             'productDescription' => 'required',
             'productCondition' => 'required|not_in:Select Condition',
             'productStatus' => 'required|not_in:Select Status',
+            'product_weight' => 'required|numeric',
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
@@ -140,6 +144,8 @@ class ComputerCaseComponent extends Component
                 // 'image' => implode(',', $storeas),
                 // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
+                'status' => $validator['productStatus'],
+                'weight' => $validator['product_weight'],
             ]);
 
             // loop through the images from the file upload
@@ -151,7 +157,7 @@ class ComputerCaseComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-            // else if there is only one image in the array create a row in db with no image
+                // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,

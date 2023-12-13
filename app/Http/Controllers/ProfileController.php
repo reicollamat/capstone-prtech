@@ -6,6 +6,9 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseCancellationInfo;
+use App\Models\PurchaseItem;
+use App\Models\ItemReturnrefundInfo;
+use App\Models\ReturnrefundImage;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,19 +23,19 @@ class ProfileController extends Controller
      */
     public function profile(Request $request): View
     {
-        // dd($request->is_mypurchase);
-        if ($request->is_mypurchase) {
+        // dd($request->profile_activetab);
+        if ($request->profile_activetab) {
             // if route from "my purchase" button
-            $is_mypurchase = $request->is_mypurchase;
+            $profile_activetab = $request->profile_activetab;
         } else {
-            $is_mypurchase = 0;
+            $profile_activetab = 0;
         }
         $user = $request->user();
         // dd(count($user->purchase));
 
         return view('profile.profile', [
             'user' => $user,
-            'is_mypurchase' => $is_mypurchase,
+            'profile_activetab' => $profile_activetab,
         ]);
     }
 
@@ -61,17 +64,65 @@ class ProfileController extends Controller
         $user = User::find($request->user_id);
 
         // dd($purchase->purchase_status);
-        $shipment = new PurchaseCancellationInfo([
+        $cancellation = new PurchaseCancellationInfo([
             'purchase_id' => $purchase->id,
             'user_id' => $user->id,
             'seller_id' => $purchase->seller->id,
             'request_date' => now(),
         ]);
-        $shipment->save();
+        $cancellation->save();
         $purchase->update(['purchase_status' => 'cancellation_pending']);
 
 
-        return Redirect::route('profile.edit', ['is_mypurchase' => true])->with('notification', 'Profile Updated!');
+        return Redirect::route('profile.edit', ['profile_activetab' => true])->with('notification', 'Cancellation requested!');
+    }
+
+    /**
+     * Request return/refund of order
+     */
+    public function request_returnrefund(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'evidence_imgs.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120'
+        ]);
+        // dd($request->evidence_imgs);
+
+        $user = User::find($request->user_id);
+        $purchase_item = PurchaseItem::find($request->purchase_item_id);
+        $img_path = null;
+
+
+        // save a new database returnrefund info
+        $returnrefund_info = new ItemReturnrefundInfo([
+            'purchase_item_id' => $purchase_item->id,
+            'user_id' => $user->id,
+            'seller_id' => $purchase_item->purchase->seller_id,
+            'request_date' => now(),
+            'status' => 'returnrefund_pending',
+            'reason' => $request->reason,
+            'condition' => $request->condition,
+        ]);
+        $returnrefund_info->save();
+
+        // loop through evidence images, store it, and save to database
+        if ($request->has('evidence_imgs')) {
+            foreach ($request->evidence_imgs as $key => $image) {
+                $img_path = $image->storeAs(
+                    'returnrefund_imgs',
+                    $purchase_item->id . '-' . $key . '-' . 'returnrefund_img' . '.' . $image->getClientOriginalExtension(),
+                    'real_public'
+                );
+
+                $returnrefund_img = new ReturnrefundImage([
+                    'item_returnrefund_info_id' => $returnrefund_info->id,
+                    'user_id' => $user->id,
+                    'img_path' => $img_path,
+                ]);
+                $returnrefund_img->save();
+            }
+        }
+
+        return Redirect::route('profile.edit', ['profile_activetab' => true])->with('notification', 'Return/refund requested!');
     }
 
     /**

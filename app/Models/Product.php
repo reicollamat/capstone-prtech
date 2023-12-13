@@ -160,7 +160,7 @@ class Product extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comment::class);
     }
 
     public function seller(): BelongsTo
