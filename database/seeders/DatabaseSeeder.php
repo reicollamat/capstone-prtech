@@ -168,6 +168,7 @@ class DatabaseSeeder extends Seeder
             SpeakerSeeder::class,
             VideoCardSeeder::class,
             WebcamSeeder::class,
+            SellerShopMetricsSeeder::class,
             CommentSeeder::class,
         ]);
 

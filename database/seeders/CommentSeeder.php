@@ -20,13 +20,13 @@ class CommentSeeder extends Seeder
         $sql = File::get('database/seeders/sql/comments-2.sql');
         DB::unprepared($sql);
 
-        $sql = File::get('database/seeders/sql/comments-3.sql');
-        DB::unprepared($sql);
-
-        $sql = File::get('database/seeders/sql/comments-4.sql');
-        DB::unprepared($sql);
-
-        $sql = File::get('database/seeders/sql/comments-5.sql');
-        DB::unprepared($sql);
+        // $sql = File::get('database/seeders/sql/comments-3.sql');
+        // DB::unprepared($sql);
+        //
+        // $sql = File::get('database/seeders/sql/comments-4.sql');
+        // DB::unprepared($sql);
+        //
+        // $sql = File::get('database/seeders/sql/comments-5.sql');
+        // DB::unprepared($sql);
     }
 }
