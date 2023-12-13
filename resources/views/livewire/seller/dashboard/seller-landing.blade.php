@@ -234,7 +234,7 @@
             <div class="relative bg-white rounded shadow shadow-cyan-500/50">
                 <div class="px-3 pt-6 pb-6 text-center relative z-10">
                     <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Positive Sentiment Overtime</h4>
-                    <h3 class="text-2xl text-gray-700 font-semibold leading-tight my-1.5 text-green-600">3,682</h3>
+                    <h3 class="text-2xl text-gray-700 font-semibold leading-tight my-1.5 text-green-600">{{ $this->getPositveCommnetsCount }}</h3>
                     {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
                 </div>
                 <div class="absolute inset-0 pt-12">
