@@ -31,7 +31,10 @@ class SellerLanding extends Component
 
         $salesData = Purchase::where('seller_id', $this->seller_id)->where('purchase_status', 'completed')
             ->select(['total_amount', 'completion_date'])
+            // ->groupBy('completion_date')
             ->get();
+
+        // dd($salesData);
 
         foreach ($salesData as $sale) {
             $date = $sale['completion_date'];
