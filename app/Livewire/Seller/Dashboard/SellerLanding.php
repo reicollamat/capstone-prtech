@@ -8,6 +8,7 @@ use App\Models\Purchase;
 use App\Models\Seller;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -16,8 +17,14 @@ use Livewire\Component;
 #[Layout('layouts.seller.seller-layout')]
 class SellerLanding extends Component
 {
+    use LivewireAlert;
+
     #[Locked]
     public $seller_id;
+
+    public string $p_asset;
+
+    public string $n_asset;
 
     public function mount()
     {
@@ -25,7 +32,7 @@ class SellerLanding extends Component
 
         // dd($this->seller_id);
 
-        // $ncount = Comment::wherein('rating', [1, 2])
+        // $ncount = Comment::wherein('rating', [1,2])
         //     ->where('created_at', '>=', now()->subDays(30))
         //     ->select('text')
         //     ->get();
@@ -39,6 +46,14 @@ class SellerLanding extends Component
         // dd($commentString);
 
         // dd($ncount[0]->text);
+
+        // check if there is no data
+        // if ($ncount->isEmpty()) {
+        //     // $this->n_asset = public_path('img/notenoughdata.png');
+        //     dd('no data');
+        // }
+
+        // dd($ncount);
 
     }
 
@@ -161,28 +176,24 @@ class SellerLanding extends Component
     {
         $ncount = Comment::wherein('rating', [1, 2])
             ->where('created_at', '>=', now()->subDays(30))
-            ->count();
+            ->count() ?? 0;
 
-        return $ncount;
+        return $ncount ?? 0;
     }
 
     #[Computed]
     public function getPositveCommentsCount()
     {
-        $ncount = Comment::wherein('rating', [3, 4, 5])
+        $pcount = Comment::wherein('rating', [3, 4, 5])
             ->where('created_at', '>=', now()->subDays(30))
-            ->count();
+            ->count() ?? 0;
 
-        return $ncount;
+        return $pcount ?? 0;
     }
 
     // #[Computed]
     public function fetchNegativeCommentsApi()
     {
-        $ncount = Comment::wherein('rating', [1, 2])
-            ->where('created_at', '>=', now()->subDays(30))
-            ->count();
-
         // Get the current date and time using Carbon
         $currentDateTime = Carbon::now();
 
@@ -191,93 +202,130 @@ class SellerLanding extends Component
             ->select('text')
             ->get();
 
-        $commentString = '';
+        // check if there is no data
+        if ($ncount->isEmpty()) {
 
-        foreach ($ncount as $n) {
-            $commentString .= $n->text;
-        }
-
-        // dd($commentString);
-
-        $response = Http::post('http://magi001.pythonanywhere.com/generatenegative', [
-            'reviews' => $commentString,
-        ]);
-
-        // Check if the request was successful
-        if ($response->successful()) {
-            // Access the response body as an array or JSON
-            $data = $response->headers(); // If the response is in JSON format
-
-            $imageData = $response->body(); // Get the image data
-            // dd($imageData);
-
-            // Format the date and time to be used in the file name
-            $fileName = $currentDateTime->format('Y-m-d').'_1_pw.png'; // Rename it to date and p for positive and w for wordlcloud
-
-            // Save the image to a file
-            $imagePath = public_path('storage'); // Change the path as needed
-            file_put_contents($imagePath.'/'.$fileName, $imageData);
-
-            return 'storage/'.$fileName;
-
-        // dd(asset('storage/'.$fileName));
-
-        // dd($data);
-        // Process the data
+            // if there is no data then set the image to notenoughdata.png
+            $this->n_asset = 'img/notenoughdata.png';
         } else {
-            // Handle the failed request
-            $statusCode = $response->status(); // Get the status code
-            $errorBody = $response->body(); // Get the error body
-            // dd($statusCode, $errorBody);
-            // Handle the error
+
+            // else fetch to api and set the image
+            $commentString = '';
+
+            foreach ($ncount as $n) {
+                $commentString .= $n->text;
+            }
+
+            // dd($commentString);
+
+            $response = Http::post('http://magi001.pythonanywhere.com/generatenegative', [
+                'reviews' => $commentString,
+            ]);
+
+            // Check if the request was successful
+            if ($response->successful()) {
+                // Access the response body as an array or JSON
+                $data = $response->headers(); // If the response is in JSON format
+
+                $imageData = $response->body(); // Get the image data
+                // dd($imageData);
+
+                // Format the date and time to be used in the file name
+                $fileName = $currentDateTime->format('Y-m-d').'_1_nw.png'; // Rename it to date and p for positive and w for wordlcloud
+
+                // Save the image to a file
+                $imagePath = public_path('storage'); // Change the path as needed
+                file_put_contents($imagePath.'/'.$fileName, $imageData);
+
+                // return 'storage/'.$fileName;
+
+                $this->n_asset = 'storage/'.$fileName;
+            // dd(asset('storage/'.$fileName));
+            // dd($data);
+
+            } else {
+                // Handle the failed request
+                $statusCode = $response->status(); // Get the status code
+                $errorBody = $response->body(); // Get the error body
+
+                $this->alert('error', 'Something went wrong'.$errorBody, [
+                    'position' => 'top-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                ]);
+
+            }
         }
+
     }
 
     // #[Computed]
     public function fetchPositiveCommentsApi()
     {
-        $ncount = Comment::wherein('rating', [3, 4, 5])
+        $pcount = Comment::wherein('rating', [3, 4, 5])
             ->where('created_at', '>=', now()->subDays(30))
-            ->count();
+            ->select('text')
+            ->get();
 
-        // Get the current date and time using Carbon
-        $currentDateTime = Carbon::now();
+        // check if there is no data
+        if ($pcount->isEmpty()) {
 
-        // dd(base_path().'/python-scripts/test.py');
-
-        // dd(public_path('storage'));
-
-        $response = Http::post('http://magi001.pythonanywhere.com/generatepositive', [
-            'reviews' => 'John',
-        ]);
-
-        // Check if the request was successful
-        if ($response->successful()) {
-            // Access the response body as an array or JSON
-            $data = $response->headers(); // If the response is in JSON format
-
-            $imageData = $response->body(); // Get the image data
-            // dd($imageData);
-
-            // Format the date and time to be used in the file name
-            $fileName = $currentDateTime->format('Y-m-d').'_1_pw.png'; // Rename it to date and p for positive and w for wordlcloud
-
-            // Save the image to a file
-            $imagePath = public_path('storage'); // Change the path as needed
-            file_put_contents($imagePath.'/'.$fileName, $imageData);
-
-            $this->asset = 'storage/'.$fileName;
-
-        // dd(asset('storage/'.$fileName));
-
-        // dd($data);
-        // Process the data
+            // if no data show not enough data
+            $this->n_asset = 'img/notenoughdata.png';
         } else {
-            // Handle the failed request
-            $statusCode = $response->status(); // Get the status code
-            $errorBody = $response->body(); // Get the error body
-            // dd($statusCode, $errorBody);
-            // Handle the error
+            // else fetch and show data
+            $commentString = '';
+
+            foreach ($pcount as $n) {
+                $commentString .= $n->text;
+            }
+
+            // Get the current date and time using Carbon
+            $currentDateTime = Carbon::now();
+
+            // dd(base_path().'/python-scripts/test.py');
+
+            // dd(public_path('storage'));
+
+            $response = Http::post('http://magi001.pythonanywhere.com/generatepositive', [
+                'reviews' => $commentString,
+            ]);
+
+            // Check if the request was successful
+            if ($response->successful()) {
+                // Access the response body as an array or JSON
+                $data = $response->headers(); // If the response is in JSON format
+
+                $imageData = $response->body(); // Get the image data
+                // dd($imageData);
+
+                // Format the date and time to be used in the file name
+                $fileName = $currentDateTime->format('Y-m-d').'_1_pw.png'; // Rename it to date and p for positive and w for wordlcloud
+
+                // Save the image to a file
+                $imagePath = public_path('storage'); // Change the path as needed
+                file_put_contents($imagePath.'/'.$fileName, $imageData);
+
+                $this->p_asset = 'storage/'.$fileName;
+
+            // dd(asset('storage/'.$fileName));
+
+            // dd($data);
+            // Process the data
+            } else {
+                // Handle the failed request
+                $statusCode = $response->status(); // Get the status code
+                $errorBody = $response->body(); // Get the error body
+                $this->alert('error', 'Something went wrong'.$errorBody, [
+                    'position' => 'top-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                ]);
+
+                // dd($statusCode, $errorBody);
+                // Handle the error
+            }
         }
+
     }
 }
