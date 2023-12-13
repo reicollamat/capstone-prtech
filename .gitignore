@@ -1,6 +1,10 @@
 /.phpunit.cache
 /node_modules
 # /public/build
+
+/public/returnrefund_imgs
+/public/product-image-uploads
+
 /public/hot
 /public/storage
 /storage/*.key
