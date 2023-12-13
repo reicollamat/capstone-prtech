@@ -117,3 +117,13 @@ body.swal2-toast-shown .swal2-container{
 .swal2-popup.swal2-toast.swal2-icon-success {
     border: rgba(30, 41, 59, 0.2) 1px solid;
 }
+
+.margin-top{
+    margin-top: 1.5rem;
+}
+@media (min-width: 1280px) {
+
+    .margin-top {
+        margin-top: 0!important;
+    }
+}
