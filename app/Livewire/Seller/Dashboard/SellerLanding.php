@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Seller\Dashboard;
 
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Seller;
@@ -20,7 +21,7 @@ class SellerLanding extends Component
     {
         $this->seller_id = auth()->user()->seller->id;
 
-        // $this->getTotalEarnings();
+        // dd($this->seller_id);
 
     }
 
@@ -136,5 +137,21 @@ class SellerLanding extends Component
             ->get();
 
         return $sales;
+    }
+
+    #[Computed]
+    public function getNegativeCommnetsCount()
+    {
+
+    }
+
+    #[Computed]
+    public function getPositveCommnetsCount()
+    {
+        $ncount = Comment::wherein('rating', [3, 4, 5])
+            ->where('created_at', '>=', now()->subDays(30))
+            ->count();
+
+        return $ncount;
     }
 }
