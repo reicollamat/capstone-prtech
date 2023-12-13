@@ -1,7 +1,7 @@
 
 <div class="d-flex justify-content-between mb-2">
     <h5>Purchase History:</h5>
-    <a href="{{route('profile.edit', ['is_mypurchase' => 1])}}" class="btn bg-primary text-light p-2 rounded mt-0">
+    <a href="{{route('profile.edit', ['profile_activetab' => 'purchases'])}}" class="btn bg-primary text-light p-2 rounded mt-0">
         <i class="bi bi-arrow-clockwise">Refresh</i>
     </a>
 </div>
@@ -408,7 +408,7 @@
                                                                         <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i> Pending return/refund request</p>
                                                                     </div>
                                                                 @else
-                                                                    <div class="col-2 text-end">
+                                                                    <div class="col-2 text-center">
                                                                         <!-- Button trigger modal -->
                                                                         <button type="button" class="bg-secondary text-light text-sm p-2 rounded" data-bs-toggle="modal" data-bs-target="#returnRefundModal{{$key}}">
                                                                             Return/Refund

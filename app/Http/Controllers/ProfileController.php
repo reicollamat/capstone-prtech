@@ -23,19 +23,19 @@ class ProfileController extends Controller
      */
     public function profile(Request $request): View
     {
-        // dd($request->is_mypurchase);
-        if ($request->is_mypurchase) {
+        // dd($request->profile_activetab);
+        if ($request->profile_activetab) {
             // if route from "my purchase" button
-            $is_mypurchase = $request->is_mypurchase;
+            $profile_activetab = $request->profile_activetab;
         } else {
-            $is_mypurchase = 0;
+            $profile_activetab = 0;
         }
         $user = $request->user();
         // dd(count($user->purchase));
 
         return view('profile.profile', [
             'user' => $user,
-            'is_mypurchase' => $is_mypurchase,
+            'profile_activetab' => $profile_activetab,
         ]);
     }
 
@@ -74,7 +74,7 @@ class ProfileController extends Controller
         $purchase->update(['purchase_status' => 'cancellation_pending']);
 
 
-        return Redirect::route('profile.edit', ['is_mypurchase' => true])->with('notification', 'Cancellation requested!');
+        return Redirect::route('profile.edit', ['profile_activetab' => true])->with('notification', 'Cancellation requested!');
     }
 
     /**
@@ -122,7 +122,7 @@ class ProfileController extends Controller
             }
         }
 
-        return Redirect::route('profile.edit', ['is_mypurchase' => true])->with('notification', 'Return/refund requested!');
+        return Redirect::route('profile.edit', ['profile_activetab' => true])->with('notification', 'Return/refund requested!');
     }
 
     /**

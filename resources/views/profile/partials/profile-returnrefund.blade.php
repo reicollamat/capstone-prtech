@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between mb-2">
     <h5>Return/Refund Items:</h5>
-    <a href="{{route('profile.edit', ['is_mypurchase' => 1])}}" class="btn bg-primary text-light p-2 rounded mt-0">
+    <a href="{{route('profile.edit', ['profile_activetab' => 'returnrefund'])}}" class="btn bg-primary text-light p-2 rounded mt-0">
         <i class="bi bi-arrow-clockwise">Refresh</i>
     </a>
 </div>
