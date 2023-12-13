@@ -30,6 +30,7 @@ class Comments extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+        'seller_id',
         'text',
         'rating',
     ];
