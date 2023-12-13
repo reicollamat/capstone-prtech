@@ -74,7 +74,7 @@ class ProfileController extends Controller
         $purchase->update(['purchase_status' => 'cancellation_pending']);
 
 
-        return Redirect::route('profile.edit', ['profile_activetab' => true])->with('notification', 'Cancellation requested!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #' . $purchase->reference_number . ' requested!');
     }
 
     /**
@@ -82,10 +82,10 @@ class ProfileController extends Controller
      */
     public function request_returnrefund(Request $request): RedirectResponse
     {
+        // dd($request->condition);
         $request->validate([
             'evidence_imgs.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120'
         ]);
-        // dd($request->evidence_imgs);
 
         $user = User::find($request->user_id);
         $purchase_item = PurchaseItem::find($request->purchase_item_id);
@@ -98,7 +98,7 @@ class ProfileController extends Controller
             'user_id' => $user->id,
             'seller_id' => $purchase_item->purchase->seller_id,
             'request_date' => now(),
-            'status' => 'returnrefund_pending',
+            'status' => 'returnrefund-pending',
             'reason' => $request->reason,
             'condition' => $request->condition,
         ]);
@@ -122,7 +122,7 @@ class ProfileController extends Controller
             }
         }
 
-        return Redirect::route('profile.edit', ['profile_activetab' => true])->with('notification', 'Return/refund requested!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for ' . $purchase_item->product->title . '!');
     }
 
     /**

@@ -13,6 +13,15 @@
     </div>
 @endif
 
+{{-- session flash notification --}}
+<x-notification-alert>
+    @if (session('notification-livewire'))
+        {{ session('notification-livewire') }}
+    @else
+        {{ session('notification') }}
+    @endif
+</x-notification-alert>
+
     <div class="card text-bg-dark rounded-0">
         <img src="{{ asset('img/profilebanner1.jpg') }}" class="card-img" alt="..." style="max-height: 200px">
         <div class="card-img-overlay text-center d-block align-items-center mt-2">
