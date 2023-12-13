@@ -18,12 +18,7 @@ class OrderReturnsRefunds extends Component
 {
     use WithPagination;
 
-    public $quick_search_filter;
-
-    public $set_to_shipping;
-
-    public $set_to_complete;
-
+    public $refund_option;
     public $seller;
 
     //    public function paginationView()
@@ -45,26 +40,42 @@ class OrderReturnsRefunds extends Component
     {
         // query for purchased items of products from current seller
         $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
-            ->where('status', 'returnrefund_pending');
+            ->where('status', 'returnrefund-pending')
+            ->orWhere('status', 'returnrefund-agreement');
 
-        if ($this->set_to_shipping) {
-            // dd($this->set_to_shipping);
-
-            Purchase::where('id', $this->set_to_shipping)->update(['purchase_status' => 'shipping']);
-            Shipments::where('purchase_id', $this->set_to_shipping)->update(['shipment_status' => 'shipping']);
-
-            // return collection of purchased items of products from current seller
-            return $this->returnrefund_items->orderBy('purchase_items.id', 'asc')->paginate(10);
-        }
-        //
-        else {
-            // dd($this->returnrefund_items->get());
-            // return collection of shipment items of products from current seller
-            return $this->returnrefund_items->orderBy('request_date', 'desc')->paginate(10);
-        }
-
-        return $this->returnrefund_items->paginate(10);
+        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
     }
+
+    public function seller_agree($refund_item_id)
+    {
+        $refund_item = ItemReturnrefundInfo::find($refund_item_id);
+        $refund_option = $this->refund_option;
+        // dd($refund_option);
+
+        // update return/refund item
+        $refund_item->status = 'returnrefund-agreement';
+        $refund_item->refund_option = $refund_option;
+        $refund_item->save();
+
+        session()->flash('notification-livewire', 'Return/Refund request approved');
+        return $this->redirect(route('order-returns'));
+    }
+
+    // reject return/refund request
+    public function reject_request($refund_item_id)
+    {
+        $refund_item = ItemReturnrefundInfo::find($refund_item_id);
+        // dd($refund_item);
+
+        $refund_item->update([
+            'status' => 'returnrefund-rejected',
+            'refund_otion' => $this->refund_option,
+        ]);
+
+        session()->flash('notification-livewire', 'Return/Refund request rejected');
+        return $this->redirect(route('order-returns'));
+    }
+
 
     #[Computed]
     public function getReturnProduct()
@@ -95,9 +106,6 @@ class OrderReturnsRefunds extends Component
 
     public function render()
     {
-        $this->orderstatus_options = ['pending', 'completed', 'to_ship', 'shipping'];
-
-        $this->paymentstatus_options = ['paid', 'unpaid'];
 
         return view('livewire..seller.dashboard.order-links.order-returns-refunds');
     }

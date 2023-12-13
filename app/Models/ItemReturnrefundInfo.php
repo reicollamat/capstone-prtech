@@ -39,7 +39,7 @@ class ItemReturnrefundInfo extends Model
         'status',
         'reason',
         'condition',
-        'refund_option', // full-refund or partial-refund
+        'refund_option',
         'agreement_date',
         'returned_date',
     ];
