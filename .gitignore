@@ -2,7 +2,7 @@
 /node_modules
 # /public/build
 
-#/public/returnrefund_imgs
+/public/returnrefund_imgs
 #/public/product-image-uploads
 
 /public/hot
