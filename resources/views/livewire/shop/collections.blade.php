@@ -33,9 +33,9 @@
         <div class="container-fluid sm:!px-16 py-4">
             <div class="d-flex justify-end ">
                 <div class="position-relative">
-                    <div x-data="{ open: false }" x-on:click.outside="open = false">
+                    <div x-data="{ open: false }" @mouseleave="open = false">
                         <button class="btn btn-outline-dark hover:! hover:!text-black bg-white  min-w-[175px]"
-                            x-on:click="open = !open">
+                            @mouseover="open = true">
                             <div class="d-flex justify-between" @class(['bg-blue-50 text-blue-900' => true === 'default'])>
                                 {{ $sortname }}
                                 <span class="ml-1" :class="{ 'rotated': open }">
@@ -43,7 +43,7 @@
                                 </span>
                             </div>
                         </button>
-                        <ul x-show="open"
+                        <ul x-cloak x-show="open"
                             class="position-absolute w-full min-w-[170px] z-50 end-0 !pl-0 bg-white shadow text-sm mt-2 rounded"
                             x-transition.origin.top>
                             {{--                            @foreach ($sortoptions as $key => $value) --}}
@@ -591,11 +591,11 @@
                                         <div>
                                             <div class="position-absolute top-0 end-0 mt-1 mr-2.5 z-[30]">
                                                 @if ($this->check_bookmark($product->id))
-                                                    <button wire:click="removefromwishlist({{ $product->id }})">
+                                                    <button type="button" wire:click="removefromwishlist({{ $product->id }})">
                                                         <i class="bi bi-heart-fill" style="font-size: 1.5rem"></i>
                                                     </button>
                                                 @else
-                                                    <button wire:click="addtowishlist({{ $product->id }})">
+                                                    <button type="button" wire:click="addtowishlist({{ $product->id }})">
                                                         <i class="bi bi-heart" style="font-size: 1.5rem"></i>
                                                     </button>
                                                 @endif
