@@ -40,7 +40,7 @@
                                 <p class="text-xs font-base text-gray-500 mb-1">Overall Products Rating</p>
                                 <div class="flex w-50 mx-auto px-5">
                                     <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
-                                    <input type="text" class="font-semibold bg-transparent"
+                                    <input type="text" class="font-semibold bg-transparent w-fit"
                                         wire:model="total_products_rating" disabled>
                                 </div>
                             </div>
@@ -410,15 +410,18 @@
                             wire:model="total_used_count" disabled>
                     </div>
                 </div>
-                <div class="py-2 text-center flex justify-center">
-                    <div class="px-2">
-                        <p class="text-xs font-base text-gray-500 mb-1">Overall Products Rating</p>
-                        <div class="flex w-50 mx-auto px-5">
-                            <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
-                            <input type="text" class="font-semibold bg-transparent"
-                                wire:model="total_products_rating" disabled>
-                        </div>
+                <div class="py-2 text-center flex flex-column justify-center">
+                    {{-- <div class="px-2"> --}}
+                    <p class="text-xs font-base text-gray-500 mb-2">Overall Products Rating</p>
+                    <div class="flex gap-2 mx-auto px-5">
+                        <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
+                        <label>
+                            {{-- <input type="text" class="font-semibold bg-transparent w-fit" --}}
+                            {{--     wire:model="total_products_rating" disabled> --}}
+                            <p class="mb-0">{{ $total_products_rating }}</p>
+                        </label>
                     </div>
+                    {{-- </div> --}}
                 </div>
                 <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
