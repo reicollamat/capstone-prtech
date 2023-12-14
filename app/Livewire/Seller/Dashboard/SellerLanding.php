@@ -53,8 +53,6 @@ class SellerLanding extends Component
         //     dd('no data');
         // }
 
-
-
         // $ncount = Comment::wherein('rating', [1, 2])
         //     ->where('seller_id', '=', $this->seller_id)
         //     ->where('created_at', '>=', now()->subDays(30))
@@ -208,7 +206,6 @@ class SellerLanding extends Component
         // Get the current date and time using Carbon
         $currentDateTime = Carbon::now();
 
-
         $ncount = Comment::wherein('rating', [1, 2])
             ->where('seller_id', '=', $this->seller_id)
             ->where('created_at', '>=', now()->subDays(30))
@@ -243,7 +240,7 @@ class SellerLanding extends Component
                 // dd($imageData);
 
                 // Format the date and time to be used in the file name
-                $fileName = $currentDateTime->format('Y-m-d').'_1_nw.png'; // Rename it to date and p for positive and w for wordlcloud
+                $fileName = $currentDateTime->format('Y-m-d').'_'.$this->seller_id.'_nw.png'; // Rename it to date and p for positive and w for wordlcloud
 
                 // Save the image to a file
                 $imagePath = public_path('storage'); // Change the path as needed
@@ -313,7 +310,7 @@ class SellerLanding extends Component
                 // dd($imageData);
 
                 // Format the date and time to be used in the file name
-                $fileName = $currentDateTime->format('Y-m-d').'_1_pw.png'; // Rename it to date and p for positive and w for wordlcloud
+                $fileName = $currentDateTime->format('Y-m-d').'_'.$this->seller_id.'_pw.png'; // Rename it to date and p for positive and w for wordlcloud
 
                 // Save the image to a file
                 $imagePath = public_path('storage'); // Change the path as needed
