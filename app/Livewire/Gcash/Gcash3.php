@@ -82,7 +82,8 @@ class Gcash3 extends Component
             // groupby seller lahat ng cartitems
             $cartitems_per_seller = $cartitems->groupBy('seller_id')->all();
 
-            // dd($cartitems_per_seller);
+            //generate reference number for purchase
+            $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
 
             // loop for each seller to save purchase per seller
             foreach ($cartitems_per_seller as $key => $seller_items) {
@@ -90,9 +91,6 @@ class Gcash3 extends Component
 
                 //get total_amount of current seller_items
                 $total_amount = $seller_items->sum('total_price');
-
-                //generate reference number for purchase
-                $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
 
                 $purchase = new Purchase([
                     'user_id' => $this->user_id,
@@ -131,7 +129,7 @@ class Gcash3 extends Component
                     'user_id' => $this->user_id,
                     'purchase_id' => $purchase->id,
                     'tag' => 'order_placed',
-                    'title' => 'Order #'.$purchase->id.' Placed',
+                    'title' => 'Order #' . $purchase->id . ' Placed',
                     'message' => 'Our logistics partner will attempt parcel delivery within the day.',
                 ]);
                 $notification->save();
@@ -186,7 +184,7 @@ class Gcash3 extends Component
                 'user_id' => $this->user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #'.$purchase->id.' Placed',
+                'title' => 'Order #' . $purchase->id . ' Placed',
                 'message' => 'Our logistics partner will attempt parcel delivery within the day.',
             ]);
             $notification->save();

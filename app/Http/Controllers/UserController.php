@@ -116,7 +116,7 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #'.$purchase->id.' Placed',
+            'title' => 'Order #' . $purchase->id . ' Placed',
             'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
         ]);
         $notification->save();
@@ -156,15 +156,15 @@ class UserController extends Controller
         // groupby seller lahat ng cartitems
         $cartitems_per_seller = $cartitems->groupBy('seller_id')->all();
 
+        //generate reference number for purchase
+        $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+
         // loop for each seller to save purchase per seller
         foreach ($cartitems_per_seller as $key => $seller_items) {
             // dd($seller_items);
 
             //get total_amount of current seller_items
             $total_amount = $seller_items->sum('total_price');
-
-            //generate reference number for purchase
-            $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
 
             $purchase = new Purchase([
                 'user_id' => $user_id,
@@ -203,7 +203,7 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #'.$purchase->id.' Placed',
+                'title' => 'Order #' . $purchase->id . ' Placed',
                 'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
             ]);
             $notification->save();
