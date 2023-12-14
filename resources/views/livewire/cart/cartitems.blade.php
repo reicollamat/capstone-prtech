@@ -11,7 +11,7 @@
             {{-- @dd($cartitem->product->product_images[0]->image_paths) --}}
             <img src="/{{ $cartitem->product->product_images[0]->image_paths }}"
                 class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="item image"
-                style="height: 80%!important;">
+                style="max-height: 80%!important;">
         </div>
         <div class="col-md-9 self-center">
             <div class="card-body mb-0" style="padding: 0.50rem!important;">
