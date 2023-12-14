@@ -557,7 +557,11 @@
                                             </div>
 
                                             <div class="border-t-4 border-blue-100 flex flex-col lg:flex-row">
-                                                <h4 class="mx-auto mt-2">ITEMS</h4>
+                                                @if ($purchase->purchase_items->count() == 1)
+                                                    <h4 class="mx-auto mt-2">{{$purchase->purchase_items->count()}} ITEM</h4>
+                                                @else
+                                                    <h4 class="mx-auto mt-2">{{$purchase->purchase_items->count()}} ITEMS</h4>
+                                                @endif
                                             </div>
                                             {{-- @dd($purchase) --}}
                                             @foreach ($purchase->purchase_items as $item)
