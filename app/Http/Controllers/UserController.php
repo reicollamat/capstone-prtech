@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\EmailHelper;
 use App\Helpers\ReferenceGeneratorHelper;
 use App\Models\CartItem;
 use App\Models\Payment;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public string $mailStatus;
+
     public function purchase_page(Request $request)
     {
         // dd($request->cartitems);
@@ -94,6 +97,13 @@ class UserController extends Controller
         ]);
         $purchase->save();
 
+        // This handles the Email Creation and Sending of the Email to the respective User
+        // first parameter is the email of the user
+        // second parameter is the id of the Purchase
+        // It will return a string of confirmation // TODO: handle the return string and show it or display it to the user
+        // the returned string will be save to mailStatus property
+        $this->mailStatus = EmailHelper::sendEmail('richmond.billones@gmail.com', 6);
+
         $payment = new Payment([
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
@@ -116,7 +126,7 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #' . $purchase->id . ' Placed',
+            'title' => 'Order #'.$purchase->id.' Placed',
             'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
         ]);
         $notification->save();
@@ -203,7 +213,7 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #' . $purchase->id . ' Placed',
+                'title' => 'Order #'.$purchase->id.' Placed',
                 'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
             ]);
             $notification->save();
