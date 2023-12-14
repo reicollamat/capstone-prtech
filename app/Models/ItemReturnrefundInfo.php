@@ -42,5 +42,6 @@ class ItemReturnrefundInfo extends Model
         'refund_option',
         'agreement_date',
         'returned_date',
+        'completion_date',
     ];
 }

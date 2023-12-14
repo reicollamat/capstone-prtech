@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('refund_option')->nullable();
             $table->timestamp('agreement_date')->nullable();
             $table->timestamp('returned_date')->nullable();
+            $table->timestamp('completion_date')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
