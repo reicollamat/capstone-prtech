@@ -2,11 +2,11 @@
 /node_modules
 # /public/build
 
-/public/returnrefund_imgs
-/public/product-image-uploads
+#/public/returnrefund_imgs
+#/public/product-image-uploads
 
 /public/hot
-/public/storage
+#/public/storage
 /storage/*.key
 /vendor
 .env
