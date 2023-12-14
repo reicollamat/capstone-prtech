@@ -33,21 +33,21 @@
                     </p>
                     <div class="d-flex items-center justify-start self-center gap-3">
                         <div class="input-group input-group-sm w-auto border-1 border-gray-300 rounded">
-                            <button type="button" class="input-group-text font-black btn btn-ghost"
+                            <button type="button" class="input-group-text text-lg font-black btn btn-ghost bg-primary-subtle"
                                 wire:click="addquantity({{ $cartitem }})" wire:key="addquantitybutton"
                                 id="inputGroup-sizingadd-sm">+
                             </button>
                             <input type="text" class="form-control text-center border-0"
                                 aria-label="Sizing example input" value="{{ $item_quantity }}"
                                 style="max-width: 2.5rem!important;" aria-describedby="inputGroup-sizing-sm">
-                            <button type="button" class="input-group-text font-black btn btn-ghost"
+                            <button type="button" class="input-group-text text-lg font-black btn btn-ghost bg-primary-subtle"
                                 wire:click="minusquantity({{ $cartitem }})" wire:key="minusquantitybutton"
                                 id="inputGroup-sizingminus-sm">-
                             </button>
                         </div>
                         <button wire:key="linktoremove"
                             wire:click="$parent.removecartitem({{ $cartitem->id }}, {{ $user_id }})"
-                            class="small decoration-0 no-underline text-gray-700 rounded border-gray-400 border-1 p-1">
+                            class="small decoration-0 no-underline text-light rounded bg-red-500 p-1">
                             Remove
                         </button>
                     </div>
