@@ -1,4 +1,4 @@
-<div class="h-full ">
+<div x-transition>
     @if ($cartiems_count > 0)
         @foreach ($cartitems as $cartitem)
             <livewire:cart.cartitems :key="$cartitem->id" :cartitem="$cartitem" />
