@@ -151,8 +151,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/profile/cancel', [ProfileController::class, 'request_cancel_order'])->name('profile.request_cancel_order');
-    Route::post('/profile/returnrefund', [ProfileController::class, 'request_returnrefund'])->name('profile.request_returnrefund');
+    Route::post('/profile/cancel_order', [ProfileController::class, 'request_cancel_order'])->name('profile.request_cancel_order');
+
+    // RETURN/REFUND
+    Route::post('/profile/request_returnrefund', [ProfileController::class, 'request_returnrefund'])->name('profile.request_returnrefund');
+    Route::post('/profile/confirm_returnrefund', [ProfileController::class, 'confirm_returnrefund'])->name('profile.confirm_returnrefund');
+    Route::post('/profile/shipping_returnrefund', [ProfileController::class, 'shipping_returnrefund'])->name('profile.shipping_returnrefund');
+    Route::post('/profile/replacement_arrived', [ProfileController::class, 'replacement_arrived'])->name('profile.replacement_arrived');
+    Route::post('/profile/refundcompleted_returnrefund', [ProfileController::class, 'refundcompleted_returnrefund'])->name('profile.refundcompleted_returnrefund');
+    Route::post('/profile/cancel_returnrefund_request', [ProfileController::class, 'cancel_returnrefund_request'])->name('profile.cancel_returnrefund_request');
 
     // logged in
     // // cart page

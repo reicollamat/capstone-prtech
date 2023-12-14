@@ -35,9 +35,9 @@
                 </div>
             </div>
 
-            <div class="tab-content mt-4">
+            <div class="tab-content">
                 {{-- pending tab content --}}
-                <div class="tab-pane fade py-2 px-2 show active" id="pending-tab">
+                <div class="tab-pane bg-secondary-subtle fade py-4 px-2 show active" id="pending-tab">
                     @if (count($user->purchase->where('purchase_status', 'pending')) == 0)
                         <div class="mb-4">
                             You have no pending orders yet <i class="bi bi-chevron-double-right"></i>
@@ -68,8 +68,8 @@
 
                     @foreach ($user->purchase as $key => $purchase)
                         @if ($purchase->purchase_status == 'pending' || $purchase->purchase_status == 'to_ship')
-                            <div class="accordion accordion-flush" id="accordionFlushPending">
-                                <div class="accordion-item border">
+                            <div class="accordion accordion-flush my-2 border rounded" id="accordionFlushPending">
+                                <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed d-block py-2" id="trackAccordionPending"
                                             type="button" data-bs-toggle="collapse"
@@ -102,7 +102,7 @@
 
                                 <div id="collapsePending-{{ $key }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushPending">
-                                    <div class="accordion-body bg-secondary-subtle p-2">
+                                    <div class="accordion-body bg-light p-2">
                                         <div class="flex justify-content-between">
                                             @if ($purchase->purchase_status == 'pending')
                                                 <h6 class="my-auto ml-4">Status: Pending order</h6>
@@ -188,8 +188,8 @@
                 </div> {{-- pending tab content --}}
 
                 {{-- shipping tab content --}}
-                <div class="tab-pane fade py-2 px-2" id="shipping-tab">
-                    <h6 class="text-yellow-500 italic mb-4">You can not cancel orders anymore after
+                <div class="tab-pane bg-secondary-subtle fade py-4 px-2" id="shipping-tab">
+                    <h6 class="text-yellow-700 italic mb-4">You can not cancel orders anymore after
                         shipment <i class="bi bi-exclamation-triangle-fill"></i>
                         <p class="text-gray-500">Please read our <a href="{{route('shipping-return-policy')}}">policy</a>.</p>
                     </h6>
@@ -226,7 +226,7 @@
 
                     @foreach ($user->purchase as $key => $purchase)
                         @if ($purchase->purchase_status == 'shipping')
-                            <div class="accordion accordion-flush" id="accordionFlushShipping">
+                            <div class="accordion accordion-flush my-2 border rounded" id="accordionFlushShipping">
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed d-block py-2" id="trackAccordionShipping"
@@ -263,7 +263,7 @@
 
                                 <div id="collapseShipping-{{ $key }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushShipping">
-                                    <div class="accordion-body bg-secondary-subtle p-2">
+                                    <div class="accordion-body bg-light p-2">
                                         @foreach ($purchase->purchase_items as $purchase_item)
                                             <div class="visually-hidden">
                                                 {{ $product = App\Models\Product::find($purchase_item->product_id) }}
@@ -303,7 +303,7 @@
                 </div>
 
                 {{-- completed tab content --}}
-                <div class="tab-pane fade py-2 px-2" id="completed-tab">
+                <div class="tab-pane bg-secondary-subtle fade py-4 px-2" id="completed-tab">
                     @if (count($user->purchase->where('purchase_status', 'completed')) == 0)
                         <div class="mb-4">
                             You have no completed order yet.
@@ -336,7 +336,7 @@
 
                     @foreach ($user->purchase as $key => $purchase)
                         @if ($purchase->purchase_status == 'completed')
-                            <div class="accordion accordion-flush" id="accordionFlushCompleted">
+                            <div class="accordion accordion-flush my-2 border rounded" id="accordionFlushCompleted">
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button collapsed d-block py-2" id="trackAccordionCompleted-{{$key}}"
@@ -373,11 +373,11 @@
 
                                 <div id="collapseCompleted-{{ $key }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushCompleted">
-                                    <div class="accordion-body bg-secondary-subtle p-2">
+                                    <div class="accordion-body bg-light p-2">
                                         @foreach ($purchase->purchase_items as $key => $purchase_item)
                                             <div class="card my-2">
                                                 <div class="row g-0" style="height: 65px">
-                                                    <div class="col-md-1 justify-content-end">
+                                                    <div class="col-1 justify-content-end">
                                                         <img src="{{ asset($purchase_item->product->product_images[0]->image_paths) }}"
                                                             class="img-fluid rounded-end mx-auto d-block p-2"
                                                             alt="" style="max-height: 60px">
@@ -397,19 +397,22 @@
                                                                     <h5>₱{{ $purchase_item->total_price }}</h5>
                                                                 </div>
                                                                 <div class="col-2 text-center">
-                                                                    <button type="button"
-                                                                        class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded">
+                                                                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
                                                                         Review Product
                                                                     </button>
                                                                 </div>
-                                                                @if ($purchase_item->item_returnrefund_info)
-                                                                    <div class="col-2 text-center">
-                                                                        <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i> Pending return/refund request</p>
-                                                                    </div>
-                                                                @else
-                                                                    <div class="col-2 text-center">
+                                                                <div class="col-2 text-center">
+                                                                    @if ($purchase_item->item_returnrefund_info)
+                                                                        @if ($purchase_item->item_returnrefund_info->status == 'returnrefund-pending')
+                                                                            <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i> Pending return/refund request</p>
+                                                                        @else
+                                                                            <a class="btn bg-secondary text-light p-2 rounded" href="{{route('profile.edit', ['profile_activetab' => 'returnrefund'])}}">
+                                                                                <p class="text-sm mb-0">Processing <sup><i class="bi bi-box-arrow-up-right"></i></sup></p>
+                                                                            </a>
+                                                                        @endif
+                                                                    @else
                                                                         <!-- Button trigger modal -->
-                                                                        <button type="button" class="bg-secondary text-light text-sm p-2 rounded" data-bs-toggle="modal" data-bs-target="#returnRefundModal-{{$key}}-{{$purchase_item->purchase->reference_number}}">
+                                                                        <button type="button" class="bg-secondary-subtle text-sm p-2 rounded" data-bs-toggle="modal" data-bs-target="#returnRefundModal-{{$key}}-{{$purchase_item->purchase->reference_number}}">
                                                                             Return/Refund
                                                                         </button>
 
@@ -501,8 +504,8 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                @endif
+                                                                    @endif
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

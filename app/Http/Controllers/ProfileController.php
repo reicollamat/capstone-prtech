@@ -125,6 +125,66 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for ' . $purchase_item->product->title . '!');
     }
 
+    public function cancel_returnrefund_request(Request $request): RedirectResponse
+    {
+        // dd($request->item_returnrefund_id);
+        ItemReturnrefundInfo::destroy($request->item_returnrefund_id);
+
+        return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Return/Refund request cancelled!');
+    }
+
+    public function confirm_returnrefund(Request $request): RedirectResponse
+    {
+        // dd($request->item_returnrefund_id);
+        $refund_item = ItemReturnrefundInfo::find($request->item_returnrefund_id);
+
+        $refund_item->update([
+            'status' => 'returnrefund-approved',
+            'agreement_date' => now(),
+        ]);
+
+        return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Approved to Return/Refund Agreement!');
+    }
+
+    public function shipping_returnrefund(Request $request): RedirectResponse
+    {
+        // dd($request->item_returnrefund_id);
+        $refund_item = ItemReturnrefundInfo::find($request->item_returnrefund_id);
+
+        $refund_item->update([
+            'status' => 'returnrefund-shipping',
+        ]);
+
+        return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Approved to Return/Refund Agreement!');
+    }
+
+
+    public function replacement_arrived(Request $request): RedirectResponse
+    {
+        // dd($request->item_returnrefund_id);
+        $refund_item = ItemReturnrefundInfo::find($request->item_returnrefund_id);
+
+        $refund_item->update([
+            'status' => 'returnrefund-completed',
+            'completion_date' => now(),
+        ]);
+
+        return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Replacement Completed!');
+    }
+
+    public function refundcompleted_returnrefund(Request $request): RedirectResponse
+    {
+        // dd($request->item_returnrefund_id);
+        $refund_item = ItemReturnrefundInfo::find($request->item_returnrefund_id);
+
+        $refund_item->update([
+            'status' => 'returnrefund-completed',
+            'completion_date' => now(),
+        ]);
+
+        return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Completed Return/Refund Request!');
+    }
+
     /**
      * Delete the user's account.
      */
