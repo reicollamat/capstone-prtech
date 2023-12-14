@@ -53,6 +53,14 @@ class SellerLanding extends Component
         //     dd('no data');
         // }
 
+
+
+        // $ncount = Comment::wherein('rating', [1, 2])
+        //     ->where('seller_id', '=', $this->seller_id)
+        //     ->where('created_at', '>=', now()->subDays(30))
+        //     ->select('text')
+        //     ->toRawSql();
+        //
         // dd($ncount);
 
     }
@@ -175,6 +183,7 @@ class SellerLanding extends Component
     public function getNegativeCommentsCount()
     {
         $ncount = Comment::wherein('rating', [1, 2])
+            ->where('seller_id', '=', $this->seller_id)
             ->where('created_at', '>=', now()->subDays(30))
             ->count() ?? 0;
 
@@ -185,6 +194,7 @@ class SellerLanding extends Component
     public function getPositveCommentsCount()
     {
         $pcount = Comment::wherein('rating', [3, 4, 5])
+            ->where('seller_id', '=', $this->seller_id)
             ->where('created_at', '>=', now()->subDays(30))
             ->count() ?? 0;
 
@@ -194,17 +204,19 @@ class SellerLanding extends Component
     // #[Computed]
     public function fetchNegativeCommentsApi()
     {
+
         // Get the current date and time using Carbon
         $currentDateTime = Carbon::now();
 
+
         $ncount = Comment::wherein('rating', [1, 2])
+            ->where('seller_id', '=', $this->seller_id)
             ->where('created_at', '>=', now()->subDays(30))
             ->select('text')
             ->get();
 
         // check if there is no data
         if ($ncount->isEmpty()) {
-
             // if there is no data then set the image to notenoughdata.png
             $this->n_asset = 'img/notenoughdata.png';
         } else {
@@ -263,6 +275,7 @@ class SellerLanding extends Component
     public function fetchPositiveCommentsApi()
     {
         $pcount = Comment::wherein('rating', [3, 4, 5])
+            ->where('seller_id', '=', $this->seller_id)
             ->where('created_at', '>=', now()->subDays(30))
             ->select('text')
             ->get();
@@ -271,7 +284,7 @@ class SellerLanding extends Component
         if ($pcount->isEmpty()) {
 
             // if no data show not enough data
-            $this->n_asset = 'img/notenoughdata.png';
+            $this->p_asset = 'img/notenoughdata.png';
         } else {
             // else fetch and show data
             $commentString = '';

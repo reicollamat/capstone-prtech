@@ -22,6 +22,7 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
+
     /**
      * The attributes that are mass assignable.
      *

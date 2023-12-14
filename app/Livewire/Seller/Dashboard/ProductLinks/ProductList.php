@@ -53,17 +53,21 @@ class ProductList extends Component
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
-        $this->total_products_count = Product::where('seller_id', $this->seller->id)->count();
+        $this->total_products_count = Product::where('seller_id', $this->seller->id)->count() ?? 0;
 
-        $this->total_available_count = Product::where('seller_id', $this->seller->id)->where('status', 'available')->count();
+        $this->total_available_count = Product::where('seller_id', $this->seller->id)->where('status', 'available')->count() ?? 0;
 
-        $this->total_brandnew_count = Product::where('seller_id', $this->seller->id)->where('condition', 'brand_new')->count();
+        $this->total_brandnew_count = Product::where('seller_id', $this->seller->id)->where('condition', 'brand_new')->count() ?? 0;
 
-        $this->total_used_count = Product::where('seller_id', $this->seller->id)->where('condition', 'used')->count();
+        $this->total_used_count = Product::where('seller_id', $this->seller->id)->where('condition', 'used')->count() ?? 0;
 
         // overall rating of all seller's products
-        $this->total_products_rating = Product::where('seller_id', $this->seller->id)->sum('rating') / $this->total_products_count;
-        $this->total_products_rating = number_format((float) $this->total_products_rating, 2, '.', '');
+        if ($this->total_products_count == 0) {
+            $this->total_products_rating = 0;
+        } else {
+            $this->total_products_rating = Product::where('seller_id', $this->seller->id)->sum('rating') / $this->total_products_count;
+            $this->total_products_rating = number_format((float) $this->total_products_rating, 2, '.', '');
+        }
 
         // dd($this->total_products_rating);
     }
