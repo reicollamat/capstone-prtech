@@ -16,7 +16,7 @@
             <div class="input-group" @mouseover="open = true">
                 <input type="text" class="form-control p-2 custom-input-text rounded-none shadow-none"
                     placeholder="Search PR-Tech" wire:model.live="search" name="to_search" autocomplete="off"
-                    aria-label="Search" aria-describedby="button-addon2">
+                    aria-label="Search" aria-describedby="button-addon2" @input="event => open = true">
                 <button type="submit" class="btn btn-outline-secondary rounded-none d-flex items-center gap-2"
                     id="button-addon2">
                     <div wire:loading.remove wire:target="search">
@@ -40,8 +40,8 @@
     </form>
     <div x-cloak x-show="open"
         class="position-absolute h-full w-full bg-white start-50 translate-middle-x rounded-lg shadow"
-        x-transition:enter.duration.250ms x-transition:leave.duration.100ms>
-        <div class="p-2 rounded-2 bg-white shadow">
+        x-transition:enter.duration.700ms x-transition:leave.duration.200ms>
+        <div class="overflow-auto p-2 rounded-2 bg-white shadow" style="max-height: 600px">
             <p>Search Results</p>
             <hr>
             @if (strlen($search) > 1)

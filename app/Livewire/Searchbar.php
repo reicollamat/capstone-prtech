@@ -39,7 +39,6 @@ class Searchbar extends Component
     public function mount()
     {
         $this->selected_category = 'all_products';
-
     }
 
     public function clearsearch()
@@ -58,13 +57,11 @@ class Searchbar extends Component
             if ($this->selected_category == 'all_products') {
                 // $this->search_return = Product::where('title', 'ilike', "%{$this->search}%") // POSTGRES
                 $this->search_return = Product::where(strtolower('title'), 'like', "%{$this->search}%")
-                    ->limit(5)
                     ->get();
             } else {
                 // $this->search_return = Product::where('title', 'ilike', "%{$this->search}%") // POSTGRES
                 $this->search_return = Product::where(strtolower('title'), 'like', "%{$this->search}%")
                     ->where('category', $this->selected_category)
-                    ->limit(5)
                     ->get();
             }
         } else {
