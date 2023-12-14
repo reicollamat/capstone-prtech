@@ -22,11 +22,11 @@ class VideoCardSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/gpu/gpu ('.fake()->numberBetween(1, 10).').png';
+            $image = 'img/components/gpu/gpu (' . fake()->numberBetween(1, 10) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
-                    'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
+                    'seller_id' => Seller::find(fake()->numberBetween(2, 11))->id,
                     'title' => $value->name,
                     'category' => 'video_card',
                     'price' => $value->price * 55,

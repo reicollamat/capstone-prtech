@@ -22,11 +22,11 @@ class ComputerCaseSeeder extends Seeder
         $dataset = json_decode($json);
 
         foreach (array_slice($dataset, 0, 100) as $key => $value) {
-            $image = 'img/components/case/case ('.fake()->numberBetween(1, 3).').png';
+            $image = 'img/components/case/case (' . fake()->numberBetween(1, 3) . ').png';
             $condition = fake()->randomElement(['brand_new', 'used']);
-            if (! empty($value->price)) {
+            if (!empty($value->price)) {
                 $product = Product::create([
-                    'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
+                    'seller_id' => Seller::find(fake()->numberBetween(2, 11))->id,
                     'title' => $value->name,
                     'category' => 'computer_case',
                     'price' => $value->price * 55,
