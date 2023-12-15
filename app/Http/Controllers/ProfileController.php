@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\Product;
+use App\Models\ItemReturnrefundInfo;
 use App\Models\Purchase;
 use App\Models\PurchaseCancellationInfo;
 use App\Models\PurchaseItem;
-use App\Models\ItemReturnrefundInfo;
 use App\Models\ReturnrefundImage;
+use App\Models\Shipments;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -73,8 +73,7 @@ class ProfileController extends Controller
         $cancellation->save();
         $purchase->update(['purchase_status' => 'cancellation_pending']);
 
-
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #' . $purchase->reference_number . ' requested!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #'.$purchase->reference_number.' requested!');
     }
 
     /**
@@ -84,13 +83,12 @@ class ProfileController extends Controller
     {
         // dd($request->condition);
         $request->validate([
-            'evidence_imgs.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120'
+            'evidence_imgs.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
         ]);
 
         $user = User::find($request->user_id);
         $purchase_item = PurchaseItem::find($request->purchase_item_id);
         $img_path = null;
-
 
         // save a new database returnrefund info
         $returnrefund_info = new ItemReturnrefundInfo([
@@ -109,7 +107,7 @@ class ProfileController extends Controller
             foreach ($request->evidence_imgs as $key => $image) {
                 $img_path = $image->storeAs(
                     'returnrefund_imgs',
-                    $purchase_item->id . '-' . $key . '-' . 'returnrefund_img' . '.' . $image->getClientOriginalExtension(),
+                    $purchase_item->id.'-'.$key.'-'.'returnrefund_img'.'.'.$image->getClientOriginalExtension(),
                     'real_public'
                 );
 
@@ -122,7 +120,7 @@ class ProfileController extends Controller
             }
         }
 
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for ' . $purchase_item->product->title . '!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for '.$purchase_item->product->title.'!');
     }
 
     public function cancel_returnrefund_request(Request $request): RedirectResponse
@@ -157,7 +155,6 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Approved to Return/Refund Agreement!');
     }
-
 
     public function replacement_arrived(Request $request): RedirectResponse
     {
@@ -204,5 +201,48 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function updateOrderStatus(Request $request): RedirectResponse
+    {
+        // dd($request->purchase_id);
+
+        $id = $request->purchase_id;
+
+        if ($id) {
+            $purchase = Purchase::find($id);
+            $purchase->update([
+                'purchase_status' => 'completed',
+                'completion_date' => now(),
+            ]);
+
+            $shipment = Shipments::where('purchase_id', $id)->first();
+            $shipment->update([
+                'shipment_status' => 'completed',
+                'shipped_date' => now(),
+            ]);
+
+        // dd($purchase, $shipment);
+
+        } else {
+            return abort(500);
+        }
+
+        // $purchase = Purchase::find($request->purchase_id);
+        //
+        // $shipment = Shipments::find($this->set_to_complete);
+        // // dd($shipment);
+        //
+        // $shipment->purchase->update([
+        //     'purchase_status' => 'completed',
+        //     'completion_date' => now(),
+        // ]);
+        // $shipment->update([
+        //     'shipment_status' => 'completed',
+        //     'shipped_date' => now(),
+        // ]);
+
+        // dd($purchase);
+        return Redirect::route('profile.edit', ['profile_activetab' => 'orders']);
     }
 }

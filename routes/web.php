@@ -153,6 +153,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/profile/cancel_order', [ProfileController::class, 'request_cancel_order'])->name('profile.request_cancel_order');
 
+    // UPDATE ITEM STATUS TO ARRIVE
+    Route::patch('/order/arrived', [ProfileController::class, 'updateOrderStatus'])->name('status-order-update');
+
     // RETURN/REFUND
     Route::post('/profile/request_returnrefund', [ProfileController::class, 'request_returnrefund'])->name('profile.request_returnrefund');
     Route::post('/profile/confirm_returnrefund', [ProfileController::class, 'confirm_returnrefund'])->name('profile.confirm_returnrefund');

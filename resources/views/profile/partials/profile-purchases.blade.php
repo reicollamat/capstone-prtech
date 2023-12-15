@@ -1,7 +1,7 @@
-
 <div class="d-flex justify-content-between mb-2">
     <h5>Purchase History:</h5>
-    <a href="{{route('profile.edit', ['profile_activetab' => 'purchases'])}}" class="btn bg-primary text-light p-2 rounded mt-0">
+    <a href="{{ route('profile.edit', ['profile_activetab' => 'purchases']) }}"
+        class="btn bg-primary text-light p-2 rounded mt-0">
         <i class="bi bi-arrow-clockwise">Refresh</i>
     </a>
 </div>
@@ -71,8 +71,8 @@
                             <div class="accordion accordion-flush my-2 border rounded" id="accordionFlushPending">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed d-block py-2" id="trackAccordionPending"
-                                            type="button" data-bs-toggle="collapse"
+                                        <button class="accordion-button collapsed d-block py-2"
+                                            id="trackAccordionPending" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#collapsePending-{{ $key }}" aria-expanded="false"
                                             aria-controls="collapsePending-{{ $key }}">
                                             <div class="row text-center">
@@ -110,43 +110,60 @@
                                                 <h6 class="my-auto ml-4">Status: Preparing order for shipment</h6>
                                             @endif
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="mt-2 mb-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#requestCancelModal-{{$key}}-{{$purchase->reference_number}}">
+                                            <button type="button"
+                                                class="mt-2 mb-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#requestCancelModal-{{ $key }}-{{ $purchase->reference_number }}">
                                                 Cancel Order
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="requestCancelModal-{{$key}}-{{$purchase->reference_number}}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="modalLabel"><i class="bi bi-exclamation-triangle-fill"></i> Confirmation</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body text-start mx-2">
-                                                    <p class="text-gray-500 text-center mx-2">Reference Number: {{$purchase->reference_number}}</p>
-                                                    Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}?
-                                                    <div class="mx-2 mt-2">
-                                                        Items:
-                                                        @foreach ($purchase->purchase_items as $purchase_item)
-                                                            <div class="mx-4">
-                                                                - {{$purchase_item->product->title}}
+                                            <div class="modal fade"
+                                                id="requestCancelModal-{{ $key }}-{{ $purchase->reference_number }}"
+                                                tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="modalLabel"><i
+                                                                    class="bi bi-exclamation-triangle-fill"></i>
+                                                                Confirmation</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-start mx-2">
+                                                            <p class="text-gray-500 text-center mx-2">Reference
+                                                                Number: {{ $purchase->reference_number }}</p>
+                                                            Are you sure you want to cancel this order
+                                                            from {{ $purchase->seller->shop_name }}?
+                                                            <div class="mx-2 mt-2">
+                                                                Items:
+                                                                @foreach ($purchase->purchase_items as $purchase_item)
+                                                                    <div class="mx-4">
+                                                                        - {{ $purchase_item->product->title }}
+                                                                    </div>
+                                                                @endforeach
                                                             </div>
-                                                        @endforeach
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">No
+                                                            </button>
+                                                            <form action="{{ route('profile.request_cancel_order') }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <input type="text" name="purchase_id"
+                                                                    value="{{ $purchase->id }}" hidden>
+                                                                <input type="text" name="user_id"
+                                                                    value="{{ $user->id }}" hidden>
+                                                                <input type="text" name="profile_activetab"
+                                                                    value="purchases" hidden>
+
+                                                                <button type="submit" class="btn btn-danger">Yes
+                                                                </button>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                                    <form action="{{route('profile.request_cancel_order')}}" method="POST">
-                                                        @csrf
-                                                        <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
-                                                        <input type="text" name="user_id" value="{{ $user->id }}" hidden>
-                                                        <input type="text" name="profile_activetab" value="purchases" hidden>
-                                                        
-                                                        <button type="submit" class="btn btn-danger">Yes</button>
-                                                    </form>
-                                                </div>
-                                                </div>
-                                            </div>
                                             </div>
                                         </div>
                                         @foreach ($purchase->purchase_items as $purchase_item)
@@ -191,7 +208,8 @@
                 <div class="tab-pane bg-secondary-subtle fade py-4 px-2" id="shipping-tab">
                     <h6 class="text-yellow-700 italic mb-4">You can not cancel orders anymore after
                         shipment <i class="bi bi-exclamation-triangle-fill"></i>
-                        <p class="text-gray-500">Please read our <a href="{{route('shipping-return-policy')}}">policy</a>.</p>
+                        <p class="text-gray-500">Please read our <a
+                                href="{{ route('shipping-return-policy') }}">policy</a>.</p>
                     </h6>
                     @if (count($user->purchase->where('purchase_status', 'shipping')) == 0)
                         <div class="mb-4">
@@ -229,9 +247,10 @@
                             <div class="accordion accordion-flush my-2 border rounded" id="accordionFlushShipping">
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed d-block py-2" id="trackAccordionShipping"
-                                            type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseShipping-{{ $key }}" aria-expanded="false"
+                                        <button class="accordion-button collapsed d-block py-2"
+                                            id="trackAccordionShipping" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseShipping-{{ $key }}"
+                                            aria-expanded="false"
                                             aria-controls="collapseShipping-{{ $key }}">
                                             <div class="row text-center">
                                                 <div class="col-2">
@@ -253,7 +272,7 @@
                                                     {{ date('m-d-y (h:i a)', strtotime($purchase->shipment->start_date)) }}
                                                 </div>
                                                 <div class="col-2">
-                                                    {{ date('m-d-y', strtotime($purchase->shipment->start_date)) }}(sample)
+                                                    {{ $date = date('m-d-y', strtotime($purchase->shipment->start_date . ' +3 days')) }}
                                                 </div>
                                                 <i class="bi bi-chevron-compact-down text-primary"></i>
                                             </div>
@@ -286,8 +305,22 @@
                                                                         Quantity: {{ $purchase_item->quantity }}
                                                                     </h6>
                                                                 </div>
-                                                                <div class="col-4 text-start">
+                                                                <div class="col-3 text-start">
                                                                     <h4>₱{{ $purchase_item->total_price }}</h4>
+                                                                </div>
+                                                                <div class="col-3 text-start">
+                                                                     <form action="{{ route('status-order-update') }}" method="post">
+                                                                         @method('PATCH')
+                                                                         @csrf
+                                                                         <label>
+                                                                             <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
+                                                                         </label>
+                                                                         <button type="submit"
+                                                                                 class="bg-green-500 hover:bg-green-700 text-white text-sm p-2 rounded">
+                                                                             Arrive
+                                                                         </button>
+                                                                     </form>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -339,9 +372,11 @@
                             <div class="accordion accordion-flush my-2 border rounded" id="accordionFlushCompleted">
                                 <div class="accordion-item border">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed d-block py-2" id="trackAccordionCompleted-{{$key}}"
-                                            type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseCompleted-{{ $key }}" aria-expanded="false"
+                                        <button class="accordion-button collapsed d-block py-2"
+                                            id="trackAccordionCompleted-{{ $key }}" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseCompleted-{{ $key }}"
+                                            aria-expanded="false"
                                             aria-controls="collapseCompleted-{{ $key }}">
                                             <div class="row text-center">
                                                 <div class="col-2">
@@ -397,80 +432,176 @@
                                                                     <h5>₱{{ $purchase_item->total_price }}</h5>
                                                                 </div>
                                                                 <div class="col-2 text-center">
-                                                                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
+                                                                    <button type="button"
+                                                                        class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
                                                                         Review Product
                                                                     </button>
                                                                 </div>
                                                                 <div class="col-2 text-center">
                                                                     @if ($purchase_item->item_returnrefund_info)
                                                                         @if ($purchase_item->item_returnrefund_info->status == 'returnrefund-pending')
-                                                                            <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i> Pending return/refund request</p>
+                                                                            <p class="text-red-500 text-sm"><i
+                                                                                    class="bi bi-info-square-fill"></i>
+                                                                                Pending return/refund request</p>
                                                                         @else
-                                                                            <a class="btn bg-secondary text-light p-2 rounded" href="{{route('profile.edit', ['profile_activetab' => 'returnrefund'])}}">
-                                                                                <p class="text-sm mb-0">Processing <sup><i class="bi bi-box-arrow-up-right"></i></sup></p>
+                                                                            <a class="btn bg-secondary text-light p-2 rounded"
+                                                                                href="{{ route('profile.edit', ['profile_activetab' => 'returnrefund']) }}">
+                                                                                <p class="text-sm mb-0">Processing
+                                                                                    <sup><i
+                                                                                            class="bi bi-box-arrow-up-right"></i></sup>
+                                                                                </p>
                                                                             </a>
                                                                         @endif
                                                                     @else
                                                                         <!-- Button trigger modal -->
-                                                                        <button type="button" class="bg-secondary-subtle text-sm p-2 rounded" data-bs-toggle="modal" data-bs-target="#returnRefundModal-{{$key}}-{{$purchase_item->purchase->reference_number}}">
+                                                                        <button type="button"
+                                                                            class="bg-secondary-subtle text-sm p-2 rounded"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#returnRefundModal-{{ $key }}-{{ $purchase_item->purchase->reference_number }}">
                                                                             Return/Refund
                                                                         </button>
 
                                                                         <!-- Modal -->
-                                                                        <div class="modal fade" id="returnRefundModal-{{$key}}-{{$purchase_item->purchase->reference_number}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                        <div class="modal fade"
+                                                                            id="returnRefundModal-{{ $key }}-{{ $purchase_item->purchase->reference_number }}"
+                                                                            data-bs-backdrop="static"
+                                                                            data-bs-keyboard="false" tabindex="-1"
+                                                                            aria-labelledby="modalLabel"
+                                                                            aria-hidden="true">
+                                                                            <div
+                                                                                class="modal-dialog modal-dialog-centered modal-lg">
                                                                                 <div class="modal-content">
-                                                                                    <form action="{{ route('profile.request_returnrefund') }}" method="POST" enctype="multipart/form-data">
+                                                                                    <form
+                                                                                        action="{{ route('profile.request_returnrefund') }}"
+                                                                                        method="POST"
+                                                                                        enctype="multipart/form-data">
                                                                                         @csrf
                                                                                         <div class="modal-header">
-                                                                                            <h1 class="modal-title fs-5" id="modalLabel">Reason for return/refund:</h1>
-                                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                            <h1 class="modal-title fs-5"
+                                                                                                id="modalLabel">Reason
+                                                                                                for return/refund:</h1>
+                                                                                            <button type="button"
+                                                                                                class="btn-close"
+                                                                                                data-bs-dismiss="modal"
+                                                                                                aria-label="Close"></button>
                                                                                         </div>
-                                                                                        <div class="modal-body text-start mx-4">
-                                                                                            <p class="text-gray-500 text-center text-lg mx-2">{{$purchase_item->product->title}}</p>
+                                                                                        <div
+                                                                                            class="modal-body text-start mx-4">
+                                                                                            <p
+                                                                                                class="text-gray-500 text-center text-lg mx-2">
+                                                                                                {{ $purchase_item->product->title }}
+                                                                                            </p>
                                                                                             {{-- Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}? --}}
-                                                                                            Please complete the following form in requesting a return/refund item to {{ $purchase->seller->shop_name }} shop.
+                                                                                            Please complete the
+                                                                                            following form in requesting
+                                                                                            a return/refund item
+                                                                                            to
+                                                                                            {{ $purchase->seller->shop_name }}
+                                                                                            shop.
                                                                                             <div class="mx-2 my-2">
-                                                                                                <h5>Reason for return/refund:</h5>
+                                                                                                <h5>Reason for
+                                                                                                    return/refund:</h5>
                                                                                                 <div class="ml-4">
-                                                                                                    <div class="form-check">
-                                                                                                        <input class="form-check-input" type="radio" name="reason" id="reason1-{{$key}}-{{$purchase->id}}" value="Product Defect or Damage" required>
-                                                                                                        <label class="form-check-label" for="reason1-{{$key}}-{{$purchase->id}}">
-                                                                                                            Product Defect or Damage
+                                                                                                    <div
+                                                                                                        class="form-check">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="reason"
+                                                                                                            id="reason1-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value="Product Defect or Damage"
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="reason1-{{ $key }}-{{ $purchase->id }}">
+                                                                                                            Product
+                                                                                                            Defect or
+                                                                                                            Damage
                                                                                                         </label>
                                                                                                     </div>
-                                                                                                    <div class="form-check">
-                                                                                                        <input class="form-check-input" type="radio" name="reason" id="reason2-{{$key}}-{{$purchase->id}}" value="Wrong Product Received" required>
-                                                                                                        <label class="form-check-label" for="reason2-{{$key}}-{{$purchase->id}}">
-                                                                                                            Wrong Product Received
+                                                                                                    <div
+                                                                                                        class="form-check">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="reason"
+                                                                                                            id="reason2-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value="Wrong Product Received"
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="reason2-{{ $key }}-{{ $purchase->id }}">
+                                                                                                            Wrong
+                                                                                                            Product
+                                                                                                            Received
                                                                                                         </label>
                                                                                                     </div>
-                                                                                                    <div class="form-check">
-                                                                                                        <input class="form-check-input" type="radio" name="reason" id="reason3-{{$key}}-{{$purchase->id}}" value="Product Not Compatible" required>
-                                                                                                        <label class="form-check-label" for="reason3-{{$key}}-{{$purchase->id}}">
-                                                                                                            Product Not Compatible
+                                                                                                    <div
+                                                                                                        class="form-check">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="reason"
+                                                                                                            id="reason3-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value="Product Not Compatible"
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="reason3-{{ $key }}-{{ $purchase->id }}">
+                                                                                                            Product Not
+                                                                                                            Compatible
                                                                                                         </label>
                                                                                                     </div>
-                                                                                                    <div class="form-check">
-                                                                                                        <input class="form-check-input" type="radio" name="reason" id="reason4-{{$key}}-{{$purchase->id}}" value="Quality Concerns" required>
-                                                                                                        <label class="form-check-label" for="reason4-{{$key}}-{{$purchase->id}}">
-                                                                                                            Quality Concerns
+                                                                                                    <div
+                                                                                                        class="form-check">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="reason"
+                                                                                                            id="reason4-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value="Quality Concerns"
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="reason4-{{ $key }}-{{ $purchase->id }}">
+                                                                                                            Quality
+                                                                                                            Concerns
                                                                                                         </label>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="mx-2 my-4">
-                                                                                                <h5>Condition of the product:</h5>
+                                                                                                <h5>Condition of the
+                                                                                                    product:</h5>
                                                                                                 <div class="ml-4">
-                                                                                                    <div class="form-check">
-                                                                                                        <input class="form-check-input" type="radio" name="condition" id="condition1-{{$key}}-{{$purchase->id}}" value="Original Packaginge" required>
-                                                                                                        <label class="form-check-label" for="condition1-{{$key}}-{{$purchase->id}}">
-                                                                                                            Original Packaging
+                                                                                                    <div
+                                                                                                        class="form-check">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="condition"
+                                                                                                            id="condition1-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value="Original Packaginge"
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="condition1-{{ $key }}-{{ $purchase->id }}">
+                                                                                                            Original
+                                                                                                            Packaging
                                                                                                         </label>
                                                                                                     </div>
-                                                                                                    <div class="form-check">
-                                                                                                        <input class="form-check-input" type="radio" name="condition" id="condition2-{{$key}}-{{$purchase->id}}" value="Unused/Unworn" required>
-                                                                                                        <label class="form-check-label" for="condition2-{{$key}}-{{$purchase->id}}">
+                                                                                                    <div
+                                                                                                        class="form-check">
+                                                                                                        <input
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="condition"
+                                                                                                            id="condition2-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value="Unused/Unworn"
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="condition2-{{ $key }}-{{ $purchase->id }}">
                                                                                                             Unused/Unworn
                                                                                                         </label>
                                                                                                     </div>
@@ -478,27 +609,65 @@
                                                                                             </div>
 
                                                                                             <div class="mx-2 my-4">
-                                                                                                <h5>Photographic evidence:</h5>
-                                                                                                <small>You can select multiple images (5.12 MB max)</small>
-                                                                                                <input type="file" class="form-control mt-2 @error('files') is-invalid @enderror" name="evidence_imgs[]" id="evidence_imgs-{{$key}}-{{$purchase->id}}" multiple required>
+                                                                                                <h5>Photographic
+                                                                                                    evidence:</h5>
+                                                                                                <small>You can select
+                                                                                                    multiple images
+                                                                                                    (5.12 MB
+                                                                                                    max)
+                                                                                                </small>
+                                                                                                <input type="file"
+                                                                                                    class="form-control mt-2 @error('files') is-invalid @enderror"
+                                                                                                    name="evidence_imgs[]"
+                                                                                                    id="evidence_imgs-{{ $key }}-{{ $purchase->id }}"
+                                                                                                    multiple required>
                                                                                                 @error('evidence_imgs')
-                                                                                                    <small class="text-red-500">{{$message}}</small>
+                                                                                                    <small
+                                                                                                        class="text-red-500">{{ $message }}</small>
                                                                                                 @enderror
                                                                                             </div>
-                                                                                            <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
-                                                                                            <input type="text" name="purchase_item_id" value="{{$purchase_item->id}}" hidden>
-                                                                                            <input type="text" name="profile_activetab" value="purchases" hidden>
+                                                                                            <input type="text"
+                                                                                                name="user_id"
+                                                                                                value="{{ Auth::user()->id }}"
+                                                                                                hidden>
+                                                                                            <input type="text"
+                                                                                                name="purchase_item_id"
+                                                                                                value="{{ $purchase_item->id }}"
+                                                                                                hidden>
+                                                                                            <input type="text"
+                                                                                                name="profile_activetab"
+                                                                                                value="purchases"
+                                                                                                hidden>
 
-                                                                                            <div class="form-check ml-28">
-                                                                                                <input class="form-check-input" type="checkbox" value="" id="accept_policy-{{$key}}-{{$purchase->id}}" required>
-                                                                                                <label class="form-check-label text-sm" for="accept_policy-{{$key}}-{{$purchase->id}}">
-                                                                                                    I have read and accept the <a href="{{route('shipping-return-policy')}}">Return/Refund Policy</a> of PR-Tech.
+                                                                                            <div
+                                                                                                class="form-check ml-28">
+                                                                                                <input
+                                                                                                    class="form-check-input"
+                                                                                                    type="checkbox"
+                                                                                                    value=""
+                                                                                                    id="accept_policy-{{ $key }}-{{ $purchase->id }}"
+                                                                                                    required>
+                                                                                                <label
+                                                                                                    class="form-check-label text-sm"
+                                                                                                    for="accept_policy-{{ $key }}-{{ $purchase->id }}">
+                                                                                                    I have read and
+                                                                                                    accept the <a
+                                                                                                        href="{{ route('shipping-return-policy') }}">Return/Refund
+                                                                                                        Policy</a> of
+                                                                                                    PR-Tech.
                                                                                                 </label>
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="modal-footer">
-                                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-bs-dismiss="modal">
+                                                                                                Cancel
+                                                                                            </button>
+                                                                                            <button type="submit"
+                                                                                                class="btn btn-danger">
+                                                                                                Submit
+                                                                                            </button>
                                                                                         </div>
                                                                                     </form>
                                                                                 </div>
