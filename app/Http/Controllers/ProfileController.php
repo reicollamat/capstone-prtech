@@ -73,7 +73,7 @@ class ProfileController extends Controller
         $cancellation->save();
         $purchase->update(['purchase_status' => 'cancellation_pending']);
 
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #'.$purchase->reference_number.' requested!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #' . $purchase->reference_number . ' requested!');
     }
 
     /**
@@ -107,7 +107,7 @@ class ProfileController extends Controller
             foreach ($request->evidence_imgs as $key => $image) {
                 $img_path = $image->storeAs(
                     'returnrefund_imgs',
-                    $purchase_item->id.'-'.$key.'-'.'returnrefund_img'.'.'.$image->getClientOriginalExtension(),
+                    $purchase_item->id . '-' . $key . '-' . 'returnrefund_img' . '.' . $image->getClientOriginalExtension(),
                     'real_public'
                 );
 
@@ -120,7 +120,7 @@ class ProfileController extends Controller
             }
         }
 
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for '.$purchase_item->product->title.'!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for ' . $purchase_item->product->title . '!');
     }
 
     public function cancel_returnrefund_request(Request $request): RedirectResponse
@@ -222,7 +222,7 @@ class ProfileController extends Controller
                 'shipped_date' => now(),
             ]);
 
-        // dd($purchase, $shipment);
+            // dd($purchase, $shipment);
 
         } else {
             return abort(500);
@@ -243,6 +243,6 @@ class ProfileController extends Controller
         // ]);
 
         // dd($purchase);
-        return Redirect::route('profile.edit', ['profile_activetab' => 'orders']);
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases']);
     }
 }
