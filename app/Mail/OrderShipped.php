@@ -22,6 +22,8 @@ class OrderShipped extends Mailable
     public function __construct($order)
     {
         $this->order = Purchase::find($order);
+
+        // dd($this->order->purchase_items);
     }
 
     /**
