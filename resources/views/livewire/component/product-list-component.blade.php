@@ -73,20 +73,20 @@
                                         <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="grid lg:grid-cols-2 mb-3 gap-4">
-                                    <div>
-                                        <label for="sku"
-                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                            SKU
-                                        </label>
-                                        <input type="text" id="sku" value="{{ $itemproductinfo->SKU }}"
-                                            wire:model.blur="product_sku"
-                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
-                                            placeholder="" required>
-                                        @error('product_sku')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                <div class="mb-3 gap-4">
+                                    {{-- <div> --}}
+                                    {{--     <label for="sku" --}}
+                                    {{--         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white"> --}}
+                                    {{--         SKU --}}
+                                    {{--     </label> --}}
+                                    {{--     <input type="text" id="sku" value="{{ $itemproductinfo->SKU }}" --}}
+                                    {{--         wire:model.blur="product_sku" --}}
+                                    {{--         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5" --}}
+                                    {{--         placeholder="" required> --}}
+                                    {{--     @error('product_sku') --}}
+                                    {{--         <span class="text-sm text-red-600 space-y-1">{{ $message }}</span> --}}
+                                    {{--     @enderror --}}
+                                    {{-- </div> --}}
                                     <div>
                                         <label for="product_slug"
                                             class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Product
