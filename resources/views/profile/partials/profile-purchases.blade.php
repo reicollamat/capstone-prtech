@@ -283,6 +283,18 @@
                                 <div id="collapseShipping-{{ $key }}" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushShipping">
                                     <div class="accordion-body bg-light p-2">
+                                        <form action="{{ route('status-order-update') }}" method="post">
+                                            @method('PATCH')
+                                            @csrf
+                                            <div class="w-full text-end">
+                                                <label>
+                                                    <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
+                                                </label>
+                                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white text-sm p-2 px-4 rounded">
+                                                    Arrive
+                                                </button>
+                                            </div>
+                                        </form>
                                         @foreach ($purchase->purchase_items as $purchase_item)
                                             <div class="visually-hidden">
                                                 {{ $product = App\Models\Product::find($purchase_item->product_id) }}
@@ -297,7 +309,7 @@
                                                     <div class="col-md-11">
                                                         <div class="card-body py-2 lh-1">
                                                             <div class="card-title d-flex p-2">
-                                                                <div class="col-5 text-start">
+                                                                <div class="col-7 text-start">
                                                                     <h5>{{ $product->title }}</h5>
                                                                 </div>
                                                                 <div class="col-3 text-start">
@@ -305,22 +317,8 @@
                                                                         Quantity: {{ $purchase_item->quantity }}
                                                                     </h6>
                                                                 </div>
-                                                                <div class="col-3 text-start">
+                                                                <div class="col-2 text-start">
                                                                     <h4>₱{{ $purchase_item->total_price }}</h4>
-                                                                </div>
-                                                                <div class="col-3 text-start">
-                                                                     <form action="{{ route('status-order-update') }}" method="post">
-                                                                         @method('PATCH')
-                                                                         @csrf
-                                                                         <label>
-                                                                             <input type="text" name="purchase_id" value="{{ $purchase->id }}" hidden>
-                                                                         </label>
-                                                                         <button type="submit"
-                                                                                 class="bg-green-500 hover:bg-green-700 text-white text-sm p-2 rounded">
-                                                                             Arrive
-                                                                         </button>
-                                                                     </form>
-
                                                                 </div>
                                                             </div>
                                                         </div>
