@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $sql = File::get('database/seeders/sql/_localhost-2023_12_15_13_00_51-dump.sql');
+        $sql = File::get('database/seeders/sql/prtech_db.sql');
         DB::unprepared($sql);
 
         // // seed an 'admin' & 'regular_user' role
