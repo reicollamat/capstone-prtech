@@ -10,6 +10,7 @@ use App\Models\PurchaseItem;
 use App\Models\ReturnrefundImage;
 use App\Models\Shipments;
 use App\Models\User;
+use App\Models\UserNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -222,27 +223,28 @@ class ProfileController extends Controller
                 'shipped_date' => now(),
             ]);
 
-            // dd($purchase, $shipment);
+            if ($shipment->purchase->payment->payment_type == 'cod') {
+                $shipment->purchase->payment->update([
+                    'payment_status' => 'paid',
+                    'date_of_payment' => now(),
+                ]);
+            }
 
-        } else {
+            //notify from 'shipping' to 'completed'
+            $notification = new UserNotification([
+                'user_id' => $shipment->purchase->user->id,
+                'purchase_id' => $shipment->purchase->id,
+                'tag' => 'completed',
+                'title' => 'Share your feedback!',
+                'message' => 'Order #' . $shipment->purchase->id . ' is completed. Your feedback matters to others! Rate the products by date',
+            ]);
+            $notification->save();
+        }
+        //
+        else {
             return abort(500);
         }
 
-        // $purchase = Purchase::find($request->purchase_id);
-        //
-        // $shipment = Shipments::find($this->set_to_complete);
-        // // dd($shipment);
-        //
-        // $shipment->purchase->update([
-        //     'purchase_status' => 'completed',
-        //     'completion_date' => now(),
-        // ]);
-        // $shipment->update([
-        //     'shipment_status' => 'completed',
-        //     'shipped_date' => now(),
-        // ]);
-
-        // dd($purchase);
         return Redirect::route('profile.edit', ['profile_activetab' => 'purchases']);
     }
 }

@@ -419,7 +419,9 @@
                                                         <div class="card-body py-2 lh-1">
                                                             <div class="card-title d-flex p-2">
                                                                 <div class="col-4 text-start">
-                                                                    <h6>{{ $purchase_item->product->title }}</h6>
+                                                                    <a href="{{route('collections-details', ['product_id' => $purchase_item->product->id, 'category' => $purchase_item->product->category])}}">
+                                                                        <h6>{{ $purchase_item->product->title }}</h6>
+                                                                    </a>
                                                                 </div>
                                                                 <div class="col-2 text-center">
                                                                     <h6>
@@ -429,18 +431,28 @@
                                                                 <div class="col-2 text-center">
                                                                     <h5>₱{{ $purchase_item->total_price }}</h5>
                                                                 </div>
-                                                                <div class="col-2 text-center">
-                                                                    <button type="button"
-                                                                        class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
-                                                                        Review Product
-                                                                    </button>
+                                                                <div class="col-2 text-center" x-data="{ isOpen: false }">
+                                                                    @if ($purchase_item->comment_id)
+                                                                        <p class="text-blue-600 text-sm">
+                                                                            <i class="bi bi-check2-circle"></i> Product Review Completed
+                                                                        </p>
+                                                                    @else
+                                                                        <button @click="isOpen = !isOpen" type="button" class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
+                                                                            Review Product
+                                                                        </button>
+                                                                    @endif
+
+                                                                    @livewire('leave_review', ['purchase_item_id' => $purchase_item->id], key($purchase_item->id))
                                                                 </div>
                                                                 <div class="col-2 text-center">
                                                                     @if ($purchase_item->item_returnrefund_info)
                                                                         @if ($purchase_item->item_returnrefund_info->status == 'returnrefund-pending')
-                                                                            <p class="text-red-500 text-sm"><i
-                                                                                    class="bi bi-info-square-fill"></i>
+                                                                            <p class="text-red-500 text-sm"><i class="bi bi-info-square-fill"></i>
                                                                                 Pending return/refund request</p>
+                                                                        @elseif ($purchase_item->item_returnrefund_info->status == 'returnrefund-completed')
+                                                                            <p class="text-green-600 text-sm">
+                                                                                <i class="bi bi-check2-circle"></i> Return/Refund Completed
+                                                                            </p>
                                                                         @else
                                                                             <a class="btn bg-secondary text-light p-2 rounded"
                                                                                 href="{{ route('profile.edit', ['profile_activetab' => 'returnrefund']) }}">

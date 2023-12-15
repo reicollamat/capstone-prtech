@@ -44,5 +44,6 @@ class PurchaseItem extends Model
         'product_id',
         'quantity',
         'total_price',
+        'comment_id',
     ];
 }

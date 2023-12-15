@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->integer('quantity');
             $table->decimal('total_price', 20, 2);
+            $table->integer('comment_id')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });
