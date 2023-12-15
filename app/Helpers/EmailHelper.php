@@ -16,6 +16,7 @@ class EmailHelper
      */
     public static function sendEmail($email, $orderId): string
     {
+        // dd($email, $orderId);
         $mailStatus = '';
         try {
             Mail::to($email)->send(new OrderShipped($orderId));
