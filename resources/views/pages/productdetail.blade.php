@@ -166,11 +166,14 @@
                 <!-- dummy customer reviews -->
 
                 <div class="overflow-auto bg-secondary-subtle p-2 border border-2 rounded" style="max-height: 600px">
-                    @foreach ($categoryproduct->product->comments as $comment)
+                    @foreach ($categoryproduct->product->comments->sortByDesc('id') as $comment)
                         <x-shop.cus_review>
                             <x-slot:img_path>img/user{{fake()->numberBetween(1, 3)}}.png</x-slot:img_path>
-                            {{-- <x-slot:cus_name>{{$comment->user->first_name}} {{$comment->user->last_name}}</x-slot:cus_name> --}}
-                            <x-slot:cus_name>Sample Name</x-slot:cus_name>
+                            @if ($comment->user)
+                            <x-slot:cus_name>{{$comment->user->first_name}} {{$comment->user->last_name}}</x-slot:cus_name>
+                            @else
+                            <x-slot:cus_name>{{fake('fil_PH')->firstName()}} {{fake('fil_PH')->lastName()}}</x-slot:cus_name>
+                            @endif
                             <x-slot:cus_date>{{date('d M Y', strtotime($comment->created_at))}}</x-slot:cus_date>
                             <x-slot:cus_star>
                                 @for ($i = 0; $i < intval($comment->rating); $i++)
