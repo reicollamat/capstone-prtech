@@ -107,7 +107,6 @@ class DatabaseSeeder extends Seeder
         //     ],
         // ]);
 
-
         // $admin_role_id = DB::table('roles')->where('slug', 'admin')->value('id');
         // $user_role_id = DB::table('roles')->where('slug', 'user')->value('id');
 
@@ -152,24 +151,26 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             SellerSeeder::class,
-            ComputerCaseSeeder::class,
-            CaseFanSeeder::class,
-            CpuSeeder::class,
-            CpuCoolerSeeder::class,
-            ExtStorageSeeder::class,
-            IntStorageSeeder::class,
-            HeadphoneSeeder::class,
-            KeyboardSeeder::class,
-            MemorySeeder::class,
-            MonitorSeeder::class,
-            MotherboardSeeder::class,
-            MouseSeeder::class,
-            PsuSeeder::class,
-            SpeakerSeeder::class,
-            VideoCardSeeder::class,
-            WebcamSeeder::class,
+            ProductSeeder::class,
             SellerShopMetricsSeeder::class,
             CommentSeeder::class,
+            // ComputerCaseSeeder::class,
+            // CaseFanSeeder::class,
+            // CpuSeeder::class,
+            // CpuCoolerSeeder::class,
+            // ExtStorageSeeder::class,
+            // IntStorageSeeder::class,
+            // HeadphoneSeeder::class,
+            // KeyboardSeeder::class,
+            // MemorySeeder::class,
+            // MonitorSeeder::class,
+            // MotherboardSeeder::class,
+            // MouseSeeder::class,
+            // PsuSeeder::class,
+            // SpeakerSeeder::class,
+            // VideoCardSeeder::class,
+            // WebcamSeeder::class,
+
         ]);
 
         // Product::factory()
