@@ -70,14 +70,16 @@ class OrderReturnsRefunds extends Component
                 'completion_date' => now(),
             ]);
 
+            sleep(0.5);
             session()->flash('notification-livewire', 'Return product completed!');
 
-            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+            return $this->returnrefund_items->where('refund_option', 'return_product')->orderBy('status', 'desc')->paginate(10);
         }
         //
         else {
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
         }
+        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
     }
 
     #[Computed]
@@ -96,6 +98,7 @@ class OrderReturnsRefunds extends Component
                 'completion_date' => now(),
             ]);
 
+            sleep(0.5);
             session()->flash('notification-livewire', 'Partial refund completed!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
@@ -122,6 +125,7 @@ class OrderReturnsRefunds extends Component
                 'completion_date' => now(),
             ]);
 
+            sleep(0.5);
             session()->flash('notification-livewire', 'Full refund completed!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
@@ -151,6 +155,7 @@ class OrderReturnsRefunds extends Component
                 'returned_date' => now(),
             ]);
 
+            sleep(0.5);
             session()->flash('notification-livewire', 'Replacement product arrived!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
@@ -163,6 +168,7 @@ class OrderReturnsRefunds extends Component
                 'status' => 'returnrefund-shipping_replace',
             ]);
 
+            sleep(0.5);
             session()->flash('notification-livewire', 'Replacement product shipped to customer!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);

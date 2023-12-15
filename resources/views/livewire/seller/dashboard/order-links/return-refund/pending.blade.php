@@ -261,7 +261,7 @@
             @endforeach
         @else
             <div class="flex content-center text-gray-500 p-6">
-                <h4>No Return/Refund Request Listed</h4>
+                <h4>No Pending Return/Refund Request Listed</h4>
             </div>
         @endif
     </div>

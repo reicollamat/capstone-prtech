@@ -10,7 +10,7 @@
     </div>
 
     <div wire:loading.remove x-transition>
-        @if ($this->getReturnrefundPartialRefund->count() > 0)
+        @if ($this->getReturnrefundPartialRefund->where('refund_option', 'partial_refund')->count() > 0)
             @foreach ($this->getReturnrefundPartialRefund as $key => $item)
                 @if ($item->refund_option == 'partial_refund')
                     <div class="border-b border-gray-300" x-data="{ selected: null }">
@@ -144,52 +144,50 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <div class="col-span-1 flex flex-col items-start">
+                                <div class="col-span-1 flex flex-col items-start" x-data="{ isOpen: false }">
                                     @if ($item->status == 'returnrefund-approved')
                                         <h6>Actions:</h6>
-                                        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white p-2 mb-2 rounded w-full" data-bs-toggle="modal" data-bs-target="#gcashRefundPartial-{{$key}}">
+                                        <button @click="isOpen = !isOpen" class="bg-blue-500 hover:bg-blue-700 text-white p-2 mb-2 rounded w-full" data-bs-toggle="modal" data-bs-target="#gcashRefundPartial-{{$key}}">
                                             Partial Refund Payment
                                         </button>
 
                                         {{-- payment modal --}}
-                                        <div class="modal fade" id="gcashRefundPartial-{{$key}}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="modalLabel"><i class="bi bi-coin"></i> GCash</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                    <div class="modal-body text-start mx-2">
-                                                        <div class=" text-gray-600 mb-5">
-                                                            <div>Amount Due: {{ $item->purchase_item->product->price }}</div>
+                                        <div x-cloak x-show="isOpen"
+                                            x-transition:enter="transition ease-out duration-100"
+                                            x-transition:enter-start="opacity-0 scale-90"
+                                            x-transition:enter-end="opacity-100 scale-100"
+                                            x-transition:leave="transition ease-in duration-100"
+                                            x-transition:leave-start="opacity-100 scale-100"
+                                            x-transition:leave-end="opacity-0 scale-90" class="absolute start-50 bottom-0 translate-middle-x bg-gray-100 p-4 border shadow-lg rounded">
+                                            <button class="w-full text-end text-red-600" @click="isOpen = false"><i class="bi bi-x-circle-fill"></i></button>
+                                            <div class=" text-gray-600 mb-5">
+                                                <div>Amount Due: {{ $item->purchase_item->product->price }}</div>
+                                            </div>
+                                            <div class="mt-5 text-center">
+                                                <h3 class="d-flex justify-content-center text-xl font-semibold mb-6">Login to pay with <p
+                                                        class="text-primary ml-1">GCash</p>
+                                                </h3>
+                                                <p class="text-gray-500 text-center mb-6">Input your Mobile number</p>
+                                            </div>
+                                            <div class="mx-auto w-3/4">
+                                                <div class="relative">
+                                                    <div class="mb-6">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="number">+63</span>
+                                                            <input type="text" class="form-control" placeholder="9999999999" aria-label="mobilenumber"
+                                                                aria-describedby="basic-addon1" required>
                                                         </div>
-                                                        <div class="mt-5 text-center">
-                                                            <h3 class="d-flex justify-content-center text-xl font-semibold mb-6">Login to pay with <p
-                                                                    class="text-primary ml-1">GCash</p>
-                                                            </h3>
-                                                            <p class="text-gray-500 text-center mb-6">Input your Mobile number</p>
-                                                        </div>
-                                                        <div class="mx-auto w-3/4">
-                                                            <div class="relative">
-                                                                <div class="mb-6">
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text" id="number">+63</span>
-                                                                        <input type="text" class="form-control" placeholder="9999999999" aria-label="mobilenumber"
-                                                                            aria-describedby="basic-addon1" required>
-                                                                    </div>
-                                                                    <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-light"></label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mt-12 mb-5 flex justify-center no-underline">
-                                                            <button type="button" wire:click="$set('pay_partial_refund', '{{ $item->id }}')" class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline">
-                                                                Payment
-                                                            </button>
-                                                        </div>
+                                                        <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-light"></label>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="mt-12 mb-5 flex justify-center no-underline">
+                                                <button type="button" wire:click="$set('pay_partial_refund', '{{ $item->id }}')" class="bg-blue-500 text-light rounded-full py-2 px-16 no-underline">
+                                                    Payment
+                                                </button>
+                                            </div>
                                         </div>
+
                                     @endif
                                 </div>
                             </div>
@@ -200,7 +198,7 @@
             @endforeach
         @else
             <div class="flex content-center text-gray-500 p-6">
-                <h4>No Return/Refund Request Listed</h4>
+                <h4>No Partial Refund Listed</h4>
             </div>
         @endif
     </div>

@@ -10,7 +10,7 @@
     </div>
 
     <div wire:loading.remove x-transition>
-        @if ($this->getReturnrefundReplacement->count() > 0)
+        @if ($this->getReturnrefundReplacement->where('refund_option', 'replacement')->count() > 0)
             @foreach ($this->getReturnrefundReplacement as $key => $item)
                 @if ($item->refund_option == 'replacement')
                     <div class="border-b border-gray-300" x-data="{ selected: null }">
@@ -192,7 +192,7 @@
             @endforeach
         @else
             <div class="flex content-center text-gray-500 p-6">
-                <h4>No Return/Refund Request Listed</h4>
+                <h4>No Replacement Listed</h4>
             </div>
         @endif
     </div>
