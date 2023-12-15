@@ -27,7 +27,11 @@
                     {{-- <h6 class="mb-0">Notifications Empty</h6> --}}
                     <div class="notification-body w-full p-1.5 border-t-2 border-gray-100">
                         @if (count($this->notifications))
-                                
+
+                            <button class="text-red-600 text-sm px-1" wire:click="clear_notifs">
+                                <i class="bi bi-trash-fill"></i>Clear
+                            </button>
+                            
                             @foreach ($this->notifications as $notification)
                                 @if ($notification->tag == 'order_placed')
                                     <div class="flex flex-col text-start m-1 p-2 bg-blue-200 rounded">
@@ -84,7 +88,7 @@
                                     </div>
                                 @endif
                                 @if ($notification->tag == 'completed')
-                                <form action="{{route('leave_review')}}" method="GET">
+                                {{-- <form action="{{route('leave_review')}}" method="GET"> --}}
 
                                     <input type="text" name="purchase_id" value="{{$notification->purchase_id}}" hidden>
                                     <button class="flex flex-col text-start m-1 p-2 bg-blue-200 rounded">
@@ -94,7 +98,7 @@
                                         </div>
                                         <p class="p-0 m-0">{{$notification->message}}</p>
                                     </button>
-                                </form>
+                                {{-- </form> --}}
                                 @endif
                                 @if ($notification->tag == 'product_restock')
                                     <div class="flex flex-col text-start m-1 p-2 bg-blue-200 rounded">

@@ -51,7 +51,7 @@ class User extends Authenticatable
     // relationship to Notification
     public function notification()
     {
-        return $this->hasMany(Notification::class);
+        return $this->hasMany(UserNotification::class);
     }
 
 

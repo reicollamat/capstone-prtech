@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use App\Models\UserNotification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -35,6 +36,18 @@ class NotificationList extends Component
         // dd($purchase_id);
         $this->dispatch('purchase_id', $purchase_id);
         $this->redirect(LeaveReview::class, navigate: true);
+    }
+
+    public function clear_notifs()
+    {
+        $user = User::find($this->user_id);
+
+        foreach ($user->notification as $key => $notif) {
+            $notif->truncate();
+        }
+
+        sleep(0.5);
+        $this->mount();
     }
 
     public function render()

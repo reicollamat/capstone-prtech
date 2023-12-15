@@ -37,8 +37,8 @@ class OrderListComponent extends Component
                 'user_id' => $item['user_id'],
                 'purchase_id' => $item['purchase_id'],
                 'tag' => 'completed',
-                'title' => 'Share your feedback! click here',
-                'message' => 'Order #'.$item['purchase_id'].' is completed. Your feedback matters to others! Rate the products by date',
+                'title' => 'Share your feedback!',
+                'message' => 'Order #' . $item['purchase_id'] . ' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
         } elseif ($this->purchase_status == 'to_ship') {
@@ -47,7 +47,7 @@ class OrderListComponent extends Component
                 'purchase_id' => $item['purchase_id'],
                 'tag' => 'to_ship',
                 'title' => 'Payment Confirmed',
-                'message' => 'Payment for order #'.$item['purchase_id'].' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                'message' => 'Payment for order #' . $item['purchase_id'] . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
             ]);
             $notification->save();
         } elseif ($this->purchase_status == 'shipping') {
@@ -56,8 +56,8 @@ class OrderListComponent extends Component
                 'purchase_id' => $item['purchase_id'],
                 'tag' => 'shipping',
                 'title' => 'Shipped Out',
-                'message' => 'Parcel parcel no for your order
-                #'.$item['purchase_id'].' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                'message' => 'Parcel for your order
+                #' . $item['purchase_id'] . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
             ]);
             $notification->save();
         } elseif ($this->purchase_status == 'failed_delivery' && $item['payment_type'] == 'cod') {
