@@ -7,6 +7,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
@@ -80,6 +81,64 @@ class ShopInformation extends Component
         return view('livewire..seller.on-boarding.form.shop-information');
     }
 
+    // list for address select component
+    #[Computed]
+    public function getAddressList()
+    {
+        $address_list = [
+            [
+                'province' => 'select',
+            ],
+            [
+                'province' => "Metro Manila",
+                'cities' => ["Manila", "Quezon City", "Makati", "Taguig", "Pasig", "Parañaque"]
+            ],
+            [
+                'province' => "Batangas",
+                'cities' => ["Batangas City", "Lipa City", "Tanauan", "Santo Tomas", "Nasugbu"]
+            ],
+            [
+                'province' => "Ilocos Norte",
+                'cities' => ["Laoag City", "Batac", "Mangaldan", "Currimao", "Pasuquin"]
+            ],
+            [
+                'province' => "Pampanga",
+                'cities' => ["Angeles City", "San Fernando", "Mabalacat", "Mexico", "Dau"]
+            ],
+            [
+                'province' => "Cavite",
+                'cities' => ["Tagaytay", "Dasmarinas", "Bacoor", "Imus", "Trece Martires"]
+            ],
+            [
+                'province' => "Benguet",
+                'cities' => ["Baguio City", "La Trinidad", "Itogon", "Tuba", "Sablan"]
+            ],
+            [
+                'province' => "Quezon",
+                'cities' => ["Lucena City", "Tayabas", "Candelaria", "Sariaya", "Dolores"]
+            ],
+            [
+                'province' => "Bulacan",
+                'cities' => ["Malolos City", "Meycauayan", "San Jose del Monte", "Baliuag", "Plaridel"]
+            ],
+            [
+                'province' => "Zambales",
+                'cities' => ["Olongapo City", "Subic", "Iba", "Masinloc", "Botolan"]
+            ],
+            [
+                'province' => "Laguna",
+                'cities' => ["Calamba City", "San Pablo City", "Santa Rosa", "Biñan", "Los Baños"]
+            ],
+            [
+                'province' => "Isabela",
+                'cities' => ["Ilagan City", "Cauayan City", "Santiago City", "Alicia", "Roxas"]
+            ],
+        ];
+
+        return $address_list;
+    }
+
+
     public function move()
     {
         if ($this->currentStep < $this->totalSteps) {
@@ -103,9 +162,14 @@ class ShopInformation extends Component
             ]
         );
 
+        // set default registerd address == shop address
+        $this->registered_address = $this->shop_address;
+        $this->registered_state_province = $this->shop_state_province;
+        $this->registered_city = $this->shop_city;
+        $this->registered_zip_code = $this->shop_zip_code;
+
         // change the form to 2nd step if validation is passed
         $this->currentStep = 2;
-
     }
 
     public function SecondStepSubmit()
@@ -160,18 +224,15 @@ class ShopInformation extends Component
 
                 // change the form to 3rd step if validation is passed
                 $this->currentStep = 3;
-
             } else {
                 $this->redirect(abort(500, 'Something went wrong!'));
             }
 
             //         set the is_seller to true
             $user->update(['is_seller' => true]);
-
         } catch (Exception $e) {
             abort(500, $e->getMessage());
         }
-
     }
 
     // public function testalert()

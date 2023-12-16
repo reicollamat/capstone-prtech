@@ -110,19 +110,21 @@
                                             </div>
                                             <div>
                                                 <label for="shop_phone"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
-                                                    number</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    Shop Contact Number
+                                                </label>
                                                 <input type="tel" id="shop_phone" wire:model.blur="shop_phone"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     placeholder="09472118385" pattern="[0-9]{11}" required>
                                             </div>
                                         </div>
-                                        <div>
+                                        <hr>
+                                        <div class="mt-4">
                                             <div>
                                                 <label for="shop_address"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     <span class="text-red-600 text-xs">*</span> Shop Address </label>
-                                                <input type="text" id="shop_address" wire:model.blur="shop_address"
+                                                <input type="text" id="shop_address" wire:model.live="shop_address"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     placeholder="Address" required>
                                                 <span
@@ -130,36 +132,69 @@
                                                     is where the Items are going to be Pick-up. Preferably the address
                                                     that is on your Business Permit</span>
                                             </div>
-                                            <div class="mt-6">
+                                            <div class="mt-4">
                                                 <div class="grid gap-6 mb-6 md:grid-cols-3">
                                                     <div>
-                                                        <label for="shop_city"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                            <span class="text-red-600 text-xs">*</span> City </label>
-                                                        <input type="text" id="shop_city" wire:model.blur="shop_city"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            required>
+                                                        <label for="shop_state_province" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                            <span class="text-red-600 text-xs">*</span>
+                                                            Shop State/Province
+                                                        </label>
+                                                        <select id="shop_state_province" class="form-select py-2" aria-label="Default select example" wire:model.live="shop_state_province" required>
+                                                            @foreach ($this->getAddressList as $address)
+                                                                @if ($address['province'] == 'select')
+                                                                    <option value="{{null}}">Please select</option>
+                                                                @else
+                                                                    <option value="{{$address['province']}}">{{$address['province']}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
+                                                        @error('shop_state_province')
+                                                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div>
-                                                        <label for="shop_state_province"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                        <label for="shop_city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             <span class="text-red-600 text-xs">*</span>
-                                                            State/Province</label>
-                                                        <input type="text" id="shop_state_province"
-                                                            wire:model.blur="shop_state_province"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                            required>
+                                                            Shop City
+                                                        </label>
+                                                        <select id="shop_city" class="form-select" aria-label="Default select example" wire:model.live="shop_city" required>
+                                                            @if ($this->shop_city == null && $this->shop_state_province == null)
+                                                                <option value="{{null}}" selected>Please select state/province first</option>
+                                                            @endif
+                                                            @foreach ($this->getAddressList as $address)
+                                                                @if ($address['province'] == $this->shop_state_province)
+                                                                    @if ($this->shop_city == null || $this->shop_city != $address['cities'][0])
+                                                                        <option value="{{null}}" selected>Please select city</option>
+                                                                    @endif
+                                                                    @foreach ($address['cities'] as $key => $cities)
+                                                                        <option value="{{$cities}}">{{$cities}}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                        </select>
+                                                        @error('shop_city')
+                                                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                     <div>
                                                         <label for="shop_zip_postal"
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip/Postal
-                                                            code</label>
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                            Zip/Postal Code
+                                                        </label>
                                                         <input type="tel" id="shop_zip_postal"
                                                             wire:model.blur="shop_zip_code"
                                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                             required>
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            <div class="mt-4">
+                                                <label for="complete" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    Shop Complete Address 
+                                                </label>
+                                                <input type="text" name="complete" id="complete" value="{{$this->shop_address}}, {{$this->shop_city}}, {{$this->shop_state_province}} {{$this->shop_zip_code}}" 
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -208,7 +243,7 @@
                                     <div class="mt-3 flex justify-center">
                                         <p class="mb-0 text-base text-gray-700 w-1/2 text-center">
                                             If Business Address is the same as the address provided at Shop Information.
-                                            You may just copy and paste the information.
+                                            You may leave this address information.
                                         </p>
                                     </div>
                                     <div class="mt-3">
@@ -224,35 +259,66 @@
                                     <div class="mt-3">
                                         <div class="grid gap-6 mb-6 md:grid-cols-3">
                                             <div>
-                                                <label for="registered_city"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    <span class="text-red-600 text-xs">*</span> City </label>
-                                                <input type="text" id="registered_city"
-                                                    wire:model.blur="registered_city"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    required>
+                                                <label for="registered_state_province" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    <span class="text-red-600 text-xs">*</span>
+                                                    Registered State/Province
+                                                </label>
+                                                <select id="registered_state_province" class="form-select py-2" aria-label="Default select example" wire:model.live="registered_state_province" required>
+                                                    @foreach ($this->getAddressList as $address)
+                                                        @if ($address['province'] == 'select')
+                                                            <option value="{{null}}">Please select</option>
+                                                        @else
+                                                            <option value="{{$address['province']}}">{{$address['province']}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                @error('registered_state_province')
+                                                    <span class="font-sm text-red-500">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div>
-                                                <label for="registered_state_province"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                <label for="registered_city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                     <span class="text-red-600 text-xs">*</span>
-                                                    State/Province</label>
-                                                <input type="text" id="registered_state_province"
-                                                    wire:model.blur="registered_state_province"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    required>
+                                                    Registered City
+                                                </label>
+                                                <select id="registered_city" class="form-select" aria-label="Default select example" wire:model.live="registered_city" required>
+                                                    <option selected disabled>Please select state/province first</option>
+                                                    @foreach ($this->getAddressList as $address)
+                                                        @if ($address['province'] == $this->registered_state_province)
+                                                            @foreach ($address['cities'] as $cities)
+                                                                @if ($cities == $this->shop_city)
+                                                                <option value="{{$cities}}" selected>{{$cities}}</option>
+                                                                @else
+                                                                <option value="{{$cities}}">{{$cities}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                @error('registered_city')
+                                                    <span class="font-sm text-red-500">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                             <div>
                                                 <label for="registered_zip_postal"
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip/Postal
-                                                    code</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                    Registered Zip/Postal Code
+                                                </label>
                                                 <input type="tel" id="registered_zip_postal"
                                                     wire:model.blur="registered_zip_code"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                     required>
                                             </div>
                                         </div>
+                                        <div class="mt-4">
+                                            <label for="complete" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Registered Complete Address 
+                                            </label>
+                                            <input type="text" name="complete" id="complete" value="{{$this->shop_address}}, {{$this->shop_city}}, {{$this->shop_state_province}} {{$this->shop_zip_code}}" 
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                        </div>
                                     </div>
+
                                     <div class="flex justify-center">
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" id="terms" name="terms" required />
