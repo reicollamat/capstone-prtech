@@ -17,7 +17,7 @@
 
     <div>
         <section class="w-full h-full flex justify-center items-center px-6 py-6 lg:px-20 lg:py-20 ">
-            <div class="container md:!max-w-2xl h-full p-4 shadow bg-white border-t-4 border-blue-500 rounded">
+            <div class="container h-full p-4 shadow bg-white border-t-4 border-blue-500 rounded">
                 <h4 class="text-center text-gray-700 tracking-tight">Complete your Registration</h4>
                 <form class="py-6" wire:submit="RegistrationForm">
                     <div>
@@ -137,10 +137,15 @@
                                             City
                                         </label>
                                         <select id="user_city" class="form-select" aria-label="Default select example" wire:model.live="user_city" required>
-                                            <option selected disabled>Please select state/province first</option>
+                                            @if ($this->user_city == null && $this->user_state_province == null)
+                                                <option value="{{null}}" selected>Please select state/province first</option>
+                                            @endif
                                             @foreach ($this->getAddressList as $address)
                                                 @if ($address['province'] == $this->user_state_province)
-                                                    @foreach ($address['cities'] as $cities)
+                                                    @if ($this->user_city == null || $this->user_city != $address['cities'][0])
+                                                        <option value="{{null}}" selected>Please select city</option>
+                                                    @endif
+                                                    @foreach ($address['cities'] as $key => $cities)
                                                         <option value="{{$cities}}">{{$cities}}</option>
                                                     @endforeach
                                                 @endif
