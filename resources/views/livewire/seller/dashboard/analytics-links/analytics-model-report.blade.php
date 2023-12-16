@@ -11,7 +11,10 @@
         {{--         </div> --}}
         {{--     </div> --}}
         {{-- </div> --}}
-        <div class="grid lg:grid-cols-4 gap-4 px-4">
+
+
+
+        {{-- <div class="grid lg:grid-cols-4 gap-4 px-4">
             <div class="relative col-span-2 bg-white rounded shadow shadow-cyan-500/50">
                 <div class="px-3 pt-6 pb-6 text-center relative z-10">
                     <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Perception</h4>
@@ -48,7 +51,127 @@
                     </div>
                 </div>
             </div>
+        </div> --}}
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <div class="bg-white overflow-x-auto rounded-lg p-3 m-4">
+            <div class="grid grid-cols-12 text-center text-sm">
+                <div class="col-span-1 p-1 !text-gray-400 !font-light border-b-2 border-blue-300">ID</div>
+                <div class="col-span-3 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
+                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category</div>
+                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Status</div>
+                <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Rating</div>
+                <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Prediction</div>
+            </div>
+        
+            <div wire:loading.remove x-transition>
+                @if ($this->getTopProducts->count() > 0)
+                    @foreach ($this->getTopProducts as $key => $product)
+                        <div class="border-b border-gray-100" x-data="{ selected: null }">
+                            {{-- @dd($product) --}}
+                            <div class="grid grid-cols-12 text-center">
+                                <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                    {{ $product->id }}
+                                </div>
+                                <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                    {{ $product->title }}
+                                </div>
+                                <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
+                                    {{ $product->category }}
+                                </div>
+                                <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                                    {{ $product->status }}
+                                </div>
+                                <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                    <i class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }}
+                                </div>
+                                <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                    High Commodity - Suggested for Restock
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="flex content-center text-gray-500 p-6">
+                        <h4></h4>
+                    </div>
+                @endif
+            </div>
+        
+            {{-- loading indicator --}}
+            <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
+                <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">
+                    <div role="status"
+                        class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                            </div>
+                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4">
+                            <div>
+                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                            </div>
+                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4">
+                            <div>
+                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                            </div>
+                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4">
+                            <div>
+                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                            </div>
+                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4">
+                            <div>
+                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                            </div>
+                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                        </div>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="m-4 ml-5">
+            <img src="{{ asset('img/chart.png') }}" alt="">
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </div>
 
