@@ -4,6 +4,7 @@ namespace App\Livewire\Buyer\OnBoarding\Form;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Rule;
@@ -56,6 +57,7 @@ class BuyerRegistration extends Component
     {
         $this->userid = Auth::user()->id ?? null;
         //        $this->userid = 1;
+        $this->user_birthdate = 0;
 
         $user = Auth::user();
 
@@ -76,7 +78,63 @@ class BuyerRegistration extends Component
         if ($user->first_name != null | $user->last_name != null) {
             return redirect()->route('index_landing');
         }
+    }
 
+    // list for address select component
+    #[Computed]
+    public function getAddressList()
+    {
+        $address_list = [
+            [
+                'province' => 'select',
+            ],
+            [
+                'province' => "Metro Manila",
+                'cities' => ["Manila", "Quezon City", "Makati", "Taguig", "Pasig", "Parañaque"]
+            ],
+            [
+                'province' => "Batangas",
+                'cities' => ["Batangas City", "Lipa City", "Tanauan", "Santo Tomas", "Nasugbu"]
+            ],
+            [
+                'province' => "Ilocos Norte",
+                'cities' => ["Laoag City", "Batac", "Mangaldan", "Currimao", "Pasuquin"]
+            ],
+            [
+                'province' => "Pampanga",
+                'cities' => ["Angeles City", "San Fernando", "Mabalacat", "Mexico", "Dau"]
+            ],
+            [
+                'province' => "Cavite",
+                'cities' => ["Tagaytay", "Dasmarinas", "Bacoor", "Imus", "Trece Martires"]
+            ],
+            [
+                'province' => "Benguet",
+                'cities' => ["Baguio City", "La Trinidad", "Itogon", "Tuba", "Sablan"]
+            ],
+            [
+                'province' => "Quezon",
+                'cities' => ["Lucena City", "Tayabas", "Candelaria", "Sariaya", "Dolores"]
+            ],
+            [
+                'province' => "Bulacan",
+                'cities' => ["Malolos City", "Meycauayan", "San Jose del Monte", "Baliuag", "Plaridel"]
+            ],
+            [
+                'province' => "Zambales",
+                'cities' => ["Olongapo City", "Subic", "Iba", "Masinloc", "Botolan"]
+            ],
+            [
+                'province' => "Laguna",
+                'cities' => ["Calamba City", "San Pablo City", "Santa Rosa", "Biñan", "Los Baños"]
+            ],
+            [
+                'province' => "Isabela",
+                'cities' => ["Ilagan City", "Cauayan City", "Santiago City", "Alicia", "Roxas"]
+            ],
+        ];
+
+        return $address_list;
     }
 
     public function render()
@@ -130,6 +188,5 @@ class BuyerRegistration extends Component
 
     public function delete(User $user)
     {
-
     }
 }

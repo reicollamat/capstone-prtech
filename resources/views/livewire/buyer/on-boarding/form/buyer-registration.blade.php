@@ -71,17 +71,22 @@
                             </div>
                         </div>
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
-                            <div>
+                            <div class="text-center">
                                 <label for="user_birthdate"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    <span class="text-red-600 text-xs">*</span>Date of Birth</label>
+                                    <span class="text-red-600 text-xs">*</span>Date of Birth
+                                </label>
+                                {{-- with a maximum of date of 18 years ago from now --}}
                                 <input type="date" id="user_birthdate" wire:model.blur="user_birthdate"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Juan" required>
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" max="{{ \Carbon\Carbon::now()->subYears(19)->toDateString() }}" required>
                                 @error('user_birthdate')
-                                    <span class="font-sm text-red-500">{{ $message }}</span>
+                                    <p class="font-sm text-red-500">{{ $message }}</p>
                                 @enderror
-                                {{ $user_birthdate }}
+                                @if ($user_birthdate != null)
+                                    {{ date('F d, Y', strtotime($user_birthdate)) }}
+                                @else
+                                    <small>18 years old and above</small>
+                                @endif
                             </div>
                             <div>
                                 <label for="user_sex"
@@ -90,7 +95,7 @@
                                 <select
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     id="user_sex" wire:model.blur="user_sex">
-                                    <option selected default value="select">Select</option>
+                                    <option selected default value="select" disabled>Select</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
@@ -100,8 +105,68 @@
                             </div>
 
                         </div>
+                        <hr>
                         <div>
-                            <div>
+                            <div class="mt-5">
+                                <div class="grid gap-6 mb-6 md:grid-cols-3">
+
+                                    {{-- state province --}}
+                                    <div>
+                                        <label for="user_state_province" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            <span class="text-red-600 text-xs">*</span>
+                                            State/Province
+                                        </label>
+                                        <select id="user_state_province" class="form-select" aria-label="Default select example" wire:model.live="user_state_province" required>
+                                            @foreach ($this->getAddressList as $address)
+                                                @if ($address['province'] == 'select')
+                                                    <option value="{{null}}">Please select</option>
+                                                @else
+                                                    <option value="{{$address['province']}}">{{$address['province']}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        @error('user_state_province')
+                                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    {{-- city --}}
+                                    <div>
+                                        <label for="user_city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            <span class="text-red-600 text-xs">*</span>
+                                            City
+                                        </label>
+                                        <select id="user_city" class="form-select" aria-label="Default select example" wire:model.live="user_city" required>
+                                            <option selected disabled>Please select state/province first</option>
+                                            @foreach ($this->getAddressList as $address)
+                                                @if ($address['province'] == $this->user_state_province)
+                                                    @foreach ($address['cities'] as $cities)
+                                                        <option value="{{$cities}}">{{$cities}}</option>
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        @error('user_city')
+                                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    {{-- postal --}}
+                                    <div>
+                                        <label for="user_zip_postal"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip/Postal
+                                            code</label>
+                                        <input type="tel" id="user_zip_postal" wire:model.blur="user_zip_postal"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required>
+                                        @error('user_zip_postal')
+                                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
                                 <label for="user_address_1"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                     <span class="text-red-600 text-xs">*</span> Address Line 1</label>
@@ -119,47 +184,6 @@
                                 <input type="text" id="user_address_2" wire:model.blur="user_address_2"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="Address">
-                            </div>
-                            <div class="mt-6">
-                                <div class="grid gap-6 mb-6 md:grid-cols-3">
-                                    <div>
-                                        <label for="user_city"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            <span class="text-red-600 text-xs">*</span> City </label>
-                                        <input type="text" id="user_city" wire:model.blur="user_city"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            required>
-                                        @error('user_city')
-                                            <span class="font-sm text-red-500">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div>
-                                        <label for="user_state_province"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            <span class="text-red-600 text-xs">*</span>
-                                            State/Province</label>
-                                        <input type="text" id="user_state_province"
-                                            wire:model.blur="user_state_province"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            required>
-                                        @error('user_state_province')
-                                            <span class="font-sm text-red-500">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
-                                    <div>
-                                        <label for="user_zip_postal"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Zip/Postal
-                                            code</label>
-                                        <input type="tel" id="user_zip_postal" wire:model.blur="user_zip_postal"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            required>
-                                        @error('user_zip_postal')
-                                            <span class="font-sm text-red-500">{{ $message }}</span>
-                                        @enderror
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
