@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
         $sql = File::get('database/seeders/sql/prtech_db.sql');
         DB::unprepared($sql);
 
+        // seed product stock - random(0-50)
+        $this->call([
+            ProductStockSeeder::class,
+        ]);
+
         // // seed an 'admin' & 'regular_user' role
         // DB::table('roles')->insert([
         //     [
