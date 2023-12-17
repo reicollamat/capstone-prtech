@@ -10,6 +10,7 @@ use Livewire\Component;
 class AddToCartInDetails extends Component
 {
     public $product_id;
+    public $product;
 
     public $quantity = 1;
 
@@ -20,6 +21,7 @@ class AddToCartInDetails extends Component
         $this->user_id = Auth::id();
 
         $this->product_id = $product_id;
+        $this->product = Product::find($product_id);
     }
 
     public function render()

@@ -67,7 +67,12 @@
             <div class="col-lg-7 h-auto mb-30 text-dark">
                 <div class="h-100">
                     <div class="d-flex items-center align-middle justify-content-between">
-                        <h3>{{ $categoryproduct->product->title }}</h3>
+                        <div class="d-flex justify-content-start">
+                            <h3>{{ $categoryproduct->product->title }}</h3>
+                            @if ($categoryproduct->product->stock == 0)
+                                <small class="text-red-600 bg-gray-200 font-bold mb-4 ml-4 p-2 rounded">NOT AVAILABLE</small>
+                            @endif
+                        </div>
                         <div class="bg-primary-subtle rounded">
                             <livewire:addtowishlist.add-to-wishlist-in-details :product_id="$categoryproduct->product->id" />
                         </div>
@@ -86,11 +91,6 @@
                                 @endif
                             @endfor
 
-                            {{-- <small class="bi bi-star-fill"></small>
-                            <small class="bi bi-star-fill"></small>
-                            <small class="bi bi-star-fill"></small>
-                            <small class="bi bi-star-half"></small>
-                            <small class="bi bi-star"></small> --}}
                         </div>
                         <small class="pb-1">
                             <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
