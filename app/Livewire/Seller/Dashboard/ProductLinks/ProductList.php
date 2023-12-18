@@ -140,11 +140,11 @@ class ProductList extends Component
 
     public function removeProduct($product_id)
     {
-        $product = Product::where('id', $product_id)->first();
+        // $product = Product::where('id', $product_id)->first();
 
-        dd($product);
+        // dd($product);
 
-        $product->destroy($product);
+        Product::destroy($product_id);
 
         $this->mount();
     }

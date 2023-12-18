@@ -250,7 +250,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                                wire:click="$parent.removeProduct( {{ $item->id }} )">Understood</button>
+                                                wire:click="$parent.removeProduct( {{ $itemproductinfo->id }} )">Understood</button>
                                         </div>
                                     </div>
                                 </div>
