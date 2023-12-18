@@ -89,8 +89,6 @@ class ProductListComponent extends Component
         dd($validator);
     }
 
-
-
     public Model $item;
 
     public Model $itemproductinfo;
@@ -136,11 +134,11 @@ class ProductListComponent extends Component
             // Resolve the model using the model class and product_id
             $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
 
-            //            $this->item = app()->make($modelClass)
-            //                ->join('products', , '=', 'products.id')
-            //                ->where('product_id', $item->id)->first();
-            //
-            //            dd($this->item);
+        //            $this->item = app()->make($modelClass)
+        //                ->join('products', , '=', 'products.id')
+        //                ->where('product_id', $item->id)->first();
+        //
+        //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);
@@ -161,7 +159,6 @@ class ProductListComponent extends Component
         $this->product_weight = $itemProductInfo['weight'];
 
         // dd($itemProductInfo);
-
 
     }
 }
