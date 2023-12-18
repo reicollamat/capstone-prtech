@@ -50,6 +50,9 @@ class ProductListComponent extends Component
 
     public $product_category;
 
+    #[Validate('required', message: 'Please provide product price')]
+    public $product_price;
+
     #[Validate('required', message: 'Please provide stocks available')]
     public $product_stock;
 
@@ -78,13 +81,15 @@ class ProductListComponent extends Component
             'product_status' => 'required|not_in:Select Status',
             'product_weight' => 'required|numeric',
             'product_category' => 'required',
-            'product_price' => 'required|integer',
+            'product_price' => 'required',
             'product_stock' => 'required|integer',
             'product_reserve' => 'required|integer',
         ]);
+
+        dd($validator);
     }
 
-    // dd($validator);
+
 
     public Model $item;
 
@@ -131,11 +136,11 @@ class ProductListComponent extends Component
             // Resolve the model using the model class and product_id
             $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
 
-        //            $this->item = app()->make($modelClass)
-        //                ->join('products', , '=', 'products.id')
-        //                ->where('product_id', $item->id)->first();
-        //
-        //            dd($this->item);
+            //            $this->item = app()->make($modelClass)
+            //                ->join('products', , '=', 'products.id')
+            //                ->where('product_id', $item->id)->first();
+            //
+            //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);
@@ -144,6 +149,10 @@ class ProductListComponent extends Component
         $this->itemproductinfo = $itemProductInfo;
 
         $this->product_name = $itemProductInfo['title'];
+        $this->product_slug = $itemProductInfo['slug'];
+        $this->product_price = $itemProductInfo['price'];
+        $this->product_stock = $itemProductInfo['stock'];
+        $this->product_reserve = $itemProductInfo['reserve'];
 
         // dd($itemProductInfo);
 
