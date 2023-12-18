@@ -30,6 +30,31 @@ class SellerLanding extends Component
     {
         $this->seller_id = auth()->user()->seller->id;
 
+        // Get the file path and name using glob
+        $files = glob(public_path('storage').'/*.png');
+
+        $filesnames = [];
+
+        // Get the png base on the file condition
+        foreach ($files as $file) {
+            if (str_contains($file, '_'.$this->seller_id.'_')) {
+                $filename = basename($file);
+
+                $file = explode('_', $filename);
+
+                // Format the date in string
+                $date = $file[0];
+
+                $formattedDate = Carbon::parse($date)->format('Y-m-d');
+
+                $filesnames[] = $formattedDate;
+            }
+        }
+
+        dd($filesnames);
+
+        // dd(public_path('storage'));
+
         // dd($this->seller_id);
 
         // $ncount = Comment::wherein('rating', [1,2])
@@ -211,6 +236,41 @@ class SellerLanding extends Component
             ->where('created_at', '>=', now()->subDays(30))
             ->select('text')
             ->get();
+
+        // Get the file path and name using glob
+        $files = glob(public_path('storage').'/*.png');
+
+        // dd($files);
+        if (! empty($files)) {
+
+            $filesnames = [];
+
+            // Get the png base on the file condition
+            foreach ($files as $file) {
+                if (str_contains($file, '_'.$this->seller_id.'_')) {
+                    $filename = basename($file);
+                    $filesnames[] = $filename;
+                }
+            }
+
+            dd($filesnames);
+
+            $filePath = $files[0];
+            $filename = basename($filePath);
+            dd($filename);
+
+            // Split the filename into an array of parts
+            $file = explode('_', $filename);
+
+            // Format the date in string
+            $date = $file[0];
+
+            $formattedDate = Carbon::parse($date)->format('Y-m-d');
+
+            echo $formattedDate; // Output: 2021-06-30
+        } else {
+            echo 'No files found in the folder.';
+        }
 
         // check if there is no data
         if ($ncount->isEmpty()) {
