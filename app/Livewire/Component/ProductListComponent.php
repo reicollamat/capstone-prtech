@@ -28,33 +28,33 @@ use Livewire\Component;
 class ProductListComponent extends Component
 {
     #[Validate('required', message: 'Please provide product name')]
-    public $productName;
+    public $product_name;
 
     #[Validate('required', message: 'Please provide product SKU')]
-    public $productSKU;
+    public $product_sku;
 
     #[Validate('required', message: 'Please provide product slug')]
-    public $productSlug;
+    public $product_slug;
 
     #[Validate('required', message: 'Please provide product description')]
-    public $productDescription;
+    public $product_description;
 
     #[Validate('required|not_in:Select Condition', message: 'Please provide product condition')]
-    public $productCondition;
+    public $product_condition;
 
     #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
-    public $productStatus;
+    public $product_status;
 
     #[Validate('required|numeric', message: 'Please provide product weight')]
     public $product_weight;
 
-    public $productCategory;
+    public $product_category;
 
     #[Validate('required', message: 'Please provide stocks available')]
-    public $stocks;
+    public $product_stock;
 
     #[Validate('required', message: 'Please provide a reserve stock if available')]
-    public $reserve_stocks;
+    public $product_reserve;
 
     // public function mount($productCategory)
     //{
@@ -70,17 +70,17 @@ class ProductListComponent extends Component
     public function submit()
     {
         $validator = $this->validate([
-            'productName' => 'required',
-            'productSKU' => 'required',
-            'productSlug' => 'required',
-            'productDescription' => 'required',
-            'productCondition' => 'required|not_in:Select Condition',
-            'productStatus' => 'required|not_in:Select Status',
+            'product_name' => 'required',
+            'product_sku' => 'required',
+            'product_slug' => 'required',
+            'product_description' => 'required',
+            'product_condition' => 'required|not_in:Select Condition',
+            'product_status' => 'required|not_in:Select Status',
             'product_weight' => 'required|numeric',
-            'productCategory' => 'required',
-            'price' => 'required|integer',
-            'stocks' => 'required|integer',
-            'reserve_stocks' => 'required|integer',
+            'product_category' => 'required',
+            'product_price' => 'required|integer',
+            'product_stock' => 'required|integer',
+            'product_reserve' => 'required|integer',
         ]);
     }
 
@@ -131,11 +131,11 @@ class ProductListComponent extends Component
             // Resolve the model using the model class and product_id
             $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
 
-        //            $this->item = app()->make($modelClass)
-        //                ->join('products', , '=', 'products.id')
-        //                ->where('product_id', $item->id)->first();
-        //
-        //            dd($this->item);
+            //            $this->item = app()->make($modelClass)
+            //                ->join('products', , '=', 'products.id')
+            //                ->where('product_id', $item->id)->first();
+            //
+            //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);
