@@ -2,28 +2,30 @@
 
 namespace App\Livewire\Component;
 
-use App\Models\CaseFan;
-use App\Models\ComputerCase;
 use App\Models\Cpu;
-use App\Models\CpuCooler;
-use App\Models\ExtStorage;
-use App\Models\Headphone;
-use App\Models\IntStorage;
-use App\Models\Keyboard;
-use App\Models\Memory;
-use App\Models\Monitor;
-use App\Models\Motherboard;
-use App\Models\Mouse;
-use App\Models\Product;
 use App\Models\Psu;
-use App\Models\Speaker;
-use App\Models\VideoCard;
+use App\Models\User;
+use App\Models\Mouse;
+use App\Models\Memory;
 use App\Models\Webcam;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-use Livewire\Attributes\Validate;
+use App\Models\CaseFan;
+use App\Models\Monitor;
+use App\Models\Product;
+use App\Models\Speaker;
 use Livewire\Component;
+use App\Models\Keyboard;
+use App\Models\CpuCooler;
+use App\Models\Headphone;
+use App\Models\VideoCard;
+use App\Models\ExtStorage;
+use App\Models\IntStorage;
+use App\Models\Motherboard;
+use App\Models\ComputerCase;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 class ProductListComponent extends Component
 {
@@ -86,7 +88,22 @@ class ProductListComponent extends Component
             'product_reserve' => 'required|integer',
         ]);
 
-        dd($validator);
+        // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+        $product = Product::create([
+            'seller_id' => User::find(Auth::user()->id)->seller->id,
+            'title' => $validator['product_name'],
+            'slug' => $validator['product_slug'],
+            'category' => $validator['product_category'],
+            'price' => $validator['product_price'],
+            'stock' => $validator['product_stock'],
+            'reserve' => $validator['product_reserve'],
+            // 'image' => implode(',', $storeas),
+            // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+            'condition' => $validator['product_condition'],
+            'status' => $validator['product_status'],
+            'weight' => $validator['product_weight'],
+        ]);
+
     }
 
     public Model $item;
