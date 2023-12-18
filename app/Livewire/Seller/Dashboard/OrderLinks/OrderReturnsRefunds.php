@@ -70,6 +70,12 @@ class OrderReturnsRefunds extends Component
                 'completion_date' => now(),
             ]);
 
+            // update product stock (increase)
+            $return_item->purchase_item->product->update([
+                'stock' => $return_item->purchase_item->product->stock + 1,
+            ]);
+
+
             sleep(0.5);
             session()->flash('notification-livewire', 'Return product completed!');
 

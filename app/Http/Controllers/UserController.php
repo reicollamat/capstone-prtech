@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\EmailHelper;
 use App\Helpers\ReferenceGeneratorHelper;
+use App\Helpers\ShippingHelper;
 use App\Models\CartItem;
 use App\Models\Payment;
 use App\Models\Product;
@@ -44,7 +45,7 @@ class UserController extends Controller
 
             $product = Product::find($product_id);
 
-            $shipping_value = 13; // Value displayed on the Cartpurchase page
+            $shipping_value = ShippingHelper::computeShipping($product->weight); // Value displayed on the Cartpurchase page
 
             $subtotal = $product->price * $quantity;
             $total = $subtotal + $shipping_value;
@@ -120,6 +121,12 @@ class UserController extends Controller
             'total_price' => $subtotal,
         ]);
         $purchaseItem->save();
+
+        // minus 1 to product stock
+        $product->update([
+            'stock' => $product->stock - 1,
+        ]);
+
 
         // This handles the Email Creation and Sending of the Email to the respective User
         // first parameter is the email of the user
@@ -214,6 +221,11 @@ class UserController extends Controller
                     'total_price' => $item->total_price,
                 ]);
                 $purchaseItem->save();
+
+                // minus 1 to product stock
+                $item->product->update([
+                    'stock' => $item->stock - 1,
+                ]);
             }
 
             // create usernotification for each purchase

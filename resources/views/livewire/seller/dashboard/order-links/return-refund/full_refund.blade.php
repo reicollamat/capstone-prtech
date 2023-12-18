@@ -63,13 +63,24 @@
                             <div class="p-2 flex flex-col lg:flex-row">
                                 <div class="flex-1">
                                     <div class="w-full flex flex-col lg:flex-row gap-1.5">
-                                        <div class="p-1.5 lg:w-1/2">
+                                        <div class="p-1.5 lg:w-1/3">
                                             <div class="mb-3">
                                                 <label for="product_name"
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                     Product Name
                                                 </label>
                                                 <input type="text" id="product_name" value="{{ $item->purchase_item->product->title }}"
+                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                    placeholder="" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="p-1.5 lg:w-1/8">
+                                            <div class="mb-3">
+                                                <label for="product_name"
+                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                    Quantity
+                                                </label>
+                                                <input type="text" id="product_name" value="{{ $item->item_quantity }}"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
                                             </div>

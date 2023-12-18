@@ -160,7 +160,7 @@
                                 <h6>₱{{ $subtotal }}</h6>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">Shipping Fee</h6>
                                 <h6 class="font-weight-medium">₱{{ $shipping_value }}</h6>
                             </div>
                         </div>

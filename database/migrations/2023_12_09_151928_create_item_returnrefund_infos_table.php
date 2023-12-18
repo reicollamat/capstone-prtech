@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('seller_id')->constrained()->cascadeOnDelete();
 
+            $table->integer('item_quantity');
             $table->timestamp('request_date');
             $table->string('status');
             $table->string('reason');

@@ -637,14 +637,36 @@
                                         </div>
 
                                         <div class="flex justify-content-center gap-2 pb-4">
-                                            <button wire:click="buynow({{ $product->id }})"
-                                                class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center">
-                                                Buy Now
-                                            </button>
-                                            <div>
-                                                <livewire:addtocart.add-to-cart :product_id="$product->id" :key="$product->id"
-                                                    wire:key="{{ $product->id }}" />
-                                            </div>
+                                            {{-- restrict if stock of product is 0 or not available --}}
+                                            @if ($product->stock == 0)
+                                                <button type="button" class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center"
+                                                        data-bs-toggle="popover" data-bs-placement="top"
+                                                        data-bs-trigger="hover focus"
+                                                        data-bs-custom-class="buynow-btn-notavailable"
+                                                        data-bs-title="Product Not Available"
+                                                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                                                        Buy Now
+                                                </button>
+                                                <button type="button" class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none focus:ring-blue-300 font-medium rounded-lg p-1.5 text-sm  items-center text-center"
+                                                        data-bs-toggle="popover" data-bs-placement="top"
+                                                        data-bs-trigger="hover focus"
+                                                        data-bs-custom-class="buynow-btn-notavailable"
+                                                        data-bs-title="Product Not Available"
+                                                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                                                        <div class="">
+                                                            <i class="bi bi-cart-plus" style="font-size: 1.5rem"></i>
+                                                        </div>
+                                                </button>
+                                            @else
+                                                <button wire:click="buynow({{ $product->id }})"
+                                                    class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center">
+                                                    Buy Now
+                                                </button>
+                                                <div>
+                                                    <livewire:addtocart.add-to-cart :product_id="$product->id" :key="$product->id"
+                                                        wire:key="{{ $product->id }}" />
+                                                </div>
+                                            @endif
                                         </div>
 
                                     </div>
