@@ -35,6 +35,7 @@ class ItemReturnrefundInfo extends Model
         'purchase_item_id',
         'user_id',
         'seller_id',
+        'item_quantity',
         'request_date',
         'status',
         'reason',
