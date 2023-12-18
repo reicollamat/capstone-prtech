@@ -146,25 +146,9 @@
                                                 </div>
                                             </form>
                                         @elseif ($item_returnrefund_info->refund_option == 'partial_refund')
-                                            <form action="{{route('profile.refundcompleted_returnrefund')}}" method="POST">
-                                                @csrf
-                                                <div class="my-2">
-                                                    <input type="text" name="item_returnrefund_id" value="{{ $item_returnrefund_info->id }}" hidden>
-                                                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white p-2 rounded w-full mb-2">
-                                                        <i class="bi bi-credit-card-2-back-fill"></i> Refund Received
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            <i class="bi bi-hourglass-split"></i> Waiting for Refund Payment
                                         @elseif ($item_returnrefund_info->refund_option == 'full_refund')
-                                            <form action="{{route('profile.refundcompleted_returnrefund')}}" method="POST">
-                                                @csrf
-                                                <div class="my-2">
-                                                    <input type="text" name="item_returnrefund_id" value="{{ $item_returnrefund_info->id }}" hidden>
-                                                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white p-2 rounded w-full mb-2">
-                                                        <i class="bi bi-credit-card-2-back-fill"></i> Refund Received
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            <i class="bi bi-hourglass-split"></i> Waiting for Refund Payment
                                         @elseif ($item_returnrefund_info->refund_option == 'replacement')
                                             <form action="{{route('profile.shipping_returnrefund')}}" method="POST">
                                                 @csrf
@@ -306,13 +290,24 @@
                         <div class="p-2 flex flex-col lg:flex-row text-start">
                             <div class="flex-1">
                                 <div class="w-full flex flex-col lg:flex-row gap-1.5">
-                                    <div class="p-1.5 lg:w-1/2">
+                                    <div class="p-1.5 lg:w-1/3">
                                         <div class="mb-3">
                                             <label for="product_name"
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                 Product Name
                                             </label>
                                             <input type="text" id="product_name" value="{{ $item_returnrefund_info->purchase_item->product->title }}"
+                                                class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
+                                                placeholder="" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="p-1.5 lg:w-1/8">
+                                        <div class="mb-3">
+                                            <label for="product_name"
+                                                class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                Quantity
+                                            </label>
+                                            <input type="text" id="product_name" value="{{ $item_returnrefund_info->item_quantity }}"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" disabled>
                                         </div>

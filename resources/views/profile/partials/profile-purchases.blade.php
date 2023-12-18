@@ -502,12 +502,26 @@
                                                                                                 {{ $purchase_item->product->title }}
                                                                                             </p>
                                                                                             {{-- Are you sure you want to cancel this order from {{ $purchase->seller->shop_name }}? --}}
-                                                                                            Please complete the
-                                                                                            following form in requesting
-                                                                                            a return/refund item
-                                                                                            to
-                                                                                            {{ $purchase->seller->shop_name }}
-                                                                                            shop.
+                                                                                            Please complete thefollowing form in requestinga return/refund itemto
+                                                                                            {{ $purchase->seller->shop_name }}shop.
+                                                                                            @if ($purchase_item->quantity > 1)
+                                                                                                <div class="mx-2 my-2">
+                                                                                                    <h5>Quantity of the product for return/refund:</h5>
+                                                                                                    <div class="mx-5">
+                                                                                                        <div>
+                                                                                                            <label for="return_refund_quantity" class="form-label d-flex flex-row justify-content-between gap-5 text-xl text-gray-900 w-full">
+                                                                                                                @for ($i = 1; $i <= $purchase_item->quantity; $i++)
+                                                                                                                    <div>
+                                                                                                                        {{$i}}
+                                                                                                                    </div>
+                                                                                                                @endfor
+                                                                                                            </label>
+                                                                                        
+                                                                                                            <input type="range" name="item_quantity" class="form-range" min="1" max="{{$purchase_item->quantity}}" id="return_refund_quantity" required>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endif
                                                                                             <div class="mx-2 my-2">
                                                                                                 <h5>Reason for
                                                                                                     return/refund:</h5>
@@ -591,7 +605,7 @@
                                                                                                             type="radio"
                                                                                                             name="condition"
                                                                                                             id="condition1-{{ $key }}-{{ $purchase->id }}"
-                                                                                                            value="Original Packaginge"
+                                                                                                            value="Original Packaging"
                                                                                                             required>
                                                                                                         <label
                                                                                                             class="form-check-label"
