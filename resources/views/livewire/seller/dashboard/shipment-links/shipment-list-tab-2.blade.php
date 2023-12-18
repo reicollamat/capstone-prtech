@@ -9,7 +9,7 @@
                 </span>
                 <input id="quick_search" type="search" name="serch" placeholder="Search Delivered"
                     class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
-                    wire:model.live="quick_search_filter">
+                    wire:model.live="delivered_quick_search_filter">
             </div>
         </div>
     </div>
