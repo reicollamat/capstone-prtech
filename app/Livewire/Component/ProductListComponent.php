@@ -7,6 +7,7 @@ use App\Models\Psu;
 use App\Models\User;
 use App\Models\Mouse;
 use App\Models\Memory;
+use App\Models\Seller;
 use App\Models\Webcam;
 use App\Models\CaseFan;
 use App\Models\Monitor;
@@ -20,7 +21,9 @@ use App\Models\VideoCard;
 use App\Models\ExtStorage;
 use App\Models\IntStorage;
 use App\Models\Motherboard;
+use Livewire\Attributes\On;
 use App\Models\ComputerCase;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +63,9 @@ class ProductListComponent extends Component
 
     #[Validate('required', message: 'Please provide a reserve stock if available')]
     public $product_reserve;
+
+    #[Locked]
+    public $seller_id;
 
     // public function mount($productCategory)
     //{
@@ -134,6 +140,8 @@ class ProductListComponent extends Component
      */
     public function mount($item, $itemProductInfo)
     {
+        $this->seller_id = Seller::find(Auth::user()->id)->select('id')->first() ?? null;
+        // dd($this->seller_id);
 
         //        dd($itemProductInfo->slug);
         //        $this->item = Product::join($item->category, $item->id, '=', $item->category . '.product.id');
@@ -151,11 +159,11 @@ class ProductListComponent extends Component
             // Resolve the model using the model class and product_id
             $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
 
-        //            $this->item = app()->make($modelClass)
-        //                ->join('products', , '=', 'products.id')
-        //                ->where('product_id', $item->id)->first();
-        //
-        //            dd($this->item);
+            //            $this->item = app()->make($modelClass)
+            //                ->join('products', , '=', 'products.id')
+            //                ->where('product_id', $item->id)->first();
+            //
+            //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);
@@ -172,10 +180,16 @@ class ProductListComponent extends Component
         $this->product_price = $itemProductInfo['price'];
         $this->product_stock = $itemProductInfo['stock'];
         $this->product_category = $itemProductInfo['category'];
-        $this->product_reserve = $itemProductInfo['reserve'];
+        $this->product_reserve = $itemProductInfo['reserve'] ?? 0;
         $this->product_weight = $itemProductInfo['weight'];
 
         // dd($itemProductInfo);
 
     }
+
+    // public function removeProduct(Product $product_id)
+    // {
+    //     dd('' . $product_id . '' . $this->seller_id);
+    // }
+
 }

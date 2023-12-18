@@ -137,4 +137,15 @@ class ProductList extends Component
     {
         return view('livewire..seller.dashboard.product-links.product-list');
     }
+
+    public function removeProduct($product_id)
+    {
+        $product = Product::where('id', $product_id)->first();
+
+        dd($product);
+
+        $product->destroy($product);
+
+        $this->mount();
+    }
 }
