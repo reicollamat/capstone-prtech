@@ -2,30 +2,90 @@
 
 namespace App\Livewire\Component;
 
-use App\Models\CaseFan;
-use App\Models\ComputerCase;
 use App\Models\Cpu;
-use App\Models\CpuCooler;
-use App\Models\ExtStorage;
-use App\Models\Headphone;
-use App\Models\IntStorage;
-use App\Models\Keyboard;
-use App\Models\Memory;
-use App\Models\Monitor;
-use App\Models\Motherboard;
-use App\Models\Mouse;
-use App\Models\Product;
 use App\Models\Psu;
-use App\Models\Speaker;
-use App\Models\VideoCard;
+use App\Models\Mouse;
+use App\Models\Memory;
 use App\Models\Webcam;
-use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use App\Models\CaseFan;
+use App\Models\Monitor;
+use App\Models\Product;
+use App\Models\Speaker;
 use Livewire\Component;
+use App\Models\Keyboard;
+use App\Models\CpuCooler;
+use App\Models\Headphone;
+use App\Models\VideoCard;
+use App\Models\ExtStorage;
+use App\Models\IntStorage;
+use App\Models\Motherboard;
+use App\Models\ComputerCase;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Container\BindingResolutionException;
 
 class ProductListComponent extends Component
 {
+    #[Validate('required', message: 'Please provide product name')]
+    public $productName;
+
+    #[Validate('required', message: 'Please provide product SKU')]
+    public $productSKU;
+
+    #[Validate('required', message: 'Please provide product slug')]
+    public $productSlug;
+
+    #[Validate('required', message: 'Please provide product description')]
+    public $productDescription;
+
+    #[Validate('required|not_in:Select Condition', message: 'Please provide product condition')]
+    public $productCondition;
+
+    #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
+    public $productStatus;
+
+    #[Validate('required|numeric', message: 'Please provide product weight')]
+    public $product_weight;
+
+    public $productCategory;
+
+    #[Validate('required', message: 'Please provide stocks available')]
+    public $stocks;
+
+    #[Validate('required', message: 'Please provide a reserve stock if available')]
+    public $reserve_stocks;
+
+    // public function mount($productCategory)
+    //{
+
+    // $this->productCategory = $productCategory;
+    //}
+
+    public function render()
+    {
+        return view('livewire.component.category-component.product-list-component');
+    }
+
+    public function submit()
+    {
+        $validator = $this->validate([
+            'productName' => 'required',
+            'productSKU' => 'required',
+            'productSlug' => 'required',
+            'productDescription' => 'required',
+            'productCondition' => 'required|not_in:Select Condition',
+            'productStatus' => 'required|not_in:Select Status',
+            'product_weight' => 'required|numeric',
+            'productCategory' => 'required',
+            'price' => 'required|integer',
+            'stocks' => 'required|integer',
+            'reserve_stocks' => 'required|integer',
+        ]);
+    }
+
+    // dd($validator);
+
     public Model $item;
 
     public Model $itemproductinfo;
@@ -71,11 +131,11 @@ class ProductListComponent extends Component
             // Resolve the model using the model class and product_id
             $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
 
-        //            $this->item = app()->make($modelClass)
-        //                ->join('products', , '=', 'products.id')
-        //                ->where('product_id', $item->id)->first();
-        //
-        //            dd($this->item);
+            //            $this->item = app()->make($modelClass)
+            //                ->join('products', , '=', 'products.id')
+            //                ->where('product_id', $item->id)->first();
+            //
+            //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);
@@ -89,11 +149,6 @@ class ProductListComponent extends Component
         //        dd(base_path('resources/views/compo'));
 
         // dd($item);
-    }
-
-    public function render()
-    {
-        return view('livewire.component.product-list-component');
     }
 
     public function save()
