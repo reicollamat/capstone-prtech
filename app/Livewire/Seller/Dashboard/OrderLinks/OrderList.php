@@ -127,56 +127,45 @@ class OrderList extends Component
     }
 
     #[Computed]
-    public function getPurchaseItemList()
+    public function getPurchaseList()
     {
         // query for purchased items of products from current seller
-        $this->purchases = Purchase::where('purchases.seller_id', $this->seller->id);
+        $this->purchases = Purchase::where('seller_id', $this->seller->id);
         // dd($test->paginate(10));
 
         //
         if ($this->orderstatus_filter) {
 
             return $this->purchases->where('purchase_status', '=', $this->orderstatus_filter)
-                ->orderBy('purchase_items.id', 'asc')
+                ->orderBy('updated_at', 'desc')
                 ->paginate(10);
         }
 
         //
         if ($this->paymentstatus_filter) {
 
-            return $this->purchases->where('payment_status', '=', $this->paymentstatus_filter)
-                ->orderBy('purchase_items.id', 'asc')
-                ->paginate(10);
+            return $this->purchases->whereHas('payment', function (Builder $query) {
+                $query->where('payment_status', '=', $this->paymentstatus_filter);
+            })->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         //
         if ($this->paymenttype_filter) {
 
-            return $this->purchases->where('payment_type', '=', $this->paymenttype_filter)
-                ->orderBy('purchase_items.id', 'asc')
-                ->paginate(10);
+            return $this->purchases->whereHas('payment', function (Builder $query) {
+                $query->where('payment_type', '=', $this->paymenttype_filter);
+            })->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         // add check to run rerender every time
         if ($this->quick_search_filter > 0) {
-            if ($this->search_method == 'title') {
 
-                $search = Product::where('seller_id', $this->seller->id)->whereHas('purchase_items', function (Builder $query) {
-                    $query->where('slug', 'ilike', "%{$this->quick_search_filter}%");
-                })->join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-                    ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-                    ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-                    ->orderBy('purchase_items.id', 'asc')
-                    ->paginate(10);
+            $search = $this->purchases->where('reference_number', 'like', "%{$this->quick_search_filter}%")
+                ->paginate(10);
 
-                // dd($search);
+            // dd($search);
 
-                return $search;
-            } elseif ($this->search_method == 'purchase_id') {
-                return $this->purchases->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
-                    ->orderBy('purchase_items.id', 'asc')
-                    ->paginate(10);
-            }
+            return $search;
         }
         //
         else {
@@ -241,7 +230,7 @@ class OrderList extends Component
                 'purchase_id' => $purchase_id,
                 'tag' => 'to_ship',
                 'title' => 'Purchase Confirmed',
-                'message' => 'Purchase for order #'.$purchase_id.' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                'message' => 'Purchase for order #' . $purchase_id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
             ]);
             $notification->save();
 
