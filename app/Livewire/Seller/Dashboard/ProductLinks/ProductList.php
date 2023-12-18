@@ -111,7 +111,6 @@ class ProductList extends Component
         //        sleep(5);
         if ($this->category_filter) {
             return Product::where('category', '=', $this->category_filter)
-                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
             //            dd($this->category_filter);
@@ -120,7 +119,6 @@ class ProductList extends Component
         if ($this->quick_search_filter > 1) {
             // return Product::where('title', 'ilike', "%{$this->quick_search_filter}%") // POSTGRES
             return Product::where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
-                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
         } else {
