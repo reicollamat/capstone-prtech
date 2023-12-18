@@ -27,7 +27,7 @@
         {{ $mailStatus }}
     </div>
 
-    {{ $purchase }}
+{{--    {{ $purchase }}--}}
 
     {{--    @foreach ($purchase->purchase_items as $items) --}}
 
@@ -85,11 +85,53 @@
             <span class="text-center">Image Loading, Please Wait...</span>
             <span class="sr-only">Loading...</span>
         </div>
-    </div>
+    </div>seller/register
 
-    {{-- <div wire:init="testapi"> --}}
-    {{--     {{ $readyToLoad }} --}}
-    {{-- </div> --}}
+{{--    {{ var_dump($this->getAddressList()) }}--}}
+
+{{--    @foreach($this->getAddressList() as $list)--}}
+{{--       @foreach($list as $address => $cities)--}}
+
+{{--           <p>{{$address['province']}}</p>--}}
+
+{{--       @endforeach--}}
+{{--    @endforeach--}}
+
+{{--    @if (!empty($this->getAddressList()))--}}
+    @foreach ($this->getAddressList as $address)
+        {{--                                                @if ($address['province'] == $this->user_state_province) --}}
+        {{--                                                    @if ($this->user_city == null || $this->user_city != $address['cities'][0]) --}}
+        {{--                                                        <option value="{{ null }}" selected>Please select city --}}
+        {{--                                                        </option> --}}
+        {{--                                                    @endif --}}
+        {{--                                                    @foreach ($address['cities'] as $key => $cities) --}}
+        {{--                                                        <option value="{{ $cities }}">{{ $cities }} --}}
+        {{--                                                        </option> --}}
+        {{--                                                    @endforeach --}}
+        {{--                                                @endif --}}
+
+        @if (isset($address['province']) && isset($address['cities']))
+{{--            {{ $address['province'] }}--}}
+            {{--                                                    @dd($address['province'])--}}
+            {{-- <h2>Province: {{ $address['province'] }}</h2> --}}
+            {{--                                                    @if ($user_city == null) --}}
+            {{--                                                        <option value="{{ null }}" selected>Please select city --}}
+            {{--                                                        </option> --}}
+            {{--                                                    @else --}}
+            @foreach ($address['cities'] as $city)
+                <option value="{{ $city }}">{{ $city }}</option>
+            @endforeach
+            {{--                                                    @endif --}}
+            {{-- <ul> --}}
+            {{--     @foreach ($address['cities'] as $city) --}}
+            {{--         <li>{{ $city }}</li> --}}
+            {{--     @endforeach --}}
+            {{-- </ul> --}}
+        @endif
+    @endforeach
+{{--    @else--}}
+{{--        <p>No data available.</p>--}}
+{{--    @endif--}}
 
 
 </div>
