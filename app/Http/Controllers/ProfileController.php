@@ -41,22 +41,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('notification', 'Profile Updated!');
-    }
-
-    /**
      * Request cancellation of order
      */
     public function request_cancel_order(Request $request): RedirectResponse
@@ -74,7 +58,23 @@ class ProfileController extends Controller
         $cancellation->save();
         $purchase->update(['purchase_status' => 'cancellation_pending']);
 
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #' . $purchase->reference_number . ' requested!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #'.$purchase->reference_number.' requested!');
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    public function update(ProfileUpdateRequest $request): RedirectResponse
+    {
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->save();
+
+        return Redirect::route('profile.edit')->with('notification', 'Profile Updated!');
     }
 
     /**
@@ -109,7 +109,7 @@ class ProfileController extends Controller
             foreach ($request->evidence_imgs as $key => $image) {
                 $img_path = $image->storeAs(
                     'returnrefund_imgs',
-                    $purchase_item->id . '-' . $key . '-' . 'returnrefund_img' . '.' . $image->getClientOriginalExtension(),
+                    $purchase_item->id.'-'.$key.'-'.'returnrefund_img'.'.'.$image->getClientOriginalExtension(),
                     'real_public'
                 );
 
@@ -122,7 +122,7 @@ class ProfileController extends Controller
             }
         }
 
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for ' . $purchase_item->product->title . '!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for '.$purchase_item->product->title.'!');
     }
 
     public function cancel_returnrefund_request(Request $request): RedirectResponse
@@ -131,6 +131,27 @@ class ProfileController extends Controller
         ItemReturnrefundInfo::destroy($request->item_returnrefund_id);
 
         return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Return/Refund request cancelled!');
+    }
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
     }
 
     public function confirm_returnrefund(Request $request): RedirectResponse
@@ -184,27 +205,6 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit', ['profile_activetab' => 'returnrefund'])->with('notification', 'Completed Return/Refund Request!');
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
-    }
-
     public function updateOrderStatus(Request $request): RedirectResponse
     {
         // dd($request->purchase_id);
@@ -212,6 +212,15 @@ class ProfileController extends Controller
         $id = $request->purchase_id;
 
         if ($id) {
+
+            $purchase_items = PurchaseItem::where('purchase_id', $id)->get();
+
+            // dd($purchase_items);
+            // if ($purchase_items->count() > 1) {
+            foreach ($purchase_items as $purchase_item) {
+                $purchase_item->product->increment('purchase_count', 1);
+            }
+
             $purchase = Purchase::find($id);
             $purchase->update([
                 'purchase_status' => 'completed',
@@ -223,6 +232,17 @@ class ProfileController extends Controller
                 'shipment_status' => 'completed',
                 'shipped_date' => now(),
             ]);
+
+            // $purchase_items = PurchaseItem::where('purchase_id', $id)->get();
+            //
+            // // dd($purchase_items);
+            // if ($purchase_items->count() > 1)
+            // {
+            //     dd($purchase_items->count());
+            // }else
+            // {
+            //     dd('im only one');
+            // }
 
             if ($shipment->purchase->payment->payment_type == 'cod') {
                 $shipment->purchase->payment->update([
@@ -237,11 +257,10 @@ class ProfileController extends Controller
                 'purchase_id' => $shipment->purchase->id,
                 'tag' => 'completed',
                 'title' => 'Share your feedback!',
-                'message' => 'Order #' . $shipment->purchase->id . ' is completed. Your feedback matters to others! Rate the products by date',
+                'message' => 'Order #'.$shipment->purchase->id.' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
-        }
-        //
+        } //
         else {
             return abort(500);
         }

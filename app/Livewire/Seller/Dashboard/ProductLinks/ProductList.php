@@ -146,4 +146,14 @@ class ProductList extends Component
 
         $this->mount();
     }
+
+    // #[Computed]
+    public function getPopularProducts()
+    {
+        $popular =  Product::where('seller_id', $this->seller->id)
+            ->orderBy('view_count', 'asc')
+            ->get();
+
+        // dd($popular);
+    }
 }

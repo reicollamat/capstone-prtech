@@ -127,7 +127,6 @@ class UserController extends Controller
             'stock' => $product->stock - 1,
         ]);
 
-
         // This handles the Email Creation and Sending of the Email to the respective User
         // first parameter is the email of the user
         // second parameter is the id of the Purchase
@@ -141,12 +140,12 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #' . $purchase->id . ' Placed',
-            'message' => 'An order has been placed' . $this->mailStatus,
+            'title' => 'Order #'.$purchase->id.' Placed',
+            'message' => 'An order has been placed'.$this->mailStatus,
         ]);
         $notification->save();
 
-        Session::flash('notification', 'Order Purchased, Thank you! ' . $this->mailStatus);
+        Session::flash('notification', 'Order Purchased, Thank you! '.$this->mailStatus);
 
         return redirect(route('product_detail', [
             'product_id' => $product_id,
@@ -233,7 +232,7 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #' . $purchase->id . ' Placed',
+                'title' => 'Order #'.$purchase->id.' Placed',
                 'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
             ]);
             $notification->save();

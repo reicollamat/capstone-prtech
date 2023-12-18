@@ -425,16 +425,16 @@
                     </div>
                 </div>
                 <div class="py-2 text-center flex flex-column justify-center">
-                    
+
                         <p class="text-xs font-base text-gray-500 mb-2">Overall Products Rating</p>
                         <div class="flex gap-2 mx-auto px-5">
                             <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
                             <label>
-                            
+
                                 <p class="mb-0">{{ $total_products_rating }}</p>
                             </label>
                         </div>
-                      
+
                 </div>
                 <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
@@ -446,27 +446,28 @@
                     <h6>Hot Products</h6>
                 </div>
                 {{-- hot product items display --}}
-                {{-- <div class="grid md:grid-cols-3 gap-1.5">
-                    <button class="content-center p-2 border rounded border-gray-100"> 
-                        <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" 
-                            alt="Product-Thumbnail"> --}}
-                        {{-- </button> --}}
-                    {{-- <button class="content-center p-2 border rounded border-gray-100"> --}}
-                        {{-- <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}} {{--
-                            alt="Product-Thumbnail"> --}}
-                        {{-- </button> --}}
-                    {{-- <button class="content-center p-2 border rounded border-gray-100"> --}}
-                        {{-- <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}} {{--
-                            alt="Product-Thumbnail"> --}}
-                        {{-- </button> --}}
-                    {{-- <button class="content-center p-2 border rounded border-gray-100"> --}}
-                        {{-- <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}} {{--
-                            alt="Product-Thumbnail"> --}}
-                        {{-- </button> --}}
-                    {{-- <button class="content-center p-2 border rounded border-gray-100"> --}}
-                        {{-- <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8" --}} {{--
-                            alt="Product-Thumbnail"> --}}
-                       {{-- </button> --}}
+                 <div class="grid md:grid-cols-3 gap-1.5">
+                  {{--   <button class="content-center p-2 border rounded border-gray-100">
+                        <img src="{{ asset($item->product) }}" class="rounded-lg mx-auto d-block w-8 h-8"
+                            alt="Product-Thumbnail">
+                         </button>
+                     <button class="content-center p-2 border rounded border-gray-100">
+                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8"
+                            alt="Product-Thumbnail">
+                         </button>
+                     <button class="content-center p-2 border rounded border-gray-100">
+                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8"
+                            alt="Product-Thumbnail">
+                         </button>
+                     <button class="content-center p-2 border rounded border-gray-100">
+                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8"
+                            alt="Product-Thumbnail">
+                         </button>
+                     <button class="content-center p-2 border rounded border-gray-100">
+                         <img src="{{ asset($item->image) }}" class="rounded-lg mx-auto d-block w-8 h-8"
+                            alt="Product-Thumbnail">
+                        </button> --}}
+                     <div wire:init="getPopularProducts"></div>
                 </div>
             </div>
         </div>
