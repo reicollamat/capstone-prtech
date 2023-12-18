@@ -122,6 +122,11 @@ class Gcash3 extends Component
                         'total_price' => $item->total_price,
                     ]);
                     $purchaseItem->save();
+
+                    // minus 1 to product stock
+                    $item->product->update([
+                        'stock' => $item->stock - 1,
+                    ]);
                 }
 
                 // create usernotification for each purchase
@@ -179,6 +184,12 @@ class Gcash3 extends Component
                 'total_price' => $this->subtotal,
             ]);
             $purchaseItem->save();
+
+            // minus 1 to product stock
+            $product->update([
+                'stock' => $product->stock - 1,
+            ]);
+
 
             $notification = new UserNotification([
                 'user_id' => $this->user_id,

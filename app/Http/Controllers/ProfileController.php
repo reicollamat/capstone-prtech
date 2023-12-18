@@ -96,6 +96,7 @@ class ProfileController extends Controller
             'purchase_item_id' => $purchase_item->id,
             'user_id' => $user->id,
             'seller_id' => $purchase_item->purchase->seller_id,
+            'item_quantity' => $request->item_quantity,
             'request_date' => now(),
             'status' => 'returnrefund-pending',
             'reason' => $request->reason,
