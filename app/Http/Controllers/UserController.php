@@ -161,6 +161,7 @@ class UserController extends Controller
         $total = $request->total;
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
+        $user_email = Auth::user()->email; // Get the user Email
 
         // redirect here if payment is GCASH
         if ($payment_type == 'gcash') {
@@ -227,13 +228,20 @@ class UserController extends Controller
                 ]);
             }
 
+            // This handles the Email Creation and Sending of the Email to the respective User
+            // first parameter is the email of the user
+            // second parameter is the id of the Purchase
+            // It will return a string of confirmation // TODO: handle the return string and show it or display it to the user
+            // the returned string will be save to mailStatus property
+            $this->mailStatus = EmailHelper::sendEmail(email: $user_email, orderId: $purchase->id);
+
             // create usernotification for each purchase
             $notification = new UserNotification([
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
                 'title' => 'Order #'.$purchase->id.' Placed',
-                'message' => 'Our logistics partner will attempt parcel delivery within the day. Keep your lines open and prepare exact payment for COD transaction.',
+                'message' => 'An order has been placed'.$this->mailStatus,
             ]);
             $notification->save();
         }
