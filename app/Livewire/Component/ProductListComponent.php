@@ -76,7 +76,7 @@ class ProductListComponent extends Component
         $validator = $this->validate([
             'product_name' => 'required',
             'product_slug' => 'required',
-            'product_description' => 'required',
+            // 'product_description' => 'required',
             'product_condition' => 'required|not_in:Select Condition',
             'product_status' => 'required|not_in:Select Status',
             // 'product_weight' => 'required|numeric',
@@ -86,7 +86,7 @@ class ProductListComponent extends Component
             'product_reserve' => 'required|integer',
         ]);
 
-        // dd($validator);
+        dd($validator);
     }
 
 
@@ -153,8 +153,10 @@ class ProductListComponent extends Component
         $this->product_name = $itemProductInfo['title'];
         $this->product_slug = $itemProductInfo['slug'];
         $this->product_status = $itemProductInfo['status'];
+        $this->product_condition = $itemProductInfo['condition'];
         $this->product_price = $itemProductInfo['price'];
         $this->product_stock = $itemProductInfo['stock'];
+        $this->product_category = $itemProductInfo['category'];
         // $this->product_reserve = $itemProductInfo['reserve'];
         // $this->product_weight = $itemProductInfo['weight'];
 
