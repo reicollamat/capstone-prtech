@@ -89,48 +89,166 @@ class BuyerRegistration extends Component
                 'province' => 'select',
             ],
             [
-                'province' => "Metro Manila",
-                'cities' => ["Manila", "Quezon City", "Makati", "Taguig", "Pasig", "Parañaque"]
+                'province' => "NCR",
+                'cities' => [
+                    "Caloocan", "Las Piñas", "Makati", "Malabon", "Mandaluyong", "Manila",
+                    "Marikina", "Muntinlupa", "Navotas", "Parañaque", "Pasay", "Pasig",
+                    "Pateros", "Quezon City", "San Juan", "Taguig", "Valenzuela"
+                ]
             ],
             [
                 'province' => "Batangas",
-                'cities' => ["Batangas City", "Lipa City", "Tanauan", "Santo Tomas", "Nasugbu"]
-            ],
-            [
-                'province' => "Ilocos Norte",
-                'cities' => ["Laoag City", "Batac", "Mangaldan", "Currimao", "Pasuquin"]
-            ],
-            [
-                'province' => "Pampanga",
-                'cities' => ["Angeles City", "San Fernando", "Mabalacat", "Mexico", "Dau"]
-            ],
-            [
-                'province' => "Cavite",
-                'cities' => ["Tagaytay", "Dasmarinas", "Bacoor", "Imus", "Trece Martires"]
+                'cities' => [
+                    "Agoncillo", "Alitagtag", "Balayan", "Balete", "Bauan", "Calatagan",
+                    "Cuenca", "Ibaan", "Laurel", "Lemery", "Lian", "Lobo", "Mabini",
+                    "Malvar", "Mataas na Kahoy", "Nasugbu", "Padre Garcia", "Rosario",
+                    "San Jose", "San Juan", "San Luis", "San Nicolas", "San Pascual",
+                    "Santa Teresita", "Taal", "Talisay", "Taysan", "Tingloy", "Tuy"
+                ]
             ],
             [
                 'province' => "Benguet",
-                'cities' => ["Baguio City", "La Trinidad", "Itogon", "Tuba", "Sablan"]
-            ],
-            [
-                'province' => "Quezon",
-                'cities' => ["Lucena City", "Tayabas", "Candelaria", "Sariaya", "Dolores"]
+                'cities' => [
+                    "Atok", "Bakun", "Bokod", "Buguias", "Itogon", "Kabayan", "Kapangan",
+                    "Kibungan", "La Trinidad", "Mankayan", "Sablan", "Tuba", "Tublay"
+                ]
             ],
             [
                 'province' => "Bulacan",
-                'cities' => ["Malolos City", "Meycauayan", "San Jose del Monte", "Baliuag", "Plaridel"]
+                'cities' => [
+                    "Angat", "Balagtas", "Baliwag", "Bocaue", "Bulakan", "Bustos",
+                    "Calumpit", "Dona Remedios Trinidad", "Guiguinto", "Hagonoy",
+                    "Malolos", "Marilao", "Meycauayan", "Norzagaray", "Obando",
+                    "Pandi", "Paombong", "Plaridel", "Pulilan", "San Ildefonso",
+                    "San Jose Del Monte", "San Miguel", "San Rafael", "Santa Maria"
+                ]
             ],
             [
-                'province' => "Zambales",
-                'cities' => ["Olongapo City", "Subic", "Iba", "Masinloc", "Botolan"]
+                'province' => "Cavite",
+                'cities' => [
+                    "Alfonso", "Amadeo", "Bacoor", "Carmona", "Cavite", "Dasmariñas",
+                    "General Emilio Aguinaldo", "General Mariano Alvarez", "General Trias",
+                    "Imus", "Indang", "Kawit", "Magallanes", "Maragondon", "Mendez",
+                    "Naic", "Noveleta", "Rosario", "Silang", "Tagaytay", "Tanza",
+                    "Ternate", "Trece Martires"
+                ]
             ],
             [
-                'province' => "Laguna",
-                'cities' => ["Calamba City", "San Pablo City", "Santa Rosa", "Biñan", "Los Baños"]
+                'province' => "Cebu",
+                'cities' => [
+                    "Alcantara", "Alcoy", "Alegria", "Aloguinsan", "Argao", "Asturias",
+                    "Badian", "Balamban", "Bantayan", "Barili", "Boljoon", "Borbon",
+                    "Carmen", "Catmon", "Compostela", "Consolacion", "Cordova",
+                    "Daanbantayan", "Dalaguete", "Dumanjug", "Ginatilan", "Liloan",
+                    "Madridejos", "Malabuyoc", "Medellin", "Minglanilla", "Moalboal",
+                    "Oslob", "Pilar", "Pinamungajan", "Poro", "Ronda", "Samboan",
+                    "San Fernando", "San Francisco", "San Remigio", "Santa Fe",
+                    "Santander", "Sibonga", "Sogod", "Tabogon", "Tabuelan", "Tuburan",
+                    "Tudela"
+                ]
+            ],
+            [
+                'province' => "Davao",
+                'cities' => [
+                    "Asuncion", "Baganga", "Banaybanay", "Boston", "Braulio E. Dujali", "Carmen", "Caraga",
+                    "Cateel", "Compostela", "Davao City", "Digos", "Don Marcelino", "Governor", "Hagonoy",
+                    "Jose Abad", "Kapalong", "Lupon", "Malita", "Magsaysay", "Manay", "Mati", "Panabo",
+                    "San Isidro", "Tagum"
+                ]
+            ],
+            [
+                'province' => "Ilocos Norte",
+                'cities' => [
+                    "Adams", "Bacarra", "Badoc", "Bangui", "Banna", "Batac",
+                    "Burgos (IN)", "Carasi", "Currimao", "Dingras", "Dumalneg",
+                    "Laoag", "Marcos", "Nueva Era", "Pagudpud", "Paoay",
+                    "Pasuquin", "Piddig", "Pinili", "San Nicolas (IN)", "Sarrat",
+                    "Solsona", "Vintar"
+                ]
+            ],
+            [
+                'provice' => "Ilocos Sur",
+                'cities' => [
+                    "Alilem", "Banayoyo", "Bantay", "Burgos (IS)", "Cabugao",
+                    "Candon", "Caoayan", "Cervantes", "Galimuyod", "Gregorio Del Pilar",
+                    "Lidlidda", "Magsingal", "Nagbukel", "Narvacan", "Quirino (IS)",
+                    "Salcedo (IS)", "San Emilio", "San Esteban", "San Ildefonso (IS)",
+                    "San Juan (IS)", "San Vicente (IS)", "Santa", "Santa Catalina (IS)",
+                    "Santa Cruz (IS)", "Santa Lucia", "Santa Maria (IS)", "Santiago (IS)",
+                    "Santo Domingo (IS)", "Sigay", "Sinait", "Sugpon", "Suyo", "Tagudin",
+                    "Vigan"
+                ]
+            ],
+            [
+                'province' => "Iloilo",
+                'cities' => [
+                    "Ajuy", "Alimodian", "Anilao", "Badiangan", "Balasan", "Banate", "Barotac Nuevo",
+                    "Barotac Viejo", "Batad", "Bingawan", "Cabatuan (IO)", "Calinog", "Carles",
+                    "Concepcion (IO)", "Dingle", "Duenas", "Dumangas", "Estancia", "Guimbal",
+                    "Igbaras", "Janiuay", "Lambunao", "Leganes", "Lemery (IO)", "Leon", "Maasin (IO)",
+                    "Miag-ao", "Mina", "New Lucena", "Oton", "Passi", "Pavia", "Pototan",
+                    "San Dionisio", "San Enrique (IO)", "San Joaquin", "San Miguel (IO)",
+                    "San Rafael (IO)", "Santa Barbara (IO)", "Sara", "Tigbauan", "Tubungan", "Zarraga"
+                ]
+
             ],
             [
                 'province' => "Isabela",
-                'cities' => ["Ilagan City", "Cauayan City", "Santiago City", "Alicia", "Roxas"]
+                'cities' => [
+                    "Alicia (IA)", "Angadanan", "Aurora (IA)", "Benito Soliven", "Burgos (IA)",
+                    "Cabagan", "Cabatuan (IA)", "Cauayan (IA)", "Cordon", "Delfin Albano",
+                    "Dinapigue", "Divilacan", "Echague", "Gamu", "Ilagan", "Jones", "Luna (IA)",
+                    "Maconacon", "Mallig", "Naguilian (IA)", "Palanan", "Quezon (IA)",
+                    "Quirino (IA)", "Ramon", "Reina Mercedes", "Roxas (IA)", "San Agustin (IA)",
+                    "San Guillermo", "San Isidro (IA)", "San Manuel (IA)", "San Mariano",
+                    "San Mateo (IA)", "San Pablo (IA)", "Santa Maria (IA)", "Santiago (IA)",
+                    "Santo Tomas (IA)", "Tumauini"
+                ]
+            ],
+            [
+                'province' => "Laguna",
+                'cities' => [
+                    "Alaminos", "Bay", "Calauan", "Cavinti", "Famy", "Kalayaan",
+                    "Liliw", "Los Baños", "Luisiana", "Lumban", "Mabitac",
+                    "Magdalena", "Majayjay", "Nagcarlan", "Paete", "Pagsanjan",
+                    "Pakil", "Pangil", "Pila", "Rizal", "Santa Cruz", "Santa Maria",
+                    "Siniloan", "Victoria"
+                ]
+            ],
+            [
+                'province' => "Pampanga",
+                'cities' => [
+                    "Apalit", "Arayat", "Bacolor", "Candaba", "Floridablanca", "Guagua", "Lubao",
+                    "Mabalacat", "Macabebe", "Magalang", "Masantol", "Mexico", "Minalin", "Porac",
+                    "San Fernando (PA)", "San Luis (PA)", "San Simon", "Santa Ana (PA)", "Santa Rita (PA)",
+                    "Santo Tomas (PA)", "Sasmuan"
+                ]
+            ],
+            [
+                'province' => "Quezon",
+                'cities' => [
+                    "Agdangan", "Alabat", "Atimonan", "Buenavista", "Burdeos", "Calauag", "Candelaria",
+                    "Catanauan", "Dolores", "General Luna", "General Nakar", "Guinayangan", "Gumaca",
+                    "Infanta", "Jomalig", "Lopez", "Lucban", "Macalelon", "Mauban", "Mulanay",
+                    "Padre Burgos", "Pagbilao", "Panukulan", "Patnanungan", "Perez", "Pitogo",
+                    "Plaridel", "Polillo", "Quezon", "Real", "Sampaloc", "San Andres", "San Antonio",
+                    "San Francisco", "San Narciso", "Sariaya", "Tagkawayan", "Tayabas", "Tiaong", "Unisan"
+                ]
+            ],
+            [
+                'province' => "Rizal",
+                'cities' => [
+                    "Angono", "Antipolo", "Baras (RL)", "Binangonan", "Cainta", "Cardona",
+                    "Jalajala", "Morong (RL)", "Pililla", "Rodriguez", "San Mateo (RL)",
+                    "Tanay", "Taytay (RL)", "Teresa"
+                ]
+            ],
+            [
+                'province' => "Zambales",
+                'cities' => [
+                    "Botolan", "Cabangan", "Candelaria (ZA)", "Castillejos", "Iba", "Masinloc", "Palauig",
+                    "San Antonio (ZA)", "San Felipe", "San Marcelino", "San Narciso (ZA)", "Santa Cruz (ZA)", "Subic"
+                ]
             ],
         ];
 
