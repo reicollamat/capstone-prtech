@@ -47,11 +47,14 @@ class SellerLanding extends Component
 
                 $formattedDate = Carbon::parse($date)->format('Y-m-d');
 
+                $currentpng = $formattedDate->
+
+
                 $filesnames[] = $formattedDate;
             }
         }
 
-        // dd($filesnames);
+        dd($filesnames);
 
         // dd(public_path('storage'));
 
