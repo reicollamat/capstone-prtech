@@ -50,7 +50,7 @@ class ProductListComponent extends Component
 
     public $product_category;
 
-    #[Validate('required', message: 'Please provide product price')]
+    #[Validate('required|integer', message: 'Please provide product price')]
     public $product_price;
 
     #[Validate('required', message: 'Please provide stocks available')]
@@ -152,9 +152,11 @@ class ProductListComponent extends Component
 
         $this->product_name = $itemProductInfo['title'];
         $this->product_slug = $itemProductInfo['slug'];
+        $this->product_status = $itemProductInfo['status'];
         $this->product_price = $itemProductInfo['price'];
         $this->product_stock = $itemProductInfo['stock'];
-        $this->product_reserve = $itemProductInfo['reserve'];
+        // $this->product_reserve = $itemProductInfo['reserve'];
+        // $this->product_weight = $itemProductInfo['weight'];
 
         // dd($itemProductInfo);
 
