@@ -72,21 +72,21 @@ class ProductListComponent extends Component
 
     public function submit()
     {
+        // dd('tst');
         $validator = $this->validate([
             'product_name' => 'required',
-            'product_sku' => 'required',
             'product_slug' => 'required',
             'product_description' => 'required',
             'product_condition' => 'required|not_in:Select Condition',
             'product_status' => 'required|not_in:Select Status',
-            'product_weight' => 'required|numeric',
+            // 'product_weight' => 'required|numeric',
             'product_category' => 'required',
             'product_price' => 'required',
             'product_stock' => 'required|integer',
             'product_reserve' => 'required|integer',
         ]);
 
-        dd($validator);
+        // dd($validator);
     }
 
 
@@ -148,6 +148,8 @@ class ProductListComponent extends Component
         //        dd($this->item);
         $this->itemproductinfo = $itemProductInfo;
 
+        // dd($itemProductInfo);
+
         $this->product_name = $itemProductInfo['title'];
         $this->product_slug = $itemProductInfo['slug'];
         $this->product_price = $itemProductInfo['price'];
@@ -156,11 +158,6 @@ class ProductListComponent extends Component
 
         // dd($itemProductInfo);
 
-
-    }
-
-    public function save()
-    {
 
     }
 }
