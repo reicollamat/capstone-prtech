@@ -79,7 +79,7 @@ class ProductListComponent extends Component
             // 'product_description' => 'required',
             'product_condition' => 'required|not_in:Select Condition',
             'product_status' => 'required|not_in:Select Status',
-            // 'product_weight' => 'required|numeric',
+            'product_weight' => 'required|numeric',
             'product_category' => 'required',
             'product_price' => 'required',
             'product_stock' => 'required|integer',
@@ -157,8 +157,8 @@ class ProductListComponent extends Component
         $this->product_price = $itemProductInfo['price'];
         $this->product_stock = $itemProductInfo['stock'];
         $this->product_category = $itemProductInfo['category'];
-        // $this->product_reserve = $itemProductInfo['reserve'];
-        // $this->product_weight = $itemProductInfo['weight'];
+        $this->product_reserve = $itemProductInfo['reserve'];
+        $this->product_weight = $itemProductInfo['weight'];
 
         // dd($itemProductInfo);
 
