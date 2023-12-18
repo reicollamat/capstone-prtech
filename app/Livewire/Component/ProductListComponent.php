@@ -2,28 +2,28 @@
 
 namespace App\Livewire\Component;
 
-use App\Models\Cpu;
-use App\Models\Psu;
-use App\Models\Mouse;
-use App\Models\Memory;
-use App\Models\Webcam;
 use App\Models\CaseFan;
-use App\Models\Monitor;
-use App\Models\Product;
-use App\Models\Speaker;
-use Livewire\Component;
-use App\Models\Keyboard;
-use App\Models\CpuCooler;
-use App\Models\Headphone;
-use App\Models\VideoCard;
-use App\Models\ExtStorage;
-use App\Models\IntStorage;
-use App\Models\Motherboard;
 use App\Models\ComputerCase;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Cpu;
+use App\Models\CpuCooler;
+use App\Models\ExtStorage;
+use App\Models\Headphone;
+use App\Models\IntStorage;
+use App\Models\Keyboard;
+use App\Models\Memory;
+use App\Models\Monitor;
+use App\Models\Motherboard;
+use App\Models\Mouse;
+use App\Models\Product;
+use App\Models\Psu;
+use App\Models\Speaker;
+use App\Models\VideoCard;
+use App\Models\Webcam;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class ProductListComponent extends Component
 {
@@ -64,7 +64,7 @@ class ProductListComponent extends Component
 
     public function render()
     {
-        return view('livewire.component.category-component.product-list-component');
+        return view('livewire.component.product-list-component');
     }
 
     public function submit()
@@ -131,11 +131,11 @@ class ProductListComponent extends Component
             // Resolve the model using the model class and product_id
             $this->item = app()->make($modelClass)->where('product_id', $item->id)->first();
 
-            //            $this->item = app()->make($modelClass)
-            //                ->join('products', , '=', 'products.id')
-            //                ->where('product_id', $item->id)->first();
-            //
-            //            dd($this->item);
+        //            $this->item = app()->make($modelClass)
+        //                ->join('products', , '=', 'products.id')
+        //                ->where('product_id', $item->id)->first();
+        //
+        //            dd($this->item);
         } else {
             // Handle the case when the category doesn't exist
             abort(404);

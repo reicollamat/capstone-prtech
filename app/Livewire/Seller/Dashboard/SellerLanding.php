@@ -51,7 +51,7 @@ class SellerLanding extends Component
             }
         }
 
-        dd($filesnames);
+        // dd($filesnames);
 
         // dd(public_path('storage'));
 
