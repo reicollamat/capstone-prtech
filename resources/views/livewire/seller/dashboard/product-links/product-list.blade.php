@@ -211,7 +211,7 @@
             </div>
             {{--            {{ $quick_search_filter }} --}}
             <hr>
-            <div class="bg-white overflow-x-auto rounded-lg p-3">
+            <div class="bg-white overflow-x-auto rounded-lg p-3 my-4">
                 <div id="table-headers" class="mb-1">
                     <div
                         class="flex flex-column flex-sm-row flex-shrink-0 min-w-full  items-center text-center tablelike">
