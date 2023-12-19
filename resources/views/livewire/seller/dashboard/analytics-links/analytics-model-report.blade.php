@@ -74,37 +74,50 @@
                 <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Rating</div>
                 <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Prediction</div>
             </div>
+
+
         
             <div wire:loading.remove x-transition>
                 @if ($this->getTopProducts->count() > 0)
                     @foreach ($this->getTopProducts as $key => $product)
-                        <div class="border-b border-gray-100" x-data="{ selected: null }">
-                            {{-- @dd($product) --}}
-                            <div class="grid grid-cols-12 text-center">
-                                <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                    {{ $product->id }}
-                                </div>
-                                <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                    {{ $product->title }}
-                                </div>
-                                <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                                    {{ $product->category }}
-                                </div>
-                                <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                                    {{ $product->status }}
-                                </div>
-                                <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                    <i class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }}
-                                </div>
-                                <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                    High Commodity - Suggested for Restock
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed d-block" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$key}}-{{$product->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$key}}-{{$product->id}}">
+                                        {{-- @dd($product) --}}
+                                        <div class="grid grid-cols-12 text-center">
+                                            <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                                {{ $product->id }}
+                                            </div>
+                                            <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                                {{ $product->title }}
+                                            </div>
+                                            <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
+                                                {{ $product->category }}
+                                            </div>
+                                            <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                                                {{ $product->status }}
+                                            </div>
+                                            <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                                <i class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }}
+                                            </div>
+                                            <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                                Model Suggested Restock Amount {{fake()->numberBetween(3, 45)}}
+                                            </div>
+                                        </div>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapse-{{$key}}-{{$product->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body flex content-center">
+                                        <img src="{{ asset('restock/future_predictions_plot'.fake()->numberBetween(0, 37).'.png') }}" alt="{{asset('img/notenoughdata.png')}}" style="max-height: 500px">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 @else
                     <div class="flex content-center text-gray-500 p-6">
-                        <h4></h4>
+                        <h4>Not Enough Data</h4>
                     </div>
                 @endif
             </div>
@@ -153,10 +166,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="m-4 ml-5">
-            <img src="{{ asset('img/chart.png') }}" alt="">
         </div>
 
 
