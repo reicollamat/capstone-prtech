@@ -140,13 +140,22 @@
                                                             Shop State/Province
                                                         </label>
                                                         <select id="shop_state_province" class="form-select py-2" aria-label="Default select example" wire:model.live="shop_state_province" required>
-                                                            @foreach ($this->getAddressList as $address)
-                                                                @if ($address['province'] == 'select')
-                                                                    <option value="{{null}}">Please select</option>
+                                                            @foreach ($this->getAddressList() as $address)
+                                                            @if (isset($address['province']) && isset($address['cities']))
+                                                                {{-- <h2>Province: {{ $address['province'] }}</h2> --}}
+                                                                @if ($address['province'] === 'select')
+                                                                    <option value="{{ null }}">Please Select</option>
                                                                 @else
-                                                                    <option value="{{$address['province']}}">{{$address['province']}}</option>
+                                                                    <option value="{{ $address['province'] }}">
+                                                                        {{ $address['province'] }}</option>
                                                                 @endif
-                                                            @endforeach
+                                                                {{-- <ul> --}}
+                                                                {{--     @foreach ($address['cities'] as $city) --}}
+                                                                {{--         <li>{{ $city }}</li> --}}
+                                                                {{--     @endforeach --}}
+                                                                {{-- </ul> --}}
+                                                            @endif
+                                                        @endforeach
                                                         </select>
                                                         @error('shop_state_province')
                                                             <span class="font-sm text-red-500">{{ $message }}</span>
@@ -158,17 +167,46 @@
                                                             Shop City
                                                         </label>
                                                         <select id="shop_city" class="form-select" aria-label="Default select example" wire:model.live="shop_city" required>
-                                                            @if ($this->shop_city == null && $this->shop_state_province == null)
-                                                                <option value="{{null}}" selected>Please select state/province first</option>
+                                                            @if ($shop_city == null && $shop_state_province == null)
+                                                                <option value="{{ null }}" selected>Please select
+                                                                    state/province first
+                                                                </option>
                                                             @endif
                                                             @foreach ($this->getAddressList as $address)
-                                                                @if ($address['province'] == $this->shop_state_province)
-                                                                    @if ($this->shop_city == null || $this->shop_city != $address['cities'][0])
-                                                                        <option value="{{null}}" selected>Please select city</option>
+                                                                {{--                                                @if ($address['province'] == $this->shop_state_province) --}}
+                                                                {{--                                                    @if ($this->shop_city == null || $this->shop_city != $address['cities'][0]) --}}
+                                                                {{--                                                        <option value="{{ null }}" selected>Please select city --}}
+                                                                {{--                                                        </option> --}}
+                                                                {{--                                                    @endif --}}
+                                                                {{--                                                    @foreach ($address['cities'] as $key => $cities) --}}
+                                                                {{--                                                        <option value="{{ $cities }}">{{ $cities }} --}}
+                                                                {{--                                                        </option> --}}
+                                                                {{--                                                    @endforeach --}}
+                                                                {{--                                                @endif --}}
+
+                                                                @if (isset($address['province']) && isset($address['cities']))
+                                                                    {{--                                                    {{ $address['province'] }} --}}
+                                                                    {{--                                                    @dd($address['province']) --}}
+                                                                    {{--                                                    --}}{{-- <h2>Province: {{ $address['province'] }}</h2> --}}
+                                                                    {{--                                                    --}}{{--                                                    @if ($shop_city == null) --}}
+                                                                    {{--                                                    --}}{{--                                                        <option value="{{ null }}" selected>Please select city --}}
+                                                                    {{--                                                    --}}{{--                                                        </option> --}}
+                                                                    {{--                                                    --}}{{--                                                    @else --}}
+                                                                    {{--                                                    @foreach ($address['cities'] as $city) --}}
+                                                                    {{--                                                        <option value="{{ $city }}">{{ $city }}</option> --}}
+                                                                    {{--                                                    @endforeach --}}
+                                                                    {{--                                                    --}}{{--                                                    @endif --}}
+                                                                    {{--                                                    --}}{{-- <ul> --}}
+                                                                    {{--                                                    --}}{{--     @foreach ($address['cities'] as $city) --}}
+                                                                    {{--                                                    --}}{{--         <li>{{ $city }}</li> --}}
+                                                                    {{--                                                    --}}{{--     @endforeach --}}
+                                                                    {{--                                                    --}}{{-- </ul> --}}
+                                                                    @if ($address['province'] === $shop_state_province)
+                                                                        @foreach ($address['cities'] as $city)
+                                                                            <option value="{{ $city }}">{{ $city }}
+                                                                            </option>
+                                                                        @endforeach
                                                                     @endif
-                                                                    @foreach ($address['cities'] as $key => $cities)
-                                                                        <option value="{{$cities}}">{{$cities}}</option>
-                                                                    @endforeach
                                                                 @endif
                                                             @endforeach
                                                         </select>
@@ -242,8 +280,8 @@
                                     </div>
                                     <div class="mt-3 flex justify-center">
                                         <p class="mb-0 text-base text-gray-700 w-1/2 text-center">
-                                            If Business Address is the same as the address provided at Shop Information.
-                                            You may leave this address information.
+                                            If Business Address is the same as the address provided at Shop Information,
+                                            you may leave this address information.
                                         </p>
                                     </div>
                                     <div class="mt-3">
@@ -264,11 +302,20 @@
                                                     Registered State/Province
                                                 </label>
                                                 <select id="registered_state_province" class="form-select py-2" aria-label="Default select example" wire:model.live="registered_state_province" required>
-                                                    @foreach ($this->getAddressList as $address)
-                                                        @if ($address['province'] == 'select')
-                                                            <option value="{{null}}">Please select</option>
-                                                        @else
-                                                            <option value="{{$address['province']}}">{{$address['province']}}</option>
+                                                    @foreach ($this->getAddressList() as $address)
+                                                        @if (isset($address['province']) && isset($address['cities']))
+                                                            {{-- <h2>Province: {{ $address['province'] }}</h2> --}}
+                                                            @if ($address['province'] === 'select')
+                                                                <option value="{{ null }}">Please Select</option>
+                                                            @else
+                                                                <option value="{{ $address['province'] }}">
+                                                                    {{ $address['province'] }}</option>
+                                                            @endif
+                                                            {{-- <ul> --}}
+                                                            {{--     @foreach ($address['cities'] as $city) --}}
+                                                            {{--         <li>{{ $city }}</li> --}}
+                                                            {{--     @endforeach --}}
+                                                            {{-- </ul> --}}
                                                         @endif
                                                     @endforeach
                                                 </select>
@@ -284,14 +331,16 @@
                                                 <select id="registered_city" class="form-select" aria-label="Default select example" wire:model.live="registered_city" required>
                                                     <option selected disabled>Please select state/province first</option>
                                                     @foreach ($this->getAddressList as $address)
-                                                        @if ($address['province'] == $this->registered_state_province)
-                                                            @foreach ($address['cities'] as $cities)
-                                                                @if ($cities == $this->shop_city)
-                                                                <option value="{{$cities}}" selected>{{$cities}}</option>
-                                                                @else
-                                                                <option value="{{$cities}}">{{$cities}}</option>
-                                                                @endif
-                                                            @endforeach
+                                                        @if (isset($address['province']) && isset($address['cities']))
+                                                            @if ($address['province'] == $this->registered_state_province)
+                                                                @foreach ($address['cities'] as $cities)
+                                                                    @if ($cities == $this->shop_city)
+                                                                    <option value="{{$cities}}" selected>{{$cities}}</option>
+                                                                    @else
+                                                                    <option value="{{$cities}}">{{$cities}}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
                                                         @endif
                                                     @endforeach
                                                 </select>
