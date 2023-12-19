@@ -112,7 +112,7 @@
 
                 </a>
             </li>
-            <li class="p-1.5 text-sm" text-sm>
+            {{-- <li class="p-1.5 text-sm" text-sm>
                 <a href="{{ route('shipment-options') }}" class="no-underline transition decoration-0 text-gray-800"
                     wire:navigate>
                     <div class="flex items-center gap-1.5">
@@ -121,7 +121,7 @@
                     </div>
 
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="p-1.5 text-sm" text-sm> --}}
             {{--     <a href="{{ route('shipment-history') }}" class="no-underline transition decoration-0 text-gray-800" --}}
             {{--         wire:navigate> --}}
