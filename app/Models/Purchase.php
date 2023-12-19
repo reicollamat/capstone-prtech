@@ -61,6 +61,7 @@ class Purchase extends Model
         'reference_number',
         'purchase_date',
         'total_amount',
+        'shipping_fee',
         'completion_date',
         'purchase_status',
     ];
