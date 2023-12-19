@@ -64,7 +64,7 @@
 
 
 
-        
+
         <div class="bg-white overflow-x-auto rounded-lg p-3 m-4">
             <div class="grid grid-cols-12 text-center text-sm">
                 <div class="col-span-1 p-1 !text-gray-400 !font-light border-b-2 border-blue-300">ID</div>
@@ -76,7 +76,7 @@
             </div>
 
 
-        
+
             <div wire:loading.remove x-transition>
                 @if ($this->getTopProducts->count() > 0)
                     @foreach ($this->getTopProducts as $key => $product)
@@ -109,7 +109,7 @@
                                 </h2>
                                 <div id="flush-collapse-{{$key}}-{{$product->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body flex content-center">
-                                        <img src="{{ asset('restock/future_predictions_plot'.fake()->numberBetween(0, 37).'.png') }}" alt="{{asset('img/notenoughdata.png')}}" style="max-height: 500px">
+                                        <img src="{{ asset('restock/future_predictions_plot'.fake()->numberBetween(0, 37).'.png') }}" alt="" style="max-height: 500px">
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                     </div>
                 @endif
             </div>
-        
+
             {{-- loading indicator --}}
             <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
                 <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">
