@@ -25,7 +25,7 @@ class ShippingHelper
      * @param  int  $shippingCost The cost per 5kg interval.
      * @return float|int The total cost of shipping.
      */
-    public static function computeShipping($weight, $basePrice = 150, $shippingCost = 20): float|int
+    public static function computeShipping($weight, $basePrice = 70, $shippingCost = 10): float|int
     {
         // Calculate the number of 5kg intervals
         $intervals = floor($weight / 5);
