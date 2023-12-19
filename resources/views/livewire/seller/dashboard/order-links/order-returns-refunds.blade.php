@@ -78,8 +78,44 @@
             <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-center bg-white">
                 <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2 text-center">
-                    <p class="text-sm font-base text-gray-500 mb-1">Total Return/Refund Listed</p>
-                    <p class="font-semibold">{{ $this->getReturnrefundPending }}</p>
+                    <p class="text-sm font-base text-gray-500 mb-1">Total Return/Refund Records</p>
+                    <input type="text" class="font-semibold bg-transparent w-full text-center"
+                        wire:model="total_returnrefund" disabled>
+                </div>
+                <div class="py-2 text-center flex justify-center">
+                    <div class="px-2">
+                        <p class="text-sm font-base text-gray-500 mb-1">Pending Return/Refund</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_pending" disabled>
+                    </div>
+                </div>
+                <div class="py-2 text-center flex justify-center">
+                    <div class="px-2">
+                        <p class="text-sm font-base text-gray-500 mb-1">Return Product</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_return_product" disabled>
+                    </div>
+                </div>
+                <div class="py-2 text-center flex justify-center">
+                    <div class="px-2">
+                        <p class="text-sm font-base text-gray-500 mb-1">Partial Refund</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_partial_refund" disabled>
+                    </div>
+                </div>
+                <div class="py-2 text-center flex justify-center">
+                    <div class="px-2">
+                        <p class="text-sm font-base text-gray-500 mb-1">Full Refund</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_full_refund" disabled>
+                    </div>
+                </div>
+                <div class="py-2 text-center flex justify-center">
+                    <div class="px-2">
+                        <p class="text-sm font-base text-gray-500 mb-1">Replacement</p>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center"
+                            wire:model="total_replacement" disabled>
+                    </div>
                 </div>
             </div>
         </div>

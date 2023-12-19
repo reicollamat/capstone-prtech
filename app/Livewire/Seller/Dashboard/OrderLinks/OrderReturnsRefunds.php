@@ -27,6 +27,18 @@ class OrderReturnsRefunds extends Component
     public $pay_partial_refund;
     public $pay_full_refund;
 
+    public $total_returnrefund = 0;
+
+    public $total_pending = 0;
+
+    public $total_return_product = 0;
+
+    public $total_partial_refund = 0;
+
+    public $total_full_refund = 0;
+
+    public $total_replacement = 0;
+
     //    public function paginationView()
     //    {
     //        return 'vendor.pagination.custom-pagination-links';
@@ -37,7 +49,36 @@ class OrderReturnsRefunds extends Component
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         // query for purchased items of products from current seller
-        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id);
+        // $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id);
+
+
+        $this->total_returnrefund = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_pending = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-pending')
+            ->get());
+
+        $this->total_return_product = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'return_product')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_partial_refund = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'partial_refund')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_full_refund = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'full_refund')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_replacement = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'replacement')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
     }
 
 
@@ -77,6 +118,7 @@ class OrderReturnsRefunds extends Component
 
 
             sleep(0.5);
+            $this->mount();
             session()->flash('notification-livewire', 'Return product completed!');
 
             return $this->returnrefund_items->where('refund_option', 'return_product')->orderBy('status', 'desc')->paginate(10);
@@ -105,6 +147,7 @@ class OrderReturnsRefunds extends Component
             ]);
 
             sleep(0.5);
+            $this->mount();
             session()->flash('notification-livewire', 'Partial refund completed!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
@@ -132,6 +175,7 @@ class OrderReturnsRefunds extends Component
             ]);
 
             sleep(0.5);
+            $this->mount();
             session()->flash('notification-livewire', 'Full refund completed!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
@@ -162,6 +206,7 @@ class OrderReturnsRefunds extends Component
             ]);
 
             sleep(0.5);
+            $this->mount();
             session()->flash('notification-livewire', 'Replacement product arrived!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
