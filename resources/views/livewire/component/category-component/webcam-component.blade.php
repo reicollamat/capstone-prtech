@@ -133,7 +133,7 @@
             <div class="grid md:grid-cols-2 gap-4">
                 <div>
                     {{-- First Columm --}}
-                    <!-- Product Name input -->
+                    <!-- Brand -->
                     <div class="mb-4">
                         <label for="brand"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
@@ -146,7 +146,7 @@
                         @enderror
                     </div>
 
-                    <!-- Product SKU input -->
+                    <!-- Price -->
                     <div class="mb-4">
                         <label for="price"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
@@ -161,7 +161,7 @@
 
                     <div class="grid md:grid-cols-2 md:gap-4">
 
-                        <!-- Product SKU input -->
+                        <!-- Connection Type -->
                         <div class="mb-4">
                             <label for="webcam_connection_type"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
@@ -185,7 +185,7 @@
                             @enderror
                         </div>
 
-                        <!-- Product SKU input -->
+                        <!-- Digital Resolution -->
                         <div class="mb-4">
                             <label for="resolution"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Max
@@ -205,7 +205,7 @@
                         </div>
 
                     </div>
-                    <!-- Product Name input -->
+                    <!-- Webcam FPS -->
                     <div class="mb-4">
                         <label for="webcam_fps"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Max
@@ -219,7 +219,7 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 md:gap-4">
-                        <!-- Product SKU input -->
+                        <!-- Audio Support -->
                         <div class="mb-4">
                             <label for="audio_support"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Audio

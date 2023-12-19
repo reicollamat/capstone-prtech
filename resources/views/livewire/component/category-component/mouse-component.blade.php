@@ -113,7 +113,7 @@
             <div class="grid md:grid-cols-2 gap-4">
 
                 <div>
-                    <!-- Product Name input -->
+                    <!-- Brand -->
                     <div class="mb-4">
                         <label for="brand"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
@@ -127,7 +127,7 @@
                     </div>
 
                     <div>
-                        <!-- Product SKU input -->
+                        <!-- Price -->
                         <div class="mb-4">
                             <label for="price"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
@@ -216,7 +216,7 @@
                             @enderror
                         </div>
 
-                        <!-- Product SKU input -->
+                        <!-- Color -->
                         <div class="mb-4">
                             <label for="color"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Mouse Color
