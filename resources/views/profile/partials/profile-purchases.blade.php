@@ -533,6 +533,8 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                            @else
+                                                                                                <input type="text" name="item_quantity" value="{{$purchase_item->quantity}}" hidden>
                                                                                             @endif
                                                                                             <div class="mx-2 my-2">
                                                                                                 <h5>Reason for
