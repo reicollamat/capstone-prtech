@@ -9,6 +9,7 @@ use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +19,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $sql = File::get('database/seeders/sql/prtech_db.sql');
+        DB::unprepared($sql);
+
+        // seed product stock - random(0-50)
+        $this->call([
+            ProductStockSeeder::class,
+        ]);
+
         // // seed an 'admin' & 'regular_user' role
         // DB::table('roles')->insert([
         //     [
@@ -107,7 +117,6 @@ class DatabaseSeeder extends Seeder
         //     ],
         // ]);
 
-
         // $admin_role_id = DB::table('roles')->where('slug', 'admin')->value('id');
         // $user_role_id = DB::table('roles')->where('slug', 'user')->value('id');
 
@@ -149,26 +158,30 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // seed dataset
-        $this->call([
-            UserSeeder::class,
-            SellerSeeder::class,
-            ComputerCaseSeeder::class,
-            CaseFanSeeder::class,
-            CpuSeeder::class,
-            CpuCoolerSeeder::class,
-            ExtStorageSeeder::class,
-            IntStorageSeeder::class,
-            HeadphoneSeeder::class,
-            KeyboardSeeder::class,
-            MemorySeeder::class,
-            MonitorSeeder::class,
-            MotherboardSeeder::class,
-            MouseSeeder::class,
-            PsuSeeder::class,
-            SpeakerSeeder::class,
-            VideoCardSeeder::class,
-            WebcamSeeder::class,
-        ]);
+        // $this->call([
+        // UserSeeder::class,
+        // SellerSeeder::class,
+        // ProductSeeder::class,
+        // SellerShopMetricsSeeder::class,
+        // CommentSeeder::class,
+        // Products
+        // ComputerCaseSeeder::class,
+        // CaseFanSeeder::class,
+        // CpuSeeder::class,
+        // CpuCoolerSeeder::class,
+        // ExtStorageSeeder::class,
+        // IntStorageSeeder::class,
+        // HeadphoneSeeder::class,
+        // KeyboardSeeder::class,
+        // MemorySeeder::class,
+        // MonitorSeeder::class,
+        // MotherboardSeeder::class,
+        // MouseSeeder::class,
+        // PsuSeeder::class,
+        // SpeakerSeeder::class,
+        // VideoCardSeeder::class,
+        // WebcamSeeder::class,
+        // ]);
 
         // Product::factory()
         //     ->count(5)

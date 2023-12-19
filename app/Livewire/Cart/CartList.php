@@ -46,7 +46,7 @@ class CartList extends Component
 
             $this->cartiems_count = count($this->cartitems);
 
-            if (!empty($this->cartitems)) {
+            if (! empty($this->cartitems)) {
                 // dd($this->cartitems);
                 foreach ($this->cartitems as $item) {
                     // dd($item);

@@ -30,7 +30,6 @@ class PurchaseCancellationInfo extends Model
         'purchase_id',
         'user_id',
         'seller_id',
-        'status',
         'request_date',
         'approved_date',
     ];

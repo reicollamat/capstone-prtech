@@ -160,7 +160,7 @@
                                 <h6>₱{{ $subtotal }}</h6>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">Shipping Fee</h6>
                                 <h6 class="font-weight-medium">₱{{ $shipping_value }}</h6>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                                 <div class="modal fade" id="confirmOrder" data-bs-backdrop="static"
                                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmOrderLabel"
                                     aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="confirmOrderLabel">Are you sure?</h1>

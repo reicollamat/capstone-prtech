@@ -1,0 +1,8 @@
+###
+POST http://localhost:8000/api/generate
+
+###
+GET https://magi001.pythonanywhere.com
+
+###
+POST https://magi001.pythonanywhere.com/generate

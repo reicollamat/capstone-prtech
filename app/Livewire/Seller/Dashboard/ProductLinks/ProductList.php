@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Seller\Dashboard\ProductLinks;
 
-use App\Http\Helper;
 use App\Models\Product;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +35,13 @@ class ProductList extends Component
     public $seller;
 
     public $total_products_count;
+
     public $total_available_count;
+
     public $total_brandnew_count;
+
     public $total_used_count;
+
     public float $total_products_rating;
 
     //    public function paginationView()
@@ -50,17 +53,21 @@ class ProductList extends Component
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
-        $this->total_products_count = Product::where('seller_id', $this->seller->id)->count();
+        $this->total_products_count = Product::where('seller_id', $this->seller->id)->count() ?? 0;
 
-        $this->total_available_count = Product::where('seller_id', $this->seller->id)->where('status', 'available')->count();
+        $this->total_available_count = Product::where('seller_id', $this->seller->id)->where('status', 'available')->count() ?? 0;
 
-        $this->total_brandnew_count = Product::where('seller_id', $this->seller->id)->where('condition', 'brand_new')->count();
+        $this->total_brandnew_count = Product::where('seller_id', $this->seller->id)->where('condition', 'brand_new')->count() ?? 0;
 
-        $this->total_used_count = Product::where('seller_id', $this->seller->id)->where('condition', 'used')->count();
+        $this->total_used_count = Product::where('seller_id', $this->seller->id)->where('condition', 'used')->count() ?? 0;
 
         // overall rating of all seller's products
-        $this->total_products_rating = Product::where('seller_id', $this->seller->id)->sum('rating') / $this->total_products_count;
-        $this->total_products_rating = number_format((float)$this->total_products_rating, 2, '.', '');
+        if ($this->total_products_count == 0) {
+            $this->total_products_rating = 0;
+        } else {
+            $this->total_products_rating = Product::where('seller_id', $this->seller->id)->sum('rating') / $this->total_products_count;
+            $this->total_products_rating = number_format((float) $this->total_products_rating, 2, '.', '');
+        }
 
         // dd($this->total_products_rating);
     }
@@ -104,7 +111,6 @@ class ProductList extends Component
         //        sleep(5);
         if ($this->category_filter) {
             return Product::where('category', '=', $this->category_filter)
-                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
             //            dd($this->category_filter);
@@ -113,7 +119,6 @@ class ProductList extends Component
         if ($this->quick_search_filter > 1) {
             // return Product::where('title', 'ilike', "%{$this->quick_search_filter}%") // POSTGRES
             return Product::where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
-                ->select('id', 'category', 'condition', 'slug', 'SKU', 'stock', 'reserve', 'rating', 'status', 'image')
                 ->orderBy('id', 'asc')
                 ->paginate(10);
         } else {
@@ -129,5 +134,26 @@ class ProductList extends Component
     public function render()
     {
         return view('livewire..seller.dashboard.product-links.product-list');
+    }
+
+    public function removeProduct($product_id)
+    {
+        // $product = Product::where('id', $product_id)->first();
+
+        // dd($product);
+
+        Product::destroy($product_id);
+
+        $this->mount();
+    }
+
+    // #[Computed]
+    public function getPopularProducts()
+    {
+        $popular =  Product::where('seller_id', $this->seller->id)
+            ->orderBy('view_count', 'asc')
+            ->get();
+
+        // dd($popular);
     }
 }

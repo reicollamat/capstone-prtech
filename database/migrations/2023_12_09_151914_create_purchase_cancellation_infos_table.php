@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('seller_id')->constrained()->cascadeOnDelete();
 
-            $table->string('status');
             $table->timestamp('request_date');
             $table->timestamp('approved_date')->nullable();
 

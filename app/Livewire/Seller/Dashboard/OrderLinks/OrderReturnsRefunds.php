@@ -4,28 +4,40 @@ namespace App\Livewire\Seller\Dashboard\OrderLinks;
 
 use App\Models\Product;
 use App\Models\Purchase;
-use App\Models\PurchaseItem;
+use App\Models\ItemReturnrefundInfo;
 use App\Models\Seller;
 use App\Models\Shipments;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\On;
 
 #[Layout('layouts.seller.seller-layout')]
 class OrderReturnsRefunds extends Component
 {
     use WithPagination;
 
-    public $quick_search_filter;
-
-    public $set_to_shipping;
-    public $set_to_complete;
-
+    public $refund_option;
     public $seller;
+
+    public $return_product_complete;
+    public $replacement_arrived;
+    public $ship_replacement_item;
+    public $pay_partial_refund;
+    public $pay_full_refund;
+
+    public $total_returnrefund = 0;
+
+    public $total_pending = 0;
+
+    public $total_return_product = 0;
+
+    public $total_partial_refund = 0;
+
+    public $total_full_refund = 0;
+
+    public $total_replacement = 0;
 
     //    public function paginationView()
     //    {
@@ -37,34 +49,238 @@ class OrderReturnsRefunds extends Component
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        // dd($this->purchase_items->get());
+        // $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id);
+
+
+        $this->total_returnrefund = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_pending = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-pending')
+            ->get());
+
+        $this->total_return_product = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'return_product')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_partial_refund = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'partial_refund')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_full_refund = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'full_refund')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
+
+        $this->total_replacement = count(ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('refund_option', 'replacement')
+            ->whereNot('status', 'returnrefund-completed')
+            ->get());
     }
 
 
     #[Computed]
-    public function getTotalReturnRefund()
+    public function getReturnrefundPending()
     {
-        $to_ship = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id);
-        return count($to_ship->where('purchase_status', 'returnrefund')->get());
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-pending')
+            ->orWhere('status', 'returnrefund-agreement');
+
+        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+    }
+
+    #[Computed]
+    public function getReturnrefundReturnProduct()
+    {
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-approved')
+            ->orWhere('status', 'returnrefund-shipping');
+
+        if ($this->return_product_complete) {
+
+            $return_item = ItemReturnrefundInfo::find($this->return_product_complete);
+
+            $return_item->update([
+                'status' => 'returnrefund-completed',
+                'returned_date' => now(),
+                'completion_date' => now(),
+            ]);
+
+            // update product stock (increase)
+            $return_item->purchase_item->product->update([
+                'stock' => $return_item->purchase_item->product->stock + 1,
+            ]);
+
+
+            sleep(0.5);
+            $this->mount();
+            session()->flash('notification-livewire', 'Return product completed!');
+
+            return $this->returnrefund_items->where('refund_option', 'return_product')->orderBy('status', 'desc')->paginate(10);
+        }
+        //
+        else {
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+    }
+
+    #[Computed]
+    public function getReturnrefundPartialRefund()
+    {
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-approved');
+
+        if ($this->pay_partial_refund) {
+
+            $return_item = ItemReturnrefundInfo::find($this->pay_partial_refund);
+
+            $return_item->update([
+                'status' => 'returnrefund-completed',
+                'completion_date' => now(),
+            ]);
+
+            sleep(0.5);
+            $this->mount();
+            session()->flash('notification-livewire', 'Partial refund completed!');
+
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+        //
+        else {
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+    }
+
+    #[Computed]
+    public function getReturnrefundFullRefund()
+    {
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-approved');
+
+        if ($this->pay_full_refund) {
+
+            $return_item = ItemReturnrefundInfo::find($this->pay_full_refund);
+
+            $return_item->update([
+                'status' => 'returnrefund-completed',
+                'completion_date' => now(),
+            ]);
+
+            sleep(0.5);
+            $this->mount();
+            session()->flash('notification-livewire', 'Full refund completed!');
+
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+        //
+        else {
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+    }
+
+    #[Computed]
+    public function getReturnrefundReplacement()
+    {
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-approved')
+            ->orWhere('status', 'returnrefund-shipping')
+            ->orWhere('status', 'returnrefund-inspection')
+            ->orWhere('status', 'returnrefund-shipping_replace');
+
+        if ($this->replacement_arrived) {
+
+            $replacement_item = ItemReturnrefundInfo::find($this->replacement_arrived);
+
+            $replacement_item->update([
+                'status' => 'returnrefund-inspection',
+                'returned_date' => now(),
+            ]);
+
+            sleep(0.5);
+            $this->mount();
+            session()->flash('notification-livewire', 'Replacement product arrived!');
+
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+        if ($this->ship_replacement_item) {
+
+            $replacement_item = ItemReturnrefundInfo::find($this->ship_replacement_item);
+
+            $replacement_item->update([
+                'status' => 'returnrefund-shipping_replace',
+            ]);
+
+            sleep(0.5);
+            session()->flash('notification-livewire', 'Replacement product shipped to customer!');
+
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+        //
+        else {
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+    }
+
+    #[Computed]
+    public function getReturnrefundRecords()
+    {
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-completed');
+
+        return $this->returnrefund_items->orderBy('completion_date', 'desc')->paginate(10);
+    }
+
+
+
+
+    public function seller_agree($refund_item_id)
+    {
+        $refund_item = ItemReturnrefundInfo::find($refund_item_id);
+        $refund_option = $this->refund_option;
+        // dd($refund_option);
+
+        // update return/refund item
+        $refund_item->status = 'returnrefund-agreement';
+        $refund_item->refund_option = $refund_option;
+        $refund_item->save();
+
+        session()->flash('notification-livewire', 'Return/Refund request approved');
+        return $this->redirect(route('order-returns'));
+    }
+
+    // reject return/refund request
+    public function reject_request($refund_item_id)
+    {
+        $refund_item = ItemReturnrefundInfo::find($refund_item_id);
+        // dd($refund_item);
+
+        $refund_item->update([
+            'status' => 'returnrefund-rejected',
+            'refund_otion' => $this->refund_option,
+        ]);
+
+        session()->flash('notification-livewire', 'Return/Refund request rejected');
+        return $this->redirect(route('order-returns'));
     }
 
 
     #[Computed]
-    public function getReturnRefund()
+    public function getReturnProduct()
     {
         // query for purchased items of products from current seller
-        $this->purchase_items = Product::join('purchase_items', 'products.id', '=', 'purchase_items.product_id')
-            ->join('purchases', 'purchase_items.purchase_id', '=', 'purchases.id')
-            ->join('payments', 'purchases.id', '=', 'payments.purchase_id')
-            ->where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'returnrefund');
+        $this->return_products = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund_approved')
+            ->where('status', 'return_product_shipping');
 
         if ($this->set_to_shipping) {
             // dd($this->set_to_shipping);
@@ -73,32 +289,20 @@ class OrderReturnsRefunds extends Component
             Shipments::where('purchase_id', $this->set_to_shipping)->update(['shipment_status' => 'shipping']);
 
             // return collection of purchased items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->return_products->orderBy('purchase_items.id', 'asc')->paginate(10);
         }
-
-        // add check to run rerender every time
-        if ($this->quick_search_filter > 0) {
-            return $this->purchase_items
-                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
-                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
-                ->where('purchases.purchase_status', 'to_ship')
-                ->orderBy('purchase_items.id', 'asc')
-                ->paginate(10);
-        } else {
-            // dd($this->purchase_items->get());
+        //
+        else {
+            // dd($this->return_products->get());
             // return collection of shipment items of products from current seller
-            return $this->purchase_items->orderBy('purchase_items.id', 'asc')->paginate(10);
+            return $this->return_products->orderBy('request_date', 'desc')->paginate(10);
         }
 
-        return $this->purchase_items->paginate(10);
+        return $this->return_products->paginate(10);
     }
-
 
     public function render()
     {
-        $this->orderstatus_options = ['pending', 'completed', 'to_ship', 'shipping'];
-
-        $this->paymentstatus_options = ['paid', 'unpaid'];
 
         return view('livewire..seller.dashboard.order-links.order-returns-refunds');
     }

@@ -1,6 +1,6 @@
-<div class="h-full w-full ">
+<div class="h-full w-full">
     {{-- Stop trying to control. --}}
-    <div class="relatve bg-blue-500 pb-40 pt-8">
+    <div class="relatve bg-blue-500 pb-44 pt-8">
         <div>
             <div class="header welcome transition duration-300 ease-in-out px-4">
                 <div class="p-2 d-md-flex lg:!justify-between gap-2 items-center bg-transparent rounded mb-2">
@@ -83,7 +83,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -91,28 +90,28 @@
             </div>
 
             {{--         content --}}
-            <div class="row mb-2 g-2 g-mb-4 px-4 mx-0">
+            <div class="row mb-2 g-2 g-mb-4 px-8 mx-0">
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column border !border-red-500">
                         <small class="text-muted d-block mb-1">Sales Today</small>
                         <p class="h3 text-black fw-light mt-auto">
-                            6,851
+                            {{ $this->getSalesToday() ?? 0 }}
 
                             <small class="text-base text-success">
-                                10.08 %
+                                {{ number_format($this->getSalesTodayPercentage(), 2) }} %
                             </small>
                         </p>
                     </div>
                 </div>
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column">
-                        <small class="text-muted d-block mb-1">Visitors Today</small>
+                        <small class="text-muted d-block mb-1">Visitors</small>
                         <p class="h3 text-black fw-light mt-auto">
-                            24,668
+                            {{ $this->getVisitors() ?? 0 }}
 
-                            <small class="text-base text-danger">
-                                -30.76 %
-                            </small>
+                            {{-- <small class="text-base text-danger"> --}}
+                            {{--     -30.76 % --}}
+                            {{-- </small> --}}
                         </p>
                     </div>
                 </div>
@@ -125,9 +124,9 @@
                     </div>
                 </div>
                 <div class="col">
-                    <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column" wire:poll.120s>
+                    <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column" wire:poll.300s>
                         <small class="text-muted d-block mb-1">Total Earnings <span
-                                class="text-xs text-gray-500">Updated every 2 minutes</span></small>
+                                class="text-xs text-gray-500">Updated every 5 minutes</span></small>
                         <p class="h3 text-black fw-light mt-auto">
                             {{ $this->getTotalEarnings->total_earnings ?? 0 }}
                             {{--                            @dd($this->getTotalEarnings->total_earnings) --}}
@@ -139,11 +138,11 @@
     </div>
     <div>
         {{--         fiest chart --}}
-        <div class=" -my-32 px-3">
-            <div class="flex flex-wrap">
+        <div class="-my-32 px-3">
+            <div class="flex flex-wrap xl:gap-0">
                 <div class="w-full xl:w-8/12 ">
                     <div
-                        class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-md rounded-lg bg-blueGray-800">
+                        class="relative flex flex-col min-w-0 break-words w-full h-full mb-8 shadow-md rounded-lg bg-blueGray-800">
                         <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
                             <div class="flex flex-wrap items-center">
                                 <div class="relative w-full max-w-full flex-grow flex-1">
@@ -154,16 +153,23 @@
                         </div>
                         <div class="p-4 flex-auto">
                             <div class="relative h-350-px">
-                                <canvas width="496" height="291"
-                                    style="display: block; box-sizing: border-box; height: 300px; width: 100%;"
-                                    id="line-chart"></canvas>
+                                <div class="inset-0">
+                                    <div class="flex items-end w-full h-full overflow-hidden" wire:ignore>
+                                        <canvas width="496" height="291" id="shop-sales-chart"></canvas>
+                                    </div>
+                                </div>
+                                {{-- <canvas width="496" height="291" --}}
+                                {{--     style="display: block; box-sizing: border-box; height: 300px; width: 100%;" --}}
+                                {{--     id="shop-sales-chart"> --}}
+                                {{-- </canvas>  --}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-full xl:w-4/12 lg:pl-6">
-                    <div class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-md rounded-lg bg-white">
-                        <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+                <div class="w-full xl:w-4/12 xl:pl-6 margin-top">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words w-full h-full mb-8 shadow-md rounded-lg bg-white">
+                        <div class="rounded-t mb-0 px-4 pt-3 bg-transparent">
                             <div class="flex flex-wrap items-center">
                                 <div class="relative w-full max-w-full flex-grow flex-1">
                                     <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Performance</h6>
@@ -171,11 +177,48 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="p-4 flex-auto">
-                            <div class="relative h-350-px">
-                                <canvas width="221" height="291"
-                                    style="display: block; box-sizing: border-box; height: 300px; width: 100%;"
-                                    id="bar-chart"></canvas>
+                        <div class="px-4 flex-auto">
+                            <div class="relative h-350-px" style="height:auto">
+                                <div class="relative overflow-x-auto sm:rounded-lg">
+                                    <table
+                                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                        <thead
+                                            class="text-xs py-2.5 text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                                            <tr>
+                                                <th scope="col" class="py-1.5">
+                                                    Reference #
+                                                </th>
+                                                <th scope="col" class="py-1.5">
+                                                    Amount
+                                                </th>
+                                                <th scope="col" class="py-1.5">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($this->getOrders as $item)
+                                                <tr
+                                                    class="bg-white text-base dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                    <th scope="row"
+                                                        class="py-2.5 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                        {{ $item->reference_number }}
+                                                    </th>
+                                                    <td class="py-2.5 text-base">
+                                                        {{ $item->total_amount }}
+                                                    </td>
+                                                    <td class="py-2.5 text-base">
+                                                        <a class="decoration-0 no-underline text-gray-600"
+                                                            href="{{ route('order-list') }}">View</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {{--                                @foreach ($this->getOrders as $item) --}}
+                                {{--                                    <p>{{ $item->reference_number }}</p> --}}
+                                {{--                                @endforeach --}}
                             </div>
                         </div>
                     </div>
@@ -183,302 +226,166 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-wrap my-32 px-3 ">
-        {{-- <div class="w-full xl:w-8/12 "> --}}
-        {{--     <div --}}
-        {{--         class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-lg rounded-lg bg-white text-blueGray-700"> --}}
-        {{--         <div class="px-6 py-4 border-0"> --}}
-        {{--             <div class="flex flex-wrap items-center"> --}}
-        {{--                 <div class="relative w-full max-w-full flex-grow flex-1"> --}}
-        {{--                     <h3 class="font-bold text-lg text-blueGray-700">Viewed Products</h3> --}}
-        {{--                 </div> --}}
-        {{--             </div> --}}
-        {{--         </div> --}}
-        {{--         <div class="block w-full overflow-x-auto"> --}}
-        {{--             <table class="items-center w-full bg-transparent border-collapse"> --}}
-        {{--                 <thead> --}}
-        {{--                     <tr> --}}
-        {{--                         <th --}}
-        {{--                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-200"> --}}
-        {{--                             Page name --}}
-        {{--                         </th> --}}
-        {{--                         <th --}}
-        {{--                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-200"> --}}
-        {{--                             Visitors --}}
-        {{--                         </th> --}}
-        {{--                         <th --}}
-        {{--                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-200"> --}}
-        {{--                             Unique Users --}}
-        {{--                         </th> --}}
-        {{--                         <th --}}
-        {{--                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-200"> --}}
-        {{--                             Bounce Rate --}}
-        {{--                         </th> --}}
-        {{--                     </tr> --}}
-        {{--                 </thead> --}}
-        {{--                 <tbody> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span class="ml-3 font-bold NaN">/argon/</span> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">4,569</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">340</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><i --}}
-        {{--                                     class="fas fa-arrow-up mr-2 text-emerald-500"></i>46,53% --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span --}}
-        {{--                                     class="ml-3 font-bold NaN">/argon/index.html</span> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">3,985</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">319</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><i --}}
-        {{--                                     class="fas fa-arrow-down mr-2 text-orange-500"></i>46,53% --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span --}}
-        {{--                                     class="ml-3 font-bold NaN">/argon/charts.html</span></div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">3,513</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">294</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><i --}}
-        {{--                                     class="fas fa-arrow-down mr-2 text-orange-500"></i>36,49% --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span --}}
-        {{--                                     class="ml-3 font-bold NaN">/argon/tables.html</span></div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">2,050</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">147</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><i --}}
-        {{--                                     class="fas fa-arrow-up mr-2 text-emerald-500"></i>50,87% --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span --}}
-        {{--                                     class="ml-3 font-bold NaN">/argon/profile.html</span></div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">1,795</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">190</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><i --}}
-        {{--                                     class="fas fa-arrow-up mr-2 text-red-500"></i>46,53% --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                 </tbody> --}}
-        {{--             </table> --}}
-        {{--         </div> --}}
-        {{--     </div> --}}
-        {{-- </div> --}}
-        {{-- <div class="w-full xl:w-4/12 lg:pl-6"> --}}
-        {{--     <div --}}
-        {{--         class="relative flex flex-col min-w-0 break-words w-full mb-8 shadow-lg rounded-lg bg-white text-blueGray-700"> --}}
-        {{--         <div class="px-6 py-4 border-0"> --}}
-        {{--             <div class="flex flex-wrap items-center"> --}}
-        {{--                 <div class="relative w-full max-w-full flex-grow flex-1"> --}}
-        {{--                     <h3 class="font-bold text-lg text-blueGray-700">Social traffic</h3> --}}
-        {{--                 </div> --}}
-        {{--             </div> --}}
-        {{--         </div> --}}
-        {{--         <div class="block w-full overflow-x-auto"> --}}
-        {{--             <table class="items-center w-full bg-transparent border-collapse"> --}}
-        {{--                 <thead> --}}
-        {{--                     <tr> --}}
-        {{--                         <th --}}
-        {{--                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-200"> --}}
-        {{--                             Referral --}}
-        {{--                         </th> --}}
-        {{--                         <th --}}
-        {{--                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-200"> --}}
-        {{--                             Visitors --}}
-        {{--                         </th> --}}
-        {{--                         <th --}}
-        {{--                             class="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-bold text-left bg-blueGray-100 text-blueGray-500 border-blueGray-200"> --}}
-        {{--                         </th> --}}
-        {{--                     </tr> --}}
-        {{--                 </thead> --}}
-        {{--                 <tbody> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span class="ml-3 font-bold NaN">Facebook</span> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">1,480</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 min-w-140-px"> --}}
-        {{--                             <div class="flex items-center"> --}}
-        {{--                                 <span class="mr-2">60%</span> --}}
-        {{--                                 <div class="relative w-full"> --}}
-        {{--                                     <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200"> --}}
-        {{--                                         <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500" --}}
-        {{--                                             style="width: 60%;"></div> --}}
-        {{--                                     </div> --}}
-        {{--                                 </div> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span class="ml-3 font-bold NaN">Facebook</span> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">5,480</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 min-w-140-px"> --}}
-        {{--                             <div class="flex items-center"> --}}
-        {{--                                 <span class="mr-2">70%</span> --}}
-        {{--                                 <div class="relative w-full"> --}}
-        {{--                                     <div class="overflow-hidden h-2 text-xs flex rounded bg-emerald-200"> --}}
-        {{--                                         <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500" --}}
-        {{--                                             style="width: 70%;"></div> --}}
-        {{--                                     </div> --}}
-        {{--                                 </div> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span class="ml-3 font-bold NaN">Google</span> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">4,807</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 min-w-140-px"> --}}
-        {{--                             <div class="flex items-center"> --}}
-        {{--                                 <span class="mr-2">80%</span> --}}
-        {{--                                 <div class="relative w-full"> --}}
-        {{--                                     <div class="overflow-hidden h-2 text-xs flex rounded bg-indigo-200"> --}}
-        {{--                                         <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500" --}}
-        {{--                                             style="width: 80%;"></div> --}}
-        {{--                                     </div> --}}
-        {{--                                 </div> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span class="ml-3 font-bold NaN">Instagram</span> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">3,678</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 min-w-140-px"> --}}
-        {{--                             <div class="flex items-center"> --}}
-        {{--                                 <span class="mr-2">75%</span> --}}
-        {{--                                 <div class="relative w-full"> --}}
-        {{--                                     <div class="overflow-hidden h-2 text-xs flex rounded bg-lightBlue-200"> --}}
-        {{--                                         <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lightBlue-500" --}}
-        {{--                                             style="width: 75%;"></div> --}}
-        {{--                                     </div> --}}
-        {{--                                 </div> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                     <tr> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center"><span class="ml-3 font-bold NaN">Twitter</span> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"> --}}
-        {{--                             <div class="flex items-center">2,645</div> --}}
-        {{--                         </td> --}}
-        {{--                         <td --}}
-        {{--                             class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 min-w-140-px"> --}}
-        {{--                             <div class="flex items-center"> --}}
-        {{--                                 <span class="mr-2">30%</span> --}}
-        {{--                                 <div class="relative w-full"> --}}
-        {{--                                     <div class="overflow-hidden h-2 text-xs flex rounded bg-amber-200"> --}}
-        {{--                                         <div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-amber-500" --}}
-        {{--                                             style="width: 30%;"></div> --}}
-        {{--                                     </div> --}}
-        {{--                                 </div> --}}
-        {{--                             </div> --}}
-        {{--                         </td> --}}
-        {{--                     </tr> --}}
-        {{--                 </tbody> --}}
-        {{--             </table> --}}
-        {{--         </div> --}}
-        {{--     </div> --}}
-        {{-- </div> --}}
+    <div class="mt-40 w-full">
+        <h4 class="tracking-tight font-light text-gray-500 text-center">Shop Sentiment Analysis</h4>
+    </div>
+    <div class="w-full pb-8 mt-4 px-3 gap-4">
+        <div class="grid lg:grid-cols-2 gap-4">
+            <div class="relative bg-white rounded shadow shadow-cyan-500/50">
+                <div class="px-3 pt-6 pb-6 text-center relative z-10">
+                    <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Positive Sentiment Overtime</h4>
+                    <h3 class="text-2xl font-semibold leading-tight my-1.5 text-green-600">{{ $this->getPositveCommentsCount() }}</h3>
+                    {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
+                </div>
+                <div class="absolute inset-0 pt-12">
+                    <div class="flex items-end w-full h-full overflow-hidden">
+                        <canvas id="shop-perception-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="relative bg-white rounded shadow shadow-cyan-500/50">
+                <div class="px-3 pt-6 pb-6 text-center relative z-10">
+                    <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Negative Sentiment Overtime</h4>
+                    <h3 class="text-2xl  font-semibold leading-tight my-1.5 text-red-600">{{ $this->getNegativeCommentsCount() }}</h3>
+                    {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
+                </div>
+                <div class="absolute inset-0 pt-12">
+                    <div class="flex items-end w-full h-full overflow-hidden">
+                        <canvas id="shop-sentiment-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 grid lg:grid-cols-2 gap-4" >
+            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false" wire:init="fetchPositiveCommentsApi">
+                <button class="w-full h-full" type="button" @click="showModal = !showModal">
+                    <div wire:loading wire:target="fetchPositiveCommentsApi" class="w-full h-72">
+                        <div role="status"
+                             class="flex gap-2.5 flex-column items-center justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+
+                            <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                                <path
+                                    d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
+                            </svg>
+                            <span class="text-center">Image Loading, Please Wait...</span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div wire:loading.remove wire:target="fetchPositiveCommentsApi">
+                        <img src="{{ asset($p_asset) }}" class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="">
+                    </div>
+                </button>
+
+                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                <div x-cloak x-transition.duration.500ms x-show="showModal"
+                    class="fixed inset-0 z-50 grid place-content-center">
+                    <div @click.away="showModal = false"
+                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
+                                    --}}
+                                </div>
+                                <div class="flex justify-center modal-body" x-transition.opacity>
+                                    <img src="{{ asset($p_asset) }}"
+                                        class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full flex gap-2 pt-3 justify-end">
+                            <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false" wire:init="fetchNegativeCommentsApi">
+
+                <button type="button" @click="showModal = !showModal" class="w-full h-72">
+                    <div wire:loading wire:target="fetchNegativeCommentsApi" class="w-full h-full">
+                        <div role="status"
+                             class="flex gap-2.5 flex-column items-center  justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+                            <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                                <path
+                                    d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
+                            </svg>
+                            <span class="text-center">Image Loading, Please Wait...</span>
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div wire:loading.remove wire:target="fetchNegativeCommentsApi">
+                        <img src="{{ asset($n_asset) }}" class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="">
+                    </div>
+                </button>
+
+                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                <div x-cloak x-transition.duration.500ms x-show="showModal"
+                    class="fixed inset-0 z-50 grid place-content-center">
+                    <div @click.away="showModal = false"
+                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
+                                    --}}
+                                </div>
+                                <div class="flex justify-center modal-body" x-transition.opacity>
+                                    <img src="{{ asset($n_asset) }}"
+                                        class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full flex gap-2 pt-3 justify-end">
+                            <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+    {{-- <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"> --}}
+    {{--     <button type="button" @click="showModal = !showModal" class="underline">Toggle</button> --}}
+
+    {{--     <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div> --}}
+
+    {{--     <div x-cloak x-transition.duration.500ms x-show="showModal" --}}
+    {{--         class="fixed inset-0 z-50 grid place-content-center"> --}}
+    {{--         <div @click.away="showModal = false" --}}
+    {{--             class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0"> --}}
+    {{--             <div class="modal-dialog modal-lg modal-dialog-centered"> --}}
+    {{--                 <div class="modal-content"> --}}
+    {{--                     <div class="modal-header"> --}}
+    {{--                         <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1> --}}
+
+    {{--                     </div> --}}
+    {{--                     <div class="flex justify-center modal-body" x-transition.opacity> --}}
+    {{--                         <img src="{{ asset('storage/2023-12-14_negative.png') }}" --}}
+    {{--                             class="img-fluid img-thumbnail rounded-start border-0 self-center select-none" --}}
+    {{--                             alt=""> --}}
+    {{--                     </div> --}}
+    {{--                 </div> --}}
+    {{--             </div> --}}
+    {{--             <div class="w-full flex gap-2 pt-3 justify-end"> --}}
+    {{--                 <button type="button" class="btn btn-outline-secondary" @click="showModal = false"> --}}
+    {{--                     Close --}}
+    {{--                 </button> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--     </div> --}}
+    {{-- </div> --}}
 
 </div>
 
@@ -486,64 +393,27 @@
     <script>
         // This Javascript will get executed every time this component is loaded onto the page...
         console.log('hello');
-        var xyValues = [{
-                x: 50,
-                y: 7
-            },
-            {
-                x: 60,
-                y: 8
-            },
-            {
-                x: 70,
-                y: 8
-            },
-            {
-                x: 80,
-                y: 9
-            },
-            {
-                x: 90,
-                y: 9
-            },
-            {
-                x: 100,
-                y: 9
-            },
-            {
-                x: 110,
-                y: 10
-            },
-            {
-                x: 120,
-                y: 11
-            },
-            {
-                x: 130,
-                y: 14
-            },
-            {
-                x: 140,
-                y: 14
-            },
-            {
-                x: 150,
-                y: 15
-            }
-        ];
 
-        new Chart("myChart", {
-            type: "scatter",
+        new Chart("shop-sales-chart", {
+            type: "line",
             data: {
+                labels: {!! json_encode($chart_labels) !!},
                 datasets: [{
-                    pointRadius: 4,
-                    pointBackgroundColor: "rgb(0,0,255)",
-                    data: xyValues
+                    borderColor: '#009aff',
+                    data: {!! json_encode($chart_data) !!},
+                    backgroundColor: '#bae0ff',
+                    pointStyle: 'circle',
+                    pointRadius: 7,
+                    pointHoverRadius: 7.5
                 }]
             },
             options: {
-                legend: {
-                    display: false
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
                 },
                 scales: {
                     y: {

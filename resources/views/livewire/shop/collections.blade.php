@@ -30,12 +30,12 @@
     </span>
 
     <div>
-        <div class="container-fluid sm:!px-16 ">
+        <div class="container-fluid sm:!px-16 py-4">
             <div class="d-flex justify-end ">
                 <div class="position-relative">
-                    <div x-data="{ open: false }" x-on:click.outside="open = false">
+                    <div x-data="{ open: false }" @mouseleave="open = false">
                         <button class="btn btn-outline-dark hover:! hover:!text-black bg-white  min-w-[175px]"
-                            x-on:click="open = !open">
+                            @mouseover="open = true">
                             <div class="d-flex justify-between" @class(['bg-blue-50 text-blue-900' => true === 'default'])>
                                 {{ $sortname }}
                                 <span class="ml-1" :class="{ 'rotated': open }">
@@ -43,7 +43,7 @@
                                 </span>
                             </div>
                         </button>
-                        <ul x-show="open"
+                        <ul x-cloak x-show="open"
                             class="position-absolute w-full min-w-[170px] z-50 end-0 !pl-0 bg-white shadow text-sm mt-2 rounded"
                             x-transition.origin.top>
                             {{--                            @foreach ($sortoptions as $key => $value) --}}
@@ -591,11 +591,11 @@
                                         <div>
                                             <div class="position-absolute top-0 end-0 mt-1 mr-2.5 z-[30]">
                                                 @if ($this->check_bookmark($product->id))
-                                                    <button wire:click="removefromwishlist({{ $product->id }})">
+                                                    <button type="button" wire:click="removefromwishlist({{ $product->id }})">
                                                         <i class="bi bi-heart-fill" style="font-size: 1.5rem"></i>
                                                     </button>
                                                 @else
-                                                    <button wire:click="addtowishlist({{ $product->id }})">
+                                                    <button type="button" wire:click="addtowishlist({{ $product->id }})">
                                                         <i class="bi bi-heart" style="font-size: 1.5rem"></i>
                                                     </button>
                                                 @endif
@@ -637,14 +637,36 @@
                                         </div>
 
                                         <div class="flex justify-content-center gap-2 pb-4">
-                                            <button wire:click="buynow({{ $product->id }})"
-                                                class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center">
-                                                Buy Now
-                                            </button>
-                                            <div>
-                                                <livewire:addtocart.add-to-cart :product_id="$product->id" :key="$product->id"
-                                                    wire:key="{{ $product->id }}" />
-                                            </div>
+                                            {{-- restrict if stock of product is 0 or not available --}}
+                                            @if ($product->stock == 0)
+                                                <button type="button" class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center"
+                                                        data-bs-toggle="popover" data-bs-placement="top"
+                                                        data-bs-trigger="hover focus"
+                                                        data-bs-custom-class="buynow-btn-notavailable"
+                                                        data-bs-title="Product Not Available"
+                                                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                                                        Buy Now
+                                                </button>
+                                                <button type="button" class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none focus:ring-blue-300 font-medium rounded-lg p-1.5 text-sm  items-center text-center"
+                                                        data-bs-toggle="popover" data-bs-placement="top"
+                                                        data-bs-trigger="hover focus"
+                                                        data-bs-custom-class="buynow-btn-notavailable"
+                                                        data-bs-title="Product Not Available"
+                                                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                                                        <div class="">
+                                                            <i class="bi bi-cart-plus" style="font-size: 1.5rem"></i>
+                                                        </div>
+                                                </button>
+                                            @else
+                                                <button wire:click="buynow({{ $product->id }})"
+                                                    class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center">
+                                                    Buy Now
+                                                </button>
+                                                <div>
+                                                    <livewire:addtocart.add-to-cart :product_id="$product->id" :key="$product->id"
+                                                        wire:key="{{ $product->id }}" />
+                                                </div>
+                                            @endif
                                         </div>
 
                                     </div>

@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use App\Models\Speaker;
 use App\Models\ProductImage;
 use App\Models\Seller;
+use App\Models\Speaker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -26,13 +26,14 @@ class SpeakerSeeder extends Seeder
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([
-                    'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
+                    'seller_id' => Seller::find(fake()->numberBetween(1, 12))->id,
                     'title' => $value->name,
                     'category' => 'speaker',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    'weight' => fake()->randomFloat(2, 0.8, 1),
                 ]);
 
                 ProductImage::create([

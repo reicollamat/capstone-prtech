@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->unsignedBigInteger('seller_id')->nullable();
             $table->text('text')->nullable();
             $table->float('rating')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

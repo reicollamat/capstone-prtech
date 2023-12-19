@@ -14,12 +14,16 @@ class OrderShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $order;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(public Purchase $order)
+    public function __construct($order)
     {
-        // dd($order->purchase_items);
+        $this->order = Purchase::find($order);
+
+        // dd($this->order->purchase_items);
     }
 
     /**

@@ -3,29 +3,10 @@
 namespace App\Livewire\Component;
 
 use App\Livewire\Seller\Dashboard\OrderLinks\OrderList;
-use App\Models\CaseFan;
-use App\Models\ComputerCase;
-use App\Models\Cpu;
-use App\Models\CpuCooler;
-use App\Models\ExtStorage;
-use App\Models\Headphone;
-use App\Models\IntStorage;
-use App\Models\Keyboard;
-use App\Models\Memory;
-use App\Models\Monitor;
-use App\Models\Motherboard;
-use App\Models\Mouse;
 use App\Models\Payment;
-use App\Models\Product;
-use App\Models\Psu;
 use App\Models\Purchase;
-use App\Models\Speaker;
 use App\Models\UserNotification;
-use App\Models\VideoCard;
-use App\Models\Webcam;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class OrderListComponent extends Component
@@ -35,6 +16,7 @@ class OrderListComponent extends Component
     public Model $itemproductinfo;
 
     public $payment_status;
+
     public $purchase_status;
 
     public function mount(Model $item)
@@ -55,7 +37,7 @@ class OrderListComponent extends Component
                 'user_id' => $item['user_id'],
                 'purchase_id' => $item['purchase_id'],
                 'tag' => 'completed',
-                'title' => 'Share your feedback! click here',
+                'title' => 'Share your feedback!',
                 'message' => 'Order #' . $item['purchase_id'] . ' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
@@ -74,7 +56,7 @@ class OrderListComponent extends Component
                 'purchase_id' => $item['purchase_id'],
                 'tag' => 'shipping',
                 'title' => 'Shipped Out',
-                'message' => 'Parcel parcel no for your order
+                'message' => 'Parcel for your order
                 #' . $item['purchase_id'] . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
             ]);
             $notification->save();

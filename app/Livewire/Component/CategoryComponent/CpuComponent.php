@@ -41,6 +41,9 @@ class CpuComponent extends Component
     #[Validate('required|not_in:Select Status', message: 'Please provide a CPU Status')]
     public $productStatus;
 
+    #[Validate('required|numeric', message: 'Please provide a CPU Weight')]
+    public $product_weight;
+
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:2048'])]
@@ -95,6 +98,7 @@ class CpuComponent extends Component
             'productDescription' => 'required',
             'productCondition' => 'required|not_in:Select Condition',
             'productStatus' => 'required|not_in:Select Status',
+            'product_weight' => 'required|numeric',
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'cpu_core_threads' => 'required',
@@ -134,6 +138,8 @@ class CpuComponent extends Component
                 // 'image' => implode(',', $storeas),
                 // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
+                'status' => $validator['productStatus'],
+                'weight' => $validator['product_weight'],
             ]);
 
             // loop through the images from the file upload
@@ -145,7 +151,7 @@ class CpuComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-            // else if there is only one image in the array create a row in db with no image
+                // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,

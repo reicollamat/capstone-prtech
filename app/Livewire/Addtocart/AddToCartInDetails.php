@@ -10,6 +10,7 @@ use Livewire\Component;
 class AddToCartInDetails extends Component
 {
     public $product_id;
+    public $product;
 
     public $quantity = 1;
 
@@ -20,6 +21,7 @@ class AddToCartInDetails extends Component
         $this->user_id = Auth::id();
 
         $this->product_id = $product_id;
+        $this->product = Product::find($product_id);
     }
 
     public function render()
@@ -63,7 +65,7 @@ class AddToCartInDetails extends Component
             $this->redirect(route('purchase_page', [
                 'product_id' => $this->product_id,
                 'user_id' => Auth::user()->id,
-                'quantity' => $this->quantity
+                'quantity' => $this->quantity,
             ]));
         } else {
             $this->redirect(route('login'));
@@ -71,7 +73,6 @@ class AddToCartInDetails extends Component
 
         //        dd($this->quantity, $this->user_id, $this->product_id);
     }
-
 
     public function addquantity()
     {

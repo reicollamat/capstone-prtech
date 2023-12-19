@@ -13,7 +13,7 @@
                         <button @click="activeTab = 0" class="tab-control p-2 rounded"
                             :class="{ 'active bg-blue-300': activeTab === 0 }">Pending Cancellation Requests</button>
                         <button @click="activeTab = 1" class="tab-control p-2 rounded"
-                            :class="{ 'active bg-blue-300': activeTab === 1 }">Cancellation Records</button>
+                            :class="{ 'active bg-gray-300': activeTab === 1 }">Cancellation Records</button>
                     </div>
                 </div>
             </div>

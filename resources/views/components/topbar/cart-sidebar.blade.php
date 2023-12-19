@@ -14,7 +14,7 @@
       </span>
     </button>
 
-    <div class="offcanvas offcanvas-end min-w-[450px]" data-bs-scroll="true" tabindex="-1"
+    <div class="offcanvas offcanvas-end min-w-[500px]" data-bs-scroll="false" tabindex="-1"
          id="offcanvasWithBothOptions_cart"
          aria-labelledby="offcanvasWithBothOptionsLabel">
         <div class="offcanvas-header px-4">
@@ -32,8 +32,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
         </div>
-        <hr class="mt-1.5 mb-1.5">
-        <div class="offcanvas-body my-0 py-0">
+        {{-- <hr class="mt-1.5 mb-1.5"> --}}
+        <div class="offcanvas-body bg-secondary-subtle mb-40">
             <div>
                 <livewire:cart.cart-list/>
             </div>

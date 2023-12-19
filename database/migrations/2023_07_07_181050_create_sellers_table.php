@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
+            $table->float('earnings')->default(0)->nullable();
+
             $table->string('shop_name')->nullable();
             $table->string('shop_email')->nullable();
             $table->string('shop_phone_number')->nullable();

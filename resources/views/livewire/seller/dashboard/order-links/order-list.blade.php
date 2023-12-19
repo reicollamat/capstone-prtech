@@ -71,146 +71,148 @@
                     </div>
                 </div>
 
-                {{--  order status Filter --}}
-                <div x-data="{ isOpen: false }" class="relative inline-block">
-                    <!-- Dropdown toggle button -->
-                    <button @click="isOpen = !isOpen"
-                        class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
-                        <span class="mx-1">Order Status:</span>
-                        <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180 transition duration-300': isOpen }">
-                            <path
-                                d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                                fill="currentColor"></path>
-                        </svg>
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div x-cloak x-show="isOpen" @click.away="isOpen = false"
-                        x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-100"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="absolute left-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
-                        <div class="grid grid-cols-2 gap-2 p-2 bg-white rounded border-1 border-gray-300">
-                            @foreach ($this->orderstatus_list as $key => $status)
+                <div class="d-flex">
+                    {{--  order status Filter --}}
+                    <div x-data="{ isOpen: false }" class="relative inline-block">
+                        <!-- Dropdown toggle button -->
+                        <button @click="isOpen = !isOpen"
+                            class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
+                            <span class="mx-1">Order Status:</span>
+                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                :class="{ 'rotate-180 transition duration-300': isOpen }">
+                                <path
+                                    d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div x-cloak x-show="isOpen" @click.away="isOpen = false"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                            class="absolute left-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                            <div class="grid grid-cols-2 gap-2 p-2 bg-white rounded border-1 border-gray-300">
+                                @foreach ($this->orderstatus_list as $key => $status)
+                                    <button
+                                        class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
+                                        type="button"
+                                        wire:click.debounce="$set('orderstatus_filter', '{{ $status }}')">
+                                        {{ $status }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    {{-- payment status filter --}}
+                    <div x-data="{ isOpen: false }" class="relative inline-block ">
+                        <!-- Dropdown toggle button -->
+                        <button @click="isOpen = !isOpen"
+                            class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
+                            <span class="mx-1">Payment Status:</span>
+                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                :class="{ 'rotate-180 transition duration-300': isOpen }">
+                                <path
+                                    d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div x-cloak x-show="isOpen" @click.away="isOpen = false"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                            class="absolute left-0 z-20 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                            <div class="bg-white rounded border-1 border-gray-300">
                                 <button
                                     class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
-                                    type="button"
-                                    wire:click.debounce="$set('orderstatus_filter', '{{ $status }}')">
-                                    {{ $status }}
+                                    type="button" wire:click.debounce="$set('paymentstatus_filter', 'paid')">
+                                    Paid
                                 </button>
-                            @endforeach
+                                <button
+                                    class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
+                                    type="button" wire:click.debounce="$set('paymentstatus_filter', 'unpaid')">
+                                    Unpaid
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {{-- payment status filter --}}
-                <div x-data="{ isOpen: false }" class="relative inline-block ">
-                    <!-- Dropdown toggle button -->
-                    <button @click="isOpen = !isOpen"
-                        class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
-                        <span class="mx-1">Payment Status:</span>
-                        <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180 transition duration-300': isOpen }">
-                            <path
-                                d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                                fill="currentColor"></path>
-                        </svg>
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div x-cloak x-show="isOpen" @click.away="isOpen = false"
-                        x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-100"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="absolute left-0 z-20 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
-                        <div class="bg-white rounded border-1 border-gray-300">
-                            <button
-                                class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
-                                type="button" wire:click.debounce="$set('paymentstatus_filter', 'paid')">
-                                Paid
-                            </button>
-                            <button
-                                class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
-                                type="button" wire:click.debounce="$set('paymentstatus_filter', 'unpaid')">
-                                Unpaid
-                            </button>
+                    {{--  payment type Filter --}}
+                    <div x-data="{ isOpen: false }" class="relative inline-block ">
+                        <!-- Dropdown toggle button -->
+                        <button @click="isOpen = !isOpen"
+                            class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
+                            <span class="mx-1">Payment Type: </span>
+                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg"
+                                :class="{ 'rotate-180 transition duration-300': isOpen }">
+                                <path
+                                    d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div x-cloak x-show="isOpen" @click.away="isOpen = false"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-100"
+                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                            class="absolute left-0 z-20 mt-1 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                            <div class="bg-white rounded border-1 border-gray-300">
+                                <button
+                                    class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
+                                    type="button" wire:click.debounce="$set('paymenttype_filter', 'cod')">
+                                    COD (Cash On Delivery)
+                                </button>
+                                <button
+                                    class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
+                                    type="button" wire:click.debounce="$set('paymenttype_filter', 'gcash')">
+                                    GCash
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {{--  payment type Filter --}}
-                <div x-data="{ isOpen: false }" class="relative inline-block ">
-                    <!-- Dropdown toggle button -->
-                    <button @click="isOpen = !isOpen"
-                        class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
-                        <span class="mx-1">Payment Type: </span>
-                        <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
-                            fill="none" xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180 transition duration-300': isOpen }">
-                            <path
-                                d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                                fill="currentColor"></path>
-                        </svg>
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div x-cloak x-show="isOpen" @click.away="isOpen = false"
-                        x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-100"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="absolute left-0 z-20 mt-1 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
-                        <div class="bg-white rounded border-1 border-gray-300">
-                            <button
-                                class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
-                                type="button" wire:click.debounce="$set('paymenttype_filter', 'cod')">
-                                COD (Cash On Delivery)
-                            </button>
-                            <button
-                                class="mb-0 w-full text-start uppercase text-xs p-1.5 tracking-tight rounded hover:bg-gray-300"
-                                type="button" wire:click.debounce="$set('paymenttype_filter', 'gcash')">
-                                GCash
+    
+                    {{-- clear filters --}}
+                    <div x-data="{ isOpen: false }" class="relative inline-block ">
+                        <div class="px-2.5 transition ease-in-out duration-300 {{ $orderstatus_filter ? 'block' : 'hidden' }}"
+                            x-transition>
+                            <button wire:click.debounce="$set('orderstatus_filter', '')">
+                                <span class="text-sm text-gray-600 tracking-tight">
+                                    Clear
+                                </span>
                             </button>
                         </div>
+    
+                        <div class="px-2.5 transition ease-in-out duration-300 {{ $paymentstatus_filter ? 'block' : 'hidden' }}"
+                            x-transition>
+                            <button wire:click.debounce="$set('paymentstatus_filter', '')">
+                                <span class="text-sm text-gray-600 tracking-tight">
+                                    Clear
+                                </span>
+                            </button>
+                        </div>
+                        <div class="px-2.5 transition ease-in-out duration-300 {{ $paymenttype_filter ? 'block' : 'hidden' }}"
+                            x-transition>
+                            <button wire:click.debounce="$set('paymenttype_filter', '')">
+                                <span class="text-sm text-gray-600 tracking-tight">
+                                    Clear
+                                </span>
+                            </button>
+                        </div>
+                        <div class="px-2.5 transition ease-in-out duration-300 {{ $quick_search_filter ? 'block' : 'hidden' }}"
+                            x-transition>
+                            <button wire:click.debounce="$set('quick_search_filter', '')">
+                                <span class="text-sm text-gray-600 tracking-tight">
+                                    Clear
+                                </span>
+                            </button>
+                        </div>
+    
                     </div>
-                </div>
-
-                {{-- clear filters --}}
-                <div x-data="{ isOpen: false }" class="relative inline-block ">
-                    <div class="px-2.5 transition ease-in-out duration-300 {{ $orderstatus_filter ? 'block' : 'hidden' }}"
-                        x-transition>
-                        <button wire:click.debounce="$set('orderstatus_filter', '')">
-                            <span class="text-sm text-gray-600 tracking-tight">
-                                Clear
-                            </span>
-                        </button>
-                    </div>
-
-                    <div class="px-2.5 transition ease-in-out duration-300 {{ $paymentstatus_filter ? 'block' : 'hidden' }}"
-                        x-transition>
-                        <button wire:click.debounce="$set('paymentstatus_filter', '')">
-                            <span class="text-sm text-gray-600 tracking-tight">
-                                Clear
-                            </span>
-                        </button>
-                    </div>
-                    <div class="px-2.5 transition ease-in-out duration-300 {{ $paymenttype_filter ? 'block' : 'hidden' }}"
-                        x-transition>
-                        <button wire:click.debounce="$set('paymenttype_filter', '')">
-                            <span class="text-sm text-gray-600 tracking-tight">
-                                Clear
-                            </span>
-                        </button>
-                    </div>
-                    <div class="px-2.5 transition ease-in-out duration-300 {{ $quick_search_filter ? 'block' : 'hidden' }}"
-                        x-transition>
-                        <button wire:click.debounce="$set('quick_search_filter', '')">
-                            <span class="text-sm text-gray-600 tracking-tight">
-                                Clear
-                            </span>
-                        </button>
-                    </div>
-
                 </div>
 
                 <div class="flex flex-column flex-lg-row lg:items-center gap-2.5">
@@ -224,16 +226,9 @@
                                         <i class="bi bi-search"></i>
                                     </span>
                                     <input id="quick_search" type="search" name="serch"
-                                        placeholder="Quick Search"
+                                        placeholder="Search Reference#"
                                         class="form-control bg-white w-full h-full border-gray-200 text-sm focus:outline-none"
                                         wire:model.live="quick_search_filter">
-                                    <select
-                                        class="form-control bg-white w-full h-full border-gray-200 focus:outline-none"
-                                        wire:model="search_method" style="max-width: 110px">
-                                        <option value="title">Product</option>
-                                        <option value="purchase_id">Order #</option>
-                                        ...
-                                    </select>
                                 </div>
                             </div>
 
@@ -241,14 +236,15 @@
                     </div>
                 </div>
             </div>
-            {{--            {{ $quick_search_filter }} --}}
             <hr>
+
+            
             <div class="bg-white overflow-x-auto rounded-lg p-3">
                 <div class="grid grid-cols-12 text-center text-sm">
-                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">#</div>
+                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Reference#</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Date</div>
-                    <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amt</div>
+                    <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amt</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Status</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Actions</div>
@@ -300,8 +296,8 @@
                 </div>
 
                 <div wire:loading.remove x-transition>
-                    @if ($this->getPurchaseItemList->count() > 0)
-                        @foreach ($this->getPurchaseItemList as $key => $purchase)
+                    @if ($this->getPurchaseList->count() > 0)
+                        @foreach ($this->getPurchaseList as $key => $purchase)
                             {{-- @dd($purchase) --}}
                             <form action="{{ route('order-list-update') }}" method="POST">
                                 @csrf
@@ -315,8 +311,8 @@
 
                                 <div x-data="{ expanded: false }" class="border-b border-gray-100">
                                     <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
-                                            {{ $purchase->id }}
+                                        <div class="col-span-2 my-4 text-sm !text-gray-800 !font-light">
+                                            {{ $purchase->reference_number }}
                                         </div>
                                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
                                             {{ $purchase->user->first_name }} {{ $purchase->user->last_name }}
@@ -324,7 +320,7 @@
                                         <div class="col-span-2 my-4 !text-gray-800 !font-light">
                                             {{ date('d-M-y', strtotime($purchase->purchase_date)) }}
                                         </div>
-                                        <div class="col-span-2 my-4 !text-gray-800 !font-light">
+                                        <div class="col-span-1 my-4 !text-gray-800 !font-light">
                                             {{ $purchase->total_amount }}
                                         </div>
 
@@ -341,17 +337,15 @@
                                             </div>
                                         @endif
 
-                                        {{-- purchase status --}}
-                                        <div class="col-span-2 my-4 !text-gray-900 !font-light">
-                                            {{ $purchase->purchase_status }}
-                                        </div>
-
-                                        {{-- purchase actions --}}
+                                        {{-- purchase --}}
                                         @if ($purchase->purchase_status == 'completed')
-                                            <div class="col-span-2 text-2xl my-auto !text-green-600 !font-light">
-                                                <i class="bi bi-check-square-fill"></i>
+                                            <div class="col-span-4 my-auto !text-green-600 !font-light">
+                                                <i class="bi bi-check-square-fill"></i> Order Completed
                                             </div>
                                         @elseif ($purchase->purchase_status == 'pending')
+                                            <div class="col-span-2 my-auto !text-blue-500 !font-light">
+                                                <i class="bi bi-exclamation-square-fill"></i> Pending Order
+                                            </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
                                                     class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
@@ -359,6 +353,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'to_ship')
+                                            <div class="col-span-2 my-auto !text-gray-900 !font-light">
+                                                <i class="bi bi-box-fill"></i></i> Pending Shipment
+                                            </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
@@ -366,6 +363,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'shipping')
+                                            <div class="col-span-2 my-auto !text-gray-900 !font-light">
+                                                <i class="bi bi-truck"></i> Shipping Parcel
+                                            </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
@@ -373,6 +373,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'failed_delivery')
+                                            <div class="col-span-2 my-auto !text-red-600 !font-light">
+                                                <i class="bi bi-truck-flatbed"></i> Failed Delivery
+                                            </div>
                                             <div class="col-span-2 my-auto !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
@@ -380,6 +383,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'cancellation_pending')
+                                        <div class="col-span-2 my-4 !text-red-600 !font-light">
+                                            <i class="bi bi-x-square-fill"></i> Pending Cancellation
+                                        </div>
                                             <div class="col-span-2 my-auto !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
@@ -387,10 +393,19 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'cancellation_approved')
+                                            <div class="col-span-2 my-4 !text-red-600 !font-light">
+                                                <i class="bi bi-x-square-fill"></i> Order Cancelled
+                                            </div>
                                             <div class="col-span-2 my-auto !font-light">
-                                                <p class="text-red-600">Order Cancelled</p>
+                                                <button type="submit"
+                                                    class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
+                                                    Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
+                                                </button>
                                             </div>
                                         @else
+                                            <div class="col-span-2 my-4 !text-gray-900 !font-light">
+                                                {{ $purchase->purchase_status }}
+                                            </div>
                                             <div class="col-span-2 my-4 !text-gray-800 !font-light">
                                                 {{ $purchase->purchase_status }}
                                             </div>
@@ -425,14 +440,28 @@
                                                     <div class="w-full flex flex-col lg:flex-row gap-1.5">
                                                         <div class="p-1.5 lg:w-1/2">
                                                             <div class="mb-2">
-                                                                <label for="product_name"
-                                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                                                    Order Reference Number
-                                                                </label>
-                                                                <input type="text" id="product_name"
-                                                                    value="{{ $purchase->reference_number }}"
-                                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
-                                                                    placeholder="" disabled>
+                                                                <div class="grid lg:grid-cols-2 gap-4">
+                                                                    <div>
+                                                                        <label for="product_name"
+                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                            Order Reference Number
+                                                                        </label>
+                                                                        <input type="text" id="product_name"
+                                                                            value="{{ $purchase->reference_number }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                            placeholder="" disabled>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="product_name"
+                                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                                            Shipment Fee
+                                                                        </label>
+                                                                        <input type="text" id="product_name"
+                                                                            value="{{ $purchase->shipping_fee }}"
+                                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                                            placeholder="" disabled>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         {{-- second half --}}
@@ -538,7 +567,11 @@
                                             </div>
 
                                             <div class="border-t-4 border-blue-100 flex flex-col lg:flex-row">
-                                                <h4 class="mx-auto mt-2">ITEMS</h4>
+                                                @if ($purchase->purchase_items->count() == 1)
+                                                    <h4 class="mx-auto mt-2">{{$purchase->purchase_items->count()}} ITEM</h4>
+                                                @else
+                                                    <h4 class="mx-auto mt-2">{{$purchase->purchase_items->count()}} ITEMS</h4>
+                                                @endif
                                             </div>
                                             {{-- @dd($purchase) --}}
                                             @foreach ($purchase->purchase_items as $item)
@@ -604,7 +637,7 @@
                         @endforeach
 
                         <div class="content-center pt-3">
-                            {{ $this->getPurchaseItemList->links() }}
+                            {{ $this->getPurchaseList->links() }}
                         </div>
                     @else
                         <div class="flex content-center text-gray-500 p-6">

@@ -2,34 +2,37 @@
 
 namespace App\Livewire\Seller\Dashboard\ShipmentLinks;
 
-use App\Models\Product;
-use App\Models\Purchase;
-use App\Models\PurchaseItem;
 use App\Models\Seller;
 use App\Models\Shipments;
 use App\Models\UserNotification;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Livewire\Attributes\On;
 
 #[Layout('layouts.seller.seller-layout')]
 class ShipmentList extends Component
 {
     use WithPagination;
 
-    public $quick_search_filter;
+    public $toship_quick_search_filter;
+    public $shipping_quick_search_filter;
+    public $delivered_quick_search_filter;
 
     public $set_to_shipping;
+
     public $set_to_complete;
 
     public $total_shipment = 0;
+
     public $total_completed_count = 0;
+
     public $total_to_ship_count = 0;
+
     public $total_shipping_count = 0;
+
     public $total_failed_delivery_count = 0;
 
     public $seller;
@@ -42,7 +45,6 @@ class ShipmentList extends Component
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
-
 
         $this->total_shipment = count(Shipments::where('seller_id', $this->seller->id)
             ->get());
@@ -63,7 +65,6 @@ class ShipmentList extends Component
             ->where('shipment_status', 'failed_delivery')
             ->get());
     }
-
 
     #[Computed]
     public function getToShipList()
@@ -95,22 +96,24 @@ class ShipmentList extends Component
 
             sleep(0.5);
             $this->mount();
+
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
-        // add check to run rerender every time
-        if ($this->quick_search_filter > 0) {
-            return $this->shipment_items
-                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
-                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
-                ->where('purchases.purchase_status', 'to_ship')
-                ->orderBy('purchase_items.id', 'asc')
+        // search filter
+        if ($this->toship_quick_search_filter > 0) {
+
+            $search = $this->shipment_items->whereHas('purchase', function (Builder $query) {
+                $query->where('reference_number', 'like', "%{$this->toship_quick_search_filter}%");
+            })->orWhere('shipment_number', 'like', "%{$this->toship_quick_search_filter}%")
                 ->paginate(10);
+
+            return $search;
         } else {
 
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->shipment_items->paginate(10);
@@ -137,7 +140,7 @@ class ShipmentList extends Component
                 'shipped_date' => now(),
             ]);
 
-            if ($shipment->purchase->payment->payment_type == "cod") {
+            if ($shipment->purchase->payment->payment_type == 'cod') {
                 $shipment->purchase->payment->update([
                     'payment_status' => 'paid',
                     'date_of_payment' => now(),
@@ -156,22 +159,24 @@ class ShipmentList extends Component
 
             sleep(0.5);
             $this->mount();
+
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
-        // add check to run rerender every time
-        if ($this->quick_search_filter > 0) {
-            return $this->shipment_items
-                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
-                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
-                ->where('purchases.purchase_status', 'shipping')
-                ->orderBy('purchase_items.id', 'asc')
+        // search filter
+        if ($this->shipping_quick_search_filter > 0) {
+
+            $search = $this->shipment_items->whereHas('purchase', function (Builder $query) {
+                $query->where('reference_number', 'like', "%{$this->shipping_quick_search_filter}%");
+            })->orWhere('shipment_number', 'like', "%{$this->shipping_quick_search_filter}%")
                 ->paginate(10);
+
+            return $search;
         } else {
 
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->shipment_items->paginate(10);
@@ -184,23 +189,23 @@ class ShipmentList extends Component
         $this->shipment_items = Shipments::where('seller_id', $this->seller->id)
             ->where('shipment_status', 'completed');
 
-        // add check to run rerender every time
-        if ($this->quick_search_filter > 0) {
-            return $this->shipment_items
-                ->where('purchases.id', 'ilike', "%{$this->quick_search_filter}%")
-                ->orWhere('products.slug', 'ilike', "%{$this->quick_search_filter}%")
-                ->where('purchases.purchase_status', 'completed')
-                ->orderBy('purchase_items.id', 'asc')
+        // search filter
+        if ($this->delivered_quick_search_filter > 0) {
+
+            $search = $this->shipment_items->whereHas('purchase', function (Builder $query) {
+                $query->where('reference_number', 'like', "%{$this->delivered_quick_search_filter}%");
+            })->orWhere('shipment_number', 'like', "%{$this->delivered_quick_search_filter}%")
                 ->paginate(10);
+
+            return $search;
         } else {
 
             // return collection of shipment items of products from current seller
-            return $this->shipment_items->orderBy('id', 'desc')->paginate(10);
+            return $this->shipment_items->orderBy('updated_at', 'desc')->paginate(10);
         }
 
         return $this->shipment_items->paginate(10);
     }
-
 
     public function render()
     {

@@ -9,7 +9,7 @@
                 </span>
                 <input id="quick_search" type="search" name="serch" placeholder="Search To Ship"
                     class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
-                    wire:model.live="quick_search_filter">
+                    wire:model.live="toship_quick_search_filter">
             </div>
         </div>
     </div>
@@ -17,7 +17,7 @@
 
 <div class="bg-white overflow-x-auto rounded-lg p-3">
     <div class="grid grid-cols-12 text-center text-sm">
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">PurchaseID</div>
+        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase#</div>
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment#</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amount</div>
@@ -36,7 +36,7 @@
                     {{-- @dd($to_ship) --}}
                     <div class="grid grid-cols-12 text-center">
                         <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                            {{ $to_ship->purchase->id }}
+                            {{ $to_ship->purchase->reference_number }}
                         </div>
                         <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
                             {{ $to_ship->shipment_number }}
@@ -158,13 +158,28 @@
                                     <div class="w-full flex flex-col lg:flex-row gap-1.5">
                                         <div class="p-1.5 lg:w-1/2">
                                             <div class="mb-2">
-                                                <label for="product_name"
-                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                                    Order Reference Number
-                                                </label>
-                                                <input type="text" id="product_name" value="samplerefcode"
-                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
-                                                    placeholder="" disabled>
+                                                <div class="grid lg:grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label for="product_name"
+                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                            Order Reference Number
+                                                        </label>
+                                                        <input type="text" id="product_name"
+                                                            value="{{ $to_ship->purchase->reference_number }}"
+                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                            placeholder="" disabled>
+                                                    </div>
+                                                    <div>
+                                                        <label for="product_name"
+                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                            Shipment Fee
+                                                        </label>
+                                                        <input type="text" id="product_name"
+                                                            value="{{ $to_ship->purchase->shipping_fee }}"
+                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                            placeholder="" disabled>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         {{-- second half --}}

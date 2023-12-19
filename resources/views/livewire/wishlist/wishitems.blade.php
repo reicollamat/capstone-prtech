@@ -33,7 +33,7 @@
                     </p>
                     <a href="#" wire:click="remove"
                         wire:click.prevent="$parent.removebookmark({{ $bookmark->id }}, {{ $user_id }})"
-                        class="small decoration-0 no-underline text-gray-700 rounded border-gray-400 border-1 p-1">Remove</a>
+                        class="small decoration-0 no-underline bg-red-500 text-light rounded p-1">Remove</a>
                 </div>
 
             </div>

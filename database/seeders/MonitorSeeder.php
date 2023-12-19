@@ -26,13 +26,15 @@ class MonitorSeeder extends Seeder
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([
-                    'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
+                    'seller_id' => Seller::find(fake()->numberBetween(1, 12))->id,
                     'title' => $value->name,
                     'category' => 'monitor',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    // 'weight' => rand(1.5, 3),
+                    'weight' => fake()->randomFloat(2, 1.5, 2.5),
                 ]);
 
                 ProductImage::create([

@@ -43,15 +43,21 @@ class User extends Authenticatable
         return $this->hasOne(Seller::class);
     }
 
-    public function comment(): Hasmany
+    public function comments(): Hasmany
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comment::class);
     }
 
     // relationship to Notification
     public function notification()
     {
-        return $this->hasMany(Notification::class);
+        return $this->hasMany(UserNotification::class);
+    }
+
+
+    public function item_returnrefund_infos()
+    {
+        return $this->hasMany(ItemReturnrefundInfo::class);
     }
 
     /**

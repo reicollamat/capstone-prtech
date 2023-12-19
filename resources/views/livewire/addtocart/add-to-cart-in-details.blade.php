@@ -34,20 +34,47 @@
                     style="max-width: 2.5rem!important;">+
             </button>
         </div>
-        <div>
-            <button class="btn btn-outline-primary px-3 w-full" id="addToCartBtn" wire:click="addtocart()" style="min-width: 15rem!important;">
-                <div class="">
-                    <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
-                </div>
-            </button>
-        </div>
-        <div>
-            <button class="btn btn-primary px-3 w-full" id="addToCartBtn" wire:click="buynow()" style="min-width: 15rem!important;">
-                <div class="text-light">
-                    <i class="fa fa-shopping-cart mr-1"></i> Buy Now
-                </div>
-            </button>
-        </div>
+
+        {{-- restrict buttons if stock of product is 0 --}}
+        @if ($this->product->stock == 0)
+            <div>
+                <button type="button" class="btn btn-outline-primary px-3 w-full" style="min-width: 15rem!important;"
+                        data-bs-toggle="popover" data-bs-placement="top"
+                        data-bs-trigger="hover focus"
+                        data-bs-custom-class="buynow-btn-notavailable"
+                        data-bs-title="Product Not Available"
+                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                        <div class="">
+                            <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+                        </div>
+                </button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary px-3 w-full" style="min-width: 15rem!important;"
+                        data-bs-toggle="popover" data-bs-placement="top"
+                        data-bs-trigger="hover focus"
+                        data-bs-custom-class="buynow-btn-notavailable"
+                        data-bs-title="Product Not Available"
+                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                        Buy Now
+                </button>
+            </div>
+        @else
+            <div>
+                <button class="btn btn-outline-primary px-3 w-full" id="addToCartBtn" wire:click="addtocart()" style="min-width: 15rem!important;">
+                    <div class="">
+                        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+                    </div>
+                </button>
+            </div>
+            <div>
+                    <button class="btn btn-primary px-3 w-full" id="addToCartBtn" wire:click="buynow()" style="min-width: 15rem!important;">
+                        <div class="text-light">
+                            <i class="fa fa-shopping-cart mr-1"></i> Buy Now
+                        </div>
+                    </button>
+            </div>
+        @endif
     </div>
 
 

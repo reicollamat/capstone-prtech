@@ -3,12 +3,13 @@
 namespace App\Livewire\Gcash;
 
 use App\Helpers\ReferenceGeneratorHelper;
+use App\Helpers\ShippingHelper;
 use App\Models\CartItem;
-use App\Models\UserNotification;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
+use App\Models\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -16,12 +17,21 @@ use Livewire\Component;
 class Gcash3 extends Component
 {
     public $is_cart;
+
     public $user_id;
+
     public $product_id;
+
     public $quantity;
+
+    public $shipping_value_purchaseone;
+
     public $subtotal;
+
     public $total;
+
     public $category;
+
     public $payment_type;
 
     public function mount(Request $request)
@@ -30,10 +40,13 @@ class Gcash3 extends Component
         $this->user_id = Auth::id();
         $this->product_id = $request->product_id;
         $this->quantity = $request->quantity;
+        $this->shipping_value_purchaseone = $request->shipping_value_purchaseone;
         $this->subtotal = $request->subtotal;
         $this->total = $request->total;
         $this->category = $request->category;
         $this->payment_type = $request->payment_type;
+
+        // dd($this->shipping_value_purchaseone);
     }
 
     public function render()
@@ -74,29 +87,44 @@ class Gcash3 extends Component
                 ->get();
             // groupby seller lahat ng cartitems
             $cartitems_per_seller = $cartitems->groupBy('seller_id')->all();
+            $cartitems_shippingfee_per_seller = 0;
 
-            // dd($cartitems_per_seller);
+            //generate reference number for purchase
+            $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
 
             // loop for each seller to save purchase per seller
             foreach ($cartitems_per_seller as $key => $seller_items) {
                 // dd($seller_items);
 
-                //get total_amount of current seller_items
-                $total_amount = $seller_items->sum('total_price');
+                $seller_items_weight_sum = 0;
+                $seller_items_subtotal = 0;
 
-                //generate reference number for purchase
-                $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
+                //loop for each item to save purchase_items per seller
+                foreach ($seller_items as $sum_key => $item) {
+                    // sum of weight of all items
+                    $seller_items_weight_sum += $item->product->weight;
+                    $seller_items_subtotal += $item->total_price;
+                }
+
+                $cartitems_shippingfee_per_seller = ShippingHelper::computeShipping($seller_items_weight_sum);
+
+                //get total_amount of current seller_items
+                $seller_items_subtotal = $seller_items_subtotal;
+                // dd($cartitems_shippingfee_per_seller);
+                $total_amount = $seller_items_subtotal + $cartitems_shippingfee_per_seller;
+                // dd($total_amount);
+
 
                 $purchase = new Purchase([
                     'user_id' => $this->user_id,
                     'seller_id' => $key,
                     'reference_number' => $puchase_reference_number,
                     'purchase_date' => now(),
+                    'shipping_fee' => $cartitems_shippingfee_per_seller,
                     'total_amount' => $total_amount,
                     'purchase_status' => 'pending',
                 ]);
                 $purchase->save();
-
 
                 $payment = new Payment([
                     'user_id' => $this->user_id,
@@ -118,6 +146,11 @@ class Gcash3 extends Component
                         'total_price' => $item->total_price,
                     ]);
                     $purchaseItem->save();
+
+                    // minus 1 to product stock
+                    $item->product->update([
+                        'stock' => $item->stock - 1,
+                    ]);
                 }
 
                 // create usernotification for each purchase
@@ -141,7 +174,8 @@ class Gcash3 extends Component
 
             return redirect(route('index_shop'));
         }
-        // saving purchase for ONE item 
+
+        // saving purchase for ONE item
         else {
             $product = Product::find($this->product_id);
 
@@ -153,6 +187,7 @@ class Gcash3 extends Component
                 'seller_id' => $product->seller_id,
                 'reference_number' => $puchase_reference_number,
                 'purchase_date' => now(),
+                'shipping_fee' => $this->shipping_value_purchaseone,
                 'total_amount' => $this->total,
                 'purchase_status' => 'pending',
             ]);
@@ -175,6 +210,12 @@ class Gcash3 extends Component
                 'total_price' => $this->subtotal,
             ]);
             $purchaseItem->save();
+
+            // minus 1 to product stock
+            $product->update([
+                'stock' => $product->stock - 1,
+            ]);
+
 
             $notification = new UserNotification([
                 'user_id' => $this->user_id,

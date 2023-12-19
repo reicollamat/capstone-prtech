@@ -12,14 +12,11 @@ class EmailHelper
      * Sends an email with the given email, subject, and message.
      *
      * @param  string  $email The email address to send the email to.
-     * @param  string  $subject The subject of the email.
-     * @param  string  $message The content of the email.
      * @return string The status of the email sending
-     *
-     * @throws Some_Exception_Class Description of exception.
      */
     public static function sendEmail($email, $orderId): string
     {
+        // dd($email, $orderId);
         $mailStatus = '';
         try {
             Mail::to($email)->send(new OrderShipped($orderId));

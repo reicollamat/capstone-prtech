@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Product;
-use App\Models\Psu;
 use App\Models\ProductImage;
+use App\Models\Psu;
 use App\Models\Seller;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -26,13 +26,14 @@ class PsuSeeder extends Seeder
             $condition = fake()->randomElement(['brand_new', 'used']);
             if (!empty($value->price)) {
                 $product = Product::create([
-                    'seller_id' => Seller::find(fake()->numberBetween(1, 5))->id,
+                    'seller_id' => Seller::find(fake()->numberBetween(1, 12))->id,
                     'title' => $value->name,
                     'category' => 'psu',
                     'price' => $value->price * 55,
                     'rating' => rand(0, 5),
                     // 'image' => [$image],
                     'condition' => $condition,
+                    'weight' => fake()->randomFloat(2, 1, 1.5),
                 ]);
 
                 ProductImage::create([

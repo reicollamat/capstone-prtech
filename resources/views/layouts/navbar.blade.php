@@ -190,6 +190,7 @@
                                 wire:navigate>Shipping
                                 and
                                 Return Policy</a>
+                            <a class="dropdown-item m-2" href="{{ route('shipping-fee-table') }}" wire:navigate>Shipping Fee Table</a>
                         </div>
                     </div>
                 </div>

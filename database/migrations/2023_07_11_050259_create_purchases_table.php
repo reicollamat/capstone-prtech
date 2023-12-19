@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('reference_number');
             $table->timestamp('purchase_date');
             $table->decimal('total_amount', 20, 2);
+            $table->decimal('shipping_fee', 20, 2);
             $table->timestamp('completion_date')->nullable();
             $table->string('purchase_status');
             $table->softDeletes();

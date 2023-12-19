@@ -2,15 +2,14 @@
 
 namespace App\Livewire\Component\CategoryComponent;
 
-use App\Models\User;
 use App\Models\Mouse;
 use App\Models\Product;
-use Livewire\Component;
 use App\Models\ProductImage;
-use Livewire\Attributes\Reactive;
-use Livewire\Attributes\Validate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class MouseComponent extends Component
@@ -19,6 +18,7 @@ class MouseComponent extends Component
     use WithFileUploads;
 
     public $previewImage;
+
     public $previewImageIndex;
 
     #[Validate('required', message: 'Please provide product name')]
@@ -38,6 +38,10 @@ class MouseComponent extends Component
 
     #[Validate('required|not_in:Select Status', message: 'Please provide product status')]
     public $productStatus;
+
+    #[Validate('required|numeric', message: 'Please provide product weight')]
+    public $product_weight;
+
     public $productCategory;
 
     #[Validate(['productImages.*' => 'image|max:5120'])]
@@ -90,6 +94,7 @@ class MouseComponent extends Component
             'productDescription' => 'required',
             'productCondition' => 'required|not_in:Select Condition',
             'productStatus' => 'required|not_in:Select Status',
+            'product_weight' => 'required|numeric',
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
@@ -127,6 +132,8 @@ class MouseComponent extends Component
                 // 'image' => implode(',', $storeas),
                 // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
                 'condition' => $validator['productCondition'],
+                'status' => $validator['productStatus'],
+                'weight' => $validator['product_weight'],
             ]);
 
             // loop through the images from the file upload
@@ -172,20 +179,19 @@ class MouseComponent extends Component
             if ($product && $mouse) {
                 // dd($product, $mouse);
                 $this->alert('success', 'Product has been created successfully.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
                 $this->reset();
             } else {
                 $this->alert('error', 'Product has not been created.', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
             }
         } else {
             $this->alert('error', 'Unkown error has occurred', [
-                'position' => 'top-end'
+                'position' => 'top-end',
             ]);
         }
-
 
         // if ($validator) {
         //     dd($validator);
