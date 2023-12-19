@@ -17,6 +17,8 @@ class Gcash1 extends Component
 
     public $quantity;
 
+    public $shipping_value_purchaseone;
+
     public $subtotal;
 
     public $total;
@@ -31,10 +33,13 @@ class Gcash1 extends Component
         $this->user_id = Auth::id();
         $this->product_id = $request->product_id;
         $this->quantity = $request->quantity;
+        $this->shipping_value_purchaseone = $request->shipping_value;
         $this->subtotal = $request->subtotal;
         $this->total = $request->total;
         $this->category = $request->category;
         $this->payment_type = $request->payment_type;
+
+        // dd($this->total);
     }
 
     public function render()
@@ -80,6 +85,7 @@ class Gcash1 extends Component
                 'user_id' => $this->user_id,
                 'product_id' => $this->product_id,
                 'quantity' => $this->quantity,
+                'shipping_value_purchaseone' => $this->shipping_value_purchaseone,
                 'subtotal' => $this->subtotal,
                 'total' => $this->total,
                 'category' => $this->category,

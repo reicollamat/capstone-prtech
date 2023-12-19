@@ -175,6 +175,7 @@
 
                             <input type="text" name="product_id" value="{{ $product->id }}" hidden>
                             <input type="text" name="category" value="{{ $product->category }}" hidden>
+                            <input type="text" name="shipping_value" value="{{ $shipping_value }}" hidden>
                             <input type="text" name="subtotal" value="{{ $subtotal }}" hidden>
                             <input type="text" name="total" value="{{ $total }}" hidden>
                             <input type="text" name="quantity" value="{{ $quantity }}" hidden>

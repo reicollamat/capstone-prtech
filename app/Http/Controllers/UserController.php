@@ -26,9 +26,34 @@ class UserController extends Controller
         if ($request->cart) {
             // dd($request);
             $user = User::find($request->user);
-            $shipping_value = $request->shipping_value;
+
+            // get all CartItems from currect user
+            $cartitems = CartItem::join('products', 'cart_items.product_id', '=', 'products.id')
+                ->where('user_id', $user->id)
+                ->get();
+            // groupby seller lahat ng cartitems
+            $cartitems_per_seller = $cartitems->groupBy('seller_id')->all();
+
+            $cartitems_shippingfee_per_seller_sum = 0;
+
+            // loop for each seller to sum product weight per purchase
+            foreach ($cartitems_per_seller as $key => $seller_items) {
+                // dd($seller_items);
+
+                $seller_items_weight_sum = 0;
+
+                //loop for each item to save purchase_items per seller
+                foreach ($seller_items as $key => $item) {
+                    // sum of weight of all items
+                    $seller_items_weight_sum += $item->product->weight;
+                }
+
+                $cartitems_shippingfee_per_seller_sum += ShippingHelper::computeShipping($seller_items_weight_sum);
+            }
+
+            $shipping_value = $cartitems_shippingfee_per_seller_sum;
             $subtotal = $request->subtotal;
-            $total = $request->total;
+            $total = $subtotal + $shipping_value;
 
             return view('pages.cartpurchase', [
                 'user' => $user,
@@ -65,6 +90,7 @@ class UserController extends Controller
     {
         $product_id = $request->product_id;
         $quantity = $request->quantity;
+        $shipping_value = $request->shipping_value;
         $subtotal = $request->subtotal;
         $total = $request->total;
         $category = $request->category;
@@ -72,13 +98,14 @@ class UserController extends Controller
         $user_id = $request->user_id;
         $user_email = Auth::user()->email; // Get the user Email
 
-        // dd($user_email);
+        // dd($subtotal);
 
         // redirect here if payment = gcash
         if ($payment_type == 'gcash') {
             return redirect(route('gcash1', [
                 'product_id' => $product_id,
                 'quantity' => $quantity,
+                'shipping_value' => $shipping_value,
                 'subtotal' => $subtotal,
                 'total' => $total,
                 'category' => $category,
@@ -98,6 +125,7 @@ class UserController extends Controller
             'reference_number' => $puchase_reference_number,
             'purchase_date' => now(),
             'total_amount' => $total,
+            'shipping_fee' => $shipping_value,
             'purchase_status' => 'pending',
         ]);
         $purchase->save();
@@ -140,12 +168,12 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #'.$purchase->id.' Placed',
-            'message' => 'An order has been placed'.$this->mailStatus,
+            'title' => 'Order #' . $purchase->id . ' Placed',
+            'message' => 'An order has been placed' . $this->mailStatus,
         ]);
         $notification->save();
 
-        Session::flash('notification', 'Order Purchased, Thank you! '.$this->mailStatus);
+        Session::flash('notification', 'Order Purchased, Thank you! ' . $this->mailStatus);
 
         return redirect(route('product_detail', [
             'product_id' => $product_id,
@@ -180,6 +208,7 @@ class UserController extends Controller
             ->get();
         // groupby seller lahat ng cartitems
         $cartitems_per_seller = $cartitems->groupBy('seller_id')->all();
+        $cartitems_shippingfee_per_seller = 0;
 
         //generate reference number for purchase
         $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
@@ -188,14 +217,31 @@ class UserController extends Controller
         foreach ($cartitems_per_seller as $key => $seller_items) {
             // dd($seller_items);
 
+            $seller_items_weight_sum = 0;
+            $seller_items_subtotal = 0;
+
+            //loop for each item to save purchase_items per seller
+            foreach ($seller_items as $key => $item) {
+                // sum of weight of all items
+                $seller_items_weight_sum += $item->product->weight;
+                $seller_items_subtotal += $item->total_price;
+            }
+
+            $cartitems_shippingfee_per_seller = ShippingHelper::computeShipping($seller_items_weight_sum);
+
             //get total_amount of current seller_items
-            $total_amount = $seller_items->sum('total_price');
+            $seller_items_subtotal = $seller_items_subtotal;
+            // dd($seller_items_subtotal);
+            $total_amount = $seller_items_subtotal + $cartitems_shippingfee_per_seller;
+            // dd($total_amount);
+
 
             $purchase = new Purchase([
                 'user_id' => $user_id,
                 'seller_id' => $key,
                 'reference_number' => $puchase_reference_number,
                 'purchase_date' => now(),
+                'shipping_fee' => $cartitems_shippingfee_per_seller,
                 'total_amount' => $total_amount,
                 'purchase_status' => 'pending',
             ]);
@@ -240,8 +286,8 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #'.$purchase->id.' Placed',
-                'message' => 'An order has been placed'.$this->mailStatus,
+                'title' => 'Order #' . $purchase->id . ' Placed',
+                'message' => 'An order has been placed' . $this->mailStatus,
             ]);
             $notification->save();
         }
