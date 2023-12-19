@@ -221,7 +221,7 @@ class UserController extends Controller
             $seller_items_subtotal = 0;
 
             //loop for each item to save purchase_items per seller
-            foreach ($seller_items as $key => $item) {
+            foreach ($seller_items as $sum_key => $item) {
                 // sum of weight of all items
                 $seller_items_weight_sum += $item->product->weight;
                 $seller_items_subtotal += $item->total_price;
