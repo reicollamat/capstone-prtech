@@ -151,13 +151,28 @@
                                     <div class="w-full flex flex-col lg:flex-row gap-1.5">
                                         <div class="p-1.5 lg:w-1/2">
                                             <div class="mb-2">
-                                                <label for="product_name"
-                                                    class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                                    Order Reference Number
-                                                </label>
-                                                <input type="text" id="product_name" value="{{$completed->purchase->reference_number}}"
-                                                    class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
-                                                    placeholder="" disabled>
+                                                <div class="grid lg:grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label for="product_name"
+                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                            Order Reference Number
+                                                        </label>
+                                                        <input type="text" id="product_name"
+                                                            value="{{ $completed->purchase->reference_number }}"
+                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                            placeholder="" disabled>
+                                                    </div>
+                                                    <div>
+                                                        <label for="product_name"
+                                                            class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                            Shipment Fee
+                                                        </label>
+                                                        <input type="text" id="product_name"
+                                                            value="{{ $completed->purchase->shipping_fee }}"
+                                                            class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
+                                                            placeholder="" disabled>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         {{-- second half --}}

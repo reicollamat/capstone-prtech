@@ -231,12 +231,15 @@
                                 Total Price
                             </div>
                             <div class="col-1 p-0">
+                                Shipment Fee
+                            </div>
+                            <div class="col-1 p-0">
                                 Payment
                             </div>
                             <div class="col-2 p-0">
                                 Shipment Date
                             </div>
-                            <div class="col-2 p-0">
+                            <div class="col-1 p-0">
                                 Est. Arrival
                             </div>
                         </div>
@@ -266,12 +269,15 @@
                                                     ₱{{ $purchase->total_amount }}
                                                 </div>
                                                 <div class="col-1">
+                                                    ₱{{ $purchase->shipping_fee }}
+                                                </div>
+                                                <div class="col-1">
                                                     {{ $purchase->payment->payment_type }}
                                                 </div>
                                                 <div class="col-2">
                                                     {{ date('m-d-y (h:i a)', strtotime($purchase->shipment->start_date)) }}
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-1">
                                                     {{ $date = date('m-d-y', strtotime($purchase->shipment->start_date . ' +3 days')) }}
                                                 </div>
                                                 <i class="bi bi-chevron-compact-down text-primary"></i>
@@ -354,12 +360,15 @@
                                 Total Price
                             </div>
                             <div class="col-1 p-0">
+                                Shipment Fee
+                            </div>
+                            <div class="col-1 p-0">
                                 Payment
                             </div>
                             <div class="col-2 p-0">
                                 Shipment Date
                             </div>
-                            <div class="col-2 p-0">
+                            <div class="col-1 p-0">
                                 Arrival Date
                             </div>
                         </div>
@@ -390,12 +399,15 @@
                                                     ₱{{ $purchase->total_amount }}
                                                 </div>
                                                 <div class="col-1">
+                                                    ₱{{ $purchase->shipping_fee }}
+                                                </div>
+                                                <div class="col-1">
                                                     {{ $purchase->payment->payment_type }}
                                                 </div>
                                                 <div class="col-2">
                                                     {{ date('m-d-y (h:i a)', strtotime($purchase->shipment->start_date)) }}
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-1">
                                                     {{ date('m-d-y', strtotime($purchase->shipment->shipped_date)) }}
                                                 </div>
                                                 <i class="bi bi-chevron-compact-down text-primary"></i>
