@@ -19,8 +19,8 @@
                                 Storage</a>
                         </div>
                     </div>
-                    <a href="{{route('index_shop', ['cpu' => 'on'])}}" value="cpu" class="nav-item nav-link">Processor
-                        (CPU)</a>
+                    <a href="{{route('index_shop', ['cpu' => 'on'])}}" value="cpu"
+                        class="nav-item nav-link">Processor(CPU)</a>
                     <a href="{{route('index_shop', ['video_card' => 'on'])}}" class="nav-item nav-link">Graphics
                         Card</a>
                     <a href="{{route('index_shop', ['motherboard' => 'on'])}}" class="nav-item nav-link">Motherboard</a>
