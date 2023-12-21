@@ -133,7 +133,7 @@
             <div class="grid md:grid-cols-2 gap-4">
                 <div>
                     {{-- First Columm --}}
-                    <!-- Product Name input -->
+                    <!-- Brand -->
                     <div class="mb-4">
                         <label for="brand"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
@@ -146,7 +146,7 @@
                         @enderror
                     </div>
 
-                    <!-- Product SKU input -->
+                    <!-- Price -->
                     <div class="mb-4">
                         <label for="price"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
@@ -161,7 +161,7 @@
 
                     <div class="grid md:grid-cols-2 md:gap-4">
 
-                        <!-- Product SKU input -->
+                        <!-- Connection Type -->
                         <div class="mb-4">
                             <label for="webcam_connection_type"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
@@ -185,7 +185,7 @@
                             @enderror
                         </div>
 
-                        <!-- Product SKU input -->
+                        <!-- Digital Resolution -->
                         <div class="mb-4">
                             <label for="resolution"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Max
@@ -205,7 +205,7 @@
                         </div>
 
                     </div>
-                    <!-- Product Name input -->
+                    <!-- Webcam FPS -->
                     <div class="mb-4">
                         <label for="webcam_fps"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Max
@@ -219,7 +219,7 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 md:gap-4">
-                        <!-- Product SKU input -->
+                        <!-- Audio Support -->
                         <div class="mb-4">
                             <label for="audio_support"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Audio
@@ -259,30 +259,21 @@
                             @enderror
                         </div>
                     </div>
-                    <!-- Product Color input -->
+
+                    <!-- OS Compatibility -->
                     <div class="mb-4">
                         <label for="webcam_os"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Webcam OS
-                            Compatibility
-                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                data-bs-trigger="hover focus" data-bs-placement="top"
-                                data-bs-content="Multiple colors can be separated by comma">
-                                <i class="bi bi-patch-question"></i>
-                            </span>
-                        </label>
-                        {{-- <input type="text" id="webcam_os" wire:model.blur="webcam_os" --}} {{--
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            --}} {{-- placeholder="Windows 10 or 11, MacOS, Linux" required> --}}
-
-                        <select id="webcam_os" wire:model.blur="webcam_os" multiple
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Compatible
+                            OS</label>
+                        <select id="webcam_os" wire:model.blur="webcam_os"
                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option>Click to Select</option>
+                            <option value="Universal">Universal</option>
                             <option value="Windows 10 and 11">Windows 10 and 11</option>
                             <option value="MacOS">MacOS</option>
                             <option value="Android">Android</option>
                             <option value="Chrome OS">Chrome OS</option>
                         </select>
-
                         @error('webcam_os')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror

@@ -125,21 +125,64 @@
                         <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="grid md:grid-cols-2 gap-4">
 
-                        <!-- Price -->
+                    <!-- Price -->
+                    <div class="mb-4">
+                        <label for="price"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                            Price</label>
+                        <input type="text" id="price" wire:model.blur="price"
+                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="In Pesos, 1000.00" required>
+                        @error('price')
+                        <span class="font-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- Headphone Connection Type -->
                         <div class="mb-4">
-                            <label for="price"
-                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
-                                Price</label>
-                            <input type="text" id="price" wire:model.blur="price"
-                                class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="In Pesos, 1000.00" required>
-                            @error('price')
+                            <label for="headphone_connection_type"
+                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Connection
+                                Type</label>
+                            <select id="headphone_connection_type" wire:model.blur="headphone_connection_type"
+                                name="headphone_connection_type"
+                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
+                                <option>Click to Select</option>
+                                <option value="Click to Select">Click to Select</option>
+                                <option value="USB">USB + 3.5mm audio jack</option>
+                                <option value="Bluetooth">Bluetooth</option>
+                                <option value="wireless">Wireless 2.4Ghz</option>
+                            </select>
+                            @error('headphone_connection_type')
                             <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
+                        <!-- Microphone -->
+                        <div class="mb-4">
+                            <label for="mic_availability"
+                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
+                                Microphone Availability
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                    data-bs-trigger="hover focus" data-bs-placement="top"
+                                    data-bs-content="The availability of microphone on the headphones.">
+                                    <i class="bi bi-patch-question"></i>
+                                </span></label>
+                            <select id="mic_availability" wire:model.blur="mic_availability"
+                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option>Click to Select</option>
+                                <option value="1">Yes</option>
+                                <option value="0">None</option>
+                            </select>
+                            @error('mic_availability')
+                            <span class="font-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
                         <!-- Sensitivity -->
                         <div class="mb-4">
                             <label for="sensitivity"
@@ -162,83 +205,33 @@
                             <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
-                    </div>
 
-                    <!-- Headphone Connection Type -->
-                    <div class="mb-4">
-                        <label for="headphone_connection_type"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
-                            Headphones Connection Type
-                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                data-bs-trigger="hover focus" data-bs-placement="top"
-                                data-bs-content="Hold down the Ctrl or Command key to select multiple options.">
-                                <i class="bi bi-patch-question"></i>
-                            </span>
-                        </label>
-                        <select id="headphone_connection_type" wire:model.blur="headphone_connection_type" multiple
-                            class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="Click to Select">Click to Select</option>
-                            <option value="USB">USB + 3.5mm audio jack</option>
-                            <option value="Bluetooth">Bluetooth</option>
-                            <option value="wireless">Wireless 2.4Ghz</option>
-                        </select>
-                        @error('headphone_connection_type')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <!-- Noise Control -->
-                    <div class="mb-4">
-                        <label for="noise_control"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Noise Control
-                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                data-bs-trigger="hover focus" data-bs-placement="top"
-                                data-bs-content="Hold down the Ctrl or Command key to select multiple options.">
-                                <i class="bi bi-patch-question"></i>
-                            </span>
-
-                        </label>
-                        <select id="noise_control" wire:model.blur="noise_control" multiple
-                            class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option>Click to Select</option>
-                            <option value="hybrid"> Hybrid Noise Cancellation</option>
-                            <option value="active">Active Noise Cancellation</option>
-                            <option value="isolate">Sound Isolation</option>
-                            <option value="n/a">N/A</option>
-                        </select>
-                        @error('noise_control')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="grid md:grid-cols-2 md:gap-4">
-
-                        <!-- Microphone -->
+                        <!-- Noise Control -->
                         <div class="mb-4">
-                            <label for="mic_availability"
-                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
-                                Microphone Availability
-                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                    data-bs-trigger="hover focus" data-bs-placement="top"
-                                    data-bs-content="The availability of microphone on the headphones.">
-                                    <i class="bi bi-patch-question"></i>
-                                </span></label>
-                            <select id="mic_availability" wire:model.blur="mic_availability"
-                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <label for="noise_control"
+                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Noise
+                                Control</label>
+                            <select id="noise_control" wire:model.blur="noise_control" name="noise_control"
+                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
                                 <option>Click to Select</option>
-                                <option value="1">Yes</option>
-                                <option value="0">None</option>
+                                <option value="hybrid"> Hybrid Noise Cancellation</option>
+                                <option value="active">Active Noise Cancellation</option>
+                                <option value="isolate">Sound Isolation</option>
+                                <option value="n/a">N/A</option>
                             </select>
-                            @error('mic_availability')
+                            @error('noise_control')
                             <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
+                    </div>
 
+                    <div class="grid md:grid-cols-2 md:gap-4">
                         <!-- Color -->
                         <div class="mb-4">
                             <label for="color"
-                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Color <span
-                                    class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Color
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                                     data-bs-trigger="hover focus" data-bs-placement="top"
                                     data-bs-content="Multiple colors can be separated by comma">
                                     <i class="bi bi-patch-question"></i>
@@ -259,8 +252,9 @@
                             <select id="enclosure_type" wire:model.blur="enclosure_type"
                                 class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option>Click to Select</option>
-                                <option value="Circumaural">Circumaural</option>
-                                <option value="Supra Aural">Supra Aural</option>
+                                <option value="Open Back">Open Back</option>
+                                <option value="Closed Back">Closed Back</option>
+                                <option value="Can't be determined">Can't be determined</option>
                             </select>
                             @error('enclosure_type')
                             <span class="font-sm text-red-500">{{ $message }}</span>
@@ -302,7 +296,8 @@
                         <p class="block mb-1 text-base font-medium text-gray-600 dark:text-white pl-1">Add Product
                             Image
                         </p>
-                        <p class="block mb-1 text-sm font-medium text-gray-500 dark:text-white pl-1">To Upload Multiple
+                        <p class="block mb-1 text-sm font-medium text-gray-500 dark:text-white pl-1">To Upload
+                            Multiple
                             Images,
                             Select them all before uploading</p>
                     </div>

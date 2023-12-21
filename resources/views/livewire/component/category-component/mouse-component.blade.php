@@ -113,7 +113,7 @@
             <div class="grid md:grid-cols-2 gap-4">
 
                 <div>
-                    <!-- Product Name input -->
+                    <!-- Brand -->
                     <div class="mb-4">
                         <label for="brand"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
@@ -125,24 +125,24 @@
                         <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <!-- Product SKU input -->
-                            <div class="mb-4">
-                                <label for="price"
-                                    class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
-                                    Price</label>
-                                <input type="text" id="price" wire:model.blur="price"
-                                    class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="In Pesos, 1000.00" required>
-                                @error('price')
-                                <span class="font-sm text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
+
+                    <div>
+                        <!-- Price -->
+                        <div class="mb-4">
+                            <label for="price"
+                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
+                                Price</label>
+                            <input type="text" id="price" wire:model.blur="price"
+                                class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="In Pesos, 1000.00" required>
+                            @error('price')
+                            <span class="font-sm text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
+
                     <div class="grid md:grid-cols-2 md:gap-4">
-                        <!-- Product SKU input -->
+                        <!-- Mouse Tracking Method -->
                         <div class="mb-4">
                             <label for="mouse_tracking_method"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Mouse
@@ -159,25 +159,20 @@
                             @enderror
                         </div>
 
-                        <!-- Product SKU input -->
+                        <!-- Mouse Connection -->
                         <div class="mb-4">
                             <label for="mouse_connection_type"
-                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
-                                Mouse Connection Type
-                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                    data-bs-trigger="hover focus" data-bs-placement="top"
-                                    data-bs-content="Hold down the Ctrl or Command key to select multiple options.">
-                                    <i class="bi bi-patch-question"></i>
-                                </span>
-
-                            </label>
-                            <select id="mouse_connection_type" wire:model.blur="mouse_connection_type" multiple
-                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Connection
+                                Type</label>
+                            <select id="mouse_connection_type" wire:model.blur="mouse_connection_type"
+                                name="mouse_connection_type"
+                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
                                 <option>Click to Select</option>
-                                <option value="available">Wired</option>
-                                <option value="unavailable">Wireless</option>
-                                <option value="unavailable">Bluetooth</option>
-                                <option value="n/a">N/A</option>
+                                <option value="Wired">Wired</option>
+                                <option value="2.4G">2.4G</option>
+                                <option value="Bluetooth">Bluetooth</option>
+                                <option value="Tri-Mode">Tri-Mode</option>
                             </select>
                             @error('mouse_connection_type')
                             <span class="font-sm text-red-500">{{ $message }}</span>
@@ -185,9 +180,10 @@
                         </div>
                     </div>
 
-                    <!-- Product Name input -->
+                    <!-- Mouse DPI -->
                     <div class="mb-4">
-                        <label for="dpi" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Mouse
+                        <label for="dpi"
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Maximum Mouse
                             DPI <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
                                 data-bs-trigger="hover focus" data-bs-placement="top"
                                 data-bs-content="Multiple DPI can be separated by commma">
@@ -200,18 +196,16 @@
                         <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="grid md:grid-cols-2 md:gap-4">
-                        <!-- Product SKU input -->
+                        <!-- Mouse Hand Orientation -->
                         <div class="mb-4">
                             <label for="orientation"
-                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Mouse Hand
-                                Orientation <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                    data-bs-trigger="hover focus" data-bs-placement="top"
-                                    data-bs-content="The hand placement of the mouse">
-                                    <i class="bi bi-patch-question"></i>
-                                </span></label>
-                            <select id="orientation" wire:model.blur="orientation"
-                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Hand
+                                Orientation</label>
+                            <select id="orientation" wire:model.blur="orientation" name="orientation"
+                                class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required>
                                 <option>Click to Select</option>
                                 <option value="Optical">Right</option>
                                 <option value="Laser">Left</option>
@@ -222,7 +216,7 @@
                             @enderror
                         </div>
 
-                        <!-- Product SKU input -->
+                        <!-- Color -->
                         <div class="mb-4">
                             <label for="color"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Mouse Color
