@@ -24,11 +24,11 @@ class MotherboardComponent extends Component
     #[Validate('required', message: 'Please provide product name')]
     public $productName;
 
-    #[Validate('required', message: 'Please provide product SKU')]
-    public $productSKU;
+    // #[Validate('required', message: 'Please provide product SKU')]
+    // public $productSKU;
 
-    #[Validate('required', message: 'Please provide product slug')]
-    public $productSlug;
+    // #[Validate('required', message: 'Please provide product slug')]
+    // public $productSlug;
 
     #[Validate('required', message: 'Please provide product description')]
     public $productDescription;

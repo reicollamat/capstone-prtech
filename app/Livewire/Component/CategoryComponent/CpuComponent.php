@@ -26,11 +26,11 @@ class CpuComponent extends Component
     #[Validate('required', message: 'Please provide a CPU Name')]
     public $productName;
 
-    #[Validate('required', message: 'Please provide a CPU SKU')]
-    public $productSKU;
+    // #[Validate('required', message: 'Please provide a CPU SKU')]
+    // public $productSKU;
 
-    #[Validate('required', message: 'Please provide a CPU Slug')]
-    public $productSlug;
+    // #[Validate('required', message: 'Please provide a CPU Slug')]
+    // public $productSlug;
 
     #[Validate('required', message: 'Please provide a CPU Description')]
     public $productDescription;
