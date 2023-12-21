@@ -16,9 +16,9 @@
                     @enderror
                 </div>
             </div>
-            <div class="grid md:grid-cols-2 md:gap-8 ">
+
+            <!-- <div class="grid md:grid-cols-2 md:gap-8 ">
                 <div>
-                    <!-- Product SKU input -->
                     <div class="mb-4">
                         <label for="sku"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
@@ -32,7 +32,6 @@
                     </div>
                 </div>
                 <div>
-                    <!-- Product SLUG input -->
                     <div class="mb-4">
                         <label for="slug"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
@@ -45,7 +44,8 @@
                         @enderror
                     </div>
                 </div>
-            </div>
+            </div> -->
+
             <div class="mb-4">
                 <label for="description"
                     class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
