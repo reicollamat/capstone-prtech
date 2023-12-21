@@ -89,8 +89,8 @@ class CpuCoolerComponent extends Component
     {
         $validator = $this->validate([
             'productName' => 'required',
-            'productSKU' => 'required',
-            'productSlug' => 'required',
+            // 'productSKU' => 'required',
+            // 'productSlug' => 'required',
             'productDescription' => 'required',
             'productCondition' => 'required|not_in:Select Condition',
             'productStatus' => 'required|not_in:Select Status',
@@ -123,8 +123,8 @@ class CpuCoolerComponent extends Component
             $product = Product::create([
                 'seller_id' => User::find(Auth::user()->id)->seller->id,
                 'title' => $validator['productName'],
-                'slug' => $validator['productSlug'],
-                'SKU' => $validator['productSKU'],
+                // 'slug' => $validator['productSlug'],
+                // 'SKU' => $validator['productSKU'],
                 'category' => $validator['productCategory'],
                 'price' => $validator['price'],
                 'stock' => $validator['stocks'],

@@ -85,7 +85,7 @@ class ProductListComponent extends Component
         // dd('tst');
         $validator = $this->validate([
             'product_name' => 'required',
-            'product_slug' => 'required',
+            // 'product_slug' => 'required',
             // 'product_description' => 'required',
             'product_condition' => 'required|not_in:Select Condition',
             'product_status' => 'required|not_in:Select Status',
