@@ -7,18 +7,26 @@ use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Layout('layouts.seller.seller-layout')]
 class AnalyticsModelReport extends Component
 {
+    use WithPagination;
 
+    #[Locked]
     public $seller;
+
     public $restock_amounts;
 
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
+
+        // dd($this->seller->id);
+
         $this->restock_amounts = [
             ['future_predictions_plot0' => 8],
             ['future_predictions_plot1' => 67],
@@ -73,13 +81,40 @@ class AnalyticsModelReport extends Component
         return $this->top_products->orderBy('rating', 'desc')->take(10)->get();
     }
 
-
-    public function shopEngagement()
+    #[Computed]
+    public function getMostPositiveReviewedProducts()
     {
+        // dd($this->seller->id);
+
+        $all_products = Product::where('seller_id', $this->seller->id)
+            ->where('rating', '>=', 3)
+            ->orderBy('rating', 'desc')
+            ->get();
+
+        return $all_products;
+
     }
 
-    public function shopSentiment()
+    #[Computed]
+    public function getMostBoughtProducts()
     {
+        $all_products = Product::where('seller_id', $this->seller->id)
+            ->where('purchase_count', '>=', 1)
+            ->orderBy('purchase_count', 'desc')
+            ->get();
+
+        return $all_products;
+    }
+
+    #[Computed]
+    public function getMostNegativeReviewedProducts()
+    {
+        $all_products = Product::where('seller_id', $this->seller->id)
+            ->where('rating', '<=', 2)
+            ->orderBy('rating', 'desc')
+            ->get();
+
+        return $all_products;
     }
 
     public function render()

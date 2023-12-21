@@ -128,7 +128,7 @@
                         <small class="text-muted d-block mb-1">Total Earnings <span
                                 class="text-xs text-gray-500">Updated every 5 minutes</span></small>
                         <p class="h3 text-black fw-light mt-auto">
-                            {{ $this->getTotalEarnings->total_earnings ?? 0 }}
+                            {{ $this->getTotalEarnings ?? 0 }}
                             {{--                            @dd($this->getTotalEarnings->total_earnings) --}}
                         </p>
                     </div>

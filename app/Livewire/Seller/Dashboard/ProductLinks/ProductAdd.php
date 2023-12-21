@@ -37,23 +37,6 @@ class ProductAdd extends Component
         'other_peripherals' => 'component.category-component.placeholder-component',
     ];
 
-    #[Validate('required', message: 'Please provide a Product Name')]
-    public $productName;
-
-    #[Validate('required', message: 'Please provide a Product SKU')]
-    public $productSKU;
-
-    #[Validate('required', message: 'Please provide a Product Slug')]
-    public $productSlug;
-
-    #[Validate('required', message: 'Please provide a Product Description')]
-    public $productDescription;
-
-    #[Validate('required|not_in:Select Condition', message: 'Please provide a Product Condition')]
-    public $productCondition;
-
-    #[Validate('required|not_in:Select Status', message: 'Please provide a Product Status')]
-    public $productStatus;
 
     #[Validate('required', message: 'Please provide a Product Category')]
     public $productCategory;

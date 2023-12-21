@@ -138,9 +138,7 @@ class SellerLanding extends Component
         // dd($this->seller_id);
         $metrics = Seller::find($this->seller_id)->shopMetrics->first();
 
-        $this->total_earnings_percentage = $metrics->total_earnings / $metrics->target_sales * 100;
-
-        return $metrics;
+        return $metrics->total_earnings ?? 0;
     }
 
     #[Computed]

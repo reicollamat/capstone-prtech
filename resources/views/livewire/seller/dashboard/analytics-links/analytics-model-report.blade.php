@@ -122,6 +122,11 @@
                 @endif
             </div>
 
+{{--            @dd($this->getMostPositiveReviewedProducts)--}}
+{{--            @dd($this->getMostBoughtProducts)--}}
+            @dd($this->getMostNegativeReviewedProducts)
+
+
             {{-- loading indicator --}}
             <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
                 <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">

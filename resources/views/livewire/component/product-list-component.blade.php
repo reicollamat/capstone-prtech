@@ -105,13 +105,13 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="grid lg:grid-cols-2 gap-4">
+                                        <div class="gap-4">
                                             <div class="grid lg:grid-cols-2 gap-2">
                                                 <div>
                                                     <label for="stock"
                                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Stock
                                                     </label>
-                                                    <input type="text" id="stock" value="{{ $itemproductinfo->stock }}"
+                                                    <input type="number" id="stock" value="{{ $itemproductinfo->stock }}"
                                                         wire:model.blur="product_stock"
                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" required>
@@ -121,11 +121,9 @@
                                                 </div>
                                                 <div>
                                                     <label for="reserve"
-                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Low
-                                                        Stock
-
+                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Low Stock Threshold
                                                     </label>
-                                                    <input type="text" id="reserve"
+                                                    <input type="number" id="reserve"
                                                         value="{{ $itemproductinfo->reserve }}"
                                                         wire:model.blur="product_reserve"
                                                         class="bg-transparent text-red-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
@@ -146,7 +144,7 @@
                                             <label for="price"
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Price
                                             </label>
-                                            <input type="text" id="price" value="{{ $item->price }}"
+                                            <input type="number" id="price" value="{{ $item->price }}"
                                                 wire:model.blur="product_price"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" required>
@@ -170,7 +168,7 @@
                                         </div>
                                     </div>
                                     <div class="grid lg:grid-cols-2 gap-2">
-                                        <div>
+                                        <div class="mb-3">
                                             <label for="conditon"
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Condition
                                             </label>
@@ -184,7 +182,7 @@
                                             <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        <div>
+                                        <div class="gap-2">
                                             <label for="status"
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Status
                                             </label>
@@ -203,7 +201,7 @@
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Product
                                                 Weight
                                             </label>
-                                            <input type="text" id="stock" value="{{ $itemproductinfo->product_weight }}"
+                                            <input type="number" id="product_weight"
                                                 wire:model.blur="product_weight"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" required>

@@ -168,12 +168,12 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #' . $purchase->id . ' Placed',
-            'message' => 'An order has been placed' . $this->mailStatus,
+            'title' => 'Order #'.$purchase->id.' Placed',
+            'message' => 'An order has been placed'.$this->mailStatus,
         ]);
         $notification->save();
 
-        Session::flash('notification', 'Order Purchased, Thank you! ' . $this->mailStatus);
+        Session::flash('notification', 'Order Purchased, Thank you! '.$this->mailStatus);
 
         return redirect(route('product_detail', [
             'product_id' => $product_id,
@@ -235,7 +235,6 @@ class UserController extends Controller
             $total_amount = $seller_items_subtotal + $cartitems_shippingfee_per_seller;
             // dd($total_amount);
 
-
             $purchase = new Purchase([
                 'user_id' => $user_id,
                 'seller_id' => $key,
@@ -286,8 +285,8 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #' . $purchase->id . ' Placed',
-                'message' => 'An order has been placed' . $this->mailStatus,
+                'title' => 'Order #'.$purchase->id.' Placed',
+                'message' => 'An order has been placed'.$this->mailStatus,
             ]);
             $notification->save();
         }

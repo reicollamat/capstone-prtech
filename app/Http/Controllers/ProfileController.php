@@ -8,6 +8,7 @@ use App\Models\Purchase;
 use App\Models\PurchaseCancellationInfo;
 use App\Models\PurchaseItem;
 use App\Models\ReturnrefundImage;
+use App\Models\SellerShopMetrics;
 use App\Models\Shipments;
 use App\Models\User;
 use App\Models\UserNotification;
@@ -232,6 +233,12 @@ class ProfileController extends Controller
                 'shipment_status' => 'completed',
                 'shipped_date' => now(),
             ]);
+
+            // increase the seller total_earnings
+            $seller = SellerShopMetrics::where('seller_id', $purchase->seller_id)->first();
+
+            // dd($seller);
+            $seller->increment('total_earnings', $purchase->total_amount);
 
             // $purchase_items = PurchaseItem::where('purchase_id', $id)->get();
             //
