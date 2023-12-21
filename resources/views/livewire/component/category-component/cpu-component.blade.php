@@ -36,36 +36,7 @@
                     @enderror
                 </div>
             </div>
-
-            <!-- <div class="grid md:grid-cols-2 md:gap-8 ">
-                <div>
-                    <div class="mb-4">
-                        <label for="sku"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
-                            SKU</label>
-                        <input type="text" id="sku" wire:model.blur="productSKU"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="XXX-XXX" required>
-                        @error('productSKU')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <div>
-                    <div class="mb-4">
-                        <label for="slug"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
-                            Slug</label>
-                        <input type="text" id="slug" wire:model.blur="productSlug"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="lowercase, no spaces seprated by hyphen " required>
-                        @error('productSlug')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-            </div> -->
-
+            <!-- Product Description -->
             <div class="mb-4">
                 <label for="description"
                     class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
