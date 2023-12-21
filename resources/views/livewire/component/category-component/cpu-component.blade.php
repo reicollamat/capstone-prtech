@@ -103,7 +103,7 @@
     <div class="mb-4 p-4 bg-white border border-gray-200 rounded-lg">
         <div class="grid md:grid-cols-2 gap-4">
             <div>
-                <!-- Brand and Price -->
+                <!-- CPU Core and Threads -->
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="mb-4">
                         <label for="cpu_core_threads"
@@ -112,7 +112,7 @@
                         </label>
                         <input type="text" id="cpu_core_threads" wire:model.blur="cpu_core_threads"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="AMD, Intel, etc." required>
+                            placeholder="Cores / Threads" required>
                         @error('cpu_core_threads')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -171,11 +171,11 @@
 
                 <!-- TDP -->
                 <div class="mb-4">
-                    <label for="tdp"
-                        class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">TDP</label>
+                    <label for="tdp" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">TDP
+                        (Watts)</label>
                     <input type="text" id="tdp" wire:model.blur="tdp"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="65 Watts" required>
+                        placeholder="65" required>
                     @error('tdp')
                     <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
