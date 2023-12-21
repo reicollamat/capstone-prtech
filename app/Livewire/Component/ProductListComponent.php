@@ -32,6 +32,8 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 
 class ProductListComponent extends Component
 {
+    public $product_id;
+
     #[Validate('required', message: 'Please provide product name')]
     public $product_name;
 
@@ -94,22 +96,85 @@ class ProductListComponent extends Component
             'product_reserve' => 'required|integer',
         ]);
 
-        // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
-        $product = Product::create([
-            'seller_id' => User::find(Auth::user()->id)->seller->id,
-            'title' => $validator['product_name'],
-            'slug' => $validator['product_slug'],
-            'category' => $validator['product_category'],
-            'price' => $validator['product_price'],
-            'stock' => $validator['product_stock'],
-            'reserve' => $validator['product_reserve'],
-            // 'image' => implode(',', $storeas),
-            // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
-            'condition' => $validator['product_condition'],
-            'status' => $validator['product_status'],
-            'weight' => $validator['product_weight'],
+        // dd($this->product_id);
+
+        $product = Product::find($this->product_id);
+
+        // Define a map of categories to their respective models
+        $categoryMap = [
+            'computer_case' => ComputerCase::class,
+            'case_fan' => CaseFan::class,
+            'cpu' => Cpu::class,
+            'cpu_cooler' => CpuCooler::class,
+            'ext_storage' => ExtStorage::class,
+            'int_storage' => IntStorage::class,
+            'headphone' => Headphone::class,
+            'keyboard' => Keyboard::class,
+            'memory' => Memory::class,
+            'monitor' => Monitor::class,
+            'motherboard' => Motherboard::class,
+            'mouse' => Mouse::class,
+            'psu' => Psu::class,
+            'speaker' => Speaker::class,
+            'video_card' => VideoCard::class,
+            'webcam' => Webcam::class,
+        ];
+
+        // Check if the category exists in the category map
+        if (array_key_exists($product->category, $categoryMap)) {
+            // Get the corresponding model class for the category
+            $modelClass = $categoryMap[$product->category];
+
+            // Resolve the model using the model class and product_id
+            $categoryproduct = app()->make($modelClass)->where('product_id', $product->id)->get()->first();
+            // dd($categoryproduct);
+
+            // Update the category product with the new data
+            $categoryproduct->update([
+                'name' => $this->product_name,
+                'price' => $this->product_price,
+                'condition' => $this->product_condition,
+                'status' => $this->product_status,
+            ]);
+        } else {
+            // Handle the case when the category doesn't exist
+            abort(404);
+        }
+
+        $product->update([
+            'title' => $this->product_name,
+            'slug' => $this->product_slug,
+            'category' => $this->product_category,
+            'price' => $this->product_price,
+            'stock' => $this->product_stock,
+            'reserve' => $this->product_reserve,
+            'condition' => $this->product_condition,
+            'status' => $this->product_status,
+            'weight' => $this->product_weight,
         ]);
 
+        // dd($this->product_name);
+
+        sleep(0.5);
+
+        $this->redirect(route('product-list'));
+
+
+        // // 'COLUMN NAME IN DATABASE' => $validator['VALUE']
+        // $product = Product::create([
+        //     'seller_id' => User::find(Auth::user()->id)->seller->id,
+        //     'title' => $validator['product_name'],
+        //     'slug' => $validator['product_slug'],
+        //     'category' => $validator['product_category'],
+        //     'price' => $validator['product_price'],
+        //     'stock' => $validator['product_stock'],
+        //     'reserve' => $validator['product_reserve'],
+        //     // 'image' => implode(',', $storeas),
+        //     // 'image' => count($storeas) > 0 ? $storeas : ['img/no-image-placeholder.png'],
+        //     'condition' => $validator['product_condition'],
+        //     'status' => $validator['product_status'],
+        //     'weight' => $validator['product_weight'],
+        // ]);
     }
 
     public Model $item;
@@ -173,6 +238,7 @@ class ProductListComponent extends Component
 
         // dd($itemProductInfo);
 
+        $this->product_id = $itemProductInfo['id'];
         $this->product_name = $itemProductInfo['title'];
         $this->product_slug = $itemProductInfo['slug'];
         $this->product_status = $itemProductInfo['status'];

@@ -44,11 +44,11 @@
                 </button>
             </div>
         </div>
-        <form wire:submit="submit">
-            <div x-cloak id="faqs-text-01" role="region" aria-labelledby="faqs-title-01"
-                class="grid text-sm border-t-2 border-blue-100 text-slate-600 overflow-hidden rounded transition-all duration-300 ease-in-out bg-background-light "
-                :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
-                <div class="overflow-hidden">
+        <div x-cloak id="faqs-text-01" role="region" aria-labelledby="faqs-title-01"
+            class="grid text-sm border-t-2 border-blue-100 text-slate-600 overflow-hidden rounded transition-all duration-300 ease-in-out bg-background-light "
+            :class="expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'">
+            <div class="overflow-hidden">
+                <form wire:submit="submit">
                     <div class="p-2 flex flex-col lg:flex-row">
                         <div class="px-6 content-center">
                             <div class="flex flex-col justify-center items-center p-2.5 gap-2">
@@ -265,10 +265,10 @@
                                 {{-- </span> --}}
                         </div>
                     </div>
-                </div>
-
+                </form>
             </div>
-        </form>
+
+        </div>
     </div>
     {{-- {{ $item->SKU }} --}}
 </div>
