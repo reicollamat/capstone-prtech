@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,6 +24,13 @@ class ProductStockSeeder extends Seeder
                 $status = 'not available';
             } else {
                 $status = 'available';
+            }
+
+            if ($comments = Comment::where('product_id', $product->id)) {
+                $product->update([
+                    'purchase_count' => $comments->count(),
+                    'view_count' => $comments->count(),
+                ]);
             }
 
             $product->update([
