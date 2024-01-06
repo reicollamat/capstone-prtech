@@ -3,7 +3,6 @@
 namespace App\Livewire\Seller\Dashboard\OrderLinks;
 
 use App\Models\Payment;
-use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Seller;
 use App\Models\Shipments;
@@ -230,7 +229,7 @@ class OrderList extends Component
                 'purchase_id' => $purchase_id,
                 'tag' => 'to_ship',
                 'title' => 'Purchase Confirmed',
-                'message' => 'Purchase for order #' . $purchase_id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                'message' => 'Purchase for order #'.$purchase_id.' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
             ]);
             $notification->save();
 
@@ -292,5 +291,10 @@ class OrderList extends Component
     public function render()
     {
         return view('livewire..seller.dashboard.order-links.order-list');
+    }
+
+    public function massShip()
+    {
+
     }
 }

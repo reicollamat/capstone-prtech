@@ -78,8 +78,8 @@
                         <button @click="isOpen = !isOpen"
                             class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
                             <span class="mx-1">Order Status:</span>
-                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
+                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg"
                                 :class="{ 'rotate-180 transition duration-300': isOpen }">
                                 <path
                                     d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
@@ -111,8 +111,8 @@
                         <button @click="isOpen = !isOpen"
                             class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
                             <span class="mx-1">Payment Status:</span>
-                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
+                            <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg"
                                 :class="{ 'rotate-180 transition duration-300': isOpen }">
                                 <path
                                     d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
@@ -157,9 +157,11 @@
                         <!-- Dropdown menu -->
                         <div x-cloak x-show="isOpen" @click.away="isOpen = false"
                             x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:enter-start="opacity-0 scale-90"
+                            x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-100"
-                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-90"
                             class="absolute left-0 z-20 mt-1 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                             <div class="bg-white rounded border-1 border-gray-300">
                                 <button
@@ -175,7 +177,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     {{-- clear filters --}}
                     <div x-data="{ isOpen: false }" class="relative inline-block ">
                         <div class="px-2.5 transition ease-in-out duration-300 {{ $orderstatus_filter ? 'block' : 'hidden' }}"
@@ -186,7 +188,7 @@
                                 </span>
                             </button>
                         </div>
-    
+
                         <div class="px-2.5 transition ease-in-out duration-300 {{ $paymentstatus_filter ? 'block' : 'hidden' }}"
                             x-transition>
                             <button wire:click.debounce="$set('paymentstatus_filter', '')">
@@ -211,7 +213,7 @@
                                 </span>
                             </button>
                         </div>
-    
+
                     </div>
                 </div>
 
@@ -238,9 +240,9 @@
             </div>
             <hr>
 
-            
             <div class="bg-white overflow-x-auto rounded-lg p-3">
                 <div class="grid grid-cols-12 text-center text-sm">
+                    {{-- <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">d</div> --}}
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Reference#</div>
                     <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Date</div>
@@ -383,9 +385,9 @@
                                                 </button>
                                             </div>
                                         @elseif ($purchase->purchase_status == 'cancellation_pending')
-                                        <div class="col-span-2 my-4 !text-red-600 !font-light">
-                                            <i class="bi bi-x-square-fill"></i> Pending Cancellation
-                                        </div>
+                                            <div class="col-span-2 my-4 !text-red-600 !font-light">
+                                                <i class="bi bi-x-square-fill"></i> Pending Cancellation
+                                            </div>
                                             <div class="col-span-2 my-auto !font-light">
                                                 <button type="submit"
                                                     class="bg-gray-300 hover:bg-gray-500 p-2 rounded w-full">
@@ -568,9 +570,11 @@
 
                                             <div class="border-t-4 border-blue-100 flex flex-col lg:flex-row">
                                                 @if ($purchase->purchase_items->count() == 1)
-                                                    <h4 class="mx-auto mt-2">{{$purchase->purchase_items->count()}} ITEM</h4>
+                                                    <h4 class="mx-auto mt-2">{{ $purchase->purchase_items->count() }}
+                                                        ITEM</h4>
                                                 @else
-                                                    <h4 class="mx-auto mt-2">{{$purchase->purchase_items->count()}} ITEMS</h4>
+                                                    <h4 class="mx-auto mt-2">{{ $purchase->purchase_items->count() }}
+                                                        ITEMS</h4>
                                                 @endif
                                             </div>
                                             {{-- @dd($purchase) --}}
@@ -645,6 +649,12 @@
                         </div>
                     @endif
                 </div>
+
+            </div>
+            <div class="w-full flex justify-end p-3">
+                <button type="button" wire:click="massShip" class="bg-red-600 hover:!bg-red-700 text-white p-2 rounded w-fit">
+                    Mass Ship Orders
+                </button>
             </div>
         </div>
         <div
