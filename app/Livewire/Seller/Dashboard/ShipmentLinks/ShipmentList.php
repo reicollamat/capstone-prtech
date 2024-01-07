@@ -7,6 +7,7 @@ use App\Models\Shipments;
 use App\Models\UserNotification;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -15,10 +16,13 @@ use Livewire\WithPagination;
 #[Layout('layouts.seller.seller-layout')]
 class ShipmentList extends Component
 {
+    use LivewireAlert;
     use WithPagination;
 
     public $toship_quick_search_filter;
+
     public $shipping_quick_search_filter;
+
     public $delivered_quick_search_filter;
 
     public $set_to_shipping;
@@ -42,28 +46,11 @@ class ShipmentList extends Component
     //        return 'vendor.pagination.custom-pagination-links';
     //    }
 
-    public function mount()
+    public function getToShipListCount()
     {
-        $this->seller = Seller::where('user_id', Auth::id())->get()->first();
-
-        $this->total_shipment = count(Shipments::where('seller_id', $this->seller->id)
-            ->get());
-
-        $this->total_completed_count = count(Shipments::where('seller_id', $this->seller->id)
-            ->where('shipment_status', 'completed')
-            ->get());
-
-        $this->total_to_ship_count = count(Shipments::where('seller_id', $this->seller->id)
+        return Shipments::where('seller_id', $this->seller->id)
             ->where('shipment_status', 'to_ship')
-            ->get());
-
-        $this->total_shipping_count = count(Shipments::where('seller_id', $this->seller->id)
-            ->where('shipment_status', 'shipping')
-            ->get());
-
-        $this->total_failed_delivery_count = count(Shipments::where('seller_id', $this->seller->id)
-            ->where('shipment_status', 'failed_delivery')
-            ->get());
+            ->count();
     }
 
     #[Computed]
@@ -90,7 +77,7 @@ class ShipmentList extends Component
                 'tag' => 'shipping',
                 'title' => 'Shipped Out',
                 'message' => 'Parcel parcel no for your order
-                #' . $shipment->purchase->id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                #'.$shipment->purchase->id.' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
             ]);
             $notification->save();
 
@@ -117,6 +104,30 @@ class ShipmentList extends Component
         }
 
         return $this->shipment_items->paginate(10);
+    }
+
+    public function mount()
+    {
+        $this->seller = Seller::where('user_id', Auth::id())->get()->first();
+
+        $this->total_shipment = count(Shipments::where('seller_id', $this->seller->id)
+            ->get());
+
+        $this->total_completed_count = count(Shipments::where('seller_id', $this->seller->id)
+            ->where('shipment_status', 'completed')
+            ->get());
+
+        $this->total_to_ship_count = count(Shipments::where('seller_id', $this->seller->id)
+            ->where('shipment_status', 'to_ship')
+            ->get());
+
+        $this->total_shipping_count = count(Shipments::where('seller_id', $this->seller->id)
+            ->where('shipment_status', 'shipping')
+            ->get());
+
+        $this->total_failed_delivery_count = count(Shipments::where('seller_id', $this->seller->id)
+            ->where('shipment_status', 'failed_delivery')
+            ->get());
     }
 
     #[Computed]
@@ -153,7 +164,7 @@ class ShipmentList extends Component
                 'purchase_id' => $shipment->purchase->id,
                 'tag' => 'completed',
                 'title' => 'Share your feedback! click here',
-                'message' => 'Order #' . $shipment->purchase->id . ' is completed. Your feedback matters to others! Rate the products by date',
+                'message' => 'Order #'.$shipment->purchase->id.' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
 
@@ -210,5 +221,41 @@ class ShipmentList extends Component
     public function render()
     {
         return view('livewire..seller.dashboard.shipment-links.shipment-list');
+    }
+
+    public function massShip()
+    {
+        // query for purchased items of products from current seller
+        $shipment_items = Shipments::where('seller_id', $this->seller->id)
+            ->where('shipment_status', 'to_ship')
+            ->get();
+
+        if (count($shipment_items) > 0) {
+            foreach ($shipment_items as $shipment_item) {
+
+                $shipment_item->purchase->update(['purchase_status' => 'shipping']);
+
+                $shipment_item->update([
+                    'shipment_status' => 'shipping',
+                    'start_date' => now(),
+                ]);
+
+                //notify from 'to_ship' to 'shipping'
+                $notification = new UserNotification([
+                    'user_id' => $shipment_item->purchase->user->id,
+                    'purchase_id' => $shipment_item->purchase->id,
+                    'tag' => 'shipping',
+                    'title' => 'Shipped Out',
+                    'message' => 'Parcel parcel no for your order
+                #'.$shipment_item->purchase->id.' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                ]);
+                $notification->save();
+
+                $this->alert('success', 'All items have been shipped', [
+                    'position' => 'top-end']);
+            }
+        }
+
+        // dd($shipment_items);
     }
 }
