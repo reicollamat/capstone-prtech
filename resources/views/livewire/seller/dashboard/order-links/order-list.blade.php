@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                <div class="d-flex">
+                <div class="d-flex gap-2">
                     {{--  order status Filter --}}
                     <div x-data="{ isOpen: false }" class="relative inline-block">
                         <!-- Dropdown toggle button -->
@@ -179,40 +179,48 @@
                     </div>
 
                     {{-- clear filters --}}
-                    <div x-data="{ isOpen: false }" class="relative inline-block ">
-                        <div class="px-2.5 transition ease-in-out duration-300 {{ $orderstatus_filter ? 'block' : 'hidden' }}"
-                            x-transition>
-                            <button wire:click.debounce="$set('orderstatus_filter', '')">
-                                <span class="text-sm text-gray-600 tracking-tight">
-                                    Clear
-                                </span>
+                    <div x-data="{ isOpen: false }" class="relative flex items-center">
+                        <div class="{{ $orderstatus_filter || $paymentstatus_filter || $paymenttype_filter || $quick_search_filter ? 'block' : 'hidden' }}">
+                            <button type="button"
+                                    wire:click="clearFilters"
+                                    class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
+                                <span class="mx-1">Clear Filters</span>
                             </button>
                         </div>
 
-                        <div class="px-2.5 transition ease-in-out duration-300 {{ $paymentstatus_filter ? 'block' : 'hidden' }}"
-                            x-transition>
-                            <button wire:click.debounce="$set('paymentstatus_filter', '')">
-                                <span class="text-sm text-gray-600 tracking-tight">
-                                    Clear
-                                </span>
-                            </button>
-                        </div>
-                        <div class="px-2.5 transition ease-in-out duration-300 {{ $paymenttype_filter ? 'block' : 'hidden' }}"
-                            x-transition>
-                            <button wire:click.debounce="$set('paymenttype_filter', '')">
-                                <span class="text-sm text-gray-600 tracking-tight">
-                                    Clear
-                                </span>
-                            </button>
-                        </div>
-                        <div class="px-2.5 transition ease-in-out duration-300 {{ $quick_search_filter ? 'block' : 'hidden' }}"
-                            x-transition>
-                            <button wire:click.debounce="$set('quick_search_filter', '')">
-                                <span class="text-sm text-gray-600 tracking-tight">
-                                    Clear
-                                </span>
-                            </button>
-                        </div>
+                        {{-- <div class="px-2.5 transition ease-in-out duration-300 {{ $orderstatus_filter ? 'block' : 'hidden' }}" --}}
+                        {{--     x-transition> --}}
+                        {{--     <button wire:click.debounce="$set('orderstatus_filter', '')"> --}}
+                        {{--         <span class="text-sm text-gray-600 tracking-tight"> --}}
+                        {{--             Clear --}}
+                        {{--         </span> --}}
+                        {{--     </button> --}}
+                        {{-- </div> --}}
+
+                        {{-- <div class="px-2.5 transition ease-in-out duration-300 {{ $paymentstatus_filter ? 'block' : 'hidden' }}" --}}
+                        {{--     x-transition> --}}
+                        {{--     <button wire:click.debounce="$set('paymentstatus_filter', '')"> --}}
+                        {{--         <span class="text-sm text-gray-600 tracking-tight"> --}}
+                        {{--             Clear --}}
+                        {{--         </span> --}}
+                        {{--     </button> --}}
+                        {{-- </div> --}}
+                        {{-- <div class="px-2.5 transition ease-in-out duration-300 {{ $paymenttype_filter ? 'block' : 'hidden' }}" --}}
+                        {{--     x-transition> --}}
+                        {{--     <button wire:click.debounce="$set('paymenttype_filter', '')"> --}}
+                        {{--         <span class="text-sm text-gray-600 tracking-tight"> --}}
+                        {{--             Clear --}}
+                        {{--         </span> --}}
+                        {{--     </button> --}}
+                        {{-- </div> --}}
+                        {{-- <div class="px-2.5 transition ease-in-out duration-300 {{ $quick_search_filter ? 'block' : 'hidden' }}" --}}
+                        {{--     x-transition> --}}
+                        {{--     <button wire:click.debounce="$set('quick_search_filter', '')"> --}}
+                        {{--         <span class="text-sm text-gray-600 tracking-tight"> --}}
+                        {{--             Clear --}}
+                        {{--         </span> --}}
+                        {{--     </button> --}}
+                        {{-- </div> --}}
 
                     </div>
                 </div>
@@ -238,7 +246,38 @@
                     </div>
                 </div>
             </div>
-            <hr>
+            {{-- <hr> --}}
+            <div class="w-full flex justify-end p-3">
+                <button type="button"  class="bg-primary hover:!bg-blue-700 text-white p-2 rounded w-fit"
+                        data-bs-toggle="modal" data-bs-target="#massShip">
+                    Mass Ship Orders
+                </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="massShip" data-bs-backdrop="static"
+                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmRemoveLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmRemoveLabel">Mass Shipping Confirmation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center text-lg text-black">Are you sure you want to proceed with mass shipping
+                            <span class="font-medium"> {{ $this->getTotalPendingCount }} item/s ?</span>
+                            This action will dispatch a <span class="font-medium">large number of items at once</span> .
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                    @disabled($this->getTotalPendingCount == 0)
+                                    wire:click="massShip">Continue and Ship</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="bg-white overflow-x-auto rounded-lg p-3">
                 <div class="grid grid-cols-12 text-center text-sm">
@@ -254,7 +293,7 @@
                 </div>
                 {{-- loading indicator --}}
                 <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
-                    <div class="w-full" wire:loading wire:target="gotoPage, orderstatus_filter, ">
+                    <div class="w-full" wire:loading wire:target="gotoPage, orderstatus_filter ">
                         <div role="status"
                             class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
                             <div class="flex items-center justify-between">
@@ -651,11 +690,11 @@
                 </div>
 
             </div>
-            <div class="w-full flex justify-end p-3">
-                <button type="button" wire:click="massShip" class="bg-red-600 hover:!bg-red-700 text-white p-2 rounded w-fit">
-                    Mass Ship Orders
-                </button>
-            </div>
+            {{-- <div class="w-full flex justify-end p-3"> --}}
+            {{--     <button type="button" wire:click="massShip" class="bg-red-600 hover:!bg-red-700 text-white p-2 rounded w-fit"> --}}
+            {{--         Mass Ship Orders --}}
+            {{--     </button> --}}
+            {{-- </div> --}}
         </div>
         <div
             class="hidden ml-3 d-lg-flex flex-none max-w-[14rem] flex-column gap-3 items-center md:content-center h-full py-4">
