@@ -247,10 +247,10 @@
                 </div>
             </div>
             {{-- <hr> --}}
-            <div class="w-full flex justify-end p-3">
+            <div class="w-full flex justify-end py-3">
                 <button type="button"  class="bg-primary hover:!bg-blue-700 text-white p-2 rounded w-fit"
                         data-bs-toggle="modal" data-bs-target="#massShip">
-                    Mass Ship Orders
+                    Mass Prepare Orders
                 </button>
             </div>
             <!-- Modal -->
@@ -260,11 +260,11 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirmRemoveLabel">Mass Shipping Confirmation</h5>
+                            <h5 class="modal-title" id="confirmRemoveLabel">Mass Prepare Order Confirmation</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                         </div>
-                        <div class="modal-body text-center text-lg text-black">Are you sure you want to proceed with mass shipping
+                        <div class="modal-body text-center text-lg text-black">Are you sure you want to proceed with mass prepare for shipping
                             <span class="font-medium"> {{ $this->getTotalPendingCount }} item/s ?</span>
                             This action will dispatch a <span class="font-medium">large number of items at once</span> .
                         </div>
