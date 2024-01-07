@@ -165,8 +165,7 @@ class OrderList extends Component
             // dd($search);
 
             return $search;
-        }
-        //
+        } //
         else {
 
             return $this->purchases->orderBy('updated_at', 'desc')->paginate(10);
@@ -187,6 +186,8 @@ class OrderList extends Component
         $user_id = $request->user_id;
         $payment_type = $request->payment_type;
         $user = User::find($user_id);
+
+        // dd($request);
 
         // dd($item);
         // Purchase::where('id', $purchase_id)->update(['purchase_status' => $this->purchase_status]);
@@ -234,33 +235,23 @@ class OrderList extends Component
             $notification->save();
 
             return redirect(route('order-list'));
-        }
-
-        // redirect to to_ship list
+        } // redirect to to_ship list
         elseif ($this->purchase_status == 'to_ship') {
 
             return redirect(route('shipment-list'));
-        }
-
-        // redirect to shipping list
+        } // redirect to shipping list
         elseif ($this->purchase_status == 'shipping') {
 
             return redirect(route('shipment-list'));
-        }
-
-        // redirect to cancellation list
+        } // redirect to cancellation list
         elseif ($this->purchase_status == 'cancellation_pending') {
 
             return redirect(route('order-cancellations'));
-        }
-
-        // redirect to cancellation list
+        } // redirect to cancellation list
         elseif ($this->purchase_status == 'cancellation_approved') {
 
             return redirect(route('order-cancellations'));
-        }
-
-        //
+        } //
         elseif ($this->purchase_status == 'failed_delivery' && $payment_type == 'cod') {
 
             // $notification = new UserNotification([
@@ -295,6 +286,55 @@ class OrderList extends Component
 
     public function massShip()
     {
+        $purchases = Purchase::where('seller_id', $this->seller->id)
+            ->where('purchase_status', 'pending')
+            ->get();
 
+        // dd($purchases);
+
+        if (count($purchases) != 0) {
+            foreach ($purchases as $purchase) {
+                $user = User::find($purchase->user_id);
+
+                $shipment = new Shipments([
+                    'shipment_number' => random_int(10000000, 99999999),
+                    'purchase_id' => $purchase->id,
+                    'user_id' => $purchase->user_id,
+                    'seller_id' => $this->seller->id,
+                    'email' => $user->email,
+                    'phone_number' => $user->phone_number,
+                    'shipment_status' => 'to_ship',
+                    'street_address_1' => $user->street_address_1,
+                    'state_province' => $user->state_province,
+                    'city' => $user->city,
+                    'postal_code' => $user->postal_code,
+                    'country' => $user->country,
+                ]);
+                $shipment->save();
+
+                Purchase::where('id', $purchase->id)->update(['purchase_status' => 'to_ship']);
+
+                //notify from 'pending' to 'to_ship'
+                $notification = new UserNotification([
+                    'user_id' => $purchase->user_id,
+                    'purchase_id' => $purchase->id,
+                    'tag' => 'to_ship',
+                    'title' => 'Purchase Confirmed',
+                    'message' => 'Purchase for order #'.$purchase->id.' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                ]);
+                $notification->save();
+
+            }
+        }
+
+        // $user = User::find($purchases->user_id);
+    }
+
+    public function clearFilters()
+    {
+        $this->orderstatus_filter = '';
+        $this->paymentstatus_filter = '';
+        $this->paymenttype_filter = '';
+        $this->quick_search_filter = '';
     }
 }
