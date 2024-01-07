@@ -11,6 +11,7 @@ use App\Models\UserNotification;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -19,6 +20,7 @@ use Livewire\WithPagination;
 #[Layout('layouts.seller.seller-layout')]
 class OrderList extends Component
 {
+    use LivewireAlert;
     use WithPagination;
 
     //    protected $paginationTheme = 'bootstrap';
@@ -323,6 +325,9 @@ class OrderList extends Component
                     'message' => 'Purchase for order #'.$purchase->id.' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
                 ]);
                 $notification->save();
+
+                $this->alert('success', 'All items have been prepared for shipping', [
+                    'position' => 'top-end']);
 
             }
         }
