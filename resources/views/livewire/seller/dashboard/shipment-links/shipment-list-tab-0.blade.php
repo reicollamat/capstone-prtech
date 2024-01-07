@@ -1,5 +1,34 @@
 {{-- searchning filter --}}
-<div class="flex flex-column flex-lg-row-reverse lg:items-center gap-2.5 mb-1">
+<div class="flex justify-between flex-lg-row-reverse lg:items-center gap-2.5 mb-3">
+    <button type="button" class="relative bg-primary hover:!bg-blue-700 text-white p-2 rounded w-fit"
+        data-bs-toggle="modal" data-bs-target="#massShip">
+        Mass Shipping Orders
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="massShip" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="confirmRemoveLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmRemoveLabel">Mass Shipping Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center text-lg text-black">Are you sure you want to proceed with mass
+                    shipping
+                    <span class="font-medium"> {{ $total_to_ship_count ?? 0 }} item/s ?</span>
+                    This action will dispatch a <span class="font-medium">large number of items at once</span> .
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @disabled( $total_to_ship_count == 0)
+                        wire:click="massShip">Continue and Ship
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="relative text-gray-600">
         <label for="quick_search" class="sr-only">Search</label>
         <div class="flex gap-1.5 items-center">
@@ -13,13 +42,14 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="bg-white overflow-x-auto rounded-lg p-3">
     <div class="grid grid-cols-12 text-center text-sm">
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase#</div>
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment#</div>
-        <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
+        <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase#</div>
+        <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment#</div>
+        {{-- <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div> --}}
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amount</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchased On
         </div>
@@ -35,15 +65,15 @@
                 <div class="border-b border-gray-100" x-data="{ selected: null }">
                     {{-- @dd($to_ship) --}}
                     <div class="grid grid-cols-12 text-center">
-                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
                             {{ $to_ship->purchase->reference_number }}
                         </div>
-                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
                             {{ $to_ship->shipment_number }}
                         </div>
-                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                            {{ $to_ship->user->first_name }} {{ $to_ship->user->last_name }}
-                        </div>
+                        {{-- <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light"> --}}
+                        {{--     {{ $to_ship->user->first_name }} {{ $to_ship->user->last_name }} --}}
+                        {{-- </div> --}}
                         <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
                             ₱{{ $to_ship->purchase->total_amount }}
                         </div>
