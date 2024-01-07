@@ -202,6 +202,7 @@
                                                 Weight
                                             </label>
                                             <input type="number" id="product_weight"
+                                                   step="0.1"
                                                 wire:model.blur="product_weight"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" required>
@@ -219,8 +220,8 @@
                     <div class="px-8 flex justify-between !pb-2">
                         <div class="content-center gap-1.5">
                             <i class="bi bi-pencil"></i>
-                            <a href="#" class="mb-0 no-underline text-gray-600 text-sm tracking-normal">Advance
-                                Edit</a>
+                            {{-- <a href="#" class="mb-0 no-underline text-gray-600 text-sm tracking-normal">Advance --}}
+                            {{--     Edit</a> --}}
                         </div>
                         <div>
                             <button type="button"
@@ -235,7 +236,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="confirmRemoveLabel">Modal title</h5>
+                                            <h5 class="modal-title" id="confirmRemoveLabel">Removal Confirmation</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -248,7 +249,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Cancel</button>
                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                                wire:click="$parent.removeProduct( {{ $itemproductinfo->id }} )">Understood</button>
+                                                wire:click="$parent.removeProduct( {{ $itemproductinfo->id }} )">Remove</button>
                                         </div>
                                     </div>
                                 </div>
