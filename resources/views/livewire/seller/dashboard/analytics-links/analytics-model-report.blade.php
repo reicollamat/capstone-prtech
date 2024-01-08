@@ -54,18 +54,8 @@
         </div> --}}
 
 
-
-
-
-
-
-
-
-
-
-
-
         <div class="bg-white overflow-x-auto rounded-lg p-3 m-4">
+            <h5>Product Restock Recommender</h5>
             <div class="grid grid-cols-12 text-center text-sm">
                 <div class="col-span-1 p-1 !text-gray-400 !font-light border-b-2 border-blue-300">ID</div>
                 <div class="col-span-3 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
@@ -124,7 +114,6 @@
 
 {{--            @dd($this->getMostPositiveReviewedProducts)--}}
 {{--            @dd($this->getMostBoughtProducts)--}}
-            @dd($this->getMostNegativeReviewedProducts)
 
 
             {{-- loading indicator --}}
@@ -172,6 +161,290 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="bg-white overflow-x-auto rounded-lg p-3 m-1">
+                    <h5>Most Positive Reviewed</h5>
+                    <div class="grid grid-cols-12 text-center text-sm">
+                        <div class="col-span-5 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
+                        <div class="col-span-4 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category</div>
+                        <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Rating</div>
+                    </div>
+        
+                    {{-- @dd($this->getMostPositiveReviewedProducts) --}}
+        
+                    <div wire:loading.remove x-transition>
+                        @if ($this->getMostPositiveReviewedProducts->count() > 0)
+                            @foreach ($this->getMostPositiveReviewedProducts as $key => $product)
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed d-block" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$key}}-{{$product->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$key}}-{{$product->id}}">
+                                                {{-- @dd($product) --}}
+                                                <div class="grid grid-cols-12 text-center">
+                                                    <div class="col-span-5 mb-0 py-3 !text-gray-800 !font-light">
+                                                        {{ $product->title }}
+                                                    </div>
+                                                    <div class="col-span-4 mb-0 py-3 !text-gray-800 !font-light">
+                                                        {{ $product->category }}
+                                                    </div>
+                                                    <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                                        <i class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapse-{{$key}}-{{$product->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body flex content-center">
+                                                <img src="{{ asset('restock/future_predictions_plot'.fake()->numberBetween(0, 37).'.png') }}" alt="" style="max-height: 500px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="flex content-center text-gray-500 p-6">
+                                <h4>Not Enough Data</h4>
+                            </div>
+                        @endif
+                    </div>
+        
+                    {{-- loading indicator --}}
+                    <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
+                        <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">
+                            <div role="status"
+                                class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-4">
+                <div class="bg-white overflow-x-auto rounded-lg p-3 m-1">
+                    <h5>Most Bought</h5>
+                    <div class="grid grid-cols-12 text-center text-sm">
+                        <div class="col-span-5 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
+                        <div class="col-span-4 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category</div>
+                        <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase Count</div>
+                    </div>
+        
+                    <div wire:loading.remove x-transition>
+                        @if ($this->getMostBoughtProducts->count() > 0)
+                            @foreach ($this->getMostBoughtProducts as $key => $product)
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed d-block" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$key}}-{{$product->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$key}}-{{$product->id}}">
+                                                {{-- @dd($product) --}}
+                                                <div class="grid grid-cols-12 text-center">
+                                                    <div class="col-span-5 mb-0 py-3 !text-gray-800 !font-light">
+                                                        {{ $product->title }}
+                                                    </div>
+                                                    <div class="col-span-4 mb-0 py-3 !text-gray-800 !font-light">
+                                                        {{ $product->category }}
+                                                    </div>
+                                                    <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                                        {{ $product->purchase_count }}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapse-{{$key}}-{{$product->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body flex content-center">
+                                                <img src="{{ asset('restock/future_predictions_plot'.fake()->numberBetween(0, 37).'.png') }}" alt="" style="max-height: 500px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="flex content-center text-gray-500 p-6">
+                                <h4>Not Enough Data</h4>
+                            </div>
+                        @endif
+                    </div>
+        
+                    {{-- loading indicator --}}
+                    <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
+                        <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">
+                            <div role="status"
+                                class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-4">
+                <div class="bg-white overflow-x-auto rounded-lg p-3 m-1">
+                    <h5>Most Negative Reviewed</h5>
+                    <div class="grid grid-cols-12 text-center text-sm">
+                        <div class="col-span-5 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
+                        <div class="col-span-4 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category</div>
+                        <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Rating</div>
+                    </div>
+        
+                    <div wire:loading.remove x-transition>
+                        @if ($this->getMostNegativeReviewedProducts->count() > 0)
+                            @foreach ($this->getMostNegativeReviewedProducts as $key => $product)
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed d-block" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-{{$key}}-{{$product->id}}" aria-expanded="false" aria-controls="flush-collapse-{{$key}}-{{$product->id}}">
+                                                {{-- @dd($product) --}}
+                                                <div class="grid grid-cols-12 text-center">
+                                                    <div class="col-span-5 mb-0 py-3 !text-gray-800 !font-light">
+                                                        {{ $product->title }}
+                                                    </div>
+                                                    <div class="col-span-4 mb-0 py-3 !text-gray-800 !font-light">
+                                                        {{ $product->category }}
+                                                    </div>
+                                                    <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                                        <i class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapse-{{$key}}-{{$product->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body flex content-center">
+                                                <img src="{{ asset('restock/future_predictions_plot'.fake()->numberBetween(0, 37).'.png') }}" alt="" style="max-height: 500px">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="flex content-center text-gray-500 p-6">
+                                <h4>Not Enough Data</h4>
+                            </div>
+                        @endif
+                    </div>
+        
+                    {{-- loading indicator --}}
+                    <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
+                        <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">
+                            <div role="status"
+                                class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <div class="flex items-center justify-between pt-4">
+                                    <div>
+                                        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                                        <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                    </div>
+                                    <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+                                </div>
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
 
 
 
