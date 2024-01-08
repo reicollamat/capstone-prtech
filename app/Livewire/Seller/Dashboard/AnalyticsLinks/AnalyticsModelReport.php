@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Seller\Dashboard\AnalyticsLinks;
 
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -21,9 +23,19 @@ class AnalyticsModelReport extends Component
 
     public $restock_amounts;
 
+    public $mostPositiveReviewFilter;
+
+    public $mostNegativeReviewFilter;
+
+    public $mostBoughtProducts;
+
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
+
+        $this->mostPositiveReviewFilter = 180;
+        $this->mostNegativeReviewFilter = 180;
+        $this->mostBoughtProducts = 7;
 
         // dd($this->seller->id);
 
@@ -84,25 +96,52 @@ class AnalyticsModelReport extends Component
     #[Computed]
     public function getMostPositiveReviewedProducts()
     {
-        // dd($this->seller->id);
+        if ($this->mostPositiveReviewFilter > 0) {
+            // $all_products = Comment::where('seller_id', $this->seller->id)
+            //     ->where('rating', '>=', 3)
+            //     ->where('created_at', '>=', now()->subDays($this->mostPositiveReviewFilter))
+            //     // ->groupBy('product_id')
+            //     ->orderBy('rating', 'desc')
+            //     ->take(10)
+            //     ->get();
 
-        $all_products = Product::where('seller_id', $this->seller->id)
-            ->where('rating', '>=', 3)
-            ->orderBy('rating', 'desc')
-            ->take(5)
-            ->get();
+            $all_products = DB::select('SELECT product_id, p.title, p.category, SUM(c.rating) / COUNT(*) AS average_rating
+                FROM comments c
+                         JOIN products p ON c.product_id = p.id
+                WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL ' .$this->mostPositiveReviewFilter. ' DAY)
+                GROUP BY product_id, p.title, p.category
+                order by SUM(c.rating) / COUNT(*) desc
+                limit 10;');
 
-        return $all_products;
+            return $all_products;
+        }
+        // $all_products
+
+        // $all_products = Product::where('seller_id', $this->seller->id)
+        //     ->where('rating', '>=', 3)
+        //     ->orderBy('rating', 'desc')
+        //     ->take(10)
+        //     ->get();
+
+        // return $all_products;
     }
 
     #[Computed]
     public function getMostBoughtProducts()
     {
-        $all_products = Product::where('seller_id', $this->seller->id)
-            ->where('purchase_count', '>=', 1)
-            ->orderBy('purchase_count', 'desc')
-            ->take(5)
-            ->get();
+        // $all_products = Product::where('seller_id', $this->seller->id)
+        //     ->where('purchase_count', '>=', 1)
+        //     ->orderBy('purchase_count', 'desc')
+        //     ->take(5)
+        //     ->get();
+
+        $all_products = DB::select('SELECT product_id, p.title, p.category, SUM(pi.quantity) AS total_quantity
+            FROM purchase_items pi
+                     JOIN products p ON pi.product_id = p.id
+            WHERE pi.created_at >= DATE_SUB(NOW(), INTERVAL ' .$this->mostBoughtProducts. ' DAY)
+            GROUP BY product_id,title,category
+            order by SUM(pi.quantity)
+            limit 10');
 
         return $all_products;
     }
@@ -110,13 +149,34 @@ class AnalyticsModelReport extends Component
     #[Computed]
     public function getMostNegativeReviewedProducts()
     {
-        $all_products = Product::where('seller_id', $this->seller->id)
-            ->where('rating', '<=', 2)
-            ->orderBy('rating', 'desc')
-            ->take(5)
-            ->get();
+        if ($this->mostPositiveReviewFilter > 0) {
+            // $all_products = Comment::where('seller_id', $this->seller->id)
+            //     ->where('rating', '<=', 2)
+            //     ->where('created_at', '>=', now()->subDays($this->mostNegativeReviewFilter))
+            //     // ->groupBy('product_id')
+            //     ->orderBy('rating', 'desc')
+            //     ->take(10)
+            //     ->get();
 
-        return $all_products;
+            $all_products = DB::select('SELECT product_id, p.title, p.category, SUM(c.rating) / COUNT(*) AS average_rating
+                FROM comments c
+                         JOIN products p ON c.product_id = p.id
+                WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL ' .$this->mostNegativeReviewFilter. ' DAY)
+                GROUP BY product_id, p.title, p.category
+                order by SUM(c.rating) / COUNT(*)
+                limit 10');
+
+            // dd($all_products);
+
+            return $all_products;
+        }
+        // $all_products = Product::where('seller_id', $this->seller->id)
+        //     ->where('rating', '<=', 2)
+        //     ->orderBy('rating', 'desc')
+        //     ->take(5)
+        //     ->get();
+        //
+        // return $all_products;
     }
 
     public function render()
