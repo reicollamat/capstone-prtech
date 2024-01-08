@@ -9,6 +9,7 @@ use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
+use App\Models\Shipments;
 use App\Models\UserNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,8 @@ class Gcash3 extends Component
     public $is_cart;
 
     public $user_id;
+
+    public $user;
 
     public $product_id;
 
@@ -38,6 +41,7 @@ class Gcash3 extends Component
     {
         $this->is_cart = $request->is_cart;
         $this->user_id = Auth::id();
+        $this->user = Auth::user($this->user_id);
         $this->product_id = $request->product_id;
         $this->quantity = $request->quantity;
         $this->shipping_value_purchaseone = $request->shipping_value_purchaseone;
@@ -126,6 +130,24 @@ class Gcash3 extends Component
                 ]);
                 $purchase->save();
 
+
+                $shipment = new Shipments([
+                    'shipment_number' => random_int(10000000, 99999999),
+                    'purchase_id' => $purchase->id,
+                    'user_id' => $this->user->id,
+                    'seller_id' => $key,
+                    'email' => $this->user->email,
+                    'phone_number' => $this->user->phone_number,
+                    'shipment_status' => 'to_ship',
+                    'street_address_1' => $this->user->street_address_1,
+                    'state_province' => $this->user->state_province,
+                    'city' => $this->user->city,
+                    'postal_code' => $this->user->postal_code,
+                    'country' => $this->user->country,
+                ]);
+                $shipment->save();
+
+
                 $payment = new Payment([
                     'user_id' => $this->user_id,
                     'purchase_id' => $purchase->id,
@@ -192,6 +214,24 @@ class Gcash3 extends Component
                 'purchase_status' => 'pending',
             ]);
             $purchase->save();
+
+
+            $shipment = new Shipments([
+                'shipment_number' => random_int(10000000, 99999999),
+                'purchase_id' => $purchase->id,
+                'user_id' => $this->user->id,
+                'seller_id' => $product->seller_id,
+                'email' => $this->user->email,
+                'phone_number' => $this->user->phone_number,
+                'shipment_status' => 'to_ship',
+                'street_address_1' => $this->user->street_address_1,
+                'state_province' => $this->user->state_province,
+                'city' => $this->user->city,
+                'postal_code' => $this->user->postal_code,
+                'country' => $this->user->country,
+            ]);
+            $shipment->save();
+
 
             $payment = new Payment([
                 'user_id' => $this->user_id,

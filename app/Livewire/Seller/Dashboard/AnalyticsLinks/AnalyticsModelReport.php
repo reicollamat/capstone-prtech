@@ -89,10 +89,10 @@ class AnalyticsModelReport extends Component
         $all_products = Product::where('seller_id', $this->seller->id)
             ->where('rating', '>=', 3)
             ->orderBy('rating', 'desc')
+            ->take(5)
             ->get();
 
         return $all_products;
-
     }
 
     #[Computed]
@@ -101,6 +101,7 @@ class AnalyticsModelReport extends Component
         $all_products = Product::where('seller_id', $this->seller->id)
             ->where('purchase_count', '>=', 1)
             ->orderBy('purchase_count', 'desc')
+            ->take(5)
             ->get();
 
         return $all_products;
@@ -112,6 +113,7 @@ class AnalyticsModelReport extends Component
         $all_products = Product::where('seller_id', $this->seller->id)
             ->where('rating', '<=', 2)
             ->orderBy('rating', 'desc')
+            ->take(5)
             ->get();
 
         return $all_products;

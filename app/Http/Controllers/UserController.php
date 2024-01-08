@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
+use App\Models\Shipments;
 use App\Models\User;
 use App\Models\UserNotification;
 use Illuminate\Http\Request;
@@ -96,6 +97,7 @@ class UserController extends Controller
         $category = $request->category;
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
+        $user = Auth::user($user_id);
         $user_email = Auth::user()->email; // Get the user Email
 
         // dd($subtotal);
@@ -126,11 +128,27 @@ class UserController extends Controller
             'purchase_date' => now(),
             'total_amount' => $total,
             'shipping_fee' => $shipping_value,
-            'purchase_status' => 'pending',
+            'purchase_status' => 'to_ship',
         ]);
         $purchase->save();
 
-        // dd($this->mailStatus);
+
+        $shipment = new Shipments([
+            'shipment_number' => random_int(10000000, 99999999),
+            'purchase_id' => $purchase->id,
+            'user_id' => $user->id,
+            'seller_id' => $product->seller_id,
+            'email' => $user->email,
+            'phone_number' => $user->phone_number,
+            'shipment_status' => 'to_ship',
+            'street_address_1' => $user->street_address_1,
+            'state_province' => $user->state_province,
+            'city' => $user->city,
+            'postal_code' => $user->postal_code,
+            'country' => $user->country,
+        ]);
+        $shipment->save();
+
 
         $payment = new Payment([
             'user_id' => $user_id,
@@ -168,12 +186,12 @@ class UserController extends Controller
             'user_id' => $user_id,
             'purchase_id' => $purchase->id,
             'tag' => 'order_placed',
-            'title' => 'Order #'.$purchase->id.' Placed',
-            'message' => 'An order has been placed'.$this->mailStatus,
+            'title' => 'Order #' . $purchase->id . ' Placed',
+            'message' => 'An order has been placed' . $this->mailStatus,
         ]);
         $notification->save();
 
-        Session::flash('notification', 'Order Purchased, Thank you! '.$this->mailStatus);
+        Session::flash('notification', 'Order Purchased, Thank you! ' . $this->mailStatus);
 
         return redirect(route('product_detail', [
             'product_id' => $product_id,
@@ -189,6 +207,7 @@ class UserController extends Controller
         $total = $request->total;
         $payment_type = $request->payment_type;
         $user_id = $request->user_id;
+        $user = Auth::user($user_id);
         $user_email = Auth::user()->email; // Get the user Email
 
         // redirect here if payment is GCASH
@@ -242,9 +261,27 @@ class UserController extends Controller
                 'purchase_date' => now(),
                 'shipping_fee' => $cartitems_shippingfee_per_seller,
                 'total_amount' => $total_amount,
-                'purchase_status' => 'pending',
+                'purchase_status' => 'to_ship',
             ]);
             $purchase->save();
+
+
+            $shipment = new Shipments([
+                'shipment_number' => random_int(10000000, 99999999),
+                'purchase_id' => $purchase->id,
+                'user_id' => $user->id,
+                'seller_id' => $key,
+                'email' => $user->email,
+                'phone_number' => $user->phone_number,
+                'shipment_status' => 'to_ship',
+                'street_address_1' => $user->street_address_1,
+                'state_province' => $user->state_province,
+                'city' => $user->city,
+                'postal_code' => $user->postal_code,
+                'country' => $user->country,
+            ]);
+            $shipment->save();
+
 
             $payment = new Payment([
                 'user_id' => $user_id,
@@ -285,8 +322,8 @@ class UserController extends Controller
                 'user_id' => $user_id,
                 'purchase_id' => $purchase->id,
                 'tag' => 'order_placed',
-                'title' => 'Order #'.$purchase->id.' Placed',
-                'message' => 'An order has been placed'.$this->mailStatus,
+                'title' => 'Order #' . $purchase->id . ' Placed',
+                'message' => 'An order has been placed' . $this->mailStatus,
             ]);
             $notification->save();
         }
