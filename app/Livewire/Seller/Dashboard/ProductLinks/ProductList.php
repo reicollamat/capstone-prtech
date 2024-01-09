@@ -5,6 +5,7 @@ namespace App\Livewire\Seller\Dashboard\ProductLinks;
 use App\Models\Product;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -155,6 +156,7 @@ class ProductList extends Component
             ->orderBy('purchase_count', 'desc')
             ->limit(10)
             ->get();
+
 
         return $all_products;
     }
