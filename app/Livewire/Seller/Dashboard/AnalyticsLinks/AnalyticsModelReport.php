@@ -33,9 +33,9 @@ class AnalyticsModelReport extends Component
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
-        $this->mostPositiveReviewFilter = 180;
-        $this->mostNegativeReviewFilter = 180;
-        $this->mostBoughtProducts = 7;
+        $this->mostPositiveReviewFilter = 30;
+        $this->mostNegativeReviewFilter = 30;
+        $this->mostBoughtProducts = 30;
 
         // dd($this->seller->id);
 
@@ -109,8 +109,9 @@ class AnalyticsModelReport extends Component
                 FROM comments c
                          JOIN products p ON c.product_id = p.id
                 WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL ' .$this->mostPositiveReviewFilter. ' DAY)
+                AND c.seller_id = ' .$this->seller->id. '
                 GROUP BY product_id, p.title, p.category
-                order by SUM(c.rating) / COUNT(*) desc
+                order by average_rating
                 limit 10;');
 
             return $all_products;
@@ -139,8 +140,9 @@ class AnalyticsModelReport extends Component
             FROM purchase_items pi
                      JOIN products p ON pi.product_id = p.id
             WHERE pi.created_at >= DATE_SUB(NOW(), INTERVAL ' .$this->mostBoughtProducts. ' DAY)
+            AND p.seller_id = ' .$this->seller->id. '
             GROUP BY product_id,title,category
-            order by SUM(pi.quantity)
+            order by total_quantity
             limit 10');
 
         return $all_products;
@@ -158,12 +160,13 @@ class AnalyticsModelReport extends Component
             //     ->take(10)
             //     ->get();
 
-            $all_products = DB::select('SELECT product_id, p.title, p.category, SUM(c.rating) / COUNT(*) AS average_rating
+            $all_products = DB::select('SELECT product_id, p.title, c.seller_id, p.category, SUM(c.rating) / COUNT(*) AS average_rating
                 FROM comments c
                          JOIN products p ON c.product_id = p.id
                 WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL ' .$this->mostNegativeReviewFilter. ' DAY)
-                GROUP BY product_id, p.title, p.category
-                order by SUM(c.rating) / COUNT(*)
+                AND c.seller_id = ' .$this->seller->id. '
+                GROUP BY product_id, p.title, p.category, c.seller_id
+                order by average_rating
                 limit 10');
 
             // dd($all_products);
