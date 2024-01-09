@@ -7,32 +7,33 @@
 
         <div class="flex-1 w-64">
             <div class="flex flex-column flex-lg-row justify-between gap-2 ">
-                <div class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
+                <div
+                    class="flex lg:hidden flex-none  flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
                     <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
                         <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                         <div class="py-2">
                             <p class="text-sm text-center font-base text-gray-500 mb-1">Total Products Listed</p>
                             <input type="text"
-                                class="font-semibold bg-transparent w-full text-center form-control-lg"
-                                wire:model="total_products_count" disabled>
+                                   class="font-semibold bg-transparent w-full text-center form-control-lg"
+                                   wire:model="total_products_count" disabled>
                         </div>
                         <div class="py-2 text-center">
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Available Products</p>
                                 <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                    wire:model="total_available_count" disabled>
+                                       wire:model="total_available_count" disabled>
                             </div>
                         </div>
                         <div class="py-2 text-center flex justify-center">
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Brand New</p>
                                 <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                    wire:model="total_brandnew_count" disabled>
+                                       wire:model="total_brandnew_count" disabled>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Used</p>
                                 <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                    wire:model="total_used_count" disabled>
+                                       wire:model="total_used_count" disabled>
                             </div>
                         </div>
                         <div class="py-2 text-center flex justify-center">
@@ -41,7 +42,7 @@
                                 <div class="flex w-50 mx-auto px-5">
                                     <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
                                     <input type="text" class="font-semibold bg-transparent w-fit"
-                                        wire:model="total_products_rating" disabled>
+                                           wire:model="total_products_rating" disabled>
                                 </div>
                             </div>
                         </div>
@@ -83,11 +84,11 @@
                 <div x-data="{ isOpen: false }" class="relative inline-block ">
                     <!-- Dropdown toggle button -->
                     <button @click="isOpen = !isOpen"
-                        class="relative z-10 w-full flex items-center p-2 text-sm text-gray-600 gap-1">
+                            class="relative z-10 w-full flex items-center p-2 text-sm text-gray-600 gap-1">
                         <span class="mx-1">IN STOCK</span>
                         <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            :class="{ 'rotate-180 transition duration-300': isOpen }">
+                             xmlns="http://www.w3.org/2000/svg"
+                             :class="{ 'rotate-180 transition duration-300': isOpen }">
                             <path
                                 d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
                                 fill="currentColor"></path>
@@ -95,11 +96,11 @@
                     </button>
                     <!-- Dropdown menu -->
                     <div x-cloak x-show="isOpen" @click.away="isOpen = false"
-                        x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-100"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="absolute left-0 z-20 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-100"
+                         x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                         class="absolute left-0 z-20 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                         <div class="bg-white rounded border-1 border-gray-300">
                             <button
                                 class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
@@ -117,12 +118,12 @@
                     <div x-data="{ isOpen: false }" class="relative inline-block ">
                         <!-- Dropdown toggle button -->
                         <button @click="isOpen = !isOpen"
-                            class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-sm bg-white text-gray-600 gap-1">
+                                class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-sm bg-white text-gray-600 gap-1">
                             <span class="mx-1">Category:
                                 {{ CustomHelper::maptopropercatetory($category_filter) }}</span>
                             <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg"
-                                :class="{ 'rotate-180 transition duration-300': isOpen }">
+                                 fill="none" xmlns="http://www.w3.org/2000/svg"
+                                 :class="{ 'rotate-180 transition duration-300': isOpen }">
                                 <path
                                     d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
                                     fill="currentColor"></path>
@@ -130,11 +131,13 @@
                         </button>
                         <!-- Dropdown menu -->
                         <div x-cloak x-show="isOpen" @click.away="isOpen = false"
-                            x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-100"
-                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                            class="absolute left-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                             x-transition:enter="transition ease-out duration-100"
+                             x-transition:enter-start="opacity-0 scale-90"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-90"
+                             class="absolute left-0 z-20 mt-1 w-full md:w-96 shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                             <div class="grid grid-cols-3 gap-2 p-2 bg-white rounded border-1 border-gray-300">
                                 @foreach (CustomHelper::categoryList() as $category_key => $category_value)
                                     <button
@@ -180,7 +183,7 @@
                     {{-- </div> --}}
                     {{-- </div> --}}
                     <div class="px-2.5 transition ease-in-out duration-300 {{ $category_filter ? 'block' : 'hidden' }}"
-                        x-transition>
+                         x-transition>
                         <button wire:click.debounce="$set('category_filter', '')">
                             <span class="text-sm text-gray-600 tracking-tight">
                                 Clear Filter
@@ -197,9 +200,9 @@
                                         <i class="bi bi-search"></i>
                                     </span>
                                     <input id="quick_search" type="search" name="serch"
-                                        placeholder="Quick Search"
-                                        class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
-                                        wire:model.live="quick_search_filter">
+                                           placeholder="Quick Search"
+                                           class="form-control bg-white w-full h-full border-gray-200 !rounded-r-lg text-sm focus:outline-none"
+                                           wire:model.live="quick_search_filter">
                                 </div>
                             </div>
 
@@ -209,7 +212,7 @@
                 <div class="flex items-center text-blue-500 justify-center gap-1">
                     <i class="bi bi-plus"></i>
                     <a href="{{ route('product-new') }}" class="no-underline decoration-0 text-sm mb-0"
-                        wire:navigate>Add
+                       wire:navigate>Add
                         Product</a>
                 </div>
             </div>
@@ -249,7 +252,7 @@
                 <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
                     <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">
                         <div role="status"
-                            class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
+                             class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
@@ -375,7 +378,7 @@
                             {{-- </div> --}}
                             {{-- @dd($item) --}}
                             <livewire:component.product-list-component :item="$item" :itemProductInfo="$item"
-                                :key="$item->id" />
+                                                                       :key="$item->id"/>
                             {{-- {{ $item->slug }} --}}
                         @endforeach
                         <div class="content-center pt-3">
@@ -406,25 +409,25 @@
                 <div class="py-2">
                     <p class="text-sm text-center font-base text-gray-500 mb-1">Total Products Listed</p>
                     <input type="text" class="font-semibold bg-transparent w-full text-center form-control-lg"
-                        wire:model="total_products_count" disabled>
+                           wire:model="total_products_count" disabled>
                 </div>
                 <div class="py-2 text-center">
                     <div class="px-2">
                         <p class="text-xs font-base text-gray-500 mb-1">Available Products</p>
                         <input type="text" class="font-semibold bg-transparent w-full text-center"
-                            wire:model="total_available_count" disabled>
+                               wire:model="total_available_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-xs font-base text-gray-500 mb-1">Brand New</p>
                         <input type="text" class="font-semibold bg-transparent w-full text-center"
-                            wire:model="total_brandnew_count" disabled>
+                               wire:model="total_brandnew_count" disabled>
                     </div>
                     <div class="px-2">
                         <p class="text-xs font-base text-gray-500 mb-1">Used</p>
                         <input type="text" class="font-semibold bg-transparent w-full text-center"
-                            wire:model="total_used_count" disabled>
+                               wire:model="total_used_count" disabled>
                     </div>
                 </div>
                 <div class="py-2 text-center flex flex-column justify-center">
@@ -453,22 +456,35 @@
                 {{--                @dd($this->getMostBoughtProducts) --}}
 
                 <div class="grid md:grid-cols-3 gap-1.5">
-{{--                    @if()--}}
+                    {{--                    @if()--}}
 
-{{--                    @endif--}}
+                    {{--                    @endif--}}
                     @foreach ($this->getMostBoughtProducts as $popularproducts)
                         <button type="button" class="content-center p-2 border rounded border-gray-100">
                             <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                data-bs-trigger="hover focus" data-bs-placement="auto"
-                                data-bs-content="Product has been bought for {{ $popularproducts->purchase_count }} times this month.">
+                                  data-bs-trigger="hover focus" data-bs-placement="auto"
+                                  data-bs-content="Product has been bought for {{ $popularproducts->purchase_count }} times this month.">
                                 <img src="{{ asset($popularproducts->product_images[0]->image_paths) }}"
-                                    class="rounded-lg mx-auto d-block w-8 h-8" alt="Product-Thumbnail">
+                                     class="rounded-lg mx-auto d-block w-8 h-8" alt="Product-Thumbnail">
                             </span>
                         </button>
                         {{-- <div wire:init="getPopularProducts"></div> --}}
                     @endforeach
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+{{--@script--}}
+{{--<script>--}}
+{{--    // initialize popover js--}}
+{{--    const popoverTriggerList = document.querySelectorAll(--}}
+{{--        '[data-bs-toggle="popover"]',--}}
+{{--    );--}}
+{{--    const popoverList = [...popoverTriggerList].map(--}}
+{{--        (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),--}}
+{{--    );--}}
+{{--</script>--}}
+{{--@endscript--}}
