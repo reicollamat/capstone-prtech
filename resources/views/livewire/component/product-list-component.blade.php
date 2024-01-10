@@ -72,35 +72,35 @@
                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                             placeholder="" required>
                                         @error('product_name')
-                                        <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="mb-3 gap-4">
                                         {{-- <div> --}}
-                                            {{-- <label for="sku" --}} {{--
+                                        {{-- <label for="sku" --}} {{--
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                 --}}
-                                                {{-- SKU --}}
-                                                {{-- </label> --}}
-                                            {{-- <input type="text" id="sku" value="{{ $itemproductinfo->SKU }}" --}}
-                                                {{-- wire:model.blur="product_sku" --}} {{--
+                                        {{-- SKU --}}
+                                        {{-- </label> --}}
+                                        {{-- <input type="text" id="sku" value="{{ $itemproductinfo->SKU }}" --}}
+                                        {{-- wire:model.blur="product_sku" --}} {{--
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 --}} {{-- placeholder="" required> --}}
-                                            {{-- @error('product_sku') --}}
-                                            {{-- <span class="text-sm text-red-600 space-y-1">{{ $message }}</span> --}}
-                                            {{-- @enderror --}}
-                                            {{-- </div> --}}
+                                        {{-- @error('product_sku') --}}
+                                        {{-- <span class="text-sm text-red-600 space-y-1">{{ $message }}</span> --}}
+                                        {{-- @enderror --}}
+                                        {{-- </div> --}}
                                         <div>
                                             <label for="product_slug"
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Product
                                                 Slug
                                             </label>
-                                            <input type="text" id="product_slug" value="{{ $itemproductinfo->slug }}"
-                                                wire:model.blur="product_slug"
+                                            <input type="text" id="product_slug"
+                                                value="{{ $itemproductinfo->slug }}" wire:model.blur="product_slug"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" required>
                                             @error('product_slug')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -111,17 +111,20 @@
                                                     <label for="stock"
                                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Stock
                                                     </label>
-                                                    <input type="number" id="stock" value="{{ $itemproductinfo->stock }}"
+                                                    <input type="number" id="stock"
+                                                        value="{{ $itemproductinfo->stock }}"
                                                         wire:model.blur="product_stock"
                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" required>
                                                     @error('product_stock')
-                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                        <span
+                                                            class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                                 <div>
                                                     <label for="reserve"
-                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Low Stock Threshold
+                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Low
+                                                        Stock Threshold
                                                     </label>
                                                     <input type="number" id="reserve"
                                                         value="{{ $itemproductinfo->reserve }}"
@@ -129,7 +132,8 @@
                                                         class="bg-transparent text-red-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                         placeholder="" required>
                                                     @error('product_reserve')
-                                                    <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                        <span
+                                                            class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -149,7 +153,7 @@
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" required>
                                             @error('product_price')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div>
@@ -159,10 +163,9 @@
                                             <select id="category" wire:model.blur="product_category"
                                                 class="bg-transparent text-gray-600 !border-b-2 border-gray-600  text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5">
                                                 <option disabled default>Category</option>
-                                                @foreach (CustomHelper::categoryList() as $category_key =>
-                                                $category_value)
-                                                <option value="{{ $category_key }}">{{ $category_value }}
-                                                </option>
+                                                @foreach (CustomHelper::categoryList() as $category_key => $category_value)
+                                                    <option value="{{ $category_key }}">{{ $category_value }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -179,7 +182,7 @@
                                                 <option value="used">Used</option>
                                             </select>
                                             @error('product_condition')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="gap-2">
@@ -193,7 +196,7 @@
                                                 <option value="unavailable">Unavailable</option>
                                             </select>
                                             @error('product_status')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div>
@@ -201,13 +204,12 @@
                                                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">Product
                                                 Weight
                                             </label>
-                                            <input type="number" id="product_weight"
-                                                   step="0.1"
+                                            <input type="number" id="product_weight" min="0.01" step="0.01"
                                                 wire:model.blur="product_weight"
                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                 placeholder="" required>
                                             @error('product_weight')
-                                            <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
+                                                <span class="text-sm text-red-600 space-y-1">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
@@ -226,11 +228,11 @@
                         <div>
                             <button type="button"
                                 class="bg-transparent border-0 hover:bg-blue-700 text-gray-800 font-bold py-1.5 px-4 rounded"
-                                data-bs-toggle="modal" data-bs-target="#confirmRemove{{ $item->id}}">
+                                data-bs-toggle="modal" data-bs-target="#confirmRemove{{ $item->id }}">
                                 Remove
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="confirmRemove{{ $item->id}}" data-bs-backdrop="static"
+                            <div class="modal fade" id="confirmRemove{{ $item->id }}" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmRemoveLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -241,15 +243,19 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body text-center text-lg text-red-800 font-bold">
-                                            Are you sure to Delete <span class="text-black">{{ $product_name }}</span>,
+                                            Are you sure to Delete <span
+                                                class="text-black">{{ $product_name }}</span>,
                                             This action is
                                             irreversible!
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Cancel</button>
+                                                data-bs-dismiss="modal">Cancel
+                                            </button>
                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                                wire:click="$parent.removeProduct( {{ $itemproductinfo->id }} )">Remove</button>
+                                                wire:click="$parent.removeProduct( {{ $itemproductinfo->id }} )">
+                                                Remove
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -260,8 +266,8 @@
                                 Update
                             </button>
                             {{-- <span class="text-gray-400 text-sm tracking-wide"> --}}
-                                {{-- Changes Saved --}}
-                                {{-- </span> --}}
+                            {{-- Changes Saved --}}
+                            {{-- </span> --}}
                         </div>
                     </div>
                 </form>
