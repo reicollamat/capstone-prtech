@@ -150,7 +150,7 @@ class CaseFanComponent extends Component
                         'image_paths' => $image,
                     ]);
                 }
-                // else if there is only one image in the array create a row in db with no image
+            // else if there is only one image in the array create a row in db with no image
             } else {
                 ProductImage::create([
                     'product_id' => $product->id,
@@ -199,19 +199,31 @@ class CaseFanComponent extends Component
             ]);
         }
 
-        // if ($validator) {
-        //     dd($validator);
-        // }
-        // dd($validator);
+    }
 
-        // $links = [];
-        // $storeas = [];
-        // foreach ($this->productImages as $image) {
-        //     $links[] = $image->temporaryUrl();
-        //     $path = $image->store('product-image-uploads');
-        //
-        //     $storeas[] = $path;
-        // }
-        // dd($storeas);
+    /**
+     * Sets the image URL and index for the preview image.
+     *
+     * @param  string  $imageurl The URL of the image.
+     * @param  int  $imageindex The index of the image.
+     *
+     * @throws \Exception
+     */
+    public function setImage($imageurl, $imageindex): void
+    {
+        $this->previewImage = $imageurl;
+        $this->previewImageIndex = $imageindex;
+    }
+
+    /**
+     * Removes a photo from the productImages array at the specified index.
+     *
+     * @param  int  $imageindex The index of the photo to remove.
+     *
+     * @throws \Exception If the index is out of bounds.
+     */
+    public function removePhoto($imageindex): void
+    {
+        array_splice($this->productImages, $imageindex, 1);
     }
 }

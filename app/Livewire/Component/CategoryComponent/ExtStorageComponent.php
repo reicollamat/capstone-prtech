@@ -203,4 +203,29 @@ class ExtStorageComponent extends Component
         // }
         // dd($storeas);
     }
+    /**
+     * Sets the image URL and index for the preview image.
+     *
+     * @param  string  $imageurl The URL of the image.
+     * @param  int  $imageindex The index of the image.
+     *
+     * @throws \Exception
+     */
+    public function setImage($imageurl, $imageindex): void
+    {
+        $this->previewImage = $imageurl;
+        $this->previewImageIndex = $imageindex;
+    }
+
+    /**
+     * Removes a photo from the productImages array at the specified index.
+     *
+     * @param  int  $imageindex The index of the photo to remove.
+     *
+     * @throws \Exception If the index is out of bounds.
+     */
+    public function removePhoto($imageindex): void
+    {
+        array_splice($this->productImages, $imageindex, 1);
+    }
 }
