@@ -12,7 +12,7 @@
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Product Name" required>
                     @error('productName')
-                    <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write your thoughts here..." required></textarea>
                 @error('productDescription')
-                <span class="font-sm text-red-500">{{ $message }}</span>
+                    <span class="font-sm text-red-500">{{ $message }}</span>
                 @enderror
             </div>
             <div class="grid md:grid-cols-3 md:gap-8 ">
@@ -42,7 +42,7 @@
                             <option value="used">Used</option>
                         </select>
                         @error('productCondition')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                             <option value="unavailable">Unavailable</option>
                         </select>
                         @error('productStatus')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -70,11 +70,12 @@
                         class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product Weight (in
                         KG)
                     </label>
-                    <input type="number" id="product_weight" wire:model.blur="product_weight" min="0.01" step="0.01"
+                    <input type="number" id="product_weight" wire:model.blur="product_weight" min="0.01"
+                        step="0.01"
                         class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="0.30" required>
                     @error('product_weight')
-                    <span class="font-sm text-red-500">{{ $message }}</span>
+                        <span class="font-sm text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -92,7 +93,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Darkflash, Deepcool, Noctua, etc." required>
                             @error('brand')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -103,7 +104,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="In Pesos" required>
                             @error('price')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -117,7 +118,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="120" required>
                         @error('fan_size')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -130,7 +131,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="Black" required>
                         @error('fan_color')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -143,7 +144,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="50" required>
                         @error('fan_cfm')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -156,7 +157,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="900" required>
                         @error('fan_rpm')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -169,7 +170,7 @@
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder="20 db" required>
                         @error('noise_level')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
 
@@ -188,7 +189,7 @@
                             <option value="Via Controller">Via Controller</option>
                         </select>
                         @error('fan_connection')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
+                            <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 </div>
@@ -204,7 +205,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock Currently On-Hand" required>
                             @error('stocks')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 
@@ -216,7 +217,7 @@
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Stock to Hold" required>
                             @error('reserve_stocks')
-                            <span class="font-sm text-red-500">{{ $message }}</span>
+                                <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -251,9 +252,10 @@
                                     800x400px)
                                 </p>
                             </div>
-                            <input id="dropzone-file" type="file" wire:model="productImages" class="hidden" multiple />
+                            <input id="dropzone-file" type="file" wire:model="productImages" class="hidden"
+                                multiple />
                             @error('productImages.*')
-                            <span class="error">{{ $message }}</span>
+                                <span class="error">{{ $message }}</span>
                             @enderror
                         </label>
                     </div>
@@ -267,35 +269,47 @@
                             To Preview)</p>
                     </div>
 
-                    <div class="grid md:grid-cols-3 gap-1 h-auto">
-                        @if ($productImages)
-                        @foreach ($productImages as $image)
-                        <!-- Button trigger modal -->
-                        <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            wire:click="$set('previewImage', '{{ $image->temporaryUrl() }}')">
-                            <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
-                                alt="image description">
-                        </button>
-                        @endforeach
-                        @endif
-                    </div>
+                    <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                        <div class="grid md:grid-cols-3 gap-1 h-auto">
+                            @if ($productImages)
+                                @foreach ($productImages as $image)
+                                    <!-- Button trigger modal -->
+                                    <button type="button" @click="showModal = !showModal" data-bs-target="#exampleModal"
+                                            wire:key="{{ $loop->index }}"
+                                            wire:click="setImage('{{ $image->temporaryUrl() }}', {{ $loop->index }})">
+                                        <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
+                                             alt="image description">
+                                    </button>
+                                @endforeach
+                            @endif
+                        </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                            <div class="modal-content p-4">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                        <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                        <div x-cloak x-transition.duration.500ms x-show="showModal"
+                             class="fixed inset-0 z-50 grid place-content-center">
+                            <div @click.away="showModal = false"
+                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
+                                            --}}
+                                        </div>
+                                        <div class="flex justify-center modal-body" x-transition.opacity>
+                                            <img class="h-auto max-w-full border border-gray-400"
+                                                 src="{{ $previewImage }}" alt="Image Preview">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <img class="h-auto max-w-full border border-gray-400" src="{{ $previewImage }}"
-                                        alt="Image Preview">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                <div class="w-full flex gap-2 pt-3 justify-end">
+                                    <button type="button" class="btn btn-outline-danger"
+                                            wire:click="removePhoto({{ $previewImageIndex }})" @click="showModal = false">
+                                        Remove
+                                        Photo
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
+                                        Close
                                     </button>
                                 </div>
                             </div>

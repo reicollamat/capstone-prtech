@@ -2,22 +2,22 @@
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     {{-- THIS SHOULD BE REMOVE IF ALL INPUT IS WORKING, FOR DEBUG ONLY --}}
     <!-- <div>
-        {{ $productName }}
-        {{ $productSKU }}
-        {{ $productSlug }}
-        {{ $productDescription }}
-        {{ $productCondition }}
-        {{ $productStatus }}
-        {{ $productCategory }}
-        {{ $cpu_core_threads }}
-        {{ $price }}
-        {{ $base_clock }}
-        {{ $boost_clock }}
-        {{ $tdp }}
-        {{ $igpu }}
-        {{ $oc_unlocked }}
-        {{ $stocks }}
-        {{ $reserve_stocks }}
+{{--        {{ $productName }}--}}
+{{--        {{ $productSKU }}--}}
+{{--        {{ $productSlug }}--}}
+{{--        {{ $productDescription }}--}}
+{{--        {{ $productCondition }}--}}
+{{--        {{ $productStatus }}--}}
+{{--        {{ $productCategory }}--}}
+{{--        {{ $cpu_core_threads }}--}}
+{{--        {{ $price }}--}}
+{{--        {{ $base_clock }}--}}
+{{--        {{ $boost_clock }}--}}
+{{--        {{ $tdp }}--}}
+{{--        {{ $igpu }}--}}
+{{--        {{ $oc_unlocked }}--}}
+{{--        {{ $stocks }}--}}
+{{--        {{ $reserve_stocks }}--}}
     </div> -->
 
     <form wire:submit="submit">
@@ -282,7 +282,7 @@
                         </label>
                     </div>
 
-                    <div wire:loading wire:target="productImages">Uploading...</div>
+                    <div wire:loading wire:target="productImages.*">Uploading...</div>
 
                     <div class="py-3">
                         <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Image Preview
@@ -305,9 +305,6 @@
                             @endforeach
                             @endif
                         </div>
-
-                        {{-- <button type="button" @click="showModal = !showModal" class="underline">Toggle</button>
-                        --}}
 
                         <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
 
