@@ -68,7 +68,7 @@ class ProductAdd extends Component
     #[On('product-saved')]
     public function resetInputs()
     {
-        $this->alert('success', 'Successssssssssssssssssssssss', [
-            'position' => 'top-end']);
+        $this->productCategory = $this->view;
+        $this->view = 'component.category-component.placeholder-component';
     }
 }
