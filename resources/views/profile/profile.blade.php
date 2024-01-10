@@ -59,9 +59,13 @@
                     {{-- <a class="btn list-group-item rounded-0 text-start" data-toggle="tab" href="#wishlist-tab"> --}}
                     {{--     <i class="bi bi-heart-fill"></i> Wishlist --}}
                     {{-- </a> --}}
-                    <a class="btn list-group-item rounded-0 text-start text-danger" href="{{ route('logout') }}">
-                        <i class="bi bi-box-arrow-left"></i> Logout
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full btn list-group-item rounded-0 text-start text-danger">
+                            <i class="bi bi-box-arrow-left"></i> Logout
+                        </button>
+                    </form>
+
                 </ul>
             </div>
             <div class="col-9 px-4">
@@ -122,9 +126,12 @@
                     {{-- <a class="btn list-group-item rounded-0 text-start" data-toggle="tab" href="#wishlist-tab"> --}}
                     {{--     <i class="bi bi-heart-fill"></i> Wishlist --}}
                     {{-- </a> --}}
-                    <a class="btn list-group-item rounded-0 text-start text-danger" href="{{ route('logout') }}">
-                        <i class="bi bi-box-arrow-left"></i> Logout
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full btn list-group-item rounded-0 text-start text-danger">
+                            <i class="bi bi-box-arrow-left"></i> Logout
+                        </button>
+                    </form>
                 </ul>
             </div>
             <div class="col-9 px-4">
@@ -184,9 +191,12 @@
                     {{-- <a class="btn list-group-item rounded-0 text-start" data-toggle="tab" href="#wishlist-tab"> --}}
                     {{--     <i class="bi bi-heart-fill"></i> Wishlist --}}
                     {{-- </a> --}}
-                    <a class="btn list-group-item rounded-0 text-start text-danger" href="{{ route('logout') }}">
-                        <i class="bi bi-box-arrow-left"></i> Logout
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full btn list-group-item rounded-0 text-start text-danger">
+                            <i class="bi bi-box-arrow-left"></i> Logout
+                        </button>
+                    </form>
                 </ul>
             </div>
             <div class="col-9 px-4">
