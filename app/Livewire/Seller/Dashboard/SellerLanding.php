@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Seller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
@@ -29,6 +30,8 @@ class SellerLanding extends Component
     public function mount()
     {
         $this->seller_id = auth()->user()->seller->id;
+
+        // dd(Auth::user());
 
         // Get the file path and name using glob
         $files = glob(public_path('storage').'/*.png');
