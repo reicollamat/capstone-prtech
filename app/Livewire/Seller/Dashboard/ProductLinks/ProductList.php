@@ -5,7 +5,6 @@ namespace App\Livewire\Seller\Dashboard\ProductLinks;
 use App\Models\Product;
 use App\Models\Seller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -52,7 +51,9 @@ class ProductList extends Component
 
     public function mount()
     {
-        $this->seller = Seller::where('user_id', Auth::id())->get()->first();
+        $this->seller = Seller::where('user_id', Auth::user()->id)->first();
+
+        // dd(Seller::where('user_id', Auth::user()->id)->first());
 
         $this->total_products_count = Product::where('seller_id', $this->seller->id)->count() ?? 0;
 
@@ -112,6 +113,7 @@ class ProductList extends Component
         //        sleep(5);
         if ($this->category_filter) {
             return Product::where('category', '=', $this->category_filter)
+                ->where('seller_id', $this->seller->id)
                 ->orderBy('id', 'asc')
                 ->paginate(10);
             //            dd($this->category_filter);
@@ -120,11 +122,13 @@ class ProductList extends Component
         if ($this->quick_search_filter > 1) {
             // return Product::where('title', 'ilike', "%{$this->quick_search_filter}%") // POSTGRES
             return Product::where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
+                ->where('seller_id', $this->seller->id)
                 ->orderBy('id', 'asc')
                 ->paginate(10);
         } else {
 
             return Product::where('seller_id', $this->seller->id)
+                ->where('seller_id', $this->seller->id)
                 ->orderBy('id', 'asc')
                 ->paginate(10);
         }
@@ -156,7 +160,6 @@ class ProductList extends Component
             ->orderBy('purchase_count', 'desc')
             ->limit(10)
             ->get();
-
 
         return $all_products;
     }
