@@ -158,7 +158,7 @@ class ProductList extends Component
         $all_products = Product::where('seller_id', $this->seller->id)
             ->where('purchase_count', '>=', 1)
             ->orderBy('purchase_count', 'desc')
-            ->limit(10)
+            ->limit(12)
             ->get();
 
         return $all_products;

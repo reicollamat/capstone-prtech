@@ -704,8 +704,8 @@
                 <div
                     class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="flex items-center justify-between mb-3">
-                        <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Most Positive
-                            Reviewed</h5>
+                        <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Positive
+                            Reviewed Products</h5>
                         <div class="btn-group btn-group-sm" role="group">
                             <div class="input-group-text" id="btnGroupAddon">Filter</div>
                             <button type="button" class="btn btn-outline-primary dropdown-toggle"
@@ -772,8 +772,8 @@
                 <div
                     class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="flex items-center justify-between mb-3">
-                        <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Most Negative
-                            Reviewed</h5>
+                        <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Negative
+                            Reviewed Products</h5>
                         <div class="btn-group btn-group-sm" role="group">
                             <div class="input-group-text" id="btnGroupAddon">Filter</div>
                             <button type="button" class="btn btn-outline-primary dropdown-toggle"
