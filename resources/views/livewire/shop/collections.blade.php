@@ -375,7 +375,7 @@
                         <div class="p-2 mt-3" style="border: 1px solid #FFFFFF">
                             <h5
                                 class="section-title position-relative text-uppercase mb-3 underline underline-offset-4 ">
-                                <span class="pr-3">Filter by Stars {{ $star_rating }}</span>
+                                <span class="pr-3">Filter by Stars {{ var_dump($star_rating) }}</span>
                             </h5>
                             <div class="">
                                 <div>

@@ -157,21 +157,40 @@ class Collections extends Component
                     ->whereBetween('price', [41000, 50000])
                     ->orderBy($this->sortingby, $this->sortdirection)
                     ->paginate(12);
-            } else {
-                return Product::with('product_images')
-                    ->orderBy($this->sortingby, $this->sortdirection)
-                    ->paginate(12);
             }
         }
 
-        if ($this->star_rating ) {
-            if ($this->price_bracket == 1) {
-                // dd('test');
-                return Product::with('product_images')
-                    ->where('rating', '=', 1)
-                    ->orderBy($this->sortingby, $this->sortdirection)
-                    ->paginate(12);
-            }
+        if ($this->star_rating) {
+            // if ($this->star_rating == 1) {
+            //     return Product::with('product_images')
+            //         ->where('rating', '=', 1)
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->star_rating == 2) {
+            //     return Product::with('product_images')
+            //         ->where('rating', '=', 2)
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->star_rating == 3) {
+            //     return Product::with('product_images')
+            //         ->where('rating', '=', 3)
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->star_rating == 4) {
+            //     return Product::with('product_images')
+            //         ->where('rating', '=', 4)
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->star_rating == 5) {
+            //     return Product::with('product_images')
+            //         ->where('rating', '=', 5)
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // }
+            return Product::with('product_images')
+                ->where('rating', '=', $this->star_rating)
+                ->orderBy($this->sortingby, $this->sortdirection)
+                ->paginate(12);
         }
 
         if ($this->search) {
@@ -249,7 +268,7 @@ class Collections extends Component
     public function mount($category = null)
     {
         $this->price_bracket = 9;
-        $this->star_rating = 9;
+        $this->star_rating = 5;
 
         // dd(Product::where('id', 1455)->select('image')->get());
         // dd($category);
