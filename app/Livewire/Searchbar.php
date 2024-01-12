@@ -11,7 +11,7 @@ class Searchbar extends Component
         'storage' => '1 Storage',
         'external_storage' => '1.1 External Storage',
         'internal_storage' => '1.2 Internal Storage',
-        'processor_cpu' => 'Processor(CPU)',
+        'processor_cpu' => 'Processor (CPU)',
         'graphics_card' => 'Graphics Card',
         'motherboard' => 'Motherboard',
         'memory_ram' => 'Memory (RAM)',

@@ -229,9 +229,9 @@
 
                                             <div class="mt-4">
                                                 <label for="complete" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                    Shop Complete Address 
+                                                    Shop Complete Address
                                                 </label>
-                                                <input type="text" name="complete" id="complete" value="{{$this->shop_address}}, {{$this->shop_city}}, {{$this->shop_state_province}} {{$this->shop_zip_code}}" 
+                                                <input type="text" name="complete" id="complete" value="{{$this->shop_address}}, {{$this->shop_city}}, {{$this->shop_state_province}} {{$this->shop_zip_code}}"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
                                             </div>
                                         </div>
@@ -259,11 +259,11 @@
                             aria-valuenow="66.66" aria-valuemin="0" aria-valuemax="100" style="height: 3px">
                             <div class="progress-bar !bg-red-600" style="width: 66.66%"></div>
                         </div>
-                        step 2 of 3
-                        <button wire:click="move">
-                            click me
-                        </button>
-                        {{ $currentStep }}
+                        {{-- step 2 of 3 --}}
+                        {{-- <button wire:click="move"> --}}
+                        {{--     click me --}}
+                        {{-- </button> --}}
+                        {{-- {{ $currentStep }} --}}
                         <div class="p-8">
                             <form wire:submit="SecondStepSubmit">
                                 <div class="my-6 lg:!px-32">
@@ -361,17 +361,17 @@
                                         </div>
                                         <div class="mt-4">
                                             <label for="complete" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                Registered Complete Address 
+                                                Registered Complete Address
                                             </label>
-                                            <input type="text" name="complete" id="complete" value="{{$this->shop_address}}, {{$this->shop_city}}, {{$this->shop_state_province}} {{$this->shop_zip_code}}" 
+                                            <input type="text" name="complete" id="complete" value="{{$this->shop_address}}, {{$this->shop_city}}, {{$this->shop_state_province}} {{$this->shop_zip_code}}"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
                                         </div>
                                     </div>
 
-                                    <div class="flex justify-center">
+                                    <div class="mt-2 flex justify-center">
                                         <div class="flex items-center gap-2">
                                             <input type="checkbox" id="terms" name="terms" required />
-                                            <label for="terms" class="mb-0">
+                                            <label for="terms" class=mb-0">
                                                 I agree to the <a class="no-underline"
                                                     href="{{ route('terms-and-conditions') }}">Terms and
                                                     Conditions</a> </label>

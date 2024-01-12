@@ -1,24 +1,24 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     {{-- THIS SHOULD BE REMOVE IF ALL INPUT IS WORKING, FOR DEBUG ONLY --}}
-    <div>
-        {{ $productName }}
-        {{ $productSKU }}
-        {{ $productSlug }}
-        {{ $productDescription }}
-        {{ $productCondition }}
-        {{ $productStatus }}
-        {{ $productCategory }}
-        {{ $cpu_core_threads }}
-        {{ $price }}
-        {{ $base_clock }}
-        {{ $boost_clock }}
-        {{ $tdp }}
-        {{ $igpu }}
-        {{ $oc_unlocked }}
-        {{ $stocks }}
-        {{ $reserve_stocks }}
-    </div>
+    <!-- <div>
+{{--        {{ $productName }}--}}
+{{--        {{ $productSKU }}--}}
+{{--        {{ $productSlug }}--}}
+{{--        {{ $productDescription }}--}}
+{{--        {{ $productCondition }}--}}
+{{--        {{ $productStatus }}--}}
+{{--        {{ $productCategory }}--}}
+{{--        {{ $cpu_core_threads }}--}}
+{{--        {{ $price }}--}}
+{{--        {{ $base_clock }}--}}
+{{--        {{ $boost_clock }}--}}
+{{--        {{ $tdp }}--}}
+{{--        {{ $igpu }}--}}
+{{--        {{ $oc_unlocked }}--}}
+{{--        {{ $stocks }}--}}
+{{--        {{ $reserve_stocks }}--}}
+    </div> -->
 
     <form wire:submit="submit">
         <div class="mb-4 p-4 bg-white border border-gray-200 rounded-lg">
@@ -36,36 +36,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="grid md:grid-cols-2 md:gap-8 ">
-                <div>
-                    <!-- Product SKU input -->
-                    <div class="mb-4">
-                        <label for="sku"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
-                            SKU</label>
-                        <input type="text" id="sku" wire:model.blur="productSKU"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="XXX-XXX" required>
-                        @error('productSKU')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <div>
-                    <!-- Product SLUG input -->
-                    <div class="mb-4">
-                        <label for="slug"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
-                            Slug</label>
-                        <input type="text" id="slug" wire:model.blur="productSlug"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="lowercase, no spaces seprated by hyphen " required>
-                        @error('productSlug')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
+            <!-- Product Description -->
             <div class="mb-4">
                 <label for="description"
                     class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
@@ -132,7 +103,7 @@
         <div class="mb-4 p-4 bg-white border border-gray-200 rounded-lg">
             <div class="grid md:grid-cols-2 gap-4">
                 <div>
-                    <!-- Brand and Price -->
+                    <!-- CPU Core and Threads -->
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="mb-4">
                             <label for="cpu_core_threads"
@@ -141,7 +112,7 @@
                             </label>
                             <input type="text" id="cpu_core_threads" wire:model.blur="cpu_core_threads"
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="AMD, Intel, etc." required>
+                                placeholder="Cores / Threads" required>
                             @error('cpu_core_threads')
                             <span class="font-sm text-red-500">{{ $message }}</span>
                             @enderror
@@ -200,11 +171,11 @@
 
                     <!-- TDP -->
                     <div class="mb-4">
-                        <label for="tdp"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">TDP</label>
+                        <label for="tdp" class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">TDP
+                            (Watts)</label>
                         <input type="text" id="tdp" wire:model.blur="tdp"
                             class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="65 Watts" required>
+                            placeholder="65" required>
                         @error('tdp')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -311,7 +282,7 @@
                         </label>
                     </div>
 
-                    <div wire:loading wire:target="productImages">Uploading...</div>
+                    <div wire:loading wire:target="productImages.*">Uploading...</div>
 
                     <div class="py-3">
                         <p class="block mb-1 text-sm font-medium text-gray-600 dark:text-white  pl-1">Image Preview
@@ -334,9 +305,6 @@
                             @endforeach
                             @endif
                         </div>
-
-                        {{-- <button type="button" @click="showModal = !showModal" class="underline">Toggle</button>
-                        --}}
 
                         <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
 

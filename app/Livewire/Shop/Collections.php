@@ -25,11 +25,6 @@ class Collections extends Component
     #[Locked]
     public $user;
 
-    public function placeholder(array $params = [])
-    {
-        return view('livewire.placeholder.shop-placeholder', $params);
-    }
-
     public array $sortoptions = [
         'default' => 'Default',
         'price-asc' => 'Price: Low to High',
@@ -38,16 +33,6 @@ class Collections extends Component
         'date-desc' => 'Date: New to Old',
         'rating-asc' => 'Rating: Low to High',
         'rating-desc' => 'Rating: High to Low',
-    ];
-
-    protected $queryString = [
-        'sortingby',
-        'sortdirection',
-        'category_filter_url',
-        'conditon_filter_url',
-        'star_rating_url',
-        'price_bracket_url',
-
     ];
 
     public $category;
@@ -62,10 +47,10 @@ class Collections extends Component
     public $conditon_filter = [];
 
     #[Url(as: 'rating', history: true, keep: false)]
-    public $star_rating_url = [];
+    public int $star_rating;
 
     #[Url(as: 'p-filter', history: true, keep: false)]
-    public $price_bracket_url = [];
+    public int $price_bracket;
 
     #[Url(as: 'sortby', history: true, keep: false)]
     public string $sortingby = 'purchase_count';
@@ -77,23 +62,19 @@ class Collections extends Component
     #[Url(as: 'order', history: true, keep: true)]
     public string $sortdirection = 'desc';
 
-    public function sortBy(string $name = 'Bestselling', string $sort = 'purchase_count', string $direction = 'desc')
+    protected $queryString = [
+        'sortingby',
+        'sortdirection',
+        'category_filter_url',
+        'conditon_filter_url',
+        'star_rating_url',
+        'price_bracket_url',
+
+    ];
+
+    public function placeholder(array $params = [])
     {
-
-        $this->sortname = $name;
-        $this->sortingby = $sort;
-        $this->sortdirection = $direction;
-
-        //        dd('test');
-        //        if ($this->sortingby == 'default') {
-        //            $this->all_products = DB::table('products')
-        //                ->limit(10)->get();
-        //        } else {
-        //            $this->all_products = DB::table('products')
-        //                ->orderBy($this->sortingby, $this->sortdirection)
-        //                ->limit(10)->get();
-        //        }
-
+        return view('livewire.placeholder.shop-placeholder', $params);
     }
 
     #[Computed]
@@ -144,6 +125,55 @@ class Collections extends Component
                 ->paginate(12);
         }
 
+        if ($this->price_bracket) {
+            if ($this->price_bracket == 1) {
+                // dd('test');
+                return Product::with('product_images')
+                    ->whereBetween('price', [1, 5000])
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            } elseif ($this->price_bracket == 2) {
+                return Product::with('product_images')
+                    ->whereBetween('price', [6000, 10000])
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            } elseif ($this->price_bracket == 3) {
+                return Product::with('product_images')
+                    ->whereBetween('price', [11000, 20000])
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            } elseif ($this->price_bracket == 4) {
+                return Product::with('product_images')
+                    ->whereBetween('price', [21000, 30000])
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            } elseif ($this->price_bracket == 5) {
+                return Product::with('product_images')
+                    ->whereBetween('price', [31000, 40000])
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            } elseif ($this->price_bracket == 6) {
+                return Product::with('product_images')
+                    ->whereBetween('price', [41000, 50000])
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            } else {
+                return Product::with('product_images')
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            }
+        }
+
+        if ($this->star_rating ) {
+            if ($this->price_bracket == 1) {
+                // dd('test');
+                return Product::with('product_images')
+                    ->where('rating', '=', 1)
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            }
+        }
+
         if ($this->search) {
             return Product::with('product_images')
                 ->where(strtolower('title'), 'like', "%{$this->search}%")
@@ -161,17 +191,66 @@ class Collections extends Component
         if ($this->sortingby && $this->sortdirection) {
             return Product::with('product_images')
                 ->orderBy($this->sortingby, $this->sortdirection)->paginate(12);
-        }
-        //
+        } //
         else {
             return Product::with('product_images')
                 ->paginate(12);
         }
     }
 
+    #[Computed]
+    public function check_bookmark($product_id)
+    {
+        if (Auth::user() && $this->user->bookmark->contains('product_id', $product_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function addtowishlist($item_id)
+    {
+        $product = Product::find($item_id);
+
+        if (Auth::check()) {
+            if (Bookmark::where(['user_id' => $this->userid, 'product_id' => $item_id])->doesntExist()) {
+                Bookmark::firstOrCreate(['user_id' => $this->userid, 'product_id' => $item_id]);
+                // create an event to update the count of wihshlist items
+                $this->dispatch('wishlist-item-change');
+
+                // display alert notification
+                session()->flash('notification-livewire', "'$product->title' added to Wishlists");
+                $this->dispatch('notif-alert-wishlist');
+            }
+        } else {
+            $this->redirect(route('login'));
+        }
+        //        dd($item_id);
+    }
+
+    public function removefromwishlist($product_id)
+    {
+        $bookmarkitem = Bookmark::where('product_id', $product_id)->where('user_id', $this->userid)->get();
+        // dd($bookmarkitem);
+        Bookmark::destroy($bookmarkitem);
+
+        // create an event to update the count of wihshlist items
+        $this->dispatch('wishlist-item-change');
+
+        sleep(0.5);
+        $this->mount();
+
+        $product = Product::find($product_id);
+        // display alert notification
+        session()->flash('notification-livewire', "'$product->title' removed from Wishlists");
+        $this->dispatch('notif-alert-wishlist');
+    }
 
     public function mount($category = null)
     {
+        $this->price_bracket = 9;
+        $this->star_rating = 9;
+
         // dd(Product::where('id', 1455)->select('image')->get());
         // dd($category);
         if ($category) {
@@ -235,59 +314,35 @@ class Collections extends Component
             $this->sortname = 'Bestselling';
         }
 
+        // dd(Product::with('product_images')
+        //     ->where('rating', '=', 1)
+        //     ->orderBy($this->sortingby, $this->sortdirection)
+        //     ->paginate(12));
+
         //        //        $this->sortBy();
     }
 
-
-    #[Computed]
-    public function check_bookmark($product_id)
+    public function sortBy(string $name = 'Bestselling', string $sort = 'purchase_count', string $direction = 'desc')
     {
-        if (Auth::user() && $this->user->bookmark->contains('product_id', $product_id)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    public function addtowishlist($item_id)
-    {
-        $product = Product::find($item_id);
+        $this->sortname = $name;
+        $this->sortingby = $sort;
+        $this->sortdirection = $direction;
 
-        if (Auth::check()) {
-            if (Bookmark::where(['user_id' => $this->userid, 'product_id' => $item_id])->doesntExist()) {
-                Bookmark::firstOrCreate(['user_id' => $this->userid, 'product_id' => $item_id]);
-                // create an event to update the count of wihshlist items
-                $this->dispatch('wishlist-item-change');
+        //        dd('test');
+        //        if ($this->sortingby == 'default') {
+        //            $this->all_products = DB::table('products')
+        //                ->limit(10)->get();
+        //        } else {
+        //            $this->all_products = DB::table('products')
+        //                ->orderBy($this->sortingby, $this->sortdirection)
+        //                ->limit(10)->get();
+        //        }
 
-                // display alert notification
-                session()->flash('notification-livewire', "'$product->title' added to Wishlists");
-                $this->dispatch('notif-alert-wishlist');
-            }
-        } else {
-            $this->redirect(route('login'));
-        }
-        //        dd($item_id);
-    }
-
-    public function removefromwishlist($product_id)
-    {
-        $bookmarkitem = Bookmark::where('product_id', $product_id)->where('user_id', $this->userid)->get();
-        // dd($bookmarkitem);
-        Bookmark::destroy($bookmarkitem);
-
-        // create an event to update the count of wihshlist items
-        $this->dispatch('wishlist-item-change');
-
-        sleep(0.5);
-        $this->mount();
-
-        $product = Product::find($product_id);
-        // display alert notification
-        session()->flash('notification-livewire', "'$product->title' removed from Wishlists");
-        $this->dispatch('notif-alert-wishlist');
     }
 
     // redirect to purchase page
+
     public function buynow($product_id)
     {
         $product = Product::find($product_id);

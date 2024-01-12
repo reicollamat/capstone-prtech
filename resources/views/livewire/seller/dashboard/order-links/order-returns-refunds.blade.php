@@ -74,7 +74,7 @@
         </div>
 
         <div
-            class="hidden ml-3 d-lg-flex flex-none max-w-[14rem] flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
+            class="hidden ml-3 d-lg-flex flex-none max-w-[20rem] flex-column gap-3 items-center md:content-center h-full py-4 pr-4">
             <div class="w-full h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-center bg-white">
                 <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2 text-center">

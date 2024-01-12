@@ -2,9 +2,9 @@
     <div class="product-img position-relative p-3">
         <img class="img-fluid-fixheight w-100" src="{{ asset($image) }}" alt="">
         <div class="product-action">
-            <a class="btn btn-outline-dark btn-square" href=""><i class="bi bi-cart-fill"></i></a>
-            <a class="btn btn-outline-dark btn-square" href=""><i class="bi bi-heart-fill"></i></a>
-            <a class="btn btn-outline-dark btn-square" href=""><i class="bi bi-search"></i></a>
+            {{-- <a class="btn btn-outline-dark btn-square" href=""><i class="bi bi-cart-fill"></i></a> --}}
+            {{-- <a class="btn btn-outline-dark btn-square" href=""><i class="bi bi-heart-fill"></i></a> --}}
+            {{-- <a class="btn btn-outline-dark btn-square" href=""><i class="bi bi-search"></i></a> --}}
         </div>
     </div>
     <div class="text-center py-4">

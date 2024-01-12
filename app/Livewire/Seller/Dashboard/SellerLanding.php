@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Seller;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
@@ -29,6 +30,8 @@ class SellerLanding extends Component
     public function mount()
     {
         $this->seller_id = auth()->user()->seller->id;
+
+        // dd(Auth::user());
 
         // Get the file path and name using glob
         $files = glob(public_path('storage').'/*.png');
@@ -138,9 +141,7 @@ class SellerLanding extends Component
         // dd($this->seller_id);
         $metrics = Seller::find($this->seller_id)->shopMetrics->first();
 
-        $this->total_earnings_percentage = $metrics->total_earnings / $metrics->target_sales * 100;
-
-        return $metrics;
+        return $metrics->total_earnings ?? 0;
     }
 
     #[Computed]

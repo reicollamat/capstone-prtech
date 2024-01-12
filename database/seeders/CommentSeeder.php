@@ -14,11 +14,15 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
+        $sql = File::get('database/seeders/sql/comments_db.sql');
+        DB::unprepared($sql);
+
+
         // $comments = Comment::whereBetween('id', [1, 8000])->get();
 
         // foreach ($comments as $key => $comment) {
         //     $user_id = fake()->numberBetween(1, 23);
-        //     $date = fake()->dateTimeBetween('-11 months', '-5 months');
+        //     $date = fake()->dateTimeBetween('2019-01-01', '2020-02-01');
 
         //     $comment->update([
         //         'user_id' => $user_id,
@@ -31,7 +35,7 @@ class CommentSeeder extends Seeder
 
         // foreach ($comments as $key => $comment) {
         //     $user_id = fake()->numberBetween(1, 23);
-        //     $date = fake()->dateTimeBetween('-11 months', '-5 months');
+        //     $date = fake()->dateTimeBetween('2019-01-01', '2020-02-01');
 
         //     $comment->update([
         //         'user_id' => $user_id,
@@ -44,7 +48,7 @@ class CommentSeeder extends Seeder
 
         // foreach ($comments as $key => $comment) {
         //     $user_id = fake()->numberBetween(1, 23);
-        //     $date = fake()->dateTimeBetween('-11 months', '-5 months');
+        //     $date = fake()->dateTimeBetween('2019-01-01', '2020-02-01');
 
         //     $comment->update([
         //         'user_id' => $user_id,
@@ -57,7 +61,7 @@ class CommentSeeder extends Seeder
 
         // foreach ($comments as $key => $comment) {
         //     $user_id = fake()->numberBetween(1, 23);
-        //     $date = fake()->dateTimeBetween('-11 months', '-5 months');
+        //     $date = fake()->dateTimeBetween('2019-01-01', '2020-02-01');
 
         //     $comment->update([
         //         'user_id' => $user_id,
@@ -70,7 +74,7 @@ class CommentSeeder extends Seeder
 
         // foreach ($comments as $key => $comment) {
         //     $user_id = fake()->numberBetween(1, 23);
-        //     $date = fake()->dateTimeBetween('-11 months', '-5 months');
+        //     $date = fake()->dateTimeBetween('2019-01-01', '2020-02-01');
 
         //     $comment->update([
         //         'user_id' => $user_id,
@@ -83,7 +87,7 @@ class CommentSeeder extends Seeder
 
         // foreach ($comments as $key => $comment) {
         //     $user_id = fake()->numberBetween(1, 23);
-        //     $date = fake()->dateTimeBetween('-11 months', '-5 months');
+        //     $date = fake()->dateTimeBetween('2019-01-01', '2020-02-01');
 
         //     $comment->update([
         //         'user_id' => $user_id,
@@ -96,7 +100,7 @@ class CommentSeeder extends Seeder
 
         // foreach ($comments as $key => $comment) {
         //     $user_id = fake()->numberBetween(1, 23);
-        //     $date = fake()->dateTimeBetween('-11 months', '-5 months');
+        //     $date = fake()->dateTimeBetween('2019-01-01', '2020-02-01');
 
         //     $comment->update([
         //         'user_id' => $user_id,

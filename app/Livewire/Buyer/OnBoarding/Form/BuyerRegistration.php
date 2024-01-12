@@ -304,7 +304,16 @@ class BuyerRegistration extends Component
         }
     }
 
-    public function delete(User $user)
+    /**
+     * @throws \Exception
+     */
+    public function delete(): void
     {
+        $user = User::find($this->userid);
+        $user->delete();
+        if ($user) {
+            $this->redirect(route('index_landing'));
+        }
+        // $this->redirect(route('index_landing'));
     }
 }

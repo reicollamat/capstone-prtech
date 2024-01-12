@@ -87,6 +87,20 @@ class LandingController extends Controller
     {
         $permissions = Auth::user()->permissions ?? '';
 
+        // dd($permissions);
+
+        /**
+         * Convert the "permissions" value to an array if it is currently a string.
+         * When using Buyer registration the permission column is a array while in Seller registration it is a string.
+         * this is fix for both cases, do not mind this
+         * @param string|array $permissions The value of the "permissions" variable.
+         * @return array The updated value of the "permissions" variable.
+         */
+        if( gettype($permissions) == 'string') {
+            $permissions = json_decode($permissions, true);
+        }
+
+
         // check permissions column
         if ($permissions['platform.index'] == 0) {
             return redirect('/');

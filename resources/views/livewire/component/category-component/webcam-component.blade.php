@@ -1,26 +1,25 @@
 <div>
     {{-- Success is as dangerous as failure. --}}
     {{-- THIS SHOULD BE REMOVE IF ALL INPUT IS WORKING, FOR DEBUG ONLY --}}
-    <div>
-        {{ $productCategory }}
-        {{ $productName }}
-        {{ $productSKU }}
-        {{ $productSlug }}
-        {{ $productDescription }}
-        {{ $productCondition }}
-        {{ $productStatus }}
-        {{ $brand }}
-        {{ $price }}
-        {{ var_dump($webcam_connection_type) }}
-        {{ $resolution }}
-        {{ $webcam_fps }}
-        {{ $audio_support }}
-        {{ $stocks }}
-        {{ $reserve_stocks }}
+    <!-- <div>
+{{--        {{ $productCategory }}--}}
+{{--        {{ $productName }}--}}
+{{--        {{ $productSKU }}--}}
+{{--        {{ $productSlug }}--}}
+{{--        {{ $productDescription }}--}}
+{{--        {{ $productCondition }}--}}
+{{--        {{ $productStatus }}--}}
+{{--        {{ $brand }}--}}
+{{--        {{ $price }}--}}
+{{--        {{ var_dump($webcam_connection_type) }}--}}
+{{--        {{ $resolution }}--}}
+{{--        {{ $webcam_fps }}--}}
+{{--        {{ $audio_support }}--}}
+{{--        {{ $stocks }}--}}
+{{--        {{ $reserve_stocks }}--}}
+    </div> -->
 
-    </div>
     <form wire:submit="submit">
-
         <div class="mb-4 p-4 bg-white border border-gray-200 rounded-lg">
             <div>
                 <!-- Product Name input -->
@@ -36,36 +35,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="grid md:grid-cols-2 md:gap-8 ">
-                <div>
-                    <!-- Product SKU input -->
-                    <div class="mb-4">
-                        <label for="sku"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
-                            SKU</label>
-                        <input type="text" id="sku" wire:model.blur="productSKU"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="XXX-XXX" required>
-                        @error('productSKU')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                <div>
-                    <!-- Product SLUG input -->
-                    <div class="mb-4">
-                        <label for="slug"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
-                            Slug</label>
-                        <input type="text" id="slug" wire:model.blur="productSlug"
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="lowercase, no spaces seprated by hyphen " required>
-                        @error('productSlug')
-                        <span class="font-sm text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
+            <!-- Product Description -->
             <div class="mb-4">
                 <label for="description"
                     class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Description</label>
@@ -133,7 +103,7 @@
             <div class="grid md:grid-cols-2 gap-4">
                 <div>
                     {{-- First Columm --}}
-                    <!-- Product Name input -->
+                    <!-- Brand -->
                     <div class="mb-4">
                         <label for="brand"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Product
@@ -146,7 +116,7 @@
                         @enderror
                     </div>
 
-                    <!-- Product SKU input -->
+                    <!-- Price -->
                     <div class="mb-4">
                         <label for="price"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Product
@@ -161,7 +131,7 @@
 
                     <div class="grid md:grid-cols-2 md:gap-4">
 
-                        <!-- Product SKU input -->
+                        <!-- Connection Type -->
                         <div class="mb-4">
                             <label for="webcam_connection_type"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">
@@ -185,7 +155,7 @@
                             @enderror
                         </div>
 
-                        <!-- Product SKU input -->
+                        <!-- Digital Resolution -->
                         <div class="mb-4">
                             <label for="resolution"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Max
@@ -205,7 +175,7 @@
                         </div>
 
                     </div>
-                    <!-- Product Name input -->
+                    <!-- Webcam FPS -->
                     <div class="mb-4">
                         <label for="webcam_fps"
                             class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Max
@@ -219,7 +189,7 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 md:gap-4">
-                        <!-- Product SKU input -->
+                        <!-- Audio Support -->
                         <div class="mb-4">
                             <label for="audio_support"
                                 class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Audio
@@ -259,30 +229,21 @@
                             @enderror
                         </div>
                     </div>
-                    <!-- Product Color input -->
+
+                    <!-- OS Compatibility -->
                     <div class="mb-4">
                         <label for="webcam_os"
-                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white pl-1">Webcam OS
-                            Compatibility
-                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
-                                data-bs-trigger="hover focus" data-bs-placement="top"
-                                data-bs-content="Multiple colors can be separated by comma">
-                                <i class="bi bi-patch-question"></i>
-                            </span>
-                        </label>
-                        {{-- <input type="text" id="webcam_os" wire:model.blur="webcam_os" --}} {{--
-                            class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            --}} {{-- placeholder="Windows 10 or 11, MacOS, Linux" required> --}}
-
-                        <select id="webcam_os" wire:model.blur="webcam_os" multiple
+                            class="block mb-1 text-sm font-medium text-gray-800 dark:text-white  pl-1">Compatible
+                            OS</label>
+                        <select id="webcam_os" wire:model.blur="webcam_os"
                             class="bbg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option>Click to Select</option>
+                            <option value="Universal">Universal</option>
                             <option value="Windows 10 and 11">Windows 10 and 11</option>
                             <option value="MacOS">MacOS</option>
                             <option value="Android">Android</option>
                             <option value="Chrome OS">Chrome OS</option>
                         </select>
-
                         @error('webcam_os')
                         <span class="font-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -362,35 +323,47 @@
                             To Preview)</p>
                     </div>
 
-                    <div class="grid md:grid-cols-3 gap-1 h-auto">
-                        @if ($productImages)
-                        @foreach ($productImages as $image)
-                        <!-- Button trigger modal -->
-                        <button type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            wire:click="$set('previewImage', '{{ $image->temporaryUrl() }}')">
-                            <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
-                                alt="image description">
-                        </button>
-                        @endforeach
-                        @endif
-                    </div>
+                    <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                        <div class="grid md:grid-cols-3 gap-1 h-auto">
+                            @if ($productImages)
+                                @foreach ($productImages as $image)
+                                    <!-- Button trigger modal -->
+                                    <button type="button" @click="showModal = !showModal" data-bs-target="#exampleModal"
+                                            wire:key="{{ $loop->index }}"
+                                            wire:click="setImage('{{ $image->temporaryUrl() }}', {{ $loop->index }})">
+                                        <img class="h-auto max-w-full border border-gray-400" src="{{ $image->temporaryUrl() }}"
+                                             alt="image description">
+                                    </button>
+                                @endforeach
+                            @endif
+                        </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                            <div class="modal-content p-4">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                        <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                        <div x-cloak x-transition.duration.500ms x-show="showModal"
+                             class="fixed inset-0 z-50 grid place-content-center">
+                            <div @click.away="showModal = false"
+                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
+                                            --}}
+                                        </div>
+                                        <div class="flex justify-center modal-body" x-transition.opacity>
+                                            <img class="h-auto max-w-full border border-gray-400"
+                                                 src="{{ $previewImage }}" alt="Image Preview">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <img class="h-auto max-w-full border border-gray-400" src="{{ $previewImage }}"
-                                        alt="Image Preview">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                <div class="w-full flex gap-2 pt-3 justify-end">
+                                    <button type="button" class="btn btn-outline-danger"
+                                            wire:click="removePhoto({{ $previewImageIndex }})" @click="showModal = false">
+                                        Remove
+                                        Photo
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
+                                        Close
                                     </button>
                                 </div>
                             </div>

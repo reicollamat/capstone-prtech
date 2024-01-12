@@ -23,7 +23,10 @@ class DatabaseSeeder extends Seeder
         $sql = File::get('database/seeders/sql/prtech_db.sql');
         DB::unprepared($sql);
 
-        // seed product stock - random(0-50)
+        $sql = File::get('database/seeders/sql/comments_db.sql');
+        DB::unprepared($sql);
+
+        // seed other product infos
         $this->call([
             ProductStockSeeder::class,
         ]);

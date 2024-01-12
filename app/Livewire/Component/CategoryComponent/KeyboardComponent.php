@@ -24,11 +24,11 @@ class KeyboardComponent extends Component
     #[Validate('required', message: 'Please provide product name')]
     public $productName;
 
-    #[Validate('required', message: 'Please provide product SKU')]
-    public $productSKU;
+    // #[Validate('required', message: 'Please provide product SKU')]
+    // public $productSKU;
 
-    #[Validate('required', message: 'Please provide product slug')]
-    public $productSlug;
+    // #[Validate('required', message: 'Please provide product slug')]
+    // public $productSlug;
 
     #[Validate('required', message: 'Please provide product description')]
     public $productDescription;
@@ -89,8 +89,8 @@ class KeyboardComponent extends Component
     {
         $validator = $this->validate([
             'productName' => 'required',
-            'productSKU' => 'required',
-            'productSlug' => 'required',
+            // 'productSKU' => 'required',
+            // 'productSlug' => 'required',
             'productDescription' => 'required',
             'productCondition' => 'required|not_in:Select Condition',
             'productStatus' => 'required|not_in:Select Status',
@@ -123,8 +123,8 @@ class KeyboardComponent extends Component
             $product = Product::create([
                 'seller_id' => User::find(Auth::user()->id)->seller->id,
                 'title' => $validator['productName'],
-                'slug' => $validator['productSlug'],
-                'SKU' => $validator['productSKU'],
+                // 'slug' => $validator['productSlug'],
+                // 'SKU' => $validator['productSKU'],
                 'category' => $validator['productCategory'],
                 'price' => $validator['price'],
                 'stock' => $validator['stocks'],
@@ -207,5 +207,30 @@ class KeyboardComponent extends Component
         //     $storeas[] = $path;
         // }
         // dd($storeas);
+    }
+    /**
+     * Sets the image URL and index for the preview image.
+     *
+     * @param  string  $imageurl The URL of the image.
+     * @param  int  $imageindex The index of the image.
+     *
+     * @throws \Exception
+     */
+    public function setImage($imageurl, $imageindex): void
+    {
+        $this->previewImage = $imageurl;
+        $this->previewImageIndex = $imageindex;
+    }
+
+    /**
+     * Removes a photo from the productImages array at the specified index.
+     *
+     * @param  int  $imageindex The index of the photo to remove.
+     *
+     * @throws \Exception If the index is out of bounds.
+     */
+    public function removePhoto($imageindex): void
+    {
+        array_splice($this->productImages, $imageindex, 1);
     }
 }
