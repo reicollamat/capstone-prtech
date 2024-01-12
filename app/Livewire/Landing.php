@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Helpers\EmailHelper;
 use App\Helpers\ReferenceGeneratorHelper;
 use App\Mail\OrderShipped;
+use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
 use Carbon\Carbon;
@@ -30,7 +31,13 @@ class Landing extends Component
 
     public $purchase;
 
+    public string $teststring = '[4199,3000]';
+
+    public string $price_bracket = '';
+
     public $readyToLoad = false;
+
+    // public $all_products;
 
     public function mount()
     {
@@ -39,6 +46,21 @@ class Landing extends Component
         // dd($this->purchase_items);
 
         // $this->testapi();
+    }
+
+    #[Computed]
+    public function getproducts()
+    {
+        if ($this->price_bracket != '') {
+            return Product::with('product_images')
+                ->whereBetween('price', json_decode($this->price_bracket, true))
+                ->paginate(5);
+        }
+
+        return Product::with('product_images')
+            ->orderBy('rating', 'desc')
+            ->paginate(5);
+
     }
 
     // public function rendered()
@@ -162,6 +184,7 @@ class Landing extends Component
 
         // sleep(30);
     }
+
     #[Computed]
     public function getAddressList()
     {
