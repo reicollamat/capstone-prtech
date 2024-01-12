@@ -41,6 +41,10 @@ class ShipmentList extends Component
 
     public $seller;
 
+    // for mass ship
+    public $selectedShipments = [];
+    public $selectAll = false;
+
     //    public function paginationView()
     //    {
     //        return 'vendor.pagination.custom-pagination-links';
@@ -77,7 +81,7 @@ class ShipmentList extends Component
                 'tag' => 'shipping',
                 'title' => 'Shipped Out',
                 'message' => 'Parcel parcel no for your order
-                #'.$shipment->purchase->id.' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                #' . $shipment->purchase->id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
             ]);
             $notification->save();
 
@@ -128,6 +132,9 @@ class ShipmentList extends Component
         $this->total_failed_delivery_count = count(Shipments::where('seller_id', $this->seller->id)
             ->where('shipment_status', 'failed_delivery')
             ->get());
+
+        $this->selectedShipments = [];
+        $this->selectAll = false;
     }
 
     #[Computed]
@@ -164,7 +171,7 @@ class ShipmentList extends Component
                 'purchase_id' => $shipment->purchase->id,
                 'tag' => 'completed',
                 'title' => 'Share your feedback! click here',
-                'message' => 'Order #'.$shipment->purchase->id.' is completed. Your feedback matters to others! Rate the products by date',
+                'message' => 'Order #' . $shipment->purchase->id . ' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
 
@@ -223,11 +230,15 @@ class ShipmentList extends Component
         return view('livewire..seller.dashboard.shipment-links.shipment-list');
     }
 
-    public function massShip()
+    public function mass_ship_selected()
     {
         // query for purchased items of products from current seller
-        $shipment_items = Shipments::where('seller_id', $this->seller->id)
-            ->where('shipment_status', 'to_ship')
+        // $shipment_items = Shipments::where('seller_id', $this->seller->id)
+        //     ->where('shipment_status', 'to_ship')
+        //     ->get();
+        // dd($this->selectedShipments);
+        $shipment_items = Shipments::where('shipment_status', 'to_ship')
+            ->whereIn('id', $this->selectedShipments)
             ->get();
 
         if (count($shipment_items) > 0) {
@@ -247,15 +258,30 @@ class ShipmentList extends Component
                     'tag' => 'shipping',
                     'title' => 'Shipped Out',
                     'message' => 'Parcel parcel no for your order
-                #'.$shipment_item->purchase->id.' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                #' . $shipment_item->purchase->id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
                 ]);
                 $notification->save();
 
                 $this->alert('success', 'All items have been shipped', [
-                    'position' => 'top-end']);
+                    'position' => 'top-end'
+                ]);
             }
         }
 
+        sleep(0.5);
+        $this->mount();
+
         // dd($shipment_items);
+    }
+
+    public function updateSelectAll()
+    {
+        $this->selectAll = !$this->selectAll;
+        // dd($value);
+        if ($this->selectAll) {
+            $this->selectedShipments = Shipments::where('shipment_status', 'to_ship')->pluck('id');
+        } else {
+            $this->selectedShipments = [];
+        }
     }
 }

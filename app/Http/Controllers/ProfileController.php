@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use function PHPUnit\Framework\isNull;
+
 class ProfileController extends Controller
 {
     /**
@@ -83,7 +85,8 @@ class ProfileController extends Controller
      */
     public function request_returnrefund(Request $request): RedirectResponse
     {
-        // dd($request->condition);
+        // dd($request->other_reason);
+
         $request->validate([
             'evidence_imgs.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
@@ -91,6 +94,22 @@ class ProfileController extends Controller
         $user = User::find($request->user_id);
         $purchase_item = PurchaseItem::find($request->purchase_item_id);
         $img_path = null;
+
+        // set reason value
+        if ($request->reason == null) {
+            $reason = $request->other_reason;
+        } else {
+            $reason = $request->reason;
+        }
+
+        // set condition value
+        if ($request->condition == null) {
+            $condition = $request->other_condition;
+        } else {
+            $condition = $request->condition;
+        }
+
+        // dd($condition);
 
         // save a new database returnrefund info
         $returnrefund_info = new ItemReturnrefundInfo([
@@ -100,8 +119,8 @@ class ProfileController extends Controller
             'item_quantity' => $request->item_quantity,
             'request_date' => now(),
             'status' => 'returnrefund-pending',
-            'reason' => $request->reason,
-            'condition' => $request->condition,
+            'reason' => $reason,
+            'condition' => $condition,
         ]);
         $returnrefund_info->save();
 

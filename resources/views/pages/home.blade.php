@@ -232,17 +232,21 @@
             <div class="row px-xl-5">
                 <div class="col">
                     <div class="owl-carousel vendor-carousel">
-                        @foreach ($featured_products as $value)
-                            <x-home.product_showcase>
-                                <a class="h6 text-decoration-none" style="font-size: 0.9rem"
-                                    href="{{ route('collections-details', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
-                                    {{ $value->product->title }}
-                                </a>
-                                <x-slot:image>{{ $value->product->product_images[0]->image_paths }}</x-slot:image>
-                                <x-slot:price>{{ $value->product->price }}</x-slot:price>
-                                <x-slot:purchasecount>{{ $value->purchase_count }}</x-slot:purchasecount>
-                            </x-home.product_showcase>
-                        @endforeach
+                        @if (count($featured_products) > 0)
+                            @foreach ($featured_products as $value)
+                                <x-home.product_showcase>
+                                    <a class="h6 text-decoration-none" style="font-size: 0.9rem"
+                                        href="{{ route('collections-details', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
+                                        {{ $value->product->title }}
+                                    </a>
+                                    <x-slot:image>{{ $value->product->product_images[0]->image_paths }}</x-slot:image>
+                                    <x-slot:price>{{ $value->product->price }}</x-slot:price>
+                                    <x-slot:purchasecount>{{ $value->purchase_count }}</x-slot:purchasecount>
+                                </x-home.product_showcase>
+                            @endforeach
+                        @else
+                            No Products to display
+                        @endif
                     </div>
                 </div>
             </div>
@@ -288,17 +292,21 @@
             <div class="row px-xl-5">
                 <div class="col">
                     <div class="owl-carousel vendor-carousel">
-                        @foreach ($recent_products as $value)
-                            <x-home.product_showcase>
-                                <a class="h6 text-decoration-none" style="font-size: 0.9rem"
-                                    href="{{ route('collections-details', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
-                                    {{ $value->product->title }}
-                                </a>
-                                <x-slot:image>{{ $value->product->product_images[0]->image_paths }}</x-slot:image>
-                                <x-slot:price>{{ $value->product->price }}</x-slot:price>
-                                <x-slot:purchasecount>{{ $value->purchase_count }}</x-slot:purchasecount>
-                            </x-home.product_showcase>
-                        @endforeach
+                        @if (count($recent_products) > 0)
+                            @foreach ($recent_products as $value)
+                                <x-home.product_showcase>
+                                    <a class="h6 text-decoration-none" style="font-size: 0.9rem"
+                                        href="{{ route('collections-details', ['product_id' => $value->product->id, 'category' => $value->product->category]) }}">
+                                        {{ $value->product->title }}
+                                    </a>
+                                    <x-slot:image>{{ $value->product->product_images[0]->image_paths }}</x-slot:image>
+                                    <x-slot:price>{{ $value->product->price }}</x-slot:price>
+                                    <x-slot:purchasecount>{{ $value->purchase_count }}</x-slot:purchasecount>
+                                </x-home.product_showcase>
+                            @endforeach
+                        @else
+                            No Products to display
+                        @endif
                     </div>
                 </div>
             </div>

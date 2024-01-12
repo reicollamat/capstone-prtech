@@ -268,13 +268,6 @@
                 </div>
                 <div class="hidden md:block">
                     @if (Auth::user())
-                        {{-- <div class="relative inline-block"> --}}
-                        {{--     <a class="text-gray-600 no-underline" href="{{ route('index_landing') }}"> --}}
-                        {{--         <i class="bi bi-box-arrow-left text-sm"> --}}
-                        {{--             <span>exit</span> --}}
-                        {{--         </i> --}}
-                        {{--     </a> --}}
-                        {{-- </div> --}}
                         <div x-data="{ isOpen: false }" class="relative inline-block ">
                             <!-- Dropdown toggle button -->
                             <button @click="isOpen = !isOpen"
@@ -319,12 +312,17 @@
                                             <span>Help</span>
                                         </div>
                                     </button>
+                                    <a class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" href="{{ route('index_landing') }}">
+                                        <i class="bi bi-box-arrow-left text-sm">
+                                            <span>close</span>
+                                        </i>
+                                    </a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit"
-                                            class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                                            class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-red-500 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                             <div class="flex gap-2 items-center">
-                                                <i class="bi bi-box-arrow-left text-gray-800 text-lg"></i>
+                                                <i class="bi bi-box-arrow-left text-red-500 text-lg"></i>
                                                 <span>Sign Out</span>
                                             </div>
                                         </button>

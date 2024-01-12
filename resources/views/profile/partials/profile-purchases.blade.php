@@ -606,6 +606,22 @@
                                                                                                             Concerns
                                                                                                         </label>
                                                                                                     </div>
+                                                                                                    <div
+                                                                                                        class="form-check mt-2" x-data="{ reasonbox: false }">
+                                                                                                        <input x-on:click="reasonbox = ! reasonbox"
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="reason"
+                                                                                                            id="reason5-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value=""
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="reason5-{{ $key }}-{{ $purchase->id }}">
+                                                                                                            Specify Other Reason:
+                                                                                                        </label>
+                                                                                                        <textarea x-show="reasonbox" type="text" class="form-control mt-2" id="otherReason{{ $key }}-{{ $purchase->id }}" name="other_reason" placeholder="Enter other reason"></textarea>
+                                                                                                    </div>
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="mx-2 my-4">
@@ -642,6 +658,22 @@
                                                                                                             for="condition2-{{ $key }}-{{ $purchase->id }}">
                                                                                                             Unused/Unworn
                                                                                                         </label>
+                                                                                                    </div>
+                                                                                                    <div
+                                                                                                        class="form-check mt-2" x-data="{ conditionbox: false }">
+                                                                                                        <input x-on:click="conditionbox = ! conditionbox"
+                                                                                                            class="form-check-input"
+                                                                                                            type="radio"
+                                                                                                            name="condition"
+                                                                                                            id="condition3-{{ $key }}-{{ $purchase->id }}"
+                                                                                                            value=""
+                                                                                                            required>
+                                                                                                        <label
+                                                                                                            class="form-check-label"
+                                                                                                            for="condition3-{{ $key }}-{{ $purchase->id }}">
+                                                                                                            Specify Other Product Condition:
+                                                                                                        </label>
+                                                                                                        <textarea x-show="conditionbox" type="text" class="form-control mt-2" id="otherCondition{{ $key }}-{{ $purchase->id }}" name="other_condition" placeholder="Enter other product condition"></textarea>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
