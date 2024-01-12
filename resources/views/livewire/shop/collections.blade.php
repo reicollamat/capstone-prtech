@@ -44,7 +44,7 @@
                             </div>
                         </button>
                         <ul x-cloak x-show="open"
-                            class="position-absolute w-full min-w-[170px] z-50 end-0 !pl-0 bg-white shadow text-sm mt-2 rounded"
+                            class="position-absolute w-full min-w-[170px] z-50 end-0 !pl-0 bg-white shadow text-sm mt-0 rounded"
                             x-transition.origin.top>
                             {{--                            @foreach ($sortoptions as $key => $value) --}}
                             {{--                                <button class="w-full p-2.5 hover:bg-blue-50 hover:text-blue-900 text-start" --}}
@@ -325,45 +325,45 @@
                         <!-- By Price Start -->
                         <div class="p-2 mt-3" style="border: 1px solid #FFFFFF">
                             <h5 class="section-title position-relative text-uppercase underline underline-offset-4">
-                                <span class="pr-3">Filter by price</span>
+                                <span class="pr-3">Filter by price {{ var_dump($price_bracket) }}</span>
                             </h5>
                             <div class="">
                                 <div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
-                                            value="" id="price-1" wire:model.live="price_bracket">
+                                        <input type="radio" class="custom-control-input" name="0"
+                                            value="1" id="price-1" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-1">₱0 - ₱5000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
-                                            value="" id="price-2" wire:model.live="price_bracket">
+                                        <input type="radio" class="custom-control-input" name="1"
+                                            value="2" id="price-2" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-2">₱6000 - ₱10000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
-                                            value="" id="price-3" wire:model.live="price_bracket">
+                                        <input type="radio" class="custom-control-input" name=""
+                                            value="3" id="price-3" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-3">₱11000 - ₱20000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
-                                            value="" id="price-4" wire:model.live="price_bracket">
+                                        <input type="radio" class="custom-control-input" name=""
+                                            value="4" id="price-4" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-4">₱21000 - ₱30000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
-                                            value="" id="price-5" wire:model.live="price_bracket">
+                                        <input type="radio" class="custom-control-input" name=""
+                                            value="5" id="price-5" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-5">₱31000 - ₱40000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
-                                            value="" id="price-6" wire:model.live="price_bracket">
-                                        <label class="custom-control-label" for="price-5">₱41000 - Above</label>
+                                        <input type="radio" class="custom-control-input" name=""
+                                            value="6" id="price-6" wire:model.live="price_bracket">
+                                        <label class="custom-control-label" for="price-6">₱41000 - Above</label>
                                     </div>
                                 </div>
                             </div>
@@ -375,15 +375,15 @@
                         <div class="p-2 mt-3" style="border: 1px solid #FFFFFF">
                             <h5
                                 class="section-title position-relative text-uppercase mb-3 underline underline-offset-4 ">
-                                <span class="pr-3">Filter by Stars</span>
+                                <span class="pr-3">Filter by Stars {{ $star_rating }}</span>
                             </h5>
                             <div class="">
                                 <div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
+                                        <input type="radio" class="custom-control-input" name=""
                                             value="5" id="star-5" wire:model.live="star_rating">
-                                        <label class="custom-control-label" for="price-4">
+                                        <label class="custom-control-label" for="star-5">
                                             <div class="flex items-center ">(5)
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
@@ -400,9 +400,9 @@
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
+                                        <input type="radio" class="custom-control-input" name=""
                                             value="4" id="star-4" wire:model.live="star_rating">
-                                        <label class="custom-control-label" for="price-4">
+                                        <label class="custom-control-label" for="star-4">
                                             <div class="flex items-center">(4)
                                                 @for ($i = 1; $i <= 4; $i++)
                                                     <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
@@ -426,9 +426,9 @@
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
+                                        <input type="radio" class="custom-control-input" name=""
                                             value="3" id="star_3" wire:model.live="star_rating">
-                                        <label class="custom-control-label" for="price-4">
+                                        <label class="custom-control-label" for="star-3">
                                             <div class="flex items-center">(3)
                                                 @for ($i = 1; $i <= 3; $i++)
                                                     <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
@@ -458,9 +458,9 @@
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
+                                        <input type="radio" class="custom-control-input" name=""
                                             value="2" id="star-2" wire:model.live="star_rating">
-                                        <label class="custom-control-label" for="price-4">
+                                        <label class="custom-control-label" for="star-2">
                                             <div class="flex items-center">(2)
                                                 @for ($i = 1; $i <= 2; $i++)
                                                     <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
@@ -496,9 +496,9 @@
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                        <input type="checkbox" class="custom-control-input" name=""
+                                        <input type="radio" class="custom-control-input" name=""
                                             value="1" id="star-1" wire:model.live="star_rating">
-                                        <label class="custom-control-label" for="price-4">
+                                        <label class="custom-control-label" for="star-1">
                                             <div class="flex items-center">(1)
                                                 <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -591,11 +591,13 @@
                                         <div>
                                             <div class="position-absolute top-0 end-0 mt-1 mr-2.5 z-[30]">
                                                 @if ($this->check_bookmark($product->id))
-                                                    <button type="button" wire:click="removefromwishlist({{ $product->id }})">
+                                                    <button type="button"
+                                                        wire:click="removefromwishlist({{ $product->id }})">
                                                         <i class="bi bi-heart-fill" style="font-size: 1.5rem"></i>
                                                     </button>
                                                 @else
-                                                    <button type="button" wire:click="addtowishlist({{ $product->id }})">
+                                                    <button type="button"
+                                                        wire:click="addtowishlist({{ $product->id }})">
                                                         <i class="bi bi-heart" style="font-size: 1.5rem"></i>
                                                     </button>
                                                 @endif
@@ -639,23 +641,25 @@
                                         <div class="flex justify-content-center gap-2 pb-4">
                                             {{-- restrict if stock of product is 0 or not available --}}
                                             @if ($product->stock == 0)
-                                                <button type="button" class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center"
-                                                        data-bs-toggle="popover" data-bs-placement="top"
-                                                        data-bs-trigger="hover focus"
-                                                        data-bs-custom-class="buynow-btn-notavailable"
-                                                        data-bs-title="Product Not Available"
-                                                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
-                                                        Buy Now
+                                                <button type="button"
+                                                    class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none text-sm focus:ring-blue-300 font-bold sm:text-xl rounded-lg !px-5 text-center"
+                                                    data-bs-toggle="popover" data-bs-placement="top"
+                                                    data-bs-trigger="hover focus"
+                                                    data-bs-custom-class="buynow-btn-notavailable"
+                                                    data-bs-title="Product Not Available"
+                                                    data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                                                    Buy Now
                                                 </button>
-                                                <button type="button" class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none focus:ring-blue-300 font-medium rounded-lg p-1.5 text-sm  items-center text-center"
-                                                        data-bs-toggle="popover" data-bs-placement="top"
-                                                        data-bs-trigger="hover focus"
-                                                        data-bs-custom-class="buynow-btn-notavailable"
-                                                        data-bs-title="Product Not Available"
-                                                        data-bs-content="We're sorry but this product is currently not available / out of stock.">
-                                                        <div class="">
-                                                            <i class="bi bi-cart-plus" style="font-size: 1.5rem"></i>
-                                                        </div>
+                                                <button type="button"
+                                                    class="text-white bg-gray-600 hover:bg-blue-800 focus:ring-4 no-underline focus:outline-none focus:ring-blue-300 font-medium rounded-lg p-1.5 text-sm  items-center text-center"
+                                                    data-bs-toggle="popover" data-bs-placement="top"
+                                                    data-bs-trigger="hover focus"
+                                                    data-bs-custom-class="buynow-btn-notavailable"
+                                                    data-bs-title="Product Not Available"
+                                                    data-bs-content="We're sorry but this product is currently not available / out of stock.">
+                                                    <div class="">
+                                                        <i class="bi bi-cart-plus" style="font-size: 1.5rem"></i>
+                                                    </div>
                                                 </button>
                                             @else
                                                 <button wire:click="buynow({{ $product->id }})"
