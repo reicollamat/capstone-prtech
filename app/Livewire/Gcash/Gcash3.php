@@ -126,7 +126,7 @@ class Gcash3 extends Component
                     'purchase_date' => now(),
                     'shipping_fee' => $cartitems_shippingfee_per_seller,
                     'total_amount' => $total_amount,
-                    'purchase_status' => 'pending',
+                    'purchase_status' => 'to_ship',
                 ]);
                 $purchase->save();
 
@@ -211,7 +211,7 @@ class Gcash3 extends Component
                 'purchase_date' => now(),
                 'shipping_fee' => $this->shipping_value_purchaseone,
                 'total_amount' => $this->total,
-                'purchase_status' => 'pending',
+                'purchase_status' => 'to_ship',
             ]);
             $purchase->save();
 
