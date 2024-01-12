@@ -247,12 +247,14 @@
                 </div>
             </div>
             {{-- <hr> --}}
-            <div class="w-full flex justify-end py-3">
+
+            {{-- <div class="w-full flex justify-end py-3">
                 <button type="button"  class="bg-primary hover:!bg-blue-700 text-white p-2 rounded w-fit"
                         data-bs-toggle="modal" data-bs-target="#massShip">
                     Mass Prepare Orders
                 </button>
-            </div>
+            </div> --}}
+
             <!-- Modal -->
             <div class="modal fade" id="massShip" data-bs-backdrop="static"
                  data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmRemoveLabel"
@@ -279,7 +281,7 @@
                 </div>
             </div>
 
-            <div class="bg-white overflow-x-auto rounded-lg p-3">
+            <div class="bg-white overflow-x-auto rounded-lg p-3 mt-3">
                 <div class="grid grid-cols-12 text-center text-sm">
                     {{-- <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">d</div> --}}
                     <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Reference#</div>
@@ -399,7 +401,7 @@
                                             </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
-                                                    class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
                                                     Manage Shipments <i class="bi bi-box-arrow-up-right text-sm"></i>
                                                 </button>
                                             </div>
@@ -409,7 +411,7 @@
                                             </div>
                                             <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                                                 <button type="submit"
-                                                    class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
                                                     Manage Shipments <i class="bi bi-box-arrow-up-right text-sm"></i>
                                                 </button>
                                             </div>
