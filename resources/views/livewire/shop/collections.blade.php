@@ -325,44 +325,50 @@
                         <!-- By Price Start -->
                         <div class="p-2 mt-3" style="border: 1px solid #FFFFFF">
                             <h5 class="section-title position-relative text-uppercase underline underline-offset-4">
-                                <span class="pr-3">Filter by price {{ var_dump($price_bracket) }}</span>
+                                <span class="pr-3">Filter by price
+                                    @if ($price_bracket != '[1, 999999]')
+                                        <button type="button" wire:click="resetPrice">
+                                            <i class="bi bi-x text-red-600"></i>
+                                        </button>
+                                    @endif
+                                </span>
                             </h5>
                             <div class="">
                                 <div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="radio" class="custom-control-input" name="0"
-                                            value="1" id="price-1" wire:model.live="price_bracket">
+                                            value="[1, 5000]" id="price-1" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-1">₱0 - ₱5000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="radio" class="custom-control-input" name="1"
-                                            value="2" id="price-2" wire:model.live="price_bracket">
+                                            value="[6000, 10000]" id="price-2" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-2">₱6000 - ₱10000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="radio" class="custom-control-input" name=""
-                                            value="3" id="price-3" wire:model.live="price_bracket">
+                                            value="[11000, 20000]" id="price-3" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-3">₱11000 - ₱20000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="radio" class="custom-control-input" name=""
-                                            value="4" id="price-4" wire:model.live="price_bracket">
+                                            value="[21000, 30000]" id="price-4" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-4">₱21000 - ₱30000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="radio" class="custom-control-input" name=""
-                                            value="5" id="price-5" wire:model.live="price_bracket">
+                                            value="[31000, 40000]" id="price-5" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-5">₱31000 - ₱40000</label>
                                     </div>
                                     <div
                                         class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                                         <input type="radio" class="custom-control-input" name=""
-                                            value="6" id="price-6" wire:model.live="price_bracket">
+                                            value="[41000, 50000]" id="price-6" wire:model.live="price_bracket">
                                         <label class="custom-control-label" for="price-6">₱41000 - Above</label>
                                     </div>
                                 </div>
@@ -375,7 +381,14 @@
                         <div class="p-2 mt-3" style="border: 1px solid #FFFFFF">
                             <h5
                                 class="section-title position-relative text-uppercase mb-3 underline underline-offset-4 ">
-                                <span class="pr-3">Filter by Stars {{ var_dump($star_rating) }}</span>
+                                <span class="pr-3">Filter by Stars
+                                    @if ($star_rating != 5)
+                                        <button type="button" wire:click="resetRating">
+                                            <i class="bi bi-x text-red-600"></i>
+                                        </button>
+                                    @endif
+
+                                </span>
                             </h5>
                             <div class="">
                                 <div>

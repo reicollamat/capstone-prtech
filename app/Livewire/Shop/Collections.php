@@ -49,8 +49,8 @@ class Collections extends Component
     #[Url(as: 'rating', history: true, keep: false)]
     public int $star_rating;
 
-    #[Url(as: 'p-filter', history: true, keep: false)]
-    public int $price_bracket;
+    // #[Url(as: 'p-filter', history: true, keep: false)]
+    public string $price_bracket = '';
 
     #[Url(as: 'sortby', history: true, keep: false)]
     public string $sortingby = 'purchase_count';
@@ -89,6 +89,15 @@ class Collections extends Component
                 ->paginate(12);
         }
 
+        // if ($this->category_filter && $this->star_rating || $this->price_bracket) {
+        //     return Product::with('product_images')
+        //         ->whereBetween('price', json_decode($this->price_bracket, true))
+        //         ->where('rating', '=', $this->star_rating)
+        //         ->whereIn('category', $this->category_filter)
+        //         ->orderBy($this->sortingby, $this->sortdirection)
+        //         ->paginate(12);
+        // }
+
         if ($this->search && $this->category_filter) {
             return Product::with('product_images')
                 ->where(strtolower('title'), 'like', "%{$this->search}%")
@@ -111,6 +120,15 @@ class Collections extends Component
                 ->paginate(12);
         }
 
+        // if ($this->star_rating && $this->price_bracket) {
+        //     return Product::with('product_images')
+        //         ->whereBetween('price', json_decode($this->price_bracket, true))
+        //         ->where('rating', '>=', $this->star_rating)
+        //         ->orderBy($this->sortingby, $this->sortdirection)
+        //         ->paginate(12);
+        //
+        // }
+
         if ($this->category_filter) {
             return Product::with('product_images')
                 ->whereIn('category', $this->category_filter)
@@ -126,41 +144,66 @@ class Collections extends Component
         }
 
         if ($this->price_bracket) {
-            if ($this->price_bracket == 1) {
-                // dd('test');
+            // dd($this->price_bracket);
+            // if ($this->price_bracket == 1) {
+            //     // dd('test');
+            //     return Product::with('product_images')
+            //         ->whereBetween('price', [1, 5000])
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->price_bracket == 2) {
+            //     return Product::with('product_images')
+            //         ->whereBetween('price', [6000, 10000])
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->price_bracket == 3) {
+            //     return Product::with('product_images')
+            //         ->whereBetween('price', [11000, 20000])
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->price_bracket == 4) {
+            //     return Product::with('product_images')
+            //         ->whereBetween('price', [21000, 30000])
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->price_bracket == 5) {
+            //     return Product::with('product_images')
+            //         ->whereBetween('price', [31000, 40000])
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // } elseif ($this->price_bracket == 6) {
+            //     return Product::with('product_images')
+            //         ->whereBetween('price', [41000, 50000])
+            //         ->orderBy($this->sortingby, $this->sortdirection)
+            //         ->paginate(12);
+            // }
+            if ($this->price_bracket != '[1, 999999]') {
                 return Product::with('product_images')
-                    ->whereBetween('price', [1, 5000])
-                    ->orderBy($this->sortingby, $this->sortdirection)
-                    ->paginate(12);
-            } elseif ($this->price_bracket == 2) {
-                return Product::with('product_images')
-                    ->whereBetween('price', [6000, 10000])
-                    ->orderBy($this->sortingby, $this->sortdirection)
-                    ->paginate(12);
-            } elseif ($this->price_bracket == 3) {
-                return Product::with('product_images')
-                    ->whereBetween('price', [11000, 20000])
-                    ->orderBy($this->sortingby, $this->sortdirection)
-                    ->paginate(12);
-            } elseif ($this->price_bracket == 4) {
-                return Product::with('product_images')
-                    ->whereBetween('price', [21000, 30000])
-                    ->orderBy($this->sortingby, $this->sortdirection)
-                    ->paginate(12);
-            } elseif ($this->price_bracket == 5) {
-                return Product::with('product_images')
-                    ->whereBetween('price', [31000, 40000])
-                    ->orderBy($this->sortingby, $this->sortdirection)
-                    ->paginate(12);
-            } elseif ($this->price_bracket == 6) {
-                return Product::with('product_images')
-                    ->whereBetween('price', [41000, 50000])
+                    ->whereBetween('price', json_decode($this->price_bracket, true))
+                    ->orderBy('price', 'asc')
                     ->orderBy($this->sortingby, $this->sortdirection)
                     ->paginate(12);
             }
         }
 
+
+
+        if ($this->search) {
+            return Product::with('product_images')
+                ->where(strtolower('title'), 'like', "%{$this->search}%")
+                ->orderBy($this->sortingby, $this->sortdirection)
+                ->paginate(12);
+        }
+
+        if ($this->category) {
+            return Product::with('product_images')
+                ->where('category', '=', $this->category)
+                ->orderBy($this->sortingby, $this->sortdirection)
+                ->paginate(12);
+        }
+
         if ($this->star_rating) {
+            // dd('test');
             // if ($this->star_rating == 1) {
             //     return Product::with('product_images')
             //         ->where('rating', '=', 1)
@@ -187,24 +230,18 @@ class Collections extends Component
             //         ->orderBy($this->sortingby, $this->sortdirection)
             //         ->paginate(12);
             // }
-            return Product::with('product_images')
-                ->where('rating', '=', $this->star_rating)
-                ->orderBy($this->sortingby, $this->sortdirection)
-                ->paginate(12);
-        }
+            if ($this->star_rating == 5) {
+                return Product::with('product_images')
+                    ->orderBy('rating', 'desc')
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            } else {
+                return Product::with('product_images')
+                    ->where('rating', '>=', $this->star_rating)
+                    ->orderBy($this->sortingby, $this->sortdirection)
+                    ->paginate(12);
+            }
 
-        if ($this->search) {
-            return Product::with('product_images')
-                ->where(strtolower('title'), 'like', "%{$this->search}%")
-                ->orderBy($this->sortingby, $this->sortdirection)
-                ->paginate(12);
-        }
-
-        if ($this->category) {
-            return Product::with('product_images')
-                ->where('category', '=', $this->category)
-                ->orderBy($this->sortingby, $this->sortdirection)
-                ->paginate(12);
         }
 
         if ($this->sortingby && $this->sortdirection) {
@@ -215,6 +252,9 @@ class Collections extends Component
             return Product::with('product_images')
                 ->paginate(12);
         }
+
+        return Product::with('product_images')
+            ->paginate(12);
     }
 
     #[Computed]
@@ -267,7 +307,7 @@ class Collections extends Component
 
     public function mount($category = null)
     {
-        $this->price_bracket = 9;
+        $this->price_bracket = '[1, 999999]';
         $this->star_rating = 5;
 
         // dd(Product::where('id', 1455)->select('image')->get());
@@ -388,5 +428,15 @@ class Collections extends Component
     {
 
         return view('livewire..shop.collections');
+    }
+
+    public function resetRating()
+    {
+        $this->star_rating = 5;
+    }
+
+    public function resetPrice()
+    {
+        $this->price_bracket = '[1, 999999]';
     }
 }
