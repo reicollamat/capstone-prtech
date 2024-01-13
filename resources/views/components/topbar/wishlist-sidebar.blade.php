@@ -1,6 +1,6 @@
-<div>
+<div >
     {{--wishlist heart button--}}
-    <button class="btn  outline-remove position-relative" type="button" data-bs-toggle="offcanvas"
+    <button class="btn outline-remove position-relative" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasWithBothOptions_wishlist"
             aria-controls="offcanvasWithBothOptions">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
@@ -17,7 +17,8 @@
 
     <div class="offcanvas offcanvas-end min-w-[500px]" data-bs-scroll="false" tabindex="-1"
          id="offcanvasWithBothOptions_wishlist"
-         aria-labelledby="offcanvasWithBothOptionsLabel">
+         aria-labelledby="offcanvasWithBothOptionsLabel"
+         style="z-index: 9999!important;">
         <div class="offcanvas-header px-4">
             <div class="d-flex align-middle self-center  items-center text-gray-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
