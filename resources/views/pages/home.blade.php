@@ -70,32 +70,58 @@
     </div>
     <!-- Carousel End -->
 
-    <!-- Featured Start -->
-    <div class="container-fluid mt-5 bg-primary">
-        <div class="row px-xl-5" style="height: 100px">
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center mb-4" style="padding: 30px;">
-                    <h1 class="fa fa-check text-light m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0 text-dark">Quality Product</h5>
-                </div>
+    {{-- <!-- Featured Start --> --}}
+    {{-- <div class="container-fluid mt-5"> --}}
+    {{--     <div class="row px-xl-5 bg-primary" style="height: 100px"> --}}
+    {{--         <div class="col-lg-3 col-md-6 col-sm-12 pb-1"> --}}
+    {{--             <div class="d-flex align-items-center mb-4" style="padding: 30px;"> --}}
+    {{--                 <h1 class="fa fa-check text-light m-0 mr-3"></h1> --}}
+    {{--                 <h5 class="font-weight-semi-bold m-0 text-dark">Quality Product</h5> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--         <div class="col-lg-3 col-md-6 col-sm-12 pb-1"> --}}
+    {{--             <div class="d-flex align-items-center mb-4" style="padding: 30px;"> --}}
+    {{--                 <h1 class="fa fa-shipping-fast text-light m-0 mr-2"></h1> --}}
+    {{--                 <h5 class="font-weight-semi-bold m-0 text-dark">Free Shipping</h5> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--         <div class="col-lg-3 col-md-6 col-sm-12 pb-1"> --}}
+    {{--             <div class="d-flex align-items-center mb-4" style="padding: 30px;"> --}}
+    {{--                 <h1 class="fas fa-exchange-alt text-light m-0 mr-3"></h1> --}}
+    {{--                 <h5 class="font-weight-semi-bold m-0 text-dark">Warranty</h5> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--         <div class="col-lg-3 col-md-6 col-sm-12 pb-1"> --}}
+    {{--             <div class="d-flex align-items-center mb-4" style="padding: 30px;"> --}}
+    {{--                 <h1 class="fa fa-phone-volume text-light m-0 mr-3"></h1> --}}
+    {{--                 <h5 class="font-weight-semi-bold m-0 text-dark">24/7 Support</h5> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--     </div> --}}
+    {{-- </div> --}}
+    <div class="container-fluid mt-5 grid grid-cols-2 md:grid-cols-4 ">
+        <div class="">
+            <div class="flex justify-center items-center p-10 border-1 border-white bg-primary">
+                {{-- <h1 class="fa fa-check text-light m-0 mr-3"></h1> --}}
+                <h5 class="font-weight-semi-bold m-0 text-dark">Quality Product</h5>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center mb-4" style="padding: 30px;">
-                    <h1 class="fa fa-shipping-fast text-light m-0 mr-2"></h1>
-                    <h5 class="font-weight-semi-bold m-0 text-dark">Free Shipping</h5>
-                </div>
+        </div>
+        <div class="">
+            <div class="flex justify-center items-center  p-10 border-1 border-white bg-primary">
+                {{-- <h1 class="fa fa-shipping-fast text-light m-0 mr-2"></h1> --}}
+                <h5 class="font-weight-semi-bold m-0 text-dark">Low Shipping Cost</h5>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center mb-4" style="padding: 30px;">
-                    <h1 class="fas fa-exchange-alt text-light m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0 text-dark">Warranty</h5>
-                </div>
+        </div>
+        <div class="">
+            <div class="flex justify-center items-center  p-10 border-1 border-white bg-primary">
+                {{-- <h1 class="fas fa-exchange-alt text-light m-0 mr-3"></h1> --}}
+                <h5 class="font-weight-semi-bold m-0 text-dark">Warranty</h5>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="d-flex align-items-center mb-4" style="padding: 30px;">
-                    <h1 class="fa fa-phone-volume text-light m-0 mr-3"></h1>
-                    <h5 class="font-weight-semi-bold m-0 text-dark">24/7 Support</h5>
-                </div>
+        </div>
+        <div class="">
+            <div class="flex justify-center items-center p-10 border-1 border-white bg-primary">
+                {{-- <h1 class="fa fa-phone-volume text-light "></h1> --}}
+                <h5 class="font-weight-semi-bold m-0 text-dark">24/7 Support</h5>
             </div>
         </div>
     </div>
