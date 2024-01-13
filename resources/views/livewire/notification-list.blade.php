@@ -1,11 +1,15 @@
 <div x-data="{ isNotificationOpen: false }" class="relative" @mouseleave="isNotificationOpen = false">
     <button class="flex gap-1.5 p-1.5 items-center self-center align-middle"
         @mouseover="isNotificationOpen = true">
-        <i class="bi bi-bell">
-            <span class="position-absolute top-25 start-25 translate-middle p-1 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New alerts</span>
-            </span>
-        </i>
+        @if (count($this->notifications))
+            <i class="bi bi-bell">
+             <span class="position-absolute top-25 start-25 translate-middle p-1 bg-danger border border-light rounded-circle">
+                 <span class="visually-hidden">New alerts</span>
+             </span>
+            </i>
+        @else
+            <i class="bi bi-bell"></i>
+        @endif
         <span>
             Notifications
         </span>
@@ -31,7 +35,7 @@
                             <button class="text-red-600 text-sm px-1" wire:click="clear_notifs">
                                 <i class="bi bi-trash-fill"></i>Clear
                             </button>
-                            
+
                             @foreach ($this->notifications as $notification)
                                 @if ($notification->tag == 'order_placed')
                                     <div class="flex flex-col text-start m-1 p-2 bg-blue-200 rounded">
@@ -110,14 +114,14 @@
                                     </div>
                                 @endif
                             @endforeach
-                            
+
                         @else
 
                         <div class="text-center text-secondary">
                             <i class="bi bi-bell mr-2"></i>
                             No notifications
                         </div>
-                            
+
                         @endif
                     </div>
                 </div>
