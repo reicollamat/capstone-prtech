@@ -41,11 +41,11 @@
                         <!-- Email input -->
                         <div class="mb-3">
                             <label for="email"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
-                                address</label>
-                            <input type="email" id="email" name="email"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username or Email
+                                </label>
+                            <input type="text" id="email" name="email"
                                 class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="john.doe@company.com" required>
+                                placeholder="Username or Email" required>
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         <!-- Password input -->
@@ -80,7 +80,7 @@
                         <!-- Remember me checkbox -->
                         <div class="mb-6 md:flex items-center md:justify-between">
                             <div class="flex justify-center p-1 self-center items-center">
-                                <input class="form-check-input mt-0 mr-1" type="checkbox" value=""
+                                <input class="form-check-input mt-0 mr-1" type="checkbox" value="1"
                                     id="remember_me" name="remember" />
                                 <label class="inline-block pl-[0.15rem] hover:cursor-pointer" for="remember_me">
                                     Remember me
