@@ -22,6 +22,7 @@ class SellerMiddleware
         if (Auth::check()) {
             // Check if the user is a seller
             if (Auth::user()->is_seller) {
+                // dd(Auth::user()->is_seller);
                 // Check if the user has a seller account information, if none then redirect to seller information page to fill necessary infos
                 if (User::find(Auth::user()->id)->seller == null) {
                     return redirect()->route('seller-shop-information');
