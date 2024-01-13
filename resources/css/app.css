@@ -12,6 +12,11 @@
     }
 }
 
+
+body {
+    min-width: 600px;
+}
+
 .bg-blueGray-800 {
     --tw-bg-opacity: 1;
     background-color: rgba(30, 41, 59, var(--tw-bg-opacity));
@@ -46,6 +51,8 @@
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
+
+
 
 .custom-input-text {
     border-top-left-radius: 0 !important;
