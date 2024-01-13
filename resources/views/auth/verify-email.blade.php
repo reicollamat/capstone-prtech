@@ -1,7 +1,11 @@
 <x-guest-layout>
     <div class="w-full h-screen flex justify-center items-center">
         <div class="p-6 rounded-xl w-1/3 border-1 border-gray-200 shadow-2xl">
-            <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            <div class="mb-4 text-xl text-gray-800 dark:text-gray-400">
+                {{ __('Please check your email for verification') }}
+                <i class="bi bi-person-check text-green-600"></i>
+            </div>
+            <div class="mb-4 text-gray-600 dark:text-gray-400">
                 {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
             </div>
 
