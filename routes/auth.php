@@ -61,9 +61,9 @@ Route::group(['prefix' => 'buyer', 'middleware' => 'guest'], function () {
 
     // TODO: uncomment me when done editing ui and logic
 
-    Route::get('buyer/on-boarding', BuyerRegistration::class)->name('buyer-on-boarding');
-
 });
+
+Route::get('buyer/on-boarding', BuyerRegistration::class)->name('buyer-on-boarding');
 
 // Route::get('buyer/on-boarding', BuyerRegistration::class)->name('buyer-on-boarding');
 
