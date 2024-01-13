@@ -1,4 +1,4 @@
-<nav class="navbar padding-remove bg-body-tertiary z-50 " role="navigation">
+<nav class="navbar padding-remove bg-body-tertiary z-50" role="navigation">
     <div class="container-fluid  bg-dark text-white content-center py-2 z-50">
         <button class="navbar-toggler outline-none outline-remove py-2 md:hidden" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
                 <rect y="14" width="30" height="2"></rect>
             </svg>
         </button>
-        <a class="navbar-brand text-white md:hidden" href="#">Offcanvas navbar</a>
+        <a class="navbar-brand text-white md:hidden" href="#">PR-Tech Navigation</a>
         <div class="hidden md:block text-white">
             <ul class="nav">
                 <li class="nav-link text-white">
@@ -227,7 +227,7 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('index_landing') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -247,7 +247,7 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex mt-3" role="search">
+            <form class="d-flex mt-3" role="search" >
                 <input class="form-control me-2" type="search" placeholder="Search PR-Tech" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>

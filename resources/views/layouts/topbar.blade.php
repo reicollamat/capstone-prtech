@@ -1,8 +1,8 @@
-<div class="sticky-top z-50">
+<div class="sticky-top">
     <div>
         <nav class="navbar bg-white text-black padding-remove sticky-top py-2 shadow">
             <div class="w-full container-fluid mx-4 justify-between align-items-center my-1">
-                <div class=" ">
+                <div class="hidden md:block">
                     <a class="navbar-brand" href="#">
                         {{--                        nagbbug to sa simula malaki din mag aayos --}}
                         <img src="/img/brand/svg/logo-no-background.svg" alt="Logo" width="150"
