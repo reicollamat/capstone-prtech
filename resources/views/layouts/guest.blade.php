@@ -35,17 +35,7 @@
 </head>
 
 <body>
-
     <main class="relative">
-        {{--        <div class="absolute w-full h-full top-0 z-10"> --}}
-        {{--            <div class="  w-full h-full opacity-50 z-10" style=""> --}}
-
-        {{--            </div> --}}
-        {{--            --}}{{--            <div class=" w-full opacity-90 h-1/2 z-10" style="background-color:#051937 "> --}}
-        {{--            --}}{{--            </div> --}}
-        {{--            --}}{{--            <div class="bg-blue-100 opacity-75  w-full h-1/2 z-10"> --}}
-        {{--            --}}{{--            </div> --}}
-        {{--        </div> --}}
         @yield('content', $slot ?? '')
     </main>
 
