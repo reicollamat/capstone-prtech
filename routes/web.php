@@ -36,6 +36,7 @@ use App\Livewire\Seller\OnBoarding\Form\SellerRegistration;
 use App\Livewire\Seller\OnBoarding\Form\ShopInformation;
 use App\Livewire\Shop;
 use App\Livewire\Shop\Collections;
+use App\Livewire\Tracker\TrackOrder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -201,9 +202,7 @@ Route::prefix('support')->group(function () {
     Route::get('/warranty-information', function () {
         return view('support.warranty');
     })->name('warranty-information');
-    Route::get('/track-order', function () {
-        return view('support.trackorder');
-    })->name('track-order');
+    Route::get('/track-order', TrackOrder::class)->name('track-order');
     Route::get('/support-center', function () {
         return view('support.supportcenter');
     })->name('support-center');
