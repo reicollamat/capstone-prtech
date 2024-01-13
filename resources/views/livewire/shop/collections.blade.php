@@ -648,6 +648,9 @@
                                                     <span class="text-xl font-medium text-gray-900 ">PHP
                                                         {{ $product->price }}</span>
                                                 </div>
+                                                @if ($product->stock == 0)
+                                                    <small class="text-red-600 bg-gray-200 text-sm mb-4 ml-4 p-1 rounded">NOT AVAILABLE</small>
+                                                @endif
                                             </div>
                                         </div>
 
