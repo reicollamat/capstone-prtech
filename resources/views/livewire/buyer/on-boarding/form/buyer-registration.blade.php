@@ -74,7 +74,7 @@
                         <div class="grid gap-6 mb-6 md:grid-cols-2">
                             <div class="text-center">
                                 <label for="user_birthdate"
-                                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                       class="block mb-2 text-sm text-start font-medium text-gray-900 dark:text-white">
                                     <span class="text-red-600 text-xs">*</span>Date of Birth
                                 </label>
                                 {{-- with a maximum of date of 18 years ago from now --}}
@@ -87,7 +87,7 @@
                                 @if ($user_birthdate != null)
 {{--                                    {{ date('F d, Y', strtotime($user_birthdate)) }}--}}
                                 @else
-                                    <small>18 years old and above</small>
+                                    <small class="text-red-500">18 years old and above</small>
                                 @endif
                             </div>
                             <div>

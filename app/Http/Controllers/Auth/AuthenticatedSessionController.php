@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         $login = $request->input('email');
         $user = User::where('email', $login)->orWhere('name', $login)->first();
 
-        if (! $user) {
+        if (!$user) {
             return redirect()->back()->withErrors(['email' => 'Invalid login credentials']);
         }
 
@@ -40,8 +40,10 @@ class AuthenticatedSessionController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt(['email' => $user->email, 'password' => $request->password]) ||
-            Auth::attempt(['username' => $user->name, 'password' => $request->password])) {
+        if (
+            Auth::attempt(['email' => $user->email, 'password' => $request->password]) ||
+            Auth::attempt(['name' => $user->name, 'password' => $request->password])
+        ) {
             Auth::loginUsingId($user->id);
 
             $request->session()->regenerate();
@@ -50,7 +52,6 @@ class AuthenticatedSessionController extends Controller
         } else {
             return redirect()->back()->withErrors(['password' => 'Invalid login credentials']);
         }
-
     }
 
     /**

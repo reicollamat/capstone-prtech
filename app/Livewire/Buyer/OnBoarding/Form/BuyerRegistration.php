@@ -295,6 +295,7 @@ class BuyerRegistration extends Component
                 'city' => $validator['user_city'],
                 'postal_code' => $validator['user_zip_postal'],
                 'state_province' => $validator['user_state_province'],
+                'country' => 'Philippines',
             ]);
             if ($user) {
                 // TODO: add a modal or confirmaiton on ui that query is sucess before redirecting to shop information page
