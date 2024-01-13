@@ -2,7 +2,12 @@
 {{--    @section('content')--}}
 <div x-transition.duration.500ms>
     {{-- <h1>testsetes</h1> --}}
+    <div class="d-flex justify-center my-4 text-center" x-transition.duration.500ms>
+        <p><span class="text-gray-600">Note:</span> Please be advised that you can also "View" the order in the "My Purchases" <br>
+        under your profile badge in the top right corner</p>
+    </div>
     <div class="d-flex justify-center my-4" x-transition.duration.500ms>
+
         <form wire:submit="submit">
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label w-full text-center">
