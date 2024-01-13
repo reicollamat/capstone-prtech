@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,11 +26,31 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        // dd($request->input('email'));
+        // $request->authenticate();
 
-        $request->session()->regenerate();
+        $login = $request->input('email');
+        $user = User::where('email', $login)->orWhere('name', $login)->first();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (! $user) {
+            return redirect()->back()->withErrors(['email' => 'Invalid login credentials']);
+        }
+
+        $request->validate([
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt(['email' => $user->email, 'password' => $request->password]) ||
+            Auth::attempt(['username' => $user->name, 'password' => $request->password])) {
+            Auth::loginUsingId($user->id);
+
+            $request->session()->regenerate();
+
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } else {
+            return redirect()->back()->withErrors(['password' => 'Invalid login credentials']);
+        }
+
     }
 
     /**
