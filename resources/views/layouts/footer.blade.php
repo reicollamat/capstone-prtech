@@ -20,19 +20,17 @@
                 </div>
 
                 <div class="col-span-2 lg:col-span-3 lg:flex lg:items-end">
-                    <form class="w-full">
-                        <label for="UserEmail" class="sr-only"> Email </label>
-
-                        <div class="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4">
-                            <input type="email" id="UserEmail" placeholder="john@rhcp.com"
-                                class="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm" />
-
-                            <button
-                                class="mt-1 w-full bg-blue-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-blue-600 sm:mt-0 sm:w-auto sm:shrink-0">
-                                Sign Up
-                            </button>
-                        </div>
-                    </form>
+                    {{-- <form class="w-full"> --}}
+                    {{--     <label for="UserEmail" class="sr-only"> Email </label> --}}
+                    {{--     <div class="border border-gray-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4"> --}}
+                    {{--         <input type="email" id="UserEmail" placeholder="" --}}
+                    {{--             class="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm" /> --}}
+                    {{--         <button --}}
+                    {{--             class="mt-1 w-full bg-blue-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-blue-600 sm:mt-0 sm:w-auto sm:shrink-0"> --}}
+                    {{--             Sign Up --}}
+                    {{--         </button> --}}
+                    {{--     </div> --}}
+                    {{-- </form> --}}
                 </div>
 
                 <div class="col-span-2 sm:col-span-1">
