@@ -59,6 +59,17 @@ class LandingController extends Controller
             $recent_products[] = Product::find($value->id)->category($value->category)->first();
         }
 
+        if (Auth::user()) {
+
+            $user = Auth::user();
+            // dd($user);
+
+            // check if user has missing infos
+            if ($user->first_name == null || $user->last_name == null || $user->phone_number == null || $user->street_address_1 == null || $user->state_province == null || $user->city == null || $user->postal_code == null || $user->country == null) {
+                return redirect()->route('buyer-on-boarding');
+            }
+        }
+
         return view('pages.home', [
             'featured_products' => $featured_products,
             'recent_products' => $recent_products,
@@ -96,7 +107,7 @@ class LandingController extends Controller
          * @param string|array $permissions The value of the "permissions" variable.
          * @return array The updated value of the "permissions" variable.
          */
-        if( gettype($permissions) == 'string') {
+        if (gettype($permissions) == 'string') {
             $permissions = json_decode($permissions, true);
         }
 
