@@ -4,7 +4,7 @@
             <strong class="text-dark mr-3">Sold:</strong>
         </td>
         <td>
-            {{ $categoryproduct->purchase_count }}
+            {{ $categoryproduct->product->purchase_count}}
         </td>
     </tr>
     <tr>
