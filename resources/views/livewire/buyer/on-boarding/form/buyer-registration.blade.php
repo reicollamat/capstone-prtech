@@ -265,13 +265,13 @@
                         {{--                                </div> --}}
                         {{--                            </span> --}}
                         {{--                        </button> --}}
-                        <button class="flex no-underline decoration-0 text-black" type="button" wire:click="delete"
-                                wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE">
-                            <span
-                                class="lg:!h-12 w-full  h-10 flex items-center text-black justify-center uppercase font-semibold rounded-sm px-4 lg:!px-6 border border-secondary hover:bg-yellow-500 hover:!text-black transition duration-500 ease-in-out">
-                                Cancel
-                            </span>
-                        </button>
+                        {{-- <button class="flex no-underline decoration-0 text-black" type="button" wire:click="delete" --}}
+                        {{--         wire:confirm.prompt="Are you sure?\n\nType DELETE to confirm|DELETE"> --}}
+                        {{--     <span --}}
+                        {{--         class="lg:!h-12 w-full  h-10 flex items-center text-black justify-center uppercase font-semibold rounded-sm px-4 lg:!px-6 border border-secondary hover:bg-yellow-500 hover:!text-black transition duration-500 ease-in-out"> --}}
+                        {{--         Cancel --}}
+                        {{--     </span> --}}
+                        {{-- </button> --}}
                         <button class="flex no-underline decoration-0 text-black" type="submit">
                             <span
                                 class="lg:!h-12 w-full  h-10 flex items-center text-primary justify-center uppercase font-semibold rounded-sm px-4 lg:!px-6 border border-primary hover:bg-blue-600 hover:!text-white transition duration-500 ease-in-out">
