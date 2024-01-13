@@ -49,7 +49,7 @@
         x-transition:enter.duration.700ms x-transition:leave.duration.200ms
         style="z-index: 1020;">
         <div class="overflow-auto p-2 rounded-2 bg-white shadow" style="max-height: 600px">
-            <p>Search Results</p>
+            {{-- <p>Search Results</p> --}}
             <hr>
             @if (strlen($search) > 1)
                 @if (strlen($search_return) > 2)
@@ -93,7 +93,7 @@
                     {{--                    <p>@json($search)</p> --}}
                 @endif
             @else
-                <p class="text-center" wire:key="no-results">Input string to Continue...</p>
+                <p class="text-center" wire:key="no-results">Search for a keyword</p>
             @endif
         </div>
     </div>
