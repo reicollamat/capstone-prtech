@@ -74,7 +74,9 @@ class RegisterPage extends Component
                     ],
                 ]);
                 if ($account) {
+
                     event(new Registered($account));
+
                     $user = Auth::attempt($validation);
                     if ($user) {
                         // redirect to comlpete account details in seller
@@ -85,7 +87,7 @@ class RegisterPage extends Component
                     }
                 }
             }
-        //            dd($validation);
+            //            dd($validation);
         } else {
             session()->flash('accountregistration', 'An error occurred. Please try again.');
         }

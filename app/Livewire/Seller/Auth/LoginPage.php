@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Seller\Auth;
 
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -12,7 +14,7 @@ use Livewire\Component;
 #[Title('Seller Login')]
 class LoginPage extends Component
 {
-    #[Validate('required|email', message: 'Please provide a Email Address')]
+    #[Validate('required|string', message: 'Please provide a Username or Email Address')]
     public $email;
 
     #[Validate('required', message: 'Please provide a Password ')]
@@ -29,22 +31,42 @@ class LoginPage extends Component
         // no associated seller account is present.
 
         $validation = $this->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required'],
+            'email' => 'required|string|exists:users,email',
+            'password' => 'required|string'],
             [
-                'email.exists' => 'Email does not exist. Please try again.',
+                'email.exists' => 'Email already exists. Please try with different email address.',
             ]);
 
         if ($validation) {
-            $user = Auth::attempt($validation);
+            $user = User::where('email', $validation['email'])->orWhere('name', $validation['email'])->first();
+
             // dd($user);
 
-            if ($user) {
+            if (! $user) {
+                session()->flash('accountlogin', 'Invalid Credentials. Please try again.');
+            }
+            // dd($user);
+
+            if (Auth::attempt(['email' => $validation['email'], 'password' => $validation['password']]) ||
+                Auth::attempt(['username' => $validation['email'], 'password' => $validation['password']])) {
+                Auth::loginUsingId($user->id);
+
+                session()->regenerate();
+
                 $this->redirect(route('seller-landing'));
             } else {
-                // TODO: show error like no record found in database or laravel eloquest where email and password
-                session()->flash('accountlogin', 'Something went wrong, Please try again.'.$user);
+                session()->flash('accountlogin', 'Invalid Credentials. Please try again.');
             }
+
+            // if ($user) {
+            //
+            //     session()->regenerate();
+            //
+            //     $this->redirect(route('seller-landing'));
+            // } else {
+            //     // TODO: show error like no record found in database or laravel eloquest where email and password
+            //     session()->flash('accountlogin', 'Something went wrong, Please try again.'.$user);
+            // }
         } else {
             session()->flash('accountlogin', 'Something went wrong, Please try again.');
         }
