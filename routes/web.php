@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::post('generate', [WordCloudController::class, 'generatePositiveWordCloud'])->name('generate_positive_word_cloud');
+// Route::post('generate', [WordCloudController::class, 'generatePositiveWordCloud'])->name('generate_positive_word_cloud');
 
 // get if user is_admin then redirect to designated view
 Route::get('/redirect', [LandingController::class, 'redirect']);
@@ -78,14 +78,16 @@ Route::prefix('seller')->group(function () {
     });
 
     // this route is for handling the shop information of the user
-    Route::get('on-boarding/form', ShopInformation::class)->name('seller-shop-information');
+    Route::get('on-boarding/form', ShopInformation::class)
+        ->middleware('verified')
+        ->name('seller-shop-information');
 
     //
     // Route::get('on-boarding', SellerRegistration::class)->name('seller-registration');
     // });
 
     // createed a middleware to handle if user is a seller or not
-    Route::middleware([SellerMiddleware::class])->group(function () {
+    Route::middleware([SellerMiddleware::class, 'verified'])->group(function () {
         // seller landing page
         Route::get('/', SellerLanding::class)->name('seller-landing');
 
@@ -135,7 +137,9 @@ Route::get('/searchresult', [ShopController::class, 'search_result'])->name('sea
 // product detail page
 Route::get('/shop/{product_id}/{category}/details', [ShopController::class, 'product_detail'])->name('product_detail');
 
-Route::get('/leave_review', [LeaveReview::class, 'review_page'])->name('leave_review');
+Route::get('/leave_review', [LeaveReview::class, 'review_page'])
+    ->middleware('verified')
+    ->name('leave_review');
 
 // Route::get('/seller-register', [SellerController::class, 'index'])->name('seller_register');
 
@@ -147,7 +151,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -182,13 +186,16 @@ Route::middleware('auth')->group(function () {
     // Route::get('/purchaselist', [PurchaseListController::class, 'purchase_list'])->name('purchase_list');
 
     // purchase page
-    Route::get('/purchasepage', [UserController::class, 'purchase_page'])->name('purchase_page');
-    Route::get('/payment1', Gcash1::class)->name('gcash1');
-    Route::get('/payment2', Gcash2::class)->name('gcash2');
-    Route::get('/payment3', Gcash3::class)->name('gcash3');
+    Route::middleware(['verified'])->group(function () {
+        Route::get('/purchasepage', [UserController::class, 'purchase_page'])->name('purchase_page');
+        Route::get('/payment1', Gcash1::class)->name('gcash1');
+        Route::get('/payment2', Gcash2::class)->name('gcash2');
+        Route::get('/payment3', Gcash3::class)->name('gcash3');
 
-    Route::post('/purchaseone', [UserController::class, 'purchase_one'])->name('purchase_one');
-    Route::post('/purchasecart', [UserController::class, 'purchase_cart'])->name('purchase_cart');
+        Route::post('/purchaseone', [UserController::class, 'purchase_one'])->name('purchase_one');
+        Route::post('/purchasecart', [UserController::class, 'purchase_cart'])->name('purchase_cart');
+    });
+
 });
 
 // support page group
@@ -227,4 +234,4 @@ Route::prefix('explore')->group(function () {
     })->name('terms-and-conditions');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
