@@ -1,18 +1,21 @@
 <div class="w-1/2 position-relative" x-data="{ open: false }" @mouseleave="open = false">
     <form wire:submit="submit">
         <div class="flex rounded-none">
-            <select wire:model.live="selected_category"
-                class="form-control form-select max-w-[200px] shadow-none custom-select"
-                aria-label="Default select example">
-                <option value="all_products" selected default>All Categories</option>
-                {{--                @foreach ($categories as $key => $value) --}}
-                {{--                    <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option> --}}
-                {{--                @endforeach --}}
-                @foreach (CustomHelper::categoryList() as $category_key => $category_value)
-                    <option value={{ $category_key }} wire:key={{ $category_key }}>{{ $category_value }}</option>
-                @endforeach
+             <div class="hidden md:flex">
+                <select wire:model.live="selected_category"
+                        class="sm:max-sm:hidden  form-control  form-select max-w-[200px] shadow-none custom-select"
+                        aria-label="Default select example">
+                    <option value="all_products" selected default>All Categories</option>
+                    {{--                @foreach ($categories as $key => $value) --}}
+                    {{--                    <option value={{ $key }} wire:key={{ $key }}>{{ $value }}</option> --}}
+                    {{--                @endforeach --}}
+                    @foreach (CustomHelper::categoryList() as $category_key => $category_value)
+                        <option value={{ $category_key }} wire:key={{ $category_key }}>{{ $category_value }}</option>
+                    @endforeach
 
-            </select>
+                </select>
+             </div>
+
             <div class="input-group" @mouseover="open = true">
                 <input type="text" class="form-control p-2 custom-input-text rounded-none shadow-none"
                     placeholder="Search PR-Tech" wire:model.live="search" name="to_search" autocomplete="off"
@@ -33,14 +36,18 @@
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
-                    Search
+                    <div class="hidden md:block">
+                        Search
+                    </div>
+
                 </button>
             </div>
         </div>
     </form>
     <div x-cloak x-show="open"
-        class="position-absolute h-full w-full bg-white start-50 translate-middle-x rounded-lg shadow"
-        x-transition:enter.duration.700ms x-transition:leave.duration.200ms>
+        class="absolute h-full w-full bg-white start-50 translate-middle-x rounded-lg shadow"
+        x-transition:enter.duration.700ms x-transition:leave.duration.200ms
+        style="z-index: 1020;">
         <div class="overflow-auto p-2 rounded-2 bg-white shadow" style="max-height: 600px">
             <p>Search Results</p>
             <hr>
