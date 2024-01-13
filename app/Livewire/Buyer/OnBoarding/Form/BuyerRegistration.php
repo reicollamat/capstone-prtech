@@ -75,9 +75,9 @@ class BuyerRegistration extends Component
         // if not page will be displayed
 
         //         redirect the user if the information here is already filled
-        if ($user->first_name != null | $user->last_name != null) {
-            return redirect()->route('index_landing');
-        }
+        // if ($user->first_name != null | $user->last_name != null) {
+        //     return redirect()->route('index_landing');
+        // }
     }
 
     // list for address select component
@@ -86,7 +86,8 @@ class BuyerRegistration extends Component
     {
         $address_list = [
             [
-                'province' => 'select',
+                'province' => 'Select Province',
+                'cities' => [],
             ],
             [
                 'province' => 'NCR',
@@ -270,7 +271,7 @@ class BuyerRegistration extends Component
             'user_email' => 'required',
             'user_phone' => 'required',
             'user_birthdate' => 'required|date|before: today|before_or_equal: -18 years',
-            'user_sex' => 'required',
+            'user_sex' => 'required|not_in:Select From Below',
             'user_address_1' => 'required',
             'user_address_2' => '',
             'user_city' => 'required',

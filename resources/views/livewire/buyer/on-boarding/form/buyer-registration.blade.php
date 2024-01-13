@@ -85,7 +85,7 @@
                                 <p class="font-sm text-red-500">{{ $message }}</p>
                                 @enderror
                                 @if ($user_birthdate != null)
-                                    {{ date('F d, Y', strtotime($user_birthdate)) }}
+{{--                                    {{ date('F d, Y', strtotime($user_birthdate)) }}--}}
                                 @else
                                     <small>18 years old and above</small>
                                 @endif
@@ -97,7 +97,7 @@
                                 <select
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     id="user_sex" wire:model.blur="user_sex">
-                                    <option selected default value="select" disabled>Select</option>
+                                    <option selected default>Select From Below</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
@@ -117,7 +117,7 @@
                                         <label for="user_state_province"
                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             <span class="text-red-600 text-xs">*</span>
-                                            State/Province {{ $user_state_province }}
+                                            State/Province
                                         </label>
                                         <select id="user_state_province" class="form-select"
                                                 aria-label="Default select example"
@@ -134,12 +134,12 @@
                                             @foreach ($this->getAddressList() as $address)
                                                 @if (isset($address['province']) && isset($address['cities']))
                                                     {{-- <h2>Province: {{ $address['province'] }}</h2> --}}
-                                                    @if ($address['province'] === 'select')
-                                                        <option value="{{ null }}">Please Select</option>
-                                                    @else
+{{--                                                    @if ($address['province'] === 'select')--}}
+{{--                                                        <option value="{{ null }}">Please Select</option>--}}
+{{--                                                    @else--}}
                                                         <option value="{{ $address['province'] }}">
                                                             {{ $address['province'] }}</option>
-                                                    @endif
+{{--                                                    @endif--}}
                                                     {{-- <ul> --}}
                                                     {{--     @foreach ($address['cities'] as $city) --}}
                                                     {{--         <li>{{ $city }}</li> --}}
@@ -167,6 +167,9 @@
                                                     state/province first
                                                 </option>
                                             @endif
+                                                <option value="{{ null }}" selected>Please select
+                                                    state/province first
+                                                </option>
                                             @foreach ($this->getAddressList as $address)
                                                 {{--                                                @if ($address['province'] == $this->user_state_province) --}}
                                                 {{--                                                    @if ($this->user_city == null || $this->user_city != $address['cities'][0]) --}}
