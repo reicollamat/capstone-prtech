@@ -87,7 +87,7 @@
                                 @if ($user_birthdate != null)
 {{--                                    {{ date('F d, Y', strtotime($user_birthdate)) }}--}}
                                 @else
-                                    <small class="text-red-500">18 years old and above</small>
+                                    <small class="text-red-500 pt-3">You must be at least 18 years old to continue.</small>
                                 @endif
                             </div>
                             <div>
