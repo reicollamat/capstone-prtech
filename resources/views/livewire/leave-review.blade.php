@@ -5,8 +5,8 @@
     x-transition:enter-end="opacity-100 scale-100"
     x-transition:leave="transition ease-in duration-100"
     x-transition:leave-start="opacity-100 scale-100"
-    x-transition:leave-end="opacity-0 scale-90" 
-    class="card text-center mx-auto my-4 w-50 shadow-lg" 
+    x-transition:leave-end="opacity-0 scale-90"
+    class="card text-center mx-auto my-4 w-50 shadow-lg"
     style="position: fixed; top: 20px; right: 25%; width: 70%; height: 90%; z-index:9999; font-size: 14px;">
 
     <div class="card-header">
@@ -154,7 +154,7 @@
                 <label for="review_text" class="text-lg">Your Review:</label>
                 <textarea wire:model="review_text" id="review_text" cols="30" rows="5" class="form-control" required></textarea>
             </div>
-            
+
             {{-- <div class="form-group m-4">
                 <label for="name">Your Name</label>
                 <input type="text" class="form-control" id="name">
@@ -168,7 +168,12 @@
                     Cancel
                 </button>
                 <button type="submit" class="btn btn-primary px-4 py-2">
-                    Submit
+                    <div wire:loading wire:target="submit_review">
+                        Awaiting response...
+                    </div>
+                    <div wire:loading.remove wire:target="submit_review">
+                        Submit
+                    </div>
                 </button>
             </div>
         </form>
