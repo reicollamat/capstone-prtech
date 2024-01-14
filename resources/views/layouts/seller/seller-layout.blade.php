@@ -234,14 +234,14 @@
                                         {{ Auth::user()->email ?? 'john.doe@gmail.com' }}</p>
                                 </div>
                             </div>
-                            <button type="submit"
-                                class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                                <div class="flex gap-2 items-center">
+                            {{-- <button type="submit" --}}
+                            {{--     class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"> --}}
+                            {{--     <div class="flex gap-2 items-center"> --}}
 
-                                    <i class="bi bi-question-lg text-gray-800 text-lg"></i>
-                                    <span>Help</span>
-                                </div>
-                            </button>
+                            {{--         <i class="bi bi-question-lg text-gray-800 text-lg"></i> --}}
+                            {{--         <span>Help</span> --}}
+                            {{--     </div> --}}
+                            {{-- </button> --}}
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit"
