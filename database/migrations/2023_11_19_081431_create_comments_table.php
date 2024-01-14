@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('seller_id')->nullable();
             $table->text('text')->nullable();
             $table->float('rating')->nullable();
-
+            $table->integer('sentiment')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

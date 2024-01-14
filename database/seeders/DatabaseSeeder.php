@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $sql = File::get('database/seeders/sql/prtech_db.sql');
         DB::unprepared($sql);
 
-        $sql = File::get('database/seeders/sql/comments_db.sql');
+        $sql = File::get('database/seeders/sql/comments_db_2.sql');
         DB::unprepared($sql);
 
         // seed other product infos

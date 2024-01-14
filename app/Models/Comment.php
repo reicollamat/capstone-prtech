@@ -34,5 +34,6 @@ class Comment extends Model
         'seller_id',
         'text',
         'rating',
+        'sentiment',
     ];
 }
