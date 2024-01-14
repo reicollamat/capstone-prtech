@@ -70,18 +70,21 @@
                                         </div>
                                         <div class="row w-full">
                                             <div class="col">
+                                                <p class="mb-0">From : {{ strtoupper($product_search->seller->shop_name) }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row w-full">
+                                            <div class="col">
                                                 <p class="mb-0">Status : {{ strtoupper($product_search->status) }}</p>
                                             </div>
                                             <div class="col">
                                                 <p class="mb-0">Condition
                                                     : {{ strtoupper($product_search->condition) }}</p>
                                             </div>
-                                            {{--                                <div class="col"> --}}
-                                            {{--                                    <p>Condition : {{ strtoupper($product_search->condition)  }}</p> --}}
-                                            {{--                                </div> --}}
                                         </div>
                                         <div>
-                                            <h1 class="text-base font-bold">{{ $product_search->price }}</h1>
+                                            <h1 class="text-base font-bold">Price
+                                                : {{ $product_search->price }}</h1>
                                         </div>
                                     </div>
                                 </div>
