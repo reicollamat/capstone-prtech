@@ -139,58 +139,66 @@
 {{-- </div> --}}
 <div>
 
-    <!-- By Price Start -->
-    <div class="p-2 mt-3" style="border: 1px solid #FFFFFF">
-        <h5 class="section-title position-relative text-uppercase underline underline-offset-4">
-            <span class="pr-3">Filter by price {{ var_dump($price_bracket) }}</span>
-        </h5>
-        <div>
-            <div>
-                <div
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                    <input type="radio" class="custom-control-input" name="0"
-                           value="[1, 5000]" id="price-1" wire:model.live="price_bracket">
-                    <label class="custom-control-label" for="price-1">₱0 - ₱5000</label>
-                </div>
-                <div
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                    <input type="radio" class="custom-control-input" name="1"
-                           value="[6000, 10000]" id="price-2" wire:model.live="price_bracket">
-                    <label class="custom-control-label" for="price-2">₱6000 - ₱10000</label>
-                </div>
-                <div
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                    <input type="radio" class="custom-control-input" name=""
-                           value="[11000, 20000]" id="price-3" wire:model.live="price_bracket">
-                    <label class="custom-control-label" for="price-3">₱11000 - ₱20000</label>
-                </div>
-                <div
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                    <input type="radio" class="custom-control-input" name=""
-                           value="[21000, 30000]" id="price-4" wire:model.live="price_bracket">
-                    <label class="custom-control-label" for="price-4">₱21000 - ₱30000</label>
-                </div>
-                <div
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                    <input type="radio" class="custom-control-input" name=""
-                           value="[31000, 40000]" id="price-5" wire:model.live="price_bracket">
-                    <label class="custom-control-label" for="price-5">₱31000 - ₱40000</label>
-                </div>
-                <div
-                    class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                    <input type="radio" class="custom-control-input" name=""
-                           value="[41000, 50000]" id="price-6" wire:model.live="price_bracket">
-                    <label class="custom-control-label" for="price-6">₱41000 - Above</label>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- <!-- By Price Start --> --}}
+    {{-- <div class="p-2 mt-3" style="border: 1px solid #FFFFFF"> --}}
+    {{--     <h5 class="section-title position-relative text-uppercase underline underline-offset-4"> --}}
+    {{--         <span class="pr-3">Filter by price {{ var_dump($price_bracket) }}</span> --}}
+    {{--     </h5> --}}
+    {{--     <div> --}}
+    {{--         <div> --}}
+    {{--             <div --}}
+    {{--                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between"> --}}
+    {{--                 <input type="radio" class="custom-control-input" name="0" --}}
+    {{--                        value="[1, 5000]" id="price-1" wire:model.live="price_bracket"> --}}
+    {{--                 <label class="custom-control-label" for="price-1">₱0 - ₱5000</label> --}}
+    {{--             </div> --}}
+    {{--             <div --}}
+    {{--                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between"> --}}
+    {{--                 <input type="radio" class="custom-control-input" name="1" --}}
+    {{--                        value="[6000, 10000]" id="price-2" wire:model.live="price_bracket"> --}}
+    {{--                 <label class="custom-control-label" for="price-2">₱6000 - ₱10000</label> --}}
+    {{--             </div> --}}
+    {{--             <div --}}
+    {{--                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between"> --}}
+    {{--                 <input type="radio" class="custom-control-input" name="" --}}
+    {{--                        value="[11000, 20000]" id="price-3" wire:model.live="price_bracket"> --}}
+    {{--                 <label class="custom-control-label" for="price-3">₱11000 - ₱20000</label> --}}
+    {{--             </div> --}}
+    {{--             <div --}}
+    {{--                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between"> --}}
+    {{--                 <input type="radio" class="custom-control-input" name="" --}}
+    {{--                        value="[21000, 30000]" id="price-4" wire:model.live="price_bracket"> --}}
+    {{--                 <label class="custom-control-label" for="price-4">₱21000 - ₱30000</label> --}}
+    {{--             </div> --}}
+    {{--             <div --}}
+    {{--                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between"> --}}
+    {{--                 <input type="radio" class="custom-control-input" name="" --}}
+    {{--                        value="[31000, 40000]" id="price-5" wire:model.live="price_bracket"> --}}
+    {{--                 <label class="custom-control-label" for="price-5">₱31000 - ₱40000</label> --}}
+    {{--             </div> --}}
+    {{--             <div --}}
+    {{--                 class="custom-control custom-checkbox d-flex align-items-center justify-content-between"> --}}
+    {{--                 <input type="radio" class="custom-control-input" name="" --}}
+    {{--                        value="[41000, 50000]" id="price-6" wire:model.live="price_bracket"> --}}
+    {{--                 <label class="custom-control-label" for="price-6">₱41000 - Above</label> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--     </div> --}}
+    {{-- </div> --}}
 
-    @if(sizeof($this->getproducts) != null)
-        @foreach($this->getproducts as $products)
-            <p>{{ $products->price }}</p>
-        @endforeach
-    @endif
+    {{-- @if(sizeof($this->getproducts) != null) --}}
+    {{--     @foreach($this->getproducts as $products) --}}
+    {{--         <p>{{ $products->price }}</p> --}}
+    {{--     @endforeach --}}
+    {{-- @endif --}}
+
+    {{ var_dump($response) }}
+    {{ var_dump($response2) }}
+
+    <button type="button" class="mt-4 ml-4 btn btn-primary"
+    wire:click="testmodel">
+        Launch demo modal
+    </button>
 
 
 

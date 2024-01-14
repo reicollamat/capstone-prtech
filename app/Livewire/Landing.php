@@ -170,10 +170,10 @@ class Landing extends Component
 
             $this->asset = 'storage/'.$fileName;
 
-        // dd(asset('storage/'.$fileName));
+            // dd(asset('storage/'.$fileName));
 
-        // dd($data);
-        // Process the data
+            // dd($data);
+            // Process the data
         } else {
             // Handle the failed request
             $statusCode = $response->status(); // Get the status code
@@ -357,5 +357,49 @@ class Landing extends Component
         ];
 
         return $address_list;
+    }
+
+    public $response;
+    public $response2;
+
+    public function testmodel()
+    {
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer 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',
+        ])
+            ->post('https://api-inference.huggingface.co/models/magixxixx/pr-tech-sentiment-analyzer', [
+                'inputs' => 'handy Value For Moneylegit super fast transfering datas Must buy',
+            ]);
+
+        if ($response->successful()) {
+
+            // Access the response data
+            $data = $response->json();
+
+            // dd($data);
+
+            $result1 = $data[0][0];
+            $result2 = $data[0][1];
+
+            // Accessing scores
+            $score1 = $result1['score'];
+            $score2 = $result2['score'];
+
+            // Determine the higher score and its label
+            if ($score1 > $score2) {
+                $higherLabel = $result1['label'];
+                $higherScore = $score1;
+            } else {
+                $higherLabel = $result2['label'];
+                $higherScore = $score2;
+            }
+
+            // Determine the result based on the higher label
+            $this->response2 = ($higherLabel === 'POSITIVE') ? 1 : 0;
+
+            // Do something with the response data
+            $this->response = [$score1, $score2, $higherLabel, round($higherScore,0)];
+        }
     }
 }
