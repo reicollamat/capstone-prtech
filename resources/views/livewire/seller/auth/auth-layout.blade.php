@@ -95,7 +95,6 @@
                                     Sign Out
                                 </button>
                             </form>
-
                         </div>
                     </div>
                 @endif
