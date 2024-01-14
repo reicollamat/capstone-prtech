@@ -54,7 +54,8 @@ class LeaveReview extends Component
             'Authorization' => 'Bearer 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',
         ])
             ->post('https://api-inference.huggingface.co/models/magixxixx/pr-tech-sentiment-analyzer', [
-                'inputs' => 'handy Value For Moneylegit super fast transfering datas Must buy',
+                'inputs' => $this->review_text,
+                'options' => '{"wait_for_model": true}',
             ]);
 
         if ($response->successful()) {
