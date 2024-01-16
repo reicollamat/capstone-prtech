@@ -27,7 +27,7 @@
                 {{ $item->price }}
             </div>
             <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
-                {{ $itemproductinfo->stock }}
+                {{ $itemproductinfo->stock > 0 ? 'In Stock' : 'Out of Stock' }}
             </div>
             <div class="flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center">
                 <button id="faqs-title-01" type="button"

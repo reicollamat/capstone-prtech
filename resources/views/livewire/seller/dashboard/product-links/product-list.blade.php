@@ -13,27 +13,35 @@
                         <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                         <div class="py-2">
                             <p class="text-sm text-center font-base text-gray-500 mb-1">Total Products Listed</p>
-                            <input type="text"
-                                   class="font-semibold bg-transparent w-full text-center form-control-lg"
-                                   wire:model="total_products_count" disabled>
+                            <label>
+                                <input type="text"
+                                       class="font-semibold bg-transparent w-full text-center form-control-lg"
+                                       wire:model="total_products_count" disabled>
+                            </label>
                         </div>
                         <div class="py-2 text-center">
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Available Products</p>
-                                <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                       wire:model="total_available_count" disabled>
+                                <label>
+                                    <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                           wire:model="total_available_count" disabled>
+                                </label>
                             </div>
                         </div>
                         <div class="py-2 text-center flex justify-center">
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Brand New</p>
-                                <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                       wire:model="total_brandnew_count" disabled>
+                                <label>
+                                    <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                           wire:model="total_brandnew_count" disabled>
+                                </label>
                             </div>
                             <div class="px-2">
                                 <p class="text-xs font-base text-gray-500 mb-1">Used</p>
-                                <input type="text" class="font-semibold bg-transparent w-full text-center"
-                                       wire:model="total_used_count" disabled>
+                                <label>
+                                    <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                           wire:model="total_used_count" disabled>
+                                </label>
                             </div>
                         </div>
                         <div class="py-2 text-center flex justify-center">
@@ -41,8 +49,10 @@
                                 <p class="text-xs font-base text-gray-500 mb-1">Overall Products Rating</p>
                                 <div class="flex w-50 mx-auto px-5">
                                     <i class="bi bi-star-fill text-yellow-400 my-auto"></i>
-                                    <input type="text" class="font-semibold bg-transparent w-fit"
-                                           wire:model="total_products_rating" disabled>
+                                    <label>
+                                        <input type="text" class="font-semibold bg-transparent w-fit"
+                                               wire:model="total_products_rating" disabled>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +233,9 @@
                     <div
                         class="flex flex-column flex-sm-row flex-shrink-0 min-w-full  items-center text-center tablelike">
                         <p class="mb-0 min-w-[40px] !text-gray-400 !font-light border-b-2 border-blue-300">
-                            <input class="form-check-input" type="checkbox">
+                            <label>
+                                <input class="form-check-input" type="checkbox">
+                            </label>
                         </p>
                         <p class="mb-0  min-w-[60px] !text-gray-400 !font-light border-b-2 border-blue-300">
                             IMG
@@ -408,26 +420,34 @@
                 <p class="text-xs text-center font-light uppercase text-gray-700 max-w-7xl">Overview</p>
                 <div class="py-2">
                     <p class="text-sm text-center font-base text-gray-500 mb-1">Total Products Listed</p>
-                    <input type="text" class="font-semibold bg-transparent w-full text-center form-control-lg"
-                           wire:model="total_products_count" disabled>
+                    <label>
+                        <input type="text" class="font-semibold bg-transparent w-full text-center form-control-lg"
+                               wire:model="total_products_count" disabled>
+                    </label>
                 </div>
                 <div class="py-2 text-center">
                     <div class="px-2">
                         <p class="text-xs font-base text-gray-500 mb-1">Available Products</p>
-                        <input type="text" class="font-semibold bg-transparent w-full text-center"
-                               wire:model="total_available_count" disabled>
+                        <label>
+                            <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                   wire:model="total_available_count" disabled>
+                        </label>
                     </div>
                 </div>
                 <div class="py-2 text-center flex justify-center">
                     <div class="px-2">
                         <p class="text-xs font-base text-gray-500 mb-1">Brand New</p>
-                        <input type="text" class="font-semibold bg-transparent w-full text-center"
-                               wire:model="total_brandnew_count" disabled>
+                        <label>
+                            <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                   wire:model="total_brandnew_count" disabled>
+                        </label>
                     </div>
                     <div class="px-2">
                         <p class="text-xs font-base text-gray-500 mb-1">Used</p>
-                        <input type="text" class="font-semibold bg-transparent w-full text-center"
-                               wire:model="total_used_count" disabled>
+                        <label>
+                            <input type="text" class="font-semibold bg-transparent w-full text-center"
+                                   wire:model="total_used_count" disabled>
+                        </label>
                     </div>
                 </div>
                 <div class="py-2 text-center flex flex-column justify-center">
