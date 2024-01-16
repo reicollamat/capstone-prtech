@@ -1,19 +1,5 @@
 <!-- Sidebar-->
 <div class="w-full h-full p-2.5" id="sidebar-wrapper">
-    {{-- <ul> --}}
-    {{--     <li class="py-2.5"> --}}
-    {{--         <div class="flex justify-between items-center"> --}}
-    {{--             <a wire:navigate href="{{ route('seller-landing') }}" --}}
-    {{--                 class="w-full no-underline flex justify-between items-center text-base font-medium {{ Route::is('seller-landing') ? '!text-blue-600' : 'text-gray-600' }} mb-1.5  transition"> --}}
-    {{--                 <div class="flex items-center gap-2"> --}}
-    {{--                     <i --}}
-    {{--                         class="bi bi-house-fill text-xl {{ Route::is('seller-landing') ? '!text-blue-600' : 'text-gray-600' }}"></i> --}}
-    {{--                     <p class="mb-0">Dashboard</p> --}}
-    {{--                 </div> --}}
-    {{--             </a> --}}
-    {{--         </div> --}}
-    {{--     </li> --}}
-    {{-- </ul> --}}
     <div class="mt-3">
         <div class="flex items-center gap-1.5 mb-1.5">
             <p class="mb-0 text-xs  text-gray-500 font-semibold">Dashboard</p>
@@ -64,6 +50,19 @@
                              L129.064,300.764z" />
                         </svg>
                         <span>StockSense</span>
+                    </div>
+                </a>
+            </li>
+            <li class="p-1.5 text-sm rounded-sm">
+                {{-- <a href="{{ route('product-list') }}" --}}
+                {{--     class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
+                <a href="{{ route('analytics-shop-metrics') }}"
+                   class="no-underline  {{ Route::is('analytics-shop-metrics') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
+                    decoration-0"
+                   wire:navigate>
+                    <div class="flex items-center gap-1.5">
+                        <i class="bi bi-graph-up-arrow text-lg"></i>
+                        <span>Shop Metrics</span>
                     </div>
                 </a>
             </li>
