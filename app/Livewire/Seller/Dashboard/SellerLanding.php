@@ -52,7 +52,6 @@ class SellerLanding extends Component
 
                 // $currentpng = $formattedDate->
 
-
                 $filesnames[] = $formattedDate;
             }
         }
@@ -246,7 +245,6 @@ class SellerLanding extends Component
 
         // dd($files);
 
-
         // check if there is no data
         if ($ncount->isEmpty()) {
             // if there is no data then set the image to notenoughdata.png
@@ -284,8 +282,8 @@ class SellerLanding extends Component
                 // return 'storage/'.$fileName;
 
                 $this->n_asset = 'storage/'.$fileName;
-            // dd(asset('storage/'.$fileName));
-            // dd($data);
+                // dd(asset('storage/'.$fileName));
+                // dd($data);
 
             } else {
                 // Handle the failed request
@@ -353,10 +351,10 @@ class SellerLanding extends Component
 
                 $this->p_asset = 'storage/'.$fileName;
 
-            // dd(asset('storage/'.$fileName));
+                // dd(asset('storage/'.$fileName));
 
-            // dd($data);
-            // Process the data
+                // dd($data);
+                // Process the data
             } else {
                 // Handle the failed request
                 $statusCode = $response->status(); // Get the status code
