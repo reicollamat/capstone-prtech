@@ -141,7 +141,7 @@
             <li class="p-1.5 text-sm">
                 <a href="{{ route('order-list') }}" class="no-underline decoration-0 text-gray-800" wire:navigate>
                     <div class="flex items-center gap-1.5">
-                        <i class="bi bi-truck text-lg"></i>
+                        <i class="bi bi-cart-check text-lg"></i>
                         <span>My Orders</span>
                     </div>
                 </a>
@@ -150,7 +150,7 @@
                 <a href="{{ route('order-cancellations') }}" class="no-underline decoration-0 text-gray-800"
                     wire:navigate>
                     <div class="flex items-center gap-1.5">
-                        <i class="bi bi-truck text-lg"></i>
+                        <i class="bi bi-x-square text-lg"></i>
                         <span>Cancellations</span>
                     </div>
 
@@ -159,7 +159,7 @@
             <li class="p-1.5 text-sm">
                 <a href="{{ route('order-returns') }}" class="no-underline decoration-0 text-gray-800" wire:navigate>
                     <div class="flex items-center gap-1.5">
-                        <i class="bi bi-truck text-lg"></i>
+                        <i class="bi bi-wallet2 text-lg"></i>
                         <span> Refunds / Returns</span>
                     </div>
 
@@ -185,7 +185,7 @@
             <li class="p-1.5 text-sm">
                 <a href="{{ route('shop-management') }}" class="no-underline decoration-0 text-gray-800" wire:navigate>
                     <div class="flex items-center gap-1.5">
-                        <i class="bi bi-truck text-lg"></i>
+                        <i class="bi bi-info-circle text-lg"></i>
                         <span> Shop Information</span>
                     </div>
 
@@ -204,7 +204,7 @@
                  <a href="{{ route('shop-management-metrics') }}"
                     class="no-underline decoration-0 text-gray-800" wire:navigate>
                      <div class="flex items-center gap-1.5">
-                         <i class="bi bi-truck text-lg"></i>
+                         <i class="bi bi-sliders2 text-lg"></i>
                          <span>Shop Metric Settings</span>
                      </div>
                  </a>
