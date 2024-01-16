@@ -746,6 +746,7 @@
                                         <th scope="col">Products</th>
                                         <th scope="col">Categories</th>
                                         <th scope="col">Ratings</th>
+                                        <th scope="col"># of Review</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -756,7 +757,10 @@
                                             <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}
                                             </td>
                                             <td>{{ $product->average_rating }}
-                                                - {{ $product->average_rating > 3 ? 'Positive' : 'Negative' }}</td>
+                                                - {{ $product->average_rating >= 3 ? 'Positive' : 'Negative' }}</td>
+                                            <td>
+                                                {{ $product->total_comment }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -813,6 +817,7 @@
                                         <th scope="col">Products</th>
                                         <th scope="col">Categories</th>
                                         <th scope="col">Ratings</th>
+                                        <th scope="col"># of Review</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -824,8 +829,11 @@
                                             <td>{{ $product->title }}</td>
                                             <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}
                                             </td>
-                                            <td>{{ $product->average_rating }}
+                                            <td>{{ round($product->average_rating, 2)  }}
                                                 - {{ $product->average_rating > 3 ? 'Positive' : 'Negative' }}</td>
+                                            <td>
+                                                {{ $product->total_comment }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
