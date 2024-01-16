@@ -28,7 +28,9 @@ class AnalyticsModelReport extends Component
     public int $mostNegativeReviewFilter;
 
     public int $mostBoughtProductsFilter;
+
     public int $recentlyBoughtProductsFilter;
+
     public int $productsReturnsFilter;
 
     public string $productsReturnsOrderFilter;
@@ -118,14 +120,21 @@ class AnalyticsModelReport extends Component
             //     ->take(10)
             //     ->get();
 
-            $all_products = DB::select('SELECT product_id, p.title, p.category, SUM(c.rating) / COUNT(*) AS average_rating
-                FROM comments c
-                         JOIN products p ON c.product_id = p.id
-                WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL ' . $this->mostPositiveReviewFilter . ' DAY)
-                AND c.seller_id = ' . $this->seller->id . '
-                GROUP BY product_id, p.title, p.category
-                order by average_rating
-                limit 10;');
+            $all_products = DB::select('SELECT
+                product_id,
+                p.title,
+                p.category,
+                SUM(c.rating) / COUNT(*) AS average_rating,
+                count(*) AS total_comment
+            FROM
+                comments c
+                    JOIN products p ON c.product_id = p.id
+            WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL '.$this->mostPositiveReviewFilter.' DAY)
+                AND c.seller_id = '.$this->seller->id.' and c.rating >= 3
+            GROUP BY
+                c.product_id, p.title, product_id, p.category
+            ORDER BY
+                average_rating DESC');
 
             return $all_products;
         }
@@ -183,8 +192,8 @@ class AnalyticsModelReport extends Component
             $all_products = DB::select('SELECT product_id, p.title, p.category, SUM(pi.quantity) AS total_quantity
             FROM purchase_items pi
                      JOIN products p ON pi.product_id = p.id
-            WHERE pi.created_at >= DATE_SUB(NOW(), INTERVAL ' . $this->mostOrderedProductsFilter . ' DAY)
-            AND p.seller_id = ' . $this->seller->id . '
+            WHERE pi.created_at >= DATE_SUB(NOW(), INTERVAL '.$this->mostOrderedProductsFilter.' DAY)
+            AND p.seller_id = '.$this->seller->id.'
             GROUP BY product_id,title,category
             order by total_quantity
             limit 10');
@@ -207,19 +216,18 @@ class AnalyticsModelReport extends Component
                          join purchases p on iri.purchase_item_id = p.id
                          join purchase_items pi on p.id = pi.purchase_id
                          join products p2 on pi.product_id = p2.id
-                where iri.request_date >= DATE_SUB(NOW(), INTERVAL ' . $this->productsReturnsFilter . ' DAY)
-                  AND iri.seller_id = ' . $this->seller->id . '
+                where iri.request_date >= DATE_SUB(NOW(), INTERVAL '.$this->productsReturnsFilter.' DAY)
+                  AND iri.seller_id = '.$this->seller->id.'
                 group by pi.product_id, p2.id, p2.title, p2.category
-                order by total_quantity ' . $this->productsReturnsOrderFilter . '
+                order by total_quantity '.$this->productsReturnsOrderFilter.'
                 limit 10');
+
             //
             // dd($all_products);
             //
             return $all_products;
         }
     }
-
-
 
     #[Computed]
     public function getRecentlyBoughtProducts()
@@ -234,9 +242,9 @@ class AnalyticsModelReport extends Component
             from purchases p
                      join purchase_items pi on p.id = pi.purchase_id
                      join products p2 on pi.product_id = p2.id
-            where pi.created_at >= DATE_SUB(NOW(), INTERVAL ' . $this->recentlyBoughtProductsFilter . ' DAY)
+            where pi.created_at >= DATE_SUB(NOW(), INTERVAL '.$this->recentlyBoughtProductsFilter.' DAY)
             AND p.purchase_status = "completed"
-            AND p2.seller_id = ' . $this->seller->id . '
+            AND p2.seller_id = '.$this->seller->id.'
             group by pi.product_id,p2.id,p2.title,p2.category');
 
             // dd($all_products);
@@ -268,8 +276,8 @@ class AnalyticsModelReport extends Component
             from purchases p
                      join purchase_items pi on p.id = pi.purchase_id
                      join products p2 on pi.product_id = p2.id
-            where pi.created_at >= DATE_SUB(NOW(), INTERVAL ' . $this->mostShippedProductsFilter . ' DAY)
-            AND p2.seller_id = ' . $this->seller->id . '
+            where pi.created_at >= DATE_SUB(NOW(), INTERVAL '.$this->mostShippedProductsFilter.' DAY)
+            AND p2.seller_id = '.$this->seller->id.'
             group by pi.product_id,p2.id,p2.title,p2.category');
 
             return $all_products;
@@ -288,14 +296,21 @@ class AnalyticsModelReport extends Component
             //     ->take(10)
             //     ->get();
 
-            $all_products = DB::select('SELECT product_id, p.title, c.seller_id, p.category, SUM(c.rating) / COUNT(*) AS average_rating
-                FROM comments c
-                         JOIN products p ON c.product_id = p.id
-                WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL ' . $this->mostPositiveReviewFilter . ' DAY)
-                AND c.seller_id = ' . $this->seller->id . '
-                GROUP BY product_id, p.title, p.category, c.seller_id
-                order by average_rating
-                limit 10');
+            $all_products = DB::select('SELECT
+                product_id,
+                p.title,
+                p.category,
+                SUM(c.rating) / COUNT(*) AS average_rating,
+                count(*) AS total_comment
+            FROM
+                comments c
+                    JOIN products p ON c.product_id = p.id
+            WHERE c.created_at >= DATE_SUB(NOW(), INTERVAL '.$this->mostNegativeReviewFilter.' DAY)
+                AND c.seller_id = '.$this->seller->id.' and c.rating <= 2
+            GROUP BY
+                c.product_id, p.title, product_id, p.category
+            ORDER BY
+                average_rating DESC');
 
             // dd($all_products);
 
