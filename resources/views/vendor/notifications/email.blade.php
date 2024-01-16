@@ -40,7 +40,8 @@
 {{ $salutation }}
 @else
 @lang('Regards'),<br>
-{{ config('app.name') }}
+{{ config('app.name') }}<br>
+Your Shopping Partner
 @endif
 
 {{-- Subcopy --}}
