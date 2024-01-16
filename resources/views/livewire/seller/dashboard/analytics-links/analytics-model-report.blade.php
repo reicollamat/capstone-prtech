@@ -846,6 +846,7 @@
                     </div>
                 </div>
             </div>
+
             <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Order Analytics</h5>
             {{-- Order Analytics --}}
             <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 mb-3">
