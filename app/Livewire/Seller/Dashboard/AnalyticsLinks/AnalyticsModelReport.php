@@ -287,7 +287,7 @@ class AnalyticsModelReport extends Component
     #[Computed]
     public function getMostNegativeReviewedProducts()
     {
-        if ($this->mostPositiveReviewFilter > 0) {
+        if ($this->mostNegativeReviewFilter > 0) {
             // $all_products = Comment::where('seller_id', $this->seller->id)
             //     ->where('rating', '<=', 2)
             //     ->where('created_at', '>=', now()->subDays($this->mostNegativeReviewFilter))
