@@ -78,6 +78,18 @@ class Landing extends Component
         HTML;
     }
 
+    public function testmodal()
+    {
+        $response = Http::post('http://127.0.0.1:5000/getprediction', [
+
+        ]);
+
+        // Check if the request was successful
+        if ($response->successful()) {
+            dd($response->json());
+        }
+    }
+
     public function render()
     {
         return view('livewire.landing');
