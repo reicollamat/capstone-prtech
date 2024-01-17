@@ -60,7 +60,6 @@ class Landing extends Component
         return Product::with('product_images')
             ->orderBy('rating', 'desc')
             ->paginate(5);
-
     }
 
     // public function rendered()
@@ -87,7 +86,7 @@ class Landing extends Component
 
         dd($publicPath . '/data249_new.json');
 
-        $data =
+        // $data =
 
         // $response = Http::post('http://127.0.0.1:5000/getprediction', [
         //     'data' =>
@@ -183,13 +182,13 @@ class Landing extends Component
             // dd($imageData);
 
             // Format the date and time to be used in the file name
-            $fileName = $currentDateTime->format('Y-m-d').'_1_pw.png'; // Rename it to date and p for positive and w for wordlcloud
+            $fileName = $currentDateTime->format('Y-m-d') . '_1_pw.png'; // Rename it to date and p for positive and w for wordlcloud
 
             // Save the image to a file
             $imagePath = public_path('storage'); // Change the path as needed
-            file_put_contents($imagePath.'/'.$fileName, $imageData);
+            file_put_contents($imagePath . '/' . $fileName, $imageData);
 
-            $this->asset = 'storage/'.$fileName;
+            $this->asset = 'storage/' . $fileName;
 
             // dd(asset('storage/'.$fileName));
 
@@ -420,7 +419,7 @@ class Landing extends Component
             $this->response2 = ($higherLabel === 'POSITIVE') ? 1 : 0;
 
             // Do something with the response data
-            $this->response = [$score1, $score2, $higherLabel, round($higherScore,0)];
+            $this->response = [$score1, $score2, $higherLabel, round($higherScore, 0)];
         }
     }
 }
