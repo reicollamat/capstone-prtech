@@ -328,6 +328,8 @@ class SellerLanding extends Component
 
             // dd(public_path('storage'));
 
+            $fileName =
+
             $response = Http::post('http://magi001.pythonanywhere.com/generatepositive', [
                 'reviews' => $commentString,
             ]);
