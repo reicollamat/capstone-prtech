@@ -106,7 +106,6 @@ class KIMPCSeeder extends Seeder
             'condition' => $product->condition,
         ]);
 
-
         $filePath = storage_path('app/kimpc_products/data222_new.csv');
         $file = fopen($filePath, 'r');
 
@@ -216,6 +215,74 @@ class KIMPCSeeder extends Seeder
             'condition' => $product->condition,
         ]);
 
+        $filePath = storage_path('app/kimpc_products/data187_new.csv');
+        $file = fopen($filePath, 'r');
+
+        $header = fgetcsv($file);
+
+        $data55_new = [];
+        while ($row = fgetcsv($file)) {
+            $data55_new[] = array_combine($header, $row);
+        }
+
+        fclose($file);
+
+        // $data55 = compact('data55_new');
+
+        // dd($data55_new);
+
+        $quantity_sum = 0;
+        $positive_sum = 0;
+        $negative_sum = 0;
+        foreach ($data55_new as $key => $row) {
+            $quantity_sum += $row['quantity'];
+            $positive_sum += $row['positive'];
+            $negative_sum += $row['negative'];
+        }
+
+        $product->update([
+            'purchase_count' => $quantity_sum,
+            'view_count' => $quantity_sum,
+        ]);
+
+        $positivecomments = Comment::where('sentiment', 1)->take(fake()->numberBetween(50, 80))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($positivecomments as $key => $positive) {
+            $positive->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $positive->text,
+                "rating" => $positive->rating,
+                "sentiment" => $positive->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
+
+        $negativecomments = Comment::where('sentiment', 0)->take(fake()->numberBetween(10, 30))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($negativecomments as $key => $negative) {
+            $negative->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $negative->text,
+                "rating" => $negative->rating,
+                "sentiment" => $negative->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
+
+
+
         // 3 //
         $image = 'img/components/headphone/kimpc_headphone.png';
         $product = Product::create([
@@ -255,6 +322,74 @@ class KIMPCSeeder extends Seeder
             ',
             'condition' => $product->condition,
         ]);
+
+        $filePath = storage_path('app/kimpc_products/data708_new.csv');
+        $file = fopen($filePath, 'r');
+
+        $header = fgetcsv($file);
+
+        $data55_new = [];
+        while ($row = fgetcsv($file)) {
+            $data55_new[] = array_combine($header, $row);
+        }
+
+        fclose($file);
+
+        // $data55 = compact('data55_new');
+
+        // dd($data55_new);
+
+        $quantity_sum = 0;
+        $positive_sum = 0;
+        $negative_sum = 0;
+        foreach ($data55_new as $key => $row) {
+            $quantity_sum += $row['quantity'];
+            $positive_sum += $row['positive'];
+            $negative_sum += $row['negative'];
+        }
+
+        $product->update([
+            'purchase_count' => $quantity_sum,
+            'view_count' => $quantity_sum,
+        ]);
+
+        $positivecomments = Comment::where('sentiment', 1)->take(fake()->numberBetween(50, 80))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($positivecomments as $key => $positive) {
+            $positive->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $positive->text,
+                "rating" => $positive->rating,
+                "sentiment" => $positive->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
+
+        $negativecomments = Comment::where('sentiment', 0)->take(fake()->numberBetween(10, 30))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($negativecomments as $key => $negative) {
+            $negative->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $negative->text,
+                "rating" => $negative->rating,
+                "sentiment" => $negative->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
+
+
 
         // 4 //
         $image = 'img/components/keyboard/kimpc_keyboard.png';
@@ -296,6 +431,74 @@ class KIMPCSeeder extends Seeder
             'condition' => $product->condition,
         ]);
 
+        $filePath = storage_path('app/kimpc_products/data55_new.csv');
+        $file = fopen($filePath, 'r');
+
+        $header = fgetcsv($file);
+
+        $data55_new = [];
+        while ($row = fgetcsv($file)) {
+            $data55_new[] = array_combine($header, $row);
+        }
+
+        fclose($file);
+
+        // $data55 = compact('data55_new');
+
+        // dd($data55_new);
+
+        $quantity_sum = 0;
+        $positive_sum = 0;
+        $negative_sum = 0;
+        foreach ($data55_new as $key => $row) {
+            $quantity_sum += $row['quantity'];
+            $positive_sum += $row['positive'];
+            $negative_sum += $row['negative'];
+        }
+
+        $product->update([
+            'purchase_count' => $quantity_sum,
+            'view_count' => $quantity_sum,
+        ]);
+
+        $positivecomments = Comment::where('sentiment', 1)->take(fake()->numberBetween(50, 80))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($positivecomments as $key => $positive) {
+            $positive->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $positive->text,
+                "rating" => $positive->rating,
+                "sentiment" => $positive->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
+
+        $negativecomments = Comment::where('sentiment', 0)->take(fake()->numberBetween(10, 30))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($negativecomments as $key => $negative) {
+            $negative->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $negative->text,
+                "rating" => $negative->rating,
+                "sentiment" => $negative->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
+
+
+
         // 5 //
         $image = 'img/components/ram/kimpc_ram.png';
         $product = Product::create([
@@ -336,9 +539,6 @@ class KIMPCSeeder extends Seeder
             'condition' => $product->condition,
         ]);
 
-
-
-        // COMMENTS
         $filePath = storage_path('app/kimpc_products/data55_new.csv');
         $file = fopen($filePath, 'r');
 
@@ -364,8 +564,45 @@ class KIMPCSeeder extends Seeder
             $negative_sum += $row['negative'];
         }
 
-        $sentiment_sum = $positive_sum + $negative_sum;
+        $product->update([
+            'purchase_count' => $quantity_sum,
+            'view_count' => $quantity_sum,
+        ]);
 
-        dd($quantity_sum, $sentiment_sum, $quantity_sum - $sentiment_sum);
+        $positivecomments = Comment::where('sentiment', 1)->take(fake()->numberBetween(50, 80))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($positivecomments as $key => $positive) {
+            $positive->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $positive->text,
+                "rating" => $positive->rating,
+                "sentiment" => $positive->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
+
+        $negativecomments = Comment::where('sentiment', 0)->take(fake()->numberBetween(10, 30))->get();
+
+        $startDate = Carbon::createFromDate(2023, 5, 30);
+
+        foreach ($negativecomments as $key => $negative) {
+            $negative->create([
+                'user_id' => fake()->numberBetween(3, 23),
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                "text" => $negative->text,
+                "rating" => $negative->rating,
+                "sentiment" => $negative->sentiment,
+                "deleted_at" => null,
+                "created_at" => $startDate->addDay()->toDateTimeString(),
+                "updated_at" => $startDate->addDay()->toDateTimeString(),
+            ]);
+        }
     }
 }

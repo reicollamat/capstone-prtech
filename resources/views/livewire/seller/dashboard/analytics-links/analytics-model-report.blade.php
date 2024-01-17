@@ -64,49 +64,1277 @@
 
             <div wire:loading.remove x-transition>
                 @if ($this->getTopProducts->count() > 0)
-                    @foreach ($this->getTopProducts as $key => $product)
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed d-block" type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapse-{{ $key }}-{{ $product->id }}"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapse-{{ $key }}-{{ $product->id }}">
-                                        {{-- @dd($product) --}}
-                                        <div class="grid grid-cols-12 text-center">
-                                            <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                                {{ $product->id }}
+                    {{-- @foreach ($this->getTopProducts as $key => $product)
+                        
+                    @endforeach --}}
+
+
+
+                    {{-- 1 1 1 11 1 1 1 1 11 1 1  --}}
+
+                    <div class="accordion accordion-flush" id="accordionFlushExample1">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed d-block" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse-1-{{ $this->getTopProducts[0]->id }}"
+                                    aria-expanded="false"
+                                    aria-controls="flush-collapse-1-{{ $this->getTopProducts[0]->id }}">
+                                    {{-- @dd($this->getTopProducts[0]) --}}
+                                    <div class="grid grid-cols-12 text-center">
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->id }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->title }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->category }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->status }}
+                                        </div>
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            <i
+                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="flush-collapse-1-{{ $this->getTopProducts[0]->id }}"
+                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">DATE</th>
+                                                        <th scope="col">Actual</th>
+                                                        <th scope="col">Predicted</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>2024-07-02</td>
+                                                        <td>4</td>
+                                                        <td>3.466008</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>2024-07-03</td>
+                                                        <td>6</td>
+                                                        <td>2.42508</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>2024-07-04</td>
+                                                        <td>8</td>
+                                                        <td>4.407293</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">4</th>
+                                                        <td>2024-07-05</td>
+                                                        <td>1</td>
+                                                        <td>1.891413</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">5</th>
+                                                        <td>2024-07-06</td>
+                                                        <td>4</td>
+                                                        <td>2.261194</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">6</th>
+                                                        <td>2024-07-07</td>
+                                                        <td>3</td>
+                                                        <td>2.865757</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">7</th>
+                                                        <td>2024-07-08</td>
+                                                        <td>4</td>
+                                                        <td>2.377063</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">8</th>
+                                                        <td>2024-07-09</td>
+                                                        <td>3</td>
+                                                        <td>2.35351</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">9</th>
+                                                        <td>2024-07-10</td>
+                                                        <td>3</td>
+                                                        <td>2.283088</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">10</th>
+                                                        <td>2024-07-11</td>
+                                                        <td>4</td>
+                                                        <td>4.079117</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">11</th>
+                                                        <td>2024-07-12</td>
+                                                        <td>4</td>
+                                                        <td>3.498422</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">12</th>
+                                                        <td>2024-07-13</td>
+                                                        <td>4</td>
+                                                        <td>4.243808</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">13</th>
+                                                        <td>2024-07-14</td>
+                                                        <td>1</td>
+                                                        <td>1.689098</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">14</th>
+                                                        <td>2024-07-15</td>
+                                                        <td>6</td>
+                                                        <td>3.368717</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">15</th>
+                                                        <td>2024-07-16</td>
+                                                        <td>3</td>
+                                                        <td>1.785003</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">16</th>
+                                                        <td>2024-07-17</td>
+                                                        <td>1</td>
+                                                        <td>1.812075</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">17</th>
+                                                        <td>2024-07-18</td>
+                                                        <td>4</td>
+                                                        <td>2.34088</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">18</th>
+                                                        <td>2024-07-19</td>
+                                                        <td>3</td>
+                                                        <td>3.394379</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">19</th>
+                                                        <td>2024-07-20</td>
+                                                        <td>3</td>
+                                                        <td>2.505314</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">20</th>
+                                                        <td>2024-07-21</td>
+                                                        <td>1</td>
+                                                        <td>1.830989</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">21</th>
+                                                        <td>2024-07-22</td>
+                                                        <td>2</td>
+                                                        <td>2.839483</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">22</th>
+                                                        <td>2024-07-23</td>
+                                                        <td>2</td>
+                                                        <td>2.547833</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">23</th>
+                                                        <td>2024-07-24</td>
+                                                        <td>1</td>
+                                                        <td>2.497402</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">24</th>
+                                                        <td>2024-07-25</td>
+                                                        <td>6</td>
+                                                        <td>3.374414</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">25</th>
+                                                        <td>2024-07-26</td>
+                                                        <td>7</td>
+                                                        <td>6.336311</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">26</th>
+                                                        <td>2024-07-27</td>
+                                                        <td>4</td>
+                                                        <td>4.035738</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">27</th>
+                                                        <td>2024-07-28</td>
+                                                        <td>6</td>
+                                                        <td>3.333203</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">28</th>
+                                                        <td>2024-07-29</td>
+                                                        <td>4</td>
+                                                        <td>3.330033</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">29</th>
+                                                        <td>2024-07-30</td>
+                                                        <td>1</td>
+                                                        <td>3.326653</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">30</th>
+                                                        <td>2024-07-31</td>
+                                                        <td>2</td>
+                                                        <td>2.319751</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px">
                                             </div>
-                                            <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                                {{ $product->title }}
-                                            </div>
-                                            <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                                                {{ $product->category }}
-                                            </div>
-                                            <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                                                {{ $product->status }}
-                                            </div>
-                                            <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                                <i
-                                                    class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }}
-                                            </div>
-                                            <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                                Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
+                                            <div class="row">
+                                                test
                                             </div>
                                         </div>
-                                    </button>
-                                </h2>
-                                <div id="flush-collapse-{{ $key }}-{{ $product->id }}"
-                                    class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body flex content-center">
-                                        <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                            alt="" style="max-height: 500px">
                                     </div>
+                                    
+                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px"> --}}
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    </div>
+
+
+
+                    {{-- 2222222222222222222222222222222222222222222 --}}
+
+                    <div class="accordion accordion-flush" id="accordionFlushExample2">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed d-block" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse-2-{{ $this->getTopProducts[0]->id }}"
+                                    aria-expanded="false"
+                                    aria-controls="flush-collapse-2-{{ $this->getTopProducts[0]->id }}">
+                                    {{-- @dd($this->getTopProducts[0]) --}}
+                                    <div class="grid grid-cols-12 text-center">
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->id }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->title }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->category }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->status }}
+                                        </div>
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            <i
+                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="flush-collapse-2-{{ $this->getTopProducts[0]->id }}"
+                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">DATE</th>
+                                                        <th scope="col">Actual</th>
+                                                        <th scope="col">Predicted</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>2024-07-02</td>
+                                                        <td>2</td>
+                                                        <td>3.368175</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>2024-07-03</td>
+                                                        <td>10</td>
+                                                        <td>8.624375</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>2024-07-04</td>
+                                                        <td>2</td>
+                                                        <td>2.933734</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">4</th>
+                                                        <td>2024-07-05</td>
+                                                        <td>2</td>
+                                                        <td>2.507154</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">5</th>
+                                                        <td>2024-07-06</td>
+                                                        <td>5</td>
+                                                        <td>7.845285</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">6</th>
+                                                        <td>2024-07-07</td>
+                                                        <td>5</td>
+                                                        <td>6.450898</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">7</th>
+                                                        <td>2024-07-08</td>
+                                                        <td>3</td>
+                                                        <td>4.202562</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">8</th>
+                                                        <td>2024-07-09</td>
+                                                        <td>6</td>
+                                                        <td>5.516248</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">9</th>
+                                                        <td>2024-07-10</td>
+                                                        <td>8</td>
+                                                        <td>7.92818</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">10</th>
+                                                        <td>2024-07-11</td>
+                                                        <td>6</td>
+                                                        <td>6.827276</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">11</th>
+                                                        <td>2024-07-12</td>
+                                                        <td>5</td>
+                                                        <td>5.009657</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">12</th>
+                                                        <td>2024-07-13</td>
+                                                        <td>2</td>
+                                                        <td>3.668016</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">13</th>
+                                                        <td>2024-07-14</td>
+                                                        <td>1</td>
+                                                        <td>3.665037</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">14</th>
+                                                        <td>2024-07-15</td>
+                                                        <td>5</td>
+                                                        <td>5.606525</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">15</th>
+                                                        <td>2024-07-16</td>
+                                                        <td>5</td>
+                                                        <td>4.03854</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">16</th>
+                                                        <td>2024-07-17</td>
+                                                        <td>2</td>
+                                                        <td>3.151775</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">17</th>
+                                                        <td>2024-07-18</td>
+                                                        <td>7</td>
+                                                        <td>7.951109</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">18</th>
+                                                        <td>2024-07-19</td>
+                                                        <td>4</td>
+                                                        <td>5.001291</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">19</th>
+                                                        <td>2024-07-20</td>
+                                                        <td>6</td>
+                                                        <td>7.728283</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">20</th>
+                                                        <td>2024-07-21</td>
+                                                        <td>6</td>
+                                                        <td>5.246104</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">21</th>
+                                                        <td>2024-07-22</td>
+                                                        <td>4</td>
+                                                        <td>3.143996</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">22</th>
+                                                        <td>2024-07-23</td>
+                                                        <td>4</td>
+                                                        <td>2.704951</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">23</th>
+                                                        <td>2024-07-24</td>
+                                                        <td>1</td>
+                                                        <td>1.735824</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">24</th>
+                                                        <td>2024-07-25</td>
+                                                        <td>12</td>
+                                                        <td>6.68533</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">25</th>
+                                                        <td>2024-07-26</td>
+                                                        <td>13</td>
+                                                        <td>8.65606</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">26</th>
+                                                        <td>2024-07-27</td>
+                                                        <td>1</td>
+                                                        <td>3.059459</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">27</th>
+                                                        <td>2024-07-28</td>
+                                                        <td>1</td>
+                                                        <td>3.213646</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">28</th>
+                                                        <td>2024-07-29</td>
+                                                        <td>7</td>
+                                                        <td>3.331099</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">29</th>
+                                                        <td>2024-07-30</td>
+                                                        <td>4</td>
+                                                        <td>4.060189</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">30</th>
+                                                        <td>2024-07-31</td>
+                                                        <td>11</td>
+                                                        <td>7.944929</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>                                                                                    
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px">
+                                            </div>
+                                            <div class="row">
+                                                test
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px"> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    {{-- 3333333333333333333333333333333333333333333333333333 --}}
+
+                    <div class="accordion accordion-flush" id="accordionFlushExample3">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed d-block" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse-3-{{ $this->getTopProducts[0]->id }}"
+                                    aria-expanded="false"
+                                    aria-controls="flush-collapse-3-{{ $this->getTopProducts[0]->id }}">
+                                    {{-- @dd($this->getTopProducts[0]) --}}
+                                    <div class="grid grid-cols-12 text-center">
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->id }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->title }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->category }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->status }}
+                                        </div>
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            <i
+                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="flush-collapse-3-{{ $this->getTopProducts[0]->id }}"
+                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">DATE</th>
+                                                        <th scope="col">Actual</th>
+                                                        <th scope="col">Predicted</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>2024-07-02</td>
+                                                        <td>2</td>
+                                                        <td>1.432598</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>2024-07-03</td>
+                                                        <td>3</td>
+                                                        <td>1.089157</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>2024-07-04</td>
+                                                        <td>4</td>
+                                                        <td>3.959125</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">4</th>
+                                                        <td>2024-07-05</td>
+                                                        <td>3</td>
+                                                        <td>1.070622</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">5</th>
+                                                        <td>2024-07-06</td>
+                                                        <td>1</td>
+                                                        <td>1.149659</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">6</th>
+                                                        <td>2024-07-07</td>
+                                                        <td>2</td>
+                                                        <td>1.20833</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">7</th>
+                                                        <td>2024-07-08</td>
+                                                        <td>6</td>
+                                                        <td>2.183637</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">8</th>
+                                                        <td>2024-07-09</td>
+                                                        <td>3</td>
+                                                        <td>4.632274</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">9</th>
+                                                        <td>2024-07-10</td>
+                                                        <td>1</td>
+                                                        <td>1.269305</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">10</th>
+                                                        <td>2024-07-11</td>
+                                                        <td>6</td>
+                                                        <td>3.540424</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">11</th>
+                                                        <td>2024-07-12</td>
+                                                        <td>1</td>
+                                                        <td>0.976535</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">12</th>
+                                                        <td>2024-07-13</td>
+                                                        <td>1</td>
+                                                        <td>1.649647</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">13</th>
+                                                        <td>2024-07-14</td>
+                                                        <td>2</td>
+                                                        <td>1.504845</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">14</th>
+                                                        <td>2024-07-15</td>
+                                                        <td>1</td>
+                                                        <td>1.906853</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">15</th>
+                                                        <td>2024-07-16</td>
+                                                        <td>2</td>
+                                                        <td>2.977401</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">16</th>
+                                                        <td>2024-07-17</td>
+                                                        <td>1</td>
+                                                        <td>1.352946</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">17</th>
+                                                        <td>2024-07-18</td>
+                                                        <td>1</td>
+                                                        <td>1.119316</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">18</th>
+                                                        <td>2024-07-19</td>
+                                                        <td>1</td>
+                                                        <td>1.003673</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">19</th>
+                                                        <td>2024-07-20</td>
+                                                        <td>1</td>
+                                                        <td>1.446194</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">20</th>
+                                                        <td>2024-07-21</td>
+                                                        <td>6</td>
+                                                        <td>1.322221</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">21</th>
+                                                        <td>2024-07-22</td>
+                                                        <td>8</td>
+                                                        <td>6.804169</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">22</th>
+                                                        <td>2024-07-23</td>
+                                                        <td>3</td>
+                                                        <td>1.515072</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">23</th>
+                                                        <td>2024-07-24</td>
+                                                        <td>2</td>
+                                                        <td>2.366222</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">24</th>
+                                                        <td>2024-07-25</td>
+                                                        <td>1</td>
+                                                        <td>1.417372</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">25</th>
+                                                        <td>2024-07-26</td>
+                                                        <td>8</td>
+                                                        <td>5.541855</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">26</th>
+                                                        <td>2024-07-27</td>
+                                                        <td>1</td>
+                                                        <td>1.537987</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">27</th>
+                                                        <td>2024-07-28</td>
+                                                        <td>2</td>
+                                                        <td>1.391241</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">28</th>
+                                                        <td>2024-07-29</td>
+                                                        <td>4</td>
+                                                        <td>3.988512</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">29</th>
+                                                        <td>2024-07-30</td>
+                                                        <td>2</td>
+                                                        <td>1.637225</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">30</th>
+                                                        <td>2024-07-31</td>
+                                                        <td>1</td>
+                                                        <td>1.088303</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px">
+                                            </div>
+                                            <div class="row">
+                                                test
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px"> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    {{-- 44444444444444444444444444444444444444444444444444 --}}
+
+                    <div class="accordion accordion-flush" id="accordionFlushExample4">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed d-block" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse-4-{{ $this->getTopProducts[0]->id }}"
+                                    aria-expanded="false"
+                                    aria-controls="flush-collapse-4-{{ $this->getTopProducts[0]->id }}">
+                                    {{-- @dd($this->getTopProducts[0]) --}}
+                                    <div class="grid grid-cols-12 text-center">
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->id }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->title }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->category }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->status }}
+                                        </div>
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            <i
+                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="flush-collapse-4-{{ $this->getTopProducts[0]->id }}"
+                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">DATE</th>
+                                                        <th scope="col">Actual</th>
+                                                        <th scope="col">Predicted</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>2024-07-02</td>
+                                                        <td>11</td>
+                                                        <td>8.839042</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>2024-07-03</td>
+                                                        <td>7</td>
+                                                        <td>7.688835</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>2024-07-04</td>
+                                                        <td>5</td>
+                                                        <td>6.495143</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">4</th>
+                                                        <td>2024-07-05</td>
+                                                        <td>11</td>
+                                                        <td>7.600179</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">5</th>
+                                                        <td>2024-07-06</td>
+                                                        <td>6</td>
+                                                        <td>7.40555</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">6</th>
+                                                        <td>2024-07-07</td>
+                                                        <td>3</td>
+                                                        <td>6.929276</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">7</th>
+                                                        <td>2024-07-08</td>
+                                                        <td>6</td>
+                                                        <td>5.775945</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">8</th>
+                                                        <td>2024-07-09</td>
+                                                        <td>12</td>
+                                                        <td>12.464057</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">9</th>
+                                                        <td>2024-07-10</td>
+                                                        <td>6</td>
+                                                        <td>5.867316</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">10</th>
+                                                        <td>2024-07-11</td>
+                                                        <td>12</td>
+                                                        <td>11.70625</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">11</th>
+                                                        <td>2024-07-12</td>
+                                                        <td>9</td>
+                                                        <td>6.077302</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">12</th>
+                                                        <td>2024-07-13</td>
+                                                        <td>9</td>
+                                                        <td>10.649224</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">13</th>
+                                                        <td>2024-07-14</td>
+                                                        <td>15</td>
+                                                        <td>12.831345</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">14</th>
+                                                        <td>2024-07-15</td>
+                                                        <td>5</td>
+                                                        <td>5.295976</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">15</th>
+                                                        <td>2024-07-16</td>
+                                                        <td>14</td>
+                                                        <td>16.417559</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">16</th>
+                                                        <td>2024-07-17</td>
+                                                        <td>7</td>
+                                                        <td>6.488717</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">17</th>
+                                                        <td>2024-07-18</td>
+                                                        <td>17</td>
+                                                        <td>14.644998</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">18</th>
+                                                        <td>2024-07-19</td>
+                                                        <td>6</td>
+                                                        <td>7.016687</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">19</th>
+                                                        <td>2024-07-20</td>
+                                                        <td>11</td>
+                                                        <td>8.151396</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">20</th>
+                                                        <td>2024-07-21</td>
+                                                        <td>4</td>
+                                                        <td>4.297068</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">21</th>
+                                                        <td>2024-07-22</td>
+                                                        <td>8</td>
+                                                        <td>8.407692</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">22</th>
+                                                        <td>2024-07-23</td>
+                                                        <td>9</td>
+                                                        <td>8.815598</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">23</th>
+                                                        <td>2024-07-24</td>
+                                                        <td>8</td>
+                                                        <td>7.957914</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">24</th>
+                                                        <td>2024-07-25</td>
+                                                        <td>7</td>
+                                                        <td>6.708437</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">25</th>
+                                                        <td>2024-07-26</td>
+                                                        <td>9</td>
+                                                        <td>6.80008</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">26</th>
+                                                        <td>2024-07-27</td>
+                                                        <td>12</td>
+                                                        <td>8.340795</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">27</th>
+                                                        <td>2024-07-28</td>
+                                                        <td>8</td>
+                                                        <td>7.296556</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">28</th>
+                                                        <td>2024-07-29</td>
+                                                        <td>10</td>
+                                                        <td>10.446693</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">29</th>
+                                                        <td>2024-07-30</td>
+                                                        <td>16</td>
+                                                        <td>9.997977</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">30</th>
+                                                        <td>2024-07-31</td>
+                                                        <td>2</td>
+                                                        <td>3.888774</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px">
+                                            </div>
+                                            <div class="row">
+                                                test
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px"> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    {{-- 5555555555555555555555555555555555555555555 --}}
+
+                    <div class="accordion accordion-flush" id="accordionFlushExample5">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed d-block" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse-5-{{ $this->getTopProducts[0]->id }}"
+                                    aria-expanded="false"
+                                    aria-controls="flush-collapse-5-{{ $this->getTopProducts[0]->id }}">
+                                    {{-- @dd($this->getTopProducts[0]) --}}
+                                    <div class="grid grid-cols-12 text-center">
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->id }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->title }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->category }}
+                                        </div>
+                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
+                                            {{ $this->getTopProducts[0]->status }}
+                                        </div>
+                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                                            <i
+                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
+                                        </div>
+                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
+                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
+                                        </div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="flush-collapse-5-{{ $this->getTopProducts[0]->id }}"
+                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">DATE</th>
+                                                        <th scope="col">Actual</th>
+                                                        <th scope="col">Predicted</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>2024-07-02</td>
+                                                        <td>10</td>
+                                                        <td>9.18343</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>2024-07-29</td>
+                                                        <td>9</td>
+                                                        <td>6.259678</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>2024-07-28</td>
+                                                        <td>12</td>
+                                                        <td>10.015704</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">4</th>
+                                                        <td>2024-07-27</td>
+                                                        <td>11</td>
+                                                        <td>9.928316</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">5</th>
+                                                        <td>2024-07-26</td>
+                                                        <td>6</td>
+                                                        <td>5.120062</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">6</th>
+                                                        <td>2024-07-25</td>
+                                                        <td>6</td>
+                                                        <td>5.602392</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">7</th>
+                                                        <td>2024-07-24</td>
+                                                        <td>5</td>
+                                                        <td>4.791564</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">8</th>
+                                                        <td>2024-07-23</td>
+                                                        <td>12</td>
+                                                        <td>5.819509</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">9</th>
+                                                        <td>2024-07-22</td>
+                                                        <td>3</td>
+                                                        <td>5.597061</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">10</th>
+                                                        <td>2024-07-21</td>
+                                                        <td>13</td>
+                                                        <td>9.885883</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">11</th>
+                                                        <td>2024-07-20</td>
+                                                        <td>7</td>
+                                                        <td>6.963221</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">12</th>
+                                                        <td>2024-07-19</td>
+                                                        <td>7</td>
+                                                        <td>7.552384</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">13</th>
+                                                        <td>2024-07-18</td>
+                                                        <td>5</td>
+                                                        <td>6.320451</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">14</th>
+                                                        <td>2024-07-17</td>
+                                                        <td>11</td>
+                                                        <td>8.161429</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">15</th>
+                                                        <td>2024-07-16</td>
+                                                        <td>6</td>
+                                                        <td>2.348556</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">16</th>
+                                                        <td>2024-07-15</td>
+                                                        <td>7</td>
+                                                        <td>4.603806</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">17</th>
+                                                        <td>2024-07-14</td>
+                                                        <td>4</td>
+                                                        <td>4.786664</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">18</th>
+                                                        <td>2024-07-13</td>
+                                                        <td>9</td>
+                                                        <td>5.519464</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">19</th>
+                                                        <td>2024-07-12</td>
+                                                        <td>6</td>
+                                                        <td>2.154969</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">20</th>
+                                                        <td>2024-07-11</td>
+                                                        <td>9</td>
+                                                        <td>10.008713</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">21</th>
+                                                        <td>2024-07-10</td>
+                                                        <td>7</td>
+                                                        <td>4.845385</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">22</th>
+                                                        <td>2024-07-09</td>
+                                                        <td>3</td>
+                                                        <td>4.778133</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">23</th>
+                                                        <td>2024-07-08</td>
+                                                        <td>3</td>
+                                                        <td>4.38189</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">24</th>
+                                                        <td>2024-07-07</td>
+                                                        <td>2</td>
+                                                        <td>4.762821</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">25</th>
+                                                        <td>2024-07-06</td>
+                                                        <td>7</td>
+                                                        <td>7.075346</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">26</th>
+                                                        <td>2024-07-05</td>
+                                                        <td>5</td>
+                                                        <td>3.614497</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">27</th>
+                                                        <td>2024-07-04</td>
+                                                        <td>2</td>
+                                                        <td>2.963265</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">28</th>
+                                                        <td>2024-07-03</td>
+                                                        <td>8</td>
+                                                        <td>7.756977</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">29</th>
+                                                        <td>2024-07-30</td>
+                                                        <td>11</td>
+                                                        <td>8.555187</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">30</th>
+                                                        <td>2024-07-31</td>
+                                                        <td>1</td>
+                                                        <td>2.159554</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px">
+                                            </div>
+                                            <div class="row">
+                                                test
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
+                                        alt="" style="max-height: 500px"> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
                 @else
                     <div class="flex content-center text-gray-500 p-6">
                         <h4>Not Enough Data</h4>

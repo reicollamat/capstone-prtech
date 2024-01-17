@@ -120,6 +120,15 @@ class SellerLanding extends Component
 
         $chart_data = [12, 12, 12, 12, 12, 12];
 
+
+
+        //
+        $kimpc_products = Product::where('seller_id', 13)->get();
+        // dd($kimpc_products);
+
+
+
+
         return view('livewire..seller.dashboard.seller-landing', [
             'chart_labels' => array_keys($salesByDate),
             'chart_data' => array_values($salesByDate),

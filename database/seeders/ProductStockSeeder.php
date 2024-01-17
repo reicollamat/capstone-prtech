@@ -39,6 +39,8 @@ class ProductStockSeeder extends Seeder
             ]);
         }
 
+
+
         $comments = Comment::all();
 
         // dd($comments);
