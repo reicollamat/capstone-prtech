@@ -78,16 +78,25 @@ class Landing extends Component
         HTML;
     }
 
+    public $product;
+
     public function testmodal()
     {
-        $response = Http::post('http://127.0.0.1:5000/getprediction', [
+        // Get the absolute path to the public directory
+        $publicPath = public_path('stocksense');
 
-        ]);
+        dd($publicPath . '/data249_new.json');
 
-        // Check if the request was successful
-        if ($response->successful()) {
-            dd($response->json());
-        }
+        $data =
+
+        // $response = Http::post('http://127.0.0.1:5000/getprediction', [
+        //     'data' =>
+        // ]);
+        //
+        // // Check if the request was successful
+        // if ($response->successful()) {
+        //     dd($response->json());
+        // }
     }
 
     public function render()

@@ -196,7 +196,7 @@
     {{ var_dump($response2) }}
 
     <button type="button" class="mt-4 ml-4 btn btn-primary"
-    wire:click="testmodel">
+    wire:click="testmodal">
         Launch demo modal
     </button>
 
