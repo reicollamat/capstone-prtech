@@ -39,6 +39,8 @@ class AnalyticsModelReport extends Component
 
     public int $mostShippedProductsFilter;
 
+    public $predict_for;
+
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
@@ -51,6 +53,8 @@ class AnalyticsModelReport extends Component
         $this->recentlyBoughtProductsFilter = 30;
         $this->productsReturnsFilter = 30;
         $this->productsReturnsOrderFilter = 'desc';
+
+        $this->predict_for = 0;
 
         // dd($this->seller->id);
 
@@ -94,6 +98,15 @@ class AnalyticsModelReport extends Component
             ['future_predictions_plot36' => 40],
             ['future_predictions_plot37' => 12],
         ];
+    }
+
+    public function generate_predict()
+    {
+        //
+        // dd($this->predict_for);
+        $this->predict_for = $this->predict_for;
+
+        sleep(0.5);
     }
 
     #[Computed]

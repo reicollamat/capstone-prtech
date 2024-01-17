@@ -84,7 +84,7 @@ class Landing extends Component
         // Get the absolute path to the public directory
         $publicPath = public_path('stocksense');
 
-        dd($publicPath . '/data249_new.json');
+        // dd($publicPath . '/data249_new.json');
 
         // $data =
 
