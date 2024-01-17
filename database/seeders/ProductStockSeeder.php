@@ -38,5 +38,23 @@ class ProductStockSeeder extends Seeder
                 'status' => $status,
             ]);
         }
+
+        $comments = Comment::all();
+
+        // dd($comments);
+        foreach ($comments as $key => $comment) {
+            // dd($comment);
+            if ($comment->rating >= 3) {
+                // positive
+                $comment->update([
+                    'sentiment' => 1
+                ]);
+            } else {
+                // negative
+                $comment->update([
+                    'sentiment' => 0
+                ]);
+            }
+        }
     }
 }

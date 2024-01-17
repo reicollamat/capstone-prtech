@@ -34,13 +34,13 @@ class SellerLanding extends Component
         // dd(Auth::user());
 
         // Get the file path and name using glob
-        $files = glob(public_path('storage').'/*.png');
+        $files = glob(public_path('storage') . '/*.png');
 
         $filesnames = [];
 
         // Get the png base on the file condition
         foreach ($files as $file) {
-            if (str_contains($file, '_'.$this->seller_id.'_')) {
+            if (str_contains($file, '_' . $this->seller_id . '_')) {
                 $filename = basename($file);
 
                 $file = explode('_', $filename);
@@ -107,7 +107,7 @@ class SellerLanding extends Component
 
         foreach ($salesData as $sale) {
             $date = $sale['completion_date'];
-            if (! isset($salesByDate[$date])) {
+            if (!isset($salesByDate[$date])) {
                 $salesByDate[$date] = 0;
             }
             $salesByDate[$date] += $sale['total_amount'];
@@ -241,7 +241,7 @@ class SellerLanding extends Component
             ->get();
 
         // Get the file path and name using glob
-        $files = glob(public_path('storage').'/*.png');
+        $files = glob(public_path('storage') . '/*.png');
 
         // dd($files);
 
@@ -273,15 +273,15 @@ class SellerLanding extends Component
                 // dd($imageData);
 
                 // Format the date and time to be used in the file name
-                $fileName = $currentDateTime->format('Y-m-d').'_'.$this->seller_id.'_nw.png'; // Rename it to date and p for positive and w for wordlcloud
+                $fileName = $currentDateTime->format('Y-m-d') . '_' . $this->seller_id . '_nw.png'; // Rename it to date and p for positive and w for wordlcloud
 
                 // Save the image to a file
                 $imagePath = public_path('storage'); // Change the path as needed
-                file_put_contents($imagePath.'/'.$fileName, $imageData);
+                file_put_contents($imagePath . '/' . $fileName, $imageData);
 
                 // return 'storage/'.$fileName;
 
-                $this->n_asset = 'storage/'.$fileName;
+                $this->n_asset = 'storage/' . $fileName;
                 // dd(asset('storage/'.$fileName));
                 // dd($data);
 
@@ -290,15 +290,13 @@ class SellerLanding extends Component
                 $statusCode = $response->status(); // Get the status code
                 $errorBody = $response->body(); // Get the error body
 
-                $this->alert('error', 'Something went wrong'.$errorBody, [
+                $this->alert('error', 'Something went wrong' . $errorBody, [
                     'position' => 'top-end',
                     'timer' => 3000,
                     'toast' => true,
                 ]);
-
             }
         }
-
     }
 
     // #[Computed]
@@ -343,13 +341,13 @@ class SellerLanding extends Component
                 // dd($imageData);
 
                 // Format the date and time to be used in the file name
-                $fileName = $currentDateTime->format('Y-m-d').'_'.$this->seller_id.'_pw.png'; // Rename it to date and p for positive and w for wordlcloud
+                $fileName = $currentDateTime->format('Y-m-d') . '_' . $this->seller_id . '_pw.png'; // Rename it to date and p for positive and w for wordlcloud
 
                 // Save the image to a file
                 $imagePath = public_path('storage'); // Change the path as needed
-                file_put_contents($imagePath.'/'.$fileName, $imageData);
+                file_put_contents($imagePath . '/' . $fileName, $imageData);
 
-                $this->p_asset = 'storage/'.$fileName;
+                $this->p_asset = 'storage/' . $fileName;
 
                 // dd(asset('storage/'.$fileName));
 
@@ -359,7 +357,7 @@ class SellerLanding extends Component
                 // Handle the failed request
                 $statusCode = $response->status(); // Get the status code
                 $errorBody = $response->body(); // Get the error body
-                $this->alert('error', 'Something went wrong'.$errorBody, [
+                $this->alert('error', 'Something went wrong' . $errorBody, [
                     'position' => 'top-end',
                     'timer' => 3000,
                     'toast' => true,
@@ -369,6 +367,5 @@ class SellerLanding extends Component
                 // Handle the error
             }
         }
-
     }
 }
