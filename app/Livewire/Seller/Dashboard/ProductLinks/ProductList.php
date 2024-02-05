@@ -80,7 +80,7 @@ class ProductList extends Component
     public function stockIssues()
     {
         $query = Product::where('seller_id', $this->seller->id)
-            ->where('stock', '<=', 'reserve')
+            ->whereColumn('stock', '<=', 'reserve')
             ->orderBy('id', 'asc')
             ->count();
 
@@ -132,9 +132,9 @@ class ProductList extends Component
 
         if ($this->stock_filter) {
             if ($this->stock_filter == 1) {
-                $query->where('stock', '>=', 1);
+                $query->whereColumn('stock', '>', 'reserve');
             } elseif ($this->stock_filter == 2) {
-                $query->where('stock', '<', 1);
+                $query->whereColumn('stock', '<=', 'reserve');
             }
         }
 
