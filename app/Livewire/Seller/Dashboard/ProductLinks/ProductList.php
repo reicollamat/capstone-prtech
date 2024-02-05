@@ -143,6 +143,7 @@ class ProductList extends Component
         }
 
         return $query->orderBy('id', 'asc')->paginate(10);
+
         //
         // if ($this->category_filter) {
         //     return Product::where('category', '=', $this->category_filter)
