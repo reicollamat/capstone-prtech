@@ -31,6 +31,8 @@ Livewire.on("page-updated", () => {
     // setChildContainerHeight();
 });
 
+window.bootstrap = bootstrap;
+
 // initialize popover js
 const popoverTriggerList = document.querySelectorAll(
     '[data-bs-toggle="popover"]',
