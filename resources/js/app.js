@@ -1,5 +1,11 @@
 import "./bootstrap";
 
+// Import our custom CSS
+import "../scss/styles.scss";
+
+// Import all of Bootstrap's JS
+import * as bootstrap from "bootstrap";
+
 import Chart from "chart.js/auto";
 
 import Swal from "sweetalert2";
@@ -7,6 +13,8 @@ import Swal from "sweetalert2";
 window.Chart = Chart;
 
 window.Swal = Swal;
+
+window.bootstrap = bootstrap;
 
 import ToastComponent from "../../vendor/usernotnull/tall-toasts/resources/js/tall-toasts";
 
@@ -20,18 +28,10 @@ import collapse from "@alpinejs/collapse";
 
 Livewire.start();
 
-// Import our custom CSS
-import "../scss/styles.scss";
-
-// Import all of Bootstrap's JS
-import * as bootstrap from "bootstrap";
-
-Livewire.on("page-updated", () => {
-    console.log("next page");
-    // setChildContainerHeight();
-});
-
-window.bootstrap = bootstrap;
+// Livewire.on("page-updated", () => {
+//     console.log("next page");
+//     // setChildContainerHeight();
+// });
 
 // initialize popover js
 const popoverTriggerList = document.querySelectorAll(
