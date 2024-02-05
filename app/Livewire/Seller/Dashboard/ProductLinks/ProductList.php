@@ -22,7 +22,7 @@ class ProductList extends Component
 
     public array $categories;
 
-    public $stock_filter;
+    public int $stock_filter;
 
     public $category_filter;
 
@@ -51,6 +51,8 @@ class ProductList extends Component
 
     public function mount()
     {
+        $this->stock_filter = 0;
+
         $this->seller = Seller::where('user_id', Auth::user()->id)->first();
 
         // dd(Seller::where('user_id', Auth::user()->id)->first());
@@ -72,6 +74,17 @@ class ProductList extends Component
         }
 
         // dd($this->total_products_rating);
+    }
+
+    #[Computed]
+    public function stockIssues()
+    {
+        $query = Product::where('seller_id', $this->seller->id)
+            ->where('stock', '<=', 'reserve')
+            ->orderBy('id', 'asc')
+            ->count();
+
+        return $query;
     }
 
     #[Computed]
@@ -111,29 +124,62 @@ class ProductList extends Component
     public function getProductList()
     {
         //        sleep(5);
+        $query = Product::where('seller_id', $this->seller->id);
+
         if ($this->category_filter) {
-            return Product::where('category', '=', $this->category_filter)
-                ->where('seller_id', $this->seller->id)
-                ->orderBy('id', 'asc')
-                ->paginate(10);
-            //            dd($this->category_filter);
-        }
-        // add check to run rerender every time
-        if ($this->quick_search_filter > 1) {
-            // return Product::where('title', 'ilike', "%{$this->quick_search_filter}%") // POSTGRES
-            return Product::where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
-                ->where('seller_id', $this->seller->id)
-                ->orderBy('id', 'asc')
-                ->paginate(10);
-        } else {
-
-            return Product::where('seller_id', $this->seller->id)
-                ->where('seller_id', $this->seller->id)
-                ->orderBy('id', 'asc')
-                ->paginate(10);
+            $query->where('category', '=', $this->category_filter);
         }
 
-        return Product::where('seller_id', $this->seller->id)->paginate(10);
+        if ($this->stock_filter) {
+            if ($this->stock_filter == 1) {
+                $query->where('stock', '>=', 1);
+            } elseif ($this->stock_filter == 2) {
+                $query->where('stock', '<', 1);
+            }
+        }
+
+        if ($this->quick_search_filter > 2) {
+            $query->where(strtolower('title'), 'like', "%{$this->quick_search_filter}%");
+        }
+
+        return $query->orderBy('id', 'asc')->paginate(10);
+        //
+        // if ($this->category_filter) {
+        //     return Product::where('category', '=', $this->category_filter)
+        //         ->where('seller_id', $this->seller->id)
+        //         ->orderBy('id', 'asc')
+        //         ->paginate(10);
+        //     //            dd($this->category_filter);
+        // }
+        // if ($this->stock_filter) {
+        //     if ($this->stock_filter == 1) {
+        //         return Product::where('stock', '>=', 1)
+        //             ->where('seller_id', $this->seller->id)
+        //             ->orderBy('id', 'asc')
+        //             ->paginate(10);
+        //     } elseif ($this->stock_filter == 2) {
+        //         return Product::where('stock', '<', 1)
+        //             ->where('seller_id', $this->seller->id)
+        //             ->orderBy('id', 'asc')
+        //             ->paginate(10);
+        //     }
+        // }
+        // // add check to run rerender every time
+        // if ($this->quick_search_filter > 2) {
+        //     // return Product::where('title', 'ilike', "%{$this->quick_search_filter}%") // POSTGRES
+        //     return Product::where(strtolower('title'), 'like', "%{$this->quick_search_filter}%") // POSTGRES
+        //         ->where('seller_id', $this->seller->id)
+        //         ->orderBy('id', 'asc')
+        //         ->paginate(10);
+        // } else {
+        //
+        //     return Product::where('seller_id', $this->seller->id)
+        //         ->where('seller_id', $this->seller->id)
+        //         ->orderBy('id', 'asc')
+        //         ->paginate(10);
+        // }
+        //
+        // return Product::where('seller_id', $this->seller->id)->paginate(10);
     }
 
     public function render()
