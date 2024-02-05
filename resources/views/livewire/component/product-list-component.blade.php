@@ -2,7 +2,8 @@
     <div x-data="{ expanded: false }" class="py-2 bg-white border-b border-gray-100">
         <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center">
             <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light">
-                <input class="form-check-input" wire:model.live="select_products" value="{{ $item->id }}"
+                {{-- <input class="form-check-input" wire:model.live="select_products" value="{{ $item->id }}" --}}
+                <input class="form-check-input" value="{{ $item->id }}"
                     type="checkbox" id="select_products">
             </span>
             <label for="select_products" class="sr-only"></label>
@@ -26,8 +27,18 @@
             <div class=" mb-0  min-w-[100px] p-2 !text-gray-800 !font-light">
                 {{ $item->price }}
             </div>
-            <div class=" mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
-                {{ $itemproductinfo->stock > 0 ? 'In Stock' : 'Out of Stock' }}
+            <div class="flex items-center justify-center mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
+{{--                {{ $itemproductinfo->stock ?? 0 }}--}}
+                @if($itemproductinfo->stock <= $itemproductinfo->reserve)
+                     <span class="bg-red-100 text-red-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ $itemproductinfo->stock ?? 0 }}</span>
+                @elseif($itemproductinfo->stock > $itemproductinfo->reserve && $itemproductinfo->stock <= 20)
+                     <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $itemproductinfo->stock ?? 0 }}</span>
+                @else
+                    <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ $itemproductinfo->stock ?? 0 }}</span>
+                @endif
+
+                {{-- <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span> --}}
+                {{-- <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Yellow</span> --}}
             </div>
             <div class="flex justify-center mb-0 min-w-[100px] p-2 !text-gray-600 !font-light items-center">
                 <button id="faqs-title-01" type="button"
