@@ -91,11 +91,12 @@
                     </div>
                 </div>
                 {{-- stock filter --}}
+{{--                {{ $stock_filter }}--}}
                 <div x-data="{ isOpen: false }" class="relative inline-block ">
                     <!-- Dropdown toggle button -->
                     <button @click="isOpen = !isOpen"
                             class="relative z-10 w-full flex items-center p-2 text-sm text-gray-600 gap-1">
-                        <span class="mx-1">IN STOCK</span>
+                        <span class="mx-1">{{ $stock_filter == null ? 'All Products' : ( $stock_filter === 1 ? 'In Stock' : 'Out of Stock')  }}</span>
                         <svg class="w-5 h-5 mx-1 rotate-180 transition duration-200" viewBox="0 0 24 24" fill="none"
                              xmlns="http://www.w3.org/2000/svg"
                              :class="{ 'rotate-180 transition duration-300': isOpen }">
@@ -110,13 +111,17 @@
                          x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                          x-transition:leave="transition ease-in duration-100"
                          x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                         class="absolute left-0 z-20 w-full shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
+                         class="absolute left-0 z-20 w-max shadow overflow-hidden origin-top-right bg-transparent rounded-md dark:bg-gray-800 front">
                         <div class="bg-white rounded border-1 border-gray-300">
-                            <button
+                             <button wire:click="$set('stock_filter', 0)"
+                                     class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
+                                     @click="isOpen = false">All Products
+                             </button>
+                            <button wire:click="$set('stock_filter', 1)"
                                 class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
                                 @click="isOpen = false">In Stock
                             </button>
-                            <button
+                            <button wire:click="$set('stock_filter', 2)"
                                 class="mb-0 w-full text-start uppercase text-sm p-2.5 tracking-tight rounded hover:bg-gray-100"
                                 @click="isOpen = false">Out of Stock
                             </button>
@@ -464,7 +469,8 @@
                 </div>
                 <div class="py-2 text-center">
                     <p class="text-sm font-base text-gray-500 mb-1">Stock Issues</p>
-                    <p class="font-semibold">0</p>
+                    <p class="font-semibold">{{ $this->stockIssues ?? 0 }}</p>
+{{--                    @dd($this->stockIssues)--}}
                 </div>
             </div>
             <div class="h-fit py-6 pr-4 rounded-lg shadow pl-3 justify-start bg-white">
