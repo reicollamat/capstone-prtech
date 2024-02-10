@@ -98,7 +98,7 @@ class WebcamComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'webcam_os' => 'required',
             'webcam_connection_type' => 'required|not_in:Click to Select',
             'resolution' => 'required|not_in:Click to Select',

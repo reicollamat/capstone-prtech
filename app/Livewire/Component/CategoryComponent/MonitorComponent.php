@@ -101,7 +101,7 @@ class MonitorComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'native_resolution' => 'required|not_in:Click to Select',
             'panel_type' => 'required|not_in:Click to Select',
             'input_signal' => 'required|not_in:Click to Select',

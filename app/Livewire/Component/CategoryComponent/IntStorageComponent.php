@@ -98,7 +98,7 @@ class IntStorageComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'intstorage_cap' => 'required|integer',
             'intstorage_type' => 'required|not_in:Click to Select',
             'intstorage_int' => 'required|not_in:Click to Select',

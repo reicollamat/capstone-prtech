@@ -104,7 +104,7 @@ class MemoryComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'mem_gen' => 'required|not_in:Click to Select',
             'modules' => 'required',
             'mem_cap' => 'required|integer',

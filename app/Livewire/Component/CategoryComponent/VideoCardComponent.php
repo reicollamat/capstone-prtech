@@ -101,7 +101,7 @@ class VideoCardComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'gpu_chipset' => 'required|not_in:Click to Select',
             'gpu_vram' => 'required|integer',
             'gpu_pcie' => 'required',

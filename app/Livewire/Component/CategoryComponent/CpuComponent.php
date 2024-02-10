@@ -102,7 +102,7 @@ class CpuComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'cpu_core_threads' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'base_clock' => 'required',
             'boost_clock' => 'required',
             'tdp' => 'required',

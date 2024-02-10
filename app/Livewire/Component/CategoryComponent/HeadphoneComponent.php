@@ -100,7 +100,7 @@ class HeadphoneComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'sensitivity' => 'required|not_in:Click to Select',
             'headphone_connection_type' => 'required|not_in:Click to Select',
             'noise_control' => 'required|not_in:Click to Select',

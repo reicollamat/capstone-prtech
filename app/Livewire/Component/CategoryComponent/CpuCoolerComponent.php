@@ -98,7 +98,7 @@ class CpuCoolerComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'cooler_type' => 'required|not_in:Click to Select',
             'cooler_size' => 'required|integer',
             'cpuc_color' => 'required',

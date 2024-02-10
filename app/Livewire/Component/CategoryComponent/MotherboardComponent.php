@@ -98,7 +98,7 @@ class MotherboardComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'mb_socket' => 'required',
             'mb_form' => 'required|not_in:Click to Select',
             'mb_slot' => 'required|not_in:Click to Select',

@@ -98,7 +98,7 @@ class PsuComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'psu_form' => 'required|not_in:Click to Select',
             'psu_watts' => 'required|integer',
             'psu_eff' => 'required|not_in:Click to Select',

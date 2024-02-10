@@ -98,7 +98,7 @@ class MouseComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'mouse_tracking_method' => 'required|not_in:Click to Select',
             'mouse_connection_type' => 'required|not_in:Click to Select',
             'dpi' => 'required|integer',

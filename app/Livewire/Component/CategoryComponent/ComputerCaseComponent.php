@@ -107,7 +107,7 @@ class ComputerCaseComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'size' => 'required',
             'dimensions_lwh' => 'required',
             'case_color' => 'required',

@@ -29,6 +29,8 @@ class KeyboardComponent extends Component
 
     // #[Validate('required', message: 'Please provide product slug')]
     // public $productSlug;
+    #[Validate('required', message: 'Please provide a price')]
+    public $price;
 
     #[Validate('required', message: 'Please provide product description')]
     public $productDescription;
@@ -49,9 +51,6 @@ class KeyboardComponent extends Component
 
     #[Validate('required', message: 'Please provide a brand')]
     public $brand;
-
-    #[Validate('required', message: 'Please provide a price')]
-    public $price;
 
     #[Validate('required', message: 'Please provide an input')]
     public $keyboard_color;
@@ -98,7 +97,7 @@ class KeyboardComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'keyboard_color' => 'required',
             'keyboard_conn' => 'required|not_in:Click to Select',
             'keyboard_layout' => 'required|not_in:Click to Select',

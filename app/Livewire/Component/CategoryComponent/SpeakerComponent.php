@@ -92,7 +92,7 @@ class SpeakerComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'compatibility' => 'required|not_in:Click to Select',
             'speaker_connectivity' => 'required|not_in:Click to Select',
             'speaker_color' => 'required',

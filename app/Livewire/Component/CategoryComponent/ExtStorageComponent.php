@@ -95,7 +95,7 @@ class ExtStorageComponent extends Component
             'productCategory' => 'required',
             'productImages.*' => 'image|max:5120',
             'brand' => 'required',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'extstorage_cap' => 'required|integer',
             'extstorage_type' => 'required|not_in:Click to Select',
             'extstorage_int' => 'required|not_in:Click to Select',
