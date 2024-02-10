@@ -412,6 +412,111 @@
                     </div>
                 </div>
             </div>
+            <div class=" grid lg:grid-cols-2 gap-3 mb-3">
+                <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"
+                     wire:init="fetchPositiveCommentsApi">
+                    <button class="w-full h-full" type="button" @click="showModal = !showModal">
+                        <div wire:loading wire:target="fetchPositiveCommentsApi" class="relative w-full h-72">
+                            <div role="status"
+                                 class="flex gap-2.5 flex-column items-center justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+
+                                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                                    <path
+                                        d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
+                                </svg>
+                                <span class="text-center">Image Loading, Please Wait...</span>
+                            </div>
+                        </div>
+                        <div wire:loading.remove wire:target="fetchPositiveCommentsApi">
+                            <img src="{{ asset($p_asset) }}"
+                                 class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="">
+                        </div>
+                    </button>
+
+                    <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                    <div x-cloak x-transition.duration.500ms x-show="showModal"
+                         class="fixed inset-0 z-50 grid place-content-center">
+                        <div @click.away="showModal = false"
+                             class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Positive Reviews Wordcloud</h1>
+
+                                    </div>
+                                    <div class="flex justify-center modal-body" x-transition.opacity>
+                                        <img src="{{ asset($p_asset) }}"
+                                             class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                             alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full flex gap-2 pt-3 justify-end">
+                                <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{--                @if ($loaddata) --}}
+                <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"
+                     wire:init="fetchNegativeCommentsApi">
+                    <button type="button" @click="showModal = !showModal" class="w-full h-72">
+                        <div wire:loading wire:target="fetchNegativeCommentsApi"
+                             class="relative w-full h-full flex items-center justify-center">
+                            <div role="status"
+                                 class="flex gap-2.5 flex-column items-center  justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+                                <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                    <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                                    <path
+                                        d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
+                                </svg>
+                                <span class="text-center">Image Loading, Please Wait...</span>
+                            </div>
+                        </div>
+                        <div wire:loading.remove wire:target="fetchNegativeCommentsApi">
+                            <img src="{{ asset($n_asset) }}"
+                                 class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="">
+                        </div>
+                    </button>
+
+                    <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"
+                         wire:loading.remove wire:target="init">
+
+                    </div>
+
+                    <div x-cloak x-transition.duration.500ms x-show="showModal"
+                         class="fixed inset-0 z-50 grid place-content-center" wire:loading.remove
+                         wire:target="fetchNegativeCommentsApi">
+                        <div @click.away="showModal = false"
+                             class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Negative Reviews Wordcloud</h1>
+
+                                    </div>
+                                    <div class="flex justify-center modal-body" x-transition.opacity>
+                                        <img src="{{ asset($n_asset) }}"
+                                             class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                             alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full flex gap-2 pt-3 justify-end">
+                                <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white py-1.5">Order & Shipment
                 Analytics</h5>
