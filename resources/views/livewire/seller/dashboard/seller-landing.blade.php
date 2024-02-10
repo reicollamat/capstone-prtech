@@ -16,14 +16,15 @@
                             {{--      --}}{{--     alt="user photo"> --}}
                             {{-- </button> --}}
                             <div>
-                                <h1 class="font-semibold tracking-tight text-white text-sm uppercase mb-0">{{ date('l, F d') }}</h1>
+                                <h1 class="font-semibold tracking-tight text-white text-sm uppercase mb-0">
+                                    {{ date('l, F d') }}</h1>
                                 <div class="flex items-center gap-0.5">
                                     <h1
                                         class="text-xl mb-0 tracking-normal text-white font-bold title dark:text-gray-100">
                                         Good {{ CustomHelper::getTimeOfDay() }}, {{ Auth::user()->name ?? 'Rafael' }}
                                     </h1>
                                     <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"
-                                         class="d-none d-md-block  w-7 h-7 -rotate-12">
+                                        class="d-none d-md-block  w-7 h-7 -rotate-12">
                                         <path
                                             d="m16.1 48.5c-.5-.1-.9-.2-1.4-.4s-.9-.3-1.3-.5c-.9-.4-1.7-.9-2.5-1.5-1.6-1.1-2.9-2.6-3.9-4.4-1-1.7-1.6-3.7-1.7-5.6-.1-1 0-1.9.1-2.9.1-.5.2-.9.3-1.4s.3-.9.4-1.4l.1 1.4c0 .5.1.9.2 1.4.1.9.3 1.8.5 2.6.4 1.7 1 3.3 1.9 4.8s1.9 2.9 3.2 4.2c.6.6 1.3 1.2 2 1.8.3.3.7.6 1.1.9zm-.3 3.6c-.3.2-.7.3-1.1.4s-.7.2-1.1.2c-.7.1-1.5.2-2.3.1-1.5-.1-3.1-.5-4.4-1.2-1.4-.7-2.6-1.8-3.4-3.1-.4-.6-.8-1.3-1.1-2-.1-.3-.2-.7-.3-1.1 0-.3-.1-.6-.1-1 .3.3.5.6.7.8.3.3.5.6.7.8.5.5.9 1 1.4 1.4 1 .9 2 1.7 3.2 2.3 1.1.6 2.4 1.1 3.6 1.5.6.2 1.3.3 2 .5.3.1.7.1 1 .2.5.1.8.1 1.2.2m22.6-48.6c.5.1.9.3 1.4.5s.9.4 1.3.6c.9.5 1.7 1 2.5 1.6 1.6 1.2 2.9 2.8 3.8 4.6s1.4 3.8 1.4 5.7c0 1-.1 1.9-.3 2.9-.1.5-.2.9-.4 1.4s-.3.9-.5 1.3l-.1-1.4c0-.5 0-.9-.1-1.4l-.3-2.7c-.3-1.7-.9-3.4-1.7-5s-1.8-3-3-4.3c-.6-.7-1.3-1.3-1.9-2-.3-.3-.7-.6-1.1-.9zm8.7-.4c.4.1.7.2 1 .4.3.1.7.3 1 .5.6.4 1.2.8 1.8 1.3 1.1 1 2 2.2 2.5 3.6.6 1.4.8 2.9.6 4.4-.1.7-.3 1.4-.5 2.1-.1.3-.3.7-.4 1-.2.3-.3.6-.6.9v-1-1c0-.7-.1-1.3-.1-1.9-.2-1.3-.4-2.5-.9-3.6-.5-1.2-1.1-2.2-1.8-3.3-.4-.5-.8-1.1-1.2-1.6-.2-.3-.4-.5-.7-.8-.2-.5-.5-.8-.7-1"
                                             fill="#42ade2" />
@@ -34,12 +35,12 @@
                                             d="m30.7 3.4c-.2.1-.4.2-.6.4 1.9-.5 3.9.4 4.8 2.2l14.4 30 1.3-.6-14.4-30c-1-2.1-3.4-3-5.5-2"
                                             fill="#eba352" />
                                         <path d="m27.8 46.2 7.7-3.7-14.7-30.6c-1-2.1-3.6-3.1-5.7-2.1s-3 3.6-2 5.7z"
-                                              fill="#ffdd67" />
+                                            fill="#ffdd67" />
                                         <path
                                             d="m15.1 9.9c-.2.1-.4.2-.6.4 1.9-.5 4.1.4 5 2.3l9.1 19.1 2.2 1.3-10-21c-1-2.2-3.5-3.1-5.7-2.1"
                                             fill="#eba352" />
                                         <path d="m34.3 40.1 7.7-3.7-14.7-30.6c-1-2.1-3.6-3.1-5.7-2-2.1 1-3 3.6-2 5.7z"
-                                              fill="#ffdd67" />
+                                            fill="#ffdd67" />
                                         <path
                                             d="m21.6 3.7c-.2.1-.4.3-.6.4 1.9-.5 4.1.4 5 2.3l10.3 21.6 2.2 1.3-11.2-23.5c-1-2.2-3.6-3.1-5.7-2.1m-11.6 14.3c-.2.1-.4.2-.6.4 1.8-.5 3.7.4 4.5 2.2l7.5 15.7 2.2 1.3-8.4-17.6c-.9-2.1-3.2-3-5.2-2"
                                             fill="#eba352" />
@@ -56,7 +57,6 @@
                                 </div>
 
                             </div>
-
 
                         </header>
                     </div>
@@ -155,7 +155,7 @@
                             <div class="flex flex-wrap items-center">
                                 <div class="relative w-full max-w-full flex-grow flex-1">
                                     <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-200">Overview</h6>
-                                    <h2 class="text-xl font-semibold text-white">Sales value</h2>
+                                    <h2 class="text-xl font-semibold text-white">Sales Revenue</h2>
                                 </div>
                             </div>
                         </div>
@@ -242,7 +242,8 @@
             <div class="relative bg-white rounded shadow shadow-cyan-500/50">
                 <div class="px-3 pt-6 pb-6 text-center relative z-10">
                     <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Positive Sentiment Overtime</h4>
-                    <h3 class="text-2xl font-semibold leading-tight my-1.5 text-green-600">{{ $this->getPositveCommentsCount() }}</h3>
+                    <h3 class="text-2xl font-semibold leading-tight my-1.5 text-green-600">
+                        {{ $this->getPositveCommentsCount() }}</h3>
                     {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
                 </div>
                 <div class="absolute inset-0 pt-12">
@@ -254,7 +255,8 @@
             <div class="relative bg-white rounded shadow shadow-cyan-500/50">
                 <div class="px-3 pt-6 pb-6 text-center relative z-10">
                     <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Negative Sentiment Overtime</h4>
-                    <h3 class="text-2xl  font-semibold leading-tight my-1.5 text-red-600">{{ $this->getNegativeCommentsCount() }}</h3>
+                    <h3 class="text-2xl  font-semibold leading-tight my-1.5 text-red-600">
+                        {{ $this->getNegativeCommentsCount() }}</h3>
                     {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
                 </div>
                 <div class="absolute inset-0 pt-12">
@@ -264,104 +266,8 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4 grid lg:grid-cols-2 gap-4" >
-            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false" wire:init="fetchPositiveCommentsApi">
-                <button class="w-full h-full" type="button" @click="showModal = !showModal">
-                    <div wire:loading wire:target="fetchPositiveCommentsApi" class="w-full h-72">
-                        <div role="status"
-                             class="flex gap-2.5 flex-column items-center justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
 
-                            <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                                <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
-                                <path
-                                    d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
-                            </svg>
-                            <span class="text-center">Image Loading, Please Wait...</span>
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    <div wire:loading.remove wire:target="fetchPositiveCommentsApi">
-                        <img src="{{ asset($p_asset) }}" class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="">
-                    </div>
-                </button>
 
-                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
-
-                <div x-cloak x-transition.duration.500ms x-show="showModal"
-                    class="fixed inset-0 z-50 grid place-content-center">
-                    <div @click.away="showModal = false"
-                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
-                                    --}}
-                                </div>
-                                <div class="flex justify-center modal-body" x-transition.opacity>
-                                    <img src="{{ asset($p_asset) }}"
-                                        class="img-fluid img-thumbnail rounded-start border-0 self-center"
-                                        alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full flex gap-2 pt-3 justify-end">
-                            <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false" wire:init="fetchNegativeCommentsApi">
-
-                <button type="button" @click="showModal = !showModal" class="w-full h-72">
-                    <div wire:loading wire:target="fetchNegativeCommentsApi" class="w-full h-full">
-                        <div role="status"
-                             class="flex gap-2.5 flex-column items-center  justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
-                            <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
-                                <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
-                                <path
-                                    d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
-                            </svg>
-                            <span class="text-center">Image Loading, Please Wait...</span>
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    <div wire:loading.remove wire:target="fetchNegativeCommentsApi">
-                        <img src="{{ asset($n_asset) }}" class="img-fluid img-thumbnail rounded-start border-0 self-center" alt="">
-                    </div>
-                </button>
-
-                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
-
-                <div x-cloak x-transition.duration.500ms x-show="showModal"
-                    class="fixed inset-0 z-50 grid place-content-center">
-                    <div @click.away="showModal = false"
-                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    {{-- <h1 class="modal-title fs-5" id="exampleModalLabel">Image Preview</h1>
-                                    --}}
-                                </div>
-                                <div class="flex justify-center modal-body" x-transition.opacity>
-                                    <img src="{{ asset($n_asset) }}"
-                                        class="img-fluid img-thumbnail rounded-start border-0 self-center"
-                                        alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full flex gap-2 pt-3 justify-end">
-                            <button type="button" class="btn btn-outline-secondary" @click="showModal = false">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     {{-- <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"> --}}
