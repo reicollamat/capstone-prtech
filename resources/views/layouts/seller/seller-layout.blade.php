@@ -213,7 +213,7 @@
                                             class="no-underline decoration-0 text-gray-800" wire:navigate>
                                             <div class="flex items-center gap-1.5">
                                                 <i class="bi bi-sliders2"></i>
-                                                <span>Shop Metrics Settings</span>
+                                                <span>Shop Metrics</span>
                                             </div>
                                         </a>
                                     </li>
@@ -346,7 +346,7 @@
         </div>
     </main>
 
-    @livewire('wire-elements-modal')
+{{--    @livewire('wire-elements-modal')--}}
 
     {{--    This directive is used to include the Livewire scripts --}}
     @livewireScriptConfig

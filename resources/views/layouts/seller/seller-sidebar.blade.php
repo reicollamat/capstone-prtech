@@ -183,6 +183,7 @@
         </div>
         <ul>
             <li class="p-1.5 text-sm">
+            <li class="p-1.5 text-sm">
                 <a href="{{ route('shop-management') }}" class="no-underline decoration-0 text-gray-800" wire:navigate>
                     <div class="flex items-center gap-1.5">
                         <i class="bi bi-info-circle text-lg"></i>
@@ -205,7 +206,7 @@
                     class="no-underline decoration-0 text-gray-800" wire:navigate>
                      <div class="flex items-center gap-1.5">
                          <i class="bi bi-sliders2 text-lg"></i>
-                         <span>Shop Metric Settings</span>
+                         <span>Shop Metric</span>
                      </div>
                  </a>
              </li>
