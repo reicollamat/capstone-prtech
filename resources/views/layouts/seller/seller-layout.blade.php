@@ -311,7 +311,8 @@
                                             <span>Help</span>
                                         </div>
                                     </button>
-                                    <a class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white" href="{{ route('index_landing') }}">
+                                    <a class="block w-full text-start font-semibold px-3 py-2.5 text-sm text-gray-800 capitalize no-underline transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
+                                        href="{{ route('index_landing') }}">
                                         <i class="bi bi-box-arrow-left text-sm">
                                             <span>close</span>
                                         </i>
@@ -346,7 +347,7 @@
         </div>
     </main>
 
-{{--    @livewire('wire-elements-modal')--}}
+    {{--    @livewire('wire-elements-modal') --}}
 
     {{--    This directive is used to include the Livewire scripts --}}
     @livewireScriptConfig
@@ -355,40 +356,43 @@
     {{--  Livewire Alert  --}}
     <x-livewire-alert::scripts />
 
-     <script data-navigate-once>
-         // // this will remove the navbar height from the page height to remove scrolling
-         // function setChildContainerHeight() {
-         //     // get the height if main wrapper
-         //     let parentHeight = document.getElementById("main").clientHeight;
-         //     // get the height of navigation bar
-         //     let otherElementHeight =
-         //         document.getElementById("navigationbar").clientHeight + 1;
-         //     // get the child container where we need to set the height
-         //     let childContainer = document.getElementById("wrapper");
-         //     // apply the height to the element
-         //     childContainer.style.height = parentHeight - otherElementHeight + "px";
-         //
-         //     console.log(parentHeight, otherElementHeight, childContainer.style.height);
-         // }
-         //
-         function inializepopover()
-         {
-             // initialize popover js
-             const popoverTriggerList = document.querySelectorAll(
-                 '[data-bs-toggle="popover"]',
-             );
-             const popoverList = [...popoverTriggerList].map(
-                 (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
-             );
-             console.log('initialize')
-         }
-         //
-         // // event listener to adjust the height of the child container
-         // window.addEventListener("load", setChildContainerHeight);
-         // window.addEventListener("resize", setChildContainerHeight);
-         // window.addEventListener("livewire:navigated", setChildContainerHeight);
-         window.addEventListener("livewire:navigated", inializepopover);
-     </script>
+    <script data-navigate-once>
+        // // this will remove the navbar height from the page height to remove scrolling
+        // function setChildContainerHeight() {
+        //     // get the height if main wrapper
+        //     let parentHeight = document.getElementById("main").clientHeight;
+        //     // get the height of navigation bar
+        //     let otherElementHeight =
+        //         document.getElementById("navigationbar").clientHeight + 1;
+        //     // get the child container where we need to set the height
+        //     let childContainer = document.getElementById("wrapper");
+        //     // apply the height to the element
+        //     childContainer.style.height = parentHeight - otherElementHeight + "px";
+        //
+        //     console.log(parentHeight, otherElementHeight, childContainer.style.height);
+        // }
+        //
+        // if (typeof initializePopover === 'function') {
+        function inializepopover() {
+            // initialize popover js
+            const popoverTriggerList = document.querySelectorAll(
+                '[data-bs-toggle="popover"]',
+            );
+            const popoverList = [...popoverTriggerList].map(
+                (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
+            );
+            console.log('initialize')
+        }
+
+        // }
+
+        //
+        // // event listener to adjust the height of the child container
+        // window.addEventListener("load", setChildContainerHeight);
+        // window.addEventListener("resize", setChildContainerHeight);
+        // window.addEventListener("livewire:navigated", setChildContainerHeight);
+        window.addEventListener("livewire:navigated", inializepopover);
+    </script>
 
 </body>
 
