@@ -1,22 +1,26 @@
-# ![Techno](public/img/icon/retechicon.ico) RE Tech Computer Parts E-commerce Website
+# ![Techno](public/img/brand/png/logo-color.png) PR Tech Computer Parts E-commerce Website
 
-> ### [RE Tech](https://github.com/reicollamat/techno-retech) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
+> ### [PR Tech](https://github.com/reicollamat/capstone-prtech.git) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
 
-## [Laravel](#about-laravel) Framework 
-- Laravel Breeze 
-    - Account Authentication
+## [Laravel](#about-laravel) Framework
+
+-   Laravel Breeze
+    -   Account Authentication
 
 ## Laravel [Orchid](https://orchid.software/)
-- Admin Management Panel
-    - CRUD Functions
+
+-   Admin Management Panel
+    -   CRUD Functions
 
 ## Database Management System
-- [MySQL](https://www.mysql.com/)
+
+-   [MySQL](https://www.mysql.com/)
 
 ## Dataset
-- [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
 
-----------
+-   [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
+
+---
 
 # Getting started
 
@@ -44,10 +48,6 @@ Generate a new application key
 
     php artisan key:generate
 
-Generate a new JWT authentication secret key
-
-    php artisan jwt:generate
-
 Run the database migrations (**Set the database connection in .env before migrating**)
 
     php artisan migrate
@@ -65,7 +65,7 @@ You can now access the server at http://localhost:8000
     composer install
     cp .env.example .env
     php artisan key:generate
-    php artisan jwt:generate 
+    php artisan jwt:generate
 
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 
@@ -82,57 +82,56 @@ Run the database seeder and you're done
 
     php artisan db:seed
 
-***Note*** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
+**_Note_** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
 
     php artisan migrate:refresh
 
-
-----------
+---
 
 # Code overview
 
 ## Dependencies
 
-- [cviebrock/eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable) - Easy creation of slugs for your Eloquent models in Laravel
-- [orchid/platform](https://orchid.software/en/) - Platform for back-office applications, admin panel or CMS your Laravel app.
+-   [cviebrock/eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable) - Easy creation of slugs for your Eloquent models in Laravel
+-   [orchid/platform](https://orchid.software/en/) - Platform for back-office applications, admin panel or CMS your Laravel app.
 
 ## Folders
 
-- `app` - Contains all the Eloquent models
-- `app/Http/Controllers` - Contains all the controllers
-- `app/Http/Middleware` - Contains the JWT auth middleware
-- `app/Orchid/Filters` - Filters used to simplify the search for records using a typical filter
-- `app/Orchid/Layouts` - Templates for screens to focus on defining the appearance of the page
-- `app/Orchid/Presenters` - Used to format and present data consistently
-- `config` - Contains all the application configuration files
-- `database/factories` - Contains the model factory for all the models
-- `database/migrations` - Contains all the database migrations
-- `database/seeds` - Contains the database seeder
-- `database/product_dataset` - Contains the pc parts dataset
-- `public/img` - Contains all image assets
-- `public/multishop` - Contains other assets for blade files
-- `resources/views/` - Contains all the blade template files
-- `routes` - Contains all the api routes defined in api.php file
+-   `app` - Contains all the Eloquent models
+-   `app/Http/Controllers` - Contains all the controllers
+-   `app/Http/Middleware` - Contains the JWT auth middleware
+-   `app/Orchid/Filters` - Filters used to simplify the search for records using a typical filter
+-   `app/Orchid/Layouts` - Templates for screens to focus on defining the appearance of the page
+-   `app/Orchid/Presenters` - Used to format and present data consistently
+-   `config` - Contains all the application configuration files
+-   `database/factories` - Contains the model factory for all the models
+-   `database/migrations` - Contains all the database migrations
+-   `database/seeds` - Contains the database seeder
+-   `database/product_dataset` - Contains the pc parts dataset
+-   `public/img` - Contains all image assets
+-   `public/multishop` - Contains other assets for blade files
+-   `resources/views/` - Contains all the blade template files
+-   `routes` - Contains all the api routes defined in api.php file
 
 ## Environment variables
 
-- `.env` - Environment variables can be set in this file
+-   `.env` - Environment variables can be set in this file
 
-***Note*** : You can quickly set the database information and other variables in this file and have the application fully working.
+**_Note_** : You can quickly set the database information and other variables in this file and have the application fully working.
 
-----------
+---
 
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
