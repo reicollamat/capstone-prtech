@@ -3,6 +3,7 @@
 namespace App\Livewire\Seller\Dashboard;
 
 use App\Models\Comment;
+use App\Models\ItemReturnrefundInfo;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Seller;
@@ -117,6 +118,23 @@ class SellerLanding extends Component
             $salesByDate[$date] += $sale['total_amount'];
         }
 
+        $ncount = Comment::wherein('rating', [1, 2])
+            ->where('seller_id', '=', $this->seller_id)
+            // ->where('created_at', '>=', now()->subDays(30))
+            ->count();
+
+        $pcount = Comment::wherein('rating', [3, 4, 5])
+            ->where('seller_id', '=', $this->seller_id)
+            // ->where('created_at', '>=', now()->subDays(30))
+            ->count();
+
+        $sentiment = [
+            'positive' => $pcount,
+            'negative' => $ncount,
+        ];
+
+        // dd($sentiment);
+
         // dd($salesData);
         // dd(array_keys($salesByDate), array_values($salesByDate));
 
@@ -125,12 +143,13 @@ class SellerLanding extends Component
         $chart_data = [12, 12, 12, 12, 12, 12];
 
         //
-        $kimpc_products = Product::where('seller_id', 13)->get();
+        // $kimpc_products = Product::where('seller_id', 13)->get();
         // dd($kimpc_products);
 
         return view('livewire..seller.dashboard.seller-landing', [
             'chart_labels' => array_keys($salesByDate),
             'chart_data' => array_values($salesByDate),
+            'sentiment' => array_values($sentiment),
         ]);
     }
 
@@ -204,36 +223,65 @@ class SellerLanding extends Component
     }
 
     #[Computed]
-    public function getOrders()
+    public function getPendingOrders()
     {
         $sales = Purchase::where('seller_id', $this->seller_id)
-            ->where('purchase_status', 'pending')
-            ->get();
+            ->where('purchase_status', 'to_ship')
+            ->count();
 
         return $sales;
     }
 
     #[Computed]
-    public function getNegativeCommentsCount()
+    public function getCompletedOrders()
     {
-        $ncount = Comment::wherein('rating', [1, 2])
-            ->where('seller_id', '=', $this->seller_id)
-            ->where('created_at', '>=', now()->subDays(30))
-            ->count() ?? 0;
+        $sales = Purchase::where('seller_id', $this->seller_id)
+            ->where('purchase_status', '=', 'completed')
+            ->whereNotNull('completion_date')
+            ->count();
 
-        return $ncount ?? 0;
+        return $sales;
+    }
+    #[Computed]
+    public function getCancelledOrders()
+    {
+        $sales = Purchase::where('seller_id', $this->seller_id)
+            ->whereIn('purchase_status', ['cancellation_approved', 'cancellation_pending'])
+            ->count();
+
+        return $sales;
     }
 
     #[Computed]
-    public function getPositveCommentsCount()
+    public function getReturnOrders()
     {
-        $pcount = Comment::wherein('rating', [3, 4, 5])
-            ->where('seller_id', '=', $this->seller_id)
-            // ->where('created_at', '>=', now()->subDays(30))
-            ->count() ?? 0;
+        $sales = ItemReturnrefundInfo::where('seller_id', $this->seller_id)
+            ->count();
 
-        return $pcount ?? 0;
+        return $sales;
     }
+
+    // #[Computed]
+    // public function getNegativeCommentsCount()
+    // {
+    //     $ncount = Comment::wherein('rating', [1, 2])
+    //         ->where('seller_id', '=', $this->seller_id)
+    //         // ->where('created_at', '>=', now()->subDays(30))
+    //         ->count();
+    //
+    //     return $ncount ?? 0;
+    // }
+    //
+    // #[Computed]
+    // public function getPositveCommentsCount()
+    // {
+    //     $pcount = Comment::wherein('rating', [3, 4, 5])
+    //         ->where('seller_id', '=', $this->seller_id)
+    //         // ->where('created_at', '>=', now()->subDays(30))
+    //         ->count();
+    //
+    //     return $pcount ?? 0;
+    // }
 
     // public function init(): void
     // {

@@ -1,6 +1,6 @@
 <div class="h-full w-full">
     {{-- Stop trying to control. --}}
-    <div class="relatve bg-blue-500 pb-40 pt-8">
+    <div class="relatve bg-blue-500 pb-40 pt-6">
         <div>
             <div class="header welcome transition duration-300 ease-in-out px-4">
                 <div class="p-2 d-md-flex lg:!justify-between gap-2 items-center bg-transparent rounded mb-2">
@@ -101,7 +101,7 @@
             <div class="row mb-2 g-2 g-mb-4 px-8 mx-0">
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column border !border-red-500">
-                        <small class="text-muted d-block mb-1">Sales Today</small>
+                        <small class="text-muted d-block mb-1">Today's Sales</small>
                         <p class="h3 text-black fw-light mt-auto">
                             {{ $this->getSalesToday() ?? 0 }}
 
@@ -113,7 +113,7 @@
                 </div>
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column">
-                        <small class="text-muted d-block mb-1">Visitors</small>
+                        <small class="text-muted d-block mb-1">Shop Visitors</small>
                         <p class="h3 text-black fw-light mt-auto">
                             {{ $this->getVisitors() ?? 0 }}
 
@@ -123,18 +123,18 @@
                         </p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column">
-                        <small class="text-muted d-block mb-1">Pending Orders</small>
-                        <p class="h3 text-black fw-light mt-auto">
-                            {{ $this->getTotalOrders ?? 0 }}
-                        </p>
-                    </div>
-                </div>
+                {{-- <div class="col"> --}}
+                {{--     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column"> --}}
+                {{--         <small class="text-muted d-block mb-1">Pending Orders</small> --}}
+                {{--         <p class="h3 text-black fw-light mt-auto"> --}}
+                {{--             {{ $this->getTotalOrders ?? 0 }} --}}
+                {{--         </p> --}}
+                {{--     </div> --}}
+                {{-- </div> --}}
                 <div class="col">
                     <div class="p-3 bg-white rounded shadow-md h-100 d-flex flex-column" wire:poll.300s>
                         <small class="text-muted d-block mb-1">Total Earnings <span
-                                class="text-xs text-gray-500">Updated every 5 minutes</span></small>
+                                class="text-xs text-gray-500">Refreshes every 5 minutes</span></small>
                         <p class="h3 text-black fw-light mt-auto">
                             {{ $this->getTotalEarnings ?? 0 }}
                             {{--                            @dd($this->getTotalEarnings->total_earnings) --}}
@@ -174,59 +174,114 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full xl:w-4/12 xl:pl-6 margin-top">
+                <div class="relative w-full xl:w-4/12 xl:pl-6 margin-top">
                     <div
-                        class="relative flex flex-col min-w-0 break-words w-full h-full mb-8 shadow-md rounded-lg bg-white">
-                        <div class="rounded-t mb-0 px-4 pt-3 bg-transparent">
+                        class="relative flex flex-col min-w-0 break-words w-full mb-3 p-4 shadow-md rounded-lg bg-white">
+                        <div class="rounded-t mb-0  bg-transparent">
                             <div class="flex flex-wrap items-center">
-                                <div class="relative w-full max-w-full flex-grow flex-1">
+                                <div class="relative w-full max-w-full flex-grow flex-1 pb-2">
                                     <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Performance</h6>
-                                    <h2 class="text-xl font-semibold text-blueGray-800">Total orders</h2>
+                                    {{-- <h2 class="text-xl font-semibold text-blueGray-800">Total orders</h2> --}}
                                 </div>
                             </div>
                         </div>
-                        <div class="px-4 flex-auto">
-                            <div class="relative h-350-px" style="height:auto">
-                                <div class="relative overflow-x-auto sm:rounded-lg">
-                                    <table
-                                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                        <thead
-                                            class="text-xs py-2.5 text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
-                                            <tr>
-                                                <th scope="col" class="py-1.5">
-                                                    Reference #
-                                                </th>
-                                                <th scope="col" class="py-1.5">
-                                                    Amount
-                                                </th>
-                                                <th scope="col" class="py-1.5">
-                                                    Action
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($this->getOrders as $item)
-                                                <tr
-                                                    class="bg-white text-base dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                    <th scope="row"
-                                                        class="py-2.5 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                        {{ $item->reference_number }}
-                                                    </th>
-                                                    <td class="py-2.5 text-base">
-                                                        {{ $item->total_amount }}
-                                                    </td>
-                                                    <td class="py-2.5 text-base">
-                                                        <a class="decoration-0 no-underline text-gray-600"
-                                                            href="{{ route('order-list') }}">View</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                         <div class="flex flex-col gap-1 flex-auto">
+                             <div class="flex justify-between items-center">
+                                 <div class="flex items-center gap-3">
+                                     <i class="bi bi-check2-circle text-2xl mr-2"></i>
+                                     <h6 class="mb-0 tracking-wide">Completed Orders</h6>
+                                 </div>
+                                 <div class="px-3 flex items-center">
+                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                     <span class="bg-green-100 text-green-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ $this->getCompletedOrders }}</span>
+                                 </div>
+                             </div>
+                             <div class="flex justify-between items-center">
+                                 <div class="flex items-center gap-3">
+                                     <i class="bi bi-exclamation-circle text-2xl mr-2"></i>
+                                     <h6 class="mb-0 tracking-wide">Pending Orders</h6>
+                                 </div>
+                                 <div class="px-3 flex items-center">
+                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                     <span class="bg-blue-100 text-blue-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $this->getPendingOrders }}</span>
+                                 </div>
+                             </div>
+                             <div class="flex justify-between items-center">
+                                 <div class="flex items-center gap-3">
+                                     <i class="bi bi-arrow-return-left text-2xl mr-2"></i>
+                                     <h6 class="mb-0 tracking-wide">Return Orders</h6>
+                                 </div>
+                                 <div class="px-3 flex items-center">
+                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                     <span class="bg-yellow-100 text-yellow-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">{{ $this->getReturnOrders }}</span>
+                                 </div>
+                             </div>
+                             <div class="flex justify-between items-center">
+                                 <div class="flex items-center gap-3">
+                                     <i class="bi bi-x-circle text-2xl mr-2"></i>
+                                     <h6 class="mb-0 tracking-wide">Cancelled Orders</h6>
+                                 </div>
+                                 <div class="px-3 flex items-center">
+                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                     <span class="bg-red-100 text-red-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">{{ $this->getCancelledOrders }}</span>
+                                 </div>
+                             </div>
+
+                         </div>
+                        {{--     <div class="relative h-350-px" style="height:auto"> --}}
+                        {{--         <div class="relative overflow-x-auto sm:rounded-lg"> --}}
+                        {{--             <table --}}
+                        {{--                 class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"> --}}
+                        {{--                 <thead --}}
+                        {{--                     class="text-xs py-2.5 text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400"> --}}
+                        {{--                     <tr> --}}
+                        {{--                         <th scope="col" class="py-1.5"> --}}
+                        {{--                             Reference # --}}
+                        {{--                         </th> --}}
+                        {{--                         <th scope="col" class="py-1.5"> --}}
+                        {{--                             Amount --}}
+                        {{--                         </th> --}}
+                        {{--                         <th scope="col" class="py-1.5"> --}}
+                        {{--                             Action --}}
+                        {{--                         </th> --}}
+                        {{--                     </tr> --}}
+                        {{--                 </thead> --}}
+                        {{--                 <tbody> --}}
+                        {{--                     @foreach ($this->getOrders as $item) --}}
+                        {{--                         <tr --}}
+                        {{--                             class="bg-white text-base dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"> --}}
+                        {{--                             <th scope="row" --}}
+                        {{--                                 class="py-2.5 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                        {{--                                 {{ $item->reference_number }} --}}
+                        {{--                             </th> --}}
+                        {{--                             <td class="py-2.5 text-base"> --}}
+                        {{--                                 {{ $item->total_amount }} --}}
+                        {{--                             </td> --}}
+                        {{--                             <td class="py-2.5 text-base"> --}}
+                        {{--                                 <a class="decoration-0 no-underline text-gray-600" --}}
+                        {{--                                     href="{{ route('order-list') }}">View</a> --}}
+                        {{--                             </td> --}}
+                        {{--                         </tr> --}}
+                        {{--                     @endforeach --}}
+                        {{--                 </tbody> --}}
+                        {{--             </table> --}}
+                        {{--         </div> --}}
+                        {{--     </div> --}}
+                        {{-- </div> --}}
+                    </div>
+                    <div
+                        class="relative flex flex-col min-w-0 break-words w-full  p-4 shadow-md rounded-lg bg-white">
+                        <div class="rounded-t mb-0  bg-transparent">
+                            <div class="flex flex-wrap items-center">
+                                <div class="relative w-full max-w-full flex-grow flex-1 pb-2">
+                                    <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Shop Sentiment</h6>
+                                    {{-- <h2 class="text-xl font-semibold text-blueGray-800">Total orders</h2> --}}
                                 </div>
-                                {{--                                @foreach ($this->getOrders as $item) --}}
-                                {{--                                    <p>{{ $item->reference_number }}</p> --}}
-                                {{--                                @endforeach --}}
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <div class="flex items-end w-full h-full overflow-hidden" wire:ignore>
+                                    <canvas height="200px" id="shop-sentiment-doughnut"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -234,41 +289,41 @@
             </div>
         </div>
     </div>
-    <div class="mt-40 w-full">
-        <h4 class="tracking-tight font-light text-gray-500 text-center">Shop Sentiment Analysis</h4>
-    </div>
-    <div class="w-full pb-8 mt-4 px-3 gap-4">
-        <div class="grid lg:grid-cols-2 gap-4">
-            <div class="relative bg-white rounded shadow shadow-cyan-500/50">
-                <div class="px-3 pt-6 pb-6 text-center relative z-10">
-                    <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Positive Sentiment Overtime</h4>
-                    <h3 class="text-2xl font-semibold leading-tight my-1.5 text-green-600">
-                        {{ $this->getPositveCommentsCount() }}</h3>
-                    {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
-                </div>
-                <div class="absolute inset-0 pt-12">
-                    <div class="flex items-end w-full h-full overflow-hidden">
-                        <canvas id="shop-perception-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="relative bg-white rounded shadow shadow-cyan-500/50">
-                <div class="px-3 pt-6 pb-6 text-center relative z-10">
-                    <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Negative Sentiment Overtime</h4>
-                    <h3 class="text-2xl  font-semibold leading-tight my-1.5 text-red-600">
-                        {{ $this->getNegativeCommentsCount() }}</h3>
-                    {{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
-                </div>
-                <div class="absolute inset-0 pt-12">
-                    <div class="flex items-end w-full h-full overflow-hidden">
-                        <canvas id="shop-sentiment-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
+    {{-- <div class="mt-40 w-full"> --}}
+    {{--     <h4 class="tracking-tight font-light text-gray-500 text-center">Shop Sentiment Analysis</h4> --}}
+    {{-- </div> --}}
+    {{-- <div class="w-full pb-8 mt-4 px-3 gap-4"> --}}
+    {{--     <div class="grid lg:grid-cols-2 gap-4"> --}}
+    {{--         <div class="relative bg-white rounded shadow shadow-cyan-500/50"> --}}
+    {{--             <div class="px-3 pt-6 pb-6 text-center relative z-10"> --}}
+    {{--                 <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Positive Sentiment Overtime</h4> --}}
+    {{--                 <h3 class="text-2xl font-semibold leading-tight my-1.5 text-green-600"> --}}
+    {{--                     {{ $this->getPositveCommentsCount() }}</h3> --}}
+    {{--                  --}}{{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
+    {{--             </div> --}}
+    {{--             <div class="absolute inset-0 pt-12"> --}}
+    {{--                 <div class="flex items-end w-full h-full overflow-hidden"> --}}
+    {{--                     <canvas id="shop-perception-chart"></canvas> --}}
+    {{--                 </div> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--         <div class="relative bg-white rounded shadow shadow-cyan-500/50"> --}}
+    {{--             <div class="px-3 pt-6 pb-6 text-center relative z-10"> --}}
+    {{--                 <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Negative Sentiment Overtime</h4> --}}
+    {{--                 <h3 class="text-2xl  font-semibold leading-tight my-1.5 text-red-600"> --}}
+    {{--                     {{ $this->getNegativeCommentsCount() }}</h3> --}}
+    {{--                  --}}{{-- <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p> --}}
+    {{--             </div> --}}
+    {{--             <div class="absolute inset-0 pt-12"> --}}
+    {{--                 <div class="flex items-end w-full h-full overflow-hidden"> --}}
+    {{--                     <canvas id="shop-sentiment-chart"></canvas> --}}
+    {{--                 </div> --}}
+    {{--             </div> --}}
+    {{--         </div> --}}
+    {{--     </div> --}}
 
 
-    </div>
+    {{-- </div> --}}
 
     {{-- <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"> --}}
     {{--     <button type="button" @click="showModal = !showModal" class="underline">Toggle</button> --}}
@@ -301,12 +356,42 @@
     {{--     </div> --}}
     {{-- </div> --}}
 
+{{--    @dd(json_encode($sentiment))--}}
+
 </div>
 
 @script
     <script>
         // This Javascript will get executed every time this component is loaded onto the page...
         console.log('hello');
+
+        new Chart("shop-sentiment-doughnut",{
+            type: "doughnut",
+            data: {
+                labels: [
+                    'Positive',
+                    'Negative',
+                ],
+                datasets: [{
+                    label: ' ',
+                    data: {!! json_encode($sentiment) !!},
+                    backgroundColor: [
+                        'lightgreen',
+                        'red',
+                    ],
+                    hoverOffset: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                    },
+                },
+            }
+        });
 
         new Chart("shop-sales-chart", {
             type: "line",
