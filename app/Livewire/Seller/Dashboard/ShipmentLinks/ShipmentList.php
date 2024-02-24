@@ -43,6 +43,7 @@ class ShipmentList extends Component
 
     // for mass ship
     public $selectedShipments = [];
+
     public $selectAll = false;
 
     //    public function paginationView()
@@ -81,7 +82,7 @@ class ShipmentList extends Component
                 'tag' => 'shipping',
                 'title' => 'Shipped Out',
                 'message' => 'Parcel parcel no for your order
-                #' . $shipment->purchase->id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                #'.$shipment->purchase->id.' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
             ]);
             $notification->save();
 
@@ -171,7 +172,7 @@ class ShipmentList extends Component
                 'purchase_id' => $shipment->purchase->id,
                 'tag' => 'completed',
                 'title' => 'Share your feedback! click here',
-                'message' => 'Order #' . $shipment->purchase->id . ' is completed. Your feedback matters to others! Rate the products by date',
+                'message' => 'Order #'.$shipment->purchase->id.' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
 
@@ -258,12 +259,12 @@ class ShipmentList extends Component
                     'tag' => 'shipping',
                     'title' => 'Shipped Out',
                     'message' => 'Parcel parcel no for your order
-                #' . $shipment_item->purchase->id . ' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
+                #'.$shipment_item->purchase->id.' has been shipped out by shop name via courier/logistics partner. Click here to see order details and track your parcel.',
                 ]);
                 $notification->save();
 
                 $this->alert('success', 'All items have been shipped', [
-                    'position' => 'top-end'
+                    'position' => 'top-end',
                 ]);
             }
         }
@@ -276,7 +277,7 @@ class ShipmentList extends Component
 
     public function updateSelectAll()
     {
-        $this->selectAll = !$this->selectAll;
+        $this->selectAll = ! $this->selectAll;
         // dd($value);
         if ($this->selectAll) {
             $this->selectedShipments = Shipments::where('shipment_status', 'to_ship')->pluck('id');

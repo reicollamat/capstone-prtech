@@ -54,6 +54,7 @@
         {{--     </ul> --}}
         {{-- </div> --}}
 
+
         <div class="row">
             <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Product Analytics</h5>
             {{-- Most Bought Products --}}
@@ -435,7 +436,7 @@
                         </div>
                     </button>
 
-                    <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+                    <div x-cloak x-transition.opacity x-show="showModal" class="fixed z-1 inset-0 bg-black/50"></div>
 
                     <div x-cloak x-transition.duration.500ms x-show="showModal"
                          class="fixed inset-0 z-50 grid place-content-center">
@@ -485,7 +486,7 @@
                         </div>
                     </button>
 
-                    <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"
+                    <div x-cloak x-transition.opacity x-show="showModal" class="fixed z-1 inset-0 bg-black/50"
                          wire:loading.remove wire:target="init">
 
                     </div>
