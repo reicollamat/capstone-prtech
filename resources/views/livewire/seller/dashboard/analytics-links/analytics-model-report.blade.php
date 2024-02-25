@@ -1,3016 +1,409 @@
-<div>
-    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-    <div class="container-fluid py-4">
-        {{-- <div class=""> --}}
-        {{--     <div class="Graph w-full"> --}}
-        {{--         <div class="relative"> --}}
-        {{--             <p>test</p> --}}
-        {{--         </div> --}}
-        {{--         <div id="chart" class="chartBox"> --}}
-        {{--             <canvas id="myChart"></canvas> --}}
-        {{--         </div> --}}
-        {{--     </div> --}}
-        {{-- </div> --}}
-
-        {{-- <div class="grid lg:grid-cols-4 gap-4 px-4">
-            <div class="relative col-span-2 bg-white rounded shadow shadow-cyan-500/50">
-                <div class="px-3 pt-6 pb-6 text-center relative z-10">
-                    <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Perception</h4>
-                    <h3 class="text-2xl text-gray-700 font-semibold leading-tight my-1.5">3,682</h3>
-                    <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p>
-                </div>
-                <div class="absolute inset-0 pt-12">
-                    <div class="flex items-end w-full h-full overflow-hidden">
-                        <canvas id="user-perception-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="relative bg-white rounded shadow shadow-cyan-500/50">
-                <div class="px-3 pt-6 pb-6 text-center relative z-10">
-                    <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Engagement</h4>
-                    <h3 class="text-2xl text-gray-700 font-semibold leading-tight my-1.5">3,682</h3>
-                    <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p>
-                </div>
-                <div class="absolute inset-0 pt-12">
-                    <div class="flex items-end w-full h-full overflow-hidden">
-                        <canvas id="shop-perception-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="relative bg-white rounded shadow shadow-cyan-500/50">
-                <div class="px-3 pt-6 pb-6 text-center relative z-10">
-                    <h4 class="text-sm uppercase text-gray-500 leading-tight">Shop Sentiment</h4>
-                    <h3 class="text-2xl text-gray-700 font-semibold leading-tight my-1.5">3,682</h3>
-                    <p class="text-xs text-green-500 leading-tight">▲ 57.1%</p>
-                </div>
-                <div class="absolute inset-0 pt-12">
-                    <div class="flex items-end w-full h-full overflow-hidden">
-                        <canvas id="shop-sentiment-chart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        <div class="bg-white overflow-x-auto rounded-lg p-3 m-4">
-            <h5>Product Restock Recommender</h5>
-            <div class="grid grid-cols-12 text-center text-sm">
-                <div class="col-span-1 p-1 !text-gray-400 !font-light border-b-2 border-blue-300">ID</div>
-                <div class="col-span-3 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div>
-                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category</div>
-                <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Status</div>
-                <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Rating</div>
-                <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Prediction</div>
-            </div>
-
-            <div wire:loading.remove x-transition>
-                @if ($this->getTopProducts->count() > 0)
-                    {{-- @foreach ($this->getTopProducts as $key => $product)
-                        
-                    @endforeach --}}
-
-
-
-                    {{-- 1 1 1 11 1 1 1 1 11 1 1  --}}
-
-                    <div class="accordion accordion-flush" id="accordionFlushExample1">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed d-block" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse-1-{{ $this->getTopProducts[0]->id }}"
-                                    aria-expanded="false"
-                                    aria-controls="flush-collapse-1-{{ $this->getTopProducts[0]->id }}">
-                                    {{-- @dd($this->getTopProducts[0]) --}}
-                                    <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->id }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->title }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->category }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->status }}
-                                        </div>
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            <i
-                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="flush-collapse-1-{{ $this->getTopProducts[0]->id }}"
-                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary w-full" wire:click="generate_predict">Generate</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-select mb-3" wire:model="predict_for"  aria-label="Default select example">
-                                                <option value="0">Predict for</option>
-                                                <option value="1">A Week</option>
-                                                <option value="2">2 Weeks</option>
-                                                <option value="3">A Month</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    @if ($predict_for == 1)
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">DATE</th>
-                                                            <th scope="col">Actual</th>
-                                                            <th scope="col">Predicted</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>2024-07-02</td>
-                                                            <td>4</td>
-                                                            <td>3.466008</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>2024-07-03</td>
-                                                            <td>6</td>
-                                                            <td>2.42508</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td>2024-07-04</td>
-                                                            <td>8</td>
-                                                            <td>4.407293</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">4</th>
-                                                            <td>2024-07-05</td>
-                                                            <td>1</td>
-                                                            <td>1.891413</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">5</th>
-                                                            <td>2024-07-06</td>
-                                                            <td>4</td>
-                                                            <td>2.261194</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">6</th>
-                                                            <td>2024-07-07</td>
-                                                            <td>3</td>
-                                                            <td>2.865757</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">7</th>
-                                                            <td>2024-07-08</td>
-                                                            <td>4</td>
-                                                            <td>2.377063</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">8</th>
-                                                            <td>2024-07-09</td>
-                                                            <td>3</td>
-                                                            <td>2.35351</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>                                            
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <img src="{{ asset('pred/data187_new_1week.png') }}"
-                                            alt="" style="max-height: 500px">
-                                                </div>
-                                                <div class="row">
-                                                    test
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @elseif ($predict_for == 2)
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">DATE</th>
-                                                            <th scope="col">Actual</th>
-                                                            <th scope="col">Predicted</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>2024-07-02</td>
-                                                            <td>4</td>
-                                                            <td>3.466008</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>2024-07-03</td>
-                                                            <td>6</td>
-                                                            <td>2.42508</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td>2024-07-04</td>
-                                                            <td>8</td>
-                                                            <td>4.407293</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">4</th>
-                                                            <td>2024-07-05</td>
-                                                            <td>1</td>
-                                                            <td>1.891413</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">5</th>
-                                                            <td>2024-07-06</td>
-                                                            <td>4</td>
-                                                            <td>2.261194</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">6</th>
-                                                            <td>2024-07-07</td>
-                                                            <td>3</td>
-                                                            <td>2.865757</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">7</th>
-                                                            <td>2024-07-08</td>
-                                                            <td>4</td>
-                                                            <td>2.377063</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">8</th>
-                                                            <td>2024-07-09</td>
-                                                            <td>3</td>
-                                                            <td>2.35351</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">9</th>
-                                                            <td>2024-07-10</td>
-                                                            <td>3</td>
-                                                            <td>2.283088</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">10</th>
-                                                            <td>2024-07-11</td>
-                                                            <td>4</td>
-                                                            <td>4.079117</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">11</th>
-                                                            <td>2024-07-12</td>
-                                                            <td>4</td>
-                                                            <td>3.498422</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">12</th>
-                                                            <td>2024-07-13</td>
-                                                            <td>4</td>
-                                                            <td>4.243808</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">13</th>
-                                                            <td>2024-07-14</td>
-                                                            <td>1</td>
-                                                            <td>1.689098</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">14</th>
-                                                            <td>2024-07-15</td>
-                                                            <td>6</td>
-                                                            <td>3.368717</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>                                            
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <img src="{{ asset('pred/data187_new_2weeks.png') }}"
-                                            alt="" style="max-height: 500px">
-                                                </div>
-                                                <div class="row">
-                                                    test
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @elseif ($predict_for == 3)
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">DATE</th>
-                                                            <th scope="col">Actual</th>
-                                                            <th scope="col">Predicted</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>2024-07-02</td>
-                                                            <td>4</td>
-                                                            <td>3.466008</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2</th>
-                                                            <td>2024-07-03</td>
-                                                            <td>6</td>
-                                                            <td>2.42508</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">3</th>
-                                                            <td>2024-07-04</td>
-                                                            <td>8</td>
-                                                            <td>4.407293</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">4</th>
-                                                            <td>2024-07-05</td>
-                                                            <td>1</td>
-                                                            <td>1.891413</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">5</th>
-                                                            <td>2024-07-06</td>
-                                                            <td>4</td>
-                                                            <td>2.261194</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">6</th>
-                                                            <td>2024-07-07</td>
-                                                            <td>3</td>
-                                                            <td>2.865757</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">7</th>
-                                                            <td>2024-07-08</td>
-                                                            <td>4</td>
-                                                            <td>2.377063</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">8</th>
-                                                            <td>2024-07-09</td>
-                                                            <td>3</td>
-                                                            <td>2.35351</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">9</th>
-                                                            <td>2024-07-10</td>
-                                                            <td>3</td>
-                                                            <td>2.283088</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">10</th>
-                                                            <td>2024-07-11</td>
-                                                            <td>4</td>
-                                                            <td>4.079117</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">11</th>
-                                                            <td>2024-07-12</td>
-                                                            <td>4</td>
-                                                            <td>3.498422</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">12</th>
-                                                            <td>2024-07-13</td>
-                                                            <td>4</td>
-                                                            <td>4.243808</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">13</th>
-                                                            <td>2024-07-14</td>
-                                                            <td>1</td>
-                                                            <td>1.689098</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">14</th>
-                                                            <td>2024-07-15</td>
-                                                            <td>6</td>
-                                                            <td>3.368717</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">15</th>
-                                                            <td>2024-07-16</td>
-                                                            <td>3</td>
-                                                            <td>1.785003</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">16</th>
-                                                            <td>2024-07-17</td>
-                                                            <td>1</td>
-                                                            <td>1.812075</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">17</th>
-                                                            <td>2024-07-18</td>
-                                                            <td>4</td>
-                                                            <td>2.34088</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">18</th>
-                                                            <td>2024-07-19</td>
-                                                            <td>3</td>
-                                                            <td>3.394379</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">19</th>
-                                                            <td>2024-07-20</td>
-                                                            <td>3</td>
-                                                            <td>2.505314</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">20</th>
-                                                            <td>2024-07-21</td>
-                                                            <td>1</td>
-                                                            <td>1.830989</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">21</th>
-                                                            <td>2024-07-22</td>
-                                                            <td>2</td>
-                                                            <td>2.839483</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">22</th>
-                                                            <td>2024-07-23</td>
-                                                            <td>2</td>
-                                                            <td>2.547833</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">23</th>
-                                                            <td>2024-07-24</td>
-                                                            <td>1</td>
-                                                            <td>2.497402</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">24</th>
-                                                            <td>2024-07-25</td>
-                                                            <td>6</td>
-                                                            <td>3.374414</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">25</th>
-                                                            <td>2024-07-26</td>
-                                                            <td>7</td>
-                                                            <td>6.336311</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">26</th>
-                                                            <td>2024-07-27</td>
-                                                            <td>4</td>
-                                                            <td>4.035738</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">27</th>
-                                                            <td>2024-07-28</td>
-                                                            <td>6</td>
-                                                            <td>3.333203</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">28</th>
-                                                            <td>2024-07-29</td>
-                                                            <td>4</td>
-                                                            <td>3.330033</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">29</th>
-                                                            <td>2024-07-30</td>
-                                                            <td>1</td>
-                                                            <td>3.326653</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">30</th>
-                                                            <td>2024-07-31</td>
-                                                            <td>2</td>
-                                                            <td>2.319751</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>                                            
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="row">
-                                                    <img src="{{ asset('pred/data187_new_1month.png') }}"
-                                            alt="" style="max-height: 500px">
-                                                </div>
-                                                <div class="row">
-                                                    test
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @else
-                                        
-                                    @endif
-                                    
-                                    
-                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px"> --}}
-                                </div>
-                            </div>
+<div class="relative container-fluid p-4 w-full ">
+    <div class="w-full grid grid-cols-4 gap-3">
+        <div class="p-3 border border-gray-200 bg-white rounded-lg">
+            <div class="h-full flex flex-wrap items-center">
+                <div class="relative h-full w-full max-w-full flex-grow flex-1 justify-end">
+                    <h6 class="uppercase mb-1 text-sm font-semibold text-green-600">Restock Now</h6>
+                    <hr class="m-0 w-16 text-green-900">
+                    <div class="absolute bottom-0 right-0">
+                        <div class="w-full flex justify-end">
+                            <button type="button" class="text-sm text-green-900">View</button>
                         </div>
-                    </div>
-
-
-
-                    {{-- 2222222222222222222222222222222222222222222 --}}
-
-                    <div class="accordion accordion-flush" id="accordionFlushExample2">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed d-block" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse-2-{{ $this->getTopProducts[0]->id }}"
-                                    aria-expanded="false"
-                                    aria-controls="flush-collapse-2-{{ $this->getTopProducts[0]->id }}">
-                                    {{-- @dd($this->getTopProducts[0]) --}}
-                                    <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->id }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->title }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->category }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->status }}
-                                        </div>
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            <i
-                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="flush-collapse-2-{{ $this->getTopProducts[0]->id }}"
-                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary w-full" wire:click="generate_predict">Generate</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-select mb-3" wire:model="predict_for"  aria-label="Default select example">
-                                                <option value="0">Predict for</option>
-                                                <option value="1">A Week</option>
-                                                <option value="2">2 Weeks</option>
-                                                <option value="3">A Month</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                                      
-                                        
-                                    <div class="row">
-                                    @if ($predict_for == 1)
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">DATE</th>
-                                                        <th scope="col">Actual</th>
-                                                        <th scope="col">Predicted</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>2024-07-02</td>
-                                                        <td>2</td>
-                                                        <td>3.368175</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>2024-07-03</td>
-                                                        <td>10</td>
-                                                        <td>8.624375</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>2024-07-04</td>
-                                                        <td>2</td>
-                                                        <td>2.933734</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>2024-07-05</td>
-                                                        <td>2</td>
-                                                        <td>2.507154</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>2024-07-06</td>
-                                                        <td>5</td>
-                                                        <td>7.845285</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>2024-07-07</td>
-                                                        <td>5</td>
-                                                        <td>6.450898</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>                                                                                    
-                                        </div>
-                                    @elseif ($predict_for == 2)
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">DATE</th>
-                                                        <th scope="col">Actual</th>
-                                                        <th scope="col">Predicted</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>2024-07-02</td>
-                                                        <td>2</td>
-                                                        <td>3.368175</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>2024-07-03</td>
-                                                        <td>10</td>
-                                                        <td>8.624375</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>2024-07-04</td>
-                                                        <td>2</td>
-                                                        <td>2.933734</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>2024-07-05</td>
-                                                        <td>2</td>
-                                                        <td>2.507154</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>2024-07-06</td>
-                                                        <td>5</td>
-                                                        <td>7.845285</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>2024-07-07</td>
-                                                        <td>5</td>
-                                                        <td>6.450898</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">7</th>
-                                                        <td>2024-07-08</td>
-                                                        <td>3</td>
-                                                        <td>4.202562</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">8</th>
-                                                        <td>2024-07-09</td>
-                                                        <td>6</td>
-                                                        <td>5.516248</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">9</th>
-                                                        <td>2024-07-10</td>
-                                                        <td>8</td>
-                                                        <td>7.92818</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">10</th>
-                                                        <td>2024-07-11</td>
-                                                        <td>6</td>
-                                                        <td>6.827276</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">11</th>
-                                                        <td>2024-07-12</td>
-                                                        <td>5</td>
-                                                        <td>5.009657</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">12</th>
-                                                        <td>2024-07-13</td>
-                                                        <td>2</td>
-                                                        <td>3.668016</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">13</th>
-                                                        <td>2024-07-14</td>
-                                                        <td>1</td>
-                                                        <td>3.665037</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">14</th>
-                                                        <td>2024-07-15</td>
-                                                        <td>5</td>
-                                                        <td>5.606525</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>                                                                                    
-                                        </div>
-                                    @elseif ($predict_for == 3)
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">DATE</th>
-                                                        <th scope="col">Actual</th>
-                                                        <th scope="col">Predicted</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>2024-07-02</td>
-                                                        <td>2</td>
-                                                        <td>3.368175</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>2024-07-03</td>
-                                                        <td>10</td>
-                                                        <td>8.624375</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>2024-07-04</td>
-                                                        <td>2</td>
-                                                        <td>2.933734</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>2024-07-05</td>
-                                                        <td>2</td>
-                                                        <td>2.507154</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>2024-07-06</td>
-                                                        <td>5</td>
-                                                        <td>7.845285</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>2024-07-07</td>
-                                                        <td>5</td>
-                                                        <td>6.450898</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">7</th>
-                                                        <td>2024-07-08</td>
-                                                        <td>3</td>
-                                                        <td>4.202562</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">8</th>
-                                                        <td>2024-07-09</td>
-                                                        <td>6</td>
-                                                        <td>5.516248</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">9</th>
-                                                        <td>2024-07-10</td>
-                                                        <td>8</td>
-                                                        <td>7.92818</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">10</th>
-                                                        <td>2024-07-11</td>
-                                                        <td>6</td>
-                                                        <td>6.827276</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">11</th>
-                                                        <td>2024-07-12</td>
-                                                        <td>5</td>
-                                                        <td>5.009657</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">12</th>
-                                                        <td>2024-07-13</td>
-                                                        <td>2</td>
-                                                        <td>3.668016</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">13</th>
-                                                        <td>2024-07-14</td>
-                                                        <td>1</td>
-                                                        <td>3.665037</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">14</th>
-                                                        <td>2024-07-15</td>
-                                                        <td>5</td>
-                                                        <td>5.606525</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">15</th>
-                                                        <td>2024-07-16</td>
-                                                        <td>5</td>
-                                                        <td>4.03854</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">16</th>
-                                                        <td>2024-07-17</td>
-                                                        <td>2</td>
-                                                        <td>3.151775</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">17</th>
-                                                        <td>2024-07-18</td>
-                                                        <td>7</td>
-                                                        <td>7.951109</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">18</th>
-                                                        <td>2024-07-19</td>
-                                                        <td>4</td>
-                                                        <td>5.001291</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">19</th>
-                                                        <td>2024-07-20</td>
-                                                        <td>6</td>
-                                                        <td>7.728283</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">20</th>
-                                                        <td>2024-07-21</td>
-                                                        <td>6</td>
-                                                        <td>5.246104</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">21</th>
-                                                        <td>2024-07-22</td>
-                                                        <td>4</td>
-                                                        <td>3.143996</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">22</th>
-                                                        <td>2024-07-23</td>
-                                                        <td>4</td>
-                                                        <td>2.704951</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">23</th>
-                                                        <td>2024-07-24</td>
-                                                        <td>1</td>
-                                                        <td>1.735824</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">24</th>
-                                                        <td>2024-07-25</td>
-                                                        <td>12</td>
-                                                        <td>6.68533</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">25</th>
-                                                        <td>2024-07-26</td>
-                                                        <td>13</td>
-                                                        <td>8.65606</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">26</th>
-                                                        <td>2024-07-27</td>
-                                                        <td>1</td>
-                                                        <td>3.059459</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">27</th>
-                                                        <td>2024-07-28</td>
-                                                        <td>1</td>
-                                                        <td>3.213646</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">28</th>
-                                                        <td>2024-07-29</td>
-                                                        <td>7</td>
-                                                        <td>3.331099</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">29</th>
-                                                        <td>2024-07-30</td>
-                                                        <td>4</td>
-                                                        <td>4.060189</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">30</th>
-                                                        <td>2024-07-31</td>
-                                                        <td>11</td>
-                                                        <td>7.944929</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>                                                                                    
-                                        </div>
-                                    @else
-                                        
-                                    @endif
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px">
-                                            </div>
-                                            <div class="row">
-                                                test
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px"> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    {{-- 3333333333333333333333333333333333333333333333333333 --}}
-
-                    <div class="accordion accordion-flush" id="accordionFlushExample3">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed d-block" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse-3-{{ $this->getTopProducts[0]->id }}"
-                                    aria-expanded="false"
-                                    aria-controls="flush-collapse-3-{{ $this->getTopProducts[0]->id }}">
-                                    {{-- @dd($this->getTopProducts[0]) --}}
-                                    <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->id }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->title }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->category }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->status }}
-                                        </div>
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            <i
-                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="flush-collapse-3-{{ $this->getTopProducts[0]->id }}"
-                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary w-full" wire:click="generate_predict">Generate</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-select mb-3" wire:model="predict_for"  aria-label="Default select example">
-                                                <option value="0">Predict for</option>
-                                                <option value="1">A Week</option>
-                                                <option value="2">2 Weeks</option>
-                                                <option value="3">A Month</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                                      
-                                        
-                                    <div class="row">
-                                    @if ($predict_for == 1)
-                                    <div class="col-md-6">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">DATE</th>
-                                                    <th scope="col">Actual</th>
-                                                    <th scope="col">Predicted</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>2024-07-02</td>
-                                                    <td>2</td>
-                                                    <td>1.432598</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>2024-07-03</td>
-                                                    <td>3</td>
-                                                    <td>1.089157</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>2024-07-04</td>
-                                                    <td>4</td>
-                                                    <td>3.959125</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td>2024-07-05</td>
-                                                    <td>3</td>
-                                                    <td>1.070622</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">5</th>
-                                                    <td>2024-07-06</td>
-                                                    <td>1</td>
-                                                    <td>1.149659</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">6</th>
-                                                    <td>2024-07-07</td>
-                                                    <td>2</td>
-                                                    <td>1.20833</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">7</th>
-                                                    <td>2024-07-08</td>
-                                                    <td>6</td>
-                                                    <td>2.183637</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">8</th>
-                                                    <td>2024-07-09</td>
-                                                    <td>3</td>
-                                                    <td>4.632274</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>                                            
-                                    </div>
-                                    @elseif ($predict_for == 2)
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">DATE</th>
-                                                        <th scope="col">Actual</th>
-                                                        <th scope="col">Predicted</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>2024-07-02</td>
-                                                        <td>2</td>
-                                                        <td>1.432598</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>2024-07-03</td>
-                                                        <td>3</td>
-                                                        <td>1.089157</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>2024-07-04</td>
-                                                        <td>4</td>
-                                                        <td>3.959125</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>2024-07-05</td>
-                                                        <td>3</td>
-                                                        <td>1.070622</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>2024-07-06</td>
-                                                        <td>1</td>
-                                                        <td>1.149659</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>2024-07-07</td>
-                                                        <td>2</td>
-                                                        <td>1.20833</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">7</th>
-                                                        <td>2024-07-08</td>
-                                                        <td>6</td>
-                                                        <td>2.183637</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">8</th>
-                                                        <td>2024-07-09</td>
-                                                        <td>3</td>
-                                                        <td>4.632274</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">9</th>
-                                                        <td>2024-07-10</td>
-                                                        <td>1</td>
-                                                        <td>1.269305</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">10</th>
-                                                        <td>2024-07-11</td>
-                                                        <td>6</td>
-                                                        <td>3.540424</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">11</th>
-                                                        <td>2024-07-12</td>
-                                                        <td>1</td>
-                                                        <td>0.976535</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">12</th>
-                                                        <td>2024-07-13</td>
-                                                        <td>1</td>
-                                                        <td>1.649647</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">13</th>
-                                                        <td>2024-07-14</td>
-                                                        <td>2</td>
-                                                        <td>1.504845</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">14</th>
-                                                        <td>2024-07-15</td>
-                                                        <td>1</td>
-                                                        <td>1.906853</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">15</th>
-                                                        <td>2024-07-16</td>
-                                                        <td>2</td>
-                                                        <td>2.977401</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">16</th>
-                                                        <td>2024-07-17</td>
-                                                        <td>1</td>
-                                                        <td>1.352946</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">17</th>
-                                                        <td>2024-07-18</td>
-                                                        <td>1</td>
-                                                        <td>1.119316</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">18</th>
-                                                        <td>2024-07-19</td>
-                                                        <td>1</td>
-                                                        <td>1.003673</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">19</th>
-                                                        <td>2024-07-20</td>
-                                                        <td>1</td>
-                                                        <td>1.446194</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">20</th>
-                                                        <td>2024-07-21</td>
-                                                        <td>6</td>
-                                                        <td>1.322221</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">21</th>
-                                                        <td>2024-07-22</td>
-                                                        <td>8</td>
-                                                        <td>6.804169</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">22</th>
-                                                        <td>2024-07-23</td>
-                                                        <td>3</td>
-                                                        <td>1.515072</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">23</th>
-                                                        <td>2024-07-24</td>
-                                                        <td>2</td>
-                                                        <td>2.366222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">24</th>
-                                                        <td>2024-07-25</td>
-                                                        <td>1</td>
-                                                        <td>1.417372</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">25</th>
-                                                        <td>2024-07-26</td>
-                                                        <td>8</td>
-                                                        <td>5.541855</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">26</th>
-                                                        <td>2024-07-27</td>
-                                                        <td>1</td>
-                                                        <td>1.537987</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">27</th>
-                                                        <td>2024-07-28</td>
-                                                        <td>2</td>
-                                                        <td>1.391241</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">28</th>
-                                                        <td>2024-07-29</td>
-                                                        <td>4</td>
-                                                        <td>3.988512</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">29</th>
-                                                        <td>2024-07-30</td>
-                                                        <td>2</td>
-                                                        <td>1.637225</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">30</th>
-                                                        <td>2024-07-31</td>
-                                                        <td>1</td>
-                                                        <td>1.088303</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>                                            
-                                        </div>
-                                    @elseif ($predict_for == 3)
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">DATE</th>
-                                                        <th scope="col">Actual</th>
-                                                        <th scope="col">Predicted</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>2024-07-02</td>
-                                                        <td>2</td>
-                                                        <td>1.432598</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>2024-07-03</td>
-                                                        <td>3</td>
-                                                        <td>1.089157</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>2024-07-04</td>
-                                                        <td>4</td>
-                                                        <td>3.959125</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>2024-07-05</td>
-                                                        <td>3</td>
-                                                        <td>1.070622</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>2024-07-06</td>
-                                                        <td>1</td>
-                                                        <td>1.149659</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>2024-07-07</td>
-                                                        <td>2</td>
-                                                        <td>1.20833</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">7</th>
-                                                        <td>2024-07-08</td>
-                                                        <td>6</td>
-                                                        <td>2.183637</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">8</th>
-                                                        <td>2024-07-09</td>
-                                                        <td>3</td>
-                                                        <td>4.632274</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">9</th>
-                                                        <td>2024-07-10</td>
-                                                        <td>1</td>
-                                                        <td>1.269305</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">10</th>
-                                                        <td>2024-07-11</td>
-                                                        <td>6</td>
-                                                        <td>3.540424</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">11</th>
-                                                        <td>2024-07-12</td>
-                                                        <td>1</td>
-                                                        <td>0.976535</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">12</th>
-                                                        <td>2024-07-13</td>
-                                                        <td>1</td>
-                                                        <td>1.649647</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">13</th>
-                                                        <td>2024-07-14</td>
-                                                        <td>2</td>
-                                                        <td>1.504845</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">14</th>
-                                                        <td>2024-07-15</td>
-                                                        <td>1</td>
-                                                        <td>1.906853</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">15</th>
-                                                        <td>2024-07-16</td>
-                                                        <td>2</td>
-                                                        <td>2.977401</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">16</th>
-                                                        <td>2024-07-17</td>
-                                                        <td>1</td>
-                                                        <td>1.352946</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">17</th>
-                                                        <td>2024-07-18</td>
-                                                        <td>1</td>
-                                                        <td>1.119316</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">18</th>
-                                                        <td>2024-07-19</td>
-                                                        <td>1</td>
-                                                        <td>1.003673</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">19</th>
-                                                        <td>2024-07-20</td>
-                                                        <td>1</td>
-                                                        <td>1.446194</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">20</th>
-                                                        <td>2024-07-21</td>
-                                                        <td>6</td>
-                                                        <td>1.322221</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">21</th>
-                                                        <td>2024-07-22</td>
-                                                        <td>8</td>
-                                                        <td>6.804169</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">22</th>
-                                                        <td>2024-07-23</td>
-                                                        <td>3</td>
-                                                        <td>1.515072</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">23</th>
-                                                        <td>2024-07-24</td>
-                                                        <td>2</td>
-                                                        <td>2.366222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">24</th>
-                                                        <td>2024-07-25</td>
-                                                        <td>1</td>
-                                                        <td>1.417372</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">25</th>
-                                                        <td>2024-07-26</td>
-                                                        <td>8</td>
-                                                        <td>5.541855</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">26</th>
-                                                        <td>2024-07-27</td>
-                                                        <td>1</td>
-                                                        <td>1.537987</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">27</th>
-                                                        <td>2024-07-28</td>
-                                                        <td>2</td>
-                                                        <td>1.391241</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">28</th>
-                                                        <td>2024-07-29</td>
-                                                        <td>4</td>
-                                                        <td>3.988512</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">29</th>
-                                                        <td>2024-07-30</td>
-                                                        <td>2</td>
-                                                        <td>1.637225</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">30</th>
-                                                        <td>2024-07-31</td>
-                                                        <td>1</td>
-                                                        <td>1.088303</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>                                            
-                                        </div>
-                                    @else
-                                        
-                                    @endif
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px">
-                                            </div>
-                                            <div class="row">
-                                                test
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px"> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    {{-- 44444444444444444444444444444444444444444444444444 --}}
-
-                    <div class="accordion accordion-flush" id="accordionFlushExample4">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed d-block" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse-4-{{ $this->getTopProducts[0]->id }}"
-                                    aria-expanded="false"
-                                    aria-controls="flush-collapse-4-{{ $this->getTopProducts[0]->id }}">
-                                    {{-- @dd($this->getTopProducts[0]) --}}
-                                    <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->id }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->title }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->category }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->status }}
-                                        </div>
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            <i
-                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="flush-collapse-4-{{ $this->getTopProducts[0]->id }}"
-                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary w-full" wire:click="generate_predict">Generate</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-select mb-3" wire:model="predict_for"  aria-label="Default select example">
-                                                <option value="0">Predict for</option>
-                                                <option value="1">A Week</option>
-                                                <option value="2">2 Weeks</option>
-                                                <option value="3">A Month</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                                      
-                                        
-                                    @if ($predict_for == 1)
-
-                                    @elseif ($predict_for == 2)
-
-                                    @elseif ($predict_for == 3)
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">DATE</th>
-                                                        <th scope="col">Actual</th>
-                                                        <th scope="col">Predicted</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>2024-07-02</td>
-                                                        <td>11</td>
-                                                        <td>8.839042</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>2024-07-03</td>
-                                                        <td>7</td>
-                                                        <td>7.688835</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>2024-07-04</td>
-                                                        <td>5</td>
-                                                        <td>6.495143</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>2024-07-05</td>
-                                                        <td>11</td>
-                                                        <td>7.600179</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>2024-07-06</td>
-                                                        <td>6</td>
-                                                        <td>7.40555</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>2024-07-07</td>
-                                                        <td>3</td>
-                                                        <td>6.929276</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">7</th>
-                                                        <td>2024-07-08</td>
-                                                        <td>6</td>
-                                                        <td>5.775945</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">8</th>
-                                                        <td>2024-07-09</td>
-                                                        <td>12</td>
-                                                        <td>12.464057</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">9</th>
-                                                        <td>2024-07-10</td>
-                                                        <td>6</td>
-                                                        <td>5.867316</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">10</th>
-                                                        <td>2024-07-11</td>
-                                                        <td>12</td>
-                                                        <td>11.70625</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">11</th>
-                                                        <td>2024-07-12</td>
-                                                        <td>9</td>
-                                                        <td>6.077302</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">12</th>
-                                                        <td>2024-07-13</td>
-                                                        <td>9</td>
-                                                        <td>10.649224</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">13</th>
-                                                        <td>2024-07-14</td>
-                                                        <td>15</td>
-                                                        <td>12.831345</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">14</th>
-                                                        <td>2024-07-15</td>
-                                                        <td>5</td>
-                                                        <td>5.295976</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">15</th>
-                                                        <td>2024-07-16</td>
-                                                        <td>14</td>
-                                                        <td>16.417559</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">16</th>
-                                                        <td>2024-07-17</td>
-                                                        <td>7</td>
-                                                        <td>6.488717</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">17</th>
-                                                        <td>2024-07-18</td>
-                                                        <td>17</td>
-                                                        <td>14.644998</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">18</th>
-                                                        <td>2024-07-19</td>
-                                                        <td>6</td>
-                                                        <td>7.016687</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">19</th>
-                                                        <td>2024-07-20</td>
-                                                        <td>11</td>
-                                                        <td>8.151396</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">20</th>
-                                                        <td>2024-07-21</td>
-                                                        <td>4</td>
-                                                        <td>4.297068</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">21</th>
-                                                        <td>2024-07-22</td>
-                                                        <td>8</td>
-                                                        <td>8.407692</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">22</th>
-                                                        <td>2024-07-23</td>
-                                                        <td>9</td>
-                                                        <td>8.815598</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">23</th>
-                                                        <td>2024-07-24</td>
-                                                        <td>8</td>
-                                                        <td>7.957914</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">24</th>
-                                                        <td>2024-07-25</td>
-                                                        <td>7</td>
-                                                        <td>6.708437</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">25</th>
-                                                        <td>2024-07-26</td>
-                                                        <td>9</td>
-                                                        <td>6.80008</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">26</th>
-                                                        <td>2024-07-27</td>
-                                                        <td>12</td>
-                                                        <td>8.340795</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">27</th>
-                                                        <td>2024-07-28</td>
-                                                        <td>8</td>
-                                                        <td>7.296556</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">28</th>
-                                                        <td>2024-07-29</td>
-                                                        <td>10</td>
-                                                        <td>10.446693</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">29</th>
-                                                        <td>2024-07-30</td>
-                                                        <td>16</td>
-                                                        <td>9.997977</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">30</th>
-                                                        <td>2024-07-31</td>
-                                                        <td>2</td>
-                                                        <td>3.888774</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>                                            
-                                        </div>
-                                    @else
-                                        
-                                    @endif
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px">
-                                            </div>
-                                            <div class="row">
-                                                test
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px"> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    {{-- 5555555555555555555555555555555555555555555 --}}
-
-                    <div class="accordion accordion-flush" id="accordionFlushExample5">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed d-block" type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse-5-{{ $this->getTopProducts[0]->id }}"
-                                    aria-expanded="false"
-                                    aria-controls="flush-collapse-5-{{ $this->getTopProducts[0]->id }}">
-                                    {{-- @dd($this->getTopProducts[0]) --}}
-                                    <div class="grid grid-cols-12 text-center">
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->id }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->title }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->category }}
-                                        </div>
-                                        <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
-                                            {{ $this->getTopProducts[0]->status }}
-                                        </div>
-                                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                                            <i
-                                                class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $this->getTopProducts[0]->rating }}
-                                        </div>
-                                        <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light">
-                                            Model Suggested Restock Amount {{ fake()->numberBetween(3, 45) }}
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="flush-collapse-5-{{ $this->getTopProducts[0]->id }}"
-                                class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary w-full" wire:click="generate_predict">Generate</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select class="form-select mb-3" wire:model="predict_for"  aria-label="Default select example">
-                                                <option value="0">Predict for</option>
-                                                <option value="1">A Week</option>
-                                                <option value="2">2 Weeks</option>
-                                                <option value="3">A Month</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                                      
-                                        
-                                    @if ($predict_for == 1)
-
-                                    @elseif ($predict_for == 2)
-
-                                    @elseif ($predict_for == 3)
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">DATE</th>
-                                                        <th scope="col">Actual</th>
-                                                        <th scope="col">Predicted</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>2024-07-02</td>
-                                                        <td>10</td>
-                                                        <td>9.18343</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>2024-07-29</td>
-                                                        <td>9</td>
-                                                        <td>6.259678</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>2024-07-28</td>
-                                                        <td>12</td>
-                                                        <td>10.015704</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>2024-07-27</td>
-                                                        <td>11</td>
-                                                        <td>9.928316</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>2024-07-26</td>
-                                                        <td>6</td>
-                                                        <td>5.120062</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>2024-07-25</td>
-                                                        <td>6</td>
-                                                        <td>5.602392</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">7</th>
-                                                        <td>2024-07-24</td>
-                                                        <td>5</td>
-                                                        <td>4.791564</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">8</th>
-                                                        <td>2024-07-23</td>
-                                                        <td>12</td>
-                                                        <td>5.819509</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">9</th>
-                                                        <td>2024-07-22</td>
-                                                        <td>3</td>
-                                                        <td>5.597061</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">10</th>
-                                                        <td>2024-07-21</td>
-                                                        <td>13</td>
-                                                        <td>9.885883</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">11</th>
-                                                        <td>2024-07-20</td>
-                                                        <td>7</td>
-                                                        <td>6.963221</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">12</th>
-                                                        <td>2024-07-19</td>
-                                                        <td>7</td>
-                                                        <td>7.552384</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">13</th>
-                                                        <td>2024-07-18</td>
-                                                        <td>5</td>
-                                                        <td>6.320451</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">14</th>
-                                                        <td>2024-07-17</td>
-                                                        <td>11</td>
-                                                        <td>8.161429</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">15</th>
-                                                        <td>2024-07-16</td>
-                                                        <td>6</td>
-                                                        <td>2.348556</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">16</th>
-                                                        <td>2024-07-15</td>
-                                                        <td>7</td>
-                                                        <td>4.603806</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">17</th>
-                                                        <td>2024-07-14</td>
-                                                        <td>4</td>
-                                                        <td>4.786664</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">18</th>
-                                                        <td>2024-07-13</td>
-                                                        <td>9</td>
-                                                        <td>5.519464</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">19</th>
-                                                        <td>2024-07-12</td>
-                                                        <td>6</td>
-                                                        <td>2.154969</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">20</th>
-                                                        <td>2024-07-11</td>
-                                                        <td>9</td>
-                                                        <td>10.008713</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">21</th>
-                                                        <td>2024-07-10</td>
-                                                        <td>7</td>
-                                                        <td>4.845385</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">22</th>
-                                                        <td>2024-07-09</td>
-                                                        <td>3</td>
-                                                        <td>4.778133</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">23</th>
-                                                        <td>2024-07-08</td>
-                                                        <td>3</td>
-                                                        <td>4.38189</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">24</th>
-                                                        <td>2024-07-07</td>
-                                                        <td>2</td>
-                                                        <td>4.762821</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">25</th>
-                                                        <td>2024-07-06</td>
-                                                        <td>7</td>
-                                                        <td>7.075346</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">26</th>
-                                                        <td>2024-07-05</td>
-                                                        <td>5</td>
-                                                        <td>3.614497</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">27</th>
-                                                        <td>2024-07-04</td>
-                                                        <td>2</td>
-                                                        <td>2.963265</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">28</th>
-                                                        <td>2024-07-03</td>
-                                                        <td>8</td>
-                                                        <td>7.756977</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">29</th>
-                                                        <td>2024-07-30</td>
-                                                        <td>11</td>
-                                                        <td>8.555187</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">30</th>
-                                                        <td>2024-07-31</td>
-                                                        <td>1</td>
-                                                        <td>2.159554</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>                                            
-                                        </div>
-                                    @else
-                                        
-                                    @endif
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px">
-                                            </div>
-                                            <div class="row">
-                                                test
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    {{-- <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}"
-                                        alt="" style="max-height: 500px"> --}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-                @else
-                    <div class="flex content-center text-gray-500 p-6">
-                        <h4>Not Enough Data</h4>
-                    </div>
-                @endif
-            </div>
-
-            {{--            @dd($this->getMostPositiveReviewedProducts) --}}
-            {{--            @dd($this->getMostBoughtProducts) --}}
-
-            {{-- loading indicator --}}
-            <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition>
-                <div class="w-full" wire:loading wire:target="gotoPage, category_filter, ">
-                    <div role="status"
-                        class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                            </div>
-                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-                        </div>
-                        <div class="flex items-center justify-between pt-4">
-                            <div>
-                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                            </div>
-                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-                        </div>
-                        <div class="flex items-center justify-between pt-4">
-                            <div>
-                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                            </div>
-                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-                        </div>
-                        <div class="flex items-center justify-between pt-4">
-                            <div>
-                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                            </div>
-                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-                        </div>
-                        <div class="flex items-center justify-between pt-4">
-                            <div>
-                                <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-                                <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                            </div>
-                            <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-                        </div>
-                        <span class="sr-only">Loading...</span>
                     </div>
                 </div>
             </div>
         </div>
-
-        {{-- <div class="row"> --}}
-        {{--      --}}{{-- <div class="col-4"> --}}
-        {{--      --}}{{--     <div class="bg-white overflow-x-auto rounded-lg p-3 m-1"> --}}
-        {{--      --}}{{--         <h5>Most Positive Reviewed</h5> --}}
-        {{--      --}}{{--         <div class="grid grid-cols-12 text-center text-sm"> --}}
-        {{--      --}}{{--             <div class="col-span-5 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div> --}}
-        {{--      --}}{{--             <div class="col-span-4 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category</div> --}}
-        {{--      --}}{{--             <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Rating</div> --}}
-        {{--      --}}{{--         </div> --}}
-
-        {{--      --}}{{--          --}}{{--  --}}{{-- @dd($this->getMostPositiveReviewedProducts) --}}
-
-        {{--      --}}{{--         <div wire:loading.remove x-transition> --}}
-        {{--      --}}{{--             @if ($this->getMostPositiveReviewedProducts->count() > 0) --}}
-        {{--      --}}{{--                 @foreach ($this->getMostPositiveReviewedProducts as $key => $product) --}}
-        {{--      --}}{{--                     <div class="accordion accordion-flush" id="accordionFlushExample"> --}}
-        {{--      --}}{{--                         <div class="accordion-item"> --}}
-        {{--      --}}{{--                             <h2 class="accordion-header"> --}}
-        {{--      --}}{{--                                 <button class="accordion-button collapsed d-block" type="button" --}}
-        {{--      --}}{{--                                     data-bs-toggle="collapse" --}}
-        {{--      --}}{{--                                     data-bs-target="#flush-collapse-{{ $key }}-{{ $product->id }}" --}}
-        {{--      --}}{{--                                     aria-expanded="false" --}}
-        {{--      --}}{{--                                     aria-controls="flush-collapse-{{ $key }}-{{ $product->id }}"> --}}
-        {{--      --}}{{--                                      --}}{{--  --}}{{-- @dd($product) --}}
-        {{--      --}}{{--                                     <div class="grid grid-cols-12 text-center"> --}}
-        {{--      --}}{{--                                         <div class="col-span-5 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                             {{ $product->title }} --}}
-        {{--      --}}{{--                                         </div> --}}
-        {{--      --}}{{--                                         <div class="col-span-4 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                             {{ $product->category }} --}}
-        {{--      --}}{{--                                         </div> --}}
-        {{--      --}}{{--                                         <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                             <i --}}
-        {{--      --}}{{--                                                 class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }} --}}
-        {{--      --}}{{--                                         </div> --}}
-        {{--      --}}{{--                                     </div> --}}
-        {{--      --}}{{--                                 </button> --}}
-        {{--      --}}{{--                             </h2> --}}
-        {{--      --}}{{--                             <div id="flush-collapse-{{ $key }}-{{ $product->id }}" --}}
-        {{--      --}}{{--                                 class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample"> --}}
-        {{--      --}}{{--                                 <div class="accordion-body flex content-center"> --}}
-        {{--      --}}{{--                                     <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}" --}}
-        {{--      --}}{{--                                         alt="" style="max-height: 500px"> --}}
-        {{--      --}}{{--                                 </div> --}}
-        {{--      --}}{{--                             </div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                 @endforeach --}}
-        {{--      --}}{{--             @else --}}
-        {{--      --}}{{--                 <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--      --}}{{--                     <h4>Not Enough Data</h4> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             @endif --}}
-        {{--      --}}{{--         </div> --}}
-
-        {{--      --}}{{--          --}}{{--  --}}{{-- loading indicator --}}
-        {{--      --}}{{--         <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition> --}}
-        {{--      --}}{{--             <div class="w-full" wire:loading wire:target="gotoPage, category_filter, "> --}}
-        {{--      --}}{{--                 <div role="status" --}}
-        {{--      --}}{{--                     class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse"> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <span class="sr-only">Loading...</span> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--         </div> --}}
-        {{--      --}}{{--     </div> --}}
-        {{--      --}}{{-- </div> --}}
-
-        {{--      --}}{{-- <div class="col-4"> --}}
-        {{--      --}}{{--     <div class="bg-white overflow-x-auto rounded-lg p-3 m-1"> --}}
-        {{--      --}}{{--         <h5>Most Bought</h5> --}}
-        {{--      --}}{{--         <div class="grid grid-cols-12 text-center text-sm"> --}}
-        {{--      --}}{{--             <div class="col-span-5 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div> --}}
-        {{--      --}}{{--             <div class="col-span-4 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--             <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase --}}
-        {{--      --}}{{--                 Count --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--         </div> --}}
-
-        {{--      --}}{{--         <div wire:loading.remove x-transition> --}}
-        {{--      --}}{{--             @if ($this->getMostBoughtProducts->count() > 0) --}}
-        {{--      --}}{{--                 @foreach ($this->getMostBoughtProducts as $key => $product) --}}
-        {{--      --}}{{--                     <div class="accordion accordion-flush" id="accordionFlushExample"> --}}
-        {{--      --}}{{--                         <div class="accordion-item"> --}}
-        {{--      --}}{{--                             <h2 class="accordion-header"> --}}
-        {{--      --}}{{--                                 <button class="accordion-button collapsed d-block" type="button" --}}
-        {{--      --}}{{--                                     data-bs-toggle="collapse" --}}
-        {{--      --}}{{--                                     data-bs-target="#flush-collapse-{{ $key }}-{{ $product->id }}" --}}
-        {{--      --}}{{--                                     aria-expanded="false" --}}
-        {{--      --}}{{--                                     aria-controls="flush-collapse-{{ $key }}-{{ $product->id }}"> --}}
-        {{--      --}}{{--                                      --}}{{--  --}}{{-- @dd($product) --}}
-        {{--      --}}{{--                                     <div class="grid grid-cols-12 text-center"> --}}
-        {{--      --}}{{--                                         <div class="col-span-5 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                             {{ $product->title }} --}}
-        {{--      --}}{{--                                         </div> --}}
-        {{--      --}}{{--                                         <div class="col-span-4 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                             {{ $product->category }} --}}
-        {{--      --}}{{--                                         </div> --}}
-        {{--      --}}{{--                                         <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                             {{ $product->purchase_count }} --}}
-        {{--      --}}{{--                                         </div> --}}
-        {{--      --}}{{--                                     </div> --}}
-        {{--      --}}{{--                                 </button> --}}
-        {{--      --}}{{--                             </h2> --}}
-        {{--      --}}{{--                             <div id="flush-collapse-{{ $key }}-{{ $product->id }}" --}}
-        {{--      --}}{{--                                 class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample"> --}}
-        {{--      --}}{{--                                 <div class="accordion-body flex content-center"> --}}
-        {{--      --}}{{--                                     <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}" --}}
-        {{--      --}}{{--                                         alt="" style="max-height: 500px"> --}}
-        {{--      --}}{{--                                 </div> --}}
-        {{--      --}}{{--                             </div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                 @endforeach --}}
-        {{--      --}}{{--             @else --}}
-        {{--      --}}{{--                 <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--      --}}{{--                     <h4>Not Enough Data</h4> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             @endif --}}
-        {{--      --}}{{--         </div> --}}
-
-        {{--      --}}{{--          --}}{{--  --}}{{-- loading indicator --}}
-        {{--      --}}{{--         <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition> --}}
-        {{--      --}}{{--             <div class="w-full" wire:loading wire:target="gotoPage, category_filter, "> --}}
-        {{--      --}}{{--                 <div role="status" --}}
-        {{--      --}}{{--                     class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse"> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <span class="sr-only">Loading...</span> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--         </div> --}}
-        {{--      --}}{{--     </div> --}}
-        {{--      --}}{{-- </div> --}}
-
-        {{--      --}}{{-- <div class="col-4"> --}}
-        {{--      --}}{{-- <div class="bg-white overflow-x-auto rounded-lg p-3 m-1"> --}}
-        {{--      --}}{{--     <h5>Most Negative Reviewed</h5> --}}
-        {{--      --}}{{--     <div class="grid grid-cols-12 text-center text-sm"> --}}
-        {{--      --}}{{--         <div class="col-span-5 p-3 !text-gray-400 !font-light border-b-2 border-blue-300">Product</div> --}}
-        {{--      --}}{{--         <div class="col-span-4 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Category --}}
-        {{--      --}}{{--         </div> --}}
-        {{--      --}}{{--         <div class="col-span-3 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Rating</div> --}}
-        {{--      --}}{{--     </div> --}}
-
-        {{--      --}}{{--     <div wire:loading.remove x-transition> --}}
-        {{--      --}}{{--         @if ($this->getMostNegativeReviewedProducts > 0) --}}
-        {{--      --}}{{--             @foreach ($this->getMostNegativeReviewedProducts as $key => $product) --}}
-        {{--      --}}{{--                 <div class="accordion accordion-flush" id="accordionFlushExample"> --}}
-        {{--      --}}{{--                     <div class="accordion-item"> --}}
-        {{--      --}}{{--                         <h2 class="accordion-header"> --}}
-        {{--      --}}{{--                             <button class="accordion-button collapsed d-block" type="button" --}}
-        {{--      --}}{{--                                 data-bs-toggle="collapse" --}}
-        {{--      --}}{{--                                 data-bs-target="#flush-collapse-{{ $key }}-{{ $product->id }}" --}}
-        {{--      --}}{{--                                 aria-expanded="false" --}}
-        {{--      --}}{{--                                 aria-controls="flush-collapse-{{ $key }}-{{ $product->id }}"> --}}
-        {{--      --}}{{--                                  --}}{{--  --}}{{-- @dd($product) --}}
-        {{--      --}}{{--                                 <div class="grid grid-cols-12 text-center"> --}}
-        {{--      --}}{{--                                     <div class="col-span-5 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                         {{ $product->title }} --}}
-        {{--      --}}{{--                                     </div> --}}
-        {{--      --}}{{--                                     <div class="col-span-4 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                         {{ $product->category }} --}}
-        {{--      --}}{{--                                     </div> --}}
-        {{--      --}}{{--                                     <div class="col-span-3 mb-0 py-3 !text-gray-800 !font-light"> --}}
-        {{--      --}}{{--                                         <i --}}
-        {{--      --}}{{--                                             class="bi bi-star-fill text-yellow-400 my-auto"></i>{{ $product->rating }} --}}
-        {{--      --}}{{--                                     </div> --}}
-        {{--      --}}{{--                                 </div> --}}
-        {{--      --}}{{--                             </button> --}}
-        {{--      --}}{{--                         </h2> --}}
-        {{--      --}}{{--                         <div id="flush-collapse-{{ $key }}-{{ $product->id }}" --}}
-        {{--      --}}{{--                             class="accordion-collapse collapse" --}}
-        {{--      --}}{{--                             data-bs-parent="#accordionFlushExample"> --}}
-        {{--      --}}{{--                             <div class="accordion-body flex content-center"> --}}
-        {{--      --}}{{--                                 <img src="{{ asset('restock/future_predictions_plot' . fake()->numberBetween(0, 37) . '.png') }}" --}}
-        {{--      --}}{{--                                     alt="" style="max-height: 500px"> --}}
-        {{--      --}}{{--                             </div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             @endforeach --}}
-        {{--      --}}{{--         @else --}}
-        {{--      --}}{{--             <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--      --}}{{--                 <h4>Not Enough Data</h4> --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--         @endif --}}
-        {{--      --}}{{--     </div> --}}
-
-        {{--      --}}{{-- loading indicator --}}
-        {{--      --}}{{--         <div class="w-full !hidden " wire:loading.class.remove="!hidden" x-transition> --}}
-        {{--      --}}{{--             <div class="w-full" wire:loading wire:target="gotoPage, category_filter, "> --}}
-        {{--      --}}{{--                 <div role="status" --}}
-        {{--      --}}{{--                     class="w-full my-2 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded  animate-pulse"> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <div class="flex items-center justify-between pt-4"> --}}
-        {{--      --}}{{--                         <div> --}}
-        {{--      --}}{{--                             <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div> --}}
-        {{--      --}}{{--                             <div class="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div> --}}
-        {{--      --}}{{--                         </div> --}}
-        {{--      --}}{{--                         <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div> --}}
-        {{--      --}}{{--                     </div> --}}
-        {{--      --}}{{--                     <span class="sr-only">Loading...</span> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--         </div> --}}
-        {{--      --}}{{--     </div> --}}
-        {{--      --}}{{-- </div> --}}
-
-        {{--     <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Product Analytics</h5> --}}
-        {{--      --}}{{-- Most Bought Products --}}
-        {{--     <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 mb-3"> --}}
-        {{--          --}}{{-- most bought --}}
-        {{--         <div --}}
-        {{--             class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"> --}}
-        {{--             <div class="flex items-center justify-between mb-3"> --}}
-        {{--                 <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Most Bought --}}
-        {{--                     Products</h5> --}}
-        {{--                  --}}{{-- <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--                  --}}{{--     <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--                  --}}{{--     <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--                  --}}{{--         data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--                  --}}{{--         {{ $mostBoughtProductsFilter }} Days Filter --}}
-        {{--                  --}}{{--     </button> --}}
-        {{--                  --}}{{--     <ul class="dropdown-menu !pl-0"> --}}
-        {{--                  --}}{{--         <li> --}}
-        {{--                  --}}{{--             <button type="button" wire:click="$set('mostBoughtProductsFilter', '7')" --}}
-        {{--                  --}}{{--                 class="dropdown-item" href="#">7 Days --}}
-        {{--                  --}}{{--             </button> --}}
-        {{--                  --}}{{--         </li> --}}
-        {{--                  --}}{{--         <li> --}}
-        {{--                  --}}{{--             <button type="button" wire:click="$set('mostBoughtProductsFilter', '30')" --}}
-        {{--                  --}}{{--                 class="dropdown-item" href="#">1 Month --}}
-        {{--                  --}}{{--             </button> --}}
-        {{--                  --}}{{--         </li> --}}
-        {{--                  --}}{{--         <li> --}}
-        {{--                  --}}{{--             <button type="button" wire:click="$set('mostBoughtProductsFilter', '90')" --}}
-        {{--                  --}}{{--                 class="dropdown-item" href="#">2 Months --}}
-        {{--                  --}}{{--             </button> --}}
-        {{--                  --}}{{--         </li> --}}
-        {{--                  --}}{{--         <li> --}}
-        {{--                  --}}{{--             <button type="button" wire:click="$set('mostBoughtProductsFilter', '180')" --}}
-        {{--                  --}}{{--                 class="dropdown-item" href="#">3 Months --}}
-        {{--                  --}}{{--             </button> --}}
-        {{--                  --}}{{--         </li> --}}
-        {{--                  --}}{{--     </ul> --}}
-        {{--                  --}}{{-- </div> --}}
-        {{--             </div> --}}
-
-        {{--             <div class="max-h-64 overflow-y-auto"> --}}
-        {{--                 @if (sizeof($this->getMostBoughtProducts) > 0) --}}
-        {{--                     <table class="table"> --}}
-        {{--                         <thead> --}}
-        {{--                             <tr> --}}
-        {{--                                 <th scope="col">#</th> --}}
-        {{--                                 <th scope="col">Products</th> --}}
-        {{--                                 <th scope="col">Categories</th> --}}
-        {{--                                 <th scope="col">Order Times</th> --}}
-        {{--                             </tr> --}}
-        {{--                         </thead> --}}
-        {{--                         <tbody> --}}
-        {{--                             @foreach ($this->getMostBoughtProducts as $product) --}}
-        {{--                                 <tr wire:key="{{ $product->id }}"> --}}
-        {{--                                     <th scope="row">{{ $product->id }}</th> --}}
-        {{--                                     <td class="text-ellipsis overflow-hidden">{{ $product->title }}</td> --}}
-        {{--                                     <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }} --}}
-        {{--                                     </td> --}}
-        {{--                                     <td>{{ $product->purchase_count }}</td> --}}
-        {{--                                 </tr> --}}
-        {{--                             @endforeach --}}
-        {{--                         </tbody> --}}
-        {{--                     </table> --}}
-        {{--                 @else --}}
-        {{--                     <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--                         <h4>Not Enough Data</h4> --}}
-        {{--                     </div> --}}
-        {{--                 @endif --}}
-        {{--             </div> --}}
-        {{--         </div> --}}
-        {{--          --}}{{-- recently most bought --}}
-        {{--         <div --}}
-        {{--             class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"> --}}
-        {{--             <div class="flex items-center justify-between mb-3"> --}}
-        {{--                 <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Recently Bought --}}
-        {{--                     Products</h5> --}}
-        {{--                 <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--                     <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--                     <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--                             data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--                         {{ $recentlyBoughtProductsFilter }} Days Filter --}}
-        {{--                     </button> --}}
-        {{--                     <ul class="dropdown-menu !pl-0"> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '7')" --}}
-        {{--                                     class="dropdown-item" href="#">7 Days --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '30')" --}}
-        {{--                                     class="dropdown-item" href="#">1 Month --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '90')" --}}
-        {{--                                     class="dropdown-item" href="#">2 Months --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '180')" --}}
-        {{--                                     class="dropdown-item" href="#">3 Months --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                     </ul> --}}
-        {{--                 </div> --}}
-        {{--             </div> --}}
-
-        {{--             <div class="max-h-64 overflow-y-auto"> --}}
-        {{--                 @if (sizeof($this->getRecentlyBoughtProducts()) > 0) --}}
-        {{--                     <table class="table"> --}}
-        {{--                         <thead> --}}
-        {{--                         <tr> --}}
-        {{--                             <th scope="col">#</th> --}}
-        {{--                             <th scope="col">Products</th> --}}
-        {{--                             <th scope="col">Categories</th> --}}
-        {{--                             <th scope="col">Order Times</th> --}}
-        {{--                         </tr> --}}
-        {{--                         </thead> --}}
-        {{--                         <tbody> --}}
-        {{--                         @foreach ($this->getRecentlyBoughtProducts as $product) --}}
-        {{--                             <tr wire:key="{{ $product->id }}"> --}}
-        {{--                                 <th scope="row">{{ $product->id }}</th> --}}
-        {{--                                 <td class="text-ellipsis overflow-hidden">{{ $product->title }}</td> --}}
-        {{--                                 <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }} --}}
-        {{--                                 </td> --}}
-        {{--                                 <td>{{ $product->total_quantity }}</td> --}}
-        {{--                             </tr> --}}
-        {{--                         @endforeach --}}
-        {{--                         </tbody> --}}
-        {{--                     </table> --}}
-        {{--                 @else --}}
-        {{--                     <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--                         <h4>Not Enough Data</h4> --}}
-        {{--                     </div> --}}
-        {{--                 @endif --}}
-        {{--             </div> --}}
+        <div class="p-3 border border-gray-200 bg-white rounded-lg">
+            <div class="h-full flex flex-wrap items-center">
+                <div class="relative h-full w-full max-w-full flex-grow flex-1 justify-end">
+                    <h6 class="uppercase mb-1 text-sm font-semibold text-yellow-600">Restock Soon</h6>
+                    <hr class="m-0 w-16 text-yellow-900">
+                    <div class="absolute bottom-0 right-0">
+                        <div class="w-full flex justify-end">
+                            <button type="button" class="text-sm text-yellow-900">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-3 col-span-2 border border-gray-200 bg-white rounded-lg">
+            <div class="flex flex-wrap items-center">
+                <div class="relative w-full max-w-full flex-grow flex-1">
+                    <h6 class="uppercase mb-1 text-sm font-semibold text-blueGray-500">REVENUE</h6>
+                    <div class="pt-2">
+                        {{-- <h4 class="mb-0 tracking-tighter text-lg text-gray-500">REVENUE</h4> --}}
+                        <div class="">
+                            <h4 class="mb-0 text-gray-700"><span class="text-gray-500">₱</span>12334.59</h4>
+                            <div class="flex items-center">
+                                <span class="text-sm text-green-800 tracking-wide">3+ </span>
+                                <span class="text-sm tracking-tighter text-gray-500">&nbsp;Since Last Week</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- <div class="p-3 border border-gray-200 bg-white rounded-xl"> --}}
+        {{--     <div class="flex flex-wrap items-center"> --}}
+        {{--         <div class="relative w-full max-w-full flex-grow flex-1 pb-2"> --}}
+        {{--             <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Performance</h6> --}}
         {{--         </div> --}}
         {{--     </div> --}}
-
-        {{--     <div class="grid grid-cols-1 gap-3 mb-3"> --}}
-        {{--          --}}{{-- product Returns --}}
-        {{--         <div --}}
-        {{--             class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"> --}}
-        {{--             <div class="flex items-center justify-between mb-3"> --}}
-        {{--                 <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Product Returns </h5> --}}
-        {{--                 <div class="flex items-center gap-3"> --}}
-        {{--                     <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--                         <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--                         <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--                                 data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--                             {{ $productsReturnsFilter }} Days Filter --}}
-        {{--                         </button> --}}
-        {{--                         <ul class="dropdown-menu !pl-0"> --}}
-        {{--                             <li> --}}
-        {{--                                 <button type="button" wire:click="$set('productsReturnsFilter', '7')" --}}
-        {{--                                         class="dropdown-item" href="#">7 Days --}}
-        {{--                                 </button> --}}
-        {{--                             </li> --}}
-        {{--                             <li> --}}
-        {{--                                 <button type="button" wire:click="$set('productsReturnsFilter', '30')" --}}
-        {{--                                         class="dropdown-item" href="#">1 Month --}}
-        {{--                                 </button> --}}
-        {{--                             </li> --}}
-        {{--                             <li> --}}
-        {{--                                 <button type="button" wire:click="$set('productsReturnsFilter', '90')" --}}
-        {{--                                         class="dropdown-item" href="#">2 Months --}}
-        {{--                                 </button> --}}
-        {{--                             </li> --}}
-        {{--                             <li> --}}
-        {{--                                 <button type="button" wire:click="$set('productsReturnsFilter', '180')" --}}
-        {{--                                         class="dropdown-item" href="#">3 Months --}}
-        {{--                                 </button> --}}
-        {{--                             </li> --}}
-        {{--                         </ul> --}}
-        {{--                     </div> --}}
-        {{--                      <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--                          <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--                          <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--                                  data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--                              {{ $productsReturnsOrderFilter }} --}}
-        {{--                          </button> --}}
-        {{--                          <ul class="dropdown-menu !pl-0"> --}}
-        {{--                              <li> --}}
-        {{--                                  <button type="button" wire:click="$set('productsReturnsOrderFilter', 'asc')" --}}
-        {{--                                          class="dropdown-item" href="#">Ascending --}}
-        {{--                                  </button> --}}
-        {{--                              </li> --}}
-        {{--                              <li> --}}
-        {{--                                  <button type="button" wire:click="$set('productsReturnsOrderFilter', 'desc')" --}}
-        {{--                                          class="dropdown-item" href="#">Descending --}}
-        {{--                                  </button> --}}
-        {{--                              </li> --}}
-        {{--                          </ul> --}}
-        {{--                      </div> --}}
-        {{--                 </div> --}}
-
-        {{--             </div> --}}
-
-        {{--             <div class="max-h-64 overflow-y-auto"> --}}
-        {{--                 @if (sizeof($this->getReturnsProducts) > 0) --}}
-        {{--                     <table class="table"> --}}
-        {{--                         <thead> --}}
-        {{--                         <tr> --}}
-        {{--                             <th scope="col">#</th> --}}
-        {{--                             <th scope="col">Products</th> --}}
-        {{--                             <th scope="col">Categories</th> --}}
-        {{--                             <th scope="col">Returned Items Count</th> --}}
-        {{--                         </tr> --}}
-        {{--                         </thead> --}}
-        {{--                         <tbody> --}}
-        {{--                         @foreach ($this->getReturnsProducts as $product) --}}
-        {{--                             <tr wire:key="{{ $product->id }}"> --}}
-        {{--                                 <th scope="row">{{ $product->id }}</th> --}}
-        {{--                                 <td class="text-ellipsis overflow-hidden">{{ $product->title }}</td> --}}
-        {{--                                 <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }} --}}
-        {{--                                 </td> --}}
-        {{--                                 <td>{{ $product->total_quantity }}</td> --}}
-        {{--                             </tr> --}}
-        {{--                         @endforeach --}}
-        {{--                         </tbody> --}}
-        {{--                     </table> --}}
-        {{--                 @else --}}
-        {{--                     <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--                         <h4>Not Enough Data</h4> --}}
-        {{--                     </div> --}}
-        {{--                 @endif --}}
-        {{--             </div> --}}
-        {{--         </div> --}}
-        {{--     </div> --}}
-
-        {{--      --}}{{-- sentiment analytics --}}
-        {{--     <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Sentiment Analytics</h5> --}}
-        {{--     <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 mb-3"> --}}
-        {{--          --}}{{-- most positive --}}
-        {{--         <div --}}
-        {{--             class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"> --}}
-        {{--             <div class="flex items-center justify-between mb-3"> --}}
-        {{--                 <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Positive --}}
-        {{--                     Reviewed Products</h5> --}}
-        {{--                 <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--                     <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--                     <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--                         data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--                         {{ $mostPositiveReviewFilter }} Days Filter --}}
-        {{--                     </button> --}}
-        {{--                     <ul class="dropdown-menu !pl-0"> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostPositiveReviewFilter', '7')" --}}
-        {{--                                 class="dropdown-item" href="#">7 Days --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostPositiveReviewFilter', '30')" --}}
-        {{--                                 class="dropdown-item" href="#">1 Month --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostPositiveReviewFilter', '90')" --}}
-        {{--                                 class="dropdown-item" href="#">2 Months --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostPositiveReviewFilter', '180')" --}}
-        {{--                                 class="dropdown-item" href="#">3 Months --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                     </ul> --}}
-        {{--                 </div> --}}
-        {{--             </div> --}}
-
-        {{--             <div class="max-h-64 overflow-y-auto"> --}}
-        {{--                 @if (sizeof($this->getMostPositiveReviewedProducts) > 0) --}}
-        {{--                     <table class="table"> --}}
-        {{--                         <thead> --}}
-        {{--                             <tr> --}}
-        {{--                                 <th scope="col">#</th> --}}
-        {{--                                 <th scope="col">Products</th> --}}
-        {{--                                 <th scope="col">Categories</th> --}}
-        {{--                                 <th scope="col">Ratings</th> --}}
-        {{--                                 <th scope="col"># of Review</th> --}}
-        {{--                             </tr> --}}
-        {{--                         </thead> --}}
-        {{--                         <tbody> --}}
-        {{--                             @foreach ($this->getMostPositiveReviewedProducts as $product) --}}
-        {{--                                 <tr wire:key="{{ $product->product_id }}"> --}}
-        {{--                                     <th scope="row">{{ $product->product_id }}</th> --}}
-        {{--                                     <td class="text-ellipsis overflow-hidden">{{ $product->title }}</td> --}}
-        {{--                                     <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }} --}}
-        {{--                                     </td> --}}
-        {{--                                     <td>{{ $product->average_rating }} --}}
-        {{--                                         - {{ $product->average_rating >= 3 ? 'Positive' : 'Negative' }}</td> --}}
-        {{--                                     <td> --}}
-        {{--                                         {{ $product->total_comment }} --}}
-        {{--                                     </td> --}}
-        {{--                                 </tr> --}}
-        {{--                             @endforeach --}}
-        {{--                         </tbody> --}}
-        {{--                     </table> --}}
-        {{--                 @else --}}
-        {{--                     <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--                         <h4>No Reviews Available</h4> --}}
-        {{--                     </div> --}}
-        {{--                 @endif --}}
-        {{--             </div> --}}
-        {{--         </div> --}}
-        {{--          --}}{{-- Most Negative Reviewed --}}
-        {{--         <div --}}
-        {{--             class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"> --}}
-        {{--             <div class="flex items-center justify-between mb-3"> --}}
-        {{--                 <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Negative --}}
-        {{--                     Reviewed Products</h5> --}}
-        {{--                 <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--                     <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--                     <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--                         data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--                         {{ $mostNegativeReviewFilter }} Days Filter --}}
-        {{--                     </button> --}}
-        {{--                     <ul class="dropdown-menu !pl-0"> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostNegativeReviewFilter', '7')" --}}
-        {{--                                 class="dropdown-item" href="#">7 Days --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostNegativeReviewFilter', '30')" --}}
-        {{--                                 class="dropdown-item" href="#">1 Month --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostNegativeReviewFilter', '90')" --}}
-        {{--                                 class="dropdown-item" href="#">2 Months --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                         <li> --}}
-        {{--                             <button type="button" wire:click="$set('mostNegativeReviewFilter', '180')" --}}
-        {{--                                 class="dropdown-item" href="#">3 Months --}}
-        {{--                             </button> --}}
-        {{--                         </li> --}}
-        {{--                     </ul> --}}
-        {{--                 </div> --}}
-        {{--             </div> --}}
-        {{--             <div class="max-h-64 overflow-y-auto"> --}}
-        {{--                 @if (sizeof($this->getMostNegativeReviewedProducts) > 0) --}}
-        {{--                     <table class="table"> --}}
-        {{--                         <thead> --}}
-        {{--                             <tr> --}}
-        {{--                                 <th scope="col">#</th> --}}
-        {{--                                 <th scope="col">Products</th> --}}
-        {{--                                 <th scope="col">Categories</th> --}}
-        {{--                                 <th scope="col">Ratings</th> --}}
-        {{--                                 <th scope="col"># of Review</th> --}}
-        {{--                             </tr> --}}
-        {{--                         </thead> --}}
-        {{--                         <tbody> --}}
-        {{--                              --}}{{--                            {{ dd($this->getMostNegativeReviewedProducts) }} --}}
-        {{--                             @foreach ($this->getMostNegativeReviewedProducts as $product) --}}
-        {{--                                  --}}{{--                                {{ var_dump($product->product_id) }} --}}
-        {{--                                 <tr wire:key="{{ $product->product_id }}"> --}}
-        {{--                                     <th scope="row">{{ $product->product_id }}</th> --}}
-        {{--                                     <td>{{ $product->title }}</td> --}}
-        {{--                                     <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }} --}}
-        {{--                                     </td> --}}
-        {{--                                     <td>{{ round($product->average_rating, 2)  }} --}}
-        {{--                                         - {{ $product->average_rating > 3 ? 'Positive' : 'Negative' }}</td> --}}
-        {{--                                     <td> --}}
-        {{--                                         {{ $product->total_comment }} --}}
-        {{--                                     </td> --}}
-        {{--                                 </tr> --}}
-        {{--                             @endforeach --}}
-        {{--                         </tbody> --}}
-        {{--                     </table> --}}
-        {{--                 @else --}}
-        {{--                     <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--                         <h4>No Reviews Available</h4> --}}
-        {{--                     </div> --}}
-        {{--                 @endif --}}
-        {{--             </div> --}}
-        {{--         </div> --}}
-        {{--     </div> --}}
-
-        {{--      --}}{{-- <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Order Analytics</h5> --}}
-        {{--      --}}{{-- Order Analytics --}}
-        {{--      --}}{{-- <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 mb-3"> --}}
-        {{--      --}}{{--      --}}{{--  --}}{{-- most ordewred --}}
-        {{--      --}}{{--     <div --}}
-        {{--      --}}{{--         class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"> --}}
-        {{--      --}}{{--         <div class="flex items-center justify-between mb-3"> --}}
-        {{--      --}}{{--             <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Most Ordered --}}
-        {{--      --}}{{--                 Products</h5> --}}
-        {{--      --}}{{--             <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--      --}}{{--                 <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--      --}}{{--                 <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--      --}}{{--                         data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--      --}}{{--                     {{ $mostOrderedProductsFilter }} Days Filter --}}
-        {{--      --}}{{--                 </button> --}}
-        {{--      --}}{{--                 <ul class="dropdown-menu !pl-0"> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostOrderedProductsFilter', '7')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">7 Days --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostOrderedProductsFilter', '30')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">1 Month --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostOrderedProductsFilter', '90')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">2 Months --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostOrderedProductsFilter', '180')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">3 Months --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                 </ul> --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--         </div> --}}
-
-        {{--      --}}{{--         <div class="max-h-64 overflow-y-auto"> --}}
-        {{--      --}}{{--             @if (sizeof($this->getMostOrderedProducts()) > 0) --}}
-        {{--      --}}{{--                 <table class="table"> --}}
-        {{--      --}}{{--                     <thead> --}}
-        {{--      --}}{{--                     <tr> --}}
-        {{--      --}}{{--                         <th scope="col">#</th> --}}
-        {{--      --}}{{--                         <th scope="col">Products</th> --}}
-        {{--      --}}{{--                         <th scope="col">Categories</th> --}}
-        {{--      --}}{{--                         <th scope="col">Purchase Times</th> --}}
-        {{--      --}}{{--                     </tr> --}}
-        {{--      --}}{{--                     </thead> --}}
-        {{--      --}}{{--                     <tbody> --}}
-        {{--      --}}{{--                     @foreach ($this->getMostOrderedProducts as $product) --}}
-        {{--      --}}{{--                         <tr wire:key="{{ $product->product_id }}"> --}}
-        {{--      --}}{{--                             <th scope="row">{{ $product->product_id }}</th> --}}
-        {{--      --}}{{--                             <td class="text-ellipsis overflow-hidden">{{ $product->title }}</td> --}}
-        {{--      --}}{{--                             <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }} --}}
-        {{--      --}}{{--                             </td> --}}
-        {{--      --}}{{--                             <td>{{ $product->total_quantity }}</td> --}}
-        {{--      --}}{{--                         </tr> --}}
-        {{--      --}}{{--                     @endforeach --}}
-        {{--      --}}{{--                     </tbody> --}}
-        {{--      --}}{{--                 </table> --}}
-        {{--      --}}{{--             @else --}}
-        {{--      --}}{{--                 <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--      --}}{{--                     <h4>Not Enough Data</h4> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             @endif --}}
-        {{--      --}}{{--         </div> --}}
-        {{--      --}}{{--     </div> --}}
-        {{--      --}}{{-- </div> --}}
-
-        {{--      --}}{{-- <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Shipment Analytics</h5> --}}
-        {{--      --}}{{-- Shipment Analytics --}}
-        {{--      --}}{{-- <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 mb-3"> --}}
-        {{--      --}}{{--      --}}{{--  --}}{{-- most shipped --}}
-        {{--      --}}{{--     <div --}}
-        {{--      --}}{{--         class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"> --}}
-        {{--      --}}{{--         <div class="flex items-center justify-between mb-3"> --}}
-        {{--      --}}{{--             <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Most Shipped --}}
-        {{--      --}}{{--                 Products</h5> --}}
-        {{--      --}}{{--             <div class="btn-group btn-group-sm" role="group"> --}}
-        {{--      --}}{{--                 <div class="input-group-text" id="btnGroupAddon">Filter</div> --}}
-        {{--      --}}{{--                 <button type="button" class="btn btn-outline-primary dropdown-toggle" --}}
-        {{--      --}}{{--                         data-bs-toggle="dropdown" aria-expanded="false"> --}}
-        {{--      --}}{{--                     {{ $mostShippedProductsFilter }} Days Filter --}}
-        {{--      --}}{{--                 </button> --}}
-        {{--      --}}{{--                 <ul class="dropdown-menu !pl-0"> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostShippedProductsFilter', '7')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">7 Days --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostShippedProductsFilter', '30')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">1 Month --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostShippedProductsFilter', '90')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">2 Months --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                     <li> --}}
-        {{--      --}}{{--                         <button type="button" wire:click="$set('mostShippedProductsFilter', '180')" --}}
-        {{--      --}}{{--                                 class="dropdown-item" href="#">3 Months --}}
-        {{--      --}}{{--                         </button> --}}
-        {{--      --}}{{--                     </li> --}}
-        {{--      --}}{{--                 </ul> --}}
-        {{--      --}}{{--             </div> --}}
-        {{--      --}}{{--         </div> --}}
-
-        {{--      --}}{{--         <div class="max-h-64 overflow-y-auto"> --}}
-        {{--      --}}{{--             @if (sizeof($this->getMostShippedProducts()) > 0) --}}
-        {{--      --}}{{--                 <table class="table"> --}}
-        {{--      --}}{{--                     <thead> --}}
-        {{--      --}}{{--                     <tr> --}}
-        {{--      --}}{{--                         <th scope="col">#</th> --}}
-        {{--      --}}{{--                         <th scope="col">Products</th> --}}
-        {{--      --}}{{--                         <th scope="col">Categories</th> --}}
-        {{--      --}}{{--                         <th scope="col">Purchase Times</th> --}}
-        {{--      --}}{{--                     </tr> --}}
-        {{--      --}}{{--                     </thead> --}}
-        {{--      --}}{{--                     <tbody> --}}
-        {{--      --}}{{--                     @foreach ($this->getMostShippedProducts as $product) --}}
-        {{--      --}}{{--                         <tr wire:key="{{ $product->id }}"> --}}
-        {{--      --}}{{--                             <th scope="row">{{ $product->id }}</th> --}}
-        {{--      --}}{{--                             <td class="text-ellipsis overflow-hidden">{{ $product->title }}</td> --}}
-        {{--      --}}{{--                             <td> {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }} --}}
-        {{--      --}}{{--                             </td> --}}
-        {{--      --}}{{--                             <td>{{ $product->total_quantity }}</td> --}}
-        {{--      --}}{{--                         </tr> --}}
-        {{--      --}}{{--                     @endforeach --}}
-        {{--      --}}{{--                     </tbody> --}}
-        {{--      --}}{{--                 </table> --}}
-        {{--      --}}{{--             @else --}}
-        {{--      --}}{{--                 <div class="flex content-center text-gray-500 p-6"> --}}
-        {{--      --}}{{--                     <h4>Not Enough Data</h4> --}}
-        {{--      --}}{{--                 </div> --}}
-        {{--      --}}{{--             @endif --}}
-        {{--      --}}{{--         </div> --}}
-        {{--      --}}{{--     </div> --}}
-        {{--      --}}{{-- </div> --}}
-
         {{-- </div> --}}
-
     </div>
+    <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
+        <div class="flex items-center justify-between pb-3">
+            <div>
+                <h4 class="mb-0 text-2xl tracking-wide text-gray-600">Forecast : </h4>
+            </div>
+            <div class="flex gap-2 items-center">
+                <div class="flex gap-1.5 items-center">
+                    <p class="mb-0 text-gray-600 text-xs tracking-tight">Total summary in</p>
+                    <div class="btn-group btn-group-sm" role="group">
+                        <button type="button" class="!font-medium btn btn-outline-primary dropdown-toggle "
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ $summary }}
+                        </button>
+                        <ul class="dropdown-menu !pl-0">
+                            <li>
+                                <button type="button" wire:click="$set('summary', 'Weekly')" class="dropdown-item"
+                                        href="#">Weekly
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" wire:click="$set('summary', 'Monthly')" class="dropdown-item"
+                                        href="#">Monthly
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item"
+                                        href="#">Yearly
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        {{ $productselected != null ? $productselected : 'Select Product' }}
+                    </button>
+                    <ul class="dropdown-menu !pl-0">
+                        <li>
+                            <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '7')"
+                                    class="dropdown-item" href="#">Weekly
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '30')"
+                                    class="dropdown-item" href="#">Monthly
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '90')"
+                                    class="dropdown-item" href="#">Yearly
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <form action="#" class="d-flex" role="search">
+                        <input class="form-control " type="search" placeholder="Search Product"
+                               aria-label="Search Product">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="block xl:flex gap-2">
 
-    {{-- </div> --}}
+                {{-- <div class="p-2 relative flex-1"> --}}
+                {{--     <div class="inset-0"> --}}
+                {{--         <div class="flex items-end w-full h-full overflow-hidden" wire:ignore> --}}
+                {{--             <canvas class="w-full h-full" id="productSalesChart"></canvas> --}}
+                {{--         </div> --}}
+                {{--     </div> --}}
+                {{-- </div> --}}
+                <div class="flex-auto border border-gray-200">
+                    <div class="p-2 h-full w-full relative flex justify-center items-center" wire:ignore>
+                        <canvas class="!w-full !h-[300px]" id="productSalesChart"></canvas>
+                        {{-- <div> --}}
+                        {{--     <h5 class="text-gray-600 text-3xl tracking-wider">Awaiting User Input</h5> --}}
+                        {{--     <h6 class="text-gray-500 text-xl text-center tracking-tighter">Select Product to View</h6> --}}
+                        {{-- </div> --}}
+                    </div>
+                </div>
+                {{-- <div class="p-2 "> --}}
+                {{--     <div class="relative"> --}}
+                {{--         <canvas class="!w-full !h-[350px]" id="productSalesChart"></canvas> --}}
+                {{--     </div> --}}
 
-    @assets
-        {{--    @vite(['resources/js/chartjs.js']) --}}
-        {{--     import Chart from 'chart.js/auto'; --}}
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    @endassets
+                {{--      --}}{{-- <div class="relative "> --}}
+                {{--      --}}{{--     <div class="inset-0"> --}}
+                {{--      --}}{{--         <div class="flex items-end w-full h-full overflow-hidden" wire:ignore> --}}
+                {{--      --}}{{--             <canvas class="h-full w-full" id="productSalesChart"></canvas> --}}
+                {{--      --}}{{--         </div> --}}
+                {{--      --}}{{--     </div> --}}
+                {{--      --}}{{--      --}}{{--  --}}{{-- <canvas width="496" height="291" --}}
+                {{--      --}}{{--      --}}{{--  --}}{{--     style="display: block; box-sizing: border-box; height: 300px; width: 100%;" --}}
+                {{--      --}}{{--      --}}{{--  --}}{{--     id="shop-sales-chart"> --}}
+                {{--      --}}{{--      --}}{{--  --}}{{-- </canvas>  --}}
+                {{--      --}}{{-- </div> --}}
+                {{-- </div> --}}
+                <div class="pt-2 px-2">
+                    <div>
+                        <label for="inputPassword5"
+                               class="form-label tracking-tight uppercase text-sm font-medium">Selected
+                            Product</label>
+                        <input type="text" placeholder="Selected Product" id="inputPassword5"
+                               class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                    </div>
 
-    @script
-        <script>
-            const data = {
-                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-                datasets: [{
-                    lineTension: 0.35,
-                    fill: true,
-                    label: "Weekly Sales",
-                    pointRadius: 0,
-                    data: [18, 12, 6, 9, 12, 3, 9],
-                    backgroundColor: [
-                        // "rgba(255, 26, 104, 0.2)",
-                        "rgba(54, 162, 235, 0.2)",
-                        // "rgba(255, 206, 86, 0.2)",
-                        // "rgba(75, 192, 192, 0.2)",
-                        // "rgba(153, 102, 255, 0.2)",
-                        // "rgba(255, 159, 64, 0.2)",
-                        // "rgba(0, 0, 0,  0.2)",
-                    ],
-                    borderColor: [
-                        // "rgba(255, 26, 104, 1)",
-                        "rgba(54, 162, 235, 1)",
-                        // "rgba(255, 206, 86, 1)",
-                        // "rgba(75, 192, 192, 1)",
-                        // "rgba(153, 102, 255, 1)",
-                        // "rgba(255, 159, 64, 1)",
-                        // "rgba(0, 0, 0, 1)",
-                    ],
-                    borderWidth: 1,
-                }, ],
-            };
+                    <div class="mt-2">
+                        <label for="inputPassword5"
+                               class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
+                        <input type="text" placeholder="Product Price" id="inputPassword5"
+                               class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                    </div>
 
-            // config
-            const config = {
-                type: "line",
-                data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            display: false,
-                        },
-                        x: {
-                            display: false,
-                        },
-                    },
-                    plugins: {
-                        legend: {
-                            display: false,
-                        },
-                        tooltip: {
-                            enabled: false,
-                        },
-                    },
+                    <div class="mt-2">
+                        <label for="predictrange"
+                               class="form-label tracking-tight uppercase text-sm font-medium">Predict
+                            for the next</label>
+
+                        <select class="form-select form-select-sm" id="predictrange"
+                                aria-label="Small select example" wire:model.live.debounce="predictrange">
+                            <option>Select Range</option>
+                            <option value="week">Week</option>
+                            <option value="month">Month</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+
+                    @if ($predictrange == 'custom')
+                        <div class="mt-2">
+                            <label for="inputPassword5"
+                                   class="form-label tracking-tight uppercase text-sm font-medium sr-only">custome
+                                date</label>
+                            <input type="number" placeholder="Type here" id="inputPassword5"
+                                   class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                        </div>
+                    @endif
+
+                    <div class="mt-2">
+                        <label for="predictinterval"
+                               class="form-label tracking-tight uppercase text-sm font-medium">Dataset
+                            Interval</label>
+
+                        <select class="form-select form-select-sm" id="predictinterval"
+                                aria-label="Small select example" wire:model.live.debounce="predictinterval">
+                            <option>Select Interval</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 mt-2">
+                        <div class="p-2">
+                            <button type="button" class="w-full btn btn-sm btn-outline-secondary ">Clear</button>
+                        </div>
+                        <div class="p-2">
+                            <button type="button" class="w-full btn btn-sm btn-primary ">Run</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="w-full mt-3 flex justify-between">
+                <div class="flex gap-3">
+                    {{-- <button type="button" class="btn btn-sm btn-outline-secondary ">View Accuracy Report</button> --}}
+                    <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                        <div class="h-auto">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                    @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
+                            </button>
+                        </div>
+
+                        <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                        <div x-cloak x-transition.duration.500ms x-show="showModal"
+                             class="fixed inset-0 z-50 grid place-content-center">
+                            <div @click.away="showModal = false"
+                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Accuracy Report</h1>
+                                        </div>
+                                        <div class="flex justify-center modal-body" x-transition.opacity>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full flex gap-2 pt-3 justify-end">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                            @click="showModal = false">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <button id="charttoimageexport" type="button" class="btn btn-sm btn-info">Save to Image
+                    </button>
+
+
+                    <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                        <div class="h-auto">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-sm btn-secondary"
+                                    @click="showModal = !showModal" data-bs-target="#exampleModal">Generate Purchase
+                                Order
+                            </button>
+                        </div>
+
+                        <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                        <div x-cloak x-transition.duration.500ms x-show="showModal"
+                             class="fixed inset-0 z-50 grid place-content-center">
+                            <div @click.away="showModal = false"
+                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Accuracy Report</h1>
+                                        </div>
+                                        <div class="flex justify-center modal-body" x-transition.opacity>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full flex gap-2 pt-3 justify-end">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                            @click="showModal = false">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {{-- <button type="button" class="btn btn-sm btn-outline-secondary ">Print</button> --}}
+                {{-- <div> --}}
+                {{--     <button type="button" class="btn btn-sm btn-outline-secondary ">Print</button> --}}
+                {{-- </div> --}}
+                {{-- <div class="flex gap-2"> --}}
+                {{--     <button type="button" class="btn btn-sm btn-outline-secondary ">Clear</button> --}}
+                {{--     <button type="button" class="btn btn-sm btn-primary ">Run Prediction</button> --}}
+                {{-- </div> --}}
+            </div>
+        </div>
+    </div>
+    <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
+        test
+    </div>
+</div>
+{{--@script--}}
+<script>
+    // Sample data for product sales
+    // let dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
+    //     29, 30
+    // ];
+    // let productSales = [
+    //     5,
+    //     15,
+    //     2,
+    //     12,
+    //     12,
+    //     11,
+    //     3,
+    //     9,
+    //     7,
+    //     4,
+    //     16,
+    //     20,
+    //     8,
+    //     19,
+    //     19,
+    //     16,
+    //     3,
+    //     13,
+    //     3,
+    //     10,
+    //     13,
+    //     8,
+    //     5,
+    //     7,
+    //     18,
+    //     15,
+    //     20,
+    //     12,
+    //     18,
+    //     4
+    // ];
+
+    // // Generate product sales between 1 and 20
+    // for (let i = 0; i < dates.length; i++) {
+    //     productSales.push(Math.floor(Math.random() * 20) + 1);
+    // }
+
+    // console.log(dates, productSales);
+
+    {{-- new Chart(document.getElementById('productSalesChart'), { --}}
+    {{--    type: 'line', --}}
+    {{--    data: { --}}
+    {{--        labels: {!! json_encode($test_a) !!}, --}}
+    {{--        datasets: [{ --}}
+    {{--            label: 'Product Sold Quantity', --}}
+    {{--            data: {!! json_encode($test_b) !!}, --}}
+    {{--            backgroundColor: 'rgba(54, 162, 235, 0.2)', --}}
+    {{--            borderColor: 'rgba(54, 162, 235, 1)', --}}
+    {{--            pointRadius: 5, --}}
+    {{--            pointHoverRadius: 7, --}}
+    {{--            pointBackgroundColor: 'rgba(54, 162, 235, 1)', --}}
+    {{--            pointBorderColor: 'white', --}}
+    {{--        }] --}}
+    {{--    }, --}}
+    {{--    options: { --}}
+    {{--        responsive: true, --}}
+    {{--        maintainAspectRatio: false, --}}
+    {{--        plugins: { --}}
+    {{--            legend: { --}}
+    {{--                display: false, --}}
+    {{--            }, --}}
+    {{--        }, --}}
+    {{--    } --}}
+    {{-- }); --}}
+
+    let chart = new Chart(document.getElementById('productSalesChart'), {
+        type: "line",
+        data: {
+            labels: {!! json_encode($test_a) !!},
+            datasets: [{
+                label: 'Product Sold Quantity',
+                borderColor: '#009aff',
+                data: {!! json_encode($test_b) !!},
+                backgroundColor: '#bae0ff',
+                pointStyle: 'circle',
+                pointRadius: 5,
+                pointHoverRadius: 4,
+                tension: 0.2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
                 },
-            };
+            },
+        }
+    });
 
-            const myChart_2 = new Chart(
-                document.getElementById("shop-perception-chart"),
-                config,
-            );
-            const myChart_3 = new Chart(
-                document.getElementById("shop-sentiment-chart"),
-                config,
-            );
-        </script>
-    @endscript
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
+{{--@endscript--}}

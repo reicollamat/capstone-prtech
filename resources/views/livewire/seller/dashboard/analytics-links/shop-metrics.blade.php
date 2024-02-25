@@ -103,7 +103,7 @@
                 <div
                     class="block p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="flex items-center justify-between mb-3">
-                        <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Recently Bought
+                        <h5 class="!mb-0 text-lg font-bold tracking-tight text-gray-700 dark:text-white">Recently Sold
                             Products</h5>
                         <div class="btn-group btn-group-sm" role="group">
                             <div class="input-group-text" id="btnGroupAddon">Filter</div>
