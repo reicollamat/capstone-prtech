@@ -11,7 +11,7 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-da57b4b3.css",
+    "file": "assets/app-90e8bbd5.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -24,7 +24,7 @@
     "src": "resources/js/analytics-model-report-header.js"
   },
   "resources/js/app.css": {
-    "file": "assets/app-47e6fcc6.css",
+    "file": "assets/app-ebde0a5b.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -33,9 +33,9 @@
       "assets/bootstrap-icons-bb1de989.woff"
     ],
     "css": [
-      "assets/app-47e6fcc6.css"
+      "assets/app-ebde0a5b.css"
     ],
-    "file": "assets/app-c8c519fa.js",
+    "file": "assets/app-bc898e08.js",
     "imports": [
       "_auto-a7dedb8f.js"
     ],
