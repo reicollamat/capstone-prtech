@@ -12,7 +12,7 @@
             <div class="col">
                 <div class="nav nav-underline nav-fill bg-dark p-2">
                     <a class="nav-item nav-link text-light active" data-toggle="tab" href="#pending-tab">
-                        Pending
+                        To Ship
                         <span class="position-absolute badge rounded-pill bg-danger ml-1">
                             {{ count($user->purchase->where('purchase_status', 'pending')) + count($user->purchase->where('purchase_status', 'to_ship')) }}
                             <span class="visually-hidden">unread messages</span>
