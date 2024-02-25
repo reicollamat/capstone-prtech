@@ -61,23 +61,23 @@
                     <p class="mb-0 text-gray-600 text-xs tracking-tight">Total summary in</p>
                     <div class="btn-group btn-group-sm" role="group">
                         <button type="button" class="!font-medium btn btn-outline-primary dropdown-toggle "
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             {{ $summary }}
                         </button>
                         <ul class="dropdown-menu !pl-0">
                             <li>
                                 <button type="button" wire:click="$set('summary', 'Weekly')" class="dropdown-item"
-                                        href="#">Weekly
+                                    href="#">Weekly
                                 </button>
                             </li>
                             <li>
                                 <button type="button" wire:click="$set('summary', 'Monthly')" class="dropdown-item"
-                                        href="#">Monthly
+                                    href="#">Monthly
                                 </button>
                             </li>
                             <li>
                                 <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item"
-                                        href="#">Yearly
+                                    href="#">Yearly
                                 </button>
                             </li>
                         </ul>
@@ -85,23 +85,23 @@
                 </div>
                 <div class="btn-group btn-group-sm" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        aria-expanded="false">
                         {{ $productselected != null ? $productselected : 'Select Product' }}
                     </button>
                     <ul class="dropdown-menu !pl-0">
                         <li>
                             <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '7')"
-                                    class="dropdown-item" href="#">Weekly
+                                class="dropdown-item" href="#">Weekly
                             </button>
                         </li>
                         <li>
                             <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '30')"
-                                    class="dropdown-item" href="#">Monthly
+                                class="dropdown-item" href="#">Monthly
                             </button>
                         </li>
                         <li>
                             <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '90')"
-                                    class="dropdown-item" href="#">Yearly
+                                class="dropdown-item" href="#">Yearly
                             </button>
                         </li>
                     </ul>
@@ -109,7 +109,7 @@
                 <div>
                     <form action="#" class="d-flex" role="search">
                         <input class="form-control " type="search" placeholder="Search Product"
-                               aria-label="Search Product">
+                            aria-label="Search Product">
                     </form>
                 </div>
             </div>
@@ -153,26 +153,26 @@
                 <div class="pt-2 px-2">
                     <div>
                         <label for="inputPassword5"
-                               class="form-label tracking-tight uppercase text-sm font-medium">Selected
+                            class="form-label tracking-tight uppercase text-sm font-medium">Selected
                             Product</label>
                         <input type="text" placeholder="Selected Product" id="inputPassword5"
-                               class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                            class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
                     </div>
 
                     <div class="mt-2">
                         <label for="inputPassword5"
-                               class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
+                            class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
                         <input type="text" placeholder="Product Price" id="inputPassword5"
-                               class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                            class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
                     </div>
 
                     <div class="mt-2">
                         <label for="predictrange"
-                               class="form-label tracking-tight uppercase text-sm font-medium">Predict
+                            class="form-label tracking-tight uppercase text-sm font-medium">Predict
                             for the next</label>
 
                         <select class="form-select form-select-sm" id="predictrange"
-                                aria-label="Small select example" wire:model.live.debounce="predictrange">
+                            aria-label="Small select example" wire:model.live.debounce="predictrange">
                             <option>Select Range</option>
                             <option value="week">Week</option>
                             <option value="month">Month</option>
@@ -183,20 +183,20 @@
                     @if ($predictrange == 'custom')
                         <div class="mt-2">
                             <label for="inputPassword5"
-                                   class="form-label tracking-tight uppercase text-sm font-medium sr-only">custome
+                                class="form-label tracking-tight uppercase text-sm font-medium sr-only">custome
                                 date</label>
                             <input type="number" placeholder="Type here" id="inputPassword5"
-                                   class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                                class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
                         </div>
                     @endif
 
                     <div class="mt-2">
                         <label for="predictinterval"
-                               class="form-label tracking-tight uppercase text-sm font-medium">Dataset
+                            class="form-label tracking-tight uppercase text-sm font-medium">Dataset
                             Interval</label>
 
                         <select class="form-select form-select-sm" id="predictinterval"
-                                aria-label="Small select example" wire:model.live.debounce="predictinterval">
+                            aria-label="Small select example" wire:model.live.debounce="predictinterval">
                             <option>Select Interval</option>
                             <option value="daily">Daily</option>
                             <option value="weekly">Weekly</option>
@@ -222,28 +222,87 @@
                         <div class="h-auto">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-sm btn-outline-secondary"
-                                    @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
+                                @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
                             </button>
                         </div>
 
                         <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
 
                         <div x-cloak x-transition.duration.500ms x-show="showModal"
-                             class="fixed inset-0 z-50 grid place-content-center">
+                            class="fixed inset-0 z-50 grid place-content-center">
                             <div @click.away="showModal = false"
-                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Accuracy Report</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                Accuracy Report <span class="text-sm tracking-wide text-gray-600">Data from XXXXX</span>
+                                            </h1>
                                         </div>
-                                        <div class="flex justify-center modal-body" x-transition.opacity>
+                                        <div class="flex flex-col items-center justify-center modal-body" x-transition.opacity>
+                                            <div class="py-4">
+                                                <div class="relative overflow-x-auto">
+                                                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                        <tr>
+                                                            <th scope="col" class="px-6 py-3">
+                                                                Metric Name
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3">
+                                                                Metric Score
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                MAE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                46457
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                MSE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                46457
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                RMSE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                46457
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row" class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                MAPE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                46457
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                            <div class="flex flex-col justify-start text-start">
+                                                <p class="text-sm mb-0.5"><span class="font-medium">MAE (Mean Absolute Error )</span> - tells us how many units we are away from the actual value (the lower the value the better)</p>
+                                                <p class="text-sm mb-0.5"><span class="font-medium">MSE (Mean Square Error )</span> - can be used to evaluate the model compared to other models</p>
+                                                <p class="text-sm mb-0.5"><span class="font-medium">RMSE (Root Mean Square Error)</span> - more accurate version of MSE but in addition it squares the mean obtained.</p>
+                                                <p class="text-sm mb-0.5"><span class="font-medium">MAPE (Mean Absolute Percetag Error )</span> - tells us the number of percent of errors (acceptable is 20%).</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="w-full flex gap-2 pt-3 justify-end">
                                     <button type="button" class="btn btn-outline-secondary"
-                                            @click="showModal = false">
+                                        @click="showModal = false">
                                         Close
                                     </button>
                                 </div>
@@ -251,16 +310,14 @@
                         </div>
                     </div>
 
-
                     <button id="charttoimageexport" type="button" class="btn btn-sm btn-info">Save to Image
                     </button>
-
 
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-secondary"
-                                    @click="showModal = !showModal" data-bs-target="#exampleModal">Generate Purchase
+                            <button type="button" class="btn btn-sm btn-secondary" @click="showModal = !showModal"
+                                data-bs-target="#exampleModal">Generate Purchase
                                 Order
                             </button>
                         </div>
@@ -268,21 +325,20 @@
                         <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
 
                         <div x-cloak x-transition.duration.500ms x-show="showModal"
-                             class="fixed inset-0 z-50 grid place-content-center">
+                            class="fixed inset-0 z-50 grid place-content-center">
                             <div @click.away="showModal = false"
-                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Accuracy Report</h1>
                                         </div>
-                                        <div class="flex justify-center modal-body" x-transition.opacity>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="w-full flex gap-2 pt-3 justify-end">
                                     <button type="button" class="btn btn-outline-secondary"
-                                            @click="showModal = false">
+                                        @click="showModal = false">
                                         Close
                                     </button>
                                 </div>
@@ -290,7 +346,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 {{-- <button type="button" class="btn btn-sm btn-outline-secondary ">Print</button> --}}
                 {{-- <div> --}}
@@ -307,103 +362,131 @@
         test
     </div>
 </div>
-{{--@script--}}
+
 <script>
-    // Sample data for product sales
-    // let dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
-    //     29, 30
-    // ];
-    // let productSales = [
-    //     5,
-    //     15,
-    //     2,
-    //     12,
-    //     12,
-    //     11,
-    //     3,
-    //     9,
-    //     7,
-    //     4,
-    //     16,
-    //     20,
-    //     8,
-    //     19,
-    //     19,
-    //     16,
-    //     3,
-    //     13,
-    //     3,
-    //     10,
-    //     13,
-    //     8,
-    //     5,
-    //     7,
-    //     18,
-    //     15,
-    //     20,
-    //     12,
-    //     18,
-    //     4
-    // ];
+    // Adding an event listener to the button
+    document.getElementById("charttoimageexport").addEventListener("click", handleClick);
 
-    // // Generate product sales between 1 and 20
-    // for (let i = 0; i < dates.length; i++) {
-    //     productSales.push(Math.floor(Math.random() * 20) + 1);
-    // }
+    let ctx = document.getElementById('productSalesChart');
 
-    // console.log(dates, productSales);
+    function handleClick() {
 
-    {{-- new Chart(document.getElementById('productSalesChart'), { --}}
-    {{--    type: 'line', --}}
-    {{--    data: { --}}
-    {{--        labels: {!! json_encode($test_a) !!}, --}}
-    {{--        datasets: [{ --}}
-    {{--            label: 'Product Sold Quantity', --}}
-    {{--            data: {!! json_encode($test_b) !!}, --}}
-    {{--            backgroundColor: 'rgba(54, 162, 235, 0.2)', --}}
-    {{--            borderColor: 'rgba(54, 162, 235, 1)', --}}
-    {{--            pointRadius: 5, --}}
-    {{--            pointHoverRadius: 7, --}}
-    {{--            pointBackgroundColor: 'rgba(54, 162, 235, 1)', --}}
-    {{--            pointBorderColor: 'white', --}}
-    {{--        }] --}}
-    {{--    }, --}}
-    {{--    options: { --}}
-    {{--        responsive: true, --}}
-    {{--        maintainAspectRatio: false, --}}
-    {{--        plugins: { --}}
-    {{--            legend: { --}}
-    {{--                display: false, --}}
-    {{--            }, --}}
-    {{--        }, --}}
-    {{--    } --}}
-    {{-- }); --}}
+        ctx.style.backgroundColor = 'white';
 
-    let chart = new Chart(document.getElementById('productSalesChart'), {
-        type: "line",
-        data: {
-            labels: {!! json_encode($test_a) !!},
-            datasets: [{
-                label: 'Product Sold Quantity',
-                borderColor: '#009aff',
-                data: {!! json_encode($test_b) !!},
-                backgroundColor: '#bae0ff',
-                pointStyle: 'circle',
-                pointRadius: 5,
-                pointHoverRadius: 4,
-                tension: 0.2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false,
-                },
-            },
-        }
-    });
+        let img = ctx.toDataURL("image/png").replace("image/png", "image/octet-stream");
 
+        let aDownloadLink = document.createElement('a');
+
+        // Add the name of the file to the link
+        aDownloadLink.download = 'canvas_image.png';
+        // Attach the data to the link
+        aDownloadLink.href = img;
+        // Get the code to click the download link
+        aDownloadLink.click();
+
+    }
 </script>
-{{--@endscript--}}
+
+@script
+    <script>
+        // Sample data for product sales
+        // let dates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
+        //     29, 30
+        // ];
+        // let productSales = [
+        //     5,
+        //     15,
+        //     2,
+        //     12,
+        //     12,
+        //     11,
+        //     3,
+        //     9,
+        //     7,
+        //     4,
+        //     16,
+        //     20,
+        //     8,
+        //     19,
+        //     19,
+        //     16,
+        //     3,
+        //     13,
+        //     3,
+        //     10,
+        //     13,
+        //     8,
+        //     5,
+        //     7,
+        //     18,
+        //     15,
+        //     20,
+        //     12,
+        //     18,
+        //     4
+        // ];
+
+        // // Generate product sales between 1 and 20
+        // for (let i = 0; i < dates.length; i++) {
+        //     productSales.push(Math.floor(Math.random() * 20) + 1);
+        // }
+
+        // console.log(dates, productSales);
+
+        {{-- new Chart(document.getElementById('productSalesChart'), { --}}
+        {{--    type: 'line', --}}
+        {{--    data: { --}}
+        {{--        labels: {!! json_encode($test_a) !!}, --}}
+        {{--        datasets: [{ --}}
+        {{--            label: 'Product Sold Quantity', --}}
+        {{--            data: {!! json_encode($test_b) !!}, --}}
+        {{--            backgroundColor: 'rgba(54, 162, 235, 0.2)', --}}
+        {{--            borderColor: 'rgba(54, 162, 235, 1)', --}}
+        {{--            pointRadius: 5, --}}
+        {{--            pointHoverRadius: 7, --}}
+        {{--            pointBackgroundColor: 'rgba(54, 162, 235, 1)', --}}
+        {{--            pointBorderColor: 'white', --}}
+        {{--        }] --}}
+        {{--    }, --}}
+        {{--    options: { --}}
+        {{--        responsive: true, --}}
+        {{--        maintainAspectRatio: false, --}}
+        {{--        plugins: { --}}
+        {{--            legend: { --}}
+        {{--                display: false, --}}
+        {{--            }, --}}
+        {{--        }, --}}
+        {{--    } --}}
+        {{-- }); --}}
+
+        // Adding an event listener to the button
+        // document.getElementById("myButton").addEventListener("click", handleClick);
+
+        new Chart(document.getElementById('productSalesChart'), {
+            type: "line",
+            data: {
+                labels: {!! json_encode($test_a) !!},
+                datasets: [{
+                    label: 'Sold Quantity',
+                    borderColor: '#009aff',
+                    data: {!! json_encode($test_b) !!},
+                    // backgroundColor: '#bae0ff',
+                    // pointStyle: 'circle',
+                    pointRadius: 7,
+                    pointHoverRadius: 7,
+                    tension: 0.1,
+                    fill: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+            }
+        });
+    </script>
+@endscript

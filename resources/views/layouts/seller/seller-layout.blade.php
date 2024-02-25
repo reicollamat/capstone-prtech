@@ -373,7 +373,7 @@
         // }
         //
         // if (typeof initializePopover === 'function') {
-        function inializepopover() {
+        function initializelibraries() {
             // initialize popover js
             const popoverTriggerList = document.querySelectorAll(
                 '[data-bs-toggle="popover"]',
@@ -381,6 +381,7 @@
             const popoverList = [...popoverTriggerList].map(
                 (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
             );
+
             console.log('initialize')
         }
 
@@ -391,7 +392,7 @@
         // window.addEventListener("load", setChildContainerHeight);
         // window.addEventListener("resize", setChildContainerHeight);
         // window.addEventListener("livewire:navigated", setChildContainerHeight);
-        window.addEventListener("livewire:navigated", inializepopover);
+        window.addEventListener("livewire:navigated", initializelibraries);
     </script>
 
 </body>
