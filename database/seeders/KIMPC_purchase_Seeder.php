@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class KIMPC_comment_Seeder extends Seeder
+class KIMPC_purchase_Seeder extends Seeder
 {
     /**
      * Run the database seeds.

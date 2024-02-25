@@ -30,11 +30,11 @@ Please check the official laravel installation guide for server requirements bef
 
 Clone the repository
 
-    git clone git@github.com:reicollamat/techno-retech.git
+    git clone https://github.com/reicollamat/capstone-prtech.git
 
 Switch to the repo folder
 
-    cd techno-retech
+    cd capstone-prtech
 
 Install all the dependencies using composer
 
