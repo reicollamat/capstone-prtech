@@ -191,7 +191,7 @@
                                     @elseif ($item->status == 'returnrefund-inspection')
                                         <h6>Actions:</h6>
                                         <button type="button" wire:click="$set('ship_replacement_item', '{{ $item->id }}')" class="bg-blue-500 hover:bg-blue-700 text-white p-2 mb-2 rounded w-full">
-                                            Ship Item
+                                            Ship Replacement
                                         </button>
                                     @endif
                                 </div>
