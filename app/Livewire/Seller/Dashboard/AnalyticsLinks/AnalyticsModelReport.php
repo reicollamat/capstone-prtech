@@ -31,6 +31,8 @@ class AnalyticsModelReport extends Component
 
     public $combinedArray;
 
+    public int $test;
+
     #[Locked]
     public $seller;
 
@@ -39,6 +41,8 @@ class AnalyticsModelReport extends Component
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         $this->summary = 'Monthly';
+
+        $this->test = 0;
 
         // $this->test_a_func();
         //
@@ -92,6 +96,9 @@ class AnalyticsModelReport extends Component
         } else {
             $this->combinedArray = array_slice($this->combinedArray, 30);
         }
+
+        $this->test = rand(1, 30);
+
         $this->dispatch('update-chart');
     }
 

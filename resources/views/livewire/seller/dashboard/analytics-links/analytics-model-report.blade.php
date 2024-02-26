@@ -115,7 +115,7 @@
                 </div>
                 <div>
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
-                        data-bs-content="Save to Image">
+                        data-bs-content="Save Chart to Image">
                         <button id="charttoimageexport" type="button" class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-download"></i>
                         </button>
@@ -442,7 +442,7 @@
         </div>
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
-        test
+        {{ $test }}
     </div>
 </div>
 
@@ -469,16 +469,14 @@
 
     }
 
-    // Livewire.on('update-chart', () => {
-    //     console.log("update");
-    // });
-
 </script>
 
 @script
     <script>
 
         let ctx = document.getElementById('productSalesChart');
+
+        let $test = 30;
 
         let predictchart = new Chart(ctx, {
             type: "line",
@@ -508,8 +506,11 @@
         });
 
         Livewire.on('update-chart', () => {
-            predictchart.data.datasets[0].data[0] = 40;
+            predictchart.data.datasets[0].data[0] = $wire.test;
             predictchart.update();
+            {{--$test = {!! $test !!};--}}
+            // console.log($test);
+            // console.log($wire.test);
             {{-- new Chart(document.getElementById('productSalesChart'), { --}}
             {{--    type: 'line', --}}
             {{--    data: { --}}
