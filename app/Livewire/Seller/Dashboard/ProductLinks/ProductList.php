@@ -199,6 +199,7 @@ class ProductList extends Component
         $this->mount();
     }
 
+    // TODO - FIX BUGS
     #[Computed]
     public function getMostBoughtProducts()
     {

@@ -322,8 +322,8 @@
                                             <td class="text-sm">
                                                 {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}
                                             </td>
-                                            <td class="text-sm">{{ $product->average_rating }}
-                                                - {{ $product->average_rating >= 3 ? 'Positive' : 'Negative' }}</td>
+                                            <td class="text-sm">{{ round($product->average_rating, 2) }}
+                                                - {{ round($product->average_rating,2)  >= 3 ? 'Positive' : 'Negative' }}</td>
                                             <td class="text-sm">
                                                 {{ $product->total_comment }}
                                             </td>
@@ -397,7 +397,7 @@
                                                 {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}
                                             </td>
                                             <td class="text-sm">{{ round($product->average_rating, 2) }}
-                                                - {{ $product->average_rating > 3 ? 'Positive' : 'Negative' }}</td>
+                                                - {{ round($product->average_rating, 2)  > 3 ? 'Positive' : 'Negative' }}</td>
                                             <td class="text-sm">
                                                 {{ $product->total_comment }}
                                             </td>

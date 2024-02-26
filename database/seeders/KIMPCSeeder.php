@@ -14,7 +14,6 @@ use App\Models\Seller;
 use App\Models\SellerShopMetrics;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,7 +30,7 @@ class KIMPCSeeder extends Seeder
             'first_name' => 'Kim',
             'last_name' => 'Megs',
             'email' => 'raycollamat11@gmail.com',
-            // 'email_verified_at' => now(),
+            'email_verified_at' => now(),
             'password' => Hash::make('kimpc123'),
             'phone_number' => '09604471340',
             'street_address_1' => 'E. Dela Paz Street, San Roque',
@@ -44,7 +43,7 @@ class KIMPCSeeder extends Seeder
         // for KIMPC seller account
         Seller::factory()->create([
             'user_id' => $user->id,
-            'registered_business_name' => $user->first_name . ' ' . $user->last_name,
+            'registered_business_name' => $user->first_name.' '.$user->last_name,
             'shop_name' => 'KIMPC',
             'shop_email' => $user->email,
             'shop_phone_number' => $user->phone_number,
@@ -63,8 +62,6 @@ class KIMPCSeeder extends Seeder
             'target_sales' => 10000,
             'seller_id' => 13,
         ]);
-
-
 
         // PRODUCTS
         // 1 //
@@ -145,12 +142,12 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $positive->text,
-                "rating" => $positive->rating,
-                "sentiment" => $positive->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $positive->text,
+                'rating' => $positive->rating,
+                'sentiment' => $positive->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
 
@@ -163,16 +160,14 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $negative->text,
-                "rating" => $negative->rating,
-                "sentiment" => $negative->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $negative->text,
+                'rating' => $negative->rating,
+                'sentiment' => $negative->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
-
-
 
         // 2 //
         $image = 'img/components/mouse/kimpc_mouse.png';
@@ -206,8 +201,8 @@ class KIMPCSeeder extends Seeder
             'tracking_method' => 'Optical',
             'connection_type' => 'Wired',
             'max_dpi' => 25600,
-            'hand_orientation' => "Right",
-            'color' => "Black",
+            'hand_orientation' => 'Right',
+            'color' => 'Black',
             // 'image' => $image,
             'description' => 'The Rakk Alti Illuminated Gaming Mouse offers superior precision and style. With customizable RGB lighting, ergonomic design, and responsive buttons, it enhances gaming experience. Dominate the game with this high-performance mouse, combining functionality and aesthetic appeal.
 
@@ -254,12 +249,12 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $positive->text,
-                "rating" => $positive->rating,
-                "sentiment" => $positive->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $positive->text,
+                'rating' => $positive->rating,
+                'sentiment' => $positive->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
 
@@ -272,16 +267,14 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $negative->text,
-                "rating" => $negative->rating,
-                "sentiment" => $negative->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $negative->text,
+                'rating' => $negative->rating,
+                'sentiment' => $negative->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
-
-
 
         // 3 //
         $image = 'img/components/headphone/kimpc_headphone.png';
@@ -362,12 +355,12 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $positive->text,
-                "rating" => $positive->rating,
-                "sentiment" => $positive->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $positive->text,
+                'rating' => $positive->rating,
+                'sentiment' => $positive->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
 
@@ -380,16 +373,14 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $negative->text,
-                "rating" => $negative->rating,
-                "sentiment" => $negative->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $negative->text,
+                'rating' => $negative->rating,
+                'sentiment' => $negative->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
-
-
 
         // 4 //
         $image = 'img/components/keyboard/kimpc_keyboard.png';
@@ -470,12 +461,12 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $positive->text,
-                "rating" => $positive->rating,
-                "sentiment" => $positive->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $positive->text,
+                'rating' => $positive->rating,
+                'sentiment' => $positive->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
 
@@ -488,16 +479,14 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $negative->text,
-                "rating" => $negative->rating,
-                "sentiment" => $negative->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $negative->text,
+                'rating' => $negative->rating,
+                'sentiment' => $negative->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
-
-
 
         // 5 //
         $image = 'img/components/ram/kimpc_ram.png';
@@ -578,12 +567,12 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $positive->text,
-                "rating" => $positive->rating,
-                "sentiment" => $positive->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $positive->text,
+                'rating' => $positive->rating,
+                'sentiment' => $positive->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
 
@@ -596,12 +585,12 @@ class KIMPCSeeder extends Seeder
                 'user_id' => fake()->numberBetween(3, 23),
                 'product_id' => $product->id,
                 'seller_id' => $product->seller_id,
-                "text" => $negative->text,
-                "rating" => $negative->rating,
-                "sentiment" => $negative->sentiment,
-                "deleted_at" => null,
-                "created_at" => $startDate->addDay()->toDateTimeString(),
-                "updated_at" => $startDate->addDay()->toDateTimeString(),
+                'text' => $negative->text,
+                'rating' => $negative->rating,
+                'sentiment' => $negative->sentiment,
+                'deleted_at' => null,
+                'created_at' => $startDate->addDay()->toDateTimeString(),
+                'updated_at' => $startDate->addDay()->toDateTimeString(),
             ]);
         }
     }

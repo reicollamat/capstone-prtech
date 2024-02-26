@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Comment;
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductStockSeeder extends Seeder
@@ -39,8 +38,6 @@ class ProductStockSeeder extends Seeder
             ]);
         }
 
-
-
         $comments = Comment::all();
 
         // dd($comments);
@@ -49,12 +46,12 @@ class ProductStockSeeder extends Seeder
             if ($comment->rating >= 3) {
                 // positive
                 $comment->update([
-                    'sentiment' => 1
+                    'sentiment' => 1,
                 ]);
             } else {
                 // negative
                 $comment->update([
-                    'sentiment' => 0
+                    'sentiment' => 0,
                 ]);
             }
         }

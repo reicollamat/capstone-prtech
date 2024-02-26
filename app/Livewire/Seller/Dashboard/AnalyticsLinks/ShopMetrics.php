@@ -355,7 +355,7 @@ class ShopMetrics extends Component
     {
         $pcount = Comment::wherein('rating', [3, 4, 5])
             ->where('seller_id', '=', $this->seller_id)
-            ->where('created_at', '>=', now()->subDays(30))
+            // ->where('created_at', '>=', now()->subDays(30))
             ->select('text')
             ->get();
 
