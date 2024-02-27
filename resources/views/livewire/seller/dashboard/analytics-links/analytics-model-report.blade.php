@@ -10,16 +10,18 @@
                             <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                                 <div class="h-auto">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="text-sm text-green-900" @click="showModal = !showModal"
-                                            data-bs-target="#exampleModal">View</button>
+                                    <button type="button" class="text-sm text-green-900"
+                                        @click="showModal = !showModal" data-bs-target="#exampleModal">View
+                                    </button>
                                 </div>
 
-                                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50 z-1"></div>
+                                <div x-cloak x-transition.opacity x-show="showModal"
+                                    class="fixed inset-0 bg-black/50 z-1"></div>
 
                                 <div x-cloak x-transition.duration.500ms x-show="showModal"
-                                     class="fixed inset-0 z-50 grid place-content-center">
+                                    class="fixed inset-0 z-50 grid place-content-center">
                                     <div @click.away="showModal = false"
-                                         class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -30,7 +32,7 @@
                                         </div>
                                         <div class="w-full flex gap-2 pt-3 justify-end">
                                             <button type="button" class="btn btn-outline-secondary"
-                                                    @click="showModal = false">
+                                                @click="showModal = false">
                                                 Close
                                             </button>
                                         </div>
@@ -52,27 +54,30 @@
                             <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                                 <div class="h-auto">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="text-sm text-yellow-900" @click="showModal = !showModal"
-                                            data-bs-target="#exampleModal">View</button>
+                                    <button type="button" class="text-sm text-yellow-900"
+                                        @click="showModal = !showModal" data-bs-target="#exampleModal">View
+                                    </button>
                                 </div>
 
-                                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50 z-1"></div>
+                                <div x-cloak x-transition.opacity x-show="showModal"
+                                    class="fixed inset-0 bg-black/50 z-1"></div>
 
                                 <div x-cloak x-transition.duration.500ms x-show="showModal"
-                                     class="fixed inset-0 z-50 grid place-content-center">
+                                    class="fixed inset-0 z-50 grid place-content-center">
                                     <div @click.away="showModal = false"
-                                         class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Restock Soon</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Restock
+                                                        Soon</h1>
                                                 </div>
 
                                             </div>
                                         </div>
                                         <div class="w-full flex gap-2 pt-3 justify-end">
                                             <button type="button" class="btn btn-outline-secondary"
-                                                    @click="showModal = false">
+                                                @click="showModal = false">
                                                 Close
                                             </button>
                                         </div>
@@ -172,8 +177,8 @@
                     </form>
                 </div>
                 <div>
-                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
-                        data-bs-content="Save Chart to Image">
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                        data-bs-trigger="hover focus" data-bs-content="Save Chart to Image">
                         <button id="charttoimageexport" type="button" class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-download"></i>
                         </button>
@@ -194,7 +199,7 @@
                 {{-- </div> --}}
                 <div class="flex-auto border border-gray-200">
                     <div class="p-2 h-full w-full relative flex justify-center items-center" wire:ignore>
-                         <canvas class="!w-full !h-[320px]" id="productSalesChart"></canvas>
+                        <canvas class="!w-full !h-[320px]" id="productSalesChart"></canvas>
                         {{-- <div> --}}
                         {{--     <h5 class="text-gray-600 text-3xl tracking-wider">Awaiting User Input</h5> --}}
                         {{--     <h6 class="text-gray-500 text-xl text-center tracking-tighter">Select Product to View</h6> --}}
@@ -254,8 +259,9 @@
                             <label for="customrange"
                                 class="form-label tracking-tight uppercase text-sm font-medium sr-only">custome
                                 date</label>
-                            <input type="number" placeholder="Type here" id="customrange" name="customrange" min="1"
-                                class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                            <input type="number" placeholder="Type here" id="customrange" name="customrange"
+                                min="1" class="form-control form-control-sm"
+                                aria-describedby="passwordHelpBlock">
                         </div>
                     @endif
 
@@ -433,7 +439,8 @@
                                                 <tbody>
                                                     @foreach ($combinedArray as $key => $value)
                                                         <tr>
-                                                            <th scope="row" class="text-sm">{{ $key }}</th>
+                                                            <th scope="row" class="text-sm">{{ $key }}
+                                                            </th>
                                                             <td>{{ $value }}</td>
                                                         </tr>
                                                     @endforeach
@@ -505,18 +512,18 @@
                 <p class="mb-0 text-gray-600 text-xs tracking-tight">Data Value from </p>
                 <div class="btn-group btn-group-sm" role="group">
                     <button type="button" class="!font-medium btn btn-outline-primary dropdown-toggle "
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         {{ $summary }}
                     </button>
                     <ul class="dropdown-menu !pl-0">
                         <li>
                             <button type="button" wire:click="summaryChange('Weekly')" class="dropdown-item"
-                                    href="#">Weekly
+                                href="#">Weekly
                             </button>
                         </li>
                         <li>
                             <button type="button" wire:click="summaryChange('Monthly')" class="dropdown-item"
-                                    href="#">Monthly
+                                href="#">Monthly
                             </button>
                         </li>
                         {{-- <li> --}}
@@ -529,76 +536,64 @@
             </div>
         </div>
         <div class="pt-2">
-            <table
-                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead
-                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Product
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Actual Sold
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Forecasted Sold
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Accuracy
-                    </th>
-                </tr>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Product
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Actual Sold
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Forecasted Sold
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Accuracy
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row"
-                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                        MAE
-                    </th>
-                    <td class="p-2">
-                        9999.99
-                    </td>
-                </tr>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row"
-                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                        MAE
-                    </th>
-                    <td class="p-2">
-                        9999.99
-                    </td>
-                </tr>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row"
-                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                        MAE
-                    </th>
-                    <td class="p-2">
-                        9999.99
-                    </td>
-                </tr>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row"
-                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                        MAE
-                    </th>
-                    <td class="p-2">
-                        9999.99
-                    </td>
-                </tr>
-                <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row"
-                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                        MAE
-                    </th>
-                    <td class="p-2">
-                        9999.99
-                    </td>
-                </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                            MAE
+                        </th>
+                        <td class="p-2">
+                            9999.99
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                            MAE
+                        </th>
+                        <td class="p-2">
+                            9999.99
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                            MAE
+                        </th>
+                        <td class="p-2">
+                            9999.99
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                            MAE
+                        </th>
+                        <td class="p-2">
+                            9999.99
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                            MAE
+                        </th>
+                        <td class="p-2">
+                            9999.99
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -627,12 +622,10 @@
         aDownloadLink.click();
 
     }
-
 </script>
 
 @script
     <script>
-
         let ctx = document.getElementById('productSalesChart');
 
         let $test = 30;
@@ -667,7 +660,7 @@
         Livewire.on('update-chart', () => {
             predictchart.data.datasets[0].data[0] = $wire.test;
             predictchart.update();
-            {{--$test = {!! $test !!};--}}
+            {{-- $test = {!! $test !!}; --}}
             // console.log($test);
             // console.log($wire.test);
             {{-- new Chart(document.getElementById('productSalesChart'), { --}}
@@ -700,8 +693,6 @@
             // document.getElementById("myButton").addEventListener("click", handleClick);
 
 
-
         });
-
     </script>
 @endscript
