@@ -19,6 +19,7 @@ use App\Livewire\LeaveReview;
 use App\Livewire\Seller\Auth\LoginPage;
 use App\Livewire\Seller\Auth\RegisterPage;
 use App\Livewire\Seller\Dashboard\AnalyticsLinks\AnalyticsModelReport;
+use App\Livewire\Seller\Dashboard\AnalyticsLinks\ReviewInsight;
 use App\Livewire\Seller\Dashboard\AnalyticsLinks\ShopMetrics;
 use App\Livewire\Seller\Dashboard\OrderLinks\OrderCancellations;
 use App\Livewire\Seller\Dashboard\OrderLinks\OrderHistory;
@@ -122,6 +123,7 @@ Route::prefix('seller')->group(function () {
             Route::prefix('analytics')->group(function () {
                 Route::get('/stocksense', AnalyticsModelReport::class)->name('analytics-model-report');
                 Route::get('/shopmetrics', ShopMetrics::class)->name('analytics-shop-metrics');
+                Route::get('/reviewinsight', ReviewInsight::class)->name('analytics-review-insight');
             });
         });
     });
