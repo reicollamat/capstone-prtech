@@ -7,7 +7,36 @@
                     <hr class="m-0 w-16 text-green-900">
                     <div class="absolute bottom-0 right-0">
                         <div class="w-full flex justify-end">
-                            <button type="button" class="text-sm text-green-900">View</button>
+                            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                                <div class="h-auto">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="text-sm text-green-900" @click="showModal = !showModal"
+                                            data-bs-target="#exampleModal">View</button>
+                                </div>
+
+                                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50 z-1"></div>
+
+                                <div x-cloak x-transition.duration.500ms x-show="showModal"
+                                     class="fixed inset-0 z-50 grid place-content-center">
+                                    <div @click.away="showModal = false"
+                                         class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Restock Now</h1>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex gap-2 pt-3 justify-end">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                    @click="showModal = false">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -20,7 +49,36 @@
                     <hr class="m-0 w-16 text-yellow-900">
                     <div class="absolute bottom-0 right-0">
                         <div class="w-full flex justify-end">
-                            <button type="button" class="text-sm text-yellow-900">View</button>
+                            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                                <div class="h-auto">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="text-sm text-yellow-900" @click="showModal = !showModal"
+                                            data-bs-target="#exampleModal">View</button>
+                                </div>
+
+                                <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50 z-1"></div>
+
+                                <div x-cloak x-transition.duration.500ms x-show="showModal"
+                                     class="fixed inset-0 z-50 grid place-content-center">
+                                    <div @click.away="showModal = false"
+                                         class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Restock Soon</h1>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex gap-2 pt-3 justify-end">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                    @click="showModal = false">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -193,10 +251,10 @@
 
                     @if ($predictrange == 'custom')
                         <div class="mt-2">
-                            <label for="inputPassword5"
+                            <label for="customrange"
                                 class="form-label tracking-tight uppercase text-sm font-medium sr-only">custome
                                 date</label>
-                            <input type="number" placeholder="Type here" id="inputPassword5"
+                            <input type="number" placeholder="Type here" id="customrange" name="customrange" min="1"
                                 class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
                         </div>
                     @endif
@@ -442,7 +500,108 @@
         </div>
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
-        {{ $test }}
+        <div class="flex justify-end">
+            <div class="flex gap-1.5 items-center">
+                <p class="mb-0 text-gray-600 text-xs tracking-tight">Data Value from </p>
+                <div class="btn-group btn-group-sm" role="group">
+                    <button type="button" class="!font-medium btn btn-outline-primary dropdown-toggle "
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ $summary }}
+                    </button>
+                    <ul class="dropdown-menu !pl-0">
+                        <li>
+                            <button type="button" wire:click="summaryChange('Weekly')" class="dropdown-item"
+                                    href="#">Weekly
+                            </button>
+                        </li>
+                        <li>
+                            <button type="button" wire:click="summaryChange('Monthly')" class="dropdown-item"
+                                    href="#">Monthly
+                            </button>
+                        </li>
+                        {{-- <li> --}}
+                        {{--     <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
+                        {{--         href="#">Yearly --}}
+                        {{--     </button> --}}
+                        {{-- </li> --}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="pt-2">
+            <table
+                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead
+                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Product
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Actual Sold
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Forecasted Sold
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Accuracy
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row"
+                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                        MAE
+                    </th>
+                    <td class="p-2">
+                        9999.99
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row"
+                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                        MAE
+                    </th>
+                    <td class="p-2">
+                        9999.99
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row"
+                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                        MAE
+                    </th>
+                    <td class="p-2">
+                        9999.99
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row"
+                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                        MAE
+                    </th>
+                    <td class="p-2">
+                        9999.99
+                    </td>
+                </tr>
+                <tr
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row"
+                        class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                        MAE
+                    </th>
+                    <td class="p-2">
+                        9999.99
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
