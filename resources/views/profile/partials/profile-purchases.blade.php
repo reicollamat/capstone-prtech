@@ -374,7 +374,7 @@
                         </div>
                     @endif
 
-                    @foreach ($user->purchase as $key => $purchase)
+                    @foreach ($user->purchase->sortByDesc('updated_at') as $key => $purchase)
                         @if ($purchase->purchase_status == 'completed')
                             <div class="accordion accordion-flush my-2 border rounded" id="accordionFlushCompleted">
                                 <div class="accordion-item border">

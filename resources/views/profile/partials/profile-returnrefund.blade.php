@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="card-body bg-secondary-subtle">
-        @foreach ($user->item_returnrefund_infos as $key => $item_returnrefund_info)
+        @foreach ($user->item_returnrefund_infos->sortByDesc('updated_at') as $key => $item_returnrefund_info)
             <div class="accordion accordion-flush my-3 border rounded" id="accordionFlush">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
