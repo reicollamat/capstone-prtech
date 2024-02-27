@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Seller\Dashboard\OrderLinks;
 
+use App\Models\ItemReturnrefundInfo;
 use App\Models\Product;
 use App\Models\Purchase;
-use App\Models\ItemReturnrefundInfo;
 use App\Models\Seller;
 use App\Models\Shipments;
 use Illuminate\Support\Facades\Auth;
@@ -19,12 +19,17 @@ class OrderReturnsRefunds extends Component
     use WithPagination;
 
     public $refund_option;
+
     public $seller;
 
     public $return_product_complete;
+
     public $replacement_arrived;
+
     public $ship_replacement_item;
+
     public $pay_partial_refund;
+
     public $pay_full_refund;
 
     public $total_returnrefund = 0;
@@ -44,13 +49,59 @@ class OrderReturnsRefunds extends Component
     //        return 'vendor.pagination.custom-pagination-links';
     //    }
 
+    #[Computed]
+    public function getReturnrefundPending()
+    {
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-pending')
+            ->orWhere('status', 'returnrefund-agreement');
+
+        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+    }
+
+    #[Computed]
+    public function getReturnrefundReturnProduct()
+    {
+        // query for return/refund items of products from current seller
+        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
+            ->where('status', 'returnrefund-approved')
+            ->orWhere('status', 'returnrefund-shipping');
+
+        if ($this->return_product_complete) {
+
+            $return_item = ItemReturnrefundInfo::find($this->return_product_complete);
+
+            $return_item->update([
+                'status' => 'returnrefund-completed',
+                'returned_date' => now(),
+                'completion_date' => now(),
+            ]);
+            
+            // update product stock (increase)
+            $return_item->purchase_item->product->update([
+                'stock' => $return_item->purchase_item->product->stock + 1,
+            ]);
+
+            sleep(0.5);
+            $this->mount();
+            session()->flash('notification-livewire', 'Return product completed!');
+
+            return $this->returnrefund_items->where('refund_option', 'return_product')->orderBy('status', 'desc')->paginate(10);
+        } //
+        else {
+            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        }
+
+        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+    }
+
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
 
         // query for purchased items of products from current seller
         // $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id);
-
 
         $this->total_returnrefund = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
             ->where('status', 'returnrefund-completed')
@@ -81,55 +132,6 @@ class OrderReturnsRefunds extends Component
             ->get();
     }
 
-
-    #[Computed]
-    public function getReturnrefundPending()
-    {
-        // query for return/refund items of products from current seller
-        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
-            ->where('status', 'returnrefund-pending')
-            ->orWhere('status', 'returnrefund-agreement');
-
-        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
-    }
-
-    #[Computed]
-    public function getReturnrefundReturnProduct()
-    {
-        // query for return/refund items of products from current seller
-        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
-            ->where('status', 'returnrefund-approved')
-            ->orWhere('status', 'returnrefund-shipping');
-
-        if ($this->return_product_complete) {
-
-            $return_item = ItemReturnrefundInfo::find($this->return_product_complete);
-
-            $return_item->update([
-                'status' => 'returnrefund-completed',
-                'returned_date' => now(),
-                'completion_date' => now(),
-            ]);
-
-            // update product stock (increase)
-            $return_item->purchase_item->product->update([
-                'stock' => $return_item->purchase_item->product->stock + 1,
-            ]);
-
-
-            sleep(0.5);
-            $this->mount();
-            session()->flash('notification-livewire', 'Return product completed!');
-
-            return $this->returnrefund_items->where('refund_option', 'return_product')->orderBy('status', 'desc')->paginate(10);
-        }
-        //
-        else {
-            return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
-        }
-        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
-    }
-
     #[Computed]
     public function getReturnrefundPartialRefund()
     {
@@ -151,8 +153,7 @@ class OrderReturnsRefunds extends Component
             session()->flash('notification-livewire', 'Partial refund completed!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
-        }
-        //
+        } //
         else {
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
         }
@@ -179,8 +180,7 @@ class OrderReturnsRefunds extends Component
             session()->flash('notification-livewire', 'Full refund completed!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
-        }
-        //
+        } //
         else {
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
         }
@@ -226,8 +226,7 @@ class OrderReturnsRefunds extends Component
             session()->flash('notification-livewire', 'Replacement product shipped to customer!');
 
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
-        }
-        //
+        } //
         else {
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
         }
@@ -239,7 +238,6 @@ class OrderReturnsRefunds extends Component
 
         $replacement_item = ItemReturnrefundInfo::find($item_id);
 
-
         $replacement_item->update([
             'status' => 'returnrefund-shipping_replace',
         ]);
@@ -249,8 +247,13 @@ class OrderReturnsRefunds extends Component
         // $this->mount();
         session()->flash('notification-livewire', 'Replacement product shipped to customer!');
 
+        // we can remount the whole component to get fresh data, we can only remount the component if this component
+        // is not a nested component,
+        //  meaning the mount method doesn't accept parameters.
+        $this->mount();
+
         // return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
-        return redirect(route('order-returns'));
+        // return redirect(route('order-returns'));
     }
 
     #[Computed]
@@ -262,9 +265,6 @@ class OrderReturnsRefunds extends Component
 
         return $this->returnrefund_items->orderBy('completion_date', 'desc')->paginate(10);
     }
-
-
-
 
     public function seller_agree($refund_item_id)
     {
@@ -278,6 +278,7 @@ class OrderReturnsRefunds extends Component
         $refund_item->save();
 
         session()->flash('notification-livewire', 'Return/Refund request approved');
+
         return $this->redirect(route('order-returns'));
     }
 
@@ -293,9 +294,9 @@ class OrderReturnsRefunds extends Component
         ]);
 
         session()->flash('notification-livewire', 'Return/Refund request rejected');
+
         return $this->redirect(route('order-returns'));
     }
-
 
     #[Computed]
     public function getReturnProduct()
@@ -313,8 +314,7 @@ class OrderReturnsRefunds extends Component
 
             // return collection of purchased items of products from current seller
             return $this->return_products->orderBy('purchase_items.id', 'asc')->paginate(10);
-        }
-        //
+        } //
         else {
             // dd($this->return_products->get());
             // return collection of shipment items of products from current seller

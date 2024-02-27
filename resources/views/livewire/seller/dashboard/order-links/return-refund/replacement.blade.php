@@ -48,7 +48,7 @@
                                         <i class="bi bi-truck"></i> Shipping Product to Customer
                                     </div>
                                 @else
-                                    {{$item->status}}
+                                    {{ $item->status }}
                                 @endif
                             </div>
                             <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
@@ -68,9 +68,9 @@
                             </div>
                         </div>
 
-                        <div class="relative overflow-hidden bg-blue-100 transition-all max-h-0 duration-300 rounded" style=""
-                            x-ref="container2"
-                            x-bind:style="selected == 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' :
+                        <div class="relative overflow-hidden bg-blue-100 transition-all max-h-0 duration-300 rounded"
+                            style="" x-ref="container2"
+                            x-bind:style="selected === 2 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' :
                                 ''">
                             <div class="p-2 flex flex-col lg:flex-row">
                                 <div class="flex-1">
@@ -81,7 +81,8 @@
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                     Product Name
                                                 </label>
-                                                <input type="text" id="product_name" value="{{ $item->purchase_item->product->title }}"
+                                                <input type="text" id="product_name"
+                                                    value="{{ $item->purchase_item->product->title }}"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
                                             </div>
@@ -92,7 +93,8 @@
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                     Quantity
                                                 </label>
-                                                <input type="text" id="product_name" value="{{ $item->item_quantity }}"
+                                                <input type="text" id="product_name"
+                                                    value="{{ $item->item_quantity }}"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
                                             </div>
@@ -101,7 +103,8 @@
                                         <div class="p-1.5 lg:w-1/2">
                                             <div class="mb-3 grid lg:grid-cols-2 gap-4">
                                                 <div>
-                                                    <label for="quantity" class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                    <label for="quantity"
+                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                         Product Condition
                                                     </label>
                                                     <input type="text" id="quantity" value="{{ $item->condition }}"
@@ -109,7 +112,8 @@
                                                         placeholder="" disabled>
                                                 </div>
                                                 <div>
-                                                    <label for="order_status" class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
+                                                    <label for="order_status"
+                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                         Return/Refund Status
                                                     </label>
                                                     @if ($item->status == 'returnrefund-approved')
@@ -149,7 +153,8 @@
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                     Customer Name
                                                 </label>
-                                                <input type="text" id="product_name" value="{{ $item->user->first_name }} {{ $item->user->last_name }}"
+                                                <input type="text" id="product_name"
+                                                    value="{{ $item->user->first_name }} {{ $item->user->last_name }}"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 text-sm focus:!ring-0 focus:border-0 block w-full !p-1.5"
                                                     placeholder="" disabled>
                                             </div>
@@ -177,15 +182,16 @@
                                     <div class="flex flex-wrap justify-start gap-4">
                                         @foreach ($item->returnrefund_images as $image)
                                             <img src="{{ asset($image->img_path) }}"
-                                                class="rounded-xl border d-block h-48"
-                                                alt="Product-Thumbnail">
+                                                class="rounded-xl border d-block h-48" alt="Product-Thumbnail">
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="col-span-1 flex flex-col items-start">
                                     @if ($item->status == 'returnrefund-shipping')
                                         <h6>Actions:</h6>
-                                        <button type="button" wire:click="$set('replacement_arrived', '{{ $item->id }}')" class="bg-blue-500 hover:bg-blue-700 text-white p-2 mb-2 rounded w-full">
+                                        <button type="button"
+                                            wire:click="$set('replacement_arrived', '{{ $item->id }}')"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white p-2 mb-2 rounded w-full">
                                             Product Arrived
                                         </button>
                                     @elseif ($item->status == 'returnrefund-inspection')
@@ -195,7 +201,8 @@
                                         </button> --}}
 
                                         <h6>Actions:</h6>
-                                        <button type="button" wire:click="ship_replacement({{ $item->id }})" class="bg-blue-500 hover:bg-blue-700 text-white p-2 mb-2 rounded w-full">
+                                        <button type="button" wire:click="ship_replacement({{ $item->id }})"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white p-2 mb-2 rounded w-full">
                                             Ship Replacement
                                         </button>
                                     @endif
