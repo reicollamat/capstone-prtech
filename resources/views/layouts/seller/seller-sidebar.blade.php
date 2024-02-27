@@ -56,6 +56,19 @@
             <li class="p-1.5 text-sm rounded-sm">
                 {{-- <a href="{{ route('product-list') }}" --}}
                 {{--     class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
+                <a href="{{ route('analytics-review-insight') }}"
+                   class="no-underline  {{ Route::is('analytics-review-insight') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
+                    decoration-0"
+                   wire:navigate>
+                    <div class="flex items-center gap-1.5">
+                        <i class="bi bi-chat-left-text text-lg"></i>
+                        <span>ReviewInsight</span>
+                    </div>
+                </a>
+            </li>
+            <li class="p-1.5 text-sm rounded-sm">
+                {{-- <a href="{{ route('product-list') }}" --}}
+                {{--     class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
                 <a href="{{ route('analytics-shop-metrics') }}"
                    class="no-underline  {{ Route::is('analytics-shop-metrics') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
                     decoration-0"
@@ -66,6 +79,7 @@
                     </div>
                 </a>
             </li>
+
         </ul>
     </div>
     <div>
