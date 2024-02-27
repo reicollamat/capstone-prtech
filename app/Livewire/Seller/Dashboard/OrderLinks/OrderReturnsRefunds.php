@@ -212,6 +212,7 @@ class OrderReturnsRefunds extends Component
             return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
         }
         if ($this->ship_replacement_item) {
+            dd('test0');
 
             $replacement_item = ItemReturnrefundInfo::find($this->ship_replacement_item);
 
@@ -234,13 +235,7 @@ class OrderReturnsRefunds extends Component
 
     public function ship_replacement($item_id)
     {
-        // dd('test');
-        // query for return/refund items of products from current seller
-        $this->returnrefund_items = ItemReturnrefundInfo::where('seller_id', $this->seller->id)
-            ->where('status', 'returnrefund-approved')
-            ->orWhere('status', 'returnrefund-shipping')
-            ->orWhere('status', 'returnrefund-inspection')
-            ->orWhere('status', 'returnrefund-shipping_replace');
+        // dd('testtt');
 
         $replacement_item = ItemReturnrefundInfo::find($item_id);
 
@@ -251,10 +246,11 @@ class OrderReturnsRefunds extends Component
         // dd($replacement_item);
 
         sleep(0.5);
-        $this->mount();
+        // $this->mount();
         session()->flash('notification-livewire', 'Replacement product shipped to customer!');
 
-        return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        // return $this->returnrefund_items->orderBy('status', 'desc')->paginate(10);
+        return redirect(route('order-returns'));
     }
 
     #[Computed]
