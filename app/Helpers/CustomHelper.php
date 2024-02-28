@@ -27,7 +27,7 @@ class CustomHelper
             'webcam' => 'Webcam',
         ];
 
-        return $mapping[$input] ?? '';
+        return $mapping[$input] ?? 'Not Listed';
     }
 
     public static function categoryList(): array
@@ -46,7 +46,7 @@ class CustomHelper
             'monitor' => 'Monitor',
             'motherboard' => 'Motherboard',
             'mouse' => 'Mouse',
-            // 'other_peripherals' => 'Other Peripherals',
+            'other_peripherals' => 'Other Peripherals',
             'psu' => 'Power Supply Unit (PSU)',
             'speaker' => 'Speaker',
             'video_card' => 'Graphics Card',
