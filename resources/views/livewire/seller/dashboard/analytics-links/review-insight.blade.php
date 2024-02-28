@@ -4,48 +4,248 @@
 
         <div class="grid xl:grid-cols-2 gap-3">
             <div class="h-full p-3 border border-gray-200 bg-white rounded-lg">
+                <div class="p-2 mb-2 border-b border-gray-200 bg-white flex items-center gap-3">
+                    <h6 class="uppercase mb-0 text-sm text-nowrap font-semibold text-gray-700">Filter :</h6>
+                    <div class="w-full flex justify-between">
+                        <div class="flex gap-3">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle "
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $category != null ? \App\Helpers\CustomHelper::maptopropercatetory($category) : 'Select Category' }}
+                                </button>
+                                <ul class="dropdown-menu !pl-0">
+                                    @foreach (\App\Helpers\CustomHelper::categoryList() as $category => $value)
+                                        <li>
+                                            <button type="button" wire:click="categoryChange('{{ $category }}')"
+                                                class="dropdown-item" href="#">{{ $value }}
+                                            </button>
+                                        </li>
+                                    @endforeach
+                                    {{-- <li> --}}
+                                    {{--     <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
+                                    {{--         href="#">Yearly --}}
+                                    {{--     </button> --}}
+                                    {{-- </li> --}}
+                                </ul>
+                            </div>
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle "
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $sentiment != null ? $sentiment . ' Sentiment' : 'Select Sentiment' }}
+                                </button>
+                                <ul class="dropdown-menu !pl-0">
+                                    <li>
+                                        <button type="button" wire:click="sentimentChange('Positive')"
+                                            class="dropdown-item" href="#">Positive
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" wire:click="sentimentChange('Negative')"
+                                            class="dropdown-item" href="#">Negative
+                                        </button>
+                                    </li>
+                                    {{-- <li> --}}
+                                    {{--     <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
+                                    {{--         href="#">Yearly --}}
+                                    {{--     </button> --}}
+                                    {{-- </li> --}}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-sm btn-outline-secondary" wire:click="resetFilter">
+                            reset
+                        </button>
+                    </div>
+
+                </div>
                 <table class="w-full table-auto">
                     <thead class="border-bottom border-gray-400">
-                    <tr class="p-2">
-                        <th>
-                            {{-- <form action="#" class="d-flex" role="search"> --}}
-                            {{--     <input class="form-control !border-none !rounded-none" type="search" placeholder="Search Product" --}}
-                            {{--            aria-label="Search Product"> --}}
-                            {{-- </form> --}}
-                            <div class="input-group">
-                                <span class="input-group-text !border-none bg-transparent">
-                                    <i class="bi bi-search text-sm"></i>
-                                </span>
-                                <input class="form-control !border-none !rounded-none" type="search" placeholder="Search Product"
-                                       aria-label="Search Product">
-                            </div>
+                        <tr class="p-2">
+                            <th>
+                                {{-- <form action="#" class="d-flex" role="search"> --}}
+                                {{--     <input class="form-control !border-none !rounded-none" type="text" --}}
+                                {{--            wire:model="search" --}}
+                                {{--         placeholder="Search Product" aria-label="Search Product"> --}}
+                                {{-- </form> --}}
+                                <div class="input-group">
+                                    <span class="input-group-text !border-none bg-transparent">
+                                        <i class="bi bi-search text-sm"></i>
+                                    </span>
+                                    <input class="form-control !border-none !rounded-none" type="text"
+                                        wire:model.live.debounce.500ms="search" placeholder="Start Search on Reviews"
+                                        aria-label="Search Product">
+                                </div>
 
-                        </th>
-                        <th class="text-gray-700">Categrory</th>
-                        <th class="text-gray-700">Sentiment</th>
-                    </tr>
+                            </th>
+                            <th class="text-gray-700 text-sm">Categrory</th>
+                            <th class="text-gray-700 text-sm">Sentiment</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                        <td>Malcolm Lockyer</td>
-                        <td>1961</td>
-                    </tr>
-                    <tr>
-                        <td>Witchy Woman</td>
-                        <td>The Eagles</td>
-                        <td>1972</td>
-                    </tr>
-                    <tr>
-                        <td>Shining Star</td>
-                        <td>Earth, Wind, and Fire</td>
-                        <td>1975</td>
-                    </tr>
+                        @if ($this->getReviews->count() > 0)
+                            @foreach ($this->getReviews as $review)
+                                <tr class="my-2 border-b border-gray-200">
+                                    <td class="text-sm truncate text-pretty p-1.5">{{ $review->text }}</td>
+                                    <td class="text-xs p-1">
+                                        <span
+                                            class="bg-info-subtle text-blue-700 text-center text-nowrap text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+                                            {{ CustomHelper::maptopropercatetory($review->product->category) }}
+                                        </span>
+                                        {{--                                        {{ CustomHelper::maptopropercatetory($review->product->category) }} --}}
+                                    </td>
+                                    <td class="text-sm p-1">
+                                        {{--                                        {{ $review->sentiment === 1 ? 'Positive' : 'Negative' }} --}}
+                                        @if ($review->sentiment === 1)
+                                            <span
+                                                class="bg-green-100 text-green-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Positive</span>
+                                        @else
+                                            <span
+                                                class="bg-red-100 text-red-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Negative</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
+                {{--                @foreach ($this->getReviews as $review) --}}
+                {{--                    {{ $review->text }} --}}
+                {{--                @endforeach --}}
+
+                <div class="content-center pt-3">
+                    {{ $this->getReviews()->links() }}
+                </div>
+
             </div>
             <div class="p-3 border border-gray-200 bg-white rounded-lg">
-tse
+                <div>
+                    <h6 class="uppercase mb-2 text-sm font-semibold text-gray-700">Reviews Word Cloud</h6>
+                    <hr class="m-0 w-16 text-green-900">
+                     <div class="grid grid-cols-1 gap-2 pt-1.5">
+                         <div>
+                             <h6 class="uppercase my-2 text-xs font-semibold text-gray-500">Click to enlarge positive reviews.</h6>
+                             <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"
+                                 wire:init="fetchPositiveCommentsApi">
+                                 <button class="w-full h-full" type="button" @click="showModal = !showModal">
+                                     <div wire:loading wire:target="fetchPositiveCommentsApi"
+                                         class="relative w-full h-72">
+                                         <div role="status"
+                                             class="flex gap-2.5 flex-column items-center justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+
+                                             <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                 viewBox="0 0 16 20">
+                                                 <path
+                                                     d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                                                 <path
+                                                     d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
+                                             </svg>
+                                             <span class="text-center">Please Wait...</span>
+                                         </div>
+                                     </div>
+                                     <div wire:loading.remove wire:target="fetchPositiveCommentsApi">
+                                         <img src="{{ asset($p_asset) }}"
+                                             class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                             alt="">
+                                     </div>
+                                 </button>
+
+                                 <div x-cloak x-transition.opacity x-show="showModal"
+                                     class="fixed z-1 inset-0 bg-black/50" wire:loading.remove wire:target="fetchPositiveCommentsApi">
+                                 </div>
+
+                                 <div x-cloak x-transition.duration.500ms x-show="showModal"
+                                     class="fixed inset-0 z-50 grid place-content-center">
+                                     <div @click.away="showModal = false"
+                                         class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                         <div class="modal-dialog modal-lg modal-dialog-centered">
+                                             <div class="modal-content">
+                                                 <div class="modal-header">
+                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Positive Reviews
+                                                         Wordcloud</h1>
+
+                                                 </div>
+                                                 <div class="flex justify-center modal-body" x-transition.opacity>
+                                                     <img src="{{ asset($p_asset) }}"
+                                                         class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                                         alt="">
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <div class="w-full flex gap-2 pt-3 justify-end">
+                                             <button type="button" class="btn btn-outline-secondary"
+                                                 @click="showModal = false">
+                                                 Close
+                                             </button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div>
+                             <h6 class="uppercase my-2 text-xs font-semibold text-gray-500">Click to enlarge negative reviews.</h6>
+                             <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"
+                                 wire:init="fetchNegativeCommentsApi">
+                                 <button type="button" @click="showModal = !showModal" class="w-full ">
+                                     <div wire:loading wire:target="fetchNegativeCommentsApi"
+                                         class="relative w-full h-72 flex items-center justify-center">
+                                         <div role="status"
+                                             class="flex gap-2.5 flex-column items-center  justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
+                                             <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true"
+                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                 viewBox="0 0 16 20">
+                                                 <path
+                                                     d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                                                 <path
+                                                     d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" />
+                                             </svg>
+                                             <span class="text-center">Please Wait...</span>
+                                         </div>
+                                     </div>
+                                     <div wire:loading.remove wire:target="fetchNegativeCommentsApi">
+                                         <img src="{{ asset($n_asset) }}"
+                                             class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                             alt="">
+                                     </div>
+                                 </button>
+
+                                 <div x-cloak x-transition.opacity x-show="showModal"
+                                     class="fixed z-1 inset-0 bg-black/50" wire:loading.remove wire:target="fetchNegativeCommentsApi">
+                                 </div>
+
+                                 <div x-cloak x-transition.duration.500ms x-show="showModal"
+                                     class="fixed inset-0 z-50 grid place-content-center" wire:loading.remove
+                                     wire:target="fetchNegativeCommentsApi">
+                                     <div @click.away="showModal = false"
+                                         class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                         <div class="modal-dialog modal-lg modal-dialog-centered">
+                                             <div class="modal-content">
+                                                 <div class="modal-header">
+                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Negative
+                                                         Reviews
+                                                         Wordcloud</h1>
+
+                                                 </div>
+                                                 <div class="flex justify-center modal-body" x-transition.opacity>
+                                                     <img src="{{ asset($n_asset) }}"
+                                                         class="img-fluid img-thumbnail rounded-start border-0 self-center"
+                                                         alt="">
+                                                 </div>
+                                             </div>
+                                         </div>
+                                         <div class="w-full flex gap-2 pt-3 justify-end">
+                                             <button type="button" class="btn btn-outline-secondary"
+                                                 @click="showModal = false">
+                                                 Close
+                                             </button>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                </div>
             </div>
         </div>
     </div>
