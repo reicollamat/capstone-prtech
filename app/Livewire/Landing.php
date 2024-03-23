@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Helpers\EmailHelper;
 use App\Helpers\ReferenceGeneratorHelper;
 use App\Mail\OrderShipped;
+use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseItem;
@@ -100,6 +101,55 @@ class Landing extends Component
 
     public function render()
     {
+        // for testing purposes
+        //////////////////////////////////////////////// 
+
+        $filePath = storage_path('app/kimpc_products/data222_new.csv');
+        $file = fopen($filePath, 'r');
+
+        $header = fgetcsv($file);
+
+        $data55_new = [];
+        while ($row = fgetcsv($file)) {
+            $data55_new[] = array_combine($header, $row);
+        }
+
+        fclose($file);
+
+        $quantity_sum = 0;
+        $positive_sum = 0;
+        $negative_sum = 0;
+
+        foreach ($data55_new as $key => $row) {
+
+            for ($i = 0; $i < $row["quantity"]; $i++) {
+                if ($i < $row["positive"]) {
+                    // 
+
+                } elseif ($i < $row["negative"]) {
+                    // 
+                } else {
+                    // 
+                }
+            }
+
+            // dd(Carbon::parse($row["created_date"])->toDateTimeString());
+
+            $quantity_sum += $row['quantity'];
+            $positive_sum += $row['positive'];
+            $negative_sum += $row['negative'];
+        }
+
+        // dd($quantity_sum);
+
+        $com = Comment::where('sentiment', 0)->skip(fake()->numberBetween(1, 580))->first();
+        // dd($com->text);
+
+        $positivecomments = Comment::where('sentiment', 1)->take(fake()->numberBetween(50, 80))->get();
+        // dd($positivecomments);
+
+        //////////////////////////////////////////////// 
+
         return view('livewire.landing');
     }
 
