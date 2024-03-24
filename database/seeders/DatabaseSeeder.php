@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         // seed other product infos
         $this->call([
             ProductStockSeeder::class,
+            KIMPCSeeder::class,
         ]);
 
         // // seed an 'admin' & 'regular_user' role
