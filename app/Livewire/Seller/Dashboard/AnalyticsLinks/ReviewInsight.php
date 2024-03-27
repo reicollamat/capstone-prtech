@@ -5,6 +5,7 @@ namespace App\Livewire\Seller\Dashboard\AnalyticsLinks;
 use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -15,7 +16,7 @@ use Livewire\WithPagination;
 #[Layout('layouts.seller.seller-layout')]
 class ReviewInsight extends Component
 {
-    use WithoutUrlPagination, WithPagination;
+    use LivewireAlert, WithoutUrlPagination, WithPagination;
 
     #[Locked]
     public $sellerId;
@@ -121,7 +122,7 @@ class ReviewInsight extends Component
 
             // dd($commentString);
 
-            $response = Http::post('http://magi001.pythonanywhere.com/generatenegative', [
+            $response = Http::post('http://127.0.0.1:5000/generatenegative', [
                 'reviews' => $commentString,
             ]);
 
@@ -184,7 +185,7 @@ class ReviewInsight extends Component
             // Get the current date and time using Carbon
             $currentDateTime = Carbon::now();
 
-            $response = Http::post('http://magi001.pythonanywhere.com/generatepositive', [
+            $response = Http::post('http://127.0.0.1:5000/generatepositive', [
                 'reviews' => $commentString,
             ]);
 
