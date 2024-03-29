@@ -63,4 +63,4 @@ jobs:
           app-name: 'prtech-capstone'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_174F276E06E24F81850C9AA70403C5EA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_06B91AA7C71A411F8F286E6670C824B4 }}
