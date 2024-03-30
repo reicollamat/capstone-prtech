@@ -168,9 +168,9 @@ class UserController extends Controller
         ]);
         $purchaseItem->save();
 
-        // minus 1 to product stock
+        // minus quantity to product stock
         $product->update([
-            'stock' => $product->stock - 1,
+            'stock' => $product->stock - $purchaseItem->quantity,
         ]);
 
         // This handles the Email Creation and Sending of the Email to the respective User
@@ -304,9 +304,9 @@ class UserController extends Controller
                 ]);
                 $purchaseItem->save();
 
-                // minus 1 to product stock
+                // minus quantity to product stock
                 $item->product->update([
-                    'stock' => $item->stock - 1,
+                    'stock' => $item->stock - $purchaseItem->quantity,
                 ]);
             }
 

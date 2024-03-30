@@ -49,7 +49,7 @@ class ProfileController extends Controller
         $purchase = Purchase::find($request->purchase_id);
         $user = User::find($request->user_id);
 
-        // dd($purchase->purchase_status);
+        // dd($purchase->purchase_items);
         $cancellation = new PurchaseCancellationInfo([
             'purchase_id' => $purchase->id,
             'user_id' => $user->id,
@@ -57,9 +57,18 @@ class ProfileController extends Controller
             'request_date' => now(),
         ]);
         $cancellation->save();
-        $purchase->update(['purchase_status' => 'cancellation_pending']);
 
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #'.$purchase->reference_number.' requested!');
+        //loop for each item to restock back the cancelled items
+        foreach ($purchase->purchase_items as $key => $item) {
+            // add back cancelled order to product stock
+            $item->product->update([
+                'stock' => $item->product->stock + $item->quantity,
+            ]);
+        }
+
+        $purchase->update(['purchase_status' => 'cancellation_unread']);
+
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Cancellation for Order #' . $purchase->reference_number . ' requested!');
     }
 
     /**
@@ -82,8 +91,10 @@ class ProfileController extends Controller
     {
         // dd($request->all());
         $request->user()->fill(
-            ['street_address_1' => $request->address_line_1,
-                'street_address_2' => $request->address_line_2, ]
+            [
+                'street_address_1' => $request->address_line_1,
+                'street_address_2' => $request->address_line_2,
+            ]
         );
 
         $request->user()->save();
@@ -140,7 +151,7 @@ class ProfileController extends Controller
             foreach ($request->evidence_imgs as $key => $image) {
                 $img_path = $image->storeAs(
                     'returnrefund_imgs',
-                    $purchase_item->id.'-'.$key.'-'.'returnrefund_img'.'.'.$image->getClientOriginalExtension(),
+                    $purchase_item->id . '-' . $key . '-' . 'returnrefund_img' . '.' . $image->getClientOriginalExtension(),
                     'real_public'
                 );
 
@@ -153,7 +164,7 @@ class ProfileController extends Controller
             }
         }
 
-        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for '.$purchase_item->product->title.'!');
+        return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Return/Refund requested for ' . $purchase_item->product->title . '!');
     }
 
     public function cancel_returnrefund_request(Request $request): RedirectResponse
@@ -294,7 +305,7 @@ class ProfileController extends Controller
                 'purchase_id' => $shipment->purchase->id,
                 'tag' => 'completed',
                 'title' => 'Share your feedback!',
-                'message' => 'Order #'.$shipment->purchase->id.' is completed. Your feedback matters to others! Rate the products by date',
+                'message' => 'Order #' . $shipment->purchase->id . ' is completed. Your feedback matters to others! Rate the products by date',
             ]);
             $notification->save();
         } //
