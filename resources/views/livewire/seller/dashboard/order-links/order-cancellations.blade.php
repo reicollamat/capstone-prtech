@@ -11,7 +11,7 @@
                     class="bg-white w-full p-1 h-full border-gray-200 !rounded-lg text-sm focus:outline-none lg:items-center mb-3">
                     <div class="grid grid-cols-2">
                         <button @click="activeTab = 0" class="tab-control p-2 rounded"
-                            :class="{ 'active bg-blue-300': activeTab === 0 }">Pending Cancellation Requests</button>
+                            :class="{ 'active bg-blue-300': activeTab === 0 }">Unread Cancellations</button>
                         <button @click="activeTab = 1" class="tab-control p-2 rounded"
                             :class="{ 'active bg-gray-300': activeTab === 1 }">Cancellation Records</button>
                     </div>

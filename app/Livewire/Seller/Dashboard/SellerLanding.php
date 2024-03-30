@@ -39,13 +39,13 @@ class SellerLanding extends Component
         // dd(Auth::user());
 
         // Get the file path and name using glob
-        $files = glob(public_path('storage').'/*.png');
+        $files = glob(public_path('storage') . '/*.png');
 
         $filesnames = [];
 
         // Get the png base on the file condition
         foreach ($files as $file) {
-            if (str_contains($file, '_'.$this->seller_id.'_')) {
+            if (str_contains($file, '_' . $this->seller_id . '_')) {
                 $filename = basename($file);
 
                 $file = explode('_', $filename);
@@ -112,7 +112,7 @@ class SellerLanding extends Component
 
         foreach ($salesData as $sale) {
             $date = $sale['completion_date'];
-            if (! isset($salesByDate[$date])) {
+            if (!isset($salesByDate[$date])) {
                 $salesByDate[$date] = 0;
             }
             $salesByDate[$date] += $sale['total_amount'];
@@ -246,7 +246,7 @@ class SellerLanding extends Component
     public function getCancelledOrders()
     {
         $sales = Purchase::where('seller_id', $this->seller_id)
-            ->whereIn('purchase_status', ['cancellation_approved', 'cancellation_pending'])
+            ->whereIn('purchase_status', ['cancellation_done', 'cancellation_unread'])
             ->count();
 
         return $sales;

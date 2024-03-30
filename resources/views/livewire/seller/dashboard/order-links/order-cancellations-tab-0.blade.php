@@ -5,52 +5,52 @@
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase Date</div>
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amt</div>
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Payment</div>
-        <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Request Date</div>
+        <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Cancellation Date</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Actions</div>
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Details</div>
     </div>
 
     <div wire:loading.remove x-transition>
         @if ($this->getCancellationPending->count() > 0)
-            @foreach ($this->getCancellationPending as $key => $cancellation_pending)
+            @foreach ($this->getCancellationPending as $key => $cancellation_unread)
                 <div class="border-b border-gray-100" x-data="{ selected: null }">
-                    {{-- @dd($cancellation_pending) --}}
+                    {{-- @dd($cancellation_unread) --}}
                     <div class="grid grid-cols-12 text-center">
                         <div class="col-span-2 my-4 text-sm !text-gray-800 !font-light">
-                            {{ $cancellation_pending->reference_number }}
+                            {{ $cancellation_unread->reference_number }}
                         </div>
                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
-                            {{ $cancellation_pending->user->first_name }} {{ $cancellation_pending->user->last_name }}
+                            {{ $cancellation_unread->user->first_name }} {{ $cancellation_unread->user->last_name }}
                         </div>
                         <div class="col-span-2 my-4 !text-gray-800 !font-light">
-                            {{ date('d-M-y (h:i a)', strtotime($cancellation_pending->purchase_date)) }}
+                            {{ date('d-M-y (h:i a)', strtotime($cancellation_unread->purchase_date)) }}
                         </div>
                         <div class="col-span-1 my-4 !text-gray-800 !font-light">
-                            {{ $cancellation_pending->total_amount }}
+                            {{ $cancellation_unread->total_amount }}
                         </div>
 
                         {{-- payment status --}}
-                        @if ($cancellation_pending->payment->payment_status == 'unpaid')
+                        @if ($cancellation_unread->payment->payment_status == 'unpaid')
                             <div class="col-span-1 text-sm my-4 !text-red-600 !font-light">
                                 <input type="text" name="payment_status" value="unpaid" hidden>
-                                Unpaid ({{ $cancellation_pending->payment->payment_type }})
+                                Unpaid ({{ $cancellation_unread->payment->payment_type }})
                             </div>
                         @else
                             <div class="col-span-1 text-sm my-4 !text-green-600 !font-light">
                                 <input type="text" name="payment_status" value="paid" hidden>
-                                Paid ({{ $cancellation_pending->payment->payment_type }})
+                                Paid ({{ $cancellation_unread->payment->payment_type }})
                             </div>
                         @endif
 
                         <div class="col-span-2 my-4 !text-gray-900 !font-light">
-                            {{ date('d-M-y (h:i a)', strtotime($cancellation_pending->purchase_cancellation_info->request_date)) }}
+                            {{ date('d-M-y (h:i a)', strtotime($cancellation_unread->purchase_cancellation_info->request_date)) }}
                         </div>
 
                         <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                             <button type="button"
-                                wire:click="$set('set_to_cancellation_approved', '{{ $cancellation_pending->id }}')"
+                                wire:click="$set('set_to_cancellation_done', '{{ $cancellation_unread->id }}')"
                                 class="bg-blue-500 hover:bg-blue-700 text-white p-2 rounded w-full">
-                                Approve Cancellation
+                                Mark as Read
                             </button>
                         </div>
                         <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
@@ -85,7 +85,8 @@
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                     Order Reference Number
                                                 </label>
-                                                <input type="text" id="product_name" value="{{$cancellation_pending->reference_number}}"
+                                                <input type="text" id="product_name"
+                                                    value="{{ $cancellation_unread->reference_number }}"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                     placeholder="" disabled>
                                             </div>
@@ -100,7 +101,7 @@
                                                             Date of Purchase
                                                         </label>
                                                         <input type="text" id="payment_type"
-                                                            value="{{ date('M d, Y (h:i a)', strtotime($cancellation_pending->purchase_date)) }}"
+                                                            value="{{ date('M d, Y (h:i a)', strtotime($cancellation_unread->purchase_date)) }}"
                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                             placeholder="" disabled>
                                                     </div>
@@ -109,9 +110,9 @@
                                                             class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                             Completion Date
                                                         </label>
-                                                        @if ($cancellation_pending->purchase_status == 'completed')
+                                                        @if ($cancellation_unread->purchase_status == 'completed')
                                                             <input type="text" id="reference_code"
-                                                                value="{{ date('M d, Y (h:i a)', strtotime($cancellation_pending->completion_date)) }}"
+                                                                value="{{ date('M d, Y (h:i a)', strtotime($cancellation_unread->completion_date)) }}"
                                                                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                                 placeholder="" disabled>
                                                         @else
@@ -137,12 +138,12 @@
                                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                         Payment Type
                                                     </label>
-                                                    @if ($cancellation_pending->payment->payment_type == 'cod')
+                                                    @if ($cancellation_unread->payment->payment_type == 'cod')
                                                         <input type="text" id="purchase_date"
                                                             value="COD (Cash On Delivery)"
                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                             placeholder="" disabled>
-                                                    @elseif ($cancellation_pending->payment->payment_type == 'gcash')
+                                                    @elseif ($cancellation_unread->payment->payment_type == 'gcash')
                                                         <input type="text" id="purchase_date" value="GCash"
                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                             placeholder="" disabled>
@@ -158,9 +159,9 @@
                                                         class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                         Date of Payment
                                                     </label>
-                                                    @if ($cancellation_pending->payment->date_of_payment)
+                                                    @if ($cancellation_unread->payment->date_of_payment)
                                                         <input type="text" id="purchase_date"
-                                                            value="{{ date('M d, Y (h:i a)', strtotime($cancellation_pending->payment->date_of_payment)) }}"
+                                                            value="{{ date('M d, Y (h:i a)', strtotime($cancellation_unread->payment->date_of_payment)) }}"
                                                             class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                             placeholder="" disabled>
                                                     @else
@@ -179,7 +180,7 @@
                                                         Payment Reference Code
                                                     </label>
                                                     <input type="text" id="purchase_date"
-                                                        value="{{ $cancellation_pending->payment->reference_code }}"
+                                                        value="{{ $cancellation_unread->payment->reference_code }}"
                                                         class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                         placeholder="" disabled>
                                                 </div>
@@ -193,7 +194,7 @@
                                 <h4 class="mx-auto mt-2">ITEMS</h4>
                             </div>
                             {{-- @dd($purchase) --}}
-                            @foreach ($cancellation_pending->purchase_items as $item)
+                            @foreach ($cancellation_unread->purchase_items as $item)
                                 {{-- @dd($item) --}}
                                 <div class="p-2 flex flex-col lg:flex-row">
                                     <div class="px-6 content-center">
@@ -253,7 +254,7 @@
             @endforeach
         @else
             <div class="flex content-center text-gray-500 p-6">
-            <h4>No Pending Cancellation Listed</h4>
+                <h4>No Pending Cancellation Listed</h4>
             </div>
         @endif
     </div>

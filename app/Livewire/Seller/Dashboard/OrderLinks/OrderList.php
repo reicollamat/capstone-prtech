@@ -59,7 +59,7 @@ class OrderList extends Component
         $this->purchases = Purchase::where('purchases.seller_id', $this->seller->id);
         // dd($this->purchases->get());
 
-        $this->orderstatus_list = ['pending', 'completed', 'to_ship', 'shipping', 'cancellation_request', 'cancellation_approved', 'failed_delivery'];
+        $this->orderstatus_list = ['pending', 'completed', 'to_ship', 'shipping', 'cancellation_request', 'cancellation_done', 'failed_delivery'];
         // dd($this->orderstatus_list);
 
     }
@@ -232,7 +232,7 @@ class OrderList extends Component
                 'purchase_id' => $purchase_id,
                 'tag' => 'to_ship',
                 'title' => 'Purchase Confirmed',
-                'message' => 'Purchase for order #'.$purchase_id.' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                'message' => 'Purchase for order #' . $purchase_id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
             ]);
             $notification->save();
 
@@ -246,11 +246,11 @@ class OrderList extends Component
 
             return redirect(route('shipment-list'));
         } // redirect to cancellation list
-        elseif ($this->purchase_status == 'cancellation_pending') {
+        elseif ($this->purchase_status == 'cancellation_unread') {
 
             return redirect(route('order-cancellations'));
         } // redirect to cancellation list
-        elseif ($this->purchase_status == 'cancellation_approved') {
+        elseif ($this->purchase_status == 'cancellation_done') {
 
             return redirect(route('order-cancellations'));
         } //
@@ -322,13 +322,13 @@ class OrderList extends Component
                     'purchase_id' => $purchase->id,
                     'tag' => 'to_ship',
                     'title' => 'Purchase Confirmed',
-                    'message' => 'Purchase for order #'.$purchase->id.' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
+                    'message' => 'Purchase for order #' . $purchase->id . ' has been confirmed and we have notified the seller. Kindly wait for your shipment.',
                 ]);
                 $notification->save();
 
                 $this->alert('success', 'All items have been prepared for shipping', [
-                    'position' => 'top-end']);
-
+                    'position' => 'top-end'
+                ]);
             }
         }
 

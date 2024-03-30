@@ -180,10 +180,10 @@
 
                     {{-- clear filters --}}
                     <div x-data="{ isOpen: false }" class="relative flex items-center">
-                        <div class="{{ $orderstatus_filter || $paymentstatus_filter || $paymenttype_filter || $quick_search_filter ? 'block' : 'hidden' }}">
-                            <button type="button"
-                                    wire:click="clearFilters"
-                                    class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
+                        <div
+                            class="{{ $orderstatus_filter || $paymentstatus_filter || $paymenttype_filter || $quick_search_filter ? 'block' : 'hidden' }}">
+                            <button type="button" wire:click="clearFilters"
+                                class="relative z-10 w-full flex items-center border border-gray-400 p-2 rounded-lg text-xs bg-white text-gray-600 gap-1">
                                 <span class="mx-1">Clear Filters</span>
                             </button>
                         </div>
@@ -256,26 +256,25 @@
             </div> --}}
 
             <!-- Modal -->
-            <div class="modal fade" id="massShip" data-bs-backdrop="static"
-                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmRemoveLabel"
-                 aria-hidden="true">
+            <div class="modal fade" id="massShip" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="confirmRemoveLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="confirmRemoveLabel">Mass Prepare Order Confirmation</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                aria-label="Close"></button>
                         </div>
-                        <div class="modal-body text-center text-lg text-black">Are you sure you want to proceed with mass prepare for shipping
+                        <div class="modal-body text-center text-lg text-black">Are you sure you want to proceed with
+                            mass prepare for shipping
                             <span class="font-medium"> {{ $this->getTotalPendingCount }} item/s ?</span>
-                            This action will dispatch a <span class="font-medium">large number of items at once</span> .
+                            This action will dispatch a <span class="font-medium">large number of items at once</span>
+                            .
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                    @disabled($this->getTotalPendingCount == 0)
-                                    wire:click="massShip">Continue and Ship</button>
+                                @disabled($this->getTotalPendingCount == 0) wire:click="massShip">Continue and Ship</button>
                         </div>
                     </div>
                 </div>
@@ -425,7 +424,7 @@
                                                     Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
                                                 </button>
                                             </div>
-                                        @elseif ($purchase->purchase_status == 'cancellation_pending')
+                                        @elseif ($purchase->purchase_status == 'cancellation_unread')
                                             <div class="col-span-2 my-4 !text-red-600 !font-light">
                                                 <i class="bi bi-x-square-fill"></i> Pending Cancellation
                                             </div>
@@ -435,7 +434,7 @@
                                                     Details.. <i class="bi bi-box-arrow-up-right text-sm"></i>
                                                 </button>
                                             </div>
-                                        @elseif ($purchase->purchase_status == 'cancellation_approved')
+                                        @elseif ($purchase->purchase_status == 'cancellation_done')
                                             <div class="col-span-2 my-4 !text-red-600 !font-light">
                                                 <i class="bi bi-x-square-fill"></i> Order Cancelled
                                             </div>

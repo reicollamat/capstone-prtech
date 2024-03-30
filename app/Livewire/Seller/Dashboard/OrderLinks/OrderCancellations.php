@@ -18,9 +18,9 @@ class OrderCancellations extends Component
 
     public $quick_search_filter;
 
-    public $set_to_cancellation_approved;
+    public $set_to_cancellation_done;
 
-    public $delete_cancellation_approved;
+    public $delete_cancellation_done;
 
     public $seller;
 
@@ -35,7 +35,7 @@ class OrderCancellations extends Component
 
         // query for purchased items of products from current seller
         $this->cancellations = Purchase::where('purchases.seller_id', $this->seller->id)
-            ->where('purchase_status', 'cancellation_pending');
+            ->where('purchase_status', 'cancellation_unread');
         // dd($this->cancellations->get());
     }
 
@@ -44,13 +44,13 @@ class OrderCancellations extends Component
     {
         // query for purchased items of products from current seller
         $this->cancellations = Purchase::where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'cancellation_pending');
+            ->where('purchase_status', 'cancellation_unread');
 
-        if ($this->set_to_cancellation_approved) {
-            // dd($this->set_to_cancellation_approved);
+        if ($this->set_to_cancellation_done) {
+            // dd($this->set_to_cancellation_done);
 
-            Purchase::where('id', $this->set_to_cancellation_approved)->update(['purchase_status' => 'cancellation_approved']);
-            PurchaseCancellationInfo::where('purchase_id', $this->set_to_cancellation_approved)->update(['approved_date' => now()]);
+            Purchase::where('id', $this->set_to_cancellation_done)->update(['purchase_status' => 'cancellation_done']);
+            PurchaseCancellationInfo::where('purchase_id', $this->set_to_cancellation_done)->update(['approved_date' => now()]);
 
             // return collection of purchased items of products from current seller
             return $this->cancellations->orderBy('updated_at', 'desc')->paginate(10);
@@ -71,12 +71,12 @@ class OrderCancellations extends Component
     {
         // query for purchased items of products from current seller
         $this->cancellations = Purchase::where('seller_id', $this->seller->id)
-            ->where('purchase_status', 'cancellation_approved');
+            ->where('purchase_status', 'cancellation_done');
 
-        if ($this->delete_cancellation_approved) {
-            // dd($this->delete_cancellation_approved);
+        if ($this->delete_cancellation_done) {
+            // dd($this->delete_cancellation_done);
 
-            Purchase::destroy($this->delete_cancellation_approved);
+            Purchase::destroy($this->delete_cancellation_done);
 
             // return collection of purchased items of products from current seller
             return $this->cancellations->orderBy('updated_at', 'desc')->paginate(10);

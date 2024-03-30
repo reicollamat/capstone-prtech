@@ -23,7 +23,7 @@
                             {{ $cancellation->user->first_name }} {{ $cancellation->user->last_name }}
                         </div>
                         <div class="col-span-2 my-4 !text-gray-800 !font-light">
-                            {{ date('d-M-y', strtotime($cancellation->purchase_date)) }}
+                            {{ date('d-M-y (h:i a)', strtotime($cancellation->purchase_date)) }}
                         </div>
                         <div class="col-span-1 my-4 !text-gray-800 !font-light">
                             {{ $cancellation->total_amount }}
@@ -43,12 +43,12 @@
                         @endif
 
                         <div class="col-span-2 my-4 !text-gray-900 !font-light">
-                            {{ date('d-M-y (h:i a)', strtotime($cancellation->purchase_cancellation_info->approved_date)) }}
+                            {{ date('d-M-y (h:i a)', strtotime($cancellation->purchase_cancellation_info->request_date)) }}
                         </div>
 
                         <div class="col-span-2 my-auto rounded !text-gray-800 !font-light">
                             <button type="button"
-                                wire:click="$set('delete_cancellation_approved', '{{ $cancellation->id }}')"
+                                wire:click="$set('delete_cancellation_done', '{{ $cancellation->id }}')"
                                 class="bg-gray-500 hover:bg-gray-700 text-white p-2 rounded w-full">
                                 Deleted Record
                             </button>
@@ -85,7 +85,8 @@
                                                     class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
                                                     Order Reference Number
                                                 </label>
-                                                <input type="text" id="product_name" value="{{$cancellation->reference_number}}"
+                                                <input type="text" id="product_name"
+                                                    value="{{ $cancellation->reference_number }}"
                                                     class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
                                                     placeholder="" disabled>
                                             </div>
@@ -253,7 +254,7 @@
             @endforeach
         @else
             <div class="flex content-center text-gray-500 p-6">
-                <h4>No Approved Cancellation Listed</h4>
+                <h4>No Cancellation Record Listed</h4>
             </div>
         @endif
     </div>
