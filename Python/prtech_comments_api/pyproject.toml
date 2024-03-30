@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "flaskproject"
+name = "prtech_comments_api"
 version = "0.1.0"
 description = ""
 authors = ["richmondb <richmond.billones@gmail.com>"]
