@@ -18,7 +18,8 @@ stopwords = preprocess()
 # # Define global stopwords list (feel free to customize)
 user_stopwords: set = set()
 
-reviews = ''
+
+# reviews = ''
 
 
 @app.route("/")
@@ -29,7 +30,7 @@ def hello_world():
 @app.post("/generatepositive")
 def generatepostive():
     global user_stopwords
-    global reviews
+    # global reviews
     data = request.get_json()
 
     print("Generating Positive")
@@ -38,11 +39,10 @@ def generatepostive():
         return abort(404, description="Data not found")
 
     # # check if reviews is not empty
-    if reviews != "":
-        reviews = reviews
-    else:
-        reviews = data["reviews"]
-
+    # if reviews != "":
+    #     reviews = reviews
+    # else:
+    reviews = data["reviews"]
 
     # clean the reviews
     clean_reviews = datacleaner.clean_text(reviews)
@@ -103,7 +103,7 @@ def generatepostive():
 @app.post("/generatenegative")
 def generatenegative():
     global user_stopwords
-    global reviews
+    # global reviews
     data = request.get_json()
 
     print("Generating Negative")
@@ -113,10 +113,10 @@ def generatenegative():
 
     # debug print
     # # check if reviews is not empty
-    if reviews != "":
-        reviews = reviews
-    else:
-        reviews = data["reviews"]
+    # if reviews != "":
+    #     reviews = reviews
+    # else:
+    reviews = data["reviews"]
 
     clean_reviews = datacleaner.clean_text(reviews)
 
@@ -176,7 +176,7 @@ def generatenegative():
 @app.post("/generatewordcount")
 def generatewordcount():
     global user_stopwords
-    global reviews
+    # global reviews
     data = request.get_json()
 
     print("Generating WordCount")
@@ -185,10 +185,10 @@ def generatewordcount():
         return abort(404, description="Data not found")
 
     # # check if reviews is not empty
-    if reviews != "":
-        reviews = reviews
-    else:
-        reviews = data["reviews"]
+    # if reviews != "":
+    #     reviews = reviews
+    # else:
+    reviews = data["reviews"]
 
     clean_reviews = datacleaner.clean_text(reviews)
 
