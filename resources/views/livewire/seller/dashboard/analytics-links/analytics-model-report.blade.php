@@ -628,7 +628,7 @@
     <script>
         let ctx = document.getElementById('productSalesChart');
 
-        let $test = 30;
+        // let $test = 30;
 
         let predictchart = new Chart(ctx, {
             type: "line",

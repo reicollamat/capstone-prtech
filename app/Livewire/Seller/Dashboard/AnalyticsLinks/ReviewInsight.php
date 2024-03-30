@@ -31,24 +31,38 @@ class ReviewInsight extends Component
 
     public string $n_asset;
 
+    public $user_stopwords = '';
+
+    public $commentsCount;
+
     public function mount()
     {
         $this->sellerId = auth()->user()->seller->id;
 
-        // $this->getReviews();
+        $this->fetchCommentscounts();
 
+        // dd(array_keys($this->commentsCount));
+
+    }
+
+    public function updateAllCharts()
+    {
+        $this->dispatch('updateCommentsChart');
+        $this->fetchNegativeCommentsApi();
+        $this->fetchPositiveCommentsApi();
+        $this->fetchCommentscounts();
     }
 
     public function render()
     {
+        // $this->fetchCommentscounts();
         return view('livewire..seller.dashboard.analytics-links.review-insight');
     }
 
     #[Computed]
     public function getReviews()
     {
-        $query = Comment::join('products', 'comments.product_id', '=', 'products.id')
-            ->where('comments.seller_id', '=', $this->sellerId);
+        $query = Comment::join('products', 'comments.product_id', '=', 'products.id')->where('comments.seller_id', '=', $this->sellerId);
 
         if ($this->search !== null) {
             $query->where('comments.text', 'like', '%'.$this->search.'%');
@@ -65,8 +79,7 @@ class ReviewInsight extends Component
             $query->where('category', '=', $this->category);
         }
 
-        return $query->orderBy('comments.created_at', 'desc')
-            ->paginate(10);
+        return $query->orderBy('comments.created_at', 'desc')->paginate(10);
     }
 
     public function sentimentChange(string $sentiment)
@@ -94,11 +107,9 @@ class ReviewInsight extends Component
         // Get the current date and time using Carbon
         $currentDateTime = Carbon::now();
 
-        $ncount = Comment::wherein('rating', [1, 2])
-            ->where('seller_id', '=', $this->sellerId)
+        $ncount = Comment::wherein('rating', [1, 2])->where('seller_id', '=', $this->sellerId)
             // ->where('created_at', '>=', now()->subDays(30))
-            ->select('text')
-            ->get();
+            ->select('text')->get();
 
         // dd($ncount);
 
@@ -122,9 +133,7 @@ class ReviewInsight extends Component
 
             // dd($commentString);
 
-            $response = Http::post('http://127.0.0.1:5000/generatenegative', [
-                'reviews' => $commentString,
-            ]);
+            $response = Http::post('https://magi001.pythonanywhere.com/generatenegative', ['reviews' => $commentString, 'stopwords' => $this->user_stopwords]);
 
             // Check if the request was successful
             if ($response->successful()) {
@@ -135,7 +144,7 @@ class ReviewInsight extends Component
                 // dd($imageData);
 
                 // Format the date and time to be used in the file name
-                $fileName = $currentDateTime->format('Y-m-d').'_'.$this->sellerId.'_nw.png'; // Rename it to date and p for positive and w for wordlcloud
+                $fileName = $currentDateTime->format('Y-m-d_h-i-s').'_'.$this->sellerId.'_nw.png'; // Rename it to date and p for positive and w for wordlcloud
 
                 // Save the image to a file
                 $imagePath = public_path('storage'); // Change the path as needed
@@ -152,22 +161,16 @@ class ReviewInsight extends Component
                 $statusCode = $response->status(); // Get the status code
                 $errorBody = $response->body(); // Get the error body
 
-                $this->alert('error', 'Something went wrong'.$errorBody, [
-                    'position' => 'top-end',
-                    'timer' => 3000,
-                    'toast' => true,
-                ]);
+                $this->alert('error', 'Something went wrong'.$errorBody, ['position' => 'top-end', 'timer' => 3000, 'toast' => true]);
             }
         }
     }
 
     public function fetchPositiveCommentsApi()
     {
-        $pcount = Comment::wherein('rating', [3, 4, 5])
-            ->where('seller_id', '=', $this->sellerId)
+        $pcount = Comment::wherein('rating', [3, 4, 5])->where('seller_id', '=', $this->sellerId)
             // ->where('created_at', '>=', now()->subDays(30))
-            ->select('text')
-            ->get();
+            ->select('text')->get();
 
         // check if there is no data
         if ($pcount->isEmpty()) {
@@ -185,9 +188,7 @@ class ReviewInsight extends Component
             // Get the current date and time using Carbon
             $currentDateTime = Carbon::now();
 
-            $response = Http::post('http://127.0.0.1:5000/generatepositive', [
-                'reviews' => $commentString,
-            ]);
+            $response = Http::post('https://magi001.pythonanywhere.com/generatepositive', ['reviews' => $commentString, 'stopwords' => $this->user_stopwords]);
 
             // Check if the request was successful
             if ($response->successful()) {
@@ -198,7 +199,7 @@ class ReviewInsight extends Component
                 // dd($imageData);
 
                 // Format the date and time to be used in the file name
-                $fileName = $currentDateTime->format('Y-m-d').'_'.$this->sellerId.'_pw.png'; // Rename it to date and p for positive and w for wordlcloud
+                $fileName = $currentDateTime->format('Y-m-d_h-i-s').'_'.$this->sellerId.'_pw.png'; // Rename it to date and p for positive and w for wordlcloud
 
                 // Save the image to a file
                 $imagePath = public_path('storage'); // Change the path as needed
@@ -214,16 +215,47 @@ class ReviewInsight extends Component
                 // Handle the failed request
                 $statusCode = $response->status(); // Get the status code
                 $errorBody = $response->body(); // Get the error body
-                $this->alert('error', 'Something went wrong'.$errorBody, [
-                    'position' => 'top-end',
-                    'timer' => 3000,
-                    'toast' => true,
-                ]);
+                $this->alert('error', 'Something went wrong'.$errorBody, ['position' => 'top-end', 'timer' => 3000, 'toast' => true]);
 
                 // dd($statusCode, $errorBody);
                 // Handle the error
                 // create a test
             }
         }
+    }
+
+    public function fetchCommentscounts()
+    {
+        $w = Comment::where('seller_id', '=', $this->sellerId)
+            // ->where('created_at', '>=', now()->subDays(90))
+            ->select('text')->get();
+
+        // else fetch and show data
+        $commentString = '';
+
+        foreach ($w as $n) {
+            $commentString .= $n->text;
+        }
+
+        $response = Http::post('https://magi001.pythonanywhere.com/generatewordcount', ['reviews' => $commentString, 'stopwords' => $this->user_stopwords]);
+
+        $data = $response->json();
+
+        $data = collect($data);
+
+        // dd(count($data));
+
+        $array = [];
+
+        foreach ($data as $key => $value) {
+            $words = $value['word'];
+            $counts = $value['count'];
+            $array[$words] = $counts;
+        }
+        // $array = ['word' => 'test', 'count' => 4];
+
+        $this->commentsCount = $array;
+
+        // dd($this->commentsCount);
     }
 }
