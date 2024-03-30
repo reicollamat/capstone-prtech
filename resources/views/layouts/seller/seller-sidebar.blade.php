@@ -57,9 +57,9 @@
                 {{-- <a href="{{ route('product-list') }}" --}}
                 {{--     class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
                 <a href="{{ route('analytics-review-insight') }}"
-                   class="no-underline  {{ Route::is('analytics-review-insight') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
+                    class="no-underline  {{ Route::is('analytics-review-insight') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
                     decoration-0"
-                   wire:navigate>
+                    wire:navigate>
                     <div class="flex items-center gap-1.5">
                         <i class="bi bi-chat-left-text text-lg"></i>
                         <span>ReviewInsight</span>
@@ -70,9 +70,9 @@
                 {{-- <a href="{{ route('product-list') }}" --}}
                 {{--     class="no-underline decoration-0 {{ Route::is('product-list') ? '!text-blue-800 font-semibold' : 'text-gray-800' }} " --}}
                 <a href="{{ route('analytics-shop-metrics') }}"
-                   class="no-underline  {{ Route::is('analytics-shop-metrics') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
+                    class="no-underline  {{ Route::is('analytics-shop-metrics') ? '!text-blue-800 font-semibold' : 'text-gray-800' }}
                     decoration-0"
-                   wire:navigate>
+                    wire:navigate>
                     <div class="flex items-center gap-1.5">
                         <i class="bi bi-graph-up-arrow text-lg"></i>
                         <span>Shop Metrics</span>
@@ -120,7 +120,15 @@
                     wire:navigate>
                     <div class="flex items-center gap-1.5">
                         <i class="bi bi-truck text-lg"></i>
-                        <span>My Shipments</span>
+                        <span>
+                            My Shipments
+                            @if (count(DB::table('shipments')->where('shipment_status', 'to_ship')->get()) > 0)
+                                <span class="badge rounded-pill bg-danger ml-1">
+                                    {{ count(DB::table('shipments')->where('shipment_status', 'to_ship')->get()) }}
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            @endif
+                        </span>
                     </div>
 
                 </a>
@@ -165,7 +173,16 @@
                     wire:navigate>
                     <div class="flex items-center gap-1.5">
                         <i class="bi bi-x-square text-lg"></i>
-                        <span>Cancellations</span>
+                        <span class="flex items-center">
+                            Cancellations
+                            @if (count(DB::table('purchases')->where('purchase_status', 'cancellation_unread')->get()) > 0)
+                                <span class="badge rounded-pill bg-danger ml-1">
+                                    {{-- {{ count($user->purchase->where('purchase_status', 'pending')) + count($user->purchase->where('purchase_status', 'to_ship')) }} --}}
+                                    {{ count(DB::table('purchases')->where('purchase_status', 'cancellation_unread')->get()) }}
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            @endif
+                        </span>
                     </div>
 
                 </a>
@@ -215,15 +232,15 @@
             {{--         </div> --}}
             {{--     </a> --}}
             {{-- </li> --}}
-             <li class="p-1.5 text-sm">
-                 <a href="{{ route('shop-management-metrics') }}"
-                    class="no-underline decoration-0 text-gray-800" wire:navigate>
-                     <div class="flex items-center gap-1.5">
-                         <i class="bi bi-sliders2 text-lg"></i>
-                         <span>Shop Metric</span>
-                     </div>
-                 </a>
-             </li>
+            <li class="p-1.5 text-sm">
+                <a href="{{ route('shop-management-metrics') }}" class="no-underline decoration-0 text-gray-800"
+                    wire:navigate>
+                    <div class="flex items-center gap-1.5">
+                        <i class="bi bi-sliders2 text-lg"></i>
+                        <span>Shop Metric</span>
+                    </div>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
