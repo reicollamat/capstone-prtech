@@ -8,7 +8,7 @@
             <requestState>
               <option name="body">
                 <bodyState>
-                  <option name="raw" value="{&#10;  &quot;reviews&quot;: &quot;test test  test&quot;,&#10;  &quot;stopwords&quot;: &quot;s&quot;&#10;}" />
+                  <option name="raw" value="{&#10;  &quot;reviews&quot;: &quot;test test test&quot;&#10;}" />
                   <option name="type" value="JSON" />
                 </bodyState>
               </option>
@@ -23,7 +23,7 @@
               <option name="id" value="89e7cea6-64e8-4299-80a3-f888ecd09fd5" />
               <option name="method" value="POST" />
               <option name="name" value="Draft" />
-              <option name="url" value="http://127.0.0.1:5000/generatewordcount" />
+              <option name="url" value="https://magi001.pythonanywhere.com/generatenegative" />
             </requestState>
           </list>
         </option>

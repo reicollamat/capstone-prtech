@@ -18,6 +18,8 @@ stopwords = preprocess()
 # # Define global stopwords list (feel free to customize)
 user_stopwords: set = set()
 
+reviews = ''
+
 
 @app.route("/")
 def hello_world():
@@ -27,22 +29,31 @@ def hello_world():
 @app.post("/generatepositive")
 def generatepostive():
     global user_stopwords
+    global reviews
     data = request.get_json()
+
+    print("Generating Positive")
 
     if data is None:
         return abort(404, description="Data not found")
 
-    reviews = data["reviews"]
+    # # check if reviews is not empty
+    if reviews != "":
+        reviews = reviews
+    else:
+        reviews = data["reviews"]
+
 
     # clean the reviews
     clean_reviews = datacleaner.clean_text(reviews)
 
     # debug print
-    print(f"clean_reviews: {clean_reviews}")
+    # print(f"clean_reviews: {clean_reviews}")
 
     if "stopwords" in data:
         print("stopwords found in data")
         user_stopwords = set(data["stopwords"].split())
+        print(f"using user_stopwords: {user_stopwords}")
 
     # # check if clean_reviews is empty when stopwords are removed
     tokens_without_sw = [word for word in clean_reviews.split() if word not in stopwords.union(user_stopwords)]
@@ -92,22 +103,30 @@ def generatepostive():
 @app.post("/generatenegative")
 def generatenegative():
     global user_stopwords
+    global reviews
     data = request.get_json()
+
+    print("Generating Negative")
 
     if data is None:
         return abort(404, description="Data not found")
 
     # debug print
-    reviews = data["reviews"]
+    # # check if reviews is not empty
+    if reviews != "":
+        reviews = reviews
+    else:
+        reviews = data["reviews"]
 
     clean_reviews = datacleaner.clean_text(reviews)
 
     # debug print
-    print(f"clean_reviews: {clean_reviews}")
+    # print(f"clean_reviews: {clean_reviews}")
 
     if "stopwords" in data:
         print("stopwords found in data")
         user_stopwords = set(data["stopwords"].split())
+        print(f"using user_stopwords: {user_stopwords}")
 
     # # check if clean_reviews is empty when stopwords are removed
     tokens_without_sw = [word for word in clean_reviews.split() if word not in stopwords.union(user_stopwords)]
@@ -154,16 +173,22 @@ def generatenegative():
         return abort(500, description="An error occurred")
 
 
-
 @app.post("/generatewordcount")
 def generatewordcount():
     global user_stopwords
+    global reviews
     data = request.get_json()
+
+    print("Generating WordCount")
 
     if data is None:
         return abort(404, description="Data not found")
 
-    reviews = data["reviews"]
+    # # check if reviews is not empty
+    if reviews != "":
+        reviews = reviews
+    else:
+        reviews = data["reviews"]
 
     clean_reviews = datacleaner.clean_text(reviews)
 
@@ -197,7 +222,7 @@ def generatewordcount():
     # Count word frequencies
     word_counts = Counter(words)
 
-    print(f"using stopwords: {_stopwords}")
+    # print(f"using stopwords: {_stopwords}")
     print(f"using user_stopwords: {user_stopwords}")
 
     # Find the 4 most frequent words (adjust k as needed)
@@ -210,7 +235,7 @@ def generatewordcount():
     # Print the results
     print("Top", k, "most frequent words (excluding stopwords):")
     for word, count in most_frequent:
-        # print(word, ":", count)
+        print(word, ":", count)
         json_data.append({"word": word, "count": count})
 
     # return reviews
