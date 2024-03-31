@@ -395,7 +395,7 @@ class KIMPCSeeder extends Seeder
                             'seller_id' => $prod['product']->seller_id,
                             'text' => $get_negative_comment->text,
                             'rating' => $get_negative_comment->rating,
-                            'sentiment' => 1,
+                            'sentiment' => 0,
                             'created_at' => $created_date,
                             'updated_at' => $created_date,
                         ]);
