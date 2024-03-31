@@ -99,7 +99,7 @@
                                         @if ($review->sentiment === 1)
                                             <span
                                                 class="bg-green-100 text-green-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Positive</span>
-                                        @else
+                                        @elseif($review->sentiment === 0)
                                             <span
                                                 class="bg-red-100 text-red-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Negative</span>
                                         @endif

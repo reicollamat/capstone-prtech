@@ -62,7 +62,8 @@ class ReviewInsight extends Component
     #[Computed]
     public function getReviews()
     {
-        $query = Comment::join('products', 'comments.product_id', '=', 'products.id')->where('comments.seller_id', '=', $this->sellerId);
+        $query = Comment::join('products', 'comments.product_id', '=', 'products.id')
+            ->where('comments.seller_id', '=', $this->sellerId)->select('comments.*', 'products.category');
 
         if ($this->search !== null) {
             $query->where('comments.text', 'like', '%'.$this->search.'%');
@@ -78,6 +79,8 @@ class ReviewInsight extends Component
             // dd($this->category);
             $query->where('category', '=', $this->category);
         }
+
+        // dd($query->orderBy('comments.created_at', 'desc')->paginate(10));
 
         return $query->orderBy('comments.created_at', 'desc')->paginate(10);
     }
