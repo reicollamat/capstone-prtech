@@ -49,7 +49,7 @@ class KIMPCSeeder extends Seeder
         // for KIMPC seller account
         $seller = Seller::factory()->create([
             'user_id' => $user->id,
-            'registered_business_name' => $user->first_name . ' ' . $user->last_name,
+            'registered_business_name' => $user->first_name.' '.$user->last_name,
             'shop_name' => 'KIMPC',
             'shop_email' => $user->email,
             'shop_phone_number' => $user->phone_number,
@@ -106,7 +106,6 @@ class KIMPCSeeder extends Seeder
             'condition' => $product1->condition,
         ]);
 
-
         // 2 //
         $image2 = 'img/components/mouse/kimpc_mouse.png';
         $product2 = Product::create([
@@ -143,7 +142,6 @@ class KIMPCSeeder extends Seeder
             'condition' => $product2->condition,
         ]);
 
-
         // 3 //
         $image3 = 'img/components/headphone/kimpc_headphone.png';
         $product3 = Product::create([
@@ -178,7 +176,6 @@ class KIMPCSeeder extends Seeder
             'description' => 'The W800BT plus is a set of impressive wireless Bluetooth headphones. The light weight frame is extremely comfortable allowing you to enjoy a full day of listening.  The over the head design has an ergonomic fit made from a breathable high elastic material and faux leather cover. The closed back design also helps with reducing outside noise and keeping your sound in.',
             'condition' => $product3->condition,
         ]);
-
 
         // 4 //
         $image4 = 'img/components/keyboard/kimpc_keyboard.png';
@@ -217,7 +214,6 @@ class KIMPCSeeder extends Seeder
             'condition' => $product4->condition,
         ]);
 
-
         // 5 //
         $image5 = 'img/components/ram/kimpc_ram.png';
         $product5 = Product::create([
@@ -254,7 +250,6 @@ class KIMPCSeeder extends Seeder
             'description' => 'XLR8 Gaming EPIC-X RGB Memory is designed for gamers and enthusiasts and offers a brilliant RGB design combined with extreme overclocked performance, taking your PC to the extreme. Not only you destroy the competition on the outside, also have good looks on the inside. PNY has your back with its elite DDR4 RGB Silver 3200MHz CL16 desktop memory upgrade. Our most advanced RGB with aluminum heat spreaders of brushed silver and simplistic design.',
             'condition' => $product5->condition,
         ]);
-
 
         $kimpc_products = [
             [
@@ -300,11 +295,11 @@ class KIMPCSeeder extends Seeder
             // loop each date
             foreach ($data_new_csv as $key => $row) {
                 // loop quantity to create purchase transations each
-                for ($i = 0; $i < $row["quantity"]; $i++) {
+                for ($i = 0; $i < $row['quantity']; $i++) {
                     $buyer = User::find(fake()->numberBetween(3, 23));
                     $shipping_value = ShippingHelper::computeShipping($prod['product']->weight);
                     $total = $prod['product']->price + $shipping_value;
-                    $created_date = Carbon::parse($row["created_date"])->toDateTimeString();
+                    $created_date = Carbon::parse($row['created_date'])->toDateTimeString();
 
                     //generate reference number for purchase
                     $puchase_reference_number = ReferenceGeneratorHelper::generateReferenceString();
@@ -363,10 +358,9 @@ class KIMPCSeeder extends Seeder
                     ]);
                     $shipment->save();
 
-
                     // create comments for positive and negative
                     // positive comments
-                    if ($i < $row["positive"]) {
+                    if ($i < $row['positive']) {
                         $get_positive_comment = Comment::where('sentiment', 1)->skip(fake()->numberBetween(1, 25410))->first();
 
                         $positive_comment = new Comment([
@@ -386,7 +380,7 @@ class KIMPCSeeder extends Seeder
                         ]);
                     }
                     // negative comments
-                    if ($i >= $row["positive"] && ($i - $row["positive"]) < $row["negative"]) {
+                    if ($i >= $row['positive'] && ($i - $row['positive']) < $row['negative']) {
                         $get_negative_comment = Comment::where('sentiment', 0)->skip(fake()->numberBetween(1, 580))->first();
 
                         $negative_comment = new Comment([
@@ -417,8 +411,6 @@ class KIMPCSeeder extends Seeder
                 'view_count' => $quantity_sum,
             ]);
         }
-
-
 
         // // 2 //
         // $image = 'img/components/mouse/kimpc_mouse.png';
@@ -535,7 +527,6 @@ class KIMPCSeeder extends Seeder
         //         ]);
         //         $shipment->save();
 
-
         //         // create comments for positive and negative
         //         if ($i < $row["positive"]) {
         //             $get_positive_comment = Comment::where('sentiment', 1)->skip(fake()->numberBetween(1, 25410))->first();
@@ -578,7 +569,6 @@ class KIMPCSeeder extends Seeder
         //     'purchase_count' => $quantity_sum,
         //     'view_count' => $quantity_sum,
         // ]);
-
 
         // // 3 //
         // $image = 'img/components/headphone/kimpc_headphone.png';
@@ -692,7 +682,6 @@ class KIMPCSeeder extends Seeder
         //         ]);
         //         $shipment->save();
 
-
         //         // create comments for positive and negative
         //         if ($i < $row["positive"]) {
         //             $get_positive_comment = Comment::where('sentiment', 1)->skip(fake()->numberBetween(1, 25410))->first();
@@ -735,7 +724,6 @@ class KIMPCSeeder extends Seeder
         //     'purchase_count' => $quantity_sum,
         //     'view_count' => $quantity_sum,
         // ]);
-
 
         //     // 4 //
         //     $image = 'img/components/keyboard/kimpc_keyboard.png';
@@ -806,7 +794,6 @@ class KIMPCSeeder extends Seeder
         //         'purchase_count' => $quantity_sum,
         //         'view_count' => $quantity_sum,
         //     ]);
-
 
         //     // 5 //
         //     $image = 'img/components/ram/kimpc_ram.png';

@@ -115,7 +115,7 @@
         {{-- </div> --}}
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
-        <div class="flex items-center justify-between pb-3">
+        <div class="flex items-center justify-between pb-2">
             <div>
                 <h4 class="mb-0 text-2xl tracking-wide text-gray-600">Forecast : </h4>
             </div>
@@ -138,12 +138,84 @@
                                     href="#">Monthly
                                 </button>
                             </li>
-                            {{-- <li> --}}
-                            {{--     <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
-                            {{--         href="#">Yearly --}}
-                            {{--     </button> --}}
-                            {{-- </li> --}}
+                             <li>
+                                 {{-- <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
+                                 {{--     href="#">Custom --}}
+                                 {{-- </button> --}}
+                                 <!-- Button trigger modal -->
+                                 <button type="button" wire:click="summaryChange('Custom')"
+                                         class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                     Custom
+                                 </button>
+
+                                 <!-- Modal -->
+
+                             </li>
                         </ul>
+                    </div>
+                </div>
+
+                {{-- Modal Body --}}
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Custom Date Input</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <p class="text-center font-bold">Today is {{ now()->format('Y-m-d') }}</p>
+                                </div>
+                                <div class="flex flex-column gap-3">
+                                    <div>
+                                        <label for="start_date"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            <span class="text-red-600 text-xs">*</span>Starting Date</label>
+                                        <input type="date" id="start_date" wire:model.blur="user_birthdate"
+                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                               placeholder="Juan" required>
+                                        @error('user_birthdate')
+                                        <span class="font-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label for="end_date"
+                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            <span class="text-red-600 text-xs">*</span>Ending Date</label>
+                                        <input type="date" id="end_date" wire:model.blur="user_birthdate"
+                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                               placeholder="Juan" required>
+                                        @error('user_birthdate')
+                                        <span class="font-sm text-red-500">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <h6 class="text-center">
+                                        Or available Months of this year
+                                    </h6>
+                                    <div>
+                                        @php
+                                            $currentMonth = now()->month;
+                                        @endphp
+
+                                        <select class="form-select form-select-sm" id="monthselect"
+                                                aria-label="Small select example" wire:model.live.debounce="monthselect">
+                                            <option>Select Month</option>
+                                            @for ($i = 1; $i <= $currentMonth; $i++)
+                                                <option value="{{ $i }}">
+                                                    {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{ $summary }}
@@ -187,9 +259,11 @@
 
             </div>
         </div>
+        <p class="mb-1 text-gray-500 text-sm tracking-wider">
+            Showing date from BLANK_DATE to {{ $ending_date ? $ending_date : now()->format('Y-m-d')}}
+        </p>
         <div>
             <div class="block xl:flex gap-2">
-
                 {{-- <div class="p-2 relative flex-1"> --}}
                 {{--     <div class="inset-0"> --}}
                 {{--         <div class="flex items-end w-full h-full overflow-hidden" wire:ignore> --}}
@@ -199,7 +273,7 @@
                 {{-- </div> --}}
                 <div class="flex-auto border border-gray-200">
                     <div class="p-2 h-full w-full relative flex justify-center items-center" wire:ignore>
-                        <canvas class="!w-full !h-[320px]" id="productSalesChart"></canvas>
+                        <canvas class="!w-full !h-[350px]" id="productSalesChart"></canvas>
                         {{-- <div> --}}
                         {{--     <h5 class="text-gray-600 text-3xl tracking-wider">Awaiting User Input</h5> --}}
                         {{--     <h6 class="text-gray-500 text-xl text-center tracking-tighter">Select Product to View</h6> --}}
@@ -243,7 +317,7 @@
                     <div class="mt-2">
                         <label for="predictrange"
                             class="form-label tracking-tight uppercase text-sm font-medium">Predict
-                            for the next</label>
+                            for the next n days</label>
 
                         <select class="form-select form-select-sm" id="predictrange"
                             aria-label="Small select example" wire:model.live.debounce="predictrange">
@@ -474,12 +548,23 @@
                         <div x-cloak x-transition.duration.500ms x-show="showModal"
                             class="fixed inset-0 z-50 grid place-content-center">
                             <div @click.away="showModal = false"
-                                class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Purchase Order
                                                 Report</h1>
+                                        </div>
+                                        <div class="flex flex-column text-start justify-start mt-1">
+                                            <p class="text-gray-600">A: Here are some key factors to consider alongside our prediction:</p>
+                                            <div>
+                                                <ul class="list-disc pl-4">
+                                                    <li class="text-gray-600 text-sm">Lead Time: The time it takes your supplier to deliver after you order. Factor this in to avoid stockouts while waiting for your order.</li>
+                                                    <li class="text-gray-600 text-sm">Minimum Order Quantity (MOQ): Some suppliers require a minimum order amount. Make sure your order meets this to avoid extra fees.</li>
+                                                    <li class="text-gray-600 text-sm">Storage Capacity: Consider your available space. Don't overstock and limit your ability to hold other products.</li>
+                                                    <li class="text-gray-600 text-sm">Cash Flow: Balance the cost of restocking with your available cash flow.</li>
+                                                </ul>
+                                            </div>
                                         </div>
 
                                     </div>
