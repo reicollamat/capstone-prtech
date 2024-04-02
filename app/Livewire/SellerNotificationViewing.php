@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
 use App\Notifications\SellerNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -22,14 +23,21 @@ class SellerNotificationViewing extends Component
     public function testnotif()
     {
         $user = Auth::user();
+
+        Notification::send($user, new SellerNotification('seller', 'low_stock', 1));
+
+
         // dd($user->notifications);
         foreach ($user->notifications as $key => $notification) {
-            DB::table('notifications')->where('id', $notification->id)->delete();
+            // DB::table('notifications')->where('id', $notification->id)->delete();
+            // dd($notification);
+            $prdct = Product::find($notification->data['product_id']);
+            // dd($prdct->reserve);
         }
         $products = $user->seller->products()->whereColumn('stock', '<=', 'reserve')->get();
 
         foreach ($products as $key => $product) {
-            Notification::send($user, new SellerNotification($product->title));
+            // Notification::send($user, new SellerNotification($product->title));
         }
     }
 }

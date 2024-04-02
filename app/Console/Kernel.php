@@ -24,14 +24,16 @@ class Kernel extends ConsoleKernel
             $user = User::where('name', 'kim_pc')->first();
             $products = $user->seller->products()->whereColumn('stock', '<=', 'reserve')->get();
 
-            foreach ($products as $key => $product) {
-                // check notifications if product exists, delete the notification and create new
-                foreach ($user->notifications as $key => $notification) {
-                    if ($notification->data['product_id'] == $product->id) {
-                        DB::table('notifications')->where('id', $notification->id)->delete();
-                    }
+            // check notifications table if low_stock notif exists
+            // delete the low_stock notifs and create new
+            foreach ($user->notifications as $key => $notification) {
+                // delete low_stock notifications to avoid product duplication
+                if ($notification->data['role'] == 'seller' && $notification->data['type'] == 'low_stock') {
+                    DB::table('notifications')->where('id', $notification->id)->delete();
                 }
-                Notification::send($user, new SellerNotification($product->id));
+            }
+            foreach ($products as $key => $product) {
+                Notification::send($user, new SellerNotification('seller', 'low_stock', $product->id));
             }
         })->everyMinute();
     }
