@@ -185,49 +185,53 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="flex flex-col gap-1 flex-auto">
-                             <div class="flex justify-between items-center">
-                                 <div class="flex items-center gap-3">
-                                     <i class="bi bi-check2-circle text-2xl mr-2"></i>
-                                     <h6 class="mb-0 tracking-wide">Completed Orders</h6>
-                                 </div>
-                                 <div class="px-3 flex items-center">
-                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
-                                     <span class="bg-green-100 text-green-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ $this->getCompletedOrders }}</span>
-                                 </div>
-                             </div>
-                             <div class="flex justify-between items-center">
-                                 <div class="flex items-center gap-3">
-                                     <i class="bi bi-exclamation-circle text-2xl mr-2"></i>
-                                     <h6 class="mb-0 tracking-wide">Pending Orders</h6>
-                                 </div>
-                                 <div class="px-3 flex items-center">
-                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
-                                     <span class="bg-blue-100 text-blue-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $this->getPendingOrders }}</span>
-                                 </div>
-                             </div>
-                             <div class="flex justify-between items-center">
-                                 <div class="flex items-center gap-3">
-                                     <i class="bi bi-arrow-return-left text-2xl mr-2"></i>
-                                     <h6 class="mb-0 tracking-wide">Return Orders</h6>
-                                 </div>
-                                 <div class="px-3 flex items-center">
-                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
-                                     <span class="bg-yellow-100 text-yellow-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">{{ $this->getReturnOrders }}</span>
-                                 </div>
-                             </div>
-                             <div class="flex justify-between items-center">
-                                 <div class="flex items-center gap-3">
-                                     <i class="bi bi-x-circle text-2xl mr-2"></i>
-                                     <h6 class="mb-0 tracking-wide">Cancelled Orders</h6>
-                                 </div>
-                                 <div class="px-3 flex items-center">
-                                     {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
-                                     <span class="bg-red-100 text-red-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">{{ $this->getCancelledOrders }}</span>
-                                 </div>
-                             </div>
+                        <div class="flex flex-col gap-1 flex-auto">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <i class="bi bi-check2-circle text-2xl mr-2"></i>
+                                    <h6 class="mb-0 tracking-wide">Completed Orders</h6>
+                                </div>
+                                <div class="px-3 flex items-center">
+                                    {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                    <span
+                                        class="bg-green-100 text-green-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">{{ $this->getCompletedOrders }}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <i class="bi bi-exclamation-circle text-2xl mr-2"></i>
+                                    <h6 class="mb-0 tracking-wide">Pending Orders</h6>
+                                </div>
+                                <div class="px-3 flex items-center">
+                                    {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                    <span
+                                        class="bg-blue-100 text-blue-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">{{ $this->getPendingOrders }}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <i class="bi bi-arrow-return-left text-2xl mr-2"></i>
+                                    <h6 class="mb-0 tracking-wide">Return Orders</h6>
+                                </div>
+                                <div class="px-3 flex items-center">
+                                    {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                    <span
+                                        class="bg-yellow-100 text-yellow-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">{{ $this->getReturnOrders }}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <i class="bi bi-x-circle text-2xl mr-2"></i>
+                                    <h6 class="mb-0 tracking-wide">Cancelled Orders</h6>
+                                </div>
+                                <div class="px-3 flex items-center">
+                                    {{-- <h6 class="mb-0 tracking-wide text-lg">3</h6> --}}
+                                    <span
+                                        class="bg-red-100 text-red-800 text-base font-medium me-2 px-3 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">{{ $this->getCancelledOrders }}</span>
+                                </div>
+                            </div>
 
-                         </div>
+                        </div>
                         {{--     <div class="relative h-350-px" style="height:auto"> --}}
                         {{--         <div class="relative overflow-x-auto sm:rounded-lg"> --}}
                         {{--             <table --}}
@@ -269,12 +273,12 @@
                         {{--     </div> --}}
                         {{-- </div> --}}
                     </div>
-                    <div
-                        class="relative flex flex-col min-w-0 break-words w-full  p-4 shadow-md rounded-lg bg-white">
+                    <div class="relative flex flex-col min-w-0 break-words w-full  p-4 shadow-md rounded-lg bg-white">
                         <div class="rounded-t mb-0  bg-transparent">
                             <div class="flex flex-wrap items-center">
                                 <div class="relative w-full max-w-full flex-grow flex-1 pb-2">
-                                    <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Shop Sentiment</h6>
+                                    <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Shop Sentiment
+                                    </h6>
                                     {{-- <h2 class="text-xl font-semibold text-blueGray-800">Total orders</h2> --}}
                                 </div>
                             </div>
@@ -322,7 +326,6 @@
     {{--         </div> --}}
     {{--     </div> --}}
 
-
     {{-- </div> --}}
 
     {{-- <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false"> --}}
@@ -356,7 +359,7 @@
     {{--     </div> --}}
     {{-- </div> --}}
 
-{{--    @dd(json_encode($sentiment))--}}
+    {{--    @dd(json_encode($sentiment)) --}}
 
 </div>
 
@@ -365,7 +368,7 @@
         // This Javascript will get executed every time this component is loaded onto the page...
         console.log('hello');
 
-        new Chart("shop-sentiment-doughnut",{
+        new Chart("shop-sentiment-doughnut", {
             type: "doughnut",
             data: {
                 labels: [
