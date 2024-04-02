@@ -265,6 +265,7 @@
                         {{ $page_header ?? 'Seller Dashboard' }}
                     </h>
                 </div>
+                <livewire:seller-notification-viewing />
                 <div class="hidden md:block">
                     @if (Auth::user())
                         <div x-data="{ isOpen: false }" class="relative inline-block ">
