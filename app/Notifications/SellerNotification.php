@@ -14,12 +14,14 @@ class SellerNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct($role, $type, $product_id)
+    public function __construct($role, $type, $product_id, $title, $description)
     {
         //
         $this->role = $role;
         $this->type = $type;
         $this->product_id = $product_id;
+        $this->title = $title;
+        $this->description = $description;
     }
 
     /**
@@ -54,6 +56,8 @@ class SellerNotification extends Notification
             'role' => $this->role,
             'type' => $this->type,
             'product_id' => $this->product_id,
+            'title' => $this->title,
+            'description' => $this->description,
         ];
     }
 }

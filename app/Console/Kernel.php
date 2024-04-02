@@ -33,7 +33,13 @@ class Kernel extends ConsoleKernel
                 }
             }
             foreach ($products as $key => $product) {
-                Notification::send($user, new SellerNotification('seller', 'low_stock', $product->id));
+                Notification::send($user, new SellerNotification(
+                    'seller',
+                    'low_stock',
+                    $product->id,
+                    'Low Stock Alert',
+                    'Product has reached a low stock threshold. Please restock to avoid shortages.'
+                ));
             }
         })->everyMinute();
     }
