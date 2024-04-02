@@ -14,10 +14,10 @@ class SellerNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct($product)
+    public function __construct($product_id)
     {
         //
-        $this->product = $product;
+        $this->product_id = $product_id;
     }
 
     /**
@@ -49,7 +49,7 @@ class SellerNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'product' => $this->product,
+            'product_id' => $this->product_id,
         ];
     }
 }

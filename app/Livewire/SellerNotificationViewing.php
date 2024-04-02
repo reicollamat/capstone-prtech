@@ -22,7 +22,10 @@ class SellerNotificationViewing extends Component
     public function testnotif()
     {
         $user = Auth::user();
-        // dd($user);
+        // dd($user->notifications);
+        foreach ($user->notifications as $key => $notification) {
+            DB::table('notifications')->where('id', $notification->id)->delete();
+        }
         $products = $user->seller->products()->whereColumn('stock', '<=', 'reserve')->get();
 
         foreach ($products as $key => $product) {

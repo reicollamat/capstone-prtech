@@ -8,6 +8,7 @@ use App\Notifications\SellerNotification;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
 class Kernel extends ConsoleKernel
@@ -20,12 +21,17 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
             // 
-            // dd(Auth::user()->seller->products()->whereColumn('stock', '<=', 'reserve')->get());
             $user = User::where('name', 'kim_pc')->first();
             $products = $user->seller->products()->whereColumn('stock', '<=', 'reserve')->get();
 
             foreach ($products as $key => $product) {
-                Notification::send($user, new SellerNotification($product->title));
+                // check notifications if product exists, delete the notification and create new
+                foreach ($user->notifications as $key => $notification) {
+                    if ($notification->data['product_id'] == $product->id) {
+                        DB::table('notifications')->where('id', $notification->id)->delete();
+                    }
+                }
+                Notification::send($user, new SellerNotification($product->id));
             }
         })->everyMinute();
     }
