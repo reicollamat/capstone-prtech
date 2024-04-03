@@ -265,8 +265,10 @@
                         {{ $page_header ?? 'Seller Dashboard' }}
                     </h>
                 </div>
-                <div class="hidden md:block">
+                <div class="hidden md:flex items-center">
                     @if (Auth::user())
+                        <livewire:seller-notification-viewing />
+                        {{-- @include('livewire.seller-notification-viewing') --}}
                         <div x-data="{ isOpen: false }" class="relative inline-block ">
                             <!-- Dropdown toggle button -->
                             <button @click="isOpen = !isOpen"

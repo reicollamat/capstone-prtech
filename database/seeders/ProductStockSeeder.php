@@ -25,6 +25,14 @@ class ProductStockSeeder extends Seeder
                 $status = 'available';
             }
 
+            // for reserve/threshold
+            if ($stock > 2) {
+                $reserve = $stock * 0.2;
+            } else {
+                $reserve = 0;
+            }
+
+
             if ($comments = Comment::where('product_id', $product->id)) {
                 $product->update([
                     'purchase_count' => $comments->count(),
@@ -35,6 +43,7 @@ class ProductStockSeeder extends Seeder
             $product->update([
                 'stock' => $stock,
                 'status' => $status,
+                'reserve' => $reserve,
             ]);
         }
 
