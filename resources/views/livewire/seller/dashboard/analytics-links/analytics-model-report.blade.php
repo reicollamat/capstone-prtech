@@ -3,15 +3,44 @@
         <div class="p-3 border border-gray-200 bg-white rounded-lg">
             <div class="h-full flex flex-wrap items-center">
                 <div class="relative h-full w-full max-w-full flex-grow flex-1 justify-end">
-                    <h6 class="uppercase mb-1 text-sm font-semibold text-green-600">Restock Now</h6>
+                    <h6 class="uppercase mb-1 text-sm font-semibold text-red-700">Restock Now</h6>
                     <hr class="m-0 w-16 text-green-900">
-                    <div class="absolute bottom-0 right-0">
+                    <div class="flex gap-3 p-3">
+                        <div class="ml-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-14 h-14" id="product">
+                                <path fill="#c80000"
+                                    d="M28 42H4a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1V43a1 1 0 0 0-1-1zM20 36h24a1 1 0 0 0 1-1V17a1 1 0 0 0-1-1H20a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1zM60 42H36a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1V43a1 1 0 0 0-1-1z">
+                                </path>
+                                <g fill="#4D4D4D">
+                                    <path
+                                        d="M29 36H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zM18.115 17.668a1.002 1.002 0 0 0 1.277.609L43.9 9.599a1 1 0 0 0 .609-1.277l-2.002-5.656a.998.998 0 0 0-.512-.568 1.01 1.01 0 0 0-.765-.041l-24.509 8.678a1.005 1.005 0 0 0-.609 1.277l2.003 5.656zM61 36H35a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z">
+                                    </path>
+                                </g>
+                                <g fill="#CCC">
+                                    <path
+                                        d="M49.04 11.091h4v2h-4zM55.04 11.091h2v2h-2zM51.035 5.22l.958 1.755-3.51 1.916-.959-1.756zM54.546 3.301l.958 1.756-1.756.958-.958-1.756zM48.48 15.287l3.512 1.917-.958 1.756-3.512-1.918zM53.744 18.16l1.756.96-.959 1.754-1.755-.958z">
+                                    </path>
+                                </g>
+                                <path fill="#FFF"
+                                    d="M19.02 52h-6.04A2.984 2.984 0 0 1 10 49.02c0-1.683 1.337-3.02 2.98-3.02h6.04A2.984 2.984 0 0 1 22 48.98c0 1.683-1.337 3.02-2.98 3.02zm-6.04-4a.98.98 0 0 0-.98.98c0 .581.439 1.02.98 1.02h6.04a.98.98 0 0 0 .98-.98c0-.581-.439-1.02-.98-1.02h-6.04zM51.02 52h-6.04A2.984 2.984 0 0 1 42 49.02c0-1.683 1.337-3.02 2.98-3.02h6.04A2.984 2.984 0 0 1 54 48.98c0 1.683-1.337 3.02-2.98 3.02zm-6.04-4a.98.98 0 0 0-.98.98c0 .581.439 1.02.98 1.02h6.04a.98.98 0 0 0 .98-.98c0-.581-.439-1.02-.98-1.02h-6.04zM35.02 26h-6.04A2.984 2.984 0 0 1 26 23.02c0-1.683 1.337-3.02 2.98-3.02h6.04A2.984 2.984 0 0 1 38 22.98c0 1.683-1.337 3.02-2.98 3.02zm-6.04-4a.98.98 0 0 0-.98.98c0 .581.439 1.02.98 1.02h6.04a.98.98 0 0 0 .98-.98c0-.581-.439-1.02-.98-1.02h-6.04z">
+                                </path>
+                                <path fill="#ec0000"
+                                    d="M28 33a23.8 23.8 0 0 1-9-1.756V35a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1v-9.462C41.184 30.052 35.001 33 28 33zM12 59a23.8 23.8 0 0 1-9-1.756V61a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1v-9.462C25.184 56.052 19.001 59 12 59zM44 59a23.8 23.8 0 0 1-9-1.756V61a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1v-9.462C57.184 56.052 51.001 59 44 59z">
+                                </path>
+                                <path fill="#FFF" d="M37 30h4v2h-4zM21 56h4v2h-4zM53 56h4v2h-4z"></path>
+                            </svg>
+                        </div>
+                        <div class="w-full flex justify-center items-center">
+                            <h3 class="text-black-50">{{ $this->restock_now->count() ?? 0 }}</h3>
+                        </div>
+                    </div>
+                    <div class="absolute  bottom-0 right-0">
                         <div class="w-full flex justify-end">
                             <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                                 <div class="h-auto">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="text-sm text-green-900"
-                                        @click="showModal = !showModal" data-bs-target="#exampleModal">View
+                                        @click="showModal = !showModal" data-bs-target="#exampleModal">View Products
                                     </button>
                                 </div>
 
@@ -21,11 +50,33 @@
                                 <div x-cloak x-transition.duration.500ms x-show="showModal"
                                     class="fixed inset-0 z-50 grid place-content-center">
                                     <div @click.away="showModal = false"
-                                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                        class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Restock Now</h1>
+                                                </div>
+                                                <div class="mt-3">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Product</th>
+                                                                <th scope="col">Stock</th>
+                                                                <th scope="col">Low Stock Threshold</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($this->restock_now as $item)
+                                                                <tr wire:key="{{ $item->id }}">
+                                                                    <th scope="row">{{ $item->id }}</th>
+                                                                    <td>{{ $item->title }}</td>
+                                                                    <td>{{ $item->stock }}</td>
+                                                                    <td>{{ $item->reserve }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
                                                 </div>
 
                                             </div>
@@ -47,15 +98,53 @@
         <div class="p-3 border border-gray-200 bg-white rounded-lg">
             <div class="h-full flex flex-wrap items-center">
                 <div class="relative h-full w-full max-w-full flex-grow flex-1 justify-end">
-                    <h6 class="uppercase mb-1 text-sm font-semibold text-yellow-600">Restock Soon</h6>
+                    <h6 class="uppercase mb-1 text-sm font-semibold text-yellow-500">Restock Soon</h6>
                     <hr class="m-0 w-16 text-yellow-900">
+                    <div class="flex gap-3 p-3">
+                        <div class="ml-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="w-14 h-14"
+                                id="product">
+                                <path fill="#FFFF00"
+                                    d="M28 42H4a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1V43a1 1 0 0 0-1-1zM20 36h24a1 1 0 0 0 1-1V17a1 1 0 0 0-1-1H20a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1zM60 42H36a1 1 0 0 0-1 1v18a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1V43a1 1 0 0 0-1-1z">
+                                </path>
+                                <g fill="#4D4D4D">
+                                    <path
+                                        d="M29 36H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zM18.115 17.668a1.002 1.002 0 0 0 1.277.609L43.9 9.599a1 1 0 0 0 .609-1.277l-2.002-5.656a.998.998 0 0 0-.512-.568 1.01 1.01 0 0 0-.765-.041l-24.509 8.678a1.005 1.005 0 0 0-.609 1.277l2.003 5.656zM61 36H35a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h26a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z">
+                                    </path>
+                                </g>
+                                <g fill="#CCC">
+                                    <path
+                                        d="M49.04 11.091h4v2h-4zM55.04 11.091h2v2h-2zM51.035 5.22l.958 1.755-3.51 1.916-.959-1.756zM54.546 3.301l.958 1.756-1.756.958-.958-1.756zM48.48 15.287l3.512 1.917-.958 1.756-3.512-1.918zM53.744 18.16l1.756.96-.959 1.754-1.755-.958z">
+                                    </path>
+                                </g>
+                                <path fill="#FFF"
+                                    d="M19.02 52h-6.04A2.984 2.984 0 0 1 10 49.02c0-1.683 1.337-3.02 2.98-3.02h6.04A2.984 2.984 0 0 1 22 48.98c0 1.683-1.337 3.02-2.98 3.02zm-6.04-4a.98.98 0 0 0-.98.98c0 .581.439 1.02.98 1.02h6.04a.98.98 0 0 0 .98-.98c0-.581-.439-1.02-.98-1.02h-6.04zM51.02 52h-6.04A2.984 2.984 0 0 1 42 49.02c0-1.683 1.337-3.02 2.98-3.02h6.04A2.984 2.984 0 0 1 54 48.98c0 1.683-1.337 3.02-2.98 3.02zm-6.04-4a.98.98 0 0 0-.98.98c0 .581.439 1.02.98 1.02h6.04a.98.98 0 0 0 .98-.98c0-.581-.439-1.02-.98-1.02h-6.04zM35.02 26h-6.04A2.984 2.984 0 0 1 26 23.02c0-1.683 1.337-3.02 2.98-3.02h6.04A2.984 2.984 0 0 1 38 22.98c0 1.683-1.337 3.02-2.98 3.02zm-6.04-4a.98.98 0 0 0-.98.98c0 .581.439 1.02.98 1.02h6.04a.98.98 0 0 0 .98-.98c0-.581-.439-1.02-.98-1.02h-6.04z">
+                                </path>
+                                <path fill="#FFFF40"
+                                    d="M28 33a23.8 23.8 0 0 1-9-1.756V35a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1v-9.462C41.184 30.052 35.001 33 28 33zM12 59a23.8 23.8 0 0 1-9-1.756V61a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1v-9.462C25.184 56.052 19.001 59 12 59zM44 59a23.8 23.8 0 0 1-9-1.756V61a1 1 0 0 0 1 1h24a1 1 0 0 0 1-1v-9.462C57.184 56.052 51.001 59 44 59z">
+                                </path>
+                                <path fill="#FFF" d="M37 30h4v2h-4zM21 56h4v2h-4zM53 56h4v2h-4z"></path>
+                            </svg>
+                        </div>
+                        <div class="w-full flex justify-center items-center">
+                            <h3 class="text-black-50">{{ $this->restock_soon->count() ?? 0 }}</h3>
+                        </div>
+                        {{--                        @foreach ($this->restock_now as $item) --}}
+                        {{--                            <div class=""> --}}
+                        {{--                                <p class="text-gray-600 text-sm"> --}}
+                        {{--                                    {{ $item->title }} --}}
+                        {{--                                </p> --}}
+                        {{--                            </div> --}}
+                        {{--                        @endforeach --}}
+
+                    </div>
                     <div class="absolute bottom-0 right-0">
                         <div class="w-full flex justify-end">
                             <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                                 <div class="h-auto">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="text-sm text-yellow-900"
-                                        @click="showModal = !showModal" data-bs-target="#exampleModal">View
+                                        @click="showModal = !showModal" data-bs-target="#exampleModal">View Products
                                     </button>
                                 </div>
 
@@ -65,14 +154,35 @@
                                 <div x-cloak x-transition.duration.500ms x-show="showModal"
                                     class="fixed inset-0 z-50 grid place-content-center">
                                     <div @click.away="showModal = false"
-                                        class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                        class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Restock
                                                         Soon</h1>
                                                 </div>
-
+                                                <div class="mt-3">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">Product</th>
+                                                                <th scope="col">Stock</th>
+                                                                <th scope="col">Low Stock Threshold</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($this->restock_soon as $item)
+                                                                <tr wire:key="{{ $item->id }}">
+                                                                    <th scope="row">{{ $item->id }}</th>
+                                                                    <td>{{ $item->title }}</td>
+                                                                    <td>{{ $item->stock }}</td>
+                                                                    <td>{{ $item->reserve }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="w-full flex gap-2 pt-3 justify-end">
@@ -138,30 +248,32 @@
                                     href="#">Monthly
                                 </button>
                             </li>
-                             <li>
-                                 {{-- <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
-                                 {{--     href="#">Custom --}}
-                                 {{-- </button> --}}
-                                 <!-- Button trigger modal -->
-                                 <button type="button" wire:click="summaryChange('Custom')"
-                                         class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                     Custom
-                                 </button>
+                            <li>
+                                {{-- <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
+                                {{--     href="#">Custom --}}
+                                {{-- </button> --}}
+                                <!-- Button trigger modal -->
+                                <button type="button" wire:click="summaryChange('Custom')" class="dropdown-item"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Custom
+                                </button>
 
-                                 <!-- Modal -->
+                                <!-- Modal -->
 
-                             </li>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 {{-- Modal Body --}}
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true" wire:ignore>
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Custom Date Input</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div>
@@ -170,24 +282,30 @@
                                 <div class="flex flex-column gap-3">
                                     <div>
                                         <label for="start_date"
-                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             <span class="text-red-600 text-xs">*</span>Starting Date</label>
-                                        <input type="date" id="start_date" wire:model.blur="user_birthdate"
-                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                               placeholder="Juan" required>
-                                        @error('user_birthdate')
-                                        <span class="font-sm text-red-500">{{ $message }}</span>
+                                        <input type="date" id="start_date"
+                                            wire:model.live.debounce="userStartingDate"
+                                            value="{{ $userStartingDate }}"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required>
+                                        @error('start_date')
+                                            <span class="font-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div>
                                         <label for="end_date"
-                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            <span class="text-red-600 text-xs">*</span>Ending Date</label>
-                                        <input type="date" id="end_date" wire:model.blur="user_birthdate"
-                                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                               placeholder="Juan" required>
-                                        @error('user_birthdate')
-                                        <span class="font-sm text-red-500">{{ $message }}</span>
+                                            class="w-full block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            <span class="text-red-600 text-xs">*</span>Ending Date
+                                            <span class="text-red-600 text-xs">Defaults to the current
+                                                day</span></label>
+                                        <input type="date" id="end_date"
+                                            wire:model.live.debounce="userEndingDate"
+                                            value="{{ now()->format('Y-m-d') }}"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required>
+                                        @error('end_date')
+                                            <span class="font-sm text-red-500">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <h6 class="text-center">
@@ -199,8 +317,8 @@
                                         @endphp
 
                                         <select class="form-select form-select-sm" id="monthselect"
-                                                aria-label="Small select example" wire:model.live.debounce="monthselect">
-                                            <option>Select Month</option>
+                                            aria-label="Small select example" wire:model.live.debounce="monthSelect">
+                                            <option value="0">Select Month</option>
                                             @for ($i = 1; $i <= $currentMonth; $i++)
                                                 <option value="{{ $i }}">
                                                     {{ DateTime::createFromFormat('!m', $i)->format('F') }}
@@ -212,34 +330,45 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{ $summary }}
+                {{ $summary ?? '' }}
+                {{ $monthSelect ?? '' }}
+                {{ $userStartingDate ?? '' }}
+                {{ $userEndingDate ?? '' }}
                 <div class="btn-group btn-group-sm" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        {{ $productselected != null ? $productselected : 'Select Product' }}
+                        Select Product
                     </button>
                     <ul class="dropdown-menu !pl-0">
-                        <li>
-                            <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '7')"
-                                class="dropdown-item" href="#">Weekly
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '30')"
-                                class="dropdown-item" href="#">Monthly
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" wire:click="$set('recentlyBoughtProductsFilter', '90')"
-                                class="dropdown-item" href="#">Yearly
-                            </button>
-                        </li>
+                        <p class="pl-3 mb-0 text-gray-600 text-sm font-bold">Recommended</p>
+                        @foreach ($this->restock_now as $item)
+                            <tr wire:key="{{ $item->id }}">
+                                <li>
+                                    <button type="button" class="dropdown-item"
+                                            wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
+                                        - {{ $item->title }}
+                                    </button>
+                                </li>
+                            </tr>
+                        @endforeach
+                        <p class="mt-2 pl-3 mb-0 text-gray-600 text-sm font-bold">Other Products</p>
+                        @foreach ($this->restock_soon as $item)
+                            <tr wire:key="{{ $item->id }}">
+                                <li>
+                                    <button type="button" class="dropdown-item"
+                                        wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
+                                        - {{ $item->title }}
+                                    </button>
+                                </li>
+                            </tr>
+                        @endforeach
                     </ul>
                 </div>
                 <div>
@@ -260,8 +389,15 @@
             </div>
         </div>
         <p class="mb-1 text-gray-500 text-sm tracking-wider">
-            Showing date from BLANK_DATE to {{ $ending_date ? $ending_date : now()->format('Y-m-d')}}
+            @if ($monthSelect && $monthSelect != 0)
+                Showing Data from the Month of {{ DateTime::createFromFormat('!m', $monthSelect)->format('F') }}
+                , {{ now()->year }}
+            @else
+                Showing Data from {{ $userStartingDate ?? 'UNKNOWN' }}
+                to {{ $userEndingDate ?? now()->format('Y-m-d') }}
+            @endif
         </p>
+        {{ $starting_date }}
         <div>
             <div class="block xl:flex gap-2">
                 {{-- <div class="p-2 relative flex-1"> --}}
@@ -300,18 +436,20 @@
                 {{-- </div> --}}
                 <div class="pt-2 px-2">
                     <div>
-                        <label for="inputPassword5"
+                        <label for="selected_product"
                             class="form-label tracking-tight uppercase text-sm font-medium">Selected
                             Product</label>
-                        <input type="text" placeholder="Selected Product" id="inputPassword5"
-                            class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                        <input type="text" placeholder="Selected Product" id="selected_product"
+                               value="{{ $productselected ?? 'Awaiting User Input' }}"
+                            class="form-control form-control-sm">
                     </div>
 
                     <div class="mt-2">
-                        <label for="inputPassword5"
+                        <label for="selected_product_price"
                             class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
-                        <input type="text" placeholder="Product Price" id="inputPassword5"
-                            class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
+                        <input type="text" placeholder="Product Price" id="selected_product_price"
+                               value="{{ $productselectedprice ?? 'Awaiting User Input' }}"
+                            class="form-control form-control-sm">
                     </div>
 
                     <div class="mt-2">
@@ -331,9 +469,9 @@
                     @if ($predictrange == 'custom')
                         <div class="mt-2">
                             <label for="customrange"
-                                class="form-label tracking-tight uppercase text-sm font-medium sr-only">custome
+                                class="form-label tracking-tight uppercase text-sm font-medium sr-only">custom
                                 date</label>
-                            <input type="number" placeholder="Type here" id="customrange" name="customrange"
+                            <input type="number" placeholder="Number of days" id="customrange" name="customrange"
                                 min="1" class="form-control form-control-sm"
                                 aria-describedby="passwordHelpBlock">
                         </div>
@@ -357,11 +495,20 @@
                             <button type="button" class="w-full btn btn-sm btn-outline-secondary ">Clear</button>
                         </div>
                         <div class="p-2">
-                            <button type="button" class="w-full btn btn-sm btn-primary ">Run</button>
+                            <button type="button" class="w-full btn btn-sm btn-outline-primary ">Run</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="p-2">
+                            <button type="button" class="w-full btn btn-sm btn-primary ">Run on All Products</button>
                         </div>
                     </div>
 
                 </div>
+            </div>
+
+            <div>
+                {{ var_dump($userArray) }}
             </div>
 
             <div class="w-full mt-3 flex justify-between">
@@ -511,7 +658,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($combinedArray as $key => $value)
+                                                    @foreach ($chartArray as $key => $value)
                                                         <tr>
                                                             <th scope="row" class="text-sm">{{ $key }}
                                                             </th>
@@ -556,13 +703,30 @@
                                                 Report</h1>
                                         </div>
                                         <div class="flex flex-column text-start justify-start mt-1">
-                                            <p class="text-gray-600">A: Here are some key factors to consider alongside our prediction:</p>
+                                            <p class="font-bold text-gray-600">Here are some key factors to consider
+                                                alongside
+                                                our prediction:</p>
                                             <div>
                                                 <ul class="list-disc pl-4">
-                                                    <li class="text-gray-600 text-sm">Lead Time: The time it takes your supplier to deliver after you order. Factor this in to avoid stockouts while waiting for your order.</li>
-                                                    <li class="text-gray-600 text-sm">Minimum Order Quantity (MOQ): Some suppliers require a minimum order amount. Make sure your order meets this to avoid extra fees.</li>
-                                                    <li class="text-gray-600 text-sm">Storage Capacity: Consider your available space. Don't overstock and limit your ability to hold other products.</li>
-                                                    <li class="text-gray-600 text-sm">Cash Flow: Balance the cost of restocking with your available cash flow.</li>
+                                                    <li class="text-gray-600 text-sm">Lead Time: The time it takes your
+                                                        supplier to deliver after you order. Factor this in to avoid
+                                                        stockouts while waiting for your order.
+                                                    </li>
+                                                    <li class="mt-1 text-gray-600 text-sm">Minimum Order Quantity
+                                                        (MOQ):
+                                                        Some
+                                                        suppliers require a minimum order amount. Make sure your order
+                                                        meets this to avoid extra fees.
+                                                    </li>
+                                                    <li class="mt-1 text-gray-600 text-sm">Storage Capacity: Consider
+                                                        your
+                                                        available space. Don't overstock and limit your ability to hold
+                                                        other products.
+                                                    </li>
+                                                    <li class="mt-1 text-gray-600 text-sm">Cash Flow: Balance the cost
+                                                        of
+                                                        restocking with your available cash flow.
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -713,23 +877,32 @@
     <script>
         let ctx = document.getElementById('productSalesChart');
 
-        // let $test = 30;
+        let $array_keys = {!! json_encode(array_keys($combinedArray)) !!};
+
+        let $array_values = {!! json_encode(array_values($combinedArray)) !!};
+
+        let data = [];
+
+        let keysArray = Object.keys(data);
+
+        let valuesArray = Object.values(data);
 
         let predictchart = new Chart(ctx, {
             type: "line",
             data: {
-                labels: {!! json_encode(array_keys($combinedArray)) !!},
+                labels: [],
                 datasets: [{
                     label: 'Sold Quantity',
                     borderColor: '#009aff',
-                    data: {!! json_encode(array_values($combinedArray)) !!},
+                    data: [],
                     // backgroundColor: '#bae0ff',
                     // pointStyle: 'circle',
-                    pointRadius: 2,
+                    pointRadius: 6,
                     pointHoverRadius: 8,
-                    tension: 0.1,
+                    tension: 0.2,
                     fill: false,
                 }],
+
             },
             options: {
                 responsive: true,
@@ -743,41 +916,20 @@
         });
 
         Livewire.on('update-chart', () => {
-            predictchart.data.datasets[0].data[0] = $wire.test;
+            console.log('Updating Chart');
+
+            data = $wire.chartArray;
+
+            keysArray = Object.keys(data);
+            valuesArray = Object.values(data);
+
+            predictchart.data.labels = keysArray;
+
+            predictchart.data.datasets[0].data = valuesArray;
+
             predictchart.update();
-            {{-- $test = {!! $test !!}; --}}
-            // console.log($test);
-            // console.log($wire.test);
-            {{-- new Chart(document.getElementById('productSalesChart'), { --}}
-            {{--    type: 'line', --}}
-            {{--    data: { --}}
-            {{--        labels: {!! json_encode($test_a) !!}, --}}
-            {{--        datasets: [{ --}}
-            {{--            label: 'Product Sold Quantity', --}}
-            {{--            data: {!! json_encode($test_b) !!}, --}}
-            {{--            backgroundColor: 'rgba(54, 162, 235, 0.2)', --}}
-            {{--            borderColor: 'rgba(54, 162, 235, 1)', --}}
-            {{--            pointRadius: 5, --}}
-            {{--            pointHoverRadius: 7, --}}
-            {{--            pointBackgroundColor: 'rgba(54, 162, 235, 1)', --}}
-            {{--            pointBorderColor: 'white', --}}
-            {{--        }] --}}
-            {{--    }, --}}
-            {{--    options: { --}}
-            {{--        responsive: true, --}}
-            {{--        maintainAspectRatio: false, --}}
-            {{--        plugins: { --}}
-            {{--            legend: { --}}
-            {{--                display: false, --}}
-            {{--            }, --}}
-            {{--        }, --}}
-            {{--    } --}}
-            {{-- }); --}}
 
-            // Adding an event listener to the button
-            // document.getElementById("myButton").addEventListener("click", handleClick);
-
-
+            console.log(keysArray, valuesArray);
         });
     </script>
 @endscript
