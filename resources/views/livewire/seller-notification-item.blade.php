@@ -90,7 +90,11 @@
                             <a href="{{ route('analytics-model-report') }}"
                                 class="list-group-item list-group-item-action">View
                                 StockSense</a>
-                            <a href="#" class="list-group-item list-group-item-action text-danger">Delete</a>
+                            <button wire:key="linktodelete"
+                                wire:click="$parent.delete_notif('{{ $notification->id }}')"
+                                class="list-group-item list-group-item-action">
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>

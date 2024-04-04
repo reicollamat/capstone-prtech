@@ -14,8 +14,7 @@ class SellerNotificationList extends Component
     public $user;
 
     public $seller_notifications = [];
-
-    public $seller_unread_notifications;
+    public $seller_unread_notifications = [];
     public $markread;
 
     public function placeholder()
@@ -53,14 +52,13 @@ class SellerNotificationList extends Component
         $this->mount();
     }
 
-    public function test()
+    public function delete_notif($notification)
     {
-        dd('test');
-    }
-
-    #[On('seller-notification-item-change')]
-    public function callfromchild()
-    {
+        // dd($notification);
+        $notification = DatabaseNotification::find($notification);
+        DatabaseNotification::destroy($notification->id);
+        // dd(DatabaseNotification::find($id));
+        sleep(0.5);
         $this->mount();
     }
 }
