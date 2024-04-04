@@ -38,18 +38,8 @@ class SellerNotificationItem extends Component
         }
     }
 
-    public function gotoMyProducts()
-    {
-        dd('test');
-    }
-
     public function render()
     {
         return view('livewire.seller-notification-item');
-    }
-
-    public function read()
-    {
-        $this->dispatch('seller-notification-item-change');
     }
 }
