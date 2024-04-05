@@ -119,6 +119,8 @@ class AnalyticsModelReport extends Component
 
     private function makeChart($product_id): void
     {
+        // dd($product_id);
+
         if ($product_id) {
             $products2 = DB::table('purchase_items')
                 ->select(DB::raw('SUM(quantity) as quantity'), 'created_at')
@@ -126,7 +128,7 @@ class AnalyticsModelReport extends Component
                 ->whereBetween('created_at', [$this->userStartingDate, $this->userEndingDate])
                 ->get();
         } else {
-            dd('No product selected');
+            // dd('No product selected');
             $products2 = Collection::make([]);
 
         }
