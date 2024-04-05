@@ -9,6 +9,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use JetBrains\PhpStorm\NoReturn;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -18,19 +21,17 @@ use Livewire\WithPagination;
 #[Layout('layouts.seller.seller-layout')]
 class AnalyticsModelReport extends Component
 {
-    use WithPagination;
+    use LivewireAlert, WithPagination;
 
     public $summary;
 
-    public $productselected;
+    public $productselectedid;
+
+    public $productselectedname;
 
     public $productselectedprice;
 
     public $searchquery;
-
-    public $predictinterval;
-
-    public $predictrange;
 
     public $test_a;
 
@@ -56,6 +57,13 @@ class AnalyticsModelReport extends Component
 
     public $chartArray = [];
 
+    // FOR API POST REQUEST
+    public $predictinterval;
+
+    public $predictrange;
+
+    public $custompredictrange;
+
     #[Locked]
     public $seller;
 
@@ -73,9 +81,11 @@ class AnalyticsModelReport extends Component
 
         $this->userStartingDate = Carbon::now()->subDays(30)->format('Y-m-d');
 
-        // $this->test_a_func();
-        //
-        // $this->test_b_func();
+        // Defaults to a Daily interval
+        $this->predictinterval = 'daily';
+
+        // Defaults to a 7-day range
+        $this->predictrange = 'week';
 
         $this->combinedArray = ['2024-01-01' => 5, '2024-01-02' => 15, '2024-01-03' => 2, '2024-01-04' => 12, '2024-01-05' => 12, '2024-01-06' => 11, '2024-01-07' => 3, '2024-01-08' => 9, '2024-01-09' => 7, '2024-01-10' => 4, '2024-01-11' => 16, '2024-01-12' => 20, '2024-01-13' => 8, '2024-01-14' => 19, '2024-01-15' => 19, '2024-01-16' => 16, '2024-01-17' => 3, '2024-01-18' => 13, '2024-01-19' => 3, '2024-01-20' => 10, '2024-01-21' => 13, '2024-01-22' => 8, '2024-01-23' => 5, '2024-01-24' => 7, '2024-01-25' => 18, '2024-01-26' => 15, '2024-01-27' => 20, '2024-01-28' => 12, '2024-01-29' => 18, '2024-01-30' => 4, '2024-01-31' => 5];
 
@@ -104,13 +114,22 @@ class AnalyticsModelReport extends Component
 
     }
 
+    #[Computed]
+    public function restock_now()
+    {
+        return Product::where('seller_id', $this->seller->id)
+            ->whereColumn('stock', '<=', 'reserve')
+            ->orderBy('stock', 'asc')
+            ->get();
+    }
+
     public function selectProduct($product): void
     {
-        $this->productselected = $product;
 
+        $this->productselectedid = $product;
         $_product = Product::findOrFail($product);
 
-        $this->productselected = $_product->title;
+        $this->productselectedname = $_product->title;
         $this->productselectedprice = $_product->price;
 
         $this->makeChart($product);
@@ -133,7 +152,6 @@ class AnalyticsModelReport extends Component
 
         }
 
-
         $startDate = Carbon::parse($this->userStartingDate);
         $endDate = Carbon::parse($this->userEndingDate);
 
@@ -142,92 +160,6 @@ class AnalyticsModelReport extends Component
         $this->chartArray = $this->prepareSalesChartDataForWeek($products2, $startDate, $endDate);
 
         $this->dispatch('update-chart');
-    }
-
-    #[Computed]
-    public function restock_now()
-    {
-        return Product::where('seller_id', $this->seller->id)
-            ->whereColumn('stock', '<=', 'reserve')
-            ->orderBy('stock', 'asc')
-            ->get();
-    }
-
-    public function updatedMonthSelect()
-    {
-        // $property: The name of the current property that was updated
-
-        // dd($this->monthSelect);
-        $year = Carbon::now()->year;
-
-        if ($this->monthSelect != 0) {
-            $this->userStartingDate = Carbon::createFromDate($year, $this->monthSelect, 1)->startOfMonth()->format('Y-m-d');
-            $this->userEndingDate = Carbon::createFromDate($year, $this->monthSelect, 1)->endOfMonth()->format('Y-m-d');
-        } else {
-            $this->userStartingDate = Carbon::now()->subDays(30)->format('Y-m-d');
-            $this->userEndingDate = Carbon::now()->format('Y-m-d');
-        }
-
-        $this->userArray = $this->changeDate();
-
-        $this->makeChart($this->productselected);
-
-        $this->dispatch('update-chart');
-        // dd($this->user_starting_date, $this->user_ending_date);
-    }
-
-    private function changeDate(): array
-    {
-        // Parse starting and ending dates
-        $start = Carbon::parse($this->userStartingDate);
-        $end = Carbon::parse($this->userEndingDate);
-
-        return $this->generateDatesArray($start, $end);
-
-    }
-
-    private function generateDatesArray($startingDate, $endingDate): array
-    {
-        $datesArray = [];
-
-        // // Parse starting and ending dates
-        // $start = Carbon::parse($startingDate);
-        // $end = Carbon::parse($endingDate);
-
-        // Include the starting date and the ending date
-        while ($startingDate->lte($endingDate)) {
-            $datesArray[] = $startingDate->toDateString();
-            $startingDate->addDay();
-        }
-
-        return $datesArray;
-    }
-
-    public function updatedUserStartingDate()
-    {
-        // $property: The name of the current property that was updated
-
-        // dd($this->user_starting_date, $this->user_ending_date);
-        // $this->user_starting_date = Carbon::createFromDate($year, $this->monthSelect, 1)->startOfMonth()->format('Y-m-d');
-        // $this->user_ending_date = Carbon::createFromDate($year, $this->monthSelect, 1)->endOfMonth()->format('Y-m-d');
-
-        $this->userArray = $this->changeDate();
-
-        // dd($this->userArray);
-
-    }
-
-    public function updatedUserEndingDate()
-    {
-        // $property: The name of the current property that was updated
-
-        // dd($this->user_starting_date, $this->user_ending_date);
-        // $this->user_starting_date = Carbon::createFromDate($year, $this->monthSelect, 1)->startOfMonth()->format('Y-m-d');
-        // $this->user_ending_date = Carbon::createFromDate($year, $this->monthSelect, 1)->endOfMonth()->format('Y-m-d');
-
-        $this->userArray = $this->changeDate();
-
-        // dd($this->userArray);
     }
 
     public function prepareSalesChartDataForWeek(Collection $sales, Carbon $startDate, Carbon $endDate): array
@@ -271,6 +203,83 @@ class AnalyticsModelReport extends Component
         // return $dates->mapWithKeys(function ($date) use ($salesData) {
         //     return [$date->format('Y-m-d') => $salesData->get($date->format('Ymd')) ?? 0];
         // })->toArray();
+    }
+
+    private function changeDate(): array
+    {
+        // Parse starting and ending dates
+        $start = Carbon::parse($this->userStartingDate);
+        $end = Carbon::parse($this->userEndingDate);
+
+        return $this->generateDatesArray($start, $end);
+
+    }
+
+    private function generateDatesArray($startingDate, $endingDate): array
+    {
+        $datesArray = [];
+
+        // // Parse starting and ending dates
+        // $start = Carbon::parse($startingDate);
+        // $end = Carbon::parse($endingDate);
+
+        // Include the starting date and the ending date
+        while ($startingDate->lte($endingDate)) {
+            $datesArray[] = $startingDate->toDateString();
+            $startingDate->addDay();
+        }
+
+        return $datesArray;
+    }
+
+    public function updatedMonthSelect()
+    {
+        // $property: The name of the current property that was updated
+
+        // dd($this->monthSelect);
+        $year = Carbon::now()->year;
+
+        if ($this->monthSelect != 0) {
+            $this->userStartingDate = Carbon::createFromDate($year, $this->monthSelect, 1)->startOfMonth()->format('Y-m-d');
+            $this->userEndingDate = Carbon::createFromDate($year, $this->monthSelect, 1)->endOfMonth()->format('Y-m-d');
+        } else {
+            $this->userStartingDate = Carbon::now()->subDays(30)->format('Y-m-d');
+            $this->userEndingDate = Carbon::now()->format('Y-m-d');
+        }
+
+        $this->userArray = $this->changeDate();
+
+        $this->makeChart($this->productselectedname);
+
+        $this->dispatch('update-chart');
+        // dd($this->user_starting_date, $this->user_ending_date);
+    }
+
+    public function updatedUserStartingDate()
+    {
+        // $property: The name of the current property that was updated
+
+        // dd($this->user_starting_date, $this->user_ending_date);
+        // $this->user_starting_date = Carbon::createFromDate($year, $this->monthSelect, 1)->startOfMonth()->format('Y-m-d');
+        // $this->user_ending_date = Carbon::createFromDate($year, $this->monthSelect, 1)->endOfMonth()->format('Y-m-d');
+
+        $this->userArray = $this->changeDate();
+
+        // dd($this->userArray);
+
+    }
+
+    public function updatedUserEndingDate()
+    {
+        // $property: The name of the current property that was updated
+
+        // dd($this->user_starting_date, $this->user_ending_date);
+        // $this->user_starting_date = Carbon::createFromDate($year, $this->monthSelect, 1)->startOfMonth()->format('Y-m-d');
+        // $this->user_ending_date = Carbon::createFromDate($year, $this->monthSelect, 1)->endOfMonth()->format('Y-m-d');
+
+        $this->userArray = $this->changeDate();
+
+        // dd($this->userArray);
     }
 
     public function summaryChange(string $summary)
@@ -317,5 +326,140 @@ class AnalyticsModelReport extends Component
             ->whereColumn('stock', '>', 'reserve')
             ->orderBy('stock', 'asc')
             ->get();
+    }
+
+    public function reset_all()
+    {
+        $this->userStartingDate = Carbon::now()->subDays(30)->format('Y-m-d');
+        $this->userEndingDate = Carbon::now()->format('Y-m-d');
+        $this->monthSelect = 0;
+        $this->productselectedname = null;
+        $this->productselectedprice = null;
+        $this->userArray = $this->changeDate();
+        $this->chartArray = [];
+
+        $this->alert('info', 'Chart data reset', [
+            'position' => 'top-end',
+            'timer' => 3000,
+            'toast' => true,
+            'text' => 'Data Cleared',
+            'showCancelButton' => false,
+            'showConfirmButton' => false,
+        ]);
+
+        $this->dispatch('update-chart');
+    }
+
+    public function runforall()
+    {
+        // sleep(3);
+        $product = DB::table('purchase_items')
+            ->select(DB::raw('SUM(quantity) as quantity'), 'created_at')
+            ->where('product_id', $this->productselectedid)->groupBy('created_at')
+            ->get();
+
+        if ($this->predictrange == 'custom') {
+            if ($this->custompredictrange == null) {
+
+                $this->notify('warning', 'Custom range selected', 'Custom range selected, Please input valid number');
+
+                return;
+
+            }
+        }
+
+        if ($this->predictrange == 'week' || $this->predictrange == 'month' || $this->predictrange == 'year') {
+            $this->custompredictrange = null;
+        }
+
+        $this->alert('success', 'This is a success message', [
+            'position' => 'top-end',
+            'timer' => 3000,
+            'toast' => true,
+            'text' => 'This is a success message',
+            'showCancelButton' => false,
+            'showConfirmButton' => false,
+        ]);
+    }
+
+    private function notify($type, $mesage, $text): void
+    {
+        $this->alert($type, $mesage, [
+            'position' => 'top-end',
+            'timer' => 3000,
+            'toast' => true,
+            'text' => $text,
+            'showCancelButton' => false,
+            'showConfirmButton' => false,
+        ]);
+    }
+
+    #[NoReturn]
+    public function runforone(): void
+    {
+        // sleep(3);
+        $product = DB::table('purchase_items')
+            ->select(DB::raw('SUM(quantity) as quantity'), 'created_at')
+            ->where('product_id', $this->productselectedid)->groupBy('created_at')
+            ->get();
+
+        if ($this->predictrange == 'custom') {
+            if ($this->custompredictrange == null) {
+
+                $this->notify('warning', 'Custom range selected', 'Custom range selected, Please input valid number');
+
+                return;
+
+            }
+        }
+
+        if ($this->predictrange == 'week' || $this->predictrange == 'month' || $this->predictrange == 'year') {
+            $this->custompredictrange = null;
+        }
+
+        try {
+
+            $this->alert('info', 'Running Prediction', [
+                'position' => 'top-end',
+                'timer' => 3000,
+                'toast' => true,
+                'text' => 'Please wait while we run the prediction',
+                'showCancelButton' => false,
+                'showConfirmButton' => false,
+            ]);
+
+
+            // send the data to the API with the following parameters, change the link to the correct API endpoint
+            $response = Http::post('http://127.0.0.1:8001/api/v1/predict', [
+                'product_id' => $this->productselectedid,
+                'interval' => $this->predictinterval,
+                'range' => $this->predictrange,
+                'custom_range' => $this->custompredictrange,
+                'data' => $product->toArray(),
+            ]);
+
+            if ($response->ok()) {
+
+                $data = $response->json();
+
+                // debug
+                dd($data);
+            }
+
+        } catch (\Exception $e) {
+            $this->alert('error', 'Something went wrong', ['position' => 'top-end', 'timer' => 3000, 'toast' => true]);
+        }
+
+        // dd($response);
+
+        // $this->alert('success', 'This is a success message', [
+        //     'position' => 'top-end',
+        //     'timer' => 3000,
+        //     'toast' => true,
+        //     'text' => 'This is a success message',
+        //     'showCancelButton' => false,
+        //     'showConfirmButton' => false,
+        // ]);
+
     }
 }

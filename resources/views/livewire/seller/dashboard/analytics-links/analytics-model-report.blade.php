@@ -225,11 +225,12 @@
         {{-- </div> --}}
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
-        <div class="flex items-center justify-between pb-2">
-            <div>
-                <h4 class="mb-0 text-2xl tracking-wide text-gray-600">Forecast : </h4>
+        <div class="pb-2">
+            <div class="flex items-center gap-1">
+                <h4 class="mb-0 text-xl tracking-wide text-gray-600">Forecast : </h4>
+                <h4 class="mb-0 text-xl tracking-wide text-gray-600">{{ $productselectedname }}</h4>
             </div>
-            <div class="flex gap-2 items-center">
+            <div class="flex justify-end gap-2 items-center">
                 <div class="flex gap-1.5 items-center">
                     <p class="mb-0 text-gray-600 text-xs tracking-tight">Total summary in</p>
                     <div class="btn-group btn-group-sm" role="group">
@@ -352,7 +353,7 @@
                             <tr wire:key="{{ $item->id }}">
                                 <li>
                                     <button type="button" class="dropdown-item"
-                                            wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
+                                        wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
                                         - {{ $item->title }}
                                     </button>
                                 </li>
@@ -440,7 +441,7 @@
                             class="form-label tracking-tight uppercase text-sm font-medium">Selected
                             Product</label>
                         <input type="text" placeholder="Selected Product" id="selected_product"
-                               value="{{ $productselected ?? 'Awaiting User Input' }}"
+                            value="{{ $productselectedname ?? 'Awaiting User Input' }}"
                             class="form-control form-control-sm">
                     </div>
 
@@ -448,7 +449,7 @@
                         <label for="selected_product_price"
                             class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
                         <input type="text" placeholder="Product Price" id="selected_product_price"
-                               value="{{ $productselectedprice ?? 'Awaiting User Input' }}"
+                            value="{{ $productselectedprice ?? 'Awaiting User Input' }}"
                             class="form-control form-control-sm">
                     </div>
 
@@ -460,7 +461,7 @@
                         <select class="form-select form-select-sm" id="predictrange"
                             aria-label="Small select example" wire:model.live.debounce="predictrange">
                             <option>Select Range</option>
-                            <option value="week">Week</option>
+                            <option selected value="week">Week</option>
                             <option value="month">Month</option>
                             <option value="custom">Custom</option>
                         </select>
@@ -472,8 +473,8 @@
                                 class="form-label tracking-tight uppercase text-sm font-medium sr-only">custom
                                 date</label>
                             <input type="number" placeholder="Number of days" id="customrange" name="customrange"
-                                min="1" class="form-control form-control-sm"
-                                aria-describedby="passwordHelpBlock">
+                                wire:model.live.debounce="custompredictrange" max="365" min="1"
+                                class="form-control form-control-sm" aria-describedby="passwordHelpBlock">
                         </div>
                     @endif
 
@@ -485,22 +486,50 @@
                         <select class="form-select form-select-sm" id="predictinterval"
                             aria-label="Small select example" wire:model.live.debounce="predictinterval">
                             <option>Select Interval</option>
-                            <option value="daily">Daily</option>
+                            <option selected value="daily">Daily</option>
                             <option value="weekly">Weekly</option>
                             <option value="monthly">Monthly</option>
                         </select>
                     </div>
                     <div class="grid grid-cols-2 mt-2">
                         <div class="p-2">
-                            <button type="button" class="w-full btn btn-sm btn-outline-secondary ">Clear</button>
+                            <button type="button" class="w-full btn btn-sm btn-outline-danger"
+                                wire:click="reset_all">
+                                Clear
+                            </button>
                         </div>
                         <div class="p-2">
-                            <button type="button" class="w-full btn btn-sm btn-outline-primary ">Run</button>
+                            <button type="button" class="w-full btn btn-sm btn-outline-primary"
+                                @disabled(!$productselectedid) wire:click="runforone">
+                                <div class="flex gap-1 items-center justify-center">
+
+                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforone" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+
+                                    <div>
+                                        Run
+                                    </div>
+
+                                </div>
+
+                            </button>
                         </div>
                     </div>
                     <div>
                         <div class="p-2">
-                            <button type="button" class="w-full btn btn-sm btn-primary ">Run on All Products</button>
+                            <button type="button" class="w-full btn btn-sm btn-primary" @disabled(!$productselectedid)
+                                wire:click="runforall">
+                                <div class="flex gap-1 items-center justify-center">
+                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforall" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div>
+                                        Run on All Products
+                                    </div>
+
+                                </div>
+                            </button>
                         </div>
                     </div>
 
