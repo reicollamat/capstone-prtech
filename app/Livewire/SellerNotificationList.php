@@ -2,8 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Models\Product;
+use App\Models\PurchaseItem;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
@@ -39,6 +42,23 @@ class SellerNotificationList extends Component
 
     public function render()
     {
+        $producttest = DB::table('purchase_items as p')
+            ->select(
+                DB::raw('SUM(p.quantity) as quantity'),
+                'p.created_at',
+                DB::raw('COUNT(CASE WHEN c.sentiment = 1 THEN 1 END) as positive'),
+                DB::raw('COUNT(CASE WHEN c.sentiment = 0 THEN 1 END) as negative')
+            )
+            ->join('comments as c', 'c.id', '=', 'p.comment_id')
+            ->where('p.product_id', 1451)
+            ->groupBy('p.created_at')
+            ->get();
+
+        $product = DB::table('purchase_items')
+            ->select(DB::raw('SUM(quantity) as quantity'), 'created_at')
+            ->where('product_id', 1447)->groupBy('created_at')
+            ->get();
+        // dd($producttest); 
         return view('livewire.seller-notification-list');
     }
 
@@ -50,6 +70,8 @@ class SellerNotificationList extends Component
         // dd(DatabaseNotification::find($id));
         sleep(0.5);
         $this->mount();
+
+        $this->dispatch('seller-notification-change');
     }
 
     public function delete_notif($notification)

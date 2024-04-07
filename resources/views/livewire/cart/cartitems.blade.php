@@ -33,14 +33,16 @@
                     </p>
                     <div class="d-flex items-center justify-start self-center gap-3">
                         <div class="input-group input-group-sm w-auto border-1 border-gray-300 rounded">
-                            <button type="button" class="input-group-text text-lg font-black btn btn-ghost bg-primary-subtle"
+                            <button type="button"
+                                class="input-group-text text-lg font-black btn btn-ghost bg-primary-subtle"
                                 wire:click="addquantity({{ $cartitem }})" wire:key="addquantitybutton"
                                 id="inputGroup-sizingadd-sm">+
                             </button>
                             <input type="text" class="form-control text-center border-0"
                                 aria-label="Sizing example input" value="{{ $item_quantity }}"
                                 style="max-width: 2.5rem!important;" aria-describedby="inputGroup-sizing-sm">
-                            <button type="button" class="input-group-text text-lg font-black btn btn-ghost bg-primary-subtle"
+                            <button type="button"
+                                class="input-group-text text-lg font-black btn btn-ghost bg-primary-subtle"
                                 wire:click="minusquantity({{ $cartitem }})" wire:key="minusquantitybutton"
                                 id="inputGroup-sizingminus-sm">-
                             </button>

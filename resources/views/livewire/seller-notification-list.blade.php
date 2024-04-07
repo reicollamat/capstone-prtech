@@ -17,11 +17,11 @@
 
             {{-- if contain notification list --}}
             @forelse ($seller_unread_notifications as $notification)
-                <livewire:seller-notification-item :key="$notification->id" :notification="$notification" />
+                <livewire:seller-notification-item :key="'unread' . $notification->id" :notification="$notification" />
             @empty
                 <div class="text-center text-secondary">
                     <i class="bi bi-bell mr-2"></i>
-                    No notifications
+                    No Unread Notifications
                 </div>
             @endforelse
 
@@ -32,7 +32,7 @@
 
             {{-- if contain notification list --}}
             @forelse ($seller_notifications as $notification)
-                <livewire:seller-notification-item :key="$notification->id" :notification="$notification" />
+                <livewire:seller-notification-item :key="'read' . $notification->id" :notification="$notification" />
             @empty
                 <div class="text-center text-secondary">
                     <i class="bi bi-bell mr-2"></i>

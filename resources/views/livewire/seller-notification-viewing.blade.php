@@ -5,7 +5,8 @@
         <i class="bi bi-bell-fill text-lg"></i>
         @if ($this->getTotalUnreadSellerNotifications)
             <span class="absolute translate-middle badge bg-transparent text-danger">
-                {{ $this->getTotalUnreadSellerNotifications }}
+                {{-- {{ $this->getTotalUnreadSellerNotifications }} --}}
+                <livewire:seller-notification-count />
                 <span class="visually-hidden">Notification</span>
             </span>
         @endif
@@ -20,7 +21,8 @@
                     @if ($this->getTotalUnreadSellerNotifications)
                         Seller Notifications
                         <span class="absolute badge rounded-pill bg-danger ml-1">
-                            {{ $this->getTotalUnreadSellerNotifications }}
+                            {{-- {{ $this->getTotalUnreadSellerNotifications }} --}}
+                            <livewire:seller-notification-count />
                             <span class="visually-hidden">unread messages</span>
                         </span>
                     @else
