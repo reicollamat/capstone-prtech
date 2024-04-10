@@ -64,6 +64,10 @@ class AnalyticsModelReport extends Component
 
     public $custompredictrange;
 
+    public $sales_apiresponse;
+
+    public $sales_futureapiresponse;
+
     #[Locked]
     public $seller;
 
@@ -85,7 +89,7 @@ class AnalyticsModelReport extends Component
         $this->predictinterval = 'daily';
 
         // Defaults to a 7-day range
-        $this->predictrange = 'week';
+        $this->predictrange = 'month';
 
         $this->combinedArray = ['2024-01-01' => 5, '2024-01-02' => 15, '2024-01-03' => 2, '2024-01-04' => 12, '2024-01-05' => 12, '2024-01-06' => 11, '2024-01-07' => 3, '2024-01-08' => 9, '2024-01-09' => 7, '2024-01-10' => 4, '2024-01-11' => 16, '2024-01-12' => 20, '2024-01-13' => 8, '2024-01-14' => 19, '2024-01-15' => 19, '2024-01-16' => 16, '2024-01-17' => 3, '2024-01-18' => 13, '2024-01-19' => 3, '2024-01-20' => 10, '2024-01-21' => 13, '2024-01-22' => 8, '2024-01-23' => 5, '2024-01-24' => 7, '2024-01-25' => 18, '2024-01-26' => 15, '2024-01-27' => 20, '2024-01-28' => 12, '2024-01-29' => 18, '2024-01-30' => 4, '2024-01-31' => 5];
 
@@ -303,15 +307,6 @@ class AnalyticsModelReport extends Component
         $this->dispatch('update-chart');
     }
 
-    public function test_a_func()
-    {
-        $this->test_a = ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05', '2024-01-06', '2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10', '2024-01-11', '2024-01-12', '2024-01-13', '2024-01-14', '2024-01-15', '2024-01-16', '2024-01-17', '2024-01-18', '2024-01-19', '2024-01-20', '2024-01-21', '2024-01-22', '2024-01-23', '2024-01-24', '2024-01-25', '2024-01-26', '2024-01-27', '2024-01-28', '2024-01-29', '2024-01-30', '2024-01-31'];
-    }
-
-    public function test_b_func()
-    {
-        $this->test_b = [5, 15, 2, 12, 12, 11, 3, 9, 7, 4, 16, 20, 8, 19, 19, 16, 3, 13, 3, 10, 13, 8, 5, 7, 18, 15, 20, 12, 18, 4, 5];
-    }
 
     public function render()
     {
@@ -333,6 +328,7 @@ class AnalyticsModelReport extends Component
         $this->userStartingDate = Carbon::now()->subDays(30)->format('Y-m-d');
         $this->userEndingDate = Carbon::now()->format('Y-m-d');
         $this->monthSelect = 0;
+        $this->productselectedid = null;
         $this->productselectedname = null;
         $this->productselectedprice = null;
         $this->userArray = $this->changeDate();
@@ -353,10 +349,19 @@ class AnalyticsModelReport extends Component
     public function runforall()
     {
         // sleep(3);
-        $product = DB::table('purchase_items')
-            ->select(DB::raw('SUM(quantity) as quantity'), 'created_at')
-            ->where('product_id', $this->productselectedid)->groupBy('created_at')
+        $producttest = DB::table('purchase_items as p')
+            ->select(
+                DB::raw('SUM(p.quantity) as quantity'),
+                'p.created_at',
+                DB::raw('COUNT(CASE WHEN c.sentiment = 1 THEN 1 END) as positive'),
+                DB::raw('COUNT(CASE WHEN c.sentiment = 0 THEN 1 END) as negative')
+            )
+            ->join('comments as c', 'c.id', '=', 'p.comment_id')
+            ->where('p.product_id', $this->productselectedid)
+            ->groupBy('p.created_at')
             ->get();
+
+        // dd($product);
 
         if ($this->predictrange == 'custom') {
             if ($this->custompredictrange == null) {
@@ -398,9 +403,16 @@ class AnalyticsModelReport extends Component
     public function runforone(): void
     {
         // sleep(3);
-        $product = DB::table('purchase_items')
-            ->select(DB::raw('SUM(quantity) as quantity'), 'created_at')
-            ->where('product_id', $this->productselectedid)->groupBy('created_at')
+        $product = DB::table('purchase_items as p')
+            ->select(
+                DB::raw('SUM(p.quantity) as quantity'),
+                'p.created_at',
+                DB::raw('COUNT(CASE WHEN c.sentiment = 1 THEN 1 END) as positive'),
+                DB::raw('COUNT(CASE WHEN c.sentiment = 0 THEN 1 END) as negative')
+            )
+            ->join('comments as c', 'c.id', '=', 'p.comment_id')
+            ->where('p.product_id', $this->productselectedid)
+            ->groupBy('p.created_at')
             ->get();
 
         if ($this->predictrange == 'custom') {
@@ -428,7 +440,6 @@ class AnalyticsModelReport extends Component
                 'showConfirmButton' => false,
             ]);
 
-
             // send the data to the API with the following parameters, change the link to the correct API endpoint
             $response = Http::post('http://127.0.0.1:8001/api/v1/predict', [
                 'product_id' => $this->productselectedid,
@@ -442,12 +453,16 @@ class AnalyticsModelReport extends Component
 
                 $data = $response->json();
 
+                $this->sales_apiresponse = $data['filtered_data'];
+
+                $this->sales_futureapiresponse = $data['future_dates'];
+
                 // debug
                 dd($data);
             }
 
         } catch (\Exception $e) {
-            $this->alert('error', 'Something went wrong', ['position' => 'top-end', 'timer' => 3000, 'toast' => true]);
+            $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is down');
         }
 
         // dd($response);

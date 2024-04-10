@@ -503,7 +503,8 @@
                                 @disabled(!$productselectedid) wire:click="runforone">
                                 <div class="flex gap-1 items-center justify-center">
 
-                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforone" role="status">
+                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforone"
+                                        role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
 
@@ -521,7 +522,8 @@
                             <button type="button" class="w-full btn btn-sm btn-primary" @disabled(!$productselectedid)
                                 wire:click="runforall">
                                 <div class="flex gap-1 items-center justify-center">
-                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforall" role="status">
+                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforall"
+                                        role="status">
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
                                     <div>
@@ -542,12 +544,12 @@
 
             <div class="w-full mt-3 flex justify-between">
                 <div class="flex gap-3">
-                    {{-- <button type="button" class="btn btn-sm btn-outline-secondary ">View Accuracy Report</button> --}}
+                    {{-- <button type="button" class="btn btn-sm btn-outline-secondary ">View Prediction Report</button> --}}
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-outline-secondary"
-                                @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
+                            <button type="button" class="btn btn-sm btn-success"
+                                @click="showModal = !showModal" data-bs-target="#exampleModal">View Prediction Report
                             </button>
                         </div>
 
@@ -571,59 +573,133 @@
                                             <div class="py-3">
                                                 <div class="relative overflow-x-auto">
                                                     <table
-                                                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        class="w-full  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                         <thead
                                                             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                                             <tr>
                                                                 <th scope="col" class="px-6 py-3">
-                                                                    Metric Name
+                                                                    Date
                                                                 </th>
                                                                 <th scope="col" class="px-6 py-3">
-                                                                    Metric Score
+                                                                    Prediction Quantity Expected
                                                                 </th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    MAE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    9999.99
-                                                                </td>
-                                                            </tr>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    MSE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    9999.99
-                                                                </td>
-                                                            </tr>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    RMSE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    9999.99
-                                                                </td>
-                                                            </tr>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    MAPE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    9999.99
-                                                                </td>
-                                                            </tr>
+                                                            @if($sales_futureapiresponse)
+                                                                @foreach($sales_futureapiresponse as $item)
+                                                                    <tr
+                                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                        <th scope="row"
+                                                                            class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                            {{ $item }}
+                                                                        </th>
+                                                                        <td class="text-center">
+                                                                            {{ rand(0,10) }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full flex gap-2 pt-3 justify-end">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                        @click="showModal = false">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <button type="button" class="btn btn-sm btn-outline-secondary ">View Accuracy Report</button> --}}
+                    <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                        <div class="h-auto">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                                    @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
+                            </button>
+                        </div>
+
+                        <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
+
+                        <div x-cloak x-transition.duration.500ms x-show="showModal"
+                             class="fixed inset-0 z-50 grid place-content-center">
+                            <div @click.away="showModal = false"
+                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                Accuracy Report <span class="text-sm tracking-wide text-gray-600">Data
+                                                    from PLACEHOLDER</span>
+                                            </h1>
+                                        </div>
+                                        <hr class="text-blue-500">
+                                        <div class="flex flex-col items-center justify-center modal-body"
+                                             x-transition.opacity>
+                                            <div class="py-3">
+                                                <div class="relative overflow-x-auto">
+                                                    <table
+                                                        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                                        <thead
+                                                            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                        <tr>
+                                                            <th scope="col" class="px-6 py-3">
+                                                                Metric Name
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3">
+                                                                Metric Score
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr
+                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row"
+                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                MAE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                2.1677
+                                                            </td>
+                                                        </tr>
+                                                        <tr
+                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row"
+                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                MSE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                8.4840
+                                                            </td>
+                                                        </tr>
+                                                        <tr
+                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row"
+                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                RMSE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                2.8884
+                                                            </td>
+                                                        </tr>
+                                                        <tr
+                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                            <th scope="row"
+                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                MAPE
+                                                            </th>
+                                                            <td class="p-4">
+                                                                0.5695
+                                                            </td>
+                                                        </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -651,7 +727,7 @@
                                 </div>
                                 <div class="w-full flex gap-2 pt-3 justify-end">
                                     <button type="button" class="btn btn-outline-secondary"
-                                        @click="showModal = false">
+                                            @click="showModal = false">
                                         Close
                                     </button>
                                 </div>
@@ -662,7 +738,7 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-primary" @click="showModal = !showModal"
+                            <button type="button" class="btn btn-sm btn-outline-primary" @click="showModal = !showModal"
                                 data-bs-target="#exampleModal">View History in Table
                             </button>
                         </div>
@@ -713,7 +789,7 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-primary" @click="showModal = !showModal"
+                            <button type="button" class="btn btn-sm btn-outline-primary" @click="showModal = !showModal"
                                 data-bs-target="#exampleModal">Generate Purchase
                                 Order
                             </button>
@@ -785,9 +861,10 @@
         </div>
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
-        <div class="flex justify-end">
+        <div class="flex justify-between">
+            <h5>{{ $productselectedname }}</h5>
             <div class="flex gap-1.5 items-center">
-                <p class="mb-0 text-gray-600 text-xs tracking-tight">Data Value from </p>
+                <p class="mb-0 text-gray-600 text-xs tracking-tight">Data Value from past</p>
                 <div class="btn-group btn-group-sm" role="group">
                     <button type="button" class="!font-medium btn btn-outline-primary dropdown-toggle "
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -795,13 +872,11 @@
                     </button>
                     <ul class="dropdown-menu !pl-0">
                         <li>
-                            <button type="button" wire:click="summaryChange('Weekly')" class="dropdown-item"
-                                href="#">Weekly
+                            <button type="button" class="dropdown-item" href="#">Weekly
                             </button>
                         </li>
                         <li>
-                            <button type="button" wire:click="summaryChange('Monthly')" class="dropdown-item"
-                                href="#">Monthly
+                            <button type="button" class="dropdown-item" href="#">Monthly
                             </button>
                         </li>
                         {{-- <li> --}}
@@ -818,7 +893,7 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Product
+                            Date
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Actual Sold
@@ -831,47 +906,69 @@
                         </th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                            MAE
+
+                    <tr class="w-full bg-white border-b text-center dark:bg-gray-800 dark:border-gray-700" wire:loading wire:target="runforone" >
+                        <th colspan="4" scope="row"
+                            class="w-full p-2 text-gray-900 text-center whitespace-nowrap dark:text-white">
+                            <div class="spinner-border spinner-border" role="status">
+                                <span class="visually-hidden">Awaiting Server Response...</span>
+                            </div>
                         </th>
-                        <td class="p-2">
-                            9999.99
-                        </td>
                     </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                            MAE
-                        </th>
-                        <td class="p-2">
-                            9999.99
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                            MAE
-                        </th>
-                        <td class="p-2">
-                            9999.99
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                            MAE
-                        </th>
-                        <td class="p-2">
-                            9999.99
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                            MAE
-                        </th>
-                        <td class="p-2">
-                            9999.99
-                        </td>
-                    </tr>
+
+                    @if($sales_apiresponse)
+                        @foreach ($sales_apiresponse as $key => $value)
+                            <tr wire:key="{{ $key }}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $value['created_at'] }}
+                                </th>
+                                <td class="p-2">
+                                    {{ $value['quantity'] }}
+                                </td>
+                                <td class="p-2">
+{{--                                    {{ $value['forecast'] }}--}}
+                                </td>
+                                <td class="p-2">
+{{--                                    {{ $value['accuracy'] }}--}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+
+                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                    {{--         MAE --}}
+                    {{--     </th> --}}
+                    {{--     <td class="p-2"> --}}
+                    {{--         9999.99 --}}
+                    {{--     </td> --}}
+                    {{-- </tr> --}}
+                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                    {{--         MAE --}}
+                    {{--     </th> --}}
+                    {{--     <td class="p-2"> --}}
+                    {{--         9999.99 --}}
+                    {{--     </td> --}}
+                    {{-- </tr> --}}
+                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                    {{--         MAE --}}
+                    {{--     </th> --}}
+                    {{--     <td class="p-2"> --}}
+                    {{--         9999.99 --}}
+                    {{--     </td> --}}
+                    {{-- </tr> --}}
+                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                    {{--         MAE --}}
+                    {{--     </th> --}}
+                    {{--     <td class="p-2"> --}}
+                    {{--         9999.99 --}}
+                    {{--     </td> --}}
+                    {{-- </tr> --}}
                 </tbody>
             </table>
         </div>
