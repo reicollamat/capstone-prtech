@@ -442,7 +442,7 @@
                             Product</label>
                         <input type="text" placeholder="Selected Product" id="selected_product"
                             value="{{ $productselectedname ?? 'Awaiting User Input' }}"
-                            class="form-control form-control-sm">
+                            class="form-control form-control-sm" disabled>
                     </div>
 
                     <div class="mt-2">
@@ -450,7 +450,7 @@
                             class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
                         <input type="text" placeholder="Product Price" id="selected_product_price"
                             value="{{ $productselectedprice ?? 'Awaiting User Input' }}"
-                            class="form-control form-control-sm">
+                            class="form-control form-control-sm" disabled>
                     </div>
 
                     <div class="mt-2">
@@ -499,7 +499,7 @@
                             </button>
                         </div>
                         <div class="p-2">
-                            <button type="button" class="w-full btn btn-sm btn-outline-primary"
+                            {{-- <button type="button" class="w-full btn btn-sm btn-outline-primary"
                                 @disabled(!$productselectedid) wire:click="runforone">
                                 <div class="flex gap-1 items-center justify-center">
 
@@ -514,7 +514,98 @@
 
                                 </div>
 
+                            </button> --}}
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="w-full btn btn-sm btn-outline-primary"
+                                data-bs-toggle="modal" data-bs-target="#confirmRun" @disabled(!$productselectedid)>
+                                <div class="flex gap-1 items-center justify-center">
+
+                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforone"
+                                        role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+
+                                    <div>
+                                        Run
+                                    </div>
+
+                                </div>
                             </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="confirmRun" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmRunLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="confirmRunLabel">Please confirm details
+                                            </h1>
+                                            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <label for="selected_product"
+                                                    class="form-label tracking-tight uppercase text-sm font-medium">Selected
+                                                    Product</label>
+                                                <input type="text" placeholder="Selected Product"
+                                                    id="selected_product"
+                                                    value="{{ $productselectedname ?? 'Product' }}"
+                                                    class="form-control form-control-sm" disabled>
+                                            </div>
+
+                                            <div class="mt-2">
+                                                <label for="selected_product_price"
+                                                    class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
+                                                <input type="text" placeholder="Product Price"
+                                                    id="selected_product_price"
+                                                    value="{{ $productselectedprice ?? 'Price' }}"
+                                                    class="form-control form-control-sm" disabled>
+                                            </div>
+
+                                            @if ($predictrange == 'custom')
+                                                <div class="mt-2">
+                                                    <label for="selected_product_price"
+                                                        class="form-label tracking-tight uppercase text-sm font-medium">Predict
+                                                        for the next n days</label>
+                                                    <input type="text" placeholder="Product Price"
+                                                        id="selected_product_price"
+                                                        value="{{ $custompredictrange ?? 'Next n Days' }}"
+                                                        class="form-control form-control-sm" disabled>
+                                                </div>
+                                            @else
+                                                <div class="mt-2">
+                                                    <label for="selected_product_price"
+                                                        class="form-label tracking-tight uppercase text-sm font-medium">Predict
+                                                        for the next n days</label>
+                                                    <input type="text" placeholder="Product Price"
+                                                        id="selected_product_price"
+                                                        value="{{ $predictrange ?? 'Next n Days' }}"
+                                                        class="form-control form-control-sm" disabled>
+                                                </div>
+                                            @endif
+
+                                            <div class="mt-2">
+                                                <label for="selected_product_price"
+                                                    class="form-label tracking-tight uppercase text-sm font-medium">Dataset
+                                                    Interval</label>
+                                                <input type="text" placeholder="Product Price"
+                                                    id="selected_product_price"
+                                                    value="{{ $predictinterval ?? 'Dataset Interval' }}"
+                                                    class="form-control form-control-sm" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-dark text-light"
+                                                data-bs-dismiss="modal">Back</button>
+                                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                                                wire:click="runforone">Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div>
@@ -548,8 +639,8 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-success"
-                                @click="showModal = !showModal" data-bs-target="#exampleModal">View Prediction Report
+                            <button type="button" class="btn btn-sm btn-success" @click="showModal = !showModal"
+                                data-bs-target="#exampleModal">View Prediction Report
                             </button>
                         </div>
 
@@ -586,8 +677,8 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @if($sales_futureapiresponse)
-                                                                @foreach($sales_futureapiresponse as $item)
+                                                            @if ($sales_futureapiresponse)
+                                                                @foreach ($sales_futureapiresponse as $item)
                                                                     <tr
                                                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                                         <th scope="row"
@@ -595,7 +686,7 @@
                                                                             {{ $item }}
                                                                         </th>
                                                                         <td class="text-center">
-                                                                            {{ rand(0,10) }}
+                                                                            {{ rand(0, 10) }}
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -623,16 +714,16 @@
                         <div class="h-auto">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-sm btn-outline-secondary"
-                                    @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
+                                @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
                             </button>
                         </div>
 
                         <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
 
                         <div x-cloak x-transition.duration.500ms x-show="showModal"
-                             class="fixed inset-0 z-50 grid place-content-center">
+                            class="fixed inset-0 z-50 grid place-content-center">
                             <div @click.away="showModal = false"
-                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -643,63 +734,63 @@
                                         </div>
                                         <hr class="text-blue-500">
                                         <div class="flex flex-col items-center justify-center modal-body"
-                                             x-transition.opacity>
+                                            x-transition.opacity>
                                             <div class="py-3">
                                                 <div class="relative overflow-x-auto">
                                                     <table
                                                         class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                         <thead
                                                             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                                        <tr>
-                                                            <th scope="col" class="px-6 py-3">
-                                                                Metric Name
-                                                            </th>
-                                                            <th scope="col" class="px-6 py-3">
-                                                                Metric Score
-                                                            </th>
-                                                        </tr>
+                                                            <tr>
+                                                                <th scope="col" class="px-6 py-3">
+                                                                    Metric Name
+                                                                </th>
+                                                                <th scope="col" class="px-6 py-3">
+                                                                    Metric Score
+                                                                </th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr
-                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                            <th scope="row"
-                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                MAE
-                                                            </th>
-                                                            <td class="p-4">
-                                                                2.1677
-                                                            </td>
-                                                        </tr>
-                                                        <tr
-                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                            <th scope="row"
-                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                MSE
-                                                            </th>
-                                                            <td class="p-4">
-                                                                8.4840
-                                                            </td>
-                                                        </tr>
-                                                        <tr
-                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                            <th scope="row"
-                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                RMSE
-                                                            </th>
-                                                            <td class="p-4">
-                                                                2.8884
-                                                            </td>
-                                                        </tr>
-                                                        <tr
-                                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                            <th scope="row"
-                                                                class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                MAPE
-                                                            </th>
-                                                            <td class="p-4">
-                                                                0.5695
-                                                            </td>
-                                                        </tr>
+                                                            <tr
+                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                <th scope="row"
+                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                    MAE
+                                                                </th>
+                                                                <td class="p-4">
+                                                                    2.1677
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                <th scope="row"
+                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                    MSE
+                                                                </th>
+                                                                <td class="p-4">
+                                                                    8.4840
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                <th scope="row"
+                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                    RMSE
+                                                                </th>
+                                                                <td class="p-4">
+                                                                    2.8884
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                <th scope="row"
+                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                    MAPE
+                                                                </th>
+                                                                <td class="p-4">
+                                                                    0.5695
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -727,7 +818,7 @@
                                 </div>
                                 <div class="w-full flex gap-2 pt-3 justify-end">
                                     <button type="button" class="btn btn-outline-secondary"
-                                            @click="showModal = false">
+                                        @click="showModal = false">
                                         Close
                                     </button>
                                 </div>
@@ -738,8 +829,8 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-outline-primary" @click="showModal = !showModal"
-                                data-bs-target="#exampleModal">View History in Table
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                @click="showModal = !showModal" data-bs-target="#exampleModal">View History in Table
                             </button>
                         </div>
 
@@ -789,8 +880,8 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-outline-primary" @click="showModal = !showModal"
-                                data-bs-target="#exampleModal">Generate Purchase
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                @click="showModal = !showModal" data-bs-target="#exampleModal">Generate Purchase
                                 Order
                             </button>
                         </div>
@@ -909,7 +1000,8 @@
 
                 <tbody>
 
-                    <tr class="w-full bg-white border-b text-center dark:bg-gray-800 dark:border-gray-700" wire:loading wire:target="runforone" >
+                    <tr class="w-full bg-white border-b text-center dark:bg-gray-800 dark:border-gray-700" wire:loading
+                        wire:target="runforone">
                         <th colspan="4" scope="row"
                             class="w-full p-2 text-gray-900 text-center whitespace-nowrap dark:text-white">
                             <div class="spinner-border spinner-border" role="status">
@@ -918,9 +1010,10 @@
                         </th>
                     </tr>
 
-                    @if($sales_apiresponse)
+                    @if ($sales_apiresponse)
                         @foreach ($sales_apiresponse as $key => $value)
-                            <tr wire:key="{{ $key }}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr wire:key="{{ $key }}"
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $value['created_at'] }}
                                 </th>
@@ -928,10 +1021,10 @@
                                     {{ $value['quantity'] }}
                                 </td>
                                 <td class="p-2">
-{{--                                    {{ $value['forecast'] }}--}}
+                                    {{--                                    {{ $value['forecast'] }} --}}
                                 </td>
                                 <td class="p-2">
-{{--                                    {{ $value['accuracy'] }}--}}
+                                    {{--                                    {{ $value['accuracy'] }} --}}
                                 </td>
                             </tr>
                         @endforeach
