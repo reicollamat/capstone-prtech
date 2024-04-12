@@ -1,3 +1,5 @@
+import random
+
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import TimeSeriesSplit, GridSearchCV
@@ -272,7 +274,7 @@ def optimize_gridsearch(X_train, y_train, X_test, y_test):
         'max_depth': [3, 5, 7],
         'learning_rate': [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3],
         'subsample': [0.6, 0.8, 1.0],
-        'min_child_weight': [1, 3, 5]
+        'min_child_weight': [1, 3, 5],
     }
 
     # Initialize the XGBRegressor
@@ -412,6 +414,7 @@ class PrtechPredict:
     user_splitting_method = 'week'
     user_lag_days = 7
     user_best_params = {}
+    user_custom_days = 2
 
     # # Prediction Information
     data_start_date = ''
@@ -438,13 +441,14 @@ class PrtechPredict:
     prediction = []
 
     def __init__(self, data, prediction_range, lag_days, model_train_ratio, remove_outliers, splitting_method,
-                 best_params=None):
+                 best_params=None, custom_days=None):
         self.user_prediction_range = prediction_range
         self.user_lag_days = lag_days
         self.model_train_ratio = model_train_ratio
         self.remove_outliers = remove_outliers
         self.user_splitting_method = splitting_method
         self.user_best_params = best_params
+        self.user_custom_days = custom_days
 
         # # Check data from user
         self.df = check_data_from_user(data)
@@ -469,7 +473,7 @@ class PrtechPredict:
         self.X_test, self.y_test = create_test_data(self.test, self.FEATURES, self.TARGET)
 
         # # Optimize model
-        # self.best_params = self.optimize_model()
+        self.best_params = self.optimize_model()
 
         # # Train model
         self.model = self.start_train_model()
@@ -553,7 +557,8 @@ class PrtechPredict:
     def apply_splitting_method(self):
         try:
             print('Applying splitting method')
-            train, test = handle_train_test_size(self.df, self.user_splitting_method, self.model_train_ratio)
+            train, test = handle_train_test_size(self.df, self.user_splitting_method, self.model_train_ratio,
+                                                 custom_days=2)
             print('Splitting method applied successfully')
             return train, test
         except Exception as e:
@@ -592,9 +597,9 @@ class PrtechPredict:
                 return self.user_best_params
             else:
                 print('Optimizing model, no user best params provided')
-                best_params = optimize_gridsearch(self.X_train, self.y_train, self.X_test, self.y_test)
+                best_params_model = optimize_gridsearch(self.X_train, self.y_train, self.X_test, self.y_test)
                 print('Model optimized successfully')
-                return best_params
+                return best_params_model
         except Exception as e:
             print(f"An error occurred: {e}")
             return False
@@ -630,7 +635,6 @@ class PrtechPredict:
 
             # # Generate future dates with lag features
             future_df = generate_future_w_lags_dates(self.df, future_dates_df, self.user_lag_days)
-
 
             # print(self.df.shape)
             print(future_df.shape)
@@ -685,13 +689,7 @@ sales = mydata.get_data()
 
 best_params = {'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 2000, 'subsample': 1.0}
 
-obj = PrtechPredict(sales, prediction_range=7, lag_days=7, splitting_method='week', model_train_ratio=0.8,
-                    remove_outliers=True, best_params=best_params)
+obj = PrtechPredict(sales, prediction_range=7, lag_days=30, splitting_method='custom', model_train_ratio=0.8,
+                    remove_outliers=True, best_params=best_params, custom_days=2)
 
-print(obj.send_report())
-
-# obj.print_df_features_target()
-# obj.train_test_shape()
-# obj.print_X_train_y_train()
-# obj.print_X_test_y_test()
-# obj.optimize_model()
+datas = obj.send_report()
