@@ -1,11 +1,6 @@
 <div>
     <div x-data="{ expanded: false }" class="py-2 bg-white border-b border-gray-100">
         <div class="flex flex-column flex-lg-row flex-shrink-0 min-w-full items-center text-center">
-            <span class="mb-0 p-2 min-w-[40px] !text-gray-400 !font-light">
-                {{-- <input class="form-check-input" wire:model.live="select_products" value="{{ $item->id }}" --}}
-                <input class="form-check-input" value="{{ $item->id }}"
-                    type="checkbox" id="select_products">
-            </span>
             <label for="select_products" class="sr-only"></label>
             <div class="relative items-center  mb-0 min-w-[60px] p-2 !text-gray-800 !font-light">
                 {{-- <img
@@ -28,13 +23,16 @@
                 {{ $item->price }}
             </div>
             <div class="flex items-center justify-center mb-0 min-w-[100px] p-2 !text-gray-800 !font-light">
-{{--                {{ $itemproductinfo->stock ?? 0 }}--}}
-                @if($itemproductinfo->stock <= $itemproductinfo->reserve)
-                     <span class="bg-red-100 text-red-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ $itemproductinfo->stock ?? 0 }}</span>
+                {{--                {{ $itemproductinfo->stock ?? 0 }} --}}
+                @if ($itemproductinfo->stock <= $itemproductinfo->reserve)
+                    <span
+                        class="bg-red-100 text-red-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ $itemproductinfo->stock ?? 0 }}</span>
                 @elseif($itemproductinfo->stock > $itemproductinfo->reserve && $itemproductinfo->stock <= 20)
-                     <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $itemproductinfo->stock ?? 0 }}</span>
+                    <span
+                        class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $itemproductinfo->stock ?? 0 }}</span>
                 @else
-                    <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ $itemproductinfo->stock ?? 0 }}</span>
+                    <span
+                        class="bg-green-100 text-green-800 text-xs font-medium px-3 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ $itemproductinfo->stock ?? 0 }}</span>
                 @endif
 
                 {{-- <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Green</span> --}}
@@ -63,33 +61,36 @@
                     <div class="p-2 flex flex-col lg:flex-row">
                         <div class="px-6 content-center">
                             <div class="flex flex-col justify-center items-center p-2.5 gap-2">
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#imagepreview-{{ $item->id }}">
+                                <button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#imagepreview-{{ $item->id }}">
                                     <img src="{{ asset($itemproductinfo->product_images[0]->image_paths) }}"
                                         class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-28 h-28"
                                         alt="Product-Thumbnail">
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="imagepreview-{{ $item->id }}" tabindex="-1" aria-labelledby="imagepreviewLabel" aria-hidden="true">
+                                <div class="modal fade" id="imagepreview-{{ $item->id }}" tabindex="-1"
+                                    aria-labelledby="imagepreviewLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="imagepreviewLabel">Product Images</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                        @foreach ($itemproductinfo->product_images as $image)
-                                            {{-- @dd($image) --}}
-                                            <img src="{{ asset($image->image_paths) }}"
-                                                class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-full"
-                                                alt="Product-Thumbnail">
-                                        @endforeach
-                                        </div>
-                                        {{-- <div class="modal-footer">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="imagepreviewLabel">Product Images</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @foreach ($itemproductinfo->product_images as $image)
+                                                    {{-- @dd($image) --}}
+                                                    <img src="{{ asset($image->image_paths) }}"
+                                                        class="rounded-xl border border-gray-600 p-2.5 mx-auto d-block w-full"
+                                                        alt="Product-Thumbnail">
+                                                @endforeach
+                                            </div>
+                                            {{-- <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
                                         </div> --}}
-                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
