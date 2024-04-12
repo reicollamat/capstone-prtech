@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Seller\Dashboard\AnalyticsLinks;
 
-use App\Helpers\DateGenerator;
 use App\Models\Product;
 use App\Models\Seller;
 use Carbon\Carbon;
@@ -22,6 +21,8 @@ use Livewire\WithPagination;
 class AnalyticsModelReport extends Component
 {
     use LivewireAlert, WithPagination;
+
+    public $predict_done = false;
 
     public $summary;
 
@@ -64,9 +65,13 @@ class AnalyticsModelReport extends Component
 
     public $custompredictrange;
 
-    public $sales_apiresponse;
+    public $sales_accuracy_apiresponse;
 
     public $sales_futureapiresponse;
+
+    public $accuracy_report;
+
+    public $prediction_report;
 
     #[Locked]
     public $seller;
@@ -189,7 +194,7 @@ class AnalyticsModelReport extends Component
                     break;
                 }
             }
-            if (!$found) {
+            if (! $found) {
                 $fixedSales[$date] = 0;
             }
         }
@@ -303,7 +308,6 @@ class AnalyticsModelReport extends Component
         $this->dispatch('update-chart');
     }
 
-
     public function render()
     {
         return view('livewire..seller.dashboard.analytics-links.analytics-model-report');
@@ -413,7 +417,7 @@ class AnalyticsModelReport extends Component
         // dd(count($product));
 
         if (count($product) < 14) {
-            $this->notify('warning', 'Insufficient data', 'Product has only ' . count($product) . ' days worth of sales, at least 14 days is recommended for accurate future predictions');
+            $this->notify('warning', 'Insufficient data', 'Product has only '.count($product).' days worth of sales, at least 14 days is recommended for accurate future predictions');
 
             return;
         }
@@ -431,19 +435,19 @@ class AnalyticsModelReport extends Component
             $this->custompredictrange = null;
         }
 
+        $this->alert('info', 'Running Prediction', [
+            'position' => 'top-end',
+            'timer' => 6000,
+            'toast' => true,
+            'text' => 'The prediction may take a while depending on the amount of data and available resource.',
+            'showCancelButton' => false,
+            'showConfirmButton' => false,
+        ]);
+
         try {
 
-            $this->alert('info', 'Running Prediction', [
-                'position' => 'top-end',
-                'timer' => 6000,
-                'toast' => true,
-                'text' => 'The prediction may take a while depending on the amount of data and available resource.',
-                'showCancelButton' => false,
-                'showConfirmButton' => false,
-            ]);
-
             // send the data to the API with the following parameters, change the link to the correct API endpoint
-            $response = Http::post('http://127.0.0.1:8001/api/v1/predict', [
+            $response = Http::timeout(300)->post('http://127.0.0.1:8001/api/v1/predict', [
                 'product_id' => $this->productselectedid,
                 'interval' => $this->predictinterval,
                 'range' => $this->predictrange,
@@ -455,12 +459,27 @@ class AnalyticsModelReport extends Component
 
                 $data = $response->json();
 
-                $this->sales_apiresponse = $data['filtered_data'];
+                // $this->sales_apiresponse = $data['filtered_data'];
 
                 $this->sales_futureapiresponse = $data['future_dates'];
 
+                $this->accuracy_report = $data['accuracy_report'];
+
+                $this->sales_accuracy_apiresponse = $data['accuracy_test_report'];
+
+                $this->prediction_report = $data['prediction_report'];
+
                 // debug
                 // dd($data);
+
+                $this->alert('success', 'Prediction Success', [
+                    'position' => 'top-end',
+                    'timer' => 6000,
+                    'toast' => true,
+                    'text' => 'Report generated successfully',
+                    'showCancelButton' => false,
+                    'showConfirmButton' => false,
+                ]);
             }
         } catch (\Exception $e) {
             $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is down');
@@ -476,6 +495,29 @@ class AnalyticsModelReport extends Component
         //     'showCancelButton' => false,
         //     'showConfirmButton' => false,
         // ]);
+        //
+    }
 
+    #[Computed]
+    public function calculateAccuracy($actual, $predicted, $method = 'mae'): float|int
+    {
+        if (! is_numeric($actual) || ! is_numeric($predicted)) {
+            throw new InvalidArgumentException('Both actual and predicted values must be numeric.');
+        }
+
+        $actual = floatval($actual);
+        $predicted = floatval($predicted);
+
+        if ($method === 'mae') {
+            $absoluteDifference = abs($actual - $predicted);
+            // Calculate percentage for MAE
+
+            return ($absoluteDifference / $actual) * 100;
+        } elseif ($method === 'mse') {
+            // MSE doesn't directly translate to percentage accuracy. Consider alternative metrics like MAPE.
+            throw new InvalidArgumentException('MSE calculation doesn\'t directly translate to percentage accuracy. Consider MAPE or alternative approaches.');
+        } else {
+            throw new InvalidArgumentException('Invalid accuracy method. Choose "mae" or "mse".');
+        }
     }
 }

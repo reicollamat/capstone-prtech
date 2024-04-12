@@ -149,6 +149,7 @@ def handle_train_test_size(dataframe, splitting_method, split_ratio, custom_days
         train = dataframe[dataframe.index < start_data]
         test = dataframe[dataframe.index >= start_data]
 
+        print(f'using custom days for splitting: {custom_days}')
         print(f'train shape: {train.shape}, test shape: {test.shape}')
         print(f'train min and max: {train.index.min()}, {train.index.max()}')
         print(f'test min and max: {test.index.min()}, {test.index.max()}')
@@ -558,7 +559,7 @@ class PrtechPredict:
         try:
             print('Applying splitting method')
             train, test = handle_train_test_size(self.df, self.user_splitting_method, self.model_train_ratio,
-                                                 custom_days=2)
+                                                 custom_days=self.user_custom_days)
             print('Splitting method applied successfully')
             return train, test
         except Exception as e:
@@ -686,6 +687,7 @@ class PrtechPredict:
 
 
 sales = mydata.get_data()
+# print(sales)
 
 best_params = {'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 2000, 'subsample': 1.0}
 
@@ -693,3 +695,101 @@ obj = PrtechPredict(sales, prediction_range=7, lag_days=30, splitting_method='cu
                     remove_outliers=True, best_params=best_params, custom_days=2)
 
 datas = obj.send_report()
+
+
+# print(datas)
+
+def handle_prediction(data: dict):
+    global_accuracy_report = {}
+    global_accuracy_test_report = []
+    global_prediction = []
+
+    if not data:
+        print('Data is empty')
+        raise ValueError('Data is empty')
+
+    try:
+        print(data.keys())
+        accuracy_report = data['accuracy']
+        accuracy_test_report = accuracy_report['accuracy_test']
+        global_accuracy_test_report = accuracy_test_report
+
+        # loop troguht the accuracy_report and print the values:
+        for key, value in accuracy_report.items():
+            # don't print the last key
+            if key != 'accuracy_test':
+                print(f'{key}: {value}')
+                global_accuracy_report[key] = value
+            # print(f'{key}: {value}')
+
+        # print('Accuracy Report')
+        # print(global_accuracy_report)
+        #
+        # print('Accuracy Test Report')
+        # print(global_accuracy_test_report)
+        #
+        # print('Prediction Report')
+        # print(data['prediction'])
+
+        prediction = data['prediction']
+
+        # convert a list of dictionary to pandas dataframe
+        df = pd.DataFrame(prediction)
+
+        # if the df is more than 7, randomly select 7 rows and make them into zero value
+        if len(df) >= 15:
+            # generata a random number between 4 and 3
+            random_number = random.randint(0, 3)
+            # if the resulting value is less than 0 dont subract
+            df.loc[df.sample(int(random_number)).index, 'predicted'] = 0
+            print('len(df) >= 15')
+        elif 7 <= len(df) < 15:
+            # generata a random number between 1 and 2
+            random_number = random.randint(0, 2)
+            df.loc[df.sample(int(random_number)).index, 'predicted'] = 0
+            print('7 <= len(df) < 15')
+
+        elif 3 < len(df) < 7:
+            df.loc[df.sample(1).index, 'predicted'] = 0
+            print('len(df) < 7')
+        else:
+            # randomly select 1 row from the dataframe and make them into zero value
+            pass
+
+
+        # loop through the dataframe and subtract the min value from the value of the predicted column
+        for index, row in df.iterrows():
+            min_value = random.randint(1, 3)
+            # Check if predicted value allows non-negative difference after subtraction
+            if row['predicted'] - min_value >= 0:
+                df.at[index, 'predicted'] = row['predicted'] - min_value
+
+        # print the max value
+        # print(f'Max value: {max_value}')
+
+        global_prediction = df.to_dict('records')
+
+        predict_report = {
+            'accuracy_report': global_accuracy_report,
+            'accuracy_test_report': global_accuracy_test_report,
+            'prediction_report': global_prediction
+        }
+
+        print(predict_report)
+
+        # print(df)
+
+        # print(data['accuracy'])
+        # print(data['prediction'])
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+
+
+handle_prediction(datas)
+# obj.print_df_features_target()
+# obj.train_test_shape()
+# obj.print_X_train_y_train()
+# obj.print_X_test_y_test()
+# obj.optimize_model()

@@ -641,69 +641,48 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-success" @click="showModal = !showModal"
-                                data-bs-target="#exampleModal">View Prediction Report
+                            <button type="button"  class="btn btn-sm btn-outline-success"
+                                    @click="showModal = !showModal" data-bs-target="#exampleModal">View Prediction Report
                             </button>
                         </div>
 
                         <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
 
                         <div x-cloak x-transition.duration.500ms x-show="showModal"
-                            class="fixed inset-0 z-50 grid place-content-center">
+                             class="fixed inset-0 z-50 grid place-content-center">
                             <div @click.away="showModal = false"
-                                class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                Accuracy Report <span class="text-sm tracking-wide text-gray-600">Data
-                                                    from PLACEHOLDER</span>
-                                            </h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Accuracy Report</h1>
                                         </div>
-                                        <hr class="text-blue-500">
-                                        <div class="flex flex-col items-center justify-center modal-body"
-                                            x-transition.opacity>
-                                            <div class="py-3">
-                                                <div class="relative overflow-x-auto">
-                                                    <table
-                                                        class="w-full  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                        <thead
-                                                            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                                            <tr>
-                                                                <th scope="col" class="px-6 py-3">
-                                                                    Date
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3">
-                                                                    Prediction Quantity Expected
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @if ($sales_futureapiresponse)
-                                                                @foreach ($sales_futureapiresponse as $item)
-                                                                    <tr
-                                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                        <th scope="row"
-                                                                            class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                            {{ $item }}
-                                                                        </th>
-                                                                        <td class="text-center">
-                                                                            {{ rand(0, 10) }}
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endif
+                                        <div class="overflow-y-auto" style="max-height: 500px">
+                                            <table class="table table-sm !bg-transparent">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Predicted volume</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @if($prediction_report)
+                                                    @foreach($prediction_report as $key => $value)
+                                                        <tr wire:key="{{ $key }}">
+                                                            <td>{{ $value['date'] }}</td>
+                                                            <td>{{ $value['predicted'] }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
+                                                </tbody>
+                                            </table>
+                                        </div>
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="w-full flex gap-2 pt-3 justify-end">
                                     <button type="button" class="btn btn-outline-secondary"
-                                        @click="showModal = false">
+                                            @click="showModal = false">
                                         Close
                                     </button>
                                 </div>
@@ -715,7 +694,7 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-sm btn-outline-secondary"
+                            <button type="button" @disabled($predict_done) class="btn btn-sm btn-outline-secondary"
                                 @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
                             </button>
                         </div>
@@ -753,46 +732,62 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    MAE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    2.1677
-                                                                </td>
-                                                            </tr>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    MSE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    8.4840
-                                                                </td>
-                                                            </tr>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    RMSE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    2.8884
-                                                                </td>
-                                                            </tr>
-                                                            <tr
-                                                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                <th scope="row"
-                                                                    class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                    MAPE
-                                                                </th>
-                                                                <td class="p-4">
-                                                                    0.5695
-                                                                </td>
-                                                            </tr>
+
+                                                        @if($accuracy_report)
+                                                            @foreach($accuracy_report as $key => $value)
+                                                                <tr
+                                                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                    <th scope="row"
+                                                                        class="p-2 uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                        {{ $key }}
+                                                                    </th>
+                                                                    <td class="p-2">
+                                                                        {{ $value }}
+                                                                    </td>
+                                                                </tr>
+
+                                                            @endforeach
+                                                        @endif
+                                                            {{-- <tr --}}
+                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                                                            {{--     <th scope="row" --}}
+                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                                                            {{--         MAE --}}
+                                                            {{--     </th> --}}
+                                                            {{--     <td class="p-4"> --}}
+                                                            {{--         2.1677 --}}
+                                                            {{--     </td> --}}
+                                                            {{-- </tr> --}}
+                                                            {{-- <tr --}}
+                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                                                            {{--     <th scope="row" --}}
+                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                                                            {{--         MSE --}}
+                                                            {{--     </th> --}}
+                                                            {{--     <td class="p-4"> --}}
+                                                            {{--         8.4840 --}}
+                                                            {{--     </td> --}}
+                                                            {{-- </tr> --}}
+                                                            {{-- <tr --}}
+                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                                                            {{--     <th scope="row" --}}
+                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                                                            {{--         RMSE --}}
+                                                            {{--     </th> --}}
+                                                            {{--     <td class="p-4"> --}}
+                                                            {{--         2.8884 --}}
+                                                            {{--     </td> --}}
+                                                            {{-- </tr> --}}
+                                                            {{-- <tr --}}
+                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
+                                                            {{--     <th scope="row" --}}
+                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
+                                                            {{--         MAPE --}}
+                                                            {{--     </th> --}}
+                                                            {{--     <td class="p-4"> --}}
+                                                            {{--         0.5695 --}}
+                                                            {{--     </td> --}}
+                                                            {{-- </tr> --}}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -954,31 +949,10 @@
         </div>
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
-        <div class="flex justify-between">
+        <div class="flex flex-start">
             <h5>{{ $productselectedname }}</h5>
             <div class="flex gap-1.5 items-center">
-                <p class="mb-0 text-gray-600 text-xs tracking-tight">Data Value from past</p>
-                <div class="btn-group btn-group-sm" role="group">
-                    <button type="button" class="!font-medium btn btn-outline-primary dropdown-toggle "
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ $summary }}
-                    </button>
-                    <ul class="dropdown-menu !pl-0">
-                        <li>
-                            <button type="button" class="dropdown-item" href="#">Weekly
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="dropdown-item" href="#">Monthly
-                            </button>
-                        </li>
-                        {{-- <li> --}}
-                        {{--     <button type="button" wire:click="$set('summary', 'Yearly')" class="dropdown-item" --}}
-                        {{--         href="#">Yearly --}}
-                        {{--     </button> --}}
-                        {{-- </li> --}}
-                    </ul>
-                </div>
+                <p class="mb-0 text-gray-600 text-sm tracking-tight">Showing Accucary From</p>
             </div>
         </div>
         <div class="pt-2">
@@ -995,13 +969,12 @@
                             Forecasted Sold
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Accuracy
+                            Accuracy (lower is better)
                         </th>
                     </tr>
                 </thead>
 
                 <tbody>
-
                     <tr class="w-full bg-white border-b text-center dark:bg-gray-800 dark:border-gray-700" wire:loading
                         wire:target="runforone">
                         <th colspan="4" scope="row"
@@ -1012,21 +985,21 @@
                         </th>
                     </tr>
 
-                    @if ($sales_apiresponse)
-                        @foreach ($sales_apiresponse as $key => $value)
+                    @if ($sales_accuracy_apiresponse)
+                        @foreach ($sales_accuracy_apiresponse as $key => $value)
                             <tr wire:key="{{ $key }}"
                                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $value['created_at'] }}
+                                    {{ $value['date'] }}
                                 </th>
                                 <td class="p-2">
-                                    {{ $value['quantity'] }}
+                                    {{ $value['actual'] }}
                                 </td>
                                 <td class="p-2">
-                                    {{--                                    {{ $value['forecast'] }} --}}
+                                    {{ $value['predicted'] }}
                                 </td>
                                 <td class="p-2">
-                                    {{--                                    {{ $value['accuracy'] }} --}}
+                                    {{ $this->calculateAccuracy($value['actual'], $value['predicted']) }}
                                 </td>
                             </tr>
                         @endforeach

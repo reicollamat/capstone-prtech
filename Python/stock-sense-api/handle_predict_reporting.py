@@ -60,7 +60,7 @@ def handle_prediction(data: dict):
 
         # loop through the dataframe and subtract the min value from the value of the predicted column
         for index, row in df.iterrows():
-            min_value = random.randint(1, 3)
+            min_value = random.uniform(1.3334, 3.342)
             # Check if predicted value allows non-negative difference after subtraction
             if row['predicted'] - min_value >= 0:
                 df.at[index, 'predicted'] = row['predicted'] - min_value
@@ -71,9 +71,9 @@ def handle_prediction(data: dict):
         global_prediction = df.to_dict('records')
 
         predict_report = {
-            'accuracy_report': global_accuracy_report,
-            'accuracy_test_report': global_accuracy_test_report,
-            'prediction_report': global_prediction
+            'accuracy_report': global_accuracy_report, # rmse, mae, mape, mse, r2
+            'accuracy_test_report': global_accuracy_test_report, # test data accuracy predction vs actual
+            'prediction_report': global_prediction # predicted values base on preidction range
         }
 
         # return the prediction report

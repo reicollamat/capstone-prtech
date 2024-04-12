@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+
 def datevalueFix(data: list[dict]):
     for item in data:
         # Parse datetime string to datetime object
@@ -10,7 +11,7 @@ def datevalueFix(data: list[dict]):
     return data
 
 
-def fill_missing_dates(data: list[dict]):
+def fill_missing_dates(data: list[dict]) -> list[dict]:
     # Extract all 'created_at' dates from the dictionaries
     dates = [datetime.strptime(item['created_at'], '%Y-%m-%d').date() for item in data]
 
