@@ -2,7 +2,7 @@
     {{-- Nothing in the world is as soft and yielding as water. --}}
     {{-- <button wire:click="getOrderList()">test</button> --}}
     <x-slot:page_header>
-        Shipment Management
+        Order Cancellations
     </x-slot:page_header>
     <div class="flex h-full">
         <div class="tab-wrapper flex-1 w-64" x-data="{ activeTab: 0 }">

@@ -115,7 +115,6 @@ class AnalyticsModelReport extends Component
         // dd(array_values($combinedArray));
 
         $this->restock_now();
-
     }
 
     #[Computed]
@@ -137,7 +136,6 @@ class AnalyticsModelReport extends Component
         $this->productselectedprice = $_product->price;
 
         $this->makeChart($product);
-
     }
 
     private function makeChart($product_id): void
@@ -153,7 +151,6 @@ class AnalyticsModelReport extends Component
         } else {
             // dd('No product selected');
             $products2 = Collection::make([]);
-
         }
 
         $startDate = Carbon::parse($this->userStartingDate);
@@ -192,7 +189,7 @@ class AnalyticsModelReport extends Component
                     break;
                 }
             }
-            if (! $found) {
+            if (!$found) {
                 $fixedSales[$date] = 0;
             }
         }
@@ -216,7 +213,6 @@ class AnalyticsModelReport extends Component
         $end = Carbon::parse($this->userEndingDate);
 
         return $this->generateDatesArray($start, $end);
-
     }
 
     private function generateDatesArray($startingDate, $endingDate): array
@@ -369,7 +365,6 @@ class AnalyticsModelReport extends Component
                 $this->notify('warning', 'Custom range selected', 'Custom range selected, Please input valid number');
 
                 return;
-
             }
         }
 
@@ -391,7 +386,7 @@ class AnalyticsModelReport extends Component
     {
         $this->alert($type, $mesage, [
             'position' => 'top-end',
-            'timer' => 3000,
+            'timer' => 6000,
             'toast' => true,
             'text' => $text,
             'showCancelButton' => false,
@@ -415,13 +410,20 @@ class AnalyticsModelReport extends Component
             ->groupBy('p.created_at')
             ->get();
 
+        // dd(count($product));
+
+        if (count($product) < 14) {
+            $this->notify('warning', 'Insufficient data', 'Product has only ' . count($product) . ' days worth of sales, at least 14 days is recommended for accurate future predictions');
+
+            return;
+        }
+
         if ($this->predictrange == 'custom') {
             if ($this->custompredictrange == null) {
 
                 $this->notify('warning', 'Custom range selected', 'Custom range selected, Please input valid number');
 
                 return;
-
             }
         }
 
@@ -433,9 +435,9 @@ class AnalyticsModelReport extends Component
 
             $this->alert('info', 'Running Prediction', [
                 'position' => 'top-end',
-                'timer' => 3000,
+                'timer' => 6000,
                 'toast' => true,
-                'text' => 'Please wait while we run the prediction',
+                'text' => 'The prediction may take a while depending on the amount of data and available resource.',
                 'showCancelButton' => false,
                 'showConfirmButton' => false,
             ]);
@@ -458,9 +460,8 @@ class AnalyticsModelReport extends Component
                 $this->sales_futureapiresponse = $data['future_dates'];
 
                 // debug
-                dd($data);
+                // dd($data);
             }
-
         } catch (\Exception $e) {
             $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is down');
         }
