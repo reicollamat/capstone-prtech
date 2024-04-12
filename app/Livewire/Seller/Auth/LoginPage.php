@@ -48,7 +48,7 @@ class LoginPage extends Component
             // dd($user);
 
             if (Auth::attempt(['email' => $validation['email'], 'password' => $validation['password']]) ||
-                Auth::attempt(['username' => $validation['email'], 'password' => $validation['password']])) {
+                Auth::attempt(['name' => $validation['email'], 'password' => $validation['password']])) {
                 Auth::loginUsingId($user->id);
 
                 session()->regenerate();
