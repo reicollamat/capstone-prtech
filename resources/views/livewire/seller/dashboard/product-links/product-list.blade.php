@@ -237,11 +237,6 @@
                 <div id="table-headers" class="mb-1">
                     <div
                         class="flex flex-column flex-sm-row flex-shrink-0 min-w-full  items-center text-center tablelike">
-                        <p class="mb-0 min-w-[40px] !text-gray-400 !font-light border-b-2 border-blue-300">
-                            <label>
-                                <input class="form-check-input" type="checkbox">
-                            </label>
-                        </p>
                         <p class="mb-0  min-w-[60px] !text-gray-400 !font-light border-b-2 border-blue-300">
                             IMG
                         </p>
