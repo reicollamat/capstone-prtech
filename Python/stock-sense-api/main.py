@@ -67,7 +67,7 @@ async def pred(request: Request):
     print(f'Interval: {interval}')
     print(f'Range: {pred_range}')
     print(f'Custom Range: {custom_range}')
-    print(type(sales[0]))
+    # print(type(sales[0]))
 
     prediction_range = 0
 
@@ -84,7 +84,7 @@ async def pred(request: Request):
     # fill missing dates according to startiung and ending date
     parase_date_2 = datevalueFix.fill_missing_dates(parase_date_1)
 
-    print(parase_date_2)
+    # print(parase_date_2)
 
     print(current_date)
     filtered_data = []
