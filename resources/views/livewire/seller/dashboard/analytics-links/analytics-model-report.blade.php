@@ -555,45 +555,47 @@
                                                     class="form-control form-control-sm" disabled>
                                             </div>
 
-                                            <div class="mt-2">
-                                                <label for="selected_product_price"
-                                                    class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
-                                                <input type="text" placeholder="Product Price"
-                                                    id="selected_product_price"
-                                                    value="{{ $productselectedprice ?? 'Price' }}"
-                                                    class="form-control form-control-sm" disabled>
-                                            </div>
-
-                                            @if ($predictrange == 'custom')
+                                            <div class="grid grid-cols-2 gap-2">
                                                 <div class="mt-2">
                                                     <label for="selected_product_price"
-                                                        class="form-label tracking-tight uppercase text-sm font-medium">Predict
-                                                        for the next n days</label>
+                                                        class="form-label tracking-tight uppercase text-sm font-medium">Price</label>
                                                     <input type="text" placeholder="Product Price"
                                                         id="selected_product_price"
-                                                        value="{{ $custompredictrange ?? 'Next n Days' }}"
+                                                        value="{{ $productselectedprice ?? 'Price' }}"
                                                         class="form-control form-control-sm" disabled>
                                                 </div>
-                                            @else
+
+                                                @if ($predictrange == 'custom')
+                                                    <div class="mt-2">
+                                                        <label for="selected_product_price"
+                                                            class="form-label tracking-tight uppercase text-sm font-medium">Predict
+                                                            for the next n days</label>
+                                                        <input type="text" placeholder="Product Price"
+                                                            id="selected_product_price"
+                                                            value="{{ $custompredictrange ?? 'Next n Days' }}"
+                                                            class="form-control form-control-sm" disabled>
+                                                    </div>
+                                                @else
+                                                    <div class="mt-2">
+                                                        <label for="selected_product_price"
+                                                            class="form-label tracking-tight uppercase text-sm font-medium">Predict
+                                                            for the next n days</label>
+                                                        <input type="text" placeholder="Product Price"
+                                                            id="selected_product_price"
+                                                            value="{{ $predictrange ?? 'Next n Days' }}"
+                                                            class="form-control form-control-sm" disabled>
+                                                    </div>
+                                                @endif
+
                                                 <div class="mt-2">
                                                     <label for="selected_product_price"
-                                                        class="form-label tracking-tight uppercase text-sm font-medium">Predict
-                                                        for the next n days</label>
+                                                        class="form-label tracking-tight uppercase text-sm font-medium">Dataset
+                                                        Interval</label>
                                                     <input type="text" placeholder="Product Price"
                                                         id="selected_product_price"
-                                                        value="{{ $predictrange ?? 'Next n Days' }}"
+                                                        value="{{ $predictinterval ?? 'Dataset Interval' }}"
                                                         class="form-control form-control-sm" disabled>
                                                 </div>
-                                            @endif
-
-                                            <div class="mt-2">
-                                                <label for="selected_product_price"
-                                                    class="form-label tracking-tight uppercase text-sm font-medium">Dataset
-                                                    Interval</label>
-                                                <input type="text" placeholder="Product Price"
-                                                    id="selected_product_price"
-                                                    value="{{ $predictinterval ?? 'Dataset Interval' }}"
-                                                    class="form-control form-control-sm" disabled>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
