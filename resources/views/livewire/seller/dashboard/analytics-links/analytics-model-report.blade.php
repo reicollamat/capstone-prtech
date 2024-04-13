@@ -83,7 +83,7 @@
                                                                         <td class="text-red-300">Low on Stock</td>
                                                                         <td
                                                                             style="background-color:  rgb(209 213 219)!important;">
-                                                                            {{ $item['prediction']['prediction_report'][0]['predicted'] ?? 0}}
+                                                                            {{ $item['prediction']['prediction_report'][0]['predicted'] ?? 0 }}
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -192,21 +192,21 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @if(count($restock_soon_predict) != 0)
-                                                            @foreach ($restock_soon_predict as $item)
-                                                                <tr wire:key="{{ $item['id'] . 'pred' }}">
-                                                                    <th scope="row">{{ $item['id'] }}</th>
-                                                                    <td class=text-sm">{{ $item['title'] }}</td>
-                                                                    <td>{{ $item['stock'] }}</td>
-                                                                    <td>{{ $item['reserve'] }}</td>
-                                                                    <td class="text-red-300">Low on Stock</td>
-                                                                    <td
-                                                                        style="background-color:  rgb(209 213 219)!important;">
-                                                                        {{ $item['prediction']['prediction_report'][0]['predicted'] ?? 0 }}
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
+                                                            @if (count($restock_soon_predict) != 0)
+                                                                @foreach ($restock_soon_predict as $item)
+                                                                    <tr wire:key="{{ $item['id'] . 'pred' }}">
+                                                                        <th scope="row">{{ $item['id'] }}</th>
+                                                                        <td class=text-sm">{{ $item['title'] }}</td>
+                                                                        <td>{{ $item['stock'] }}</td>
+                                                                        <td>{{ $item['reserve'] }}</td>
+                                                                        <td class="text-red-300">Low on Stock</td>
+                                                                        <td
+                                                                            style="background-color:  rgb(209 213 219)!important;">
+                                                                            {{ $item['prediction']['prediction_report'][0]['predicted'] ?? 0 }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -369,41 +369,120 @@
                 {{ $monthSelect ?? '' }}
                 {{ $userStartingDate ?? '' }}
                 {{ $userEndingDate ?? '' }}
+
                 <div class="btn-group btn-group-sm" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Select Product
                     </button>
-                    <ul class="dropdown-menu !pl-0">
-                        <p class="pl-3 mb-0 text-gray-600 text-sm font-bold">Recommended</p>
-                        @foreach ($this->restock_now_list as $item)
-                            <tr wire:key="{{ $item->id . 'list' }}">
-                                <li>
-                                    <button type="button" class="dropdown-item"
-                                        wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
-                                        - {{ $item->title }}
-                                    </button>
-                                </li>
-                            </tr>
-                        @endforeach
-                        <p class="mt-2 pl-3 mb-0 text-gray-600 text-sm font-bold">Other Products</p>
-                        @foreach ($this->restock_soon_list as $item)
-                            <tr wire:key="{{ $item->id . 'list' }}">
-                                <li>
-                                    <button type="button" class="dropdown-item"
-                                        wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
-                                        - {{ $item->title }}
-                                    </button>
-                                </li>
-                            </tr>
-                        @endforeach
-                    </ul>
+                    <div class="dropdown-menu overflow-auto p-2 rounded-2 bg-white shadow max-h-96 w-96">
+                        <div class="list-group">
+                            <p class="mb-0 text-gray-600 text-sm font-bold">Recommended</p>
+                            @foreach ($this->restock_now_list as $item)
+                                <button class="list-group-item list-group-item-action" wire:key="{{ $item->id }}"
+                                    wire:click="selectProduct({{ $item->id }})">
+                                    <div class="flex gap-2">
+                                        <p>{{ $item->id }}</p>
+                                        <p>-</p>
+                                        <p>{{ $item->title }}</p>
+                                    </div>
+                                </button>
+                            @endforeach
+                            @foreach ($this->restock_soon_list as $item)
+                                <button class="list-group-item list-group-item-action" wire:key="{{ $item->id }}"
+                                    wire:click="selectProduct({{ $item->id }})">
+                                    <div class="flex gap-2">
+                                        <p>{{ $item->id }}</p>
+                                        <p>-</p>
+                                        <p>{{ $item->title }}</p>
+                                    </div>
+                                </button>
+                            @endforeach
+                            <p class="mb-0 mt-2 text-gray-600 text-sm font-bold">Other Products</p>
+                            @foreach ($this->all_products as $item)
+                                <button class="list-group-item list-group-item-action" wire:key="{{ $item->id }}"
+                                    wire:click="selectProduct({{ $item->id }})">
+                                    <div class="flex gap-2">
+                                        <p>{{ $item->id }}</p>
+                                        <p>-</p>
+                                        <p>{{ $item->title }}</p>
+                                    </div>
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <form action="#" class="d-flex" role="search">
-                        <input class="form-control " type="search" placeholder="Search Product"
-                            aria-label="Search Product">
-                    </form>
+                <div x-data="{ openSearchProduct: false }" @mouseleave="openSearchProduct = false"
+                    @mouseover="openSearchProduct = true">
+                    <input class="form-control " type="search" placeholder="Search Product" autocomplete="off"
+                        aria-label="Search Product" wire:model.live="search_product"
+                        @input="event => openSearchProduct = true">
+                    <div x-cloak x-show="openSearchProduct" class="absolute bg-white end-6 rounded-lg shadow"
+                        x-transition:enter.duration.700ms x-transition:leave.duration.200ms style="z-index: 1020;">
+                        <div class="overflow-auto p-2 rounded-2 bg-white shadow max-h-96 w-96">
+
+                            @if (strlen($search_product) > 1)
+                                @if (strlen($return_search_product) > 2)
+                                    <div class="list-group">
+                                        <p class="mb-0 text-gray-600 text-sm font-bold">Results</p>
+                                        @foreach ($return_search_product as $item)
+                                            <button class="list-group-item list-group-item-action"
+                                                wire:transition.scale.origin.top wire:key="{{ $item->id }}"
+                                                wire:click="selectProduct({{ $item->id }})">
+                                                <div class="flex gap-2">
+                                                    <p>{{ $item->id }}</p>
+                                                    <p>-</p>
+                                                    <p>{{ $item->title }}</p>
+                                                </div>
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <p class="text-center" wire:key="no-results">
+                                        No Product Found.</p>
+                                @endif
+                            @else
+                                {{-- if not typing --}}
+                                <div class="list-group">
+                                    <p class="mb-0 text-gray-600 text-sm font-bold">Recommended</p>
+                                    @foreach ($this->restock_now_list as $item)
+                                        <button class="list-group-item list-group-item-action"
+                                            wire:key="{{ $item->id }}"
+                                            wire:click="selectProduct({{ $item->id }})">
+                                            <div class="flex gap-2">
+                                                <p>{{ $item->id }}</p>
+                                                <p>-</p>
+                                                <p>{{ $item->title }}</p>
+                                            </div>
+                                        </button>
+                                    @endforeach
+                                    @foreach ($this->restock_soon_list as $item)
+                                        <button class="list-group-item list-group-item-action"
+                                            wire:key="{{ $item->id }}"
+                                            wire:click="selectProduct({{ $item->id }})">
+                                            <div class="flex gap-2">
+                                                <p>{{ $item->id }}</p>
+                                                <p>-</p>
+                                                <p>{{ $item->title }}</p>
+                                            </div>
+                                        </button>
+                                    @endforeach
+                                    <p class="mb-0 mt-2 text-gray-600 text-sm font-bold">Other Products</p>
+                                    @foreach ($this->all_products as $item)
+                                        <button class="list-group-item list-group-item-action"
+                                            wire:key="{{ $item->id }}"
+                                            wire:click="selectProduct({{ $item->id }})">
+                                            <div class="flex gap-2">
+                                                <p>{{ $item->id }}</p>
+                                                <p>-</p>
+                                                <p>{{ $item->title }}</p>
+                                            </div>
+                                        </button>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"

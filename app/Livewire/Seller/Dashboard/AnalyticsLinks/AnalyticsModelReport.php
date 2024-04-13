@@ -74,6 +74,11 @@ class AnalyticsModelReport extends Component
 
     public $prediction_report;
 
+    public $search_product = '';
+
+    public $return_search_product;
+
+
     #[Locked]
     public $seller;
 
@@ -106,7 +111,24 @@ class AnalyticsModelReport extends Component
 
         $this->restock_now_predict = $this->restock_now();
         $this->restock_soon_predict = $this->restock_soon();
+    }
 
+
+    #[Computed]
+    public function all_products()
+    {
+        if (strlen($this->search_product) > 1) {
+            $this->return_search_product = Product::where('seller_id', $this->seller->id)
+                ->where(strtolower('title'), 'like', "%{$this->search_product}%")
+                ->orderBy('stock', 'asc')
+                ->get();
+            // dd($this->return_search_product);
+        } else {
+            $this->return_search_product = '';
+        }
+        return Product::where('seller_id', $this->seller->id)
+            ->orderBy('stock', 'asc')
+            ->get();
     }
 
     public function selectProduct($product): void
@@ -172,7 +194,7 @@ class AnalyticsModelReport extends Component
                     break;
                 }
             }
-            if (! $found) {
+            if (!$found) {
                 $fixedSales[$date] = 0;
             }
         }
@@ -456,7 +478,7 @@ class AnalyticsModelReport extends Component
         // dd(count($product));
 
         if (count($product) < 14) {
-            $this->notify('warning', 'Insufficient data', 'Product has only '.count($product).' days worth of sales, at least 14 days is recommended for accurate future predictions');
+            $this->notify('warning', 'Insufficient data', 'Product has only ' . count($product) . ' days worth of sales, at least 14 days is recommended for accurate future predictions');
 
             return;
         }
@@ -510,7 +532,6 @@ class AnalyticsModelReport extends Component
                     'showCancelButton' => false,
                     'showConfirmButton' => false,
                 ]);
-
             }
         } catch (\Exception $e) {
             $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is downs');
@@ -532,7 +553,7 @@ class AnalyticsModelReport extends Component
     #[Computed]
     public function calculateAccuracy($actual, $predicted, $method = 'mae'): float|int
     {
-        if (! is_numeric($actual) || ! is_numeric($predicted)) {
+        if (!is_numeric($actual) || !is_numeric($predicted)) {
             throw new InvalidArgumentException('Both actual and predicted values must be numeric.');
         }
 
@@ -613,6 +634,5 @@ class AnalyticsModelReport extends Component
 
     public function identify_product_torestioc()
     {
-
     }
 }
