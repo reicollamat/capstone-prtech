@@ -419,7 +419,7 @@
                         @input="event => openSearchProduct = true">
                     <div x-cloak x-show="openSearchProduct" class="absolute bg-white end-6 rounded-lg shadow"
                         x-transition:enter.duration.700ms x-transition:leave.duration.200ms style="z-index: 1020;">
-                        <div class="overflow-auto p-2 rounded-2 bg-white shadow max-h-96 w-96">
+                        <div class="overflow-auto p-2 rounded-2 bg-white shadow max-h-96">
 
                             @if (strlen($search_product) > 1)
                                 @if (strlen($return_search_product) > 2)
