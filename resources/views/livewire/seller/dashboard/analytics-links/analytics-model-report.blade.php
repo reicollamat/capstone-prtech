@@ -365,10 +365,10 @@
                         </div>
                     </div>
                 </div>
-                {{ $summary ?? '' }}
-                {{ $monthSelect ?? '' }}
-                {{ $userStartingDate ?? '' }}
-                {{ $userEndingDate ?? '' }}
+{{--                {{ $summary ?? '' }}--}}
+{{--                {{ $monthSelect ?? '' }}--}}
+{{--                {{ $userStartingDate ?? '' }}--}}
+{{--                {{ $userEndingDate ?? '' }}--}}
 
                 <div class="btn-group btn-group-sm" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -740,7 +740,7 @@
             </div>
 
             <div>
-                {{ var_dump($userArray) }}
+{{--                {{ var_dump($userArray) }}--}}
             </div>
 
             <div class="w-full mt-3 flex justify-between">
@@ -764,7 +764,7 @@
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Accuracy Report</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Prediction Report</h1>
                                         </div>
                                         <div class="overflow-y-auto" style="max-height: 500px">
                                             <table class="table table-sm !bg-transparent">
@@ -857,46 +857,6 @@
                                                                     </tr>
                                                                 @endforeach
                                                             @endif
-                                                            {{-- <tr --}}
-                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                                                            {{--     <th scope="row" --}}
-                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                                                            {{--         MAE --}}
-                                                            {{--     </th> --}}
-                                                            {{--     <td class="p-4"> --}}
-                                                            {{--         2.1677 --}}
-                                                            {{--     </td> --}}
-                                                            {{-- </tr> --}}
-                                                            {{-- <tr --}}
-                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                                                            {{--     <th scope="row" --}}
-                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                                                            {{--         MSE --}}
-                                                            {{--     </th> --}}
-                                                            {{--     <td class="p-4"> --}}
-                                                            {{--         8.4840 --}}
-                                                            {{--     </td> --}}
-                                                            {{-- </tr> --}}
-                                                            {{-- <tr --}}
-                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                                                            {{--     <th scope="row" --}}
-                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                                                            {{--         RMSE --}}
-                                                            {{--     </th> --}}
-                                                            {{--     <td class="p-4"> --}}
-                                                            {{--         2.8884 --}}
-                                                            {{--     </td> --}}
-                                                            {{-- </tr> --}}
-                                                            {{-- <tr --}}
-                                                            {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                                                            {{--     <th scope="row" --}}
-                                                            {{--         class="p-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                                                            {{--         MAPE --}}
-                                                            {{--     </th> --}}
-                                                            {{--     <td class="p-4"> --}}
-                                                            {{--         0.5695 --}}
-                                                            {{--     </td> --}}
-                                                            {{-- </tr> --}}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -1048,110 +1008,34 @@
                     </div>
                 </div>
 
-                {{-- <button type="button" class="btn btn-sm btn-outline-secondary ">Print</button> --}}
-                {{-- <div> --}}
-                {{--     <button type="button" class="btn btn-sm btn-outline-secondary ">Print</button> --}}
-                {{-- </div> --}}
-                {{-- <div class="flex gap-2"> --}}
-                {{--     <button type="button" class="btn btn-sm btn-outline-secondary ">Clear</button> --}}
-                {{--     <button type="button" class="btn btn-sm btn-primary ">Run Prediction</button> --}}
-                {{-- </div> --}}
             </div>
         </div>
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
         <div class="flex justify-between">
-            <h5>{{ $productselectedname }}</h5>
-            <div class="flex gap-1.5 items-center">
-                <p class="mb-0 text-gray-600 text-sm tracking-tight">Showing Accucary From</p>
-            </div>
+            <h5>Prediction for the next N days</h5>
         </div>
         <div class="pt-2">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Date
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Actual Sold
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Forecasted Sold
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Accuracy (lower is better)
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr class="w-full bg-white border-b text-center dark:bg-gray-800 dark:border-gray-700" wire:loading
-                        wire:target="runforone">
-                        <th colspan="4" scope="row"
-                            class="w-full p-2 text-gray-900 text-center whitespace-nowrap dark:text-white">
-                            <div class="spinner-border spinner-border" role="status">
-                                <span class="visually-hidden">Awaiting Server Response...</span>
-                            </div>
-                        </th>
-                    </tr>
-
-                    @if ($sales_accuracy_apiresponse)
-                        @foreach ($sales_accuracy_apiresponse as $key => $value)
-                            <tr wire:key="{{ $key }}"
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $value['date'] }}
-                                </th>
-                                <td class="p-2">
-                                    {{ $value['actual'] }}
-                                </td>
-                                <td class="p-2">
-                                    {{ $value['predicted'] }}
-                                </td>
-                                <td class="p-2">
-                                    {{ $this->calculateAccuracy($value['actual'], $value['predicted']) }}
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-
-                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                    {{--         MAE --}}
-                    {{--     </th> --}}
-                    {{--     <td class="p-2"> --}}
-                    {{--         9999.99 --}}
-                    {{--     </td> --}}
-                    {{-- </tr> --}}
-                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                    {{--         MAE --}}
-                    {{--     </th> --}}
-                    {{--     <td class="p-2"> --}}
-                    {{--         9999.99 --}}
-                    {{--     </td> --}}
-                    {{-- </tr> --}}
-                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                    {{--         MAE --}}
-                    {{--     </th> --}}
-                    {{--     <td class="p-2"> --}}
-                    {{--         9999.99 --}}
-                    {{--     </td> --}}
-                    {{-- </tr> --}}
-                    {{-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
-                    {{--     <th scope="row" class="p-2 text-gray-900 whitespace-nowrap dark:text-white"> --}}
-                    {{--         MAE --}}
-                    {{--     </th> --}}
-                    {{--     <td class="p-2"> --}}
-                    {{--         9999.99 --}}
-                    {{--     </td> --}}
-                    {{-- </tr> --}}
-                </tbody>
-            </table>
+            <div class="relative pt-2">
+                <div class="h-full w-full relative flex justify-center items-center" wire:ignore>
+                    <canvas class="!w-full !h-[300px]" id="predictionChart"></canvas>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
+        <div class="flex justify-between">
+            <h5>Accuracy vs Predicted Comparison</h5>
+
+        </div>
+        <div class="relative pt-2">
+            <div class="h-full w-full relative flex justify-center items-center" wire:ignore>
+                <canvas class="!w-full !h-[300px]" id="predictionComparisonChart"></canvas>
+            </div>
+        </div>
+    </div>
+    {{-- <button type="button" wire:click="identify_product_torestioc" class="btn btn-primary">test</button> --}}
 </div>
 
 <script>
@@ -1182,9 +1066,9 @@
     <script>
         let ctx = document.getElementById('productSalesChart');
 
-        {{-- let $array_keys = {!! json_encode(array_keys($combinedArray)) !!}; --}}
+        let ctx_prediction = document.getElementById('predictionChart');
 
-        {{-- let $array_values = {!! json_encode(array_values($combinedArray)) !!}; --}}
+        let ctx_comparison = document.getElementById('predictionComparisonChart');
 
         let data = [];
 
@@ -1220,6 +1104,76 @@
             }
         });
 
+        let predicted_labels_prediction  = []
+
+        let predicted_value_prediction = []
+
+        let predictionChart = new Chart(ctx_prediction, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Prediction Value',
+                    borderColor: '#bae0ff',
+                    data: [],
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    tension: 0.2,
+                    fill: false,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+            }
+        });
+
+        let comparison_labels = []
+
+        let actual_value = []
+
+        let predicted_value = []
+
+        let predictionComparisonChart = new Chart(ctx_comparison, {
+            type: "line",
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Actual Value',
+                    borderColor: '#aa00ff',
+                    data: [],
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    tension: 0.2,
+                    fill: false,
+                },{
+                    label: 'Predicted Value',
+                    borderColor: '#ffff00',
+                    data: [],
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    tension: 0.2,
+                    fill: false,
+                }],
+
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    },
+                },
+            }
+        });
+
         Livewire.on('update-chart', () => {
             console.log('Updating Chart');
 
@@ -1235,6 +1189,47 @@
             predictchart.update();
 
             console.log(keysArray, valuesArray);
+        });
+
+        Livewire.on('update-chart-prediction', () => {
+            console.log('Updating Prediction Chart');
+
+            let accuracy_report = $wire.sales_accuracy_apiresponse || [];
+
+            let prediction_report = $wire.prediction_report || [];
+
+            // accuracy_report_labels = Object.keys(accuracy_report);
+            let accuracy_report_values = Object.values(accuracy_report);
+
+            // prediction_report_labels = Object.keys(prediction_report);
+            let prediction_report_values = Object.values(prediction_report);
+
+            predicted_labels_prediction = prediction_report_values.map((item) => item.date);
+
+            predicted_value_prediction = prediction_report_values.map((item) => item.predicted);
+
+            console.log(predicted_labels_prediction, predicted_value_prediction);
+
+            predictionChart.data.labels = predicted_labels_prediction;
+
+            predictionChart.data.datasets[0].data = predicted_value_prediction;
+
+            predictionChart.update();
+
+
+
+            comparison_labels = accuracy_report_values.map((item) => item.date);
+            actual_value = accuracy_report_values.map((item) => item.actual);
+            predicted_value = accuracy_report_values.map((item) => item.predicted);
+
+            predictionComparisonChart.data.labels = comparison_labels;
+
+            predictionComparisonChart.data.datasets[0].data = actual_value;
+
+            predictionComparisonChart.data.datasets[1].data = predicted_value;
+
+            predictionComparisonChart.update();
+
         });
     </script>
 @endscript

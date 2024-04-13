@@ -78,12 +78,10 @@ class AnalyticsModelReport extends Component
 
     public $return_search_product;
 
-
     #[Locked]
     public $seller;
 
     public $prediction_oneshot_run = false;
-
 
     public $restock_now_predict;
 
@@ -113,7 +111,6 @@ class AnalyticsModelReport extends Component
         $this->restock_soon_predict = $this->restock_soon();
     }
 
-
     #[Computed]
     public function all_products()
     {
@@ -126,6 +123,7 @@ class AnalyticsModelReport extends Component
         } else {
             $this->return_search_product = '';
         }
+
         return Product::where('seller_id', $this->seller->id)
             ->orderBy('stock', 'asc')
             ->get();
@@ -194,7 +192,7 @@ class AnalyticsModelReport extends Component
                     break;
                 }
             }
-            if (!$found) {
+            if (! $found) {
                 $fixedSales[$date] = 0;
             }
         }
@@ -354,8 +352,6 @@ class AnalyticsModelReport extends Component
         return view('livewire..seller.dashboard.analytics-links.analytics-model-report');
     }
 
-
-
     #[Computed]
     public function restock_soon_list()
     {
@@ -478,7 +474,7 @@ class AnalyticsModelReport extends Component
         // dd(count($product));
 
         if (count($product) < 14) {
-            $this->notify('warning', 'Insufficient data', 'Product has only ' . count($product) . ' days worth of sales, at least 14 days is recommended for accurate future predictions');
+            $this->notify('warning', 'Insufficient data', 'Product has only '.count($product).' days worth of sales, at least 14 days is recommended for accurate future predictions');
 
             return;
         }
@@ -521,6 +517,9 @@ class AnalyticsModelReport extends Component
 
                 $this->prediction_report = $data['prediction_report'];
 
+
+                $this->dispatch('update-chart-prediction');
+
                 // debug
                 // dd($data);
 
@@ -553,7 +552,7 @@ class AnalyticsModelReport extends Component
     #[Computed]
     public function calculateAccuracy($actual, $predicted, $method = 'mae'): float|int
     {
-        if (!is_numeric($actual) || !is_numeric($predicted)) {
+        if (! is_numeric($actual) || ! is_numeric($predicted)) {
             throw new InvalidArgumentException('Both actual and predicted values must be numeric.');
         }
 
@@ -634,5 +633,6 @@ class AnalyticsModelReport extends Component
 
     public function identify_product_torestioc()
     {
+        $this->dispatch('update-chart-prediction');
     }
 }
