@@ -31,12 +31,12 @@
                             </svg>
                         </div>
                         <div class="w-full flex justify-center items-center">
-                            <h3 class="text-black-50">{{ $this->restock_now->count() ?? 0 }}</h3>
+                            <h3 class="text-black-50">{{ count($restock_now_predict) ?? 0 }}</h3>
                         </div>
                     </div>
-                    <div class="absolute  bottom-0 right-0">
+                    <div class="absolute bottom-0 right-0">
                         <div class="w-full flex justify-end">
-                            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                            <div wire:ignore x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                                 <div class="h-auto">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="text-sm text-green-900"
@@ -51,7 +51,7 @@
                                     class="fixed inset-0 z-50 grid place-content-center">
                                     <div @click.away="showModal = false"
                                         class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                        <div class="modal-dialog modal-xl modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Restock Now</h1>
@@ -63,18 +63,33 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Product</th>
                                                                 <th scope="col">Stock</th>
+                                                                <th scope="col">Status</th>
                                                                 <th scope="col">Low Stock Threshold</th>
+                                                                <th scope="col"
+                                                                    style="background-color:  rgb(209 213 219)!important;">
+                                                                    Anticipated Volume
+                                                                </th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($this->restock_now as $item)
-                                                                <tr wire:key="{{ $item->id }}">
-                                                                    <th scope="row">{{ $item->id }}</th>
-                                                                    <td>{{ $item->title }}</td>
-                                                                    <td>{{ $item->stock }}</td>
-                                                                    <td>{{ $item->reserve }}</td>
-                                                                </tr>
-                                                            @endforeach
+
+                                                            @if (count($restock_now_predict) != 0)
+                                                                @foreach ($restock_now_predict as $item)
+                                                                    <tr wire:key="{{ $item['id'] . 'pred' }}">
+                                                                        <th scope="row">{{ $item['id'] }}</th>
+                                                                        <td class=text-sm">{{ $item['title'] }}</td>
+                                                                        <td>{{ $item['stock'] }}</td>
+                                                                        <td>{{ $item['reserve'] }}</td>
+                                                                        <td class="text-red-300">Low on Stock</td>
+                                                                        <td
+                                                                            style="background-color:  rgb(209 213 219)!important;">
+                                                                            {{ $item['prediction']['prediction_report'][0]['predicted'] ?? 0}}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+
+                                                            @endif
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -127,7 +142,7 @@
                             </svg>
                         </div>
                         <div class="w-full flex justify-center items-center">
-                            <h3 class="text-black-50">{{ $this->restock_soon->count() ?? 0 }}</h3>
+                            <h3 class="text-black-50">{{ count($restock_soon_predict) ?? 0 }}</h3>
                         </div>
                         {{--                        @foreach ($this->restock_now as $item) --}}
                         {{--                            <div class=""> --}}
@@ -140,7 +155,7 @@
                     </div>
                     <div class="absolute bottom-0 right-0">
                         <div class="w-full flex justify-end">
-                            <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+                            <div wire:ignore x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                                 <div class="h-auto">
                                     <!-- Button trigger modal -->
                                     <button type="button" class="text-sm text-yellow-900"
@@ -155,31 +170,43 @@
                                     class="fixed inset-0 z-50 grid place-content-center">
                                     <div @click.away="showModal = false"
                                         class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                        <div class="modal-dialog modal-xl modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Restock
                                                         Soon</h1>
                                                 </div>
                                                 <div class="mt-3">
-                                                    <table class="table table-striped">
+                                                    <table class="table">
                                                         <thead>
                                                             <tr>
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Product</th>
                                                                 <th scope="col">Stock</th>
+                                                                <th scope="col">Status</th>
                                                                 <th scope="col">Low Stock Threshold</th>
+                                                                <th scope="col"
+                                                                    style="background-color:  rgb(209 213 219)!important;">
+                                                                    Anticipated Volume
+                                                                </th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($this->restock_soon as $item)
-                                                                <tr wire:key="{{ $item->id }}">
-                                                                    <th scope="row">{{ $item->id }}</th>
-                                                                    <td>{{ $item->title }}</td>
-                                                                    <td>{{ $item->stock }}</td>
-                                                                    <td>{{ $item->reserve }}</td>
+                                                        @if(count($restock_soon_predict) != 0)
+                                                            @foreach ($restock_soon_predict as $item)
+                                                                <tr wire:key="{{ $item['id'] . 'pred' }}">
+                                                                    <th scope="row">{{ $item['id'] }}</th>
+                                                                    <td class=text-sm">{{ $item['title'] }}</td>
+                                                                    <td>{{ $item['stock'] }}</td>
+                                                                    <td>{{ $item['reserve'] }}</td>
+                                                                    <td class="text-red-300">Low on Stock</td>
+                                                                    <td
+                                                                        style="background-color:  rgb(209 213 219)!important;">
+                                                                        {{ $item['prediction']['prediction_report'][0]['predicted'] ?? 0 }}
+                                                                    </td>
                                                                 </tr>
                                                             @endforeach
+                                                        @endif
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -349,8 +376,8 @@
                     </button>
                     <ul class="dropdown-menu !pl-0">
                         <p class="pl-3 mb-0 text-gray-600 text-sm font-bold">Recommended</p>
-                        @foreach ($this->restock_now as $item)
-                            <tr wire:key="{{ $item->id }}">
+                        @foreach ($this->restock_now_list as $item)
+                            <tr wire:key="{{ $item->id . 'list' }}">
                                 <li>
                                     <button type="button" class="dropdown-item"
                                         wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
@@ -360,8 +387,8 @@
                             </tr>
                         @endforeach
                         <p class="mt-2 pl-3 mb-0 text-gray-600 text-sm font-bold">Other Products</p>
-                        @foreach ($this->restock_soon as $item)
-                            <tr wire:key="{{ $item->id }}">
+                        @foreach ($this->restock_soon_list as $item)
+                            <tr wire:key="{{ $item->id . 'list' }}">
                                 <li>
                                     <button type="button" class="dropdown-item"
                                         wire:click="selectProduct({{ $item->id }})">{{ $item->id }}
@@ -493,7 +520,7 @@
                     </div>
                     <div class="grid grid-cols-2 mt-2">
                         <div class="p-2">
-                            <button type="button" class="w-full btn btn-sm btn-outline-danger"
+                            <button type="reset" class="w-full btn btn-sm btn-outline-danger"
                                 wire:click="reset_all">
                                 Clear
                             </button>
@@ -600,9 +627,11 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-dark text-light"
-                                                data-bs-dismiss="modal">Back</button>
+                                                data-bs-dismiss="modal">Back
+                                            </button>
                                             <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
-                                                wire:click="runforone">Confirm</button>
+                                                wire:click="runforone">Confirm
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -641,17 +670,18 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button"  class="btn btn-sm btn-outline-success"
-                                    @click="showModal = !showModal" data-bs-target="#exampleModal">View Prediction Report
+                            <button type="button" class="btn btn-sm btn-outline-success"
+                                @click="showModal = !showModal" data-bs-target="#exampleModal">View Prediction
+                                Report
                             </button>
                         </div>
 
                         <div x-cloak x-transition.opacity x-show="showModal" class="fixed inset-0 bg-black/50"></div>
 
                         <div x-cloak x-transition.duration.500ms x-show="showModal"
-                             class="fixed inset-0 z-50 grid place-content-center">
+                            class="fixed inset-0 z-50 grid place-content-center">
                             <div @click.away="showModal = false"
-                                 class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -660,20 +690,20 @@
                                         <div class="overflow-y-auto" style="max-height: 500px">
                                             <table class="table table-sm !bg-transparent">
                                                 <thead>
-                                                <tr>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Predicted volume</th>
-                                                </tr>
+                                                    <tr>
+                                                        <th scope="col">Date</th>
+                                                        <th scope="col">Predicted volume</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                @if($prediction_report)
-                                                    @foreach($prediction_report as $key => $value)
-                                                        <tr wire:key="{{ $key }}">
-                                                            <td>{{ $value['date'] }}</td>
-                                                            <td>{{ $value['predicted'] }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endif
+                                                    @if ($prediction_report)
+                                                        @foreach ($prediction_report as $key => $value)
+                                                            <tr wire:key="{{ $key }}">
+                                                                <td>{{ $value['date'] }}</td>
+                                                                <td>{{ $value['predicted'] }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -682,7 +712,7 @@
                                 </div>
                                 <div class="w-full flex gap-2 pt-3 justify-end">
                                     <button type="button" class="btn btn-outline-secondary"
-                                            @click="showModal = false">
+                                        @click="showModal = false">
                                         Close
                                     </button>
                                 </div>
@@ -694,8 +724,9 @@
                     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
                         <div class="h-auto">
                             <!-- Button trigger modal -->
-                            <button type="button" @disabled($predict_done) class="btn btn-sm btn-outline-secondary"
-                                @click="showModal = !showModal" data-bs-target="#exampleModal">View Accuracy Report
+                            <button type="button" @disabled($predict_done)
+                                class="btn btn-sm btn-outline-secondary" @click="showModal = !showModal"
+                                data-bs-target="#exampleModal">View Accuracy Report
                             </button>
                         </div>
 
@@ -710,7 +741,7 @@
                                         <div class="modal-header">
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">
                                                 Accuracy Report <span class="text-sm tracking-wide text-gray-600">Data
-                                                    from PLACEHOLDER</span>
+                                                    from past prediction vs actual</span>
                                             </h1>
                                         </div>
                                         <hr class="text-blue-500">
@@ -733,21 +764,20 @@
                                                         </thead>
                                                         <tbody>
 
-                                                        @if($accuracy_report)
-                                                            @foreach($accuracy_report as $key => $value)
-                                                                <tr
-                                                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                                    <th scope="row"
-                                                                        class="p-2 uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                                                        {{ $key }}
-                                                                    </th>
-                                                                    <td class="p-2">
-                                                                        {{ $value }}
-                                                                    </td>
-                                                                </tr>
-
-                                                            @endforeach
-                                                        @endif
+                                                            @if ($accuracy_report)
+                                                                @foreach ($accuracy_report as $key => $value)
+                                                                    <tr
+                                                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                        <th scope="row"
+                                                                            class="p-2 uppercase font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                                            {{ $key }}
+                                                                        </th>
+                                                                        <td class="p-2">
+                                                                            {{ $value }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
                                                             {{-- <tr --}}
                                                             {{--     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"> --}}
                                                             {{--     <th scope="row" --}}
@@ -840,7 +870,9 @@
                                 <div class="modal-dialog modal-lg modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Accuracy Report</h1>
+                                            <h1 class="modal-title font-light fs-5" id="exampleModalLabel">Table View
+                                                of
+                                                Prodct : <span class="font-bold">{{ $productselectedid }}</span></h1>
                                         </div>
                                         <div class="overflow-y-auto" style="max-height: 500px">
                                             <table class="table table-sm !bg-transparent">
@@ -949,7 +981,7 @@
         </div>
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
-        <div class="flex flex-start">
+        <div class="flex justify-between">
             <h5>{{ $productselectedname }}</h5>
             <div class="flex gap-1.5 items-center">
                 <p class="mb-0 text-gray-600 text-sm tracking-tight">Showing Accucary From</p>
@@ -1071,9 +1103,9 @@
     <script>
         let ctx = document.getElementById('productSalesChart');
 
-        let $array_keys = {!! json_encode(array_keys($combinedArray)) !!};
+        {{-- let $array_keys = {!! json_encode(array_keys($combinedArray)) !!}; --}}
 
-        let $array_values = {!! json_encode(array_values($combinedArray)) !!};
+        {{-- let $array_values = {!! json_encode(array_values($combinedArray)) !!}; --}}
 
         let data = [];
 

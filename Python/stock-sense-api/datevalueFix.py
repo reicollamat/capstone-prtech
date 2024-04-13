@@ -15,9 +15,12 @@ def fill_missing_dates(data: list[dict]) -> list[dict]:
     # Extract all 'created_at' dates from the dictionaries
     dates = [datetime.strptime(item['created_at'], '%Y-%m-%d').date() for item in data]
 
+    # get the current date today and label it max
+    current_date = datetime.now().date()
+
     # Find the minimum and maximum dates
     min_date = min(dates)
-    max_date = max(dates)
+    max_date = current_date
 
     # Generate all dates between min and max dates
     all_dates = [min_date + timedelta(days=i) for i in range((max_date - min_date).days + 1)]

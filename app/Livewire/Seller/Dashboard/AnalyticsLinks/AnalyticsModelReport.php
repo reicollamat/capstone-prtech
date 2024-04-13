@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use InvalidArgumentException;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Attributes\Computed;
@@ -76,6 +77,13 @@ class AnalyticsModelReport extends Component
     #[Locked]
     public $seller;
 
+    public $prediction_oneshot_run = false;
+
+
+    public $restock_now_predict;
+
+    public $restock_soon_predict;
+
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
@@ -96,39 +104,9 @@ class AnalyticsModelReport extends Component
         // Defaults to a 7-day range
         $this->predictrange = 'month';
 
-        $this->combinedArray = ['2024-01-01' => 5, '2024-01-02' => 15, '2024-01-03' => 2, '2024-01-04' => 12, '2024-01-05' => 12, '2024-01-06' => 11, '2024-01-07' => 3, '2024-01-08' => 9, '2024-01-09' => 7, '2024-01-10' => 4, '2024-01-11' => 16, '2024-01-12' => 20, '2024-01-13' => 8, '2024-01-14' => 19, '2024-01-15' => 19, '2024-01-16' => 16, '2024-01-17' => 3, '2024-01-18' => 13, '2024-01-19' => 3, '2024-01-20' => 10, '2024-01-21' => 13, '2024-01-22' => 8, '2024-01-23' => 5, '2024-01-24' => 7, '2024-01-25' => 18, '2024-01-26' => 15, '2024-01-27' => 20, '2024-01-28' => 12, '2024-01-29' => 18, '2024-01-30' => 4, '2024-01-31' => 5];
+        $this->restock_now_predict = $this->restock_now();
+        $this->restock_soon_predict = $this->restock_soon();
 
-        $this->combinedArray2 = [
-            '2024-02-01' => 2,
-            '2024-02-02' => 3,
-            '2024-02-03' => 5,
-            '2024-02-04' => 0,
-            '2024-02-05' => 5,
-            '2024-02-06' => 3,
-            '2024-02-07' => 6,
-            '2024-02-08' => 8,
-            '2024-02-09' => 5,
-            '2024-02-10' => 7,
-            '2024-02-11' => 5,
-            '2024-02-12' => 3,
-            '2024-02-13' => 6,
-            '2024-02-14' => 7,
-            '2024-02-15' => 0,
-        ];
-        // dd(DateGenerator::generateDates('2024-01-01', 7));
-
-        // dd(array_values($combinedArray));
-
-        $this->restock_now();
-    }
-
-    #[Computed]
-    public function restock_now()
-    {
-        return Product::where('seller_id', $this->seller->id)
-            ->whereColumn('stock', '<=', 'reserve')
-            ->orderBy('stock', 'asc')
-            ->get();
     }
 
     public function selectProduct($product): void
@@ -308,17 +286,69 @@ class AnalyticsModelReport extends Component
         $this->dispatch('update-chart');
     }
 
+    public function restock_soon()
+    {
+        $array = [];
+
+        $products = Product::where('seller_id', $this->seller->id)
+            ->whereColumn('stock', '<', DB::raw('reserve + 10'))
+            ->whereColumn('stock', '>', 'reserve')
+            ->orderBy('stock', 'asc')
+            ->get()
+            ->toArray();
+
+        foreach ($products as $key => $product) {
+            $array[] = $product;
+            $array[$key]['prediction'] = $this->generate_onedshot_prediction($product['id']);
+        }
+
+        // dd($array[0]['prediction']['prediction_report'][0]['predicted']);
+
+        return $array;
+    }
+
+    public function restock_now()
+    {
+        $array = [];
+
+        $products = Product::where('seller_id', $this->seller->id)
+            ->whereColumn('stock', '<=', 'reserve')
+            ->orderBy('stock', 'asc')
+            ->get()
+            ->toArray();
+
+        foreach ($products as $key => $product) {
+            $array[] = $product;
+            $array[$key]['prediction'] = $this->generate_onedshot_prediction($product['id']);
+        }
+
+        // dd($array[0]['prediction']['prediction_report'][0]['predicted']);
+
+        return $array;
+    }
+
     public function render()
     {
         return view('livewire..seller.dashboard.analytics-links.analytics-model-report');
     }
 
+
+
     #[Computed]
-    public function restock_soon()
+    public function restock_soon_list()
     {
         return Product::where('seller_id', $this->seller->id)
             ->whereColumn('stock', '<', DB::raw('reserve + 10'))
             ->whereColumn('stock', '>', 'reserve')
+            ->orderBy('stock', 'asc')
+            ->get();
+    }
+
+    #[Computed]
+    public function restock_now_list()
+    {
+        return Product::where('seller_id', $this->seller->id)
+            ->whereColumn('stock', '<=', 'reserve')
             ->orderBy('stock', 'asc')
             ->get();
     }
@@ -401,6 +431,15 @@ class AnalyticsModelReport extends Component
     #[NoReturn]
     public function runforone(): void
     {
+        $this->alert('info', 'Running Prediction', [
+            'position' => 'top-end',
+            'timer' => 6000,
+            'toast' => true,
+            'text' => 'The prediction may take a while depending on the amount of data and available resource.',
+            'showCancelButton' => false,
+            'showConfirmButton' => false,
+        ]);
+
         // sleep(3);
         $product = DB::table('purchase_items as p')
             ->select(
@@ -435,19 +474,10 @@ class AnalyticsModelReport extends Component
             $this->custompredictrange = null;
         }
 
-        $this->alert('info', 'Running Prediction', [
-            'position' => 'top-end',
-            'timer' => 6000,
-            'toast' => true,
-            'text' => 'The prediction may take a while depending on the amount of data and available resource.',
-            'showCancelButton' => false,
-            'showConfirmButton' => false,
-        ]);
-
         try {
 
             // send the data to the API with the following parameters, change the link to the correct API endpoint
-            $response = Http::timeout(300)->post('http://127.0.0.1:8001/api/v1/predict', [
+            $response = Http::timeout(300)->post('http://127.0.0.1:8484/api/v1/predict', [
                 'product_id' => $this->productselectedid,
                 'interval' => $this->predictinterval,
                 'range' => $this->predictrange,
@@ -472,17 +502,18 @@ class AnalyticsModelReport extends Component
                 // debug
                 // dd($data);
 
-                $this->alert('success', 'Prediction Success', [
+                $this->alert('success', 'Prediction Ready', [
                     'position' => 'top-end',
                     'timer' => 6000,
                     'toast' => true,
-                    'text' => 'Report generated successfully',
+                    'text' => 'Prediction Complete. Click View Prediction Report to see the results.',
                     'showCancelButton' => false,
                     'showConfirmButton' => false,
                 ]);
+
             }
         } catch (\Exception $e) {
-            $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is down');
+            $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is downs');
         }
 
         // dd($response);
@@ -519,5 +550,69 @@ class AnalyticsModelReport extends Component
         } else {
             throw new InvalidArgumentException('Invalid accuracy method. Choose "mae" or "mse".');
         }
+    }
+
+    public function generate_onedshot_prediction($productID)
+    {
+        $product = DB::table('purchase_items as p')
+            ->select(
+                DB::raw('SUM(p.quantity) as quantity'),
+                'p.created_at',
+                DB::raw('COUNT(CASE WHEN c.sentiment = 1 THEN 1 END) as positive'),
+                DB::raw('COUNT(CASE WHEN c.sentiment = 0 THEN 1 END) as negative')
+            )
+            ->join('comments as c', 'c.id', '=', 'p.comment_id')
+            ->where('p.product_id', $productID)
+            ->groupBy('p.created_at')
+            ->get();
+
+        $predict_interval = 'daily';
+        $predict_range = 1;
+        $custom_range = 1;
+
+        try {
+            // send the data to the API with the following parameters, change the link to the correct API endpoint
+            $response = Http::timeout(300)->post('http://127.0.0.1:8484/api/v1/predict/oneshot', [
+                'product_id' => $productID,
+                'interval' => $predict_interval,
+                'range' => $predict_range,
+                'custom_range' => $custom_range,
+                'data' => $product->toArray(),
+            ]);
+
+            if ($response->ok()) {
+
+                $data = $response->json();
+
+                // $future = $data['future_dates'];
+
+                $accuracy_report = $data['accuracy_report'];
+
+                $prediction_report = $data['prediction_report'];
+
+                // commbine the two arrays
+                return [
+                    'accuracy_report' => $accuracy_report,
+                    'prediction_report' => $prediction_report,
+                ];
+
+                // $this->alert('success', 'Prediction Ready', [
+                //     'position' => 'top-end',
+                //     'timer' => 3000,
+                //     'toast' => true,
+                //     'text' => 'Prediction Complete. Click View Prediction Report to see the results.',
+                //     'showCancelButton' => false,
+                //     'showConfirmButton' => false,
+                // ]);
+
+            }
+        } catch (\Exception $e) {
+            $this->notify('error', 'Prediction failed', 'Prediction sdasdsad, Please try again later, maybe the server is down');
+        }
+    }
+
+    public function identify_product_torestioc()
+    {
+
     }
 }

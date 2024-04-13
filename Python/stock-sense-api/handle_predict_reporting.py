@@ -71,9 +71,9 @@ def handle_prediction(data: dict):
         global_prediction = df.to_dict('records')
 
         predict_report = {
-            'accuracy_report': global_accuracy_report, # rmse, mae, mape, mse, r2
-            'accuracy_test_report': global_accuracy_test_report, # test data accuracy predction vs actual
-            'prediction_report': global_prediction # predicted values base on preidction range
+            'accuracy_report': global_accuracy_report,  # rmse, mae, mape, mse, r2
+            'accuracy_test_report': global_accuracy_test_report,  # test data accuracy predction vs actual
+            'prediction_report': global_prediction  # predicted values base on preidction range
         }
 
         # return the prediction report
