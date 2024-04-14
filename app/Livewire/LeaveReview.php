@@ -18,6 +18,7 @@ class LeaveReview extends Component
     public $rating_value = 1;
 
     public $purchase_item;
+
     public $review_text;
 
     public $response;
@@ -86,21 +87,22 @@ class LeaveReview extends Component
             $this->sentimentfromapi = ($higherLabel === 'POSITIVE') ? 1 : 0;
 
             // Do something with the response data
-            $this->response = [$score1, $score2, $higherLabel, round($higherScore,0)];
+            $this->response = [$score1, $score2, $higherLabel, round($higherScore, 0)];
+
+            $comment = Comment::create([
+                'user_id' => $this->user->id,
+                'product_id' => $product->id,
+                'seller_id' => $product->seller_id,
+                'text' => $this->review_text,
+                'rating' => $this->rating_value,
+                'sentiment' => $this->sentimentfromapi,
+            ]);
+
+            $this->purchase_item->update([
+                'comment_id' => $comment->id,
+            ]);
         }
 
-        $comment = Comment::create([
-            'user_id' => $this->user->id,
-            'product_id' => $product->id,
-            'seller_id' => $product->seller_id,
-            'text' => $this->review_text,
-            'rating' => $this->rating_value,
-            'sentiment' => $this->sentimentfromapi,
-        ]);
-
-        $this->purchase_item->update([
-            'comment_id' => $comment->id,
-        ]);
 
         return Redirect::route('profile.edit', ['profile_activetab' => 'purchases'])->with('notification', 'Product review for '.$product->title.' completed!');
     }

@@ -229,27 +229,19 @@
         <div class="p-3 col-span-2 border border-gray-200 bg-white rounded-lg">
             <div class="flex flex-wrap items-center">
                 <div class="relative w-full max-w-full flex-grow flex-1">
-                    <h6 class="uppercase mb-1 text-sm font-semibold text-blueGray-500">REVENUE</h6>
+                    <h6 class="uppercase mb-0 text-lg font-semibold text-blueGray-500">Forecast Restocks with
+                        Sentiment-Driven
+                        Insights</h6>
                     <div class="pt-2">
-                        {{-- <h4 class="mb-0 tracking-tighter text-lg text-gray-500">REVENUE</h4> --}}
-                        <div class="">
-                            <h4 class="mb-0 text-gray-700"><span class="text-gray-500">₱</span>12334.59</h4>
-                            <div class="flex items-center">
-                                <span class="text-sm text-green-800 tracking-wide">3+ </span>
-                                <span class="text-sm tracking-tighter text-gray-500">&nbsp;Since Last Week</span>
-                            </div>
-                        </div>
+                        <p class="mb-1 text-gray-500 text-sm">Predict surges in popularity before they happen.</p>
+                        <p class="mb-1 text-gray-500 text-sm">Gain insights from social media buzz and customer
+                            reviews.</p>
+                        <p class="mb-1 text-gray-500 text-sm">Optimize inventory levels and prevent stockouts.</p>
                     </div>
+
                 </div>
             </div>
         </div>
-        {{-- <div class="p-3 border border-gray-200 bg-white rounded-xl"> --}}
-        {{--     <div class="flex flex-wrap items-center"> --}}
-        {{--         <div class="relative w-full max-w-full flex-grow flex-1 pb-2"> --}}
-        {{--             <h6 class="uppercase mb-1 text-xs font-semibold text-blueGray-500">Performance</h6> --}}
-        {{--         </div> --}}
-        {{--     </div> --}}
-        {{-- </div> --}}
     </div>
     <div class="mt-3 p-3 border border-gray-200 bg-white rounded-lg">
         <div class="pb-2">
@@ -967,16 +959,21 @@
                                                 Considerations
                                                 Info</h1>
                                         </div>
-                                        <div class="flex flex-col justify-start overflow-y-auto" style="max-height: 500px">
+                                        <div class="flex flex-col justify-start overflow-y-auto"
+                                            style="max-height: 500px">
                                             <p class="my-2 font-bold text-gray-600">Here are some key factors to
                                                 consider
                                                 alongside
                                                 our prediction:</p>
                                             <div>
                                                 <ul class="text-start list-disc pl-4">
-                                                    <li class="text-gray-800 font-bold text-sm">**Demand Fluctuations:**</li>
+                                                    <li class="text-gray-800 font-bold text-sm">**Demand
+                                                        Fluctuations:**
+                                                    </li>
                                                     <ul class="pl-4 text-gray-600 text-sm">
-                                                        <li class="mt-2">**Seasonality:** Consider predictable changes in demand due
+                                                        <li class="mt-2">**Seasonality:** Consider predictable
+                                                            changes
+                                                            in demand due
                                                             to seasons, holidays, or trends. (e.g., higher sunscreen
                                                             sales in summer)
                                                         </li>
@@ -990,9 +987,13 @@
                                                             competitor actions, or unexpected weather events.
                                                         </li>
                                                     </ul>
-                                                    <li class="mt-4 text-gray-800 font-bold text-sm">**Product Life Cycle:**</li>
+                                                    <li class="mt-4 text-gray-800 font-bold text-sm">**Product Life
+                                                        Cycle:**
+                                                    </li>
                                                     <ul class="pl-4 text-gray-600 text-sm">
-                                                        <li class="mt-2">**New Products:** Forecast for new products can be more
+                                                        <li class="mt-2">**New Products:** Forecast for new products
+                                                            can
+                                                            be more
                                                             uncertain. Consider market research and competitor analysis.
                                                         </li>
                                                         <li class="mt-2">**Maturing Products:** Demand may stabilize
@@ -1006,11 +1007,13 @@
                                                             ceases.
                                                         </li>
                                                     </ul>
-                                                    <li class="mt-4 text-gray-800 font-bold text-sm">**Accuracy and Error
+                                                    <li class="mt-4 text-gray-800 font-bold text-sm">**Accuracy and
+                                                        Error
                                                         Ranges:**
                                                     </li>
                                                     <ul class="pl-4 text-gray-600 text-sm">
-                                                        <li class="mt-2">**Historical Data Quality:** The accuracy of your forecast
+                                                        <li class="mt-2">**Historical Data Quality:** The accuracy of
+                                                            your forecast
                                                             relies on the quality of past data. Identify and address any
                                                             inconsistencies.
                                                         </li>
@@ -1027,7 +1030,9 @@
                                                         Integration:**
                                                     </li>
                                                     <ul class="pl-4 text-gray-600 text-sm">
-                                                        <li class="mt-2">**Market Trends:** Consider broader market data to identify
+                                                        <li class="mt-2">**Market Trends:** Consider broader market
+                                                            data
+                                                            to identify
                                                             potential changes in customer preferences or industry
                                                             shifts.
                                                         </li>
@@ -1041,7 +1046,9 @@
                                                         </li>
                                                     </ul>
                                                 </ul>
-                                                <p>These are just some additional considerations. The specific factors you need to focus on will depend on your industry, business model, and the products you sell.</p>
+                                                <p>These are just some additional considerations. The specific factors
+                                                    you need to focus on will depend on your industry, business model,
+                                                    and the products you sell.</p>
 
                                             </div>
                                         </div>

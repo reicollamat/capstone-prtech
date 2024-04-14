@@ -319,7 +319,7 @@ class AnalyticsModelReport extends Component
 
         foreach ($products as $key => $product) {
             $array[] = $product;
-            $array[$key]['prediction'] = $this->generate_onedshot_prediction($product['id']);
+            // $array[$key]['prediction'] = $this->generate_onedshot_prediction($product['id']);
         }
 
         // dd($array[0]['prediction']['prediction_report'][0]['predicted']);
@@ -339,7 +339,7 @@ class AnalyticsModelReport extends Component
 
         foreach ($products as $key => $product) {
             $array[] = $product;
-            $array[$key]['prediction'] = $this->generate_onedshot_prediction($product['id']);
+            // $array[$key]['prediction'] = $this->generate_onedshot_prediction($product['id']);
         }
 
         // dd($array[0]['prediction']['prediction_report'][0]['predicted']);

@@ -50,8 +50,8 @@
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">
             <input type="checkbox" wire:click="updateSelectAll">
         </div>
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase#</div>
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment#</div>
+        {{-- <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase#</div> --}}
+        <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment#</div>
         {{-- <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div> --}}
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amount</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchased On
@@ -71,10 +71,10 @@
                         <div class="col-span-1 my-4 text-sm !text-gray-800 !font-light">
                             <input type="checkbox" wire:model="selectedShipments" value="{{ $to_ship->id }}">
                         </div>
-                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                            {{ $to_ship->purchase->reference_number }}
-                        </div>
-                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                        {{-- <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light"> --}}
+                        {{--     {{ $to_ship->purchase->reference_number }} --}}
+                        {{-- </div> --}}
+                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
                             {{ $to_ship->shipment_number }}
                         </div>
                         {{-- <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light"> --}}
