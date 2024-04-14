@@ -365,10 +365,10 @@
                         </div>
                     </div>
                 </div>
-{{--                {{ $summary ?? '' }}--}}
-{{--                {{ $monthSelect ?? '' }}--}}
-{{--                {{ $userStartingDate ?? '' }}--}}
-{{--                {{ $userEndingDate ?? '' }}--}}
+                {{--                {{ $summary ?? '' }} --}}
+                {{--                {{ $monthSelect ?? '' }} --}}
+                {{--                {{ $userStartingDate ?? '' }} --}}
+                {{--                {{ $userEndingDate ?? '' }} --}}
 
                 <div class="btn-group btn-group-sm" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
@@ -720,19 +720,19 @@
                     </div>
                     <div>
                         <div class="p-2">
-                            <button type="button" class="w-full btn btn-sm btn-primary" @disabled(!$productselectedid)
-                                wire:click="runforall">
-                                <div class="flex gap-1 items-center justify-center">
-                                    <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforall"
-                                        role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                    <div>
-                                        Run on All Products
-                                    </div>
+                            {{-- <button type="button" class="w-full btn btn-sm btn-primary" @disabled(!$productselectedid) --}}
+                            {{--     wire:click="runforall"> --}}
+                            {{--     <div class="flex gap-1 items-center justify-center"> --}}
+                            {{--         <div class="spinner-border spinner-border-sm" wire:loading wire:target="runforall" --}}
+                            {{--             role="status"> --}}
+                            {{--             <span class="visually-hidden">Loading...</span> --}}
+                            {{--         </div> --}}
+                            {{--         <div> --}}
+                            {{--             Run on All Products --}}
+                            {{--         </div> --}}
 
-                                </div>
-                            </button>
+                            {{--     </div> --}}
+                            {{-- </button> --}}
                         </div>
                     </div>
 
@@ -740,7 +740,7 @@
             </div>
 
             <div>
-{{--                {{ var_dump($userArray) }}--}}
+                {{--                {{ var_dump($userArray) }} --}}
             </div>
 
             <div class="w-full mt-3 flex justify-between">
@@ -949,8 +949,8 @@
                         <div class="h-auto">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-sm btn-outline-primary"
-                                @click="showModal = !showModal" data-bs-target="#exampleModal">Generate Purchase
-                                Order
+                                @click="showModal = !showModal" data-bs-target="#exampleModal">Forecast
+                                Considerations
                             </button>
                         </div>
 
@@ -960,38 +960,89 @@
                             class="fixed inset-0 z-50 grid place-content-center">
                             <div @click.away="showModal = false"
                                 class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-dialog modal-xl modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Purchase Order
-                                                Report</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Forecast
+                                                Considerations
+                                                Info</h1>
                                         </div>
-                                        <div class="flex flex-column text-start justify-start mt-1">
-                                            <p class="font-bold text-gray-600">Here are some key factors to consider
+                                        <div class="flex flex-col justify-start overflow-y-auto" style="max-height: 500px">
+                                            <p class="my-2 font-bold text-gray-600">Here are some key factors to
+                                                consider
                                                 alongside
                                                 our prediction:</p>
                                             <div>
-                                                <ul class="list-disc pl-4">
-                                                    <li class="text-gray-600 text-sm">Lead Time: The time it takes your
-                                                        supplier to deliver after you order. Factor this in to avoid
-                                                        stockouts while waiting for your order.
+                                                <ul class="text-start list-disc pl-4">
+                                                    <li class="text-gray-800 font-bold text-sm">**Demand Fluctuations:**</li>
+                                                    <ul class="pl-4 text-gray-600 text-sm">
+                                                        <li class="mt-2">**Seasonality:** Consider predictable changes in demand due
+                                                            to seasons, holidays, or trends. (e.g., higher sunscreen
+                                                            sales in summer)
+                                                        </li>
+                                                        <li class="mt-2">**Promotions and Marketing Efforts:**
+                                                            Account
+                                                            for potential spikes in demand due to planned promotions or
+                                                            marketing campaigns.
+                                                        </li>
+                                                        <li class="mt-2">**External Factors:** Be aware of external
+                                                            events that could impact demand, like economic changes,
+                                                            competitor actions, or unexpected weather events.
+                                                        </li>
+                                                    </ul>
+                                                    <li class="mt-4 text-gray-800 font-bold text-sm">**Product Life Cycle:**</li>
+                                                    <ul class="pl-4 text-gray-600 text-sm">
+                                                        <li class="mt-2">**New Products:** Forecast for new products can be more
+                                                            uncertain. Consider market research and competitor analysis.
+                                                        </li>
+                                                        <li class="mt-2">**Maturing Products:** Demand may stabilize
+                                                            or
+                                                            decline for established products. Plan for potential
+                                                            adjustments.
+                                                        </li>
+                                                        <li class="mt-2">**End-of-Life Products:** Factor in
+                                                            phase-out
+                                                            periods and potential clearance sales before demand fully
+                                                            ceases.
+                                                        </li>
+                                                    </ul>
+                                                    <li class="mt-4 text-gray-800 font-bold text-sm">**Accuracy and Error
+                                                        Ranges:**
                                                     </li>
-                                                    <li class="mt-1 text-gray-600 text-sm">Minimum Order Quantity
-                                                        (MOQ):
-                                                        Some
-                                                        suppliers require a minimum order amount. Make sure your order
-                                                        meets this to avoid extra fees.
+                                                    <ul class="pl-4 text-gray-600 text-sm">
+                                                        <li class="mt-2">**Historical Data Quality:** The accuracy of your forecast
+                                                            relies on the quality of past data. Identify and address any
+                                                            inconsistencies.
+                                                        </li>
+                                                        <li class="mt-2">**Safety Stock:** Maintain a buffer of
+                                                            inventory to account for unexpected demand fluctuations or
+                                                            forecast errors.
+                                                        </li>
+                                                        <li class="mt-2">**Forecast Review and Updates:** Regularly
+                                                            monitor and update your forecasts to reflect changing
+                                                            conditions.
+                                                        </li>
+                                                    </ul>
+                                                    <li class="mt-4 text-gray-800 font-bold  text-sm">**External Data
+                                                        Integration:**
                                                     </li>
-                                                    <li class="mt-1 text-gray-600 text-sm">Storage Capacity: Consider
-                                                        your
-                                                        available space. Don't overstock and limit your ability to hold
-                                                        other products.
-                                                    </li>
-                                                    <li class="mt-1 text-gray-600 text-sm">Cash Flow: Balance the cost
-                                                        of
-                                                        restocking with your available cash flow.
-                                                    </li>
+                                                    <ul class="pl-4 text-gray-600 text-sm">
+                                                        <li class="mt-2">**Market Trends:** Consider broader market data to identify
+                                                            potential changes in customer preferences or industry
+                                                            shifts.
+                                                        </li>
+                                                        <li class="mt-2">**Supplier Lead Times:** Integrate real-time
+                                                            supplier lead time information into your forecasts for
+                                                            better inventory management.
+                                                        </li>
+                                                        <li class="mt-2">**Economic Indicators:** Factor in economic
+                                                            forecasts that could impact consumer spending and overall
+                                                            demand.
+                                                        </li>
+                                                    </ul>
                                                 </ul>
+                                                <p>These are just some additional considerations. The specific factors you need to focus on will depend on your industry, business model, and the products you sell.</p>
+
                                             </div>
                                         </div>
 
@@ -1104,7 +1155,7 @@
             }
         });
 
-        let predicted_labels_prediction  = []
+        let predicted_labels_prediction = []
 
         let predicted_value_prediction = []
 
@@ -1152,7 +1203,7 @@
                     pointHoverRadius: 8,
                     tension: 0.2,
                     fill: false,
-                },{
+                }, {
                     label: 'Predicted Value',
                     borderColor: '#ffff00',
                     data: [],
@@ -1217,7 +1268,6 @@
             predictionChart.update();
 
 
-
             comparison_labels = accuracy_report_values.map((item) => item.date);
             actual_value = accuracy_report_values.map((item) => item.actual);
             predicted_value = accuracy_report_values.map((item) => item.predicted);
@@ -1227,6 +1277,8 @@
             predictionComparisonChart.data.datasets[0].data = actual_value;
 
             predictionComparisonChart.data.datasets[1].data = predicted_value;
+
+            console.log(comparison_labels, actual_value, predicted_value);
 
             predictionComparisonChart.update();
 

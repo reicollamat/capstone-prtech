@@ -181,7 +181,7 @@
 
                 </div>
                 <div>
-                    <h6 class="uppercase mb-2 text-sm font-semibold text-gray-700">Reviews Word Cloud</h6>
+                    <h6 class="mt-3 uppercase mb-2 text-sm font-semibold text-gray-700">Reviews Word Cloud</h6>
                     <hr class="m-0 w-16 text-green-900">
                     <div class="grid grid-cols-2 gap-2 pt-1.5">
                         <div>
@@ -312,8 +312,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3 h-50">
-                    <h6 class="uppercase mb-2 text-sm font-semibold text-gray-700">Reviews Word Cloud</h6>
+                <div class="mt-4 h-50">
+                    <h6 class="uppercase mb-2 text-sm font-semibold text-gray-700">Reviews Word Association Count</h6>
+                    <hr class="m-0 w-16 text-green-900">
                     <div class="relative h-100">
                         <div class="h-100">
                             <canvas id="commentsChart" width="400" height="400" wire:ignore>
