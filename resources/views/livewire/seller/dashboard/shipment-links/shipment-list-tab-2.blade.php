@@ -17,8 +17,8 @@
 
 <div class="bg-white overflow-x-auto rounded-lg p-3">
     <div class="grid grid-cols-12 text-center text-sm">
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase#</div>
-        <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment#</div>
+        {{-- <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Purchase#</div> --}}
+        <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment#</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Buyer</div>
         <div class="col-span-1 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Total Amount</div>
         <div class="col-span-2 p-2 !text-gray-400 !font-light border-b-2 border-blue-300">Shipment Date
@@ -34,10 +34,10 @@
                 <div class="border-b border-gray-100" x-data="{ selected: null }">
                     {{-- @dd($completed) --}}
                     <div class="grid grid-cols-12 text-center">
-                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
-                            {{ $completed->purchase->reference_number }}
-                        </div>
-                        <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light">
+                        {{-- <div class="col-span-1 mb-0 py-3 !text-gray-800 !font-light"> --}}
+                        {{--     {{ $completed->purchase->reference_number }} --}}
+                        {{-- </div> --}}
+                        <div class="col-span-2 mb-0 py-3 !text-gray-800 !font-light">
                             {{ $completed->shipment_number }}
                         </div>
                         <div class="col-span-2 mb-0 py-3 text-sm !text-gray-800 !font-light">
@@ -257,20 +257,20 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="p-1.5 lg:w-1/3">
-                                            <div class="mb-2">
-                                                <div>
-                                                    <label for="purchase_date"
-                                                        class="block text-sm font-light text-gray-500 tracking-tight dark:text-white">
-                                                        Payment Reference Code
-                                                    </label>
-                                                    <input type="text" id="purchase_date"
-                                                        value="{{ $completed->purchase->payment->reference_code }}"
-                                                        class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1"
-                                                        placeholder="" disabled>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {{-- <div class="p-1.5 lg:w-1/3"> --}}
+                                        {{--     <div class="mb-2"> --}}
+                                        {{--         <div> --}}
+                                        {{--             <label for="purchase_date" --}}
+                                        {{--                 class="block text-sm font-light text-gray-500 tracking-tight dark:text-white"> --}}
+                                        {{--                 Payment Reference Code --}}
+                                        {{--             </label> --}}
+                                        {{--             <input type="text" id="purchase_date" --}}
+                                        {{--                 value="{{ $completed->purchase->payment->reference_code }}" --}}
+                                        {{--                 class="bg-transparent !border-b-2 border-gray-600 text-gray-900 focus:!ring-0 focus:border-0 block w-full !p-1" --}}
+                                        {{--                 placeholder="" disabled> --}}
+                                        {{--         </div> --}}
+                                        {{--     </div> --}}
+                                        {{-- </div> --}}
                                     </div>
                                 </div>
                             </div>
