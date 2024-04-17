@@ -25,6 +25,9 @@ class ShopMetricSettings extends Component
 
     public $currentTargetSales;
 
+    public $targetLeadTime;
+
+    public $currentLeadTime;
 
     public function mount()
     {
@@ -34,6 +37,8 @@ class ShopMetricSettings extends Component
 
         // dd($shopMetrics->target_sales);
         $this->currentTargetSales = $shopMetrics->target_sales ?? 0;
+
+        $this->currentLeadTime = $shopMetrics->lead_time ?? 0;
     }
 
     public function render()
@@ -45,7 +50,10 @@ class ShopMetricSettings extends Component
     {
         $validator = $this->validate([
             'targetSales' => 'required',
+            'targetLeadTime' => 'required',
         ]);
+
+        // dd($validator);
 
         // dd($this->shopMetricsId);
 
@@ -53,12 +61,14 @@ class ShopMetricSettings extends Component
 
         try {
             $shopMetyricsUpdate->update([
-                'target_sales' => $this->targetSales,
+                'target_sales' => $validator['targetSales'],
+                'lead_time' => $validator['targetLeadTime'],
             ]);
 
             $this->alert('success', 'Shop Target Sales Metrics Updated', [
                 'position' => 'center',
                 'toast' => false,
+                'timer' => 3000,
             ]);
 
             $this->mount();

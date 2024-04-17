@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->float('total_earnings')->default(0)->nullable();
             $table->integer('target_sales')->default(10000)->nullable();
+            $table->integer('lead_time')->default(7)->nullable();
             $table->unsignedBigInteger('seller_id');
             $table->timestamps();
         });

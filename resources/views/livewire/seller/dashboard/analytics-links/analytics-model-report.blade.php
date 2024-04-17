@@ -52,7 +52,7 @@
                                     <div @click.away="showModal = false"
                                         class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                         <div class="modal-dialog modal-xl modal-dialog-centered">
-                                            <div class="modal-content">
+                                            <div class="modal-content overflow-y-auto" style="max-height: 500px">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Restock Now</h1>
                                                 </div>
@@ -63,8 +63,8 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Product</th>
                                                                 <th scope="col">Stock</th>
-                                                                <th scope="col">Status</th>
                                                                 <th scope="col">Low Stock Threshold</th>
+                                                                <th scope="col">Status</th>
                                                                 <th scope="col"
                                                                     style="background-color:  rgb(209 213 219)!important;">
                                                                     Anticipated Volume
@@ -171,7 +171,7 @@
                                     <div @click.away="showModal = false"
                                         class="min-h-full rounded-xl min-w-[800px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                         <div class="modal-dialog modal-xl modal-dialog-centered">
-                                            <div class="modal-content">
+                                            <div class="modal-content overflow-y-auto" style="max-height: 500px">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Restock
                                                         Soon</h1>
@@ -183,8 +183,8 @@
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">Product</th>
                                                                 <th scope="col">Stock</th>
-                                                                <th scope="col">Status</th>
                                                                 <th scope="col">Low Stock Threshold</th>
+                                                                <th scope="col">Status</th>
                                                                 <th scope="col"
                                                                     style="background-color:  rgb(209 213 219)!important;">
                                                                     Anticipated Volume

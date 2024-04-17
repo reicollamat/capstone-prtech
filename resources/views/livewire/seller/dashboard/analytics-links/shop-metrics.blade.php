@@ -1,59 +1,6 @@
 <div>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
     <div class="container-fluid p-4">
-        {{-- <div class="flex flex-column flex-lg-row justify-between gap-2 "> --}}
-        {{--     <div --}}
-        {{--         class="bg-white w-full p-1 h-full border-gray-200 !rounded-lg text-sm focus:outline-none lg:items-center mb-3"> --}}
-        {{--         <div class="grid grid-cols-5"> --}}
-        {{--             <button @click="activeTab = 0" class="tab-control p-2.5 rounded hover:bg-blue-300" --}}
-        {{--                 :class="{ 'active bg-blue-300': activeTab === 0 }">Overview --}}
-        {{--             </button> --}}
-        {{--             <button @click="activeTab = 1" class="tab-control p-2.5 rounded" --}}
-        {{--                 :class="{ 'active bg-gray-300': activeTab === 1 }">Most Bought Products --}}
-        {{--             </button> --}}
-        {{--             <button @click="activeTab = 1" class="tab-control p-2.5 rounded" --}}
-        {{--                 :class="{ 'active bg-gray-300': activeTab === 1 }">Recently Bought Products --}}
-        {{--             </button> --}}
-        {{--             <button @click="activeTab = 0" class="tab-control p-2.5 rounded" --}}
-        {{--                 :class="{ 'active bg-blue-300': activeTab === 0 }">Product Returns --}}
-        {{--             </button> --}}
-        {{--             <button @click="activeTab = 1" class="tab-control p-2.5 rounded" --}}
-        {{--                 :class="{ 'active bg-gray-300': activeTab === 1 }">Product Reviews --}}
-        {{--             </button> --}}
-        {{--         </div> --}}
-        {{--     </div> --}}
-        {{-- </div> --}}
-        {{-- <div --}}
-        {{--     class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700"> --}}
-        {{--     <ul class="flex flex-wrap -mb-px"> --}}
-        {{--         <li class="me-2"> --}}
-        {{--             <a href="#" --}}
-        {{--                 class="border-blue-600 no-underline inline-block p-3 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Overview</a> --}}
-        {{--         </li> --}}
-        {{--         <li class="me-2"> --}}
-        {{--             <a href="#" --}}
-        {{--                 class="no-underline inline-block p-3 text-blue-600 border-b-2  rounded-t-lg active dark:text-blue-500 hover:border-gray-300 dark:border-blue-500" --}}
-        {{--                 aria-current="page">Most Bought Products</a> --}}
-        {{--         </li> --}}
-        {{--         <li class="me-2"> --}}
-        {{--             <a href="#" --}}
-        {{--                 class="no-underline inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Recently Bought Products</a> --}}
-        {{--         </li> --}}
-        {{--         <li class="me-2"> --}}
-        {{--             <a href="#" --}}
-        {{--                 class="no-underline inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Product Returns</a> --}}
-        {{--         </li> --}}
-        {{--         <li class="me-2"> --}}
-        {{--             <a href="#" --}}
-        {{--                 class="no-underline inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Positive Reviewed Products</a> --}}
-        {{--         </li> --}}
-        {{--         <li class="me-2"> --}}
-        {{--             <a href="#" --}}
-        {{--                 class="no-underline inline-block p-3 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Negative Reviewed Products</a> --}}
-        {{--         </li> --}}
-        {{--     </ul> --}}
-        {{-- </div> --}}
-
 
         <div class="row">
             <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Product Analytics</h5>
@@ -73,7 +20,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        {{-- <th scope="col">#</th> --}}
+                                         <th scope="col">#</th>
                                         <th scope="col" class="text-sm !bg-gray-50">Products</th>
                                         <th scope="col" class="text-sm !bg-gray-50">Categories</th>
                                         <th scope="col" class="text-sm !bg-gray-50">Order Times</th>
@@ -82,7 +29,7 @@
                                 <tbody>
                                     @foreach ($this->getMostBoughtProducts as $product)
                                         <tr wire:key="{{ $product->id }}">
-                                            {{-- <th scope="row">{{ $product->id }}</th> --}}
+                                             <th scope="row">{{ $product->id }}</th>
                                             <td class="text-sm">{{ $product->title }}</td>
                                             <td class="text-sm">
                                                 {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}

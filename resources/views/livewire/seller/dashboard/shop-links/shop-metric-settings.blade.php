@@ -20,7 +20,7 @@
                                     <i class="bi bi-question-circle"></i>
                                 </span>
                             </label>
-                            <input type="number" id="shop_target_sales" wire:model.blur="targetSales" min="1000" step="any"
+                            <input type="number" id="shop_target_sales" wire:model.blur="targetSales" min="1000" step="any" value="{{ number_format($targetSales, 2) }}"
                                 class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="10,000.00" required>
                             @error('targetSales')
@@ -41,6 +41,43 @@
                         </div>
 {{--                        {{ number_format($currentTargetSales, 2) }}--}}
                     </div>
+
+                </div>
+                <!-- Lead time input -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <div class="mb-4">
+                            <label for="shop_lead_time"
+                                   class="block mb-1.5 text-base font-medium text-gray-600 dark:text-white  pl-1">Product Lead Time
+
+                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover"
+                                      data-bs-trigger="hover focus" data-bs-placement="right"
+                                      data-bs-content="Lead time is the time it takes to fulfill an order from the time it is placed to the time it is delivered.">
+                                    <i class="bi bi-question-circle"></i>
+                                </span>
+                            </label>
+                            <input type="number" id="shop_lead_time" wire:model.blur="targetLeadTime" min="0" step="any"
+                                   class="bg-white border border-gray-300 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="Days of Product Lead time" required>
+                            @error('targetLeadTime')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mb-4">
+                            <label for="shop_current_lead_time"
+                                   class="block mb-1.5 text-base font-medium text-gray-600 dark:text-white  pl-1">Current
+                                Value
+                            </label>
+                            <input type="number" id="shop_current_lead_time" wire:model.blur="currentLeadTime"
+                                   step="any" disabled
+                                   value="{{ $currentLeadTime }}"
+                                   class="bg-white border border-gray-50 text-gray-900 text-sm !rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                        </div>
+                        {{--                        {{ number_format($currentTargetSales, 2) }}--}}
+                    </div>
+
                 </div>
             </div>
             <div class="mb-4 p-3 flex justify-end items-center bg-white rounded-lg">

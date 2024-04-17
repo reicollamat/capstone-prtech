@@ -1268,6 +1268,7 @@ CREATE TABLE `seller_shop_metrics` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `total_earnings` double(8,2) DEFAULT '0.00',
   `target_sales` int DEFAULT '10000',
+  `lead_time` int DEFAULT '7',
   `seller_id` bigint unsigned NOT NULL,
   `path_pw` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `path_nw` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1283,19 +1284,19 @@ CREATE TABLE `seller_shop_metrics` (
 
 LOCK TABLES `seller_shop_metrics` WRITE;
 /*!40000 ALTER TABLE `seller_shop_metrics` DISABLE KEYS */;
-INSERT INTO `seller_shop_metrics` (`id`, `total_earnings`, `target_sales`, `seller_id`,`created_at`, `updated_at`) VALUES
-(1,0.00,10000,1,NULL,NULL),
-(2,0.00,10000,2,NULL,NULL),
-(3,0.00,10000,3,NULL,NULL),
-(4,0.00,10000,4,NULL,NULL),
-(5,0.00,10000,5,NULL,NULL),
-(6,0.00,10000,6,NULL,NULL),
-(7,0.00,10000,7,NULL,NULL),
-(8,0.00,10000,8,NULL,NULL),
-(9,0.00,10000,9,NULL,NULL),
-(10,0.00,10000,10,NULL,NULL),
-(11,0.00,10000,11,NULL,NULL),
-(12,0.00,10000,12,NULL,NULL);
+INSERT INTO `seller_shop_metrics` (`id`, `total_earnings`, `target_sales`,`lead_time`, `seller_id`,`created_at`, `updated_at`) VALUES
+(1,0.00,10000,7,1,NULL,NULL),
+(2,0.00,10000,7,2,NULL,NULL),
+(3,0.00,10000,7,3,NULL,NULL),
+(4,0.00,10000,7,4,NULL,NULL),
+(5,0.00,10000,7,5,NULL,NULL),
+(6,0.00,10000,7,6,NULL,NULL),
+(7,0.00,10000,7,7,NULL,NULL),
+(8,0.00,10000,7,8,NULL,NULL),
+(9,0.00,10000,7,9,NULL,NULL),
+(10,0.00,10000,7,10,NULL,NULL),
+(11,0.00,10000,7,11,NULL,NULL),
+(12,0.00,10000,7,12,NULL,NULL);
 /*!40000 ALTER TABLE `seller_shop_metrics` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -24,6 +24,7 @@ class SellerShopMetrics extends Model
         'seller_id',
         'total_earnings',
         'target_sales',
+        'lead_time',
         'path_pw',
         'path_nw',
     ];
