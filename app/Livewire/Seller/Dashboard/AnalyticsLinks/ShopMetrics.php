@@ -48,6 +48,184 @@ class ShopMetrics extends Component
 
     public function mount()
     {
+
+        // FILTER
+        //////////////////////////////////////////////////////////////////////
+
+        $seller = auth()->user()->seller;
+        $p_id = [];
+        // get all product id that bellows to the seller_id in Products table
+        $product = Product::where('seller_id', $seller->id)
+            ->select('id')
+            ->get()
+            ->toArray();
+
+        foreach ($product as $key => $value) {
+            $p_id[] = $value['id'];
+        }
+        $seller_products = DB::select('select `product_id`,
+               pi.`created_at`,
+               p.`title`  as `product_title`,
+               `total_price` as `unit_price`,
+               sum(quantity)    as total_quantity,
+               sum(total_price) as sales_day
+        from purchase_items pi
+                 join products p on p.id = pi.product_id
+        where `product_id` in (' . implode(',', $p_id) . ')
+        group by `created_at`, `product_id`, p.`title`, pi.`created_at`, `product_id`, `total_price`
+        order by `created_at`;');
+
+        // dd($seller_products);
+
+        // QUARTERLY
+        $quartersByYear = [];
+
+        foreach ($seller_products as $product) {
+            $createdYear = date('Y', strtotime($product->created_at));
+            $createdMonth = date('m', strtotime($product->created_at));
+            $quarter = ceil($createdMonth / 3);
+            if (!isset($quartersByYear[$createdYear])) {
+                $quartersByYear[$createdYear] = [
+                    'Q1' => [],
+                    'Q2' => [],
+                    'Q3' => [],
+                    'Q4' => [],
+                ];
+            }
+            $quartersByYear[$createdYear]['Q' . $quarter][] = $product;
+        }
+        // dd($quartersByYear);
+
+        $q1 = $quartersByYear[2024]["Q1"];
+        $q2 = $quartersByYear[2024]["Q2"];
+        $q3 = $quartersByYear[2024]["Q3"];
+        $q4 = $quartersByYear[2024]["Q4"];
+
+
+        // MONTHLY
+        $monthsByYear = [];
+        foreach ($seller_products as $product) {
+            $createdYear = date('Y', strtotime($product->created_at));
+            $createdMonth = date('m', strtotime($product->created_at));
+            if (!isset($monthsByYear[$createdYear])) {
+                $monthsByYear[$createdYear] = [];
+            }
+            if (!isset($monthsByYear[$createdYear][$createdMonth])) {
+                $monthsByYear[$createdYear][$createdMonth] = [];
+            }
+            $monthsByYear[$createdYear][$createdMonth][] = $product;
+        }
+        // dd($monthsByYear);
+
+        $january = $monthsByYear[2024]['01'];
+        $february = $monthsByYear[2024]['02'];
+        $march = $monthsByYear[2024]['03'];
+        $april = $monthsByYear[2024]['04'];
+
+
+
+        // BY PRODUCT CATEGORY
+        $productByCategory = [];
+        foreach ($seller_products as $key => $product) {
+            $prod_category = Product::find($product->product_id)->category;
+            // dd($prod_category);
+            if (!isset($productByCategory[$prod_category])) {
+                $productByCategory[$prod_category] = [];
+            }
+            if (!isset($productByCategory[$prod_category][$product->product_id])) {
+                $productByCategory[$prod_category][$product->product_id] = [];
+            }
+            $productByCategory[$prod_category][$product->product_id][] = $product;
+        }
+        // dd($productByCategory);
+
+        if (isset($productByCategory['computer_case'])) {
+            $computer_case_products = $productByCategory['computer_case'];
+        } else {
+            $computer_case_products = [];
+        }
+        if (isset($productByCategory['case_fan'])) {
+            $case_fan_products = $productByCategory['case_fan'];
+        } else {
+            $case_fan_products = [];
+        }
+        if (isset($productByCategory['cpu'])) {
+            $cpu_products = $productByCategory['cpu'];
+        } else {
+            $cpu_products = [];
+        }
+        if (isset($productByCategory['cpu_cooler'])) {
+            $cpu_cooler_products = $productByCategory['cpu_cooler'];
+        } else {
+            $cpu_cooler_products = [];
+        }
+        if (isset($productByCategory['ext_storage'])) {
+            $ext_storage_products = $productByCategory['ext_storage'];
+        } else {
+            $ext_storage_products = [];
+        }
+        if (isset($productByCategory['int_storage'])) {
+            $int_storage_products = $productByCategory['int_storage'];
+        } else {
+            $int_storage_products = [];
+        }
+        if (isset($productByCategory['headphone'])) {
+            $headphone_products = $productByCategory['headphone'];
+        } else {
+            $headphone_products = [];
+        }
+        if (isset($productByCategory['keyboard'])) {
+            $keyboard_products = $productByCategory['keyboard'];
+        } else {
+            $keyboard_products = [];
+        }
+        if (isset($productByCategory['memory'])) {
+            $memory_products = $productByCategory['memory'];
+        } else {
+            $memory_products = [];
+        }
+        if (isset($productByCategory['monitor'])) {
+            $monitor_products = $productByCategory['monitor'];
+        } else {
+            $monitor_products = [];
+        }
+        if (isset($productByCategory['motherboard'])) {
+            $motherboard_products = $productByCategory['motherboard'];
+        } else {
+            $motherboard_products = [];
+        }
+        if (isset($productByCategory['mouse'])) {
+            $mouse_products = $productByCategory['mouse'];
+        } else {
+            $mouse_products = [];
+        }
+        if (isset($productByCategory['psu'])) {
+            $psu_products = $productByCategory['psu'];
+        } else {
+            $psu_products = [];
+        }
+        if (isset($productByCategory['speaker'])) {
+            $speaker_products = $productByCategory['speaker'];
+        } else {
+            $speaker_products = [];
+        }
+        if (isset($productByCategory['video_card'])) {
+            $video_card_products = $productByCategory['video_card'];
+        } else {
+            $video_card_products = [];
+        }
+        if (isset($productByCategory['webcam'])) {
+            $webcam_products = $productByCategory['webcam'];
+        } else {
+            $webcam_products = [];
+        }
+        // dd($computer_case_products);
+
+
+        //////////////////////////////////////////////////////////////////////
+        // FILTER
+
+
         $this->seller_id = auth()->user()->seller->id;
 
         $this->seller_name = auth()->user()->seller->shop_name ?? 'PR-Tech';
