@@ -5,20 +5,83 @@
             class="block p-3 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <div class="flex flex-end justify-end">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#salesReportModal">
                     Generate Sales Report for {{ $seller_name }}
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="salesReportModal" tabindex="-1" aria-labelledby="salesReportModalLabel"
+                    aria-hidden="true" wire:ignore>
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Report Generation For  {{ $seller_name }}</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h1 class="modal-title fs-5" id="salesReportModalLabel">Report Generation For
+                                    {{ $seller_name }}</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ...
+                                <label for="report_filter" class="form-label w-full font-medium">
+                                    Filter Report:
+                                </label>
+                                <div class="flex gap-2">
+                                    <div>
+                                        <div class="flex items-center p-2">
+                                            <input id="bordered-radio-1" type="radio" value="quarterly"
+                                                wire:model="sales_report_filter" name="bordered-radio"
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for="bordered-radio-1"
+                                                class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                Quarterly
+                                            </label>
+                                            <select class="form-select form-select-sm" id="report_filter"
+                                                aria-label="Small select example"
+                                                wire:model.live.debounce="report_filter">
+                                                <option value="q1">Quarter 1</option>
+                                                <option value="q2">Quarter 2</option>
+                                                <option value="q3">Quarter 3</option>
+                                                <option value="q4">Quarter 4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center p-2">
+                                            <input id="bordered-radio-2" type="radio" value="month"
+                                                wire:model="sales_report_filter" name="bordered-radio"
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for="bordered-radio-2"
+                                                class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                Month
+                                            </label>
+                                            @php
+                                                $currentMonth = now()->month;
+                                            @endphp
+
+                                            <select class="form-select form-select-sm" id="monthselect"
+                                                aria-label="Small select example"
+                                                wire:model.live.debounce="monthSelect">
+                                                <option value="0">Select Month</option>
+                                                @for ($i = 1; $i <= $currentMonth; $i++)
+                                                    <option value="{{ $i }}">
+                                                        {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex items-center p-2">
+                                            <input id="bordered-radio-3" type="radio" value="category"
+                                                wire:model="sales_report_filter" name="bordered-radio"
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for="bordered-radio-3"
+                                                class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                By Product Category
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -29,7 +92,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="mt-2 row">
             <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white">Product Analytics</h5>
@@ -49,7 +111,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                         <th scope="col">#</th>
+                                        <th scope="col">#</th>
                                         <th scope="col" class="text-sm !bg-gray-50">Products</th>
                                         <th scope="col" class="text-sm !bg-gray-50">Categories</th>
                                         <th scope="col" class="text-sm !bg-gray-50">Order Times</th>
@@ -58,7 +120,7 @@
                                 <tbody>
                                     @foreach ($this->getMostBoughtProducts as $product)
                                         <tr wire:key="{{ $product->id }}">
-                                             <th scope="row">{{ $product->id }}</th>
+                                            <th scope="row">{{ $product->id }}</th>
                                             <td class="text-sm">{{ $product->title }}</td>
                                             <td class="text-sm">
                                                 {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}
@@ -299,7 +361,9 @@
                                                 {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}
                                             </td>
                                             <td class="text-sm">{{ round($product->average_rating, 2) }}
-                                                - {{ round($product->average_rating,2)  >= 3 ? 'Positive' : 'Negative' }}</td>
+                                                -
+                                                {{ round($product->average_rating, 2) >= 3 ? 'Positive' : 'Negative' }}
+                                            </td>
                                             <td class="text-sm">
                                                 {{ $product->total_comment }}
                                             </td>
@@ -373,7 +437,9 @@
                                                 {{ \App\Helpers\CustomHelper::maptopropercatetory($product->category) }}
                                             </td>
                                             <td class="text-sm">{{ round($product->average_rating, 2) }}
-                                                - {{ round($product->average_rating, 2)  > 3 ? 'Positive' : 'Negative' }}</td>
+                                                -
+                                                {{ round($product->average_rating, 2) > 3 ? 'Positive' : 'Negative' }}
+                                            </td>
                                             <td class="text-sm">
                                                 {{ $product->total_comment }}
                                             </td>
