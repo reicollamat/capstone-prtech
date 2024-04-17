@@ -13,7 +13,6 @@ class Landing extends Component
 
     public $seller_id;
 
-
     public $loading = true;
 
     public $pdfpath;
@@ -74,15 +73,15 @@ class Landing extends Component
                 'shop_id' => $this->seller_id,
                 'shop_name' => $this->shop_name,
                 'products' => $seller_products,
-                'quarter' => 'Q1',
+                'quarter' => 'N/A',
                 'category' => 'All',
             ]);
 
             if ($response->ok()) {
-                # accept application/pdf response
+                // accept application/pdf response
                 $pdf = $response->body();
 
-                # save to file
+                // save to file
                 $file = public_path('sales.pdf');
                 file_put_contents($file, $pdf);
 

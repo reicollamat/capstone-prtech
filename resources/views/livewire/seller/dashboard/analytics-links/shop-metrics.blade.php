@@ -1,5 +1,8 @@
 <div>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+    {{ $filterQuarterly }}
+    {{ $filterMonth }}
+    {{ $filterCategory }}
     <div class="container-fluid p-4">
         <div
             class="block p-3 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -10,9 +13,9 @@
                 </button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="salesReportModal" tabindex="-1" aria-labelledby="salesReportModalLabel"
-                    aria-hidden="true" wire:ignore>
-                    <div class="modal-dialog modal-lg">
+                <div wire:ignore class="modal fade" id="salesReportModal" tabindex="-1"
+                    aria-labelledby="salesReportModalLabel" aria-hidden="true" wire:ignore>
+                    <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="salesReportModalLabel">Report Generation For
@@ -20,72 +23,130 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
-                                <label for="report_filter" class="form-label w-full font-medium">
-                                    Filter Report:
-                                </label>
-                                <div class="flex gap-2">
-                                    <div>
-                                        <div class="flex items-center p-2">
-                                            <input id="bordered-radio-1" type="radio" value="quarterly"
-                                                wire:model="sales_report_filter" name="bordered-radio"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="bordered-radio-1"
-                                                class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                Quarterly
-                                            </label>
-                                            <select class="form-select form-select-sm" id="report_filter"
-                                                aria-label="Small select example"
-                                                wire:model.live.debounce="report_filter">
-                                                <option value="q1">Quarter 1</option>
-                                                <option value="q2">Quarter 2</option>
-                                                <option value="q3">Quarter 3</option>
-                                                <option value="q4">Quarter 4</option>
-                                            </select>
+                            <div class="modal-body overflow-y-auto" style="max-height: 600px">
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapseOne">
+                                                Filter Report Generation
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                            <div class="accordion-body">
+                                                <div class="grid grid-cols-6">
+                                                    <div class="flex justify-center items-center">
+                                                        <p class="mb-0">Year Quarter : </p>
+                                                    </div>
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="options-base"
+                                                            id="all" value="all"
+                                                            wire:model.live.debounce="filterQuarterly"
+                                                            autocomplete="off" checked>
+                                                        <label class="btn" for="all">Other</label>
+                                                    </div>
+
+                                                    <div>
+
+                                                        <input type="radio" class="btn-check" name="options-base"
+                                                            id="q1" value="q1"
+                                                            wire:model.live.debounce="filterQuarterly"
+                                                            autocomplete="off">
+                                                        <label class="btn" for="q1">Quarter 1</label>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="options-base"
+                                                            id="q2" value="q2"
+                                                            wire:model.live.debounce="filterQuarterly"
+                                                            autocomplete="off">
+                                                        <label class="btn" for="q2">Quarter 2</label>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="options-base"
+                                                            id="q3" value="q3"
+                                                            wire:model.live.debounce="filterQuarterly"
+                                                            autocomplete="off">
+                                                        <label class="btn" for="q3">Quarter 3</label>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="radio" class="btn-check" name="options-base"
+                                                            id="q4" value="q4"
+                                                            wire:model.live.debounce="filterQuarterly"
+                                                            autocomplete="off">
+                                                        <label class="btn" for="q4">Quarter 4</label>
+                                                    </div>
+
+                                                </div>
+                                                <hr>
+                                                <p class="text-center">Or</p>
+                                                <hr>
+                                                <div class="grid grid-cols-2 gap-2">
+                                                    <div>
+                                                        @php
+                                                            $currentMonth = now()->month;
+                                                        @endphp
+
+                                                        <select class="form-select form-select-sm p-2" id="monthselect"
+                                                            aria-label="Small select example"
+                                                            wire:model.live.debounce="filterMonth">
+                                                            <option value="{{ null }}">Select Month</option>
+                                                            @for ($i = 1; $i <= $currentMonth; $i++)
+                                                                <option value="{{ $i }}">
+                                                                    {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                                                                </option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        @php
+                                                            $currentMonth = now()->month;
+                                                        @endphp
+
+                                                        <select class="form-select form-select-sm p-2" id="monthselect"
+                                                            aria-label="Small select example"
+                                                            wire:model.live.debounce="filterCategory">
+                                                            <option value="{{ null }}">Select Category</option>
+                                                            @foreach (CustomHelper::categoryList() as $category_key => $category_value)
+                                                                <option value="{{ $category_key }}">
+                                                                    {{ $category_value }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+                                                <hr>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="flex items-center p-2">
-                                            <input id="bordered-radio-2" type="radio" value="month"
-                                                wire:model="sales_report_filter" name="bordered-radio"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="bordered-radio-2"
-                                                class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                Month
-                                            </label>
-                                            @php
-                                                $currentMonth = now()->month;
-                                            @endphp
+                                </div>
+                                <div class="mt-2 gap-3   flex justify-center">
+                                    <button type="button" class="btn btn-outline-primary" wire:click="generateAll">Generate report without Filter
+                                    </button>
+                                    <button type="button" class="btn btn-primary" wire:click="generateFilter">Generate report with Filter
+                                    </button>
+                                </div>
 
-                                            <select class="form-select form-select-sm" id="monthselect"
-                                                aria-label="Small select example"
-                                                wire:model.live.debounce="monthSelect">
-                                                <option value="0">Select Month</option>
-                                                @for ($i = 1; $i <= $currentMonth; $i++)
-                                                    <option value="{{ $i }}">
-                                                        {{ DateTime::createFromFormat('!m', $i)->format('F') }}
-                                                    </option>
-                                                @endfor
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="flex items-center p-2">
-                                            <input id="bordered-radio-3" type="radio" value="category"
-                                                wire:model="sales_report_filter" name="bordered-radio"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                            <label for="bordered-radio-3"
-                                                class="w-full ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                By Product Category
-                                            </label>
-                                        </div>
+                                <div class="my-2">
+                                    <div class="row justify-content-center w-full">
+                                        <iframe src="{{ asset('sales.pdf') }}" width="100%" height="600"
+                                            id="myPdfIframe">
+                                            This browser does not support PDFs. Please download the PDF to view it: <a
+                                                href="{{ asset('sales.pdf') }}">Download PDF</a>
+                                        </iframe>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="savePDFButton">Save Report
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -455,113 +516,6 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="grid lg:grid-cols-2 gap-3 mb-3"> --}}
-            {{--     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false" --}}
-            {{--          wire:init="fetchPositiveCommentsApi"> --}}
-            {{--         <button class="w-full h-full" type="button" @click="showModal = !showModal"> --}}
-            {{--             <div wire:loading wire:target="fetchPositiveCommentsApi" class="relative w-full h-72"> --}}
-            {{--                 <div role="status" --}}
-            {{--                      class="flex gap-2.5 flex-column items-center justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"> --}}
-
-            {{--                     <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" --}}
-            {{--                          xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20"> --}}
-            {{--                         <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" /> --}}
-            {{--                         <path --}}
-            {{--                             d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" /> --}}
-            {{--                     </svg> --}}
-            {{--                     <span class="text-center">Image Loading, Please Wait...</span> --}}
-            {{--                 </div> --}}
-            {{--             </div> --}}
-            {{--             <div wire:loading.remove wire:target="fetchPositiveCommentsApi"> --}}
-            {{--                 <img src="{{ asset($p_asset) }}" --}}
-            {{--                      class="img-fluid img-thumbnail rounded-start border-0 self-center" alt=""> --}}
-            {{--             </div> --}}
-            {{--         </button> --}}
-
-            {{--         <div x-cloak x-transition.opacity x-show="showModal" class="fixed z-1 inset-0 bg-black/50" --}}
-            {{--              wire:loading.remove wire:target="init"> --}}
-            {{--         </div> --}}
-
-            {{--         <div x-cloak x-transition.duration.500ms x-show="showModal" --}}
-            {{--              class="fixed inset-0 z-50 grid place-content-center"> --}}
-            {{--             <div @click.away="showModal = false" --}}
-            {{--                  class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0"> --}}
-            {{--                 <div class="modal-dialog modal-lg modal-dialog-centered"> --}}
-            {{--                     <div class="modal-content"> --}}
-            {{--                         <div class="modal-header"> --}}
-            {{--                             <h1 class="modal-title fs-5" id="exampleModalLabel">Positive Reviews Wordcloud</h1> --}}
-
-            {{--                         </div> --}}
-            {{--                         <div class="flex justify-center modal-body" x-transition.opacity> --}}
-            {{--                             <img src="{{ asset($p_asset) }}" --}}
-            {{--                                  class="img-fluid img-thumbnail rounded-start border-0 self-center" --}}
-            {{--                                  alt=""> --}}
-            {{--                         </div> --}}
-            {{--                     </div> --}}
-            {{--                 </div> --}}
-            {{--                 <div class="w-full flex gap-2 pt-3 justify-end"> --}}
-            {{--                     <button type="button" class="btn btn-outline-secondary" @click="showModal = false"> --}}
-            {{--                         Close --}}
-            {{--                     </button> --}}
-            {{--                 </div> --}}
-            {{--             </div> --}}
-            {{--         </div> --}}
-            {{--     </div> --}}
-
-            {{--     <div x-data="{ showModal: false }" @keydown.window.escape="showModal = false" --}}
-            {{--          wire:init="fetchNegativeCommentsApi"> --}}
-            {{--         <button type="button" @click="showModal = !showModal" class="w-full h-72"> --}}
-            {{--             <div wire:loading wire:target="fetchNegativeCommentsApi" --}}
-            {{--                  class="relative w-full h-full flex items-center justify-center"> --}}
-            {{--                 <div role="status" --}}
-            {{--                      class="flex gap-2.5 flex-column items-center  justify-center h-full w-full bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"> --}}
-            {{--                     <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" --}}
-            {{--                          xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20"> --}}
-            {{--                         <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" /> --}}
-            {{--                         <path --}}
-            {{--                             d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM9 13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2Zm4 .382a1 1 0 0 1-1.447.894L10 13v-2l1.553-1.276a1 1 0 0 1 1.447.894v2.764Z" /> --}}
-            {{--                     </svg> --}}
-            {{--                     <span class="text-center">Image Loading, Please Wait...</span> --}}
-            {{--                 </div> --}}
-            {{--             </div> --}}
-            {{--             <div wire:loading.remove wire:target="fetchNegativeCommentsApi"> --}}
-            {{--                 <img src="{{ asset($n_asset) }}" --}}
-            {{--                      class="img-fluid img-thumbnail rounded-start border-0 self-center" alt=""> --}}
-            {{--             </div> --}}
-            {{--         </button> --}}
-
-            {{--         <div x-cloak x-transition.opacity x-show="showModal" class="fixed z-1 inset-0 bg-black/50" --}}
-            {{--              wire:loading.remove wire:target="init"> --}}
-            {{--         </div> --}}
-
-            {{--         <div x-cloak x-transition.duration.500ms x-show="showModal" --}}
-            {{--              class="fixed inset-0 z-50 grid place-content-center" wire:loading.remove --}}
-            {{--              wire:target="fetchNegativeCommentsApi"> --}}
-            {{--             <div @click.away="showModal = false" --}}
-            {{--                  class="min-h-full rounded-xl min-w-[500px] bg-white items-end justify-center p-4 text-center sm:items-center sm:p-0"> --}}
-            {{--                 <div class="modal-dialog modal-lg modal-dialog-centered"> --}}
-            {{--                     <div class="modal-content"> --}}
-            {{--                         <div class="modal-header"> --}}
-            {{--                             <h1 class="modal-title fs-5" id="exampleModalLabel">Negative Reviews Wordcloud</h1> --}}
-
-            {{--                         </div> --}}
-            {{--                         <div class="flex justify-center modal-body" x-transition.opacity> --}}
-            {{--                             <img src="{{ asset($n_asset) }}" --}}
-            {{--                                  class="img-fluid img-thumbnail rounded-start border-0 self-center" --}}
-            {{--                                  alt=""> --}}
-            {{--                         </div> --}}
-            {{--                     </div> --}}
-            {{--                 </div> --}}
-            {{--                 <div class="w-full flex gap-2 pt-3 justify-end"> --}}
-            {{--                     <button type="button" class="btn btn-outline-secondary" @click="showModal = false"> --}}
-            {{--                         Close --}}
-            {{--                     </button> --}}
-            {{--                 </div> --}}
-            {{--             </div> --}}
-            {{--         </div> --}}
-            {{--     </div> --}}
-            {{-- </div> --}}
-
             <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white py-1.5">Order & Shipment
                 Analytics</h5>
             {{-- Order Analytics --}}
@@ -702,12 +656,27 @@
                 </div>
             </div>
 
-            {{-- <h5 class="text-lg font-bold tracking-tight text-gray-600 dark:text-white py-1.5">Shipment Analytics</h5> --}}
-            {{-- Shipment Analytics --}}
-            {{-- <div class="grid grid-cols-1 gap-3 lg:grid-cols-1 mb-3"> --}}
-            {{-- most shipped --}}
-
         </div>
     </div>
 </div>
-</div>
+
+@script
+    <script>
+        counter = 0;
+
+        Livewire.on('reload-iframe', () => {
+            console.log('reload iframe');
+            var iframe = document.getElementById("myPdfIframe");
+            var doc = iframe.contentDocument || iframe.contentWindow;
+            doc.location.reload(true);
+        });
+
+
+        const savePDFButton = document.getElementById("savePDFButton");
+        const iframe = document.getElementById("myPdfIframe");
+
+        savePDFButton.addEventListener("click", () => {
+            iframe.contentWindow.print(); // Trigger browser print dialog
+        });
+    </script>
+@endscript
