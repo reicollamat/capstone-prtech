@@ -5,34 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a14466d9-7265-4525-a567-b0d7bd9d01ad" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/product-image-uploads/KIFdC7OUoCsdJvoj4tIDQlLgAJwUBT6pJPjLir14.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/product-image-uploads/sqZ0jGT9jhpqrDEx8KGj3755EPWi1PZ3GgTJ4mrC.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_06-39-42_13_pw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_06-39-49_13_nw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_10-21-08_13_pw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_10-21-17_13_nw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_11-48-16_13_pw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_11-48-23_13_nw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_11-50-27_13_nw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-15_11-50-34_13_pw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-17_11-44-21_1_pw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../public/storage/2024-04-17_11-44-32_1_nw.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../stock-sense-api/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../stock-sense-api/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/JetClient/state.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ruff.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hello_world.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventoryreport.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/salesreport.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../app/Livewire/Seller/Dashboard/AnalyticsLinks/AnalyticsModelReport.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../app/Livewire/Seller/Dashboard/AnalyticsLinks/AnalyticsModelReport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../app/Livewire/Seller/Dashboard/ShopLinks/ShopMetricSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../app/Livewire/Seller/Dashboard/ShopLinks/ShopMetricSettings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../app/Models/SellerShopMetrics.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../app/Models/SellerShopMetrics.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../database/migrations/2023_12_06_070146_create_seller_shop_metrics_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../database/migrations/2023_12_06_070146_create_seller_shop_metrics_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../database/seeders/sql/prtech_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../database/seeders/sql/prtech_db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../resources/views/livewire/seller/dashboard/analytics-links/analytics-model-report.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../resources/views/livewire/seller/dashboard/analytics-links/analytics-model-report.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../resources/views/livewire/seller/dashboard/analytics-links/shop-metrics.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../resources/views/livewire/seller/dashboard/analytics-links/shop-metrics.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../resources/views/livewire/seller/dashboard/shop-links/shop-metric-settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../../resources/views/livewire/seller/dashboard/shop-links/shop-metric-settings.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -50,21 +48,31 @@
     <option name="showLibraryContents" value="true" />
     <option name="sortKey" value="BY_TIME_DESCENDING" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/run/media/magi/8ae8cf59-85ae-4153-b477-636270c3addc/ext-magi/Programming/CAPSTONE_FRONTEND/capstone-prtech/Python/generate-report&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "FastAPI.Start Server.executor": "Run",
+    "FastAPI.Unnamed.executor": "Run",
+    "Python.inventoryreport.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.salesreport.executor": "Run",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/run/media/magi/8ae8cf59-85ae-4153-b477-636270c3addc/ext-magi/Programming/CAPSTONE_FRONTEND/capstone-prtech/Python/generate-report/main.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="generate-report" />
@@ -89,6 +97,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Start Server" type="Python.FastAPI">
+      <option name="additionalOptions" value="--reload --port 8585" />
+      <option name="file" value="$PROJECT_DIR$/main.py" />
+      <module name="generate-report" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/.venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.11 (generate-report)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="FastAPI.Start Server" />
+      <item itemvalue="Python.main" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -106,6 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1713326481847</updated>
       <workItem from="1713326482891" duration="540000" />
+      <workItem from="1713345867785" duration="2183000" />
     </task>
     <servers />
   </component>
@@ -113,6 +143,10 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/generate_report$main.coverage" NAME="main Coverage Results" MODIFIED="1713326505570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/generate_report$main.coverage" NAME="main Coverage Results" MODIFIED="1713345938359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/generate_report$Unnamed.coverage" NAME="Start Server Coverage Results" MODIFIED="1713346035864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/generate_report$salesreport.coverage" NAME="salesreport Coverage Results" MODIFIED="1713354657240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/generate_report$inventoryreport.coverage" NAME="inventoryreport Coverage Results" MODIFIED="1713354794383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/generate_report$test.coverage" NAME="test Coverage Results" MODIFIED="1713354472222" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

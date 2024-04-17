@@ -438,7 +438,7 @@ class AnalyticsModelReport extends Component
     {
         $this->alert($type, $mesage, [
             'position' => 'top-end',
-            'timer' => 6000,
+            'timer' => 3000,
             'toast' => true,
             'text' => $text,
             'showCancelButton' => false,
