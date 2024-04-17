@@ -627,7 +627,7 @@ class AnalyticsModelReport extends Component
 
             }
         } catch (\Exception $e) {
-            $this->notify('error', 'Prediction failed', 'Prediction sdasdsad, Please try again later, maybe the server is down');
+            $this->notify('error', 'Prediction failed', 'Prediction not ready, Please try again later, maybe the server is down');
         }
     }
 

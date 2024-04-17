@@ -229,16 +229,34 @@
         <div class="p-3 col-span-2 border border-gray-200 bg-white rounded-lg">
             <div class="flex flex-wrap items-center">
                 <div class="relative w-full max-w-full flex-grow flex-1">
-                    <h6 class="uppercase mb-0 text-lg font-semibold text-blueGray-500">Forecast Restocks with
-                        Sentiment-Driven
-                        Insights</h6>
-                    <div class="pt-2">
-                        <p class="mb-1 text-gray-500 text-sm">Predict surges in popularity before they happen.</p>
-                        <p class="mb-1 text-gray-500 text-sm">Gain insights from social media buzz and customer
-                            reviews.</p>
-                        <p class="mb-1 text-gray-500 text-sm">Optimize inventory levels and prevent stockouts.</p>
-                    </div>
+                    <h6 class="uppercase mb-0 text-lg font-semibold text-blueGray-500">Inventory Stock Information</h6>
+                   <div class="mt-1">
+                       <p class="mb-1 text-gray-500 text-sm">Optimize inventory levels and prevent stockouts.</p>
+                       <div class="w-full flex justify-end">
+                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                               Generate Inventory Report
+                           </button>
 
+                           <!-- Modal -->
+                           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                               <div class="modal-dialog modal-lg">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h1 class="modal-title fs-5" id="exampleModalLabel">Inventory Report Generation</h1>
+                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                       </div>
+                                       <div class="modal-body">
+                                           ...
+                                       </div>
+                                       <div class="modal-footer">
+                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                           <button type="button" class="btn btn-primary">Save changes</button>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
                 </div>
             </div>
         </div>
