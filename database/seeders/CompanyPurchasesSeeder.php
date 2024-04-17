@@ -39,23 +39,23 @@ class CompanyPurchasesSeeder extends Seeder
         $company_products = [
             [
                 'product' => $products[0],
-                'csv_path' => 'app/kimpc_products/purchase_csv-new/data222_new_6months.csv',
+                'csv_path' => 'app/kimpc_products/csv_techlabs-new/data222_techlabs_6months.csv',
             ],
             [
                 'product' => $products[1],
-                'csv_path' => 'app/kimpc_products/purchase_csv-new/data187_new_6months.csv',
+                'csv_path' => 'app/kimpc_products/csv_techlabs-new/data187_techlabs_6months.csv',
             ],
             [
                 'product' => $products[2],
-                'csv_path' => 'app/kimpc_products/purchase_csv-new/data708_new_6months.csv',
+                'csv_path' => 'app/kimpc_products/csv_techlabs-new/data708_techlabs_6months.csv',
             ],
             [
                 'product' => $products[3],
-                'csv_path' => 'app/kimpc_products/purchase_csv-new/data55_new_6months.csv',
+                'csv_path' => 'app/kimpc_products/csv_techlabs-new/data55_techlabs_6months.csv',
             ],
             [
                 'product' => $products[4],
-                'csv_path' => 'app/kimpc_products/purchase_csv-new/data249_new_6months.csv',
+                'csv_path' => 'app/kimpc_products/csv_techlabs-new/data249_techlabs_6months.csv',
             ],
         ];
 
@@ -207,23 +207,23 @@ class CompanyPurchasesSeeder extends Seeder
         $company_products = [
             [
                 'product' => $products[0],
-                'csv_path' => 'app/kimpc_products/data222_new-old.csv',
+                'csv_path' => 'app/kimpc_products/csv_jdcworld-new/data222_jdcworld_6months.csv',
             ],
             [
                 'product' => $products[1],
-                'csv_path' => 'app/kimpc_products/data187_new-old.csv',
+                'csv_path' => 'app/kimpc_products/csv_jdcworld-new/data222_jdcworld_6months.csv',
             ],
             [
                 'product' => $products[2],
-                'csv_path' => 'app/kimpc_products/data708_new-old.csv',
+                'csv_path' => 'app/kimpc_products/csv_jdcworld-new/data222_jdcworld_6months.csv',
             ],
             [
                 'product' => $products[3],
-                'csv_path' => 'app/kimpc_products/data55_new-old.csv',
+                'csv_path' => 'app/kimpc_products/csv_jdcworld-new/data222_jdcworld_6months.csv',
             ],
             [
                 'product' => $products[4],
-                'csv_path' => 'app/kimpc_products/data249_new-old.csv',
+                'csv_path' => 'app/kimpc_products/csv_jdcworld-new/data222_jdcworld_6months.csv',
             ],
         ];
 
