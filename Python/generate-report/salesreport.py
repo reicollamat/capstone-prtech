@@ -1,12 +1,10 @@
 from fpdf import FPDF
 from fpdf.fonts import FontFace
 
-pdf = FPDF()
-pdf.add_page()
-pdf.set_font('helvetica', size=18, style='B') 
 
 
-def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_sold, best_selling, TABLE_DATA):
+
+def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_sold, best_selling, TABLE_DATA, quarter_sales, product_category):
     # create a hint for the function parameters
     """
     Create a sales report in PDF format
@@ -19,6 +17,7 @@ def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_s
         seller_id (int): The ID of the seller
         best_selling (str): The best selling product
         TABLE_DATA (tuple): The data to be displayed in the table
+        quarter_sales (str): what quarter the sales report is for
     Returns:
         None
     """
@@ -26,13 +25,19 @@ def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_s
     shop_name_format = f"{shop_name} Sales Report"  # format it to be displayed in the PDF
     timespan_format = f"Date From {timespan}"  # format it to be displayed in the PDF
 
-
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font('helvetica', size=18, style='B') 
 
     pdf.cell(text=shop_name_format, align='C', center=True) # title of the PDF
     pdf.ln(10)  # line break
     pdf.set_font('helvetica', size=12)  # set font size
     # justify right
     pdf.write(None, timespan_format)  # write the timespan
+    pdf.ln(5)  # line break
+    pdf.write(None, f'Quarter Sales: {quarter_sales}')  # write the timespan
+    pdf.ln(5)  # line break
+    pdf.write(None, f'Product Category: {product_category}')  # write the timespan
     pdf.ln(5)  # line break
     pdf.cell(None, text=f'Seller # {shop_id}', align='L')  # write the timespan
     pdf.ln(5)  # line break
@@ -54,7 +59,6 @@ def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_s
     white = (255, 255, 255)
     headings_style = FontFace(emphasis="ITALICS", color=blue, fill_color=white)
 
-    
 
     with pdf.table(col_widths=(7,5,20,10,10, 10), headings_style=headings_style) as table:
         for data_row in TABLE_DATA:
@@ -63,7 +67,9 @@ def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_s
                 row.cell(datum)
 
 
-    pdf.output("sales.pdf")
+    # pdf.output("sales.pdf")
+    return bytes(pdf.output())
+    
 
 
 # TABLE_DATA = (

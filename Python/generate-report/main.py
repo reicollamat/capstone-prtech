@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import locale
 import pandas as pd
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 
 from salesreport import create_sales_report_pdf
 
@@ -24,6 +24,15 @@ async def create_sales_report(request: Request):
 
     shop_name = data.get("shop_name")
     shop_id = data.get("shop_id")
+    quarter = data.get("quarter")
+    category = data.get("category")
+
+    if (quarter is None):
+        quarter = "N/A"
+
+    if (category is None):
+        category = "All Products"
+
 
     print(shop_name, shop_id) # debug
 
@@ -92,7 +101,9 @@ async def create_sales_report(request: Request):
         f'best_selling: {best_selling}\n'
         f'total_revenue: {total_revenue}\n'
         f'total_items_sold: {total_items_sold}\n'
-        f'TABLE_DATA: {TABLE_DATA[:5]}\n'
+        # f'TABLE_DATA: {TABLE_DATA[:5]}\n',
+        f'quarter_sales: {quarter}\n',
+        f'category: {category}\n'
     )
 
 
@@ -101,16 +112,26 @@ async def create_sales_report(request: Request):
 
     # print(TABLE_DATA[:5]) # debug
     try:
-        create_sales_report_pdf(
+        pdf = create_sales_report_pdf(
             shop_name=shop_name,
             shop_id=shop_id,
             timespan=f"{starting_date} - {ending_date}",
             revenue=str(total_revenue),
             total_items_sold=str(total_items_sold),
             best_selling=best_selling,
-            TABLE_DATA=TABLE_DATA
+            TABLE_DATA=TABLE_DATA,
+            quarter_sales=quarter,
+            product_category=category
         )
-        pass
+        
+        # Prepare the filename and headers
+        filename = "report_generated.pdf"
+        headers = {
+            "Content-Disposition": f"inline; filename={filename}"
+        }
+
+        return Response(content=pdf, media_type="application/pdf", headers=headers, status_code=200)
+        
     except Exception as e:
         print(e)
         return {"status": "failed"}
