@@ -232,7 +232,7 @@
                     <h6 class="uppercase mb-0 text-lg font-semibold text-blueGray-500">Inventory Stock Information</h6>
                    <div class="mt-1">
                        <p class="mb-1 text-gray-500 text-sm">Optimize inventory levels and prevent stockouts.</p>
-                       <div class="w-full flex justify-end">
+                       <div class="mt-2 w-full flex justify-end">
                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                Generate Inventory Report
                            </button>
