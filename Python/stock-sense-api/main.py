@@ -70,7 +70,7 @@ async def pred(request: Request):
     df = pd.DataFrame(parase_date_2)
 
     computed_lags = 0
-    best_params = {'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 2000,
+    best_params = {'learning_rate': 0.1, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 1000,
                    'subsample': 1.0}
 
     custom_days_testing = 2
@@ -177,8 +177,9 @@ async def oneshot(request: Request):
     df = pd.DataFrame(parase_date_2)
 
     computed_lags = 2
-    best_params = {'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 2000,
+    best_params = {'learning_rate': 0.1, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 1000,
                    'subsample': 1.0}
+    
 
     if len(df) < 7:
         return {'message': "Data is too small for prediction"}

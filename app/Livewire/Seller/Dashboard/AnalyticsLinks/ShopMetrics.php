@@ -6,6 +6,7 @@ use App\Models\Product;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
@@ -14,6 +15,7 @@ use Livewire\Component;
 #[Layout('layouts.seller.seller-layout')]
 class ShopMetrics extends Component
 {
+    use LivewireAlert;
     #[Locked]
     public $seller_id;
 
@@ -399,6 +401,8 @@ class ShopMetrics extends Component
 
     public bool $loading = true;
 
+    public bool $showIframe = false;
+
     public function generateAll()
     {
         $this->loading = true;
@@ -429,7 +433,7 @@ class ShopMetrics extends Component
 
         // send to api
         try {
-            $response = Http::post('http://127.0.0.1:8787/sales', [
+            $response = Http::post('http://127.0.0.1:8484/sales', [
                 'shop_id' => $this->seller_id,
                 'shop_name' => $this->seller_name,
                 'products' => $seller_products,
@@ -448,6 +452,8 @@ class ShopMetrics extends Component
                 $this->pdfpath = $file;
 
                 $this->loading = false;
+
+                $this->showIframe = true;
 
                 $this->dispatch('reload-iframe');
 
@@ -559,28 +565,66 @@ class ShopMetrics extends Component
         }
 
         if ($this->filterCategory) {
-            $productByCategory = [];
-            foreach ($seller_products as $key => $product) {
-                $prod_category = Product::find($product->product_id)->category;
-                // dd($prod_category);
-                if (! isset($productByCategory[$prod_category])) {
-                    $productByCategory[$prod_category] = [];
-                }
-                if (! isset($productByCategory[$prod_category][$product->product_id])) {
-                    $productByCategory[$prod_category][$product->product_id] = [];
-                }
-                $productByCategory[$prod_category][$product->product_id][] = $product;
-            }
-            // dd($productByCategory);
+            $product = Product::where('seller_id', $this->seller_id)
+                ->where('category', $this->filterCategory)
+                ->get()
+                ->toArray();
 
-            $sql = $productByCategory[$this->filterCategory] ?? [];
+            // dd($product);
+
+            if (empty($product)) {
+                $this->alert('warning', 'No Products', [
+                    'position' => 'top-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                    'text' => 'There are no products in this category. Please select another category.',
+                    'showCancelButton' => false,
+                    'showConfirmButton' => false,
+                ]);
+                return;
+            }
+
+            // dd($product);
+            $p_id = [];
+
+            foreach ($product as $key => $value) {
+                $p_id[] = $value['id'];
+            }
+            // dd($p_id);
+
+            $seller_products = DB::select('select `product_id`,
+                   pi.`created_at`,
+                   p.`title`  as `product_title`,
+                   `total_price` as `unit_price`,
+                   sum(quantity)    as total_quantity,
+                   sum(total_price) as sales_day
+            from purchase_items pi
+                     join products p on p.id = pi.product_id
+            where `product_id` in ('.implode(',', $p_id).')
+            group by `created_at`, `product_id`, p.`title`, pi.`created_at`, `product_id`, `total_price`
+            order by `created_at`;');
+
+            if (empty($seller_products)) {
+                $this->alert('warning', 'No Sales on This Product Yet', [
+                    'position' => 'top-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                    'text' => 'There are no sales on this product yet. Please select another product category',
+                    'showCancelButton' => false,
+                    'showConfirmButton' => false,
+                ]);
+                return;
+            }
+            $sql = $seller_products;
         }
 
         // BY PRODUCT CATEGORY
 
+        // dd($sql);
+
         // send to api
         try {
-            $response = Http::post('http://127.0.0.1:8787/sales', [
+            $response = Http::post('http://127.0.0.1:8484/sales', [
                 'shop_id' => $this->seller_id,
                 'shop_name' => $this->seller_name,
                 'products' => $sql,
@@ -599,6 +643,8 @@ class ShopMetrics extends Component
                 $this->pdfpath = $file;
 
                 $this->loading = false;
+
+                $this->showIframe = true;
 
                 $this->dispatch('reload-iframe');
 

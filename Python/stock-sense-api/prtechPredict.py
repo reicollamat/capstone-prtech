@@ -27,7 +27,7 @@ def check_data_from_user(data):
 
             print('Dataframe created successfully')
             print(f'Shape of given data: {df.shape}')
-            print(df.head(5))
+            # print(df.head(5))
             return df
         except KeyError:
             raise KeyError('KeyError: created_at column not found')
@@ -595,10 +595,12 @@ class PrtechPredict:
         try:
             if self.user_best_params:
                 print('User best params provided')
+                print(f'Best params: {self.user_best_params}')
                 return self.user_best_params
             else:
                 print('Optimizing model, no user best params provided')
                 best_params_model = optimize_gridsearch(self.X_train, self.y_train, self.X_test, self.y_test)
+                print(f'Best params: {best_params_model}')
                 print('Model optimized successfully')
                 return best_params_model
         except Exception as e:
@@ -689,12 +691,12 @@ class PrtechPredict:
 sales = mydata.get_data()
 # print(sales)
 
-best_params = {'learning_rate': 0.01, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 2000, 'subsample': 1.0}
+best_params = {'learning_rate': 0.1, 'max_depth': 3, 'min_child_weight': 1, 'n_estimators': 1000, 'subsample': 1.0}
 
-obj = PrtechPredict(sales, prediction_range=7, lag_days=30, splitting_method='custom', model_train_ratio=0.8,
-                    remove_outliers=True, best_params=best_params, custom_days=2)
+# obj = PrtechPredict(sales, prediction_range=7, lag_days=30, splitting_method='custom', model_train_ratio=0.8,
+#                     remove_outliers=True, best_params=best_params, custom_days=2)
 
-datas = obj.send_report()
+# datas = obj.send_report()
 
 
 # print(datas)
@@ -787,7 +789,7 @@ def handle_prediction(data: dict):
         return False
 
 
-handle_prediction(datas)
+# handle_prediction(datas)
 # obj.print_df_features_target()
 # obj.train_test_shape()
 # obj.print_X_train_y_train()

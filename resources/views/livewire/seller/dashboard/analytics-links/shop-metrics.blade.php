@@ -1,8 +1,8 @@
 <div>
     {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
-    {{ $filterQuarterly }}
-    {{ $filterMonth }}
-    {{ $filterCategory }}
+{{--    {{ $filterQuarterly }}--}}
+{{--    {{ $filterMonth }}--}}
+{{--    {{ $filterCategory }}--}}
     <div class="container-fluid p-4">
         <div
             class="block p-3 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -13,8 +13,8 @@
                 </button>
 
                 <!-- Modal -->
-                <div wire:ignore class="modal fade" id="salesReportModal" tabindex="-1"
-                    aria-labelledby="salesReportModalLabel" aria-hidden="true" wire:ignore>
+                <div wire:ignore.self x-cloak="true"  class="modal fade" id="salesReportModal" tabindex="-1"
+                    aria-labelledby="salesReportModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -134,23 +134,27 @@
 
                                 <div class="my-2">
                                     <div class="row justify-content-center w-full">
-                                        <iframe src="{{ asset('sales.pdf') }}" width="100%" height="600"
-                                            id="myPdfIframe">
-                                            This browser does not support PDFs. Please download the PDF to view it: <a
-                                                href="{{ asset('sales.pdf') }}">Download PDF</a>
-                                        </iframe>
+                                        @if($showIframe)
+                                            <iframe src="{{ asset('sales.pdf') }}" width="100%" height="600"
+                                                    id="myPdfIframe">
+                                                This browser does not support PDFs. Please download the PDF to view it: <a
+                                                    href="{{ asset('sales.pdf') }}">Download PDF</a>
+                                            </iframe>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                                 </button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="savePDFButton">Save Report
-                                </button>
+                                {{-- <button type="button" class="btn btn-primary"  id="savePDFButton">Save Report --}}
+                                {{-- </button> --}}
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
 

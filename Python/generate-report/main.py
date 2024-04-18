@@ -4,6 +4,8 @@ import pandas as pd
 from fastapi import FastAPI, Request, Response
 
 from salesreport import create_sales_report_pdf
+from inventoryreport import create_report
+from predictexport import create_report_predict
 
 app = FastAPI()
 
@@ -136,4 +138,123 @@ async def create_sales_report(request: Request):
         print(e)
         return {"status": "failed"}
 
+    return {"status": "success"}
+
+
+
+@app.post("/stock")
+async def create_stock_report(request: Request):
+    data = await request.json()
+
+    seller_id = data.get("seller_id")
+    shop_name = data.get("shop_name")
+    # print(data)
+
+    df = pd.DataFrame(data.get("data"))
+
+    df['date'] = df['created_at'].apply(lambda x: pd.to_datetime(x).date().strftime("%Y-%m-%d"))
+
+    # remove the created_at column
+    df = df.drop(columns=["created_at"])
+
+
+    print(df.head())
+
+    print(df.columns)
+
+    df = df[["id", "title", "slug", "category", "stock", "reserve", "price", "purchase_count", "date"]]
+
+    df = df.astype(str)
+
+    TABLE_DATA2 = [tuple(row) for row in df.values]
+
+    # convert the list of tuples into a tuple of tuples
+    TABLE_DATA2 = tuple(TABLE_DATA2)
+
+    TABLE_DATA1 = (
+        ("ID", "Title", "Slug", "Category", "Stock", "Reserve", "Price", "Purchase Count", "Date Created"),
+    )
+
+    TABLE_DATA = TABLE_DATA1 + TABLE_DATA2
+
+    print(TABLE_DATA[:5])
+
+    try:
+        pdf = create_report(TABLE_DATA=TABLE_DATA, Seller_ID=str(seller_id), Shop_Name=shop_name, Product_Category="All")
+
+        # Prepare the filename and headers
+        filename = "stock_report_generated.pdf"
+        headers = {
+            "Content-Disposition": f"attachment; filename={filename}"
+        }
+
+        return Response(content=pdf, media_type="application/pdf", headers=headers, status_code=200)
+    
+    except Exception as e:
+        print(e)
+        return {"status": "failed"}
+    
+
+
+    return {"status": "success"}
+
+@app.post("/exportpredict")
+async def exportpredict(request: Request):
+    data =  await request.json()
+
+    seller_id = data.get("seller_id")
+    shop_name = data.get("shop_name")
+    date_today = current_date.strftime("%Y-%m-%d")
+    lead_time = data.get("lead_time")
+
+    df = pd.DataFrame(data.get("data"))
+
+    df['date'] = df['updated_at'].apply(lambda x: pd.to_datetime(x).date().strftime("%Y-%m-%d"))
+
+    # remove the created_at column
+    df = df.drop(columns=["created_at"])
+    # remove the updated_at column
+    df = df.drop(columns=["updated_at"])
+
+    #round drp and ord to nearest whole number
+    df['drp'] = df['drp'].apply(lambda x: round(x))
+    df['ord'] = df['ord'].apply(lambda x: round(x))
+
+
+    df = df[["id", "title", "slug", "category", "stock", "reserve", "purchase_count", "drp", "ord", "date"]]
+
+
+    df = df.astype(str)
+
+    TABLE_DATA2 = [tuple(row) for row in df.values]
+
+    # convert the list of tuples into a tuple of tuples
+    TABLE_DATA2 = tuple(TABLE_DATA2)
+
+    TABLE_DATA1 = (
+        ("ID", "Title", "Slug", "Category", "Stock", "Reserve", "Purchase Count", "DRP", "ORD", "Date"),
+    )
+
+    TABLE_DATA = TABLE_DATA1 + TABLE_DATA2
+
+    print(TABLE_DATA[:5])
+
+    print(df.columns)
+
+    try:
+        pdf = create_report_predict(TABLE_DATA=TABLE_DATA, Seller_ID=str(seller_id), Shop_Name=shop_name, Product_Category="All", date_today=date_today, lead_time=lead_time)
+
+        # Prepare the filename and headers
+        filename = "predict_report_generated.pdf"
+        headers = {
+            "Content-Disposition": f"attachment; filename={filename}"
+        }
+        
+        return Response(content=pdf, media_type="application/pdf", headers=headers, status_code=200)
+    
+    except Exception as e:
+        print(e)
+        return {"status": "failed"}
+
+    # print(data)
     return {"status": "success"}

@@ -4,6 +4,7 @@ namespace App\Livewire\Seller\Dashboard\AnalyticsLinks;
 
 use App\Models\Product;
 use App\Models\Seller;
+use App\Models\SellerShopMetrics;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -81,15 +82,34 @@ class AnalyticsModelReport extends Component
     #[Locked]
     public $seller;
 
+    public $seller_name;
+
     public $prediction_oneshot_run = false;
 
-    public $restock_now_predict;
+    public $restock_now_predict = [];
 
-    public $restock_soon_predict;
+    public $restock_soon_predict = [];
+
+    public $lead_time;
+
+    public $forecastresultdata = [];
+
+    public $pdfpath;
 
     public function mount()
     {
         $this->seller = Seller::where('user_id', Auth::id())->get()->first();
+
+        $this->lead_time = SellerShopMetrics::where('seller_id', $this->seller->id)
+            ->select('lead_time')
+            ->first()
+            ->toArray();
+
+        $this->showgenerate = 0;
+
+        // dd($this->lead_time);
+
+        $this->seller_name = $this->seller->shop_name;
 
         $this->summary = 'Monthly';
 
@@ -109,6 +129,217 @@ class AnalyticsModelReport extends Component
 
         $this->restock_now_predict = $this->restock_now();
         $this->restock_soon_predict = $this->restock_soon();
+
+    }
+
+    public function generateStockReport()
+    {
+        $products = Product::where('seller_id', $this->seller->id)
+            ->orderBy('stock', 'desc')
+            ->get()
+            ->toArray();
+
+        try {
+
+            // send the data to the API with the following parameters, change the link to the correct API endpoint
+            $response = Http::timeout(300)->post('http://127.0.0.1:8484/stock', [
+                'data' => $products,
+                'shop_name' => $this->seller_name,
+                'seller_id' => $this->seller->id,
+            ]);
+
+            if ($response->ok()) {
+                // accept application/pdf response
+                $pdf = $response->body();
+
+                // save to file
+                $file = public_path('report.pdf');
+                file_put_contents($file, $pdf);
+
+                // $this->pdfpath = $file;
+
+                $this->showgenerate = 1;
+
+                // get th base url
+                $url = url('/');
+                $this->pdfpath = $url.'/report.pdf';
+
+                $this->dispatch('reload-iframe');
+
+                $this->alert('success', 'Generation Success', [
+                    'position' => 'top-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                    'text' => 'Prediction Complete. Click View Prediction Report to see the results.',
+                    'showCancelButton' => false,
+                    'showConfirmButton' => false,
+                ]);
+
+                // prevuew pdf in browser
+                // return response()->streamDownload($file);
+            }
+        } catch (\Exception $e) {
+            $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is downs');
+        }
+    }
+
+    public function generateExportRestock()
+    {
+        $data = $this->forecastresultdata;
+
+        if (count($data) < 1) {
+            $this->notify('error', 'No data to export', 'No data to export, Please run forecast first');
+
+            return;
+        }
+        try {
+
+            // send the data to the API with the following parameters, change the link to the correct API endpoint
+            $response = Http::timeout(300)->post('http://127.0.0.1:8484/exportpredict', [
+                'data' => $data,
+                'shop_name' => $this->seller_name,
+                'seller_id' => $this->seller->id,
+                'lead_time' => $this->lead_time['lead_time'],
+            ]);
+
+            if ($response->ok()) {
+                // accept application/pdf response
+                $pdf = $response->body();
+
+                // dd($response);
+
+                // save to file
+                $file = public_path('predict_report.pdf');
+                file_put_contents($file, $pdf);
+
+                // $this->pdfpath = $file;
+
+                // get th base url
+                $url = url('/');
+                $this->pdfpath = $url.'/predict_report.pdf';
+
+                $this->showgenerate = 2;
+
+                $this->dispatch('reload-iframe');
+
+                $this->alert('success', 'Generation Success', [
+                    'position' => 'top-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                    'text' => 'Prediction Complete. Click View Prediction Report to see the results.',
+                    'showCancelButton' => false,
+                    'showConfirmButton' => false,
+                ]);
+
+                // prevuew pdf in browser
+                // return response()->streamDownload($file);
+            }
+        } catch (\Exception $e) {
+            $this->notify('error', 'Prediction failed', 'Prediction failed, Please try again later, maybe the server is downs');
+        }
+    }
+
+    public $showgenerate = 0;
+
+    // #[Computed]
+    public function forecastresult()
+    {
+        // sleep(3);
+        $product_id_with_enough_data = DB::select(' select product_id  from purchase_items
+        where product_id in (select id from products where seller_id = '.$this->seller->id.')
+        group by product_id
+        having  count(product_id) > 7;');
+
+        $product_id_with_enough_data_ids = [];
+        foreach ($product_id_with_enough_data as $key => $value) {
+            $product_id_with_enough_data_ids[] = $value->product_id;
+        }
+
+        $productInfos = Product::whereIn('id', $product_id_with_enough_data_ids)
+            ->get()
+            ->toArray();
+
+        // dd($productInfos[0]);
+
+        // dd($productInfos[0]['stock']);
+
+        $loop = 0;
+
+        foreach ($product_id_with_enough_data_ids as $id) {
+
+            $product = DB::table('purchase_items as p')
+                ->select(
+                    DB::raw('SUM(p.quantity) as quantity'),
+                    'p.created_at',
+                    DB::raw('COUNT(CASE WHEN c.sentiment = 1 THEN 1 END) as positive'),
+                    DB::raw('COUNT(CASE WHEN c.sentiment = 0 THEN 1 END) as negative')
+                )
+                ->join('comments as c', 'c.id', '=', 'p.comment_id')
+                ->where('p.product_id', $id)
+                ->groupBy('p.created_at')
+                ->get();
+
+            $predict_interval = 'daily';
+            $predict_range = 7;
+            $custom_range = 7;
+
+            try {
+                // send the data to the API with the following parameters, change the link to the correct API endpoint
+                $response = Http::timeout(300)->post('http://127.0.0.1:8787/api/v1/predict', [
+                    'product_id' => $id,
+                    'interval' => $predict_interval,
+                    'range' => $predict_range,
+                    'custom_range' => $custom_range,
+                    'data' => $product->toArray(),
+                ]);
+
+                if ($response->ok()) {
+
+                    $data = $response->json();
+
+                    // $accuracy_report = $data['accuracy_report'];
+
+                    $prediction_report = $data['prediction_report'];
+
+                    // $average = 0;
+
+                    $sum = 0;
+
+                    // unpack $prediction_report and get teh avvrage of the predicted values
+                    foreach ($prediction_report as $key => $value) {
+                        $sum += $value['predicted'];
+                    }
+
+                    $average_sales = $sum / count($prediction_report);
+
+                    $lead_time = $this->lead_time['lead_time'];
+
+                    $safe_stock = $productInfos[$loop]['stock'];
+
+                    // calcualte the Dynamic Reorder Point
+                    $drp = ($average_sales * $lead_time) + $safe_stock;
+
+                    // calcualte the Optimal Reorder Quantity
+                    $ord = $drp / $average_sales;
+
+                    // insert $drp and $ord into the $productInfos array
+                    $productInfos[$loop]['drp'] = $drp ?? 0;
+                    $productInfos[$loop]['ord'] = $ord ?? 0;
+
+                }
+            } catch (\Exception $e) {
+                $this->notify('error', 'Prediction failed', 'Prediction not ready, Please try again later, maybe the server is down');
+            }
+
+            $loop++;
+
+        }
+
+        $this->forecastresultdata = $productInfos;
+
+        // $this->forecastresultdata = $productInfos;
+
+        // dd($product_id_with_enough_data_ids);
     }
 
     #[Computed]
@@ -495,7 +726,7 @@ class AnalyticsModelReport extends Component
         try {
 
             // send the data to the API with the following parameters, change the link to the correct API endpoint
-            $response = Http::timeout(300)->post('http://127.0.0.1:8484/api/v1/predict', [
+            $response = Http::timeout(300)->post('http://127.0.0.1:8787/api/v1/predict', [
                 'product_id' => $this->productselectedid,
                 'interval' => $this->predictinterval,
                 'range' => $this->predictrange,
@@ -516,7 +747,6 @@ class AnalyticsModelReport extends Component
                 $this->sales_accuracy_apiresponse = $data['accuracy_test_report'];
 
                 $this->prediction_report = $data['prediction_report'];
-
 
                 $this->dispatch('update-chart-prediction');
 
@@ -592,7 +822,7 @@ class AnalyticsModelReport extends Component
 
         try {
             // send the data to the API with the following parameters, change the link to the correct API endpoint
-            $response = Http::timeout(300)->post('http://127.0.0.1:8484/api/v1/predict/oneshot', [
+            $response = Http::timeout(300)->post('http://127.0.0.1:8787/api/v1/predict/oneshot', [
                 'product_id' => $productID,
                 'interval' => $predict_interval,
                 'range' => $predict_range,
@@ -615,15 +845,6 @@ class AnalyticsModelReport extends Component
                     'accuracy_report' => $accuracy_report,
                     'prediction_report' => $prediction_report,
                 ];
-
-                // $this->alert('success', 'Prediction Ready', [
-                //     'position' => 'top-end',
-                //     'timer' => 3000,
-                //     'toast' => true,
-                //     'text' => 'Prediction Complete. Click View Prediction Report to see the results.',
-                //     'showCancelButton' => false,
-                //     'showConfirmButton' => false,
-                // ]);
 
             }
         } catch (\Exception $e) {

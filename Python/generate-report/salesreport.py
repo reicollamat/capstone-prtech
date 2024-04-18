@@ -27,7 +27,8 @@ def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_s
 
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font('helvetica', size=18, style='B')
+    pdf.add_font('roboto', '', 'Roboto-Regular.ttf', uni=True)
+    pdf.set_font('roboto', size=18, style='')
 
     pdf.cell(text=shop_name_format, align='C', center=True) # title of the PDF
     pdf.ln(10)  # line break
@@ -43,7 +44,7 @@ def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_s
     pdf.ln(5)  # line break
     pdf.cell(None, text=f"Bestselling : {best_selling}", align='L')  # total revenue
 
-    pdf.set_font('helvetica', size=12, style='B')  # set font size
+    pdf.set_font('roboto', size=12)  # set font size
     # pdf.cell(0, 10, text=f'Average Price Per Item: {price_per_item}')  # price per item
     pdf.ln(5)  # line break
     pdf.cell(0, 10, text=f"Total Items Sold: {total_items_sold} Items", align='R')  # total items sold
@@ -53,11 +54,11 @@ def create_sales_report_pdf(shop_name, shop_id, timespan, revenue, total_items_s
 
     #TABLE
     pdf.ln(10)
-    pdf.set_font('helvetica', size=8)
+    pdf.set_font('roboto', size=8)
 
     blue = (0, 0, 255)
     white = (255, 255, 255)
-    headings_style = FontFace(emphasis="ITALICS", color=blue, fill_color=white)
+    headings_style = FontFace(color=blue, fill_color=white)
 
     # create the table with the headings style and the column widths specified
     with pdf.table(col_widths=(7,5,20,10,10, 10), headings_style=headings_style) as table:
