@@ -9,7 +9,7 @@ def create_report_predict(TABLE_DATA=None, Seller_ID=None, Shop_Name=None, Produ
     pdf.add_font('roboto', '', 'Roboto-Regular.ttf', uni=True)
     pdf.set_font('roboto', size=18, style='')
 
-    shop_name_format = f"{Shop_Name} Inventory Reports"  # format it to be displayed in the PDF
+    shop_name_format = f"{Shop_Name} Restock Reports"  # format it to be displayed in the PDF
 
     pdf.cell(text=shop_name_format, align='C', center=True) # title of the PDF
     pdf.ln(10)  # line break
