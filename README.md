@@ -3,16 +3,16 @@
 > ### [PR Tech](https://github.com/reicollamat/capstone-prtech.git) is an e-commerce website business that specializes in providing a secure and reliable online shop experience to sellers and customers. Integrates machine learning techniques providing online shop owners a data-driven insights into customer behavior for optimized inventory levels and restocking decisions.
 
 - ### [Laravel](#about-laravel) Framework
-- Laravel Livewire
-- [Tailwind CSS](https://tailwindcss.com) 
-- [MySQL](https://www.mysql.com/) for Database Management
+    - Laravel Livewire
+    - [Tailwind CSS](https://tailwindcss.com) 
+    - [MySQL](https://www.mysql.com/) for Database Management
 
 - ### Machine Learning using Python
-- BERT on Sentiment Analysis
-- XGBoost on Time Series
+    - BERT on Sentiment Analysis
+    - XGBoost on Time Series
 
 - ### Dataset
-- [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
+    - [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
 
 ---
 
