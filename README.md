@@ -1,6 +1,6 @@
 # ![PRTECH](public/img/brand/png/logo-color-landscape.png) PR Tech Computer Parts E-commerce Website
 
-> ### [PR Tech](https://github.com/reicollamat/capstone-prtech.git) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
+> ### [PR Tech](https://github.com/reicollamat/capstone-prtech.git) is an e-commerce website business that specializes in providing a secure and reliable online shop experience to sellers and customers. Integrates machine learning techniques providing online shop owners a data-driven insights into customer behavior for optimized inventory levels and restocking decisions.
 
 - ### [Laravel](#about-laravel) Framework
     - Laravel Livewire
