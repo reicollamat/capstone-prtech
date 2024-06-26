@@ -4,7 +4,7 @@
 
 - ### [Laravel](#about-laravel) Framework
     - Laravel Livewire
-    - Tailwind CSS 
+    - [Tailwind CSS](https://tailwindcss.com) 
     - [MySQL](https://www.mysql.com/) for Database Management
 
 - ### Machine Learning using Python
@@ -12,7 +12,7 @@
     - XGBoost on Time Series
 
 - ## Dataset
--   [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
+    - [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
 
 ---
 
