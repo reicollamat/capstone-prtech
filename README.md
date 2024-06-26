@@ -1,23 +1,17 @@
-# ![Techno](public/img/brand/png/logo-color-landscape.png) PR Tech Computer Parts E-commerce Website
+# ![PRTECH](public/img/brand/png/logo-color-landscape.png) PR Tech Computer Parts E-commerce Website
 
 > ### [PR Tech](https://github.com/reicollamat/capstone-prtech.git) is an e-commerce business that specializes in providing a secure and reliable online shopping experience to customers looking for affordable computer parts and peripherals.
 
-## [Laravel](#about-laravel) Framework
+- ### [Laravel](#about-laravel) Framework
+    - Laravel Livewire
+    - Tailwind CSS 
+    - [MySQL](https://www.mysql.com/) for Database Management
 
--   Laravel Breeze
-    -   Account Authentication
-
-## Laravel [Orchid](https://orchid.software/)
-
--   Admin Management Panel
-    -   CRUD Functions
-
-## Database Management System
-
--   [MySQL](https://www.mysql.com/)
+- ### Machine Learning using Python
+    - BERT on Sentiment Analysis
+    - XGBoost on Time Series
 
 ## Dataset
-
 -   [PcPartPicker](https://github.com/docyx/pc-part-dataset) by docyx
 
 ---
@@ -57,7 +51,7 @@ Start the local development server
     php artisan serve
 
 You can now access the server at http://localhost:8000
-
+<!-- 
 **TL;DR command list**
 
     git clone git@github.com:reicollamat/techno-retech.git
@@ -65,7 +59,7 @@ You can now access the server at http://localhost:8000
     composer install
     cp .env.example .env
     php artisan key:generate
-    php artisan jwt:generate
+    php artisan jwt:generate -->
 
 **Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
 
